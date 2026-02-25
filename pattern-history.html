@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pattern History · First-Order Circuits · 7-8 to 7-9</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap"
+        rel="stylesheet" />
+    <script>MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #04060e;
+            --cyan: #00e5ff;
+            --gold: #ffc947;
+            --violet: #b06aff;
+            --green: #2bff7f;
+            --red: #ff4d6a;
+            --orange: #ff9500;
+            --pink: #ff6eb4;
+            --panel: rgba(10, 12, 28, 0.92)
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Outfit', sans-serif;
+            color: #dde8ff;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse 55% 35% at 10% 15%, rgba(80, 0, 180, .16) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 88% 80%, rgba(0, 160, 200, .12) 0%, transparent 70%)
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(0, 229, 255, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, .03) 1px, transparent 1px);
+            background-size: 48px 48px
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 2rem 1.4rem 7rem
+        }
+
+        /* NAV */
+        .nav {
+            display: flex;
+            gap: .8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem
+        }
+
+        .nav a {
+            background: rgba(176, 106, 255, .12);
+            border: 1px solid rgba(176, 106, 255, .3);
+            border-radius: 999px;
+            padding: .35rem 1.1rem;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--violet);
+            text-decoration: none;
+            transition: background .2s, color .2s
+        }
+
+        .nav a:hover {
+            background: rgba(176, 106, 255, .25);
+            color: #fff
+        }
+
+        .nav a.active {
+            background: var(--violet);
+            color: #000
+        }
+
+        /* HEADER */
+        .hdr {
+            text-align: center;
+            padding: 2.5rem 1rem 2rem
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(176, 106, 255, .18), rgba(0, 229, 255, .12));
+            border: 1px solid var(--violet);
+            border-radius: 999px;
+            padding: .35rem 1.6rem;
+            font-size: .68rem;
+            color: var(--violet);
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 0 20px rgba(176, 106, 255, .35)
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.7rem, 4vw, 2.7rem);
+            font-weight: 900;
+            background: linear-gradient(130deg, #fff 0%, var(--cyan) 55%, var(--violet) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            margin-bottom: .6rem
+        }
+
+        .hdr p {
+            font-size: .92rem;
+            color: rgba(200, 215, 255, .5);
+            max-width: 560px;
+            margin: 0 auto
+        }
+
+        /* SECTION TITLE */
+        .sec {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0 1.4rem;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(176, 106, 255, .5)
+        }
+
+        .sec::before,
+        .sec::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(176, 106, 255, .15)
+        }
+
+        /* ── PATTERN GALLERY ── */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.1rem
+        }
+
+        .pcard {
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: transform .3s, border-color .3s;
+            backdrop-filter: blur(12px)
+        }
+
+        .pcard:hover {
+            transform: translateY(-6px);
+            border-color: var(--pc)
+        }
+
+        .pcard-head {
+            background: rgba(0, 0, 0, .3);
+            border-bottom: 2px solid var(--pc);
+            padding: 1rem 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem
+        }
+
+        .pcard-icon {
+            font-size: 1.4rem
+        }
+
+        .pcard-title {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--pc)
+        }
+
+        .pcard-sub {
+            font-size: .65rem;
+            color: rgba(200, 215, 255, .4)
+        }
+
+        .pcard-body {
+            padding: 1.1rem 1.3rem
+        }
+
+        .mini-eq {
+            background: rgba(0, 0, 0, .4);
+            border-radius: 8px;
+            padding: .6rem .8rem;
+            text-align: center;
+            margin: .4rem 0;
+            font-size: .88rem
+        }
+
+        .mini-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            font-size: .76rem;
+            color: rgba(200, 215, 255, .62)
+        }
+
+        .mini-row:last-child {
+            border-bottom: none
+        }
+
+        .mini-row b {
+            color: var(--pc);
+            font-size: .7rem;
+            letter-spacing: .08em
+        }
+
+        .mini-row span {
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+            font-size: .76rem
+        }
+
+        /* ── COMPARISON TABLE ── */
+        .ctable {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--panel);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(176, 106, 255, .18)
+        }
+
+        .ctable th {
+            background: rgba(0, 0, 0, .5);
+            padding: .75rem 1rem;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(176, 106, 255, .7);
+            border-bottom: 1px solid rgba(176, 106, 255, .2);
+            text-align: left
+        }
+
+        .ctable td {
+            padding: .7rem 1rem;
+            font-size: .8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            vertical-align: middle;
+            line-height: 1.5
+        }
+
+        .ctable tr:last-child td {
+            border-bottom: none
+        }
+
+        .ctable tr:hover td {
+            background: rgba(176, 106, 255, .05)
+        }
+
+        .same {
+            color: var(--green);
+            font-size: .65rem;
+            font-weight: 700;
+            background: rgba(43, 255, 127, .1);
+            border: 1px solid rgba(43, 255, 127, .3);
+            border-radius: 4px;
+            padding: .1rem .4rem
+        }
+
+        .diff {
+            color: var(--gold);
+            font-size: .65rem;
+            font-weight: 700;
+            background: rgba(255, 201, 71, .1);
+            border: 1px solid rgba(255, 201, 71, .3);
+            border-radius: 4px;
+            padding: .1rem .4rem
+        }
+
+        /* ── SOLUTION WALK ── */
+        .walk {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem
+        }
+
+        .wstep {
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            background: var(--panel);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .07);
+            transition: box-shadow .3s;
+            backdrop-filter: blur(12px)
+        }
+
+        .wstep:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, .4)
+        }
+
+        .wleft {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: .3rem;
+            padding: .8rem .4rem;
+            min-height: 130px;
+            border-right: 2px solid var(--wc)
+        }
+
+        .wnum {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--wc)
+        }
+
+        .wicon {
+            font-size: 1.4rem
+        }
+
+        .wright {
+            padding: 1.4rem 1.6rem
+        }
+
+        .wmove {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--wc);
+            margin-bottom: .2rem
+        }
+
+        .wtitle {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: .8rem
+        }
+
+        .fbox {
+            background: rgba(0, 0, 0, .45);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 10px;
+            padding: .85rem 1.1rem;
+            text-align: center;
+            margin: .5rem 0;
+            transition: border-color .3s
+        }
+
+        .fbox.hot {
+            border-color: var(--wc);
+            box-shadow: 0 0 14px color-mix(in srgb, var(--wc) 35%, transparent)
+        }
+
+        .fbox-lbl {
+            font-size: .58rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(200, 215, 255, .35);
+            margin-bottom: .4rem
+        }
+
+        .fbox-note {
+            font-size: .76rem;
+            color: rgba(200, 215, 255, .55);
+            margin-top: .4rem;
+            line-height: 1.5
+        }
+
+        .insight {
+            background: rgba(176, 106, 255, .06);
+            border: 1px dashed rgba(176, 106, 255, .25);
+            border-radius: 8px;
+            padding: .75rem 1rem;
+            margin: .5rem 0;
+            font-size: .8rem;
+            color: rgba(200, 215, 255, .65);
+            line-height: 1.65
+        }
+
+        .insight b {
+            color: #fff
+        }
+
+        .insight .hi {
+            color: var(--cyan);
+            font-weight: 700
+        }
+
+        .insight .ac {
+            color: var(--pink);
+            font-weight: 700
+        }
+
+        .steps {
+            list-style: none;
+            margin-top: .5rem
+        }
+
+        .steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: .6rem;
+            padding: .38rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            font-size: .8rem;
+            line-height: 1.5;
+            color: rgba(200, 215, 255, .65)
+        }
+
+        .steps li:last-child {
+            border-bottom: none
+        }
+
+        .sn {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--wc);
+            color: #000;
+            font-size: .65rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px
+        }
+
+        /* both sub-problems for 7-9 */
+        .sub-tabs {
+            display: flex;
+            gap: .6rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap
+        }
+
+        .sub-tab {
+            padding: .35rem 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            font-size: .75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s, border-color .2s;
+            color: rgba(200, 215, 255, .6)
+        }
+
+        .sub-tab.on {
+            background: rgba(0, 229, 255, .15);
+            border-color: var(--cyan);
+            color: var(--cyan)
+        }
+
+        .sub-content {
+            display: none
+        }
+
+        .sub-content.on {
+            display: block
+        }
+
+        /* final answer */
+        .answer-box {
+            background: linear-gradient(135deg, rgba(0, 50, 80, .6), rgba(50, 0, 100, .6));
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 1.4rem 1.8rem;
+            text-align: center;
+            margin: 1rem 0;
+            box-shadow: 0 0 40px rgba(255, 201, 71, .2)
+        }
+
+        .answer-box .albl {
+            font-size: .62rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: .6rem;
+            font-weight: 700
+        }
+
+        .answer-box .aeq {
+            font-size: clamp(.95rem, 2.2vw, 1.3rem)
+        }
+
+        /* WAVEFORM */
+        .wave-wrap {
+            background: var(--panel);
+            border: 1px solid rgba(176, 106, 255, .18);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: .8rem 0
+        }
+
+        /* PATTERN DNA */
+        .dna {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.2rem 0
+        }
+
+        .dna-card {
+            background: rgba(0, 0, 0, .4);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 14px;
+            padding: 1.1rem
+        }
+
+        .dna-label {
+            font-size: .62rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: .6rem
+        }
+
+        .dna-item {
+            font-size: .8rem;
+            color: rgba(200, 215, 255, .65);
+            padding: .3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            line-height: 1.5
+        }
+
+        .dna-item:last-child {
+            border-bottom: none
+        }
+
+        .dna-item b {
+            color: #fff
+        }
+
+        /* ANIM */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .ani {
+            opacity: 0;
+            animation: fadeUp .6s cubic-bezier(.25, .8, .25, 1) both
+        }
+
+        @media(max-width:560px) {
+            .wstep {
+                grid-template-columns: 54px 1fr
+            }
+
+            .wright {
+                padding: 1rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- NAV -->
+        <div class="nav ani" style="animation-delay:.03s">
+            <a href="hub.html">🏠 Hub</a>
+            <a href="index.html">🏛 Pattern Palace</a>
+            <a href="pattern-history.html" class="active">📚 Pattern History</a>
+            <a href="../rc-memory-palace/index.html">⚡ Ex 7-8 Palace</a>
+            <a href="flashcards.html">🃏 Anki Mode</a>
+        </div>
+
+        <!-- HEADER -->
+        <div class="hdr ani" style="animation-delay:.06s">
+            <div class="tag">📚 Pattern Recognition History · Ch. 7 First-Order Circuits</div>
+            <h1>Four Problems.<br />One Pattern. Every Time.</h1>
+            <p>See how the skeleton $x(\infty)+[x(0)-x(\infty)]e^{-t/\tau}$ repeats across every problem. Recognize the
+                DNA — solve anything.</p>
+        </div>
+
+        <!-- ════════ PROBLEM GALLERY ════════ -->
+        <div class="sec ani" style="animation-delay:.1s">🗂 Problem History Gallery</div>
+        <div class="gallery ani" style="animation-delay:.13s">
+
+            <!-- Example 7-8 -->
+            <div class="pcard" style="--pc:#00e5ff">
+                <div class="pcard-head">
+                    <div class="pcard-icon">⚡</div>
+                    <div>
+                        <div class="pcard-title">Example 7-8</div>
+                        <div class="pcard-sub">Given response → extract everything</div>
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <div class="mini-eq">$v_C(t)=20e^{-200t}-10\;\text{V}$</div>
+                    <div class="mini-row"><b>τ (flip k)</b><span>1/200 = 5 ms</span></div>
+                    <div class="mini-row"><b>x(0) freeze</b><span>20−10 = +10 V</span></div>
+                    <div class="mini-row"><b>x(∞) melt</b><span>0−10 = −10 V</span></div>
+                    <div class="mini-row"><b>Zero cross</b><span>t = ln2/200 ≈ 3.47 ms</span></div>
+                    <div class="mini-row"><b>ODE</b><span>τv̇ + v = −10·u(t)</span></div>
+                </div>
+            </div>
+
+            <!-- Exercise 7-8 -->
+            <div class="pcard" style="--pc:#2bff7f">
+                <div class="pcard-head">
+                    <div class="pcard-icon">🔋</div>
+                    <div>
+                        <div class="pcard-title">Exercise 7-8</div>
+                        <div class="pcard-sub">Charging from 0 to forced value</div>
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <div class="mini-eq">$v_C(t)=20-20e^{-1000t}\;\text{V}$</div>
+                    <div class="mini-row"><b>τ (flip k)</b><span>1/1000 = 1 ms</span></div>
+                    <div class="mini-row"><b>x(0) freeze</b><span>20−20 = 0 V</span></div>
+                    <div class="mini-row"><b>x(∞) melt</b><span>20−0 = 20 V</span></div>
+                    <div class="mini-row"><b>ODE</b><span>10⁻³v̇ + v = 20·u(t)</span></div>
+                    <div class="mini-row"><b style="color:#888">Note</b><span style="color:rgba(200,215,255,.45)">No
+                            zero crossing (0→20)</span></div>
+                </div>
+            </div>
+
+            <!-- Exercise 7-9a -->
+            <div class="pcard" style="--pc:#ffc947">
+                <div class="pcard-head">
+                    <div class="pcard-icon">📐</div>
+                    <div>
+                        <div class="pcard-title">Exercise 7-9 (a)</div>
+                        <div class="pcard-sub">ODE given → find response</div>
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <div class="mini-eq">$10^{-4}\dot{v}_C + v_C = -5u(t)$</div>
+                    <div class="mini-row"><b>τ (from ODE)</b><span>10⁻⁴ = 0.1 ms</span></div>
+                    <div class="mini-row"><b>x(0) given</b><span>v_C(0) = +5 V</span></div>
+                    <div class="mini-row"><b>x(∞) from ODE</b><span>−5 V (DC forced)</span></div>
+                    <div class="mini-row"><b>Coeff B</b><span>5−(−5) = 10</span></div>
+                    <div class="mini-eq" style="border:1px solid rgba(255,201,71,.3)">
+                        $v_C=-5+10e^{-10{,}000t}\;\text{V}$</div>
+                </div>
+            </div>
+
+            <!-- Exercise 7-9b -->
+            <div class="pcard" style="--pc:#ff4d6a">
+                <div class="pcard-head">
+                    <div class="pcard-icon">🌀</div>
+                    <div>
+                        <div class="pcard-title">Exercise 7-9 (b)</div>
+                        <div class="pcard-sub">RL circuit — same skeleton!</div>
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <div class="mini-eq">$5{\times}10^{-2}\dot{i}_L + 2000i_L = 10u(t)$</div>
+                    <div class="mini-row"><b>τ from ODE</b><span>5×10⁻²/2000 = 25 μs</span></div>
+                    <div class="mini-row"><b>x(0) given</b><span>i_L(0) = −5 mA</span></div>
+                    <div class="mini-row"><b>x(∞) from ODE</b><span>10/2000 = 5 mA</span></div>
+                    <div class="mini-row"><b>Coeff B</b><span>−5−5 = −10</span></div>
+                    <div class="mini-eq" style="border:1px solid rgba(255,77,106,.3)">
+                        $i_L=5-10e^{-40{,}000t}\;\text{mA}$</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ════════ PATTERN DNA TABLE ════════ -->
+        <div class="sec ani" style="animation-delay:.18s">🧬 Pattern DNA — What Changes vs What Never Changes</div>
+        <div class="ani" style="animation-delay:.21s;overflow-x:auto">
+            <table class="ctable">
+                <thead>
+                    <tr>
+                        <th>Element</th>
+                        <th>Example 7-8</th>
+                        <th>Exercise 7-8</th>
+                        <th>Exercise 7-9a</th>
+                        <th>Exercise 7-9b</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Form</b></td>
+                        <td style="font-family:monospace;font-size:.75rem">A + Be^{-kt}</td>
+                        <td style="font-family:monospace;font-size:.75rem">A + Be^{-kt}</td>
+                        <td style="font-family:monospace;font-size:.75rem">A + Be^{-kt}</td>
+                        <td style="font-family:monospace;font-size:.75rem">A + Be^{-kt}</td>
+                        <td><span class="same">ALWAYS SAME</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>τ extraction</b></td>
+                        <td>flip k=200</td>
+                        <td>flip k=1000</td>
+                        <td>read τ=10⁻⁴</td>
+                        <td>coeff/coeff</td>
+                        <td><span class="same">SAME MOVE</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>x(0) method</b></td>
+                        <td>plug t=0</td>
+                        <td>plug t=0</td>
+                        <td>given directly</td>
+                        <td>given directly</td>
+                        <td><span class="same">SAME LOGIC</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>x(∞) method</b></td>
+                        <td>melt e→0</td>
+                        <td>melt e→0</td>
+                        <td>RHS of ODE at DC</td>
+                        <td>RHS/coeff</td>
+                        <td><span class="same">SAME CONCEPT</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>ODE shape</b></td>
+                        <td>τẋ+x=x(∞)u(t)</td>
+                        <td>τẋ+x=x(∞)u(t)</td>
+                        <td>τẋ+x=x(∞)u(t)</td>
+                        <td>τẋ+x=x(∞)u(t)</td>
+                        <td><span class="same">ALWAYS SAME</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>x(0) value</b></td>
+                        <td>+10 V</td>
+                        <td>0 V</td>
+                        <td>+5 V</td>
+                        <td>−5 mA</td>
+                        <td><span class="diff">CHANGES</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>τ value</b></td>
+                        <td>5 ms</td>
+                        <td>1 ms</td>
+                        <td>0.1 ms</td>
+                        <td>25 μs</td>
+                        <td><span class="diff">CHANGES</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>x(∞) value</b></td>
+                        <td>−10 V</td>
+                        <td>+20 V</td>
+                        <td>−5 V</td>
+                        <td>+5 mA</td>
+                        <td><span class="diff">CHANGES</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="font-size:.78rem;color:rgba(200,215,255,.4);text-align:center;margin:.8rem 0">
+            🟢 <b style="color:var(--green)">Green = the pattern (memorize this once)</b> &nbsp;·&nbsp; 🟡 <b
+                style="color:var(--gold)">Yellow = just numbers (calculate, don't memorize)</b>
+        </div>
+
+        <!-- ════════ EXERCISE 7-9 FULL WALKTHROUGH ════════ -->
+        <div class="sec ani" style="animation-delay:.25s">🔬 Exercise 7-9 — Full Walkthrough Using the 5 Palace Moves
+        </div>
+
+        <!-- Sub-problem tabs -->
+        <div style="background:var(--panel);border:1px solid rgba(176,106,255,.18);border-radius:18px;padding:1.6rem;backdrop-filter:blur(12px)"
+            class="ani" style="animation-delay:.28s">
+            <div class="sub-tabs">
+                <div class="sub-tab on" onclick="showSub('a')">Problem (a) — Voltage / RC</div>
+                <div class="sub-tab" onclick="showSub('b')">Problem (b) — Current / RL</div>
+            </div>
+
+            <!-- ── SUB A ── -->
+            <div class="sub-content on" id="sub-a">
+                <div class="mini-eq" style="font-size:1rem;margin-bottom:1.2rem">
+                    Given: &nbsp; $10^{-4}\dfrac{dv_C}{dt} + v_C = -5u(t)$ &nbsp; with &nbsp; $v_C(0) = 5\text{ V}$
+                </div>
+
+                <div class="walk">
+                    <!-- MOVE I -->
+                    <div class="wstep" style="--wc:#00e5ff">
+                        <div class="wleft">
+                            <div class="wicon">👁</div>
+                            <div class="wnum" style="color:var(--wc)">I</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move I · Recognize</div>
+                            <div class="wtitle">Is this a first-order circuit?</div>
+                            <div class="insight">The ODE has the form <span class="hi">$\tau\dot{x} + x = f(t)$</span> —
+                                linear, first-order, constant coefficients. One energy-storage element. ✓ <b>First-order
+                                    RC confirmed.</b> The solution will be $v_C(t) = A + Be^{-t/\tau}$.</div>
+                        </div>
+                    </div>
+
+                    <!-- MOVE II -->
+                    <div class="wstep" style="--wc:#ffc947">
+                        <div class="wleft">
+                            <div class="wicon">⏱</div>
+                            <div class="wnum" style="color:var(--wc)">II</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move II · Flip → Extract τ</div>
+                            <div class="wtitle">The coefficient in front of $\dot{v}_C$ IS the time constant</div>
+                            <div class="fbox hot">
+                                <div class="fbox-lbl">ODE coefficient directly gives τ</div>
+                                $$10^{-4}\frac{dv_C}{dt} + v_C = -5u(t) \;\Rightarrow\; \tau = 10^{-4}\text{ s}$$
+                                <div class="fbox-note">When ODE is in standard form $\tau\dot{x}+x=f$, the leading
+                                    coefficient IS τ. No flipping needed here — it's already readable. $k = 1/\tau =
+                                    10{,}000$</div>
+                            </div>
+                            <div class="insight"><b>Result:</b> $\tau = 10^{-4}$ s $= 0.1$ ms &nbsp;→&nbsp; exponential
+                                decay rate $k = \mathbf{10{,}000}$ s⁻¹</div>
+                        </div>
+                    </div>
+
+                    <!-- MOVE III-A: x(∞) from ODE -->
+                    <div class="wstep" style="--wc:#2bff7f">
+                        <div class="wleft">
+                            <div class="wicon">🔥</div>
+                            <div class="wnum" style="color:var(--wc)">III-a</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move III · Melt → Forced Response x(∞)</div>
+                            <div class="wtitle">What does the circuit settle at as $t \to \infty$?</div>
+                            <div class="fbox hot">
+                                <div class="fbox-lbl">At steady state: $\dot{v}_C = 0$, so the ODE collapses to:</div>
+                                $$\tau \cdot 0 + v_C(\infty) = -5 \;\Rightarrow\; v_C(\infty) = -5\text{ V}$$
+                                <div class="fbox-note">The derivative term vanishes. DC steady state = whatever is on
+                                    the right-hand side (if τẋ+x=A, then x(∞)=A)</div>
+                            </div>
+                            <div class="insight">
+                                <b>Forced response</b> = <span class="hi">−5 V</span>. This is where the step input
+                                drives the circuit. Negative because the source is $-5u(t)$.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MOVE III-B: x(0) -->
+                    <div class="wstep" style="--wc:#2bff7f">
+                        <div class="wleft">
+                            <div class="wicon">❄️</div>
+                            <div class="wnum" style="color:var(--wc)">III-b</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move III · Freeze → Initial Condition x(0)</div>
+                            <div class="wtitle">What is the starting value?</div>
+                            <div class="fbox hot">
+                                <div class="fbox-lbl">Given directly in the problem statement</div>
+                                $$v_C(0) = +5\text{ V}$$
+                                <div class="fbox-note">Capacitor had +5 V stored before $t = 0$. The step switches on at
+                                    $t = 0$ but the capacitor voltage cannot jump — it starts exactly where it was.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MOVE IV: Coefficient B -->
+                    <div class="wstep" style="--wc:#ff4d6a">
+                        <div class="wleft">
+                            <div class="wicon">✂️</div>
+                            <div class="wnum" style="color:var(--wc)">IV</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move IV · Split → Find Amplitude B</div>
+                            <div class="wtitle">The natural response amplitude = difference between start and end</div>
+                            <div class="fbox hot">
+                                <div class="fbox-lbl">From the universal template: $B = x(0) - x(\infty)$</div>
+                                $$B = v_C(0) - v_C(\infty) = 5 - (-5) = +10$$
+                            </div>
+                            <div class="insight">
+                                <b>Why:</b> At $t=0$, the solution must give $x(0)$: &nbsp; $A + B\cdot e^0 = A + B =
+                                x(0)$ &nbsp;→&nbsp; $B = x(0)-A = x(0)-x(\infty)$.
+                            </div>
+                            <ul class="steps">
+                                <li><span class="sn">→</span>$x(\infty) = -5$, $x(0)=+5$. The gap is $+10$.</li>
+                                <li><span class="sn">→</span>The natural term must cover this gap and decay it away.
+                                </li>
+                                <li><span class="sn">→</span>$B = +10$ means the exponential starts positive and decays
+                                    to zero.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MOVE V: Assemble -->
+                    <div class="wstep" style="--wc:#b06aff">
+                        <div class="wleft">
+                            <div class="wicon">📐</div>
+                            <div class="wnum" style="color:var(--wc)">V</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move V · Blueprint → Assemble the Answer</div>
+                            <div class="wtitle">Fill the skeleton with your extracted values</div>
+                            <div class="fbox hot">
+                                <div class="fbox-lbl">Template → Substitute</div>
+                                $$v_C(t) = \underbrace{x(\infty)}_{-5} +
+                                \underbrace{[x(0)-x(\infty)]}_{+10}\,e^{-t/\tau}$$
+                            </div>
+                            <div class="answer-box">
+                                <div class="albl">✅ Final Answer — Part (a)</div>
+                                <div class="aeq">$$v_C(t) = -5 + 10\,e^{-10{,}000\,t}\;\text{V} \qquad t \geq 0$$</div>
+                            </div>
+                            <div class="insight">
+                                <b>Verify:</b> At $t=0$: $-5+10(1) = +5$ V ✓ &nbsp;·&nbsp; As $t\to\infty$: $-5+10(0) =
+                                -5$ V ✓<br />
+                                The voltage <span class="hi">starts at +5 V</span>, passes through <span class="ac">0 V
+                                    at $t = \ln2/10{,}000 \approx 69.3\;\mu$s</span>, then settles at <b>−5 V</b>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WAVEFORM (a) -->
+                <div class="wave-wrap" style="margin-top:1.2rem">
+                    <div
+                        style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(176,106,255,.5);margin-bottom:1rem">
+                        Waveform: $v_C(t) = -5+10e^{-10{,}000t}$ V</div>
+                    <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg"
+                        style="width:100%;min-width:340px;overflow:visible">
+                        <defs>
+                            <linearGradient id="wga" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#ffc947" />
+                                <stop offset="50%" stop-color="#00e5ff" />
+                                <stop offset="100%" stop-color="#2bff7f" />
+                            </linearGradient>
+                            <filter id="gfa">
+                                <feGaussianBlur stdDeviation="2.5" result="b" />
+                                <feMerge>
+                                    <feMergeNode in="b" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <g stroke="rgba(255,255,255,.05)" stroke-width="1">
+                            <line x1="60" y1="30" x2="620" y2="30" />
+                            <line x1="60" y1="80" x2="620" y2="80" />
+                            <line x1="60" y1="130" x2="620" y2="130" />
+                            <line x1="60" y1="180" x2="620" y2="180" />
+                        </g>
+                        <!-- zero at y=130 -->
+                        <line x1="60" y1="130" x2="620" y2="130" stroke="rgba(255,255,255,.18)" stroke-width="1.2"
+                            stroke-dasharray="5,4" />
+                        <!-- +5V start = y=80 -->
+                        <circle cx="60" cy="80" r="5" fill="#ffc947" filter="url(#gfa)" />
+                        <text x="64" y="76" font-family="Outfit" font-size="11" fill="#ffc947"
+                            font-weight="700">v(0)=+5V</text>
+                        <!-- zero cross ~69μs: x=60+69/400*560=157 -->
+                        <circle cx="157" cy="130" r="5" fill="#00e5ff" filter="url(#gfa)" />
+                        <line x1="157" y1="30" x2="157" y2="185" stroke="#00e5ff" stroke-width="1"
+                            stroke-dasharray="4,3" opacity=".5" />
+                        <text x="161" y="185" font-size="9" font-family="JetBrains Mono" fill="#00e5ff">≈69μs</text>
+                        <!-- final at y=180 -->
+                        <line x1="60" y1="180" x2="620" y2="180" stroke="rgba(43,255,127,.25)" stroke-width="1"
+                            stroke-dasharray="4,4" />
+                        <text x="570" y="176" font-size="10" font-family="Outfit" fill="#2bff7f"
+                            font-weight="700">v(∞)=−5V</text>
+                        <!-- curve: v=-5+10e^{-10000t}, t 0→0.0004s, x 60→620, y: +5V at y=80, -5V at y=180 → scale 10px/V, 0V at y=130 -->
+                        <polyline filter="url(#gfa)" stroke="url(#wga)" stroke-width="3" fill="none"
+                            stroke-linecap="round"
+                            points="60,80 90,100 120,116 157,130 200,147 250,158 320,167 400,174 500,178 600,180 620,180" />
+                        <line x1="60" y1="30" x2="60" y2="190" stroke="rgba(200,180,255,.18)" stroke-width="1.5" />
+                        <line x1="60" y1="190" x2="620" y2="190" stroke="rgba(200,180,255,.18)" stroke-width="1.5" />
+                        <text x="55" y="34" text-anchor="end" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(255,201,71,.8)">+5</text>
+                        <text x="55" y="84" text-anchor="end" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.4)"> 0</text>
+                        <text x="55" y="134" text-anchor="end" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.4)">-2.5</text>
+                        <text x="55" y="184" text-anchor="end" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(43,255,127,.8)">-5</text>
+                        <text x="60" y="200" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.35)">0</text>
+                        <text x="157" y="200" text-anchor="middle" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.35)">0.1ms</text>
+                        <text x="340" y="200" text-anchor="middle" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.35)">0.2ms</text>
+                        <text x="620" y="200" text-anchor="middle" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.35)">0.4ms→</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- ── SUB B ── -->
+            <div class="sub-content" id="sub-b">
+                <div class="mini-eq" style="font-size:.95rem;margin-bottom:1.2rem">
+                    Given: &nbsp; $5{\times}10^{-2}\dfrac{di_L}{dt} + 2000\,i_L = 10u(t)$ &nbsp; with &nbsp; $i_L(0)=-5$
+                    mA
+                </div>
+
+                <div class="walk">
+                    <div class="wstep" style="--wc:#00e5ff">
+                        <div class="wleft">
+                            <div class="wicon">👁</div>
+                            <div class="wnum" style="color:var(--wc)">I</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move I · Recognize</div>
+                            <div class="wtitle">First-order — but now it's an RL circuit!</div>
+                            <div class="insight"><b>Same ODE shape</b>, different physical element. The inductor's
+                                $L\frac{di}{dt}$ gives the same first-order structure. <span class="hi">The skeleton is
+                                    universal — it doesn't care about RC vs RL.</span> $x(t) = A + Be^{-t/\tau}$ still
+                                applies.</div>
+                        </div>
+                    </div>
+
+                    <div class="wstep" style="--wc:#ffc947">
+                        <div class="wleft">
+                            <div class="wicon">⏱</div>
+                            <div class="wnum" style="color:var(--wc)">II</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move II · Extract τ — ODE not in standard form!</div>
+                            <div class="wtitle">Must divide through to isolate $\dot{i}_L$ coefficient</div>
+                            <div class="fbox hot">
+                                <div class="fbox-lbl">Standard form requires coefficient of x to be 1</div>
+                                $$5{\times}10^{-2}\dot{i}_L + 2000\,i_L = 10u(t)$$
+                                $$\div 2000: \;\;\frac{5{\times}10^{-2}}{2000}\dot{i}_L + i_L = \frac{10}{2000}u(t)$$
+                                $$\tau\dot{i}_L + i_L = 0.005\,u(t) \;\;\Rightarrow\;\; \tau =
+                                \frac{5{\times}10^{-2}}{2000} = 25\;\mu\text{s}$$
+                            </div>
+                            <div class="insight"><b>Key move:</b> When the coefficient on $x$ isn't 1, <span
+                                    class="ac">divide the whole equation by it</span> first. Then the leading
+                                coefficient IS τ. &nbsp; $k = 1/\tau = 40{,}000$ s⁻¹</div>
+                        </div>
+                    </div>
+
+                    <div class="wstep" style="--wc:#2bff7f">
+                        <div class="wleft">
+                            <div class="wicon">🔥</div>
+                            <div class="wnum" style="color:var(--wc)">III</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move III · Freeze & Melt — Boundary Conditions</div>
+                            <div class="wtitle">Initial: given. Final: from RHS of standard form ODE.</div>
+                            <div class="fbox hot">
+                                <div class="fbox-lbl">Melt: steady state from standard form</div>
+                                $$i_L(\infty) = \frac{10}{2000} = 0.005\text{ A} = 5\text{ mA}$$
+                            </div>
+                            <div class="fbox" style="border-color:rgba(43,255,127,.3)">
+                                <div class="fbox-lbl">Freeze: given initial condition</div>
+                                $$i_L(0) = -5\text{ mA} \quad\text{(given)}$$
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wstep" style="--wc:#ff4d6a">
+                        <div class="wleft">
+                            <div class="wicon">✂️</div>
+                            <div class="wnum" style="color:var(--wc)">IV</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move IV · Split → Amplitude B</div>
+                            <div class="wtitle">Natural response amplitude = gap between start and end</div>
+                            <div class="fbox hot">
+                                <div class="fbox-lbl">Same formula as always</div>
+                                $$B = i_L(0) - i_L(\infty) = -5 - 5 = -10\text{ mA}$$
+                            </div>
+                            <div class="insight">B is <b>negative</b> here — the circuit starts <em>below</em> the
+                                forced value and climbs up. The exponential term contributes $-10e^{-40000t}$, which
+                                starts at $-10$ and grows toward zero.</div>
+                        </div>
+                    </div>
+
+                    <div class="wstep" style="--wc:#b06aff">
+                        <div class="wleft">
+                            <div class="wicon">📐</div>
+                            <div class="wnum" style="color:var(--wc)">V</div>
+                        </div>
+                        <div class="wright">
+                            <div class="wmove">Move V · Blueprint → Final Answer</div>
+                            <div class="wtitle">Assemble the skeleton</div>
+                            <div class="fbox hot">
+                                $$i_L(t) = \underbrace{5}_{x(\infty)} +
+                                \underbrace{(-10)}_{B}\,e^{-40{,}000\,t}\;\text{mA}$$
+                            </div>
+                            <div class="answer-box">
+                                <div class="albl">✅ Final Answer — Part (b)</div>
+                                <div class="aeq">$$i_L(t) = 5 - 10\,e^{-40{,}000\,t}\;\text{mA} \qquad t \geq 0$$</div>
+                            </div>
+                            <div class="insight">
+                                <b>Verify:</b> $t=0$: $5-10(1)=-5$ mA ✓ &nbsp;·&nbsp; $t\to\infty$: $5-10(0)=+5$ mA
+                                ✓<br />
+                                Starts at <span class="ac">−5 mA</span>, charges toward <span class="hi">+5 mA</span>
+                                with τ = 25 μs.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wave-wrap" style="margin-top:1.2rem">
+                    <div
+                        style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(176,106,255,.5);margin-bottom:1rem">
+                        Waveform: $i_L(t) = 5-10e^{-40{,}000t}$ mA</div>
+                    <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg"
+                        style="width:100%;min-width:340px;overflow:visible">
+                        <defs>
+                            <linearGradient id="wgb" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#ff4d6a" />
+                                <stop offset="50%" stop-color="#b06aff" />
+                                <stop offset="100%" stop-color="#ffc947" />
+                            </linearGradient>
+                            <filter id="gfb">
+                                <feGaussianBlur stdDeviation="2.5" result="b" />
+                                <feMerge>
+                                    <feMergeNode in="b" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <g stroke="rgba(255,255,255,.05)" stroke-width="1">
+                            <line x1="60" y1="30" x2="620" y2="30" />
+                            <line x1="60" y1="80" x2="620" y2="80" />
+                            <line x1="60" y1="130" x2="620" y2="130" />
+                            <line x1="60" y1="180" x2="620" y2="180" />
+                        </g>
+                        <!-- 0 at y=130 -->
+                        <line x1="60" y1="130" x2="620" y2="130" stroke="rgba(255,255,255,.18)" stroke-width="1.2"
+                            stroke-dasharray="5,4" />
+                        <!-- start -5mA at y=180 -->
+                        <circle cx="60" cy="180" r="5" fill="#ff4d6a" filter="url(#gfb)" />
+                        <text x="64" y="195" font-size="11" font-family="Outfit" fill="#ff4d6a"
+                            font-weight="700">i(0)=−5mA</text>
+                        <!-- zero cross ~17.3μs: t=ln2/40000=17.3μs → x=60+(17.3/100)*560=157 -->
+                        <circle cx="157" cy="130" r="5" fill="#b06aff" filter="url(#gfb)" />
+                        <line x1="157" y1="30" x2="157" y2="190" stroke="#b06aff" stroke-width="1"
+                            stroke-dasharray="4,3" opacity=".5" />
+                        <text x="161" y="188" font-size="9" font-family="JetBrains Mono" fill="#b06aff">≈17μs</text>
+                        <!-- final +5mA at y=80 -->
+                        <line x1="60" y1="80" x2="620" y2="80" stroke="rgba(255,201,71,.25)" stroke-width="1"
+                            stroke-dasharray="4,4" />
+                        <text x="565" y="76" font-size="10" font-family="Outfit" fill="#ffc947"
+                            font-weight="700">i(∞)=+5mA</text>
+                        <!-- curve: starts 180 (−5mA), ends 80 (+5mA) -->
+                        <polyline filter="url(#gfb)" stroke="url(#wgb)" stroke-width="3" fill="none"
+                            stroke-linecap="round"
+                            points="60,180 90,160 120,144 157,130 200,115 250,103 310,94 390,86 490,81 600,80 620,80" />
+                        <line x1="60" y1="30" x2="60" y2="195" stroke="rgba(200,180,255,.18)" stroke-width="1.5" />
+                        <line x1="60" y1="195" x2="620" y2="195" stroke="rgba(200,180,255,.18)" stroke-width="1.5" />
+                        <text x="55" y="34" text-anchor="end" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.4)">+10</text>
+                        <text x="55" y="84" text-anchor="end" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(255,201,71,.8)">+5</text>
+                        <text x="55" y="134" text-anchor="end" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.4)">0</text>
+                        <text x="55" y="184" text-anchor="end" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(255,77,106,.8)">-5</text>
+                        <text x="60" y="205" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.35)">0</text>
+                        <text x="200" y="205" text-anchor="middle" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.35)">25μs</text>
+                        <text x="410" y="205" text-anchor="middle" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.35)">75μs</text>
+                        <text x="620" y="205" text-anchor="middle" font-size="9" font-family="JetBrains Mono"
+                            fill="rgba(200,215,255,.35)">125μs→</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════ PATTERN DNA SUMMARY ════════ -->
+        <div class="sec ani" style="animation-delay:.55s">🔑 Pattern Summary — What Your Brain Should Auto-Fire</div>
+        <div class="dna ani" style="animation-delay:.58s">
+            <div class="dna-card" style="border-color:rgba(0,229,255,.25)">
+                <div class="dna-label" style="color:var(--cyan)">👁 See the Trigger</div>
+                <div class="dna-item">First-order ODE or $e^{-kt}$ in equation → <b>I know this shape</b></div>
+                <div class="dna-item">Works for RC <b>and</b> RL circuits identically</div>
+                <div class="dna-item">Works whether response or ODE is given — same moves</div>
+            </div>
+            <div class="dna-card" style="border-color:rgba(255,201,71,.25)">
+                <div class="dna-label" style="color:var(--gold)">⚙️ Do the Moves</div>
+                <div class="dna-item"><b>τ:</b> Flip exponent coefficient, OR read ODE leading coeff (after normalizing)
+                </div>
+                <div class="dna-item"><b>x(∞):</b> $t\to\infty$ kills exponential. Only DC survives. (= RHS of
+                    normalized ODE)</div>
+                <div class="dna-item"><b>x(0):</b> Plug $t=0$ (e⁰=1) or read from given initial condition</div>
+                <div class="dna-item"><b>B:</b> Always = $x(0) - x(\infty)$</div>
+            </div>
+            <div class="dna-card" style="border-color:rgba(43,255,127,.25)">
+                <div class="dna-label" style="color:var(--green)">✅ The Skeleton (Never Changes)</div>
+                <div class="dna-item">$x(t) = x(\infty) + [x(0)-x(\infty)]\,e^{-t/\tau}$</div>
+                <div class="dna-item">ODE: $\tau\dot{x} + x = x(\infty)\,u(t)$</div>
+                <div class="dna-item">Zero crossing: set $=0$, isolate $e^{-kt}$, take $\ln$</div>
+                <div class="dna-item">Verify: check $t=0$ and $t\to\infty$ always ✓</div>
+            </div>
+        </div>
+
+    </div><!-- page -->
+
+    <script>
+        function showSub(id) {
+            document.querySelectorAll('.sub-content').forEach(el => el.classList.remove('on'));
+            document.querySelectorAll('.sub-tab').forEach(el => el.classList.remove('on'));
+            document.getElementById('sub-' + id).classList.add('on');
+            document.querySelectorAll('.sub-tab')[id === 'a' ? 0 : 1].classList.add('on');
+        }
+        // Intersection observer
+        const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; io.unobserve(e.target) } }) }, { threshold: .06 });
+        document.querySelectorAll('.ani').forEach(el => { el.style.animationPlayState = 'paused'; io.observe(el) });
+        // 3D tilt on walk steps
+        document.querySelectorAll('.wstep').forEach(el => {
+            el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; el.style.transform = `perspective(800px) rotateX(${-y * 2.5}deg) rotateY(${x * 3}deg)`; });
+            el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pattern Palace · First-Order RC · Solve Any Problem</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap"
+        rel="stylesheet" />
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #05080f;
+            --cyan: #00e5ff;
+            --gold: #ffc947;
+            --violet: #b06aff;
+            --green: #2bff7f;
+            --red: #ff4d6a;
+            --orange: #ff9500;
+            --pink: #ff6eb4;
+            --panel: rgba(10, 12, 28, 0.9);
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Outfit', sans-serif;
+            color: #dde8ff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* atmosphere */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 55% 35% at 10% 15%, rgba(80, 0, 180, 0.16) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 88% 80%, rgba(0, 160, 200, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 70% 25% at 50% 105%, rgba(255, 100, 0, 0.07) 0%, transparent 70%);
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.4rem 8rem
+        }
+
+        /* ── HEADER ── */
+        .header {
+            text-align: center;
+            padding: 3.5rem 1rem 2.5rem
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(176, 106, 255, 0.18), rgba(0, 229, 255, 0.12));
+            border: 1px solid var(--violet);
+            border-radius: 999px;
+            padding: .4rem 1.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem;
+            color: var(--violet);
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 22px rgba(176, 106, 255, 0.4);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.7rem, 4.5vw, 3rem);
+            font-weight: 900;
+            background: linear-gradient(130deg, #fff 0%, var(--cyan) 55%, var(--violet) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.12;
+            letter-spacing: .02em;
+            margin-bottom: .7rem;
+        }
+
+        .header p {
+            font-size: .95rem;
+            color: rgba(200, 215, 255, 0.5);
+            max-width: 580px;
+            margin: 0 auto
+        }
+
+        /* ── BIG IDEA BOX ── */
+        .idea-box {
+            background: linear-gradient(135deg, rgba(0, 60, 100, 0.55), rgba(40, 0, 100, 0.55));
+            border: 2px solid var(--cyan);
+            border-radius: 22px;
+            padding: 2.2rem 2.5rem;
+            max-width: 740px;
+            margin: 2.5rem auto 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 229, 255, 0.3), inset 0 0 40px rgba(0, 229, 255, 0.04);
+            animation: ideaGlow 5s ease-in-out infinite;
+        }
+
+        @keyframes ideaGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 60px rgba(0, 229, 255, 0.3), inset 0 0 40px rgba(0, 229, 255, 0.04)
+            }
+
+            50% {
+                box-shadow: 0 0 90px rgba(0, 229, 255, 0.5), inset 0 0 60px rgba(0, 229, 255, 0.07)
+            }
+        }
+
+        .idea-label {
+            font-size: .62rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            font-weight: 700;
+            margin-bottom: 1rem
+        }
+
+        .idea-form {
+            font-size: clamp(1rem, 2.8vw, 1.55rem);
+            color: #fff;
+            margin-bottom: 1.2rem
+        }
+
+        .idea-desc {
+            font-size: .85rem;
+            color: rgba(180, 210, 255, 0.6);
+            line-height: 1.7
+        }
+
+        .idea-desc b {
+            color: #fff
+        }
+
+        .idea-desc .hi {
+            color: var(--cyan);
+            font-weight: 700
+        }
+
+        /* ── SECTION TITLE ── */
+        .sec {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 3.5rem 0 1.6rem;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(176, 106, 255, 0.5);
+        }
+
+        .sec::before,
+        .sec::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(176, 106, 255, 0.15)
+        }
+
+        /* ── PATTERN FLOW (horizontal steps) ── */
+        .flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0;
+            background: var(--panel);
+            border: 1px solid rgba(176, 106, 255, 0.18);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .flow-step {
+            padding: 1.5rem 1.2rem;
+            position: relative;
+            border-right: 1px solid rgba(176, 106, 255, 0.12);
+            transition: background .3s;
+            cursor: default;
+        }
+
+        .flow-step:last-child {
+            border-right: none
+        }
+
+        .flow-step:hover {
+            background: rgba(176, 106, 255, 0.07)
+        }
+
+        .flow-arrow {
+            position: absolute;
+            right: -13px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+            color: rgba(176, 106, 255, 0.4);
+            z-index: 2;
+            display: none;
+        }
+
+        @media(min-width:500px) {
+            .flow-arrow {
+                display: block
+            }
+        }
+
+        .flow-step:last-child .flow-arrow {
+            display: none
+        }
+
+        .fs-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--st-c, var(--violet));
+            color: #000;
+            font-weight: 900;
+            font-size: .85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: .7rem;
+            box-shadow: 0 0 12px var(--st-c, var(--violet));
+        }
+
+        .fs-title {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--st-c, var(--violet));
+            margin-bottom: .35rem
+        }
+
+        .fs-body {
+            font-size: .76rem;
+            color: rgba(200, 215, 255, 0.55);
+            line-height: 1.55
+        }
+
+        /* ── PALACE ROOMS (concept rooms) ── */
+        .rooms {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem
+        }
+
+        .room {
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            background: var(--panel);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(176, 106, 255, 0.15);
+            transition: box-shadow .35s, transform .35s;
+            backdrop-filter: blur(14px);
+        }
+
+        .room:hover {
+            box-shadow: 0 0 40px var(--rc)18;
+            transform: translateX(4px);
+        }
+
+        .room-left {
+            background: var(--rc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+            padding: 1rem .5rem;
+            min-height: 140px;
+        }
+
+        .room-left .ricon {
+            font-size: 1.8rem
+        }
+
+        .room-left .rnum {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.75);
+            line-height: 1;
+        }
+
+        .room-left .rlabel {
+            font-size: .55rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .room-right {
+            padding: 1.6rem 1.8rem
+        }
+
+        .room-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--rc);
+            margin-bottom: .2rem
+        }
+
+        .room-sub {
+            font-size: .76rem;
+            color: rgba(200, 215, 255, 0.42);
+            margin-bottom: 1rem
+        }
+
+        /* PATTERN TRIGGER */
+        .trigger {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 3px solid var(--rc);
+            border-radius: 0 10px 10px 0;
+            padding: .85rem 1.1rem;
+            margin: .5rem 0;
+        }
+
+        .trigger-lbl {
+            font-size: .58rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--rc);
+            margin-bottom: .4rem
+        }
+
+        .trigger-q {
+            font-size: .88rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: .25rem
+        }
+
+        .trigger-text {
+            font-size: .8rem;
+            color: rgba(200, 215, 255, 0.6);
+            line-height: 1.6
+        }
+
+        .trigger-text em {
+            color: var(--rc);
+            font-style: normal;
+            font-weight: 700
+        }
+
+        /* FORMULA DISPLAY */
+        .fbox {
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            padding: .95rem 1.2rem;
+            margin: .6rem 0;
+            text-align: center;
+            transition: border-color .3s;
+        }
+
+        .room:hover .fbox {
+            border-color: color-mix(in srgb, var(--rc) 30%, transparent)
+        }
+
+        .fbox.key {
+            border-color: var(--rc);
+            box-shadow: 0 0 16px color-mix(in srgb, var(--rc) 40%, transparent)
+        }
+
+        .fbox-lbl {
+            font-size: .58rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: rgba(200, 215, 255, 0.35);
+            margin-bottom: .45rem
+        }
+
+        .fbox-note {
+            font-size: .78rem;
+            color: rgba(200, 215, 255, 0.55);
+            margin-top: .45rem;
+            line-height: 1.5
+        }
+
+        /* SCENE (visceral image) */
+        .scene {
+            background: rgba(176, 106, 255, 0.05);
+            border: 1px dashed rgba(176, 106, 255, 0.22);
+            border-radius: 10px;
+            padding: .85rem 1rem;
+            margin: .5rem 0;
+        }
+
+        .scene-lbl {
+            font-size: .58rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--violet);
+            font-weight: 700;
+            margin-bottom: .4rem
+        }
+
+        .scene-text {
+            font-size: .82rem;
+            color: rgba(200, 215, 255, 0.65);
+            line-height: 1.7
+        }
+
+        .scene-text .vi {
+            color: var(--pink);
+            font-weight: 700
+        }
+
+        /* vivid image */
+        .scene-text .ac {
+            color: var(--cyan);
+            font-weight: 700
+        }
+
+        /* action */
+        .scene-text .co {
+            color: var(--gold);
+            font-weight: 700
+        }
+
+        /* concept */
+
+        /* STEPS inside a room */
+        .steps {
+            list-style: none;
+            margin-top: .6rem
+        }
+
+        .steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: .65rem;
+            padding: .45rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: .82rem;
+            line-height: 1.55;
+            color: rgba(200, 215, 255, 0.68);
+        }
+
+        .steps li:last-child {
+            border-bottom: none
+        }
+
+        .snum {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--rc);
+            color: #000;
+            font-size: .65rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        /* RECOGNITION BADGE */
+        .badge {
+            display: inline-block;
+            padding: .22rem .85rem;
+            border-radius: 999px;
+            font-size: .65rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border: 1px solid currentColor;
+            margin: .2rem .15rem;
+        }
+
+        /* ── UNIVERSAL SOLVER CARD ── */
+        .solver {
+            background: linear-gradient(135deg, rgba(0, 50, 80, 0.55), rgba(50, 0, 100, 0.55));
+            border: 2px solid var(--gold);
+            border-radius: 22px;
+            padding: 2rem 2.4rem;
+            margin: 2rem 0;
+            box-shadow: 0 0 50px rgba(255, 201, 71, 0.25);
+        }
+
+        .solver-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 1.4rem;
+            text-align: center;
+        }
+
+        .solver-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem
+        }
+
+        .solver-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 201, 71, 0.2);
+            padding: 1.1rem 1.2rem;
+        }
+
+        .sc-q {
+            font-size: .65rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255, 201, 71, 0.5);
+            margin-bottom: .5rem;
+            font-weight: 700
+        }
+
+        .sc-trigger {
+            font-size: .85rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: .4rem
+        }
+
+        .sc-how {
+            font-size: .78rem;
+            color: rgba(200, 215, 255, 0.6);
+            line-height: 1.55
+        }
+
+        .sc-formula {
+            margin-top: .5rem;
+            font-size: .85rem;
+            text-align: center
+        }
+
+        /* ── VARIANT EXAMPLES ── */
+        .variants {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0
+        }
+
+        .variant {
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            padding: 1.4rem;
+            transition: border-color .25s, transform .25s;
+        }
+
+        .variant:hover {
+            border-color: rgba(255, 201, 71, 0.4);
+            transform: translateY(-4px)
+        }
+
+        .variant-label {
+            font-size: .62rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: .7rem
+        }
+
+        .variant-eq {
+            font-size: .95rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: .7rem .5rem;
+            margin: .5rem 0
+        }
+
+        .variant-ans {
+            font-size: .75rem;
+            color: rgba(200, 215, 255, 0.55);
+            line-height: 1.6;
+            margin-top: .5rem
+        }
+
+        .variant-ans b {
+            color: var(--gold)
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(176, 106, 255, 0.35);
+            border-radius: 4px
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(26px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .ani {
+            opacity: 0;
+            animation: fadeUp .65s cubic-bezier(.25, .8, .25, 1) both
+        }
+
+        @media(max-width:580px) {
+            .room {
+                grid-template-columns: 64px 1fr
+            }
+
+            .room-right {
+                padding: 1.2rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div
+        style="position:relative;z-index:10;display:flex;gap:.6rem;flex-wrap:wrap;padding:1rem 1.4rem .4rem;max-width:1200px;margin:0 auto">
+        <a href="hub.html"
+            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">🏠
+            Hub</a>
+        <a href="../rc-memory-palace/index.html"
+            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">⚡
+            Ex 7-8 Palace</a>
+        <a href="index.html"
+            style="background:#b06aff;border:1px solid #b06aff;border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;text-decoration:none">🏛
+            Pattern Palace</a>
+        <a href="pattern-history.html"
+            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">📚
+            History</a>
+        <a href="flashcards.html"
+            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">🃏
+            Anki Mode</a>
+    </div>
+    <div class="page">
+
+        <!-- ══════════════ HEADER ══════════════ -->
+        <header class="header ani" style="animation-delay:.05s">
+            <div class="tag">⚡ Pattern Palace · First-Order RC · Magnetic Memory Method</div>
+            <h1>Recognize the Pattern.<br />Solve Any RC Problem.</h1>
+            <p>This palace doesn't store numbers. It stores the <strong>mental moves</strong> — the cognitive machinery
+                that works on any first-order RC circuit you encounter.</p>
+
+            <div class="idea-box">
+                <div class="idea-label">⬡ The Universal First-Order RC Template</div>
+                <div class="idea-form">
+                    $$x(t) = \underbrace{x(\infty)}_{\text{forced}} + \underbrace{\bigl[x(0) -
+                    x(\infty)\bigr]}_{\text{difference}}\, e^{-t/\tau}$$
+                </div>
+                <div class="idea-desc">
+                    Every single first-order circuit response — no matter what the numbers are — <b>fits this one
+                        skeleton</b>.
+                    Your job is never to memorize the numbers. Your job is to <span class="hi">read the skeleton</span>
+                    and <span class="hi">extract the bones</span>.
+                </div>
+            </div>
+        </header>
+
+        <!-- ══════════════ PROCESS FLOW ══════════════ -->
+        <div class="sec ani" style="animation-delay:.2s">🧭 The 5-Move Mental Algorithm</div>
+
+        <div class="flow ani" style="animation-delay:.23s">
+            <div class="flow-step" style="--st-c:#00e5ff">
+                <div class="flow-arrow">▶</div>
+                <div class="fs-num" style="background:#00e5ff">1</div>
+                <div class="fs-title" style="color:#00e5ff">RECOGNIZE</div>
+                <div class="fs-body">See $Ae^{-kt}$ in the equation → first-order RC confirmed</div>
+            </div>
+            <div class="flow-step" style="--st-c:#ffc947">
+                <div class="flow-arrow">▶</div>
+                <div class="fs-num" style="background:#ffc947">2</div>
+                <div class="fs-title" style="color:#ffc947">READ τ</div>
+                <div class="fs-body">Exponent coefficient $k$ → flip it: $\tau = 1/k$</div>
+            </div>
+            <div class="flow-step" style="--st-c:#2bff7f">
+                <div class="flow-arrow">▶</div>
+                <div class="fs-num" style="background:#2bff7f">3</div>
+                <div class="fs-title" style="color:#2bff7f">FREEZE t=0</div>
+                <div class="fs-body">$e^0 = 1$ → every term alive → that's your initial value</div>
+            </div>
+            <div class="flow-step" style="--st-c:#ff4d6a">
+                <div class="flow-arrow">▶</div>
+                <div class="fs-num" style="background:#ff4d6a">4</div>
+                <div class="fs-title" style="color:#ff4d6a">LET t→∞</div>
+                <div class="fs-body">$e^{-\infty}=0$ → transient dies → only DC term survives</div>
+            </div>
+            <div class="flow-step" style="--st-c:#b06aff">
+                <div class="flow-arrow">▶</div>
+                <div class="fs-num" style="background:#b06aff">5</div>
+                <div class="fs-title" style="color:#b06aff">BUILD ODE</div>
+                <div class="fs-body">$\tau\,\dot{x} + x = x(\infty)\cdot u(t)$</div>
+            </div>
+        </div>
+
+        <!-- ══════════════ PALACE ROOMS ══════════════ -->
+        <div class="sec ani" style="animation-delay:.3s">🏛 Palace Rooms — One Mental Move Per Room</div>
+
+        <div class="rooms">
+
+            <!-- ──────── ROOM 1: RECOGNITION ──────── -->
+            <div class="room ani" style="--rc:#00e5ff;animation-delay:.33s">
+                <div class="room-left" style="background:#00e5ff18;border-right:2px solid #00e5ff">
+                    <div class="ricon">👁</div>
+                    <div class="rnum" style="color:#00e5ff">I</div>
+                    <div class="rlabel" style="color:#00e5ff55">Entry<br />Hall</div>
+                </div>
+                <div class="room-right">
+                    <div class="room-title">The Recognition Move</div>
+                    <div class="room-sub">What to look for the moment you see any equation</div>
+
+                    <div class="trigger">
+                        <div class="trigger-lbl">👁 Pattern Trigger — You see this:</div>
+                        <div class="trigger-q">Any equation with $e^{-(\text{something})t}$</div>
+                        <div class="trigger-text">
+                            Your brain fires: <em>"First-order circuit. Natural response decaying. I know this
+                                skeleton."</em><br />
+                            Doesn't matter if it's $v_C$, $i_L$, $v_R$ — the shape is always the same.
+                        </div>
+                    </div>
+
+                    <div class="fbox key">
+                        <div class="fbox-lbl">The Skeleton You Are Reading</div>
+                        $$x(t) = \underbrace{A}_{\text{forced}} + \underbrace{B}_{\text{amplitude}} \cdot e^{-t/\tau}$$
+                        <div class="fbox-note">$A$ = where it ends up &nbsp;·&nbsp; $B$ = how far it has to travel
+                            &nbsp;·&nbsp; $\tau$ = how fast it gets there</div>
+                    </div>
+
+                    <div class="scene">
+                        <div class="scene-lbl">🏛 Memory Palace Scene (Entry Hall)</div>
+                        <div class="scene-text">
+                            You walk into the Entry Hall. On the wall is a <span class="vi">giant glowing
+                                skeleton</span> —
+                            $A + Be^{-t/\tau}$ carved in neon.
+                            Every time you see an equation with <span class="ac">$e$ raised to a negative power of
+                                $t$</span>,
+                            this skeleton flashes in your mind automatically.
+                            It's your <span class="co">pattern lock screen</span> — the door opens only when you
+                            recognize it.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ──────── ROOM 2: TIME CONSTANT ──────── -->
+            <div class="room ani" style="--rc:#ffc947;animation-delay:.4s">
+                <div class="room-left" style="background:#ffc94718;border-right:2px solid #ffc947">
+                    <div class="ricon">⏱</div>
+                    <div class="rnum" style="color:#ffc947">II</div>
+                    <div class="rlabel" style="color:#ffc94755">Kitchen</div>
+                </div>
+                <div class="room-right">
+                    <div class="room-title">The Flip Move — Extracting τ</div>
+                    <div class="room-sub">The exponent tells you everything about speed</div>
+
+                    <div class="trigger">
+                        <div class="trigger-lbl">👁 Pattern Trigger — You see this form:</div>
+                        <div class="trigger-q">$e^{-k\,t}$ where $k$ is a number</div>
+                        <div class="trigger-text">
+                            Your brain fires: <em>"The coefficient in the exponent is $1/\tau$. Flip it."</em><br />
+                            Always and without exception: <em>bigger $k$ = faster decay = smaller $\tau$</em>.
+                        </div>
+                    </div>
+
+                    <div class="fbox key">
+                        <div class="fbox-lbl">The One Operation You Do</div>
+                        $$e^{-k\,t} \;\xrightarrow{\text{flip}}\; \tau = \frac{1}{k}$$
+                        <div class="fbox-note">
+                            If you see $e^{-1000t}$ → $\tau = 1/1000 = 1\text{ ms}$<br />
+                            If you see $e^{-200t}$ → $\tau = 1/200 = 5\text{ ms}$<br />
+                            If you see $e^{-50t}$ → $\tau = 1/50 = 20\text{ ms}$
+                        </div>
+                    </div>
+
+                    <div class="scene">
+                        <div class="scene-lbl">🏛 Memory Palace Scene (Kitchen)</div>
+                        <div class="scene-text">
+                            In the Kitchen, a chef <span class="vi">grabs a fraction and physically flips it
+                                upside-down</span>,
+                            slamming it on the counter. The number on top becomes the bottom.
+                            That's all. <span class="ac">Flip the exponent. Get τ.</span>
+                            The faster it decays, the hotter the stove — <span class="co">large $k$ = small $\tau$ =
+                                very hot</span>.
+                        </div>
+                    </div>
+
+                    <div class="trigger" style="border-left-color:var(--violet);">
+                        <div class="trigger-lbl" style="color:var(--violet)">💡 Physical Intuition (Why This Works)
+                        </div>
+                        <div class="trigger-text">
+                            $\tau = RC$ for a series RC circuit. Bigger resistance or bigger capacitance → slower
+                            charge/discharge → bigger $\tau$.
+                            The exponent $k = 1/RC$ — it literally is 1 divided by the time constant.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ──────── ROOM 3: BOUNDARY CONDITIONS ──────── -->
+            <div class="room ani" style="--rc:#2bff7f;animation-delay:.47s">
+                <div class="room-left" style="background:#2bff7f18;border-right:2px solid #2bff7f">
+                    <div class="ricon">🔬</div>
+                    <div class="rnum" style="color:#2bff7f">III</div>
+                    <div class="rlabel" style="color:#2bff7f55">Bedroom</div>
+                </div>
+                <div class="room-right">
+                    <div class="room-title">The Freeze/Melt Moves — Boundary Conditions</div>
+                    <div class="room-sub">Two key substitutions that extract initial and final values</div>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.5rem 0">
+                        <div>
+                            <div class="trigger" style="margin:0">
+                                <div class="trigger-lbl">❄️ FREEZE: $t=0$</div>
+                                <div class="trigger-q">$e^{0} = 1$</div>
+                                <div class="trigger-text">Every term is fully alive. No decay has happened yet. Sum them
+                                    all → <em>initial value $x(0)$</em></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="trigger" style="margin:0;border-left-color:#ff4d6a">
+                                <div class="trigger-lbl" style="color:#ff4d6a">🔥 MELT: $t\to\infty$</div>
+                                <div class="trigger-q">$e^{-\infty} = 0$</div>
+                                <div class="trigger-text">Transient term dies completely. Only the <span
+                                        class="ac">non-exponential terms</span> survive → <em>forced response
+                                        $x(\infty)$</em></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fbox key">
+                        <div class="fbox-lbl">The Two Substitutions</div>
+                        $$x(0) = A + B\cdot e^0 = A + B$$
+                        $$x(\infty) = A + B\cdot 0 = A$$
+                    </div>
+
+                    <div class="scene">
+                        <div class="scene-lbl">🏛 Memory Palace Scene (Bedroom)</div>
+                        <div class="scene-text">
+                            The bedroom has two light switches on opposite walls.<br /><br />
+                            <span class="vi">Left switch (FREEZE)</span>: you flip it <span class="ac">OFF → time stops
+                                at $t=0$</span>.
+                            The exponential is frozen at full amplitude ($e^0=1$). Read every term — that's your
+                            start.<br /><br />
+                            <span class="vi">Right switch (MELT)</span>: you hold it down until <span class="ac">the
+                                exponential melts away to nothing</span>.
+                            What's left glowing on the wall — just the DC term — that's your endpoint.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ──────── ROOM 4: DECOMPOSITION ──────── -->
+            <div class="room ani" style="--rc:#ff4d6a;animation-delay:.54s">
+                <div class="room-left" style="background:#ff4d6a18;border-right:2px solid #ff4d6a">
+                    <div class="ricon">✂️</div>
+                    <div class="rnum" style="color:#ff4d6a">IV</div>
+                    <div class="rlabel" style="color:#ff4d6a55">Living<br />Room</div>
+                </div>
+                <div class="room-right">
+                    <div class="room-title">The Split Move — Natural vs. Forced</div>
+                    <div class="room-sub">Every response is two things glued together. Learn to see both.</div>
+
+                    <div class="fbox key">
+                        <div class="fbox-lbl">The Decomposition — Always True</div>
+                        $$\underbrace{x(t)}_{\text{total}} = \underbrace{x(\infty)}_{\substack{\text{forced}\\\text{(DC
+                        input)}}} + \underbrace{[x(0)-x(\infty)]\,e^{-t/\tau}}_{\substack{\text{natural}\\\text{(circuit
+                        memory)}}}$$
+                    </div>
+
+                    <ul class="steps">
+                        <li><span class="snum">→</span><b>Forced</b> = where the circuit is <em>being driven to</em> by
+                            the input source. Determined entirely by the source, not the initial state.</li>
+                        <li><span class="snum">→</span><b>Natural</b> = how much the circuit deviates from forced,
+                            decaying away. It "remembers" the initial condition and forgets it at rate $1/\tau$.</li>
+                        <li><span class="snum">→</span>If $x(0) = x(\infty)$: natural term = 0, no transient. Already at
+                            steady state.</li>
+                        <li><span class="snum">→</span>If $x(0) = 0$: coefficient = $-x(\infty)$. Starts at zero,
+                            charges up to $x(\infty)$.</li>
+                    </ul>
+
+                    <div class="scene">
+                        <div class="scene-lbl">🏛 Memory Palace Scene (Living Room)</div>
+                        <div class="scene-text">
+                            The living room sofa has a <span class="vi">seam down the middle</span>.
+                            Left cushion = <span class="co">forced</span> (a glowing DC power cable plugged in — the
+                            input source owns it).
+                            Right cushion = <span class="co">natural</span> (a spring that's compressed or stretched —
+                            the circuit's own memory, slowly releasing).
+                            <span class="ac">Pull the cushions apart and you understand the whole response.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ──────── ROOM 5: ODE ──────── -->
+            <div class="room ani" style="--rc:#b06aff;animation-delay:.61s">
+                <div class="room-left" style="background:#b06aff18;border-right:2px solid #b06aff">
+                    <div class="ricon">📐</div>
+                    <div class="rnum" style="color:#b06aff">V</div>
+                    <div class="rlabel" style="color:#b06aff55">Study<br />Room</div>
+                </div>
+                <div class="room-right">
+                    <div class="room-title">The Blueprint Move — Building the ODE</div>
+                    <div class="room-sub">Read the solution backwards to find the equation that produced it</div>
+
+                    <div class="trigger">
+                        <div class="trigger-lbl">👁 Pattern Trigger</div>
+                        <div class="trigger-q">Given a response, reconstruct the governing equation</div>
+                        <div class="trigger-text">
+                            The ODE for any first-order circuit with a step input follows the same blueprint.
+                            Once you read $\tau$ and $x(\infty)$, the ODE is immediate.
+                        </div>
+                    </div>
+
+                    <div class="fbox key">
+                        <div class="fbox-lbl">Universal First-Order ODE Blueprint</div>
+                        $$\tau\,\frac{dx}{dt} + x = x(\infty)\cdot u(t)$$
+                        <div class="fbox-note">
+                            Left side: <b>τ × (rate of change) + current value</b> = how the circuit behaves<br />
+                            Right side: <b>the forcing function</b> — what it's being driven toward × unit step
+                        </div>
+                    </div>
+
+                    <ul class="steps">
+                        <li><span class="snum">1</span>Read $\tau$ from the exponent (flip move from Room II)</li>
+                        <li><span class="snum">2</span>Read $x(\infty)$ by melting the equation (melt move from Room
+                            III)</li>
+                        <li><span class="snum">3</span>Plug both into $\tau\,\dot{x} + x = x(\infty)\,u(t)$ — done</li>
+                    </ul>
+
+                    <div class="scene">
+                        <div class="scene-lbl">🏛 Memory Palace Scene (Study Room)</div>
+                        <div class="scene-text">
+                            The study room has a <span class="vi">blueprint pinned to the wall</span> — always the same
+                            blueprint.
+                            Left beam of the blueprint says <span class="co">"$\tau\,\dot{x}+x$"</span>.
+                            Right beam says <span class="co">"$x(\infty)$"</span>.
+                            You just fill in the numbers you already extracted from the other rooms.
+                            <span class="ac">The blueprint never changes — only the numbers do.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ══════════════ UNIVERSAL SOLVER ══════════════ -->
+        <div class="sec ani" style="animation-delay:.68s">🔑 Universal Solver — Apply to Any Problem</div>
+
+        <div class="solver ani" style="animation-delay:.71s">
+            <div class="solver-title">🏛 Walk the Palace → Answer Any Question → In 30 Seconds</div>
+            <div class="solver-grid">
+                <div class="solver-card">
+                    <div class="sc-q">Q: What is the time constant?</div>
+                    <div class="sc-trigger">→ Go to Room II (Kitchen)</div>
+                    <div class="sc-how">Find the exponent coefficient $k$. Flip it.</div>
+                    <div class="sc-formula">$$\tau = \frac{1}{k}$$</div>
+                </div>
+                <div class="solver-card">
+                    <div class="sc-q">Q: What is the initial value?</div>
+                    <div class="sc-trigger">→ Go to Room III (Bedroom · left switch)</div>
+                    <div class="sc-how">Freeze time. Substitute $t=0$. Calculate.</div>
+                    <div class="sc-formula">$$x(0) = A + B$$</div>
+                </div>
+                <div class="solver-card">
+                    <div class="sc-q">Q: What is the forced / final response?</div>
+                    <div class="sc-trigger">→ Go to Room III (Bedroom · right switch)</div>
+                    <div class="sc-how">Melt the exponential. Only DC survives.</div>
+                    <div class="sc-formula">$$x(\infty) = A$$</div>
+                </div>
+                <div class="solver-card">
+                    <div class="sc-q">Q: What is the differential equation?</div>
+                    <div class="sc-trigger">→ Go to Room V (Study)</div>
+                    <div class="sc-how">Read $\tau$ and $x(\infty)$, fill the blueprint.</div>
+                    <div class="sc-formula">$$\tau\dot{x} + x = x(\infty)\,u(t)$$</div>
+                </div>
+                <div class="solver-card">
+                    <div class="sc-q">Q: When does $x(t) = 0$?</div>
+                    <div class="sc-trigger">→ Set equation = 0 → isolate exponential</div>
+                    <div class="sc-how">Divide, then take $\ln$ of both sides.</div>
+                    <div class="sc-formula">$$t = \frac{-\ln(\text{ratio})}{k}$$</div>
+                </div>
+                <div class="solver-card">
+                    <div class="sc-q">Q: What type of response is it?</div>
+                    <div class="sc-trigger">→ Go to Room IV (Living Room)</div>
+                    <div class="sc-how">Split at the seam: forced DC + natural exponential.</div>
+                    <div class="sc-formula">$$x = x_F + x_N$$</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════ TRY IT ON BOTH PROBLEMS ══════════════ -->
+        <div class="sec ani" style="animation-delay:.75s">🧪 Apply the Pattern — Both Problems Solved the Same Way</div>
+
+        <div class="variants ani" style="animation-delay:.78s">
+
+            <div class="variant">
+                <div class="variant-label">Example 7-8 · The First Problem</div>
+                <div class="variant-eq">$$v_C(t) = 20e^{-200t} - 10\text{ V}$$</div>
+                <div class="variant-ans">
+                    <b>Room I (Recognize):</b> $e^{-200t}$ → it's first-order RC ✓<br />
+                    <b>Room II (Flip):</b> $k=200$ → $\tau = 1/200 = 5\text{ ms}$<br />
+                    <b>Room III Freeze</b> ($t=0$): $20(1)-10 = +10\text{ V}$<br />
+                    <b>Room III Melt</b> ($t\to\infty$): $20(0)-10 = -10\text{ V}$<br />
+                    <b>Room IV (Split):</b> Forced $=-10$V, Natural $=20e^{-200t}$<br />
+                    <b>Room V (Blueprint):</b> $\frac{1}{200}\dot{v}+v=-10\,u(t)$
+                </div>
+            </div>
+
+            <div class="variant">
+                <div class="variant-label">Exercise 7-8 · This Problem</div>
+                <div class="variant-eq">$$v_C(t) = 20 - 20e^{-1000t}\text{ V}$$</div>
+                <div class="variant-ans">
+                    <b>Room I (Recognize):</b> $e^{-1000t}$ → it's first-order RC ✓<br />
+                    <b>Room II (Flip):</b> $k=1000$ → $\tau = 1/1000 = 1\text{ ms}$<br />
+                    <b>Room III Freeze</b> ($t=0$): $20-20(1) = 0\text{ V}$<br />
+                    <b>Room III Melt</b> ($t\to\infty$): $20-20(0) = 20\text{ V}$<br />
+                    <b>Room IV (Split):</b> Forced $=20$V, Natural $=-20e^{-1000t}$<br />
+                    <b>Room V (Blueprint):</b> $10^{-3}\dot{v}+v=20\,u(t)$
+                </div>
+            </div>
+
+            <div class="variant" style="border-color:rgba(176,106,255,0.3)">
+                <div class="variant-label" style="color:var(--violet)">Any Future Problem · Same 5 Moves</div>
+                <div class="variant-eq">$$x(t) = \underbrace{A}_{\text{melt}} + \underbrace{B}_{\text{freeze-A}}
+                    e^{-\overbrace{k}^{\text{flip}}t}$$</div>
+                <div class="variant-ans">
+                    <b>Room I:</b> Spot $e^{-kt}$ → first-order RC<br />
+                    <b>Room II:</b> Flip $k$ → $\tau$<br />
+                    <b>Room III:</b> $t=0$ (freeze) → $x(0)$ &nbsp;|&nbsp; $t\to\infty$ (melt) → $x(\infty)$<br />
+                    <b>Room IV:</b> Forced $= A$, Natural $= Be^{-t/\tau}$<br />
+                    <b>Room V:</b> $\tau\dot{x}+x=A\,u(t)$<br />
+                    <b style="color:var(--violet)">The structure is identical. Every time.</b>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ══════════════ PALACE RULES ══════════════ -->
+        <div class="sec ani" style="animation-delay:.82s">📖 How to Practice This Palace</div>
+        <div style="background:var(--panel);border:1px solid rgba(176,106,255,0.18);border-radius:18px;padding:1.8rem;backdrop-filter:blur(12px)"
+            class="ani" style="animation-delay:.85s">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem">
+                <div>
+                    <div
+                        style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:.5rem">
+                        The Walk (30 sec)</div>
+                    <div style="font-size:.8rem;color:rgba(200,215,255,0.58);line-height:1.65">
+                        Close eyes. Walk: <b style="color:#fff">Entry Hall → Kitchen → Bedroom → Living Room →
+                            Study</b>.
+                        At each room, perform the mental move. Don't think about numbers — think about the operation.
+                    </div>
+                </div>
+                <div>
+                    <div
+                        style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.5rem">
+                        What You're Training</div>
+                    <div style="font-size:.8rem;color:rgba(200,215,255,0.58);line-height:1.65">
+                        Pattern recognition, not recall. You're training your brain to <b style="color:#fff">see the
+                            skeleton before the numbers</b>.
+                        At exam time, you recognize the form instantly and the moves fire automatically.
+                    </div>
+                </div>
+                <div>
+                    <div
+                        style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:.5rem">
+                        Spaced Practice</div>
+                    <div style="font-size:.8rem;color:rgba(200,215,255,0.58);line-height:1.65">
+                        Walk the palace + apply to a new random $k$ and $A,B$ value each session.
+                        After 5 sessions, the 5 moves are automatic — no palace needed anymore.
+                        <b style="color:#fff">The palace bootstrapped your intuition.</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Intersection observer — all .ani elements
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.animationPlayState = 'running';
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.07 });
+
+        document.querySelectorAll('.ani').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            io.observe(el);
+        });
+
+        // 3D tilt on rooms
+        document.querySelectorAll('.room').forEach(room => {
+            room.addEventListener('mousemove', e => {
+                const r = room.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                room.style.transform = `perspective(900px) rotateX(${-y * 3}deg) rotateY(${x * 4}deg) translateX(4px)`;
+            });
+            room.addEventListener('mouseleave', () => { room.style.transform = ''; });
+        });
+
+        // Flow steps hover ripple
+        document.querySelectorAll('.flow-step').forEach(step => {
+            step.addEventListener('click', () => {
+                step.style.transform = 'scale(0.96)';
+                setTimeout(() => { step.style.transform = ''; }, 150);
+            });
+        });
+    </script>
+</body>
+
+</html>

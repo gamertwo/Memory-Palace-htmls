@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Anki Mode · RC Circuit Flashcards</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700&display=swap"
+        rel="stylesheet" />
+    <script>MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' }, startup: { typeset: false } };</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async id="MathJax-script"></script>
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #03050d;
+            --cyan: #00e5ff;
+            --gold: #ffc947;
+            --violet: #b06aff;
+            --green: #2bff7f;
+            --red: #ff4d6a;
+            --orange: #ff9500;
+            --pink: #ff6eb4;
+            --panel: rgba(10, 12, 28, .95)
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Outfit', sans-serif;
+            color: #dde8ff;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse 60% 40% at 20% 20%, rgba(80, 0, 200, .15) 0%, transparent 65%),
+                radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0, 150, 220, .12) 0%, transparent 65%)
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(0, 229, 255, .025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, .025) 1px, transparent 1px);
+            background-size: 52px 52px
+        }
+
+        /* NAV */
+        .nav {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            gap: .7rem;
+            flex-wrap: wrap;
+            padding: 1.2rem 1.4rem .6rem;
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .nav a {
+            background: rgba(176, 106, 255, .1);
+            border: 1px solid rgba(176, 106, 255, .25);
+            border-radius: 999px;
+            padding: .3rem 1rem;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--violet);
+            text-decoration: none;
+            transition: background .2s
+        }
+
+        .nav a:hover {
+            background: rgba(176, 106, 255, .22)
+        }
+
+        .nav a.active {
+            background: var(--violet);
+            color: #000
+        }
+
+        /* LAYOUT */
+        .app {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 1.2rem 5rem
+        }
+
+        /* ── HEADER ── */
+        .h {
+            text-align: center;
+            padding: 1.8rem 0 1rem
+        }
+
+        .h h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+            font-weight: 700;
+            background: linear-gradient(130deg, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: .4rem
+        }
+
+        .h p {
+            font-size: .82rem;
+            color: rgba(200, 215, 255, .45)
+        }
+
+        /* ── SESSION STATS BAR ── */
+        .stats-bar {
+            display: flex;
+            gap: .6rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(10, 12, 28, .9);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 14px;
+            padding: 1rem 1.5rem;
+            margin: .8rem 0 1.4rem;
+            backdrop-filter: blur(14px)
+        }
+
+        .stat {
+            text-align: center;
+            min-width: 60px
+        }
+
+        .stat-n {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1
+        }
+
+        .stat-l {
+            font-size: .6rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(200, 215, 255, .38);
+            margin-top: .25rem
+        }
+
+        .prog-wrap {
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .prog-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, .07);
+            border-radius: 999px;
+            overflow: hidden
+        }
+
+        .prog-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--violet), var(--cyan));
+            border-radius: 999px;
+            transition: width .5s
+        }
+
+        .prog-lbl {
+            font-size: .6rem;
+            color: rgba(200, 215, 255, .35);
+            margin-top: .3rem;
+            text-align: center
+        }
+
+        /* ── FILTER TABS ── */
+        .tabs {
+            display: flex;
+            gap: .5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem
+        }
+
+        .tab {
+            padding: .3rem .9rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            font-size: .72rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+            color: rgba(200, 215, 255, .5);
+            background: none
+        }
+
+        .tab.on {
+            color: #000;
+            border-color: transparent
+        }
+
+        .tab[data-f="all"].on {
+            background: var(--violet)
+        }
+
+        .tab[data-f="due"].on {
+            background: var(--gold)
+        }
+
+        .tab[data-f="new"].on {
+            background: var(--cyan)
+        }
+
+        .tab[data-f="review"].on {
+            background: var(--green)
+        }
+
+        /* ── CARD SCENE ── */
+        .scene {
+            perspective: 1200px;
+            margin: 0 auto;
+            max-width: 680px
+        }
+
+        .card-wrap {
+            width: 100%;
+            min-height: 340px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform .55s cubic-bezier(.4, 0, .2, 1);
+            cursor: pointer
+        }
+
+        .card-wrap.flipped {
+            transform: rotateY(180deg)
+        }
+
+        .face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 22px;
+            padding: 2rem 2.2rem;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(16px);
+        }
+
+        .front {
+            background: linear-gradient(135deg, rgba(15, 10, 40, .95), rgba(5, 20, 50, .95));
+            border: 1px solid rgba(176, 106, 255, .3);
+            box-shadow: 0 0 50px rgba(176, 106, 255, .15), 0 20px 60px rgba(0, 0, 0, .5);
+        }
+
+        .back {
+            background: linear-gradient(135deg, rgba(5, 20, 45, .95), rgba(10, 5, 35, .95));
+            border: 1px solid rgba(0, 229, 255, .3);
+            box-shadow: 0 0 50px rgba(0, 229, 255, .15), 0 20px 60px rgba(0, 0, 0, .5);
+            transform: rotateY(180deg);
+        }
+
+        /* Card header row */
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap
+        }
+
+        .cat-badge {
+            padding: .22rem .75rem;
+            border-radius: 999px;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border: 1px solid currentColor
+        }
+
+        .card-n {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem;
+            color: rgba(200, 215, 255, .3);
+            margin-left: auto
+        }
+
+        .diff-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        /* move badge */
+        .move-tag {
+            font-size: .6rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(200, 215, 255, .35);
+            padding: .18rem .6rem;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .08)
+        }
+
+        /* Question */
+        .qtext {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.5;
+            flex: 1;
+            display: flex;
+            align-items: center
+        }
+
+        .q-hint {
+            font-size: .75rem;
+            color: rgba(200, 215, 255, .35);
+            margin-top: 1rem;
+            font-style: italic
+        }
+
+        /* Answer */
+        .aheader {
+            font-size: .65rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            font-weight: 700;
+            margin-bottom: .6rem
+        }
+
+        .atext {
+            font-size: .92rem;
+            color: rgba(200, 215, 255, .8);
+            line-height: 1.7;
+            flex: 1
+        }
+
+        .atext b {
+            color: #fff
+        }
+
+        .atext .hi {
+            color: var(--cyan);
+            font-weight: 700
+        }
+
+        .atext .gold {
+            color: var(--gold);
+            font-weight: 700
+        }
+
+        .atext .red {
+            color: var(--red);
+            font-weight: 700
+        }
+
+        .aformula {
+            background: rgba(0, 0, 0, .45);
+            border: 1px solid rgba(0, 229, 255, .2);
+            border-radius: 10px;
+            padding: .8rem 1rem;
+            text-align: center;
+            margin: .7rem 0;
+            font-size: .95rem
+        }
+
+        .atip {
+            background: rgba(176, 106, 255, .07);
+            border-left: 3px solid var(--violet);
+            border-radius: 0 8px 8px 0;
+            padding: .65rem .9rem;
+            margin: .6rem 0;
+            font-size: .8rem;
+            color: rgba(200, 215, 255, .65);
+            line-height: 1.6
+        }
+
+        /* Flip hint */
+        .flip-hint {
+            text-align: center;
+            font-size: .75rem;
+            color: rgba(200, 215, 255, .3);
+            margin-top: .8rem;
+            animation: blink 2s ease-in-out infinite
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: .3
+            }
+
+            50% {
+                opacity: .7
+            }
+        }
+
+        /* ── RATING BUTTONS ── */
+        .ratings {
+            display: none;
+            gap: .8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.2rem
+        }
+
+        .ratings.show {
+            display: flex
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 100px;
+            max-width: 140px;
+            padding: .85rem .5rem;
+            border-radius: 14px;
+            border: 2px solid transparent;
+            font-family: 'Outfit', sans-serif;
+            font-size: .88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s cubic-bezier(.25, .8, .25, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.05)
+        }
+
+        .btn:active {
+            transform: scale(.97)
+        }
+
+        .btn-again {
+            background: rgba(255, 77, 106, .15);
+            border-color: var(--red);
+            color: var(--red)
+        }
+
+        .btn-again:hover {
+            background: rgba(255, 77, 106, .3)
+        }
+
+        .btn-hard {
+            background: rgba(255, 149, 0, .15);
+            border-color: var(--orange);
+            color: var(--orange)
+        }
+
+        .btn-hard:hover {
+            background: rgba(255, 149, 0, .3)
+        }
+
+        .btn-good {
+            background: rgba(0, 229, 255, .15);
+            border-color: var(--cyan);
+            color: var(--cyan)
+        }
+
+        .btn-good:hover {
+            background: rgba(0, 229, 255, .3)
+        }
+
+        .btn-easy {
+            background: rgba(43, 255, 127, .15);
+            border-color: var(--green);
+            color: var(--green)
+        }
+
+        .btn-easy:hover {
+            background: rgba(43, 255, 127, .3)
+        }
+
+        .btn-sub {
+            font-size: .62rem;
+            font-weight: 400;
+            opacity: .6
+        }
+
+        /* ── EMPTY / DONE STATES ── */
+        .state {
+            text-align: center;
+            padding: 3rem 1rem;
+            display: none
+        }
+
+        .state.show {
+            display: block
+        }
+
+        .state-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem
+        }
+
+        .state-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: .5rem
+        }
+
+        .state-sub {
+            font-size: .85rem;
+            color: rgba(200, 215, 255, .5);
+            line-height: 1.6;
+            margin-bottom: 1.5rem
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--violet);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            padding: .7rem 2rem;
+            font-size: .9rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            transition: transform .2s, box-shadow .2s;
+            text-decoration: none
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(176, 106, 255, .4)
+        }
+
+        /* ── KEYBOARD SHORTCUT BAR ── */
+        .shortcuts {
+            text-align: center;
+            font-size: .7rem;
+            color: rgba(200, 215, 255, .25);
+            margin-top: .8rem
+        }
+
+        .shortcuts kbd {
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 4px;
+            padding: .1rem .4rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem;
+            margin: 0 .15rem
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar {
+            width: 5px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(176, 106, 255, .3);
+            border-radius: 4px
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <div class="nav">
+        <a href="hub.html">🏠 Hub</a>
+        <a href="../rc-memory-palace/index.html">⚡ Ex 7-8 Palace</a>
+        <a href="index.html">🏛 Pattern Palace</a>
+        <a href="pattern-history.html">📚 History</a>
+        <a href="flashcards.html" class="active">🃏 Anki Mode</a>
+    </div>
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <div class="h">
+            <h1>🃏 Anki Mode — Spaced Repetition</h1>
+            <p>Concept cards, not fact cards. Train your pattern recognition until it's automatic.</p>
+        </div>
+
+        <!-- STATS BAR -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-n" id="sDue" style="color:var(--gold)">—</div>
+                <div class="stat-l">Due</div>
+            </div>
+            <div class="stat">
+                <div class="stat-n" id="sNew" style="color:var(--cyan)">—</div>
+                <div class="stat-l">New</div>
+            </div>
+            <div class="stat">
+                <div class="stat-n" id="sReview" style="color:var(--green)">—</div>
+                <div class="stat-l">Review</div>
+            </div>
+            <div class="prog-wrap">
+                <div class="prog-bar">
+                    <div class="prog-fill" id="progFill" style="width:0%"></div>
+                </div>
+                <div class="prog-lbl" id="progLbl">0 / 0 done this session</div>
+            </div>
+            <div class="stat">
+                <div class="stat-n" id="sMastered" style="color:var(--violet)">—</div>
+                <div class="stat-l">Mastered</div>
+            </div>
+            <div class="stat">
+                <div class="stat-n" id="sStreak" style="color:var(--pink)">—</div>
+                <div class="stat-l">🔥 Streak</div>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab on" data-f="all">All Cards</button>
+            <button class="tab" data-f="due">Due Today</button>
+            <button class="tab" data-f="new">New Only</button>
+            <button class="tab" data-f="review">Review Only</button>
+        </div>
+
+        <!-- CARD SCENE -->
+        <div id="cardArea">
+            <div class="scene">
+                <div class="card-wrap" id="cardWrap" onclick="flipCard()">
+                    <!-- FRONT -->
+                    <div class="face front" id="cardFront">
+                        <div class="card-meta">
+                            <span class="cat-badge" id="catBadge"
+                                style="color:var(--violet);border-color:var(--violet)">Move I</span>
+                            <span class="move-tag" id="moveBadge">Recognize</span>
+                            <span class="card-n" id="cardNum">1/24</span>
+                            <span class="diff-dot" id="diffDot" style="background:var(--green)"></span>
+                        </div>
+                        <div class="qtext" id="qText">Loading…</div>
+                        <div class="q-hint" id="qHint"></div>
+                    </div>
+                    <!-- BACK -->
+                    <div class="face back" id="cardBack">
+                        <div class="aheader">✅ Pattern Answer</div>
+                        <div class="atext" id="aText"></div>
+                        <div class="aformula" id="aFormula" style="display:none"></div>
+                        <div class="atip" id="aTip" style="display:none"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-hint" id="flipHint">Click card or press Space to reveal</div>
+
+            <!-- RATING BUTTONS -->
+            <div class="ratings" id="ratings">
+                <button class="btn btn-again" onclick="rate(1)">
+                    <span>😰 Again</span>
+                    <span class="btn-sub" id="tAgain">&lt;1 min</span>
+                </button>
+                <button class="btn btn-hard" onclick="rate(2)">
+                    <span>😐 Hard</span>
+                    <span class="btn-sub" id="tHard">~6 min</span>
+                </button>
+                <button class="btn btn-good" onclick="rate(3)">
+                    <span>😊 Good</span>
+                    <span class="btn-sub" id="tGood">~1 day</span>
+                </button>
+                <button class="btn btn-easy" onclick="rate(4)">
+                    <span>😎 Easy</span>
+                    <span class="btn-sub" id="tEasy">~4 days</span>
+                </button>
+            </div>
+
+            <div class="shortcuts">
+                <kbd>Space</kbd> flip &nbsp;·&nbsp;
+                <kbd>1</kbd> Again &nbsp;·&nbsp;
+                <kbd>2</kbd> Hard &nbsp;·&nbsp;
+                <kbd>3</kbd> Good &nbsp;·&nbsp;
+                <kbd>4</kbd> Easy
+            </div>
+        </div>
+
+        <!-- DONE STATE -->
+        <div class="state" id="doneState">
+            <div class="state-icon">🎉</div>
+            <div class="state-title">Session Complete!</div>
+            <div class="state-sub" id="doneMsg">All due cards reviewed.</div>
+            <a href="hub.html" class="btn-primary">← Back to Hub</a>
+            <button class="btn-primary" style="margin-left:.8rem;background:var(--cyan)" onclick="resetSession()">Review
+                Again</button>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div class="state" id="emptyState">
+            <div class="state-icon">✅</div>
+            <div class="state-title">Nothing Due!</div>
+            <div class="state-sub">All cards are scheduled for future review. Come back tomorrow to keep the streak
+                alive.</div>
+            <a href="hub.html" class="btn-primary">← Back to Hub</a>
+        </div>
+
+    </div><!-- app -->
+
+    <script>
+        /* ═══════════════════════════════════════════
+           CARD DECK — 24 CONCEPT-BASED CARDS
+           Organized by the 5 Palace Moves
+        ═══════════════════════════════════════════ */
+        const DECK = [
+            // MOVE I — RECOGNIZE
+            {
+                id: 1, cat: "Move I", move: "Recognize", color: "#00e5ff",
+                q: "You open a textbook and see $v_C(t) = 15e^{-500t} + 8$ V. Before calculating anything — what TYPE of problem is this and what SKELETON does it fit?",
+                a: "<b>First-order circuit response.</b> The presence of $e^{-(\text{positive})t}$ is the pattern lock. It always fits the skeleton:",
+                formula: "$$x(t) = \\underbrace{A}_{\\text{forced}} + \\underbrace{B}_{\\text{amp}} e^{-t/\\tau}$$",
+                tip: "The variable (v_C, i_L, v_R) doesn't matter. The form is always the same. <b>Recognition is the first unlock.</b>",
+                diff: 1
+            },
+            {
+                id: 2, cat: "Move I", move: "Recognize", color: "#00e5ff",
+                q: "The ODE given is $5\\times10^{-3}\\frac{dv}{dt} + v = 12u(t)$. What does simply SEEING this tell you — before solving?",
+                a: "<b>First-order, constant-coefficient ODE.</b> It's in standard form $\\tau\\dot{x}+x=f(t)$. This means:\n• Solution = $A + Be^{-t/\\tau}$ form\n• $\\tau$ = the leading coefficient\n• $x(\\infty)$ = RHS value\n• Just need $x(0)$ to finish",
+                formula: "$$\\tau\\dot{x}+x=f(t) \\;\\Rightarrow\\; x=x(\\infty)+[x(0)-x(\\infty)]e^{-t/\\tau}$$",
+                tip: "When you see standard-form ODE, the answer structure is <b>already visible</b>. You're just filling in τ, x(0), x(∞).",
+                diff: 1
+            },
+            {
+                id: 3, cat: "Move I", move: "Recognize", color: "#00e5ff",
+                q: "What's the key difference between a GIVEN RESPONSE problem vs a GIVEN ODE problem — and how does your approach change?",
+                a: "<b>Given response:</b> $v_C=20e^{-200t}-10$\n→ Extract τ by flipping k. Get x(0) by freezing t=0. Get x(∞) by melting t→∞.\n\n<b>Given ODE:</b> $\\tau\\dot{v}+v=-5u(t)$\n→ Read τ directly. Get x(∞) from RHS. x(0) is given separately.",
+                formula: "",
+                tip: "<b class='hi'>Same destination, different starting point.</b> The 5 palace moves apply to both — just different rooms you visit first.",
+                diff: 2
+            },
+
+            // MOVE II — EXTRACT τ
+            {
+                id: 4, cat: "Move II", move: "Extract τ", color: "#ffc947",
+                q: "You see $e^{-1000t}$ in a response. What is τ? What is the circuit 63% of the way to its final value?",
+                a: "<b>Flip</b> the exponent coefficient: $\\tau = 1/1000 = 1$ ms\n\nAt $t = \\tau = 1$ ms, the circuit has completed 63.2% of its total change (since $1-e^{-1}\\approx0.632$).",
+                formula: "$$e^{-kt} \\;\\xrightarrow{\\text{flip}}\\; \\tau=\\frac{1}{k}$$",
+                tip: "After $5\\tau$, the transient is &lt;1% of its initial value — effectively done. $5\\times1\\text{ ms}=5\\text{ ms}$ here.",
+                diff: 1
+            },
+            {
+                id: 5, cat: "Move II", move: "Extract τ", color: "#ffc947",
+                q: "The ODE is $5\\times10^{-2}\\dot{i}_L + 2000i_L = 10u(t)$. What is τ? (Careful — it's not in standard form!)",
+                a: "<b>Must normalize first.</b> Divide through by the coefficient on $i_L$ (which is 2000):\n$$\\frac{5\\times10^{-2}}{2000}\\dot{i}_L + i_L = \\frac{10}{2000}u(t)$$\nNow the leading coefficient IS τ:",
+                formula: "$$\\tau = \\frac{5\\times10^{-2}}{2000} = 25\\;\\mu\\text{s}$$",
+                tip: "<b>Rule:</b> Standard form = coefficient of $x$ must be 1. If not, divide first. Then τ = leading coefficient.",
+                diff: 2
+            },
+            {
+                id: 6, cat: "Move II", move: "Extract τ", color: "#ffc947",
+                q: "$\\tau = RC$ for RC circuits and $\\tau = L/R$ for RL circuits. Given $\\tau$ from the equation IS $10^{-4}$ s — what can you infer about the physical circuit?",
+                a: "$\\tau = 10^{-4}$ s = 0.1 ms. You know $RC = 10^{-4}$.\nFor example: $R=10\\;\\text{k}\\Omega,\\;C=10\\text{ nF}$ works, or $R=100\\;\\Omega,\\;C=1\\;\\mu\\text{F}$.\n\n<b>Key physical insight:</b> Bigger R or C → slower decay → bigger τ → SLOWER circuit.",
+                formula: "$$\\tau_{RC}=RC \\qquad \\tau_{RL}=L/R$$",
+                tip: "You can't uniquely determine R and C from τ alone — only their product. τ is the fingerprint of the circuit speed.",
+                diff: 3
+            },
+            {
+                id: 7, cat: "Move II", move: "Extract τ", color: "#ffc947",
+                q: "Without calculating: which circuit decays faster — one with $\\tau=5\\text{ ms}$ or one with $\\tau=25\\;\\mu\\text{s}$?",
+                a: "<b>$\\tau=25\\;\\mu\\text{s}$</b> decays much faster. 25 μs vs 5 ms — 200× faster!\n\nSmaller τ = steeper exponential = faster approach to steady state.\nAt $t=5\\tau$: both are at &lt;1%, but the first takes 25 ms total and the second only 125 μs.",
+                formula: "",
+                tip: "Physical intuition: A very small capacitor through a large resistance charges/discharges extremely fast → tiny τ.",
+                diff: 1
+            },
+
+            // MOVE III — BOUNDARY CONDITIONS
+            {
+                id: 8, cat: "Move III", move: "Freeze/Melt", color: "#2bff7f",
+                q: "FREEZE move: Why does $e^{0} = 1$ matter? What does plugging $t=0$ reveal — and what does it NOT reveal?",
+                a: "$e^0=1$: at $t=0$, the exponential is <b>fully present</b>. No decay has happened.\n\nPlugging $t=0$: $x(0)=A+B\\cdot1=A+B$ → initial value (capacitor charge state before circuit changes).\n\n<b>It does NOT tell you</b> why x(0) has that value — that comes from the circuit history before t=0.",
+                formula: "$$x(0)=A+B\\cdot e^0=A+B$$",
+                tip: "Continuity of capacitor voltage: $v_C$ cannot jump instantaneously. So $v_C(0^-)=v_C(0^+)=v_C(0)$.",
+                diff: 1
+            },
+            {
+                id: 9, cat: "Move III", move: "Freeze/Melt", color: "#2bff7f",
+                q: "MELT move: Why does $e^{-\\infty}=0$? And what survives after the natural response 'melts away'?",
+                a: "$e^{-\\infty}=0$ because the exponential function approaches zero asymptotically for negative exponents.\n\nWhat survives = the <b>forced response</b> = the DC steady state = what the input source DRIVES the circuit to.\n\n$x(\\infty)=A+B\\cdot0=A$",
+                formula: "$$x(\\infty)=A \\quad\\text{(only DC term survives)}$$",
+                tip: "If you know x(∞) before solving, you already know <b>half the answer</b>. Natural response is temporary — forced response is permanent.",
+                diff: 1
+            },
+            {
+                id: 10, cat: "Move III", move: "Freeze/Melt", color: "#2bff7f",
+                q: "Given response: $v_C(t)=-5+10e^{-10000t}$ V. Find $v_C(0)$ and $v_C(\\infty)$ using the Freeze and Melt moves.",
+                a: "<b>Freeze</b> ($t=0$, $e^0=1$):\n$v_C(0)=-5+10(1)=+5$ V\n\n<b>Melt</b> ($t\\to\\infty$, $e^{-\\infty}=0$):\n$v_C(\\infty)=-5+10(0)=-5$ V\n\nThe circuit starts at +5 V, crosses zero at $t=\\ln2/10000\\approx69\\;\\mu$s, settles at −5 V.",
+                formula: "$$v_C(0)=+5\\text{ V} \\qquad v_C(\\infty)=-5\\text{ V}$$",
+                tip: "Sign change: initial and final have opposite signs → the circuit passes through zero. The zero crossing is at $t=\\ln2/k$.",
+                diff: 2
+            },
+            {
+                id: 11, cat: "Move III", move: "Freeze/Melt", color: "#2bff7f",
+                q: "Given ODE: $10^{-4}\\dot{v}_C+v_C=-5u(t)$ with $v_C(0)=5$ V. What is the forced response $v_C(\\infty)$ and why?",
+                a: "At steady state (DC), $\\dot{v}_C=0$. The derivative term vanishes:\n$10^{-4}(0)+v_C=-5$\nSo $v_C(\\infty)=-5$ V\n\n<b>Physical reason:</b> The capacitor acts as an open circuit at DC, so current stops flowing and the voltage settles at the value dictated by the source.",
+                formula: "$$\\tau(0)+x(\\infty)=\\text{RHS} \\;\\Rightarrow\\; x(\\infty)=\\text{RHS coefficient}$$",
+                tip: "<span class='gold'>If RHS = $Au(t)$, then $x(\\infty)=A$.</span> If RHS = $Au(t)/R$ etc., solve the DC circuit.",
+                diff: 2
+            },
+
+            // MOVE IV — SPLIT / AMPLITUDE B
+            {
+                id: 12, cat: "Move IV", move: "Split", color: "#ff4d6a",
+                q: "What is the amplitude B of the natural response? Why does the formula $B=x(0)-x(\\infty)$ always work?",
+                a: "From the template: $x(t)=x(\\infty)+Be^{-t/\\tau}$\n\nAt $t=0$: $x(0)=x(\\infty)+B\\cdot e^0=x(\\infty)+B$\n\nSolve: $B=x(0)-x(\\infty)$\n\n<b>Meaning:</b> B is the GAP between where the circuit starts and where it's going. The natural response closes this gap exponentially.",
+                formula: "$$B=x(0)-x(\\infty) \\quad\\text{(always)}$$",
+                tip: "If x(0)=x(∞): B=0, no transient. Circuit already at steady state. If x(0)=0: B=−x(∞), charging curve.",
+                diff: 1
+            },
+            {
+                id: 13, cat: "Move IV", move: "Split", color: "#ff4d6a",
+                q: "For Exercise 7-9(b): $i_L(0)=-5$ mA and $i_L(\\infty)=+5$ mA. What is B? What does the sign of B tell you?",
+                a: "$B = i_L(0)-i_L(\\infty) = -5-5 = -10$ mA\n\n<b>Negative B:</b> The exponential term is $-10e^{-40000t}$. It starts at −10 mA and grows toward 0 (from below). The total current climbs from −5 mA up to +5 mA.\n\n<b>Sign rule:</b> B<0 means circuit charges up; B>0 means circuit decays down.",
+                formula: "$$i_L(t)=5+(-10)e^{-40000t}=5-10e^{-40000t}\\text{ mA}$$",
+                tip: "Always verify: at $t=0$: $5-10(1)=-5$ ✓. At $t\\to\\infty$: $5-0=5$ ✓. Verification is the Move V quality check.",
+                diff: 2
+            },
+            {
+                id: 14, cat: "Move IV", move: "Split", color: "#ff4d6a",
+                q: "What is the PHYSICAL meaning of the natural response vs the forced response? What would happen if you only had one and not the other?",
+                a: "<b>Forced response</b> = what the INPUT SOURCE dictates at steady state. No source → no forced response.\n\n<b>Natural response</b> = circuit's own MEMORY of how it was before t=0. No initial energy → B=0, natural response = 0.\n\nWithout forced: circuit decays to zero (source-free). Without natural: circuit jumps directly to steady state (artificial but valid for x(0)=x(∞)).",
+                formula: "$$x_{total}=\\underbrace{x_N}_{\\text{memory fading}}+\\underbrace{x_F}_{\\text{source driving}}$$",
+                tip: "The battle between memory and forcing: the natural response always loses. Forced always wins in the long run.",
+                diff: 3
+            },
+
+            // MOVE V — BLUEPRINT / ASSEMBLE
+            {
+                id: 15, cat: "Move V", move: "Blueprint", color: "#b06aff",
+                q: "Given: $\\tau=5$ ms, $x(0)=10$ V, $x(\\infty)=-10$ V. Write the complete response without any further calculation.",
+                a: "Plug directly into the template:\n$x(t)=x(\\infty)+[x(0)-x(\\infty)]e^{-t/\\tau}$\n$=(-10)+[10-(-10)]e^{-t/0.005}$\n$=-10+20e^{-200t}$ V",
+                formula: "$$\\boxed{v_C(t)=20e^{-200t}-10\\text{ V}}\\qquad t\\geq0$$",
+                tip: "Recognize this? It's Example 7-8! The template generates the answer in one step once you have τ, x(0), x(∞). No differential equations needed.",
+                diff: 1
+            },
+            {
+                id: 16, cat: "Move V", move: "Blueprint", color: "#b06aff",
+                q: "Write the ODE that corresponds to $v_C(t)=-5+10e^{-10000t}$ V. Show the move, step by step.",
+                a: "From the response:\n• <b>τ</b>: exponent is $-10000t$ → $k=10000$ → $\\tau=1/10000=10^{-4}$ s\n• <b>x(∞)</b>: melt → $-5$ V\n\nFill blueprint $\\tau\\dot{x}+x=x(\\infty)u(t)$:",
+                formula: "$$10^{-4}\\frac{dv_C}{dt}+v_C=-5u(t)$$",
+                tip: "This is Exercise 7-9(a) ODE — and the answer matches the given answer. <b>Reading the response backwards is Move V in reverse.</b>",
+                diff: 2
+            },
+            {
+                id: 17, cat: "Move V", move: "Blueprint", color: "#b06aff",
+                q: "ALWAYS verify your answer. What are the two checkpoints you ALWAYS apply after writing the response?",
+                a: "<b>Checkpoint 1 — Freeze:</b> Substitute $t=0$ into your answer. Does it give the known $x(0)$? If not, B is wrong.\n\n<b>Checkpoint 2 — Melt:</b> Let $t\\to\\infty$. Does it give the known $x(\\infty)$? If not, A is wrong.\n\nBoth must pass before writing the final answer.",
+                formula: "$$x(0)=A+B\\stackrel{?}{=}\\text{known}\\qquad x(\\infty)=A\\stackrel{?}{=}\\text{known}$$",
+                tip: "<span class='gold'>If Checkpoint 1 fails → recheck B. If Checkpoint 2 fails → recheck x(∞) from ODE/source.</span>",
+                diff: 1
+            },
+
+            // CROSS-PROBLEM PATTERNS
+            {
+                id: 18, cat: "Pattern", move: "Cross-Problem", color: "#ff6eb4",
+                q: "Name the 3 numbers you ALWAYS extract from any first-order circuit problem, and where each comes from.",
+                a: "<b>1. τ (time constant)</b>\n→ From exponent: flip k. Or from ODE: leading coefficient after normalizing.\n\n<b>2. x(0) (initial value)</b>\n→ From response: freeze t=0. Or given directly in problem. Or from pre-t=0 circuit analysis.\n\n<b>3. x(∞) (forced/final value)</b>\n→ From response: melt t→∞. Or from ODE RHS. Or from DC circuit analysis at t=∞.",
+                formula: "$$x(t)=\\underbrace{x(\\infty)}_{3}+[\\underbrace{x(0)}_{2}-x(\\infty)]e^{-t/\\underbrace{\\tau}_{1}}$$",
+                tip: "These 3 numbers ARE the complete solution. Once you have them, writing the answer is mechanical.",
+                diff: 1
+            },
+            {
+                id: 19, cat: "Pattern", move: "Cross-Problem", color: "#ff6eb4",
+                q: "Compare Example 7-8 and Exercise 7-8. Both are RC circuits. List every difference and every similarity.",
+                a: "<b>Similarities:</b>\n• Both fit $A+Be^{-kt}$ skeleton\n• Both use the exact same 5 moves\n• Both have ODE form $\\tau\\dot{v}+v=x(\\infty)u(t)$\n• Both verified by Freeze/Melt\n\n<b>Differences:</b>\n• Ex 7-8: k=200, τ=5ms, x(0)=+10, x(∞)=−10 (DECAY, sign change)\n• Ex 7-8: k=1000, τ=1ms, x(0)=0, x(∞)=+20 (CHARGING from zero)",
+                formula: "",
+                tip: "<span class='hi'>The ALGORITHM never changes. Only the 3 numbers change.</span>",
+                diff: 2
+            },
+            {
+                id: 20, cat: "Pattern", move: "Cross-Problem", color: "#ff6eb4",
+                q: "Exercise 7-9(b) is an RL circuit, not RC. Does the solution method change at all?",
+                a: "<b>Not at all.</b> The ODE structure $\\tau\\dot{x}+x=f$ is identical. The 5 moves work exactly the same.\n\nOnly the physical meaning of τ changes:\n• RC: $\\tau=RC$\n• RL: $\\tau=L/R$\n\nThe mathematical pattern is universal to all first-order linear systems.",
+                formula: "$$\\tau_{RC}=RC \\quad\\leftrightarrow\\quad \\tau_{RL}=\\frac{L}{R}$$",
+                tip: "This is the power of the pattern: learn it once, apply it to RC, RL, thermal systems, fluid systems — anywhere first-order ODEs appear.",
+                diff: 2
+            },
+
+            // EDGE CASES / DEEP UNDERSTANDING
+            {
+                id: 21, cat: "Deep", move: "Edge Cases", color: "#ff9500",
+                q: "What happens when $x(0) = x(\\infty)$? What does the response look like, and why?",
+                a: "$B = x(0)-x(\\infty) = 0$. The natural response term vanishes.\n\n$x(t) = x(\\infty) + 0\\cdot e^{-t/\\tau} = x(\\infty)$ (constant for all $t$)\n\n<b>Meaning:</b> The capacitor was already pre-charged to exactly the forced value. No transient because there's no mismatch between initial state and steady state.",
+                formula: "$$x(0)=x(\\infty) \\;\\Rightarrow\\; x(t)=\\text{constant (no transient)}$$",
+                tip: "This makes physical sense: if the circuit starts at its final value, nothing needs to adjust. Instant 'steady state.'",
+                diff: 3
+            },
+            {
+                id: 22, cat: "Deep", move: "Edge Cases", color: "#ff9500",
+                q: "When does the response cross through zero? Derive the formula for the zero-crossing time $t^*$.",
+                a: "Set $x(t^*)=0$:\n$A+Be^{-t^*/\\tau}=0$\n$e^{-t^*/\\tau}=-A/B$\n$-t^*/\\tau=\\ln(-A/B)$\n$t^*=-\\tau\\ln(-A/B)=\\tau\\ln(-B/A)$\n\n<b>Condition for zero crossing to exist:</b> A and B must have opposite signs (response must start on one side of zero and end on the other).",
+                formula: "$$t^* = \\tau\\ln\\!\\left(\\frac{-B}{A}\\right) = \\frac{\\ln(-B/A)}{k}$$",
+                tip: "Example 7-8: $A=-10, B=20$, $t^*=\\ln(20/10)/200=\\ln2/200\\approx3.47$ ms ✓",
+                diff: 3
+            },
+            {
+                id: 23, cat: "Deep", move: "Edge Cases", color: "#ff9500",
+                q: "If I double the time constant τ (by doubling R), how does the waveform shape change?",
+                a: "<b>x(0) and x(∞) stay identical</b> (same initial charge, same source).\nOnly the SPEED changes: the circuit takes twice as long to reach steady state.\n\n• New $k'=k/2$, so $e^{-k't}$ decays half as fast\n• The 63% point moves from $\\tau$ to $2\\tau$\n• 5τ becomes 10τ — takes twice as long to settle\n\n<b>Shape:</b> Same start, same end, stretched horizontally by 2×.",
+                formula: "$$x(\\infty)+[x(0)-x(\\infty)]e^{-(k/2)t}$$",
+                tip: "τ only controls SPEED. The endpoints are set by the source and initial conditions, not by R or C independently.",
+                diff: 3
+            },
+            {
+                id: 24, cat: "Deep", move: "Edge Cases", color: "#ff9500",
+                q: "A student writes $v_C(t)=20e^{-200t}-10$ and checks: $v_C(0)=20(1)-10=10$ V ✓, $v_C(\\infty)=20(0)-10=-10$ V ✓. Is the answer correct? What else should they check?",
+                a: "The answer PASSES the freeze/melt checks ✓. It's very likely correct.\n\n<b>Additional checks to be thorough:</b>\n1. Does τ=5ms match the circuit's RC product?\n2. Does x(∞)=−10V match the source voltage/circuit analysis?\n3. Does x(0)=10V match the initial capacitor charge stated in problem?\n4. Plug into ODE and verify it satisfies the differential equation.\n\nThe MathJax check is a sanity check — circuit physics should also confirm.",
+                formula: "$$\\text{Verify: }\\tau\\frac{d}{dt}(20e^{-200t}-10)+(20e^{-200t}-10)\\stackrel{?}{=}x(\\infty)u(t)$$",
+                tip: "Plugging back into the ODE is the gold standard verification — if it satisfies the ODE AND satisfies initial conditions, it IS the answer.",
+                diff: 3
+            },
+        ];
+
+        /* ═══════════════════════════════════════════
+           SM-2 SPACED REPETITION ENGINE
+        ═══════════════════════════════════════════ */
+        const STORAGE_KEY = 'ankiRC';
+        let state = { cards: [], session: { done: 0, total: 0 }, streak: 0, filter: 'all' };
+        let queue = []; // current session queue
+        let currentIdx = 0;
+        let isFlipped = false;
+        let sessionDoneCount = 0;
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) state = JSON.parse(raw);
+            } catch (e) { }
+            // init any missing cards
+            DECK.forEach(card => {
+                if (!state.cards.find(c => c.id === card.id)) {
+                    state.cards.push({ id: card.id, interval: 0, ease: 2.5, reps: 0, nextDue: 0, lapses: 0 });
+                }
+            });
+            if (!state.streak) state.streak = 0;
+        }
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function getCardData(id) { return DECK.find(c => c.id === id) }
+        function getCardState(id) { return state.cards.find(c => c.id === id) }
+
+        // SM-2 algorithm
+        function sm2(cs, rating) {
+            // rating: 1=again, 2=hard, 3=good, 4=easy
+            const now = Date.now();
+            const cs2 = { ...cs };
+            if (rating === 1) {
+                cs2.interval = 1; cs2.reps = 0; cs2.lapses++;
+                cs2.nextDue = now + 60 * 1000; // 1 min
+            } else {
+                const ease = rating === 2 ? Math.max(1.3, cs2.ease - 0.15) :
+                    rating === 4 ? cs2.ease + 0.15 : cs2.ease;
+                cs2.ease = Math.round(ease * 100) / 100;
+                if (cs2.reps === 0) cs2.interval = 1;
+                else if (cs2.reps === 1) cs2.interval = 6;
+                else cs2.interval = Math.round(cs2.interval * cs2.ease);
+                if (rating === 2) cs2.interval = Math.max(1, Math.round(cs2.interval * 0.5));
+                if (rating === 4) cs2.interval = Math.round(cs2.interval * 1.3);
+                cs2.reps++;
+                cs2.nextDue = now + cs2.interval * 24 * 60 * 60 * 1000;
+            }
+            return cs2;
+        }
+
+        function getNextDueText(rating, cs) {
+            const staged = sm2(cs, rating);
+            const d = staged.interval;
+            if (rating === 1) return '<1 min';
+            if (d <= 1) return '~1 day';
+            if (d < 7) return `~${d} days`;
+            return `~${Math.round(d / 7)} wks`;
+        }
+
+        function buildQueue() {
+            const now = Date.now();
+            if (state.filter === 'new') return state.cards.filter(c => c.reps === 0).map(c => ({ ...c }));
+            if (state.filter === 'due') return state.cards.filter(c => c.reps > 0 && c.nextDue <= now).map(c => ({ ...c }));
+            if (state.filter === 'review') return state.cards.filter(c => c.reps > 0).map(c => ({ ...c }));
+            // 'all': new + due
+            const due = state.cards.filter(c => c.nextDue <= now).map(c => ({ ...c }));
+            return due.length > 0 ? due : state.cards.filter(c => c.reps === 0).slice(0, 5).map(c => ({ ...c }));
+        }
+
+        function updateStats() {
+            const now = Date.now();
+            const due = state.cards.filter(c => c.nextDue <= now).length;
+            const newC = state.cards.filter(c => c.reps === 0).length;
+            const review = state.cards.filter(c => c.reps > 0 && c.nextDue > now).length;
+            const mastered = state.cards.filter(c => c.interval >= 21).length;
+            document.getElementById('sDue').textContent = due;
+            document.getElementById('sNew').textContent = newC;
+            document.getElementById('sReview').textContent = review;
+            document.getElementById('sMastered').textContent = mastered;
+            document.getElementById('sStreak').textContent = state.streak + 'd';
+            const sessTotal = queue.length + sessionDoneCount || 1;
+            const pct = Math.round((sessionDoneCount / sessTotal) * 100);
+            document.getElementById('progFill').style.width = pct + '%';
+            document.getElementById('progLbl').textContent = `${sessionDoneCount} / ${sessTotal} done this session`;
+        }
+
+        function showCard() {
+            if (currentIdx >= queue.length) { showDone(); return }
+            const cs = queue[currentIdx];
+            const card = getCardData(cs.id);
+            if (!card) { currentIdx++; showCard(); return }
+
+            isFlipped = false;
+            document.getElementById('cardWrap').classList.remove('flipped');
+            document.getElementById('ratings').classList.remove('show');
+            document.getElementById('flipHint').style.display = 'block';
+
+            // Populate front
+            document.getElementById('catBadge').textContent = card.cat;
+            document.getElementById('catBadge').style.color = card.color;
+            document.getElementById('catBadge').style.borderColor = card.color;
+            document.getElementById('moveBadge').textContent = card.move;
+            document.getElementById('cardNum').textContent = `${currentIdx + 1}/${queue.length}`;
+            const diffColors = ['', '#2bff7f', '#ffc947', '#ff4d6a'];
+            document.getElementById('diffDot').style.background = diffColors[card.diff] || '#888';
+            document.getElementById('qText').innerHTML = card.q;
+            document.getElementById('qHint').textContent = card.diff === 3 ? '💀 Hard card — think carefully' : '';
+
+            // Populate back
+            document.getElementById('aText').innerHTML = card.a.replace(/\n/g, '<br/>');
+            const aFEl = document.getElementById('aFormula');
+            if (card.formula) { aFEl.textContent = card.formula; aFEl.style.display = 'block' }
+            else { aFEl.style.display = 'none' }
+            const tipEl = document.getElementById('aTip');
+            if (card.tip) { tipEl.innerHTML = card.tip; tipEl.style.display = 'block' }
+            else { tipEl.style.display = 'none' }
+
+            // Update interval previews
+            const btnTimes = [1, 2, 3, 4].map(r => getNextDueText(r, cs));
+            document.getElementById('tAgain').textContent = btnTimes[0];
+            document.getElementById('tHard').textContent = btnTimes[1];
+            document.getElementById('tGood').textContent = btnTimes[2];
+            document.getElementById('tEasy').textContent = btnTimes[3];
+
+            // Typeset MathJax
+            setTimeout(() => {
+                if (window.MathJax && MathJax.typesetPromise) {
+                    MathJax.typesetPromise([document.getElementById('cardFront'), document.getElementById('cardBack')]).catch(() => { });
+                }
+            }, 50);
+
+            updateStats();
+        }
+
+        function flipCard() {
+            if (isFlipped) return;
+            isFlipped = true;
+            document.getElementById('cardWrap').classList.add('flipped');
+            document.getElementById('ratings').classList.add('show');
+            document.getElementById('flipHint').style.display = 'none';
+            setTimeout(() => {
+                if (window.MathJax && MathJax.typesetPromise) {
+                    MathJax.typesetPromise([document.getElementById('cardBack')]).catch(() => { });
+                }
+            }, 300);
+        }
+
+        function rate(rating) {
+            const cs = queue[currentIdx];
+            const newState = sm2(cs, rating);
+            // Update in main state
+            const idx = state.cards.findIndex(c => c.id === cs.id);
+            if (idx >= 0) state.cards[idx] = newState;
+            // If again, push to end of queue
+            if (rating === 1) queue.push({ ...newState });
+            sessionDoneCount++;
+            // Update streak
+            const today = new Date().toDateString();
+            if (state.lastStudyDate !== today) {
+                state.streak = (state.lastStudyDate === new Date(Date.now() - 86400000).toDateString()) ? state.streak + 1 : 1;
+                state.lastStudyDate = today;
+            }
+            saveState();
+            currentIdx++;
+            showCard();
+        }
+
+        function showDone() {
+            document.getElementById('cardArea').style.display = 'none';
+            document.getElementById('doneState').classList.add('show');
+            const mastered = state.cards.filter(c => c.interval >= 21).length;
+            document.getElementById('doneMsg').textContent =
+                `Session complete! ${sessionDoneCount} cards reviewed. ${mastered}/${DECK.length} mastered overall.`;
+            updateStats();
+        }
+
+        function resetSession() {
+            document.getElementById('doneState').classList.remove('show');
+            document.getElementById('emptyState').classList.remove('show');
+            document.getElementById('cardArea').style.display = 'block';
+            sessionDoneCount = 0; currentIdx = 0;
+            queue = buildQueue();
+            if (queue.length === 0) {
+                document.getElementById('cardArea').style.display = 'none';
+                document.getElementById('emptyState').classList.add('show');
+                return;
+            }
+            showCard();
+        }
+
+        // Filter tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+                tab.classList.add('on');
+                state.filter = tab.dataset.f;
+                resetSession();
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', e => {
+            if (e.code === 'Space') { e.preventDefault(); if (!isFlipped) flipCard() }
+            if (e.key === '1' && isFlipped) rate(1);
+            if (e.key === '2' && isFlipped) rate(2);
+            if (e.key === '3' && isFlipped) rate(3);
+            if (e.key === '4' && isFlipped) rate(4);
+        });
+
+        // INIT
+        loadState();
+        queue = buildQueue();
+        if (queue.length === 0) {
+            document.getElementById('cardArea').style.display = 'none';
+            document.getElementById('emptyState').classList.add('show');
+        } else { showCard() }
+        updateStats();
+    </script>
+</body>
+
+</html>

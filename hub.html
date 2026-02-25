@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>RC Circuit Study Hub · First-Order Circuits</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #03050d;
+            --cyan: #00e5ff;
+            --gold: #ffc947;
+            --violet: #b06aff;
+            --green: #2bff7f;
+            --red: #ff4d6a
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Outfit', sans-serif;
+            color: #dde8ff;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse 60% 40% at 20% 20%, rgba(80, 0, 200, .18) 0%, transparent 65%),
+                radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0, 150, 220, .14) 0%, transparent 65%),
+                radial-gradient(ellipse 70% 30% at 50% 110%, rgba(255, 100, 0, .08) 0%, transparent 60%)
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(0, 229, 255, .025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, .025) 1px, transparent 1px);
+            background-size: 52px 52px
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.4rem 6rem
+        }
+
+        /* HEADER */
+        .hdr {
+            text-align: center;
+            padding: 4rem 1rem 3rem
+        }
+
+        .tag {
+            display: inline-block;
+            border: 1px solid var(--violet);
+            border-radius: 999px;
+            padding: .36rem 1.6rem;
+            font-size: .68rem;
+            color: var(--violet);
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
+            box-shadow: 0 0 20px rgba(176, 106, 255, .4);
+            background: rgba(176, 106, 255, .08)
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 900;
+            background: linear-gradient(130deg, #fff 0%, var(--cyan) 50%, var(--violet) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            margin-bottom: .7rem
+        }
+
+        .hdr p {
+            font-size: .95rem;
+            color: rgba(200, 215, 255, .5);
+            max-width: 520px;
+            margin: 0 auto 2rem
+        }
+
+        /* PROGRESS BAR */
+        .progress-wrap {
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            text-align: center
+        }
+
+        .prog-label {
+            font-size: .68rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(200, 215, 255, .4);
+            margin-bottom: .8rem
+        }
+
+        .prog-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, .07);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: .5rem
+        }
+
+        .prog-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--violet), var(--cyan));
+            width: 75%;
+            transition: width 1s
+        }
+
+        .prog-steps {
+            display: flex;
+            justify-content: space-between;
+            font-size: .68rem;
+            color: rgba(200, 215, 255, .35)
+        }
+
+        .prog-steps span.done {
+            color: var(--green)
+        }
+
+        /* SECTION */
+        .sec {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0 1.4rem;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(176, 106, 255, .45)
+        }
+
+        .sec::before,
+        .sec::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(176, 106, 255, .12)
+        }
+
+        /* CARDS GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem
+        }
+
+        .card {
+            background: rgba(10, 12, 28, .9);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .07);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: transform .3s cubic-bezier(.25, .8, .25, 1), border-color .3s, box-shadow .3s;
+            backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--cc);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .4), 0 0 30px color-mix(in srgb, var(--cc) 25%, transparent)
+        }
+
+        .card-top {
+            height: 5px;
+            background: var(--cc);
+            box-shadow: 0 0 20px var(--cc)
+        }
+
+        .card-body {
+            padding: 1.5rem 1.6rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: .9rem
+        }
+
+        .card-num {
+            position: absolute;
+            top: 1.4rem;
+            right: 1.4rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .65rem;
+            color: rgba(200, 215, 255, .2);
+            letter-spacing: .1em
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--cc);
+            margin-bottom: .3rem
+        }
+
+        .card-desc {
+            font-size: .8rem;
+            color: rgba(200, 215, 255, .5);
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 1.2rem
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .card-badge {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: .22rem .75rem;
+            border-radius: 999px;
+            border: 1px solid currentColor
+        }
+
+        .card-arrow {
+            color: var(--cc);
+            font-size: 1.2rem;
+            transition: transform .25s
+        }
+
+        .card:hover .card-arrow {
+            transform: translateX(5px)
+        }
+
+        /* ANKI HERO */
+        .anki-card {
+            background: linear-gradient(135deg, rgba(0, 50, 90, .6), rgba(60, 0, 120, .6));
+            border: 2px solid var(--gold);
+            border-radius: 22px;
+            padding: 2.2rem 2.4rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform .3s, box-shadow .3s;
+            box-shadow: 0 0 50px rgba(255, 201, 71, .2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anki-card:hover {
+            transform: scale(1.02) translateY(-4px);
+            box-shadow: 0 0 80px rgba(255, 201, 71, .35)
+        }
+
+        .anki-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 201, 71, .02) 10px, rgba(255, 201, 71, .02) 11px)
+        }
+
+        .anki-icon {
+            font-size: 2.8rem;
+            margin-bottom: .8rem
+        }
+
+        .anki-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: .5rem
+        }
+
+        .anki-desc {
+            font-size: .88rem;
+            color: rgba(200, 215, 255, .6);
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto .8rem
+        }
+
+        .anki-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: .6rem
+        }
+
+        .anki-stat {
+            text-align: center
+        }
+
+        .anki-stat-n {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold)
+        }
+
+        .anki-stat-l {
+            font-size: .65rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(200, 215, 255, .4)
+        }
+
+        /* QUICK FORMULA */
+        .formula-strip {
+            background: rgba(10, 12, 28, .9);
+            border: 1px solid rgba(176, 106, 255, .2);
+            border-radius: 16px;
+            padding: 1.4rem 1.8rem;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            align-items: center;
+            justify-content: space-around;
+            margin: 1.2rem 0;
+        }
+
+        .fstrip-item {
+            text-align: center
+        }
+
+        .fstrip-lbl {
+            font-size: .6rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: rgba(200, 215, 255, .35);
+            margin-bottom: .3rem
+        }
+
+        .fstrip-val {
+            font-size: .88rem;
+            color: #fff
+        }
+
+        /* ANIM */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(22px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .ani {
+            opacity: 0;
+            animation: fadeUp .6s cubic-bezier(.25, .8, .25, 1) both
+        }
+    </style>
+    <script>MathJax = { tex: { inlineMath: [['$', '$']] }, svg: { fontCache: 'global' } };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="hdr ani" style="animation-delay:.04s">
+            <div class="tag">⚡ RC Circuit · Pattern Recognition Study System</div>
+            <h1>First-Order Circuits<br />Study Hub</h1>
+            <p>Every concept, proof, and pattern from Chapter 7 — connected and navigable in one place.</p>
+            <div class="progress-wrap">
+                <div class="prog-label">📚 Study Progress</div>
+                <div class="prog-bar">
+                    <div class="prog-fill" id="progFill" style="width:0%"></div>
+                </div>
+                <div class="prog-steps">
+                    <span class="done" id="s1">✓ Example 7-8</span>
+                    <span class="done" id="s2">✓ Exercise 7-8</span>
+                    <span class="done" id="s3">✓ Exercise 7-9</span>
+                    <span id="s4">○ Flashcards</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MASTER FORMULA STRIP -->
+        <div class="formula-strip ani" style="animation-delay:.1s">
+            <div class="fstrip-item">
+                <div class="fstrip-lbl">Universal Template</div>
+                <div class="fstrip-val">$x(\infty)+[x(0)-x(\infty)]\,e^{-t/\tau}$</div>
+            </div>
+            <div class="fstrip-item">
+                <div class="fstrip-lbl">Time Constant</div>
+                <div class="fstrip-val">$\tau = 1/k$ &nbsp;(flip exponent)</div>
+            </div>
+            <div class="fstrip-item">
+                <div class="fstrip-lbl">ODE Blueprint</div>
+                <div class="fstrip-val">$\tau\dot{x}+x=x(\infty)\,u(t)$</div>
+            </div>
+        </div>
+
+        <!-- MAIN PAGES -->
+        <div class="sec ani" style="animation-delay:.14s">🏛 Memory Palaces & Study Pages</div>
+        <div class="grid ani" style="animation-delay:.17s">
+
+            <a href="../rc-memory-palace/index.html" class="card" style="--cc:#00e5ff">
+                <div class="card-top"></div>
+                <div class="card-body">
+                    <div class="card-num">01</div>
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">Example 7-8 Palace</div>
+                    <div class="card-desc">Full memory palace for the given-response problem. $v_C=20e^{-200t}-10$ V.
+                        All 4 answers encoded with vivid loci and Major System mnemonics.</div>
+                    <div class="card-footer">
+                        <span class="card-badge" style="color:#00e5ff">Given Response</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="index.html" class="card" style="--cc:#b06aff">
+                <div class="card-top"></div>
+                <div class="card-body">
+                    <div class="card-num">02</div>
+                    <div class="card-icon">🏛</div>
+                    <div class="card-title">Pattern Palace</div>
+                    <div class="card-desc">The 5 cognitive moves that solve ANY first-order RC/RL problem. Not values —
+                        the algorithm. Walk the palace, fire the moves automatically.</div>
+                    <div class="card-footer">
+                        <span class="card-badge" style="color:#b06aff">5 Moves</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="pattern-history.html" class="card" style="--cc:#2bff7f">
+                <div class="card-top"></div>
+                <div class="card-body">
+                    <div class="card-num">03</div>
+                    <div class="card-icon">📚</div>
+                    <div class="card-title">Pattern History</div>
+                    <div class="card-desc">All 4 problems (Ex 7-8, Ex 7-8, Ex 7-9a, 7-9b) solved identically. DNA table
+                        showing what NEVER changes vs what does. Full Ex 7-9 walkthrough.</div>
+                    <div class="card-footer">
+                        <span class="card-badge" style="color:#2bff7f">4 Problems</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- ANKI MODE -->
+        <div class="sec ani" style="animation-delay:.22s">🃏 Anki Flashcard Mode</div>
+        <a href="flashcards.html" class="anki-card ani" style="animation-delay:.25s">
+            <div class="anki-icon">🃏</div>
+            <div class="anki-title">Anki Mode — Spaced Repetition Flashcards</div>
+            <div class="anki-desc">
+                Concept-based cards built around the 5 palace moves. SM-2 spaced repetition algorithm tracks what you
+                know. Rate cards: Again / Hard / Good / Easy. Progress saved in browser.
+            </div>
+            <div class="anki-stats">
+                <div class="anki-stat">
+                    <div class="anki-stat-n" id="totalCards">24</div>
+                    <div class="anki-stat-l">Total Cards</div>
+                </div>
+                <div class="anki-stat">
+                    <div class="anki-stat-n" id="dueCards">—</div>
+                    <div class="anki-stat-l">Due Today</div>
+                </div>
+                <div class="anki-stat">
+                    <div class="anki-stat-n" id="masteredCards">—</div>
+                    <div class="anki-stat-l">Mastered</div>
+                </div>
+            </div>
+        </a>
+
+        <!-- HOW TO USE -->
+        <div class="sec ani" style="animation-delay:.3s">🗺 Recommended Study Flow</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem" class="ani"
+            style="animation-delay:.33s">
+            <div
+                style="background:rgba(10,12,28,.9);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1.2rem;backdrop-filter:blur(12px)">
+                <div style="color:var(--cyan);font-weight:700;margin-bottom:.5rem">① First time</div>
+                <div style="font-size:.8rem;color:rgba(200,215,255,.55);line-height:1.6">Read Pattern Palace (page 02).
+                    Do one slow walk through the 5 rooms. Build the mental space.</div>
+            </div>
+            <div
+                style="background:rgba(10,12,28,.9);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1.2rem;backdrop-filter:blur(12px)">
+                <div style="color:var(--gold);font-weight:700;margin-bottom:.5rem">② See the pattern repeat</div>
+                <div style="font-size:.8rem;color:rgba(200,215,255,.55);line-height:1.6">Go to Pattern History (page
+                    03). Watch the same 5 moves applied 4 times. Let the pattern solidify.</div>
+            </div>
+            <div
+                style="background:rgba(10,12,28,.9);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1.2rem;backdrop-filter:blur(12px)">
+                <div style="color:var(--violet);font-weight:700;margin-bottom:.5rem">③ Daily: Anki Mode</div>
+                <div style="font-size:.8rem;color:rgba(200,215,255,.55);line-height:1.6">5-10 min/day on flashcards.
+                    SM-2 brings back what you're forgetting. In 1 week: automatic recognition.</div>
+            </div>
+            <div
+                style="background:rgba(10,12,28,.9);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1.2rem;backdrop-filter:blur(12px)">
+                <div style="color:var(--green);font-weight:700;margin-bottom:.5rem">④ Exam check</div>
+                <div style="font-size:.8rem;color:rgba(200,215,255,.55);line-height:1.6">Quick palace walk (30 sec)
+                    before the exam. Fire the 5 moves on first problem. Pattern recognition engaged.</div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        const io = new IntersectionObserver(e => e.forEach(en => { if (en.isIntersecting) { en.target.style.animationPlayState = 'running'; io.unobserve(en.target) } }), { threshold: .06 });
+        document.querySelectorAll('.ani').forEach(el => { el.style.animationPlayState = 'paused'; io.observe(el) });
+
+        // Load anki stats from localStorage
+        try {
+            const data = JSON.parse(localStorage.getItem('ankiRC') || '{}');
+            const all = data.cards || [];
+            const now = Date.now();
+            const due = all.filter(c => !c.nextDue || c.nextDue <= now).length;
+            const mastered = all.filter(c => c.interval >= 21).length;
+            if (all.length) {
+                document.getElementById('dueCards').textContent = due || '0';
+                document.getElementById('masteredCards').textContent = mastered || '0';
+            }
+            // Update progress bar
+            const done = (mastered / (all.length || 24)) * 100;
+            setTimeout(() => document.getElementById('progFill').style.width = Math.min(done + 10, 100) + '%', 300);
+            if (mastered > 0) document.getElementById('s4').textContent = '✓ Flashcards';
+        } catch (e) { }
+    </script>
+</body>
+
+</html>
