@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Math Flashcards · Separable + Homogeneous DE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'},startup:{typeset:false}};</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{--bg:#0b1018;--panel:#141c2a;--panel2:#101724;--border:#25324a;--text:#eaf0ff;--muted:#94a3c6;--violet:#7f5af0;--cyan:#00e5ff;--green:#2bff7f;--gold:#ffd166;--red:#ff5c7a}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+        .top{position:sticky;top:0;z-index:5;background:#0f1622;border-bottom:1px solid var(--border);padding:.85rem 1rem;display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+        .back{text-decoration:none;color:var(--muted);border:1px solid var(--border);border-radius:7px;padding:.32rem .72rem;font-size:.77rem}
+        .back:hover{color:#fff}
+        .title{font-size:.96rem;font-weight:700;color:#fff}
+        .sub{font-size:.73rem;color:var(--muted)}
+        .chips{display:flex;gap:.5rem;margin-left:auto}
+        .chip{font-size:.7rem;border:1px solid var(--border);border-radius:999px;padding:.2rem .58rem}
+
+        .filters{display:flex;gap:.45rem;flex-wrap:wrap;padding:.75rem 1rem;border-bottom:1px solid var(--border);background:#0f1622}
+        .f{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:.25rem .75rem;font-size:.74rem;cursor:pointer}
+        .f.on{background:var(--set,#7f5af0);color:#07101d;border-color:transparent;font-weight:700}
+
+        .stage{max-width:760px;margin:0 auto;padding:1.8rem 1.2rem 4rem}
+        .progress{display:flex;gap:.8rem;align-items:center;margin-bottom:1.5rem}
+        .bar{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+        .fill{height:100%;background:var(--set,#7f5af0);width:0;transition:width .35s}
+        .pt{font-size:.73rem;color:var(--muted)}
+
+        .card-scene{perspective:1400px}
+        .card{min-height:320px;position:relative;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+        .card.flipped{transform:rotateY(180deg)}
+        .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:1.4rem 1.55rem;border:1px solid var(--border);display:flex;flex-direction:column}
+        .front{background:var(--panel)}
+        .backf{background:var(--panel2);transform:rotateY(180deg);border-color:var(--set,#7f5af0)}
+
+        .ctop{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+        .badge{font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--set,#7f5af0);color:var(--set,#7f5af0);border-radius:999px;padding:.15rem .55rem;font-weight:700}
+        .move{font-size:.68rem;color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:.15rem .5rem}
+        .num{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted)}
+        .q{flex:1;display:flex;align-items:center;font-size:clamp(.96rem,2.2vw,1.16rem);line-height:1.6;font-weight:600;color:#fff}
+        .hint{font-size:.74rem;color:var(--muted)}
+
+        .ahead{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--set,#7f5af0);font-weight:700;margin-bottom:.55rem}
+        .ans{flex:1;overflow:auto;font-size:.88rem;line-height:1.7;color:rgba(230,238,255,.86)}
+        .ans b{color:#fff}
+        .formula{background:#0a101a;border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:.65rem .82rem;text-align:center;margin:.58rem 0}
+        .tip{background:rgba(127,90,240,.08);border-left:2px solid var(--violet);border-radius:0 6px 6px 0;padding:.5rem .75rem;font-size:.8rem;color:var(--muted)}
+
+        .flip{margin:.8rem 0;text-align:center;font-size:.74rem;color:var(--muted)}
+
+        .rates{display:none;gap:.55rem;flex-wrap:wrap;justify-content:center}
+        .rates.show{display:flex}
+        .r{min-width:120px;border-radius:9px;padding:.58rem .6rem;border:1px solid var(--border);font-weight:700;font-size:.8rem;cursor:pointer;background:#151d2b;color:#fff}
+        .r small{display:block;font-size:.63rem;opacity:.66;font-weight:500}
+        .r1{border-color:var(--red);color:var(--red)}
+        .r2{border-color:var(--gold);color:var(--gold)}
+        .r3{border-color:var(--cyan);color:var(--cyan)}
+        .r4{border-color:var(--green);color:var(--green)}
+
+        .done{display:none;text-align:center;padding:3rem 1rem}
+        .done.show{display:block}
+        .done h2{font-size:1.28rem;margin-bottom:.4rem}
+        .done p{color:var(--muted);font-size:.86rem;line-height:1.65;max-width:460px;margin:0 auto 1rem}
+        .done .btns{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+        .db{padding:.5rem 1rem;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:700}
+        .db.ghost{border:1px solid var(--border);color:var(--muted)}
+        .db.fill{background:var(--set,#7f5af0);color:#09101d;border:none}
+    </style>
+</head>
+<body>
+    <div class="top">
+        <a class="back" id="backBtn" href="math-hub.html">Back</a>
+        <div>
+            <div class="title" id="setTitle">Flashcards</div>
+            <div class="sub" id="setSub"></div>
+        </div>
+        <div class="chips">
+            <div class="chip" id="dueChip">0 due</div>
+            <div class="chip" id="doneChip">0 mastered</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <button class="f on" data-f="all">All</button>
+        <button class="f" data-f="due">Due</button>
+        <button class="f" data-f="new">New</button>
+        <button class="f" data-f="hard">Hard</button>
+    </div>
+
+    <div class="stage">
+        <div id="mainArea">
+            <div class="progress"><div class="bar"><div class="fill" id="fill"></div></div><div class="pt" id="pt">0 of 0</div></div>
+
+            <div class="card-scene">
+                <div class="card" id="card" onclick="flipCard()">
+                    <div class="face front" id="front">
+                        <div class="ctop">
+                            <span class="badge" id="badge">Set</span>
+                            <span class="move" id="move">Move</span>
+                            <span class="num" id="num">1/1</span>
+                        </div>
+                        <div class="q" id="q">Loading...</div>
+                        <div class="hint" id="hint"></div>
+                    </div>
+                    <div class="face backf" id="backf">
+                        <div class="ahead">Answer</div>
+                        <div class="ans" id="ans"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip" id="flipText">Click card or press Space to reveal</div>
+
+            <div class="rates" id="rates">
+                <button class="r r1" onclick="rate(1)">Again<small id="t1">~1m</small></button>
+                <button class="r r2" onclick="rate(2)">Hard<small id="t2">~1d</small></button>
+                <button class="r r3" onclick="rate(3)">Good<small id="t3">~3d</small></button>
+                <button class="r r4" onclick="rate(4)">Easy<small id="t4">~7d</small></button>
+            </div>
+        </div>
+
+        <div class="done" id="done">
+            <h2>Session Complete</h2>
+            <p id="doneMsg">Cards reviewed.</p>
+            <div class="btns">
+                <a class="db ghost" href="math-hub.html">Back to Hub</a>
+                <a class="db fill" href="#" onclick="restart();return false;">Review Again</a>
+            </div>
+        </div>
+    </div>
+
+<script>
+const SETS = {
+    core: {
+        label: 'Core Set',
+        sub: 'Main target: dx/x = tan(y)dy',
+        color: '#00e5ff',
+        cards: [
+            {id:'c1',move:'Recognize',q:'In $\\frac{dx}{x}=\\tan y\\,dy$, what is the equation type?',a:'<b>Separable differential equation.</b> Left side depends only on $x$, right side only on $y$.',formula:'$$\\frac{dx}{x}=\\tan y\\,dy$$',tip:'Pattern trigger: variable-isolated sides.'},
+            {id:'c2',move:'Integrate',q:'What is $\\int \\frac{1}{x}dx$?',a:'It is <b>$\\ln|x|$</b>. Keep absolute value.',formula:'$$\\int\\frac{1}{x}dx=\\ln|x|+C$$',tip:'Missing absolute value is a common exam mistake.'},
+            {id:'c3',move:'Identity',q:'What is $\\int\\tan y\\,dy$?',a:'Rewrite as $\\sin y/\\cos y$ then integrate: <b>$-\\ln|\\cos y|$</b>.',formula:'$$\\int\\tan y\\,dy=-\\ln|\\cos y|+C$$',tip:'Minus sign comes from $d(\\cos y)=-\\sin y\\,dy$.'},
+            {id:'c4',move:'Merge',q:'After integration, how do you combine logs?',a:'From $\\ln|x|=-\\ln|\\cos y|+C$, bring logs together: $\\ln|x\\cos y|=C$.',formula:'$$\\ln|x|+\\ln|\\cos y|=C$$',tip:'Use $\\ln a+\\ln b=\\ln(ab)$.'},
+            {id:'c5',move:'Finalize',q:'Final standard answer for the target problem?',a:'Exponentiate and rename constants: <b>$x\\cos y=C$</b>.',formula:'$$\\boxed{x\\cos y=C}$$',tip:'Any equivalent constant form is valid.'},
+            {id:'c6',move:'Verify',q:'How do you verify $x\\cos y=C$?',a:'Differentiate w.r.t. $y$: $\\frac{dx}{dy}\\cos y-x\\sin y=0\\Rightarrow \\frac{dx}{dy}=x\\tan y$, so $\\frac{dx}{x}=\\tan y\\,dy$.',formula:'$$d(x\\cos y)=0$$',tip:'Always include one verification line in practice.'},
+            {id:'c7',move:'Anti-error',q:'Most likely sign mistake in this problem?',a:'Writing $\\int\\tan y\\,dy=+\\ln|\\cos y|$. Correct is <b>negative</b>.',formula:'$$\\int\\tan y\\,dy=-\\ln|\\cos y|$$',tip:'Remember cosine derivative is negative sine.'}
+        ]
+    },
+    variants: {
+        label: 'Variant Set',
+        sub: 'Same family, different right side',
+        color: '#2bff7f',
+        cards: [
+            {id:'v1',move:'Cot Pattern',q:'Solve quickly: $\\frac{dx}{x}=\\cot y\\,dy$',a:'Integrate: $\\ln|x|=\\ln|\\sin y|+C$. So $x=C\\sin y$, or $x/\\sin y=C$.',formula:'$$\\frac{x}{\\sin y}=C$$',tip:'Use $\\int\\cot y\\,dy=\\ln|\\sin y|$.'},
+            {id:'v2',move:'Sec-Tan',q:'Solve: $\\frac{dx}{x}=\\sec y\\tan y\\,dy$',a:'Right integral is $\\sec y$. So $\\ln|x|=\\sec y+C$, giving $x=Ce^{\\sec y}$.',formula:'$$x=Ce^{\\sec y}$$',tip:'Recognize direct derivative of sec.'},
+            {id:'v3',move:'Sin/Cos',q:'Solve: $\\frac{dx}{x}=\\frac{\\sin y}{\\cos y}dy$',a:'This is exactly tan case. Final form remains $x\\cos y=C$.',formula:'$$x\\cos y=C$$',tip:'Reduce expression before integrating.'},
+            {id:'v4',move:'Exam Check',q:'When do you keep implicit form instead of explicit?',a:'Keep implicit when explicit isolation is messy or unnecessary. For these, implicit constant form is standard and clean.',formula:'$$F(x,y)=C$$',tip:'Textbook answers often prefer implicit forms.'},
+            {id:'v5',move:'Constant Logic',q:'Why can $|x\\cos y|=K$ become $x\\cos y=C$?',a:'Because arbitrary constant in differential equation solutions absorbs sign and magnitude conventions.',formula:'$$|x\\cos y|=K\Rightarrow x\\cos y=C$$',tip:'Mention "renaming constant" once and move on.'}
+        ]
+    }
+    ,
+    homogeneous: {
+        label: 'Homogeneous Set',
+        sub: 'Method: put y = vx',
+        color: '#ff5c7a',
+        cards: [
+            {id:'h1',move:'Recognize',q:'Why is $(2xy+x^2)\\dfrac{dy}{dx}=3y^2+2xy$ called homogeneous?',a:'Because every term in numerator and denominator (after writing $dy/dx$ form) has the same total degree in $x,y$.',formula:'$$\\frac{dy}{dx}=\\frac{3y^2+2xy}{2xy+x^2}$$',tip:'Degree-2 over degree-2 is the trigger.'},
+            {id:'h2',move:'Substitute',q:'What substitution is used for homogeneous first-order equations?',a:'Use <b>$y=vx$</b>, so that $\\dfrac{dy}{dx}=v+x\\dfrac{dv}{dx}$.',formula:'$$y=vx,\\quad \\frac{dy}{dx}=v+x\\frac{dv}{dx}$$',tip:'This converts equation to variables $v$ and $x$.'},
+            {id:'h3',move:'Transform',q:'After substitution in this problem, what equation do you get?',a:'Substitute and cancel $x^2$: $v+x\\dfrac{dv}{dx}=\\dfrac{3v^2+2v}{2v+1}$.',formula:'$$v+x\\frac{dv}{dx}=\\frac{3v^2+2v}{2v+1}$$',tip:'Always simplify before separating.'},
+            {id:'h4',move:'Separate',q:'What is the separable form in $v$ and $x$?',a:'Rearranging gives: $x\\dfrac{dv}{dx}=\\dfrac{v^2+v}{2v+1}$, so $\\dfrac{2v+1}{v^2+v}dv=\\dfrac{dx}{x}$.',formula:'$$\\frac{2v+1}{v^2+v}dv=\\frac{dx}{x}$$',tip:'Now it is plain separable.'},
+            {id:'h5',move:'Integrate',q:'Integrate $\\int\\dfrac{2v+1}{v^2+v}dv$.',a:'It becomes $\\ln(v^2+v)$ since derivative of denominator is numerator.',formula:'$$\\int\\frac{2v+1}{v^2+v}dv=\\ln(v^2+v)$$',tip:'Direct log form, no partial fractions needed.'},
+            {id:'h6',move:'Back-substitute',q:'Final answer after putting $v=\\dfrac{y}{x}$ back?',a:'From $\\ln(v^2+v)=\\ln x+\\ln C$, get $v^2+v=Cx$. Replace $v=y/x$ and simplify.',formula:'$$\\boxed{y^2+xy=Cx^3}$$',tip:'This matches the reference solution form.'}
+        ]
+    }
+};
+SETS.all = {label:'All Cards',sub:'Core + variants + homogeneous',color:'#7f5af0',cards:[...SETS.core.cards,...SETS.variants.cards,...SETS.homogeneous.cards]};
+
+const params = new URLSearchParams(location.search);
+let setKey = params.get('set') || 'all';
+if(!SETS[setKey]) setKey='all';
+let set = SETS[setKey];
+let filter = 'all';
+
+const root = document.documentElement;
+root.style.setProperty('--set', set.color);
+document.getElementById('setTitle').textContent = set.label;
+document.getElementById('setSub').textContent = set.sub;
+
+document.getElementById('badge').textContent = set.label;
+document.getElementById('badge').style.color = set.color;
+document.getElementById('badge').style.borderColor = set.color;
+
+const SK = 'anki_math_de_' + setKey;
+let st = {};
+try { st = JSON.parse(localStorage.getItem(SK) || '{}'); } catch(e) { st = {}; }
+function cs(id){ if(!st[id]) st[id]={interval:0,ease:2.5,reps:0,nextDue:0,lapses:0}; return st[id]; }
+function save(){ localStorage.setItem(SK, JSON.stringify(st)); }
+
+function sm2(c, r){
+    const now = Date.now();
+    const n = {...c};
+    if(r===1){ n.interval=1; n.reps=0; n.lapses++; n.nextDue=now+60000; return n; }
+    n.ease = Math.max(1.3, Math.round((n.ease + (r===4?0.15:r===2?-0.15:0))*100)/100);
+    if(n.reps===0) n.interval=1;
+    else if(n.reps===1) n.interval=3;
+    else n.interval=Math.round(n.interval*n.ease);
+    if(r===2) n.interval=Math.max(1, Math.round(n.interval*0.6));
+    if(r===4) n.interval=Math.round(n.interval*1.3);
+    n.reps++; n.nextDue = now + n.interval*86400000;
+    return n;
+}
+function eta(r,c){ const n=sm2(c,r); if(r===1) return '~1m'; if(n.interval<=1) return '~1d'; if(n.interval<7) return '~'+n.interval+'d'; return '~'+Math.round(n.interval/7)+'w'; }
+
+let queue=[]; let idx=0; let done=0; let flipped=false;
+function build(){
+    const now=Date.now();
+    if(filter==='new') return set.cards.filter(c=>cs(c.id).reps===0);
+    if(filter==='due') return set.cards.filter(c=>cs(c.id).nextDue<=now && cs(c.id).reps>0);
+    if(filter==='hard') return set.cards.filter(c=>cs(c.id).lapses>0);
+    return set.cards.filter(c=>cs(c.id).nextDue<=now || cs(c.id).reps===0);
+}
+function chips(){
+    const now=Date.now();
+    const due=set.cards.filter(c=>cs(c.id).nextDue<=now || cs(c.id).reps===0).length;
+    const md=set.cards.filter(c=>cs(c.id).interval>=14).length;
+    document.getElementById('dueChip').textContent = due + ' due';
+    document.getElementById('doneChip').textContent = md + ' mastered';
+}
+function prog(){
+    const total = queue.length + done || 1;
+    document.getElementById('fill').style.width = Math.round((done/total)*100) + '%';
+    document.getElementById('pt').textContent = done + ' of ' + total;
+}
+
+function show(){
+    if(idx>=queue.length){
+        document.getElementById('mainArea').style.display='none';
+        document.getElementById('done').classList.add('show');
+        document.getElementById('doneMsg').textContent = done + ' cards reviewed for ' + set.label + '.';
+        chips();
+        return;
+    }
+    const c=queue[idx];
+    flipped=false;
+    document.getElementById('card').classList.remove('flipped');
+    document.getElementById('rates').classList.remove('show');
+    document.getElementById('flipText').style.display='block';
+
+    document.getElementById('move').textContent = c.move;
+    document.getElementById('num').textContent = (idx+1) + '/' + queue.length;
+    document.getElementById('q').innerHTML = c.q;
+    document.getElementById('hint').textContent = '';
+    let html = c.a;
+    if(c.formula) html += '<div class="formula">'+c.formula+'</div>';
+    if(c.tip) html += '<div class="tip">'+c.tip+'</div>';
+    document.getElementById('ans').innerHTML = html;
+
+    const state = cs(c.id);
+    document.getElementById('t1').textContent = eta(1,state);
+    document.getElementById('t2').textContent = eta(2,state);
+    document.getElementById('t3').textContent = eta(3,state);
+    document.getElementById('t4').textContent = eta(4,state);
+
+    prog(); chips();
+    setTimeout(()=>{ if(window.MathJax&&MathJax.typesetPromise){ MathJax.typesetPromise([document.getElementById('front'),document.getElementById('backf')]).catch(()=>{}); }},60);
+}
+
+function flipCard(){
+    if(flipped) return;
+    flipped=true;
+    document.getElementById('card').classList.add('flipped');
+    document.getElementById('rates').classList.add('show');
+    document.getElementById('flipText').style.display='none';
+}
+function rate(r){
+    const c=queue[idx];
+    st[c.id]=sm2(cs(c.id),r);
+    save();
+    if(r===1) queue.push(c);
+    done++; idx++; show();
+}
+function restart(){
+    document.getElementById('done').classList.remove('show');
+    document.getElementById('mainArea').style.display='block';
+    done=0; idx=0; queue=set.cards.slice(); show();
+}
+function start(){
+    document.getElementById('done').classList.remove('show');
+    document.getElementById('mainArea').style.display='block';
+    done=0; idx=0;
+    queue=build();
+    if(queue.length===0 && filter!=='all'){ filter='all'; queue=build(); document.querySelectorAll('.f').forEach(b=>b.classList.toggle('on', b.dataset.f==='all')); }
+    show();
+}
+
+document.querySelectorAll('.f').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.f').forEach(x=>x.classList.remove('on')); b.classList.add('on'); filter=b.dataset.f; start(); }));
+
+window.addEventListener('keydown',e=>{
+    if(e.code==='Space'){ e.preventDefault(); if(!flipped) flipCard(); }
+    if(flipped && ['1','2','3','4'].includes(e.key)) rate(parseInt(e.key,10));
+});
+
+start();
+</script>
+</body>
+</html>
