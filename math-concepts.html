@@ -2,37 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Math Concepts · Exam Readiness</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Math Concepts · Memory Palace + Exam Readiness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
   <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0b1018;--panel:#141c2a;--border:#243149;--text:#eaf0ff;--muted:#8fa0c5;--cyan:#00e5ff;--gold:#ffd166;--violet:#7f5af0;--green:#2bff7f;--red:#ff5c7a}
+    :root{--bg:#07101a;--panel:#121c2e;--panel2:#0e1726;--border:#243553;--text:#eaf1ff;--muted:#90a4ca;--violet:#7f5af0;--cyan:#00d1ff;--green:#2bff7f;--gold:#ffd166;--red:#ff5c7a}
     body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;display:flex}
-    .sidebar{width:250px;min-height:100vh;background:#0f1622;border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;padding:.9rem .65rem;overflow:auto}
-    .logo{padding:.4rem .5rem .9rem;border-bottom:1px solid var(--border);margin-bottom:.7rem}.logo .t{font-size:.92rem;font-weight:700}.logo .s{font-size:.68rem;color:var(--muted)}
-    .sec{font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700;padding:.7rem .45rem .35rem}
-    .item{display:block;padding:.42rem .55rem;border-radius:7px;color:var(--muted);text-decoration:none;font-size:.8rem;margin:.15rem 0}
-    .item:hover{background:#182334;color:#fff}.item.active{background:rgba(127,90,240,.16);color:#d3c8ff}
-    .main{margin-left:250px;flex:1}.inner{max-width:980px;margin:0 auto;padding:2rem 1.6rem 3rem}
-    h1{font-family:'Cinzel',serif;font-size:2rem;line-height:1.2;background:linear-gradient(130deg,#fff,var(--cyan),#d3c8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
-    p.lead{color:var(--muted);font-size:.9rem;line-height:1.7;max-width:760px}
-    .sec-head{margin:1.8rem 0 .7rem;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:#c2b6ff;font-weight:700}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}
-    .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1rem}
-    .card h3{font-size:.88rem;color:#fff;margin-bottom:.45rem}
-    .card p{font-size:.8rem;color:var(--muted);line-height:1.6}
-    .f{background:#0c1320;border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem;text-align:center;margin:.6rem 0;font-size:.88rem}
-    .steps{list-style:none}.steps li{padding:.26rem 0;font-size:.8rem;color:var(--muted);line-height:1.6}
-    .steps b{color:#fff}
-    @media(max-width:760px){.sidebar{position:relative;width:100%;min-height:auto;border-right:none;border-bottom:1px solid var(--border)}.main{margin-left:0}}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(55% 35% at 12% 15%,rgba(0,209,255,.13),transparent 70%),radial-gradient(45% 35% at 88% 80%,rgba(127,90,240,.14),transparent 70%)}
+    .sidebar{width:260px;min-height:100vh;background:#0d1522;border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;padding:1rem .75rem;overflow:auto;z-index:5}
+    .logo{padding:.45rem .55rem 1rem;border-bottom:1px solid var(--border);margin-bottom:.75rem}
+    .logo .t{font-size:.96rem;font-weight:800}.logo .s{font-size:.69rem;color:var(--muted)}
+    .sec{font-size:.64rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700;padding:.75rem .5rem .35rem}
+    .item{display:block;padding:.46rem .58rem;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.81rem;margin:.16rem 0;transition:.2s}
+    .item:hover{background:#1a2740;color:#fff}.item.active{background:rgba(127,90,240,.18);color:#d7ccff;border:1px solid rgba(127,90,240,.35)}
+
+    .main{margin-left:260px;flex:1;position:relative;z-index:1}
+    .inner{max-width:1060px;margin:0 auto;padding:2.2rem 1.6rem 3.2rem}
+    h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,3.2vw,2.5rem);line-height:1.16;background:linear-gradient(130deg,#fff 0%,var(--cyan)48%,#d7ccff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.55rem}
+    .lead{max-width:820px;color:var(--muted);font-size:.92rem;line-height:1.72}
+
+    .hero{margin-top:1.2rem;background:linear-gradient(135deg,rgba(0,58,92,.42),rgba(51,18,90,.4));border:1px solid rgba(0,209,255,.32);border-radius:14px;padding:1rem 1.1rem}
+    .hero .h{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:.4rem}
+    .hero .b{font-size:.84rem;color:rgba(232,242,255,.83);line-height:1.68}
+
+    .section{margin-top:1.55rem}
+    .section .head{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:#c8bdff;font-weight:700;margin-bottom:.65rem}
+
+    .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:.6rem}
+    .chip{background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:.7rem .75rem}
+    .chip .n{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cc);font-weight:700;margin-bottom:.25rem}
+    .chip .t{font-size:.84rem;color:#fff;font-weight:700;margin-bottom:.2rem}
+    .chip .d{font-size:.78rem;color:var(--muted);line-height:1.56}
+
+    .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.75rem}
+    .room{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-left:3px solid var(--rc);border-radius:12px;padding:.86rem .92rem}
+    .room .rt{font-size:.84rem;color:var(--rc);font-weight:700;margin-bottom:.2rem}
+    .room .rs{font-size:.76rem;color:var(--muted);line-height:1.58;margin-bottom:.45rem}
+    .room .eq{background:#0a1321;border:1px solid var(--border);border-radius:8px;padding:.48rem .6rem;text-align:center;font-size:.86rem}
+    .room .cue{margin-top:.45rem;font-size:.77rem;color:#cfdcff;line-height:1.58}
+
+    .check{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1rem}
+    .check ul{list-style:none}
+    .check li{font-size:.8rem;color:var(--muted);line-height:1.68;padding:.2rem 0}
+    .check b{color:#fff}
+
+    @media(max-width:780px){.sidebar{position:relative;width:100%;min-height:auto;border-right:none;border-bottom:1px solid var(--border)}.main{margin-left:0}.inner{padding:1.3rem}}
   </style>
 </head>
 <body>
   <aside class="sidebar">
-    <div class="logo"><div class="t">Maths DE Notes</div><div class="s">Clear structure mode</div></div>
+    <div class="logo"><div class="t">Maths DE Notes</div><div class="s">Memory palace + exam system</div></div>
     <div class="sec">Core</div>
     <a class="item" href="math-hub.html">Hub</a>
     <a class="item active" href="math-concepts.html">Patterns + Exam Readiness</a>
@@ -44,62 +66,69 @@
     <a class="item" href="math-q2-homogeneous-vx.html">Q2 Homogeneous</a>
     <a class="item" href="math-q3-cot.html">Q3 Cot Variant</a>
     <a class="item" href="math-q4-sectan.html">Q4 SecTan Variant</a>
+    <a class="item" href="math-q5-arcsin-symmetry.html">Q5 Arcsin Symmetry</a>
+    <a class="item" href="math-q6-root-coupled.html">Q6 Root Coupled</a>
+    <a class="item" href="math-q7-secsq-tan.html">Q7 SecSq-Tan</a><a class="item" href="math-q8-oneplusx2-xy.html">Q8 (1+x^2)dy-xy dx</a>
     <div class="sec">Practice</div>
     <a class="item" href="math-flashcards.html?set=all">Flashcards</a>
   </aside>
 
   <main class="main"><div class="inner">
-    <h1>Patterns and Concepts in One Place</h1>
-    <p class="lead">This is your single exam-readiness center: triggers, method rules, anti-mistake checks, and final-form patterns for both separable and homogeneous first-order differential equations.</p>
+    <h1>Patterns, Memory Cues, and Exam Readiness</h1>
+    <p class="lead">Everything conceptual is centralized here: pattern triggers, memory palace rooms, and checklist discipline. Use this as your one-page revision command center before problem solving.</p>
 
-    <div class="sec-head">Pattern A · Separable</div>
-    <div class="grid">
-      <div class="card">
-        <h3>Recognition Trigger</h3>
-        <p>Equation can be put as $f(x)dx=g(y)dy$ directly.</p>
-        <div class="f">$$\frac{dx}{x}=\tan y\,dy$$</div>
-      </div>
-      <div class="card">
-        <h3>Core Move</h3>
-        <p>Integrate both sides and compress logs cleanly.</p>
-        <div class="f">$$\int\frac{dx}{x}=\int\tan y\,dy$$</div>
-      </div>
-      <div class="card">
-        <h3>Answer Skeleton</h3>
-        <p>After integration and constant absorption.</p>
-        <div class="f">$$\ln|F(x,y)|=C\Rightarrow F(x,y)=C$$</div>
+    <div class="hero">
+      <div class="h">Core finals to memorize</div>
+      <div class="b">Separable target: $$\frac{dx}{x}=\tan y\,dy\Rightarrow x\cos y=C$$
+      Homogeneous example: $$(2xy+x^2)\frac{dy}{dx}=3y^2+2xy\Rightarrow y^2+xy=Cx^3$$</div>
+    </div>
+
+    <div class="section">
+      <div class="head">Separable 5-Move Flow</div>
+      <div class="flow">
+        <div class="chip" style="--cc:#00d1ff"><div class="n">Move 1</div><div class="t">Recognize</div><div class="d">See $f(x)dx=g(y)dy$ structure.</div></div>
+        <div class="chip" style="--cc:#ffd166"><div class="n">Move 2</div><div class="t">Integrate</div><div class="d">Integrate left and right directly.</div></div>
+        <div class="chip" style="--cc:#2bff7f"><div class="n">Move 3</div><div class="t">Identity</div><div class="d">Use $\int\tan y\,dy=-\ln|\cos y|$.</div></div>
+        <div class="chip" style="--cc:#ff5c7a"><div class="n">Move 4</div><div class="t">Compress</div><div class="d">Merge logs to single expression.</div></div>
+        <div class="chip" style="--cc:#7f5af0"><div class="n">Move 5</div><div class="t">Finalize</div><div class="d">Exponentiate and absorb constants.</div></div>
       </div>
     </div>
 
-    <div class="sec-head">Pattern B · Homogeneous</div>
-    <div class="grid">
-      <div class="card">
-        <h3>Recognition Trigger</h3>
-        <p>Numerator and denominator same degree in $x,y$.</p>
-        <div class="f">$$\frac{dy}{dx}=\frac{3y^2+2xy}{2xy+x^2}$$</div>
-      </div>
-      <div class="card">
-        <h3>Substitution Rule</h3>
-        <p>Put $y=vx$ to reduce to separable in $v,x$.</p>
-        <div class="f">$$y=vx,\quad \frac{dy}{dx}=v+x\frac{dv}{dx}$$</div>
-      </div>
-      <div class="card">
-        <h3>Back-substitute</h3>
-        <p>After integrating in $v,x$, replace $v=\dfrac{y}{x}$.</p>
-        <div class="f">$$\boxed{y^2+xy=Cx^3}$$</div>
+    <div class="section">
+      <div class="head">Memory Palace A · Separable</div>
+      <div class="rooms">
+        <div class="room" style="--rc:#00d1ff"><div class="rt">Room I: Split Gate</div><div class="rs">Cue: “x-side and y-side already separated.”</div><div class="eq">$$\frac{dx}{x}=\tan y\,dy$$</div><div class="cue">Image cue: two doors, one labeled $x$, one labeled $y$.</div></div>
+        <div class="room" style="--rc:#ffd166"><div class="rt">Room II: Integration Hall</div><div class="rs">Cue: “mirror of $1/x$ gives log.”</div><div class="eq">$$\int\frac{1}{x}dx=\ln|x|$$</div><div class="cue">Image cue: mirrored corridor writes “log” in gold.</div></div>
+        <div class="room" style="--rc:#2bff7f"><div class="rt">Room III: Tangent Lab</div><div class="rs">Cue: “cos derivative gives minus sign.”</div><div class="eq">$$\int\tan y\,dy=-\ln|\cos y|$$</div><div class="cue">Image cue: leaking cosine tank reminds negative sign.</div></div>
+        <div class="room" style="--rc:#ff5c7a"><div class="rt">Room IV: Log Studio</div><div class="rs">Cue: “two logs fuse into one.”</div><div class="eq">$$\ln|x|+\ln|\cos y|=\ln|x\cos y|$$</div><div class="cue">Image cue: two neon bars merging into one panel.</div></div>
+        <div class="room" style="--rc:#7f5af0"><div class="rt">Room V: Constant Vault</div><div class="rs">Cue: “constant gets renamed cleanly.”</div><div class="eq">$$\boxed{x\cos y=C}$$</div><div class="cue">Image cue: vault stamp says “all constants collapse to C.”</div></div>
       </div>
     </div>
 
-    <div class="sec-head">Exam Readiness Checklist</div>
-    <div class="card">
-      <ul class="steps">
-        <li><b>1. Type test first:</b> Separable or homogeneous?</li>
-        <li><b>2. Sign discipline:</b> $\int\tan y\,dy=-\ln|\cos y|$ (minus matters).</li>
-        <li><b>3. Keep absolute values:</b> in logarithms until final constant absorption.</li>
-        <li><b>4. Verify quickly:</b> Differentiate final answer and recover original DE.</li>
-        <li><b>5. Homogeneous flow:</b> substitute $y=vx$ then separate, integrate, back-substitute.</li>
-      </ul>
+    <div class="section">
+      <div class="head">Memory Palace B · Homogeneous</div>
+      <div class="rooms">
+        <div class="room" style="--rc:#ff5c7a"><div class="rt">Room I: Degree Scanner</div><div class="rs">Cue: “same degree numerator/denominator.”</div><div class="eq">$$\frac{dy}{dx}=\frac{3y^2+2xy}{2xy+x^2}$$</div><div class="cue">Image cue: red scanner shows “degree-2 / degree-2”.</div></div>
+        <div class="room" style="--rc:#ffd166"><div class="rt">Room II: Substitution Switch</div><div class="rs">Cue: flip to $y=vx$ mode.</div><div class="eq">$$y=vx,\quad \frac{dy}{dx}=v+x\frac{dv}{dx}$$</div><div class="cue">Image cue: switch board converts y into vx.</div></div>
+        <div class="room" style="--rc:#2bff7f"><div class="rt">Room III: Separation Tunnel</div><div class="rs">Cue: isolate $dv$ and $dx$ sides.</div><div class="eq">$$\frac{2v+1}{v^2+v}dv=\frac{dx}{x}$$</div><div class="cue">Image cue: tunnel split, green left for $v$, blue right for $x$.</div></div>
+        <div class="room" style="--rc:#00d1ff"><div class="rt">Room IV: Integration Console</div><div class="rs">Cue: derivative-over-function log instantly.</div><div class="eq">$$\ln(v^2+v)=\ln x+\ln C$$</div><div class="cue">Image cue: console lights “log match found”.</div></div>
+        <div class="room" style="--rc:#7f5af0"><div class="rt">Room V: Back-Sub Chamber</div><div class="rs">Cue: put $v=y/x$ and simplify to final polynomial form.</div><div class="eq">$$\boxed{y^2+xy=Cx^3}$$</div><div class="cue">Image cue: purple projector turns v-symbol back into y/x.</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="head">Exam Readiness Checklist</div>
+      <div class="check">
+        <ul>
+          <li><b>Type first, always:</b> separable or homogeneous?</li>
+          <li><b>Don’t lose the sign:</b> $\int\tan y\,dy=-\ln|\cos y|$.</li>
+          <li><b>Hold absolute values</b> through log steps.</li>
+          <li><b>Back-substitute carefully</b> in homogeneous questions.</li>
+          <li><b>Final check:</b> differentiate your final answer to verify the original DE.</li>
+        </ul>
+      </div>
     </div>
   </div></main>
 </body>
 </html>
+

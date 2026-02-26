@@ -1,8 +1,49 @@
 ﻿<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Q3 · Cot Variant</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
-<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--bg:#0b1018;--panel:#141c2a;--border:#243149;--text:#eaf0ff;--muted:#8fa0c5;--green:#2bff7f;--gold:#ffd166}body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;display:flex;min-height:100vh}.sidebar{width:250px;min-height:100vh;background:#0f1622;border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;padding:.9rem .65rem;overflow:auto}.logo{padding:.4rem .5rem .9rem;border-bottom:1px solid var(--border);margin-bottom:.7rem}.logo .t{font-size:.92rem;font-weight:700}.logo .s{font-size:.68rem;color:var(--muted)}.sec{font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700;padding:.7rem .45rem .35rem}.item{display:block;padding:.42rem .55rem;border-radius:7px;color:var(--muted);text-decoration:none;font-size:.8rem;margin:.15rem 0}.item:hover{background:#182334;color:#fff}.item.active{background:rgba(127,90,240,.16);color:#d3c8ff}.main{margin-left:250px;flex:1}.inner{max-width:900px;margin:0 auto;padding:2rem 1.6rem 3rem}h1{font-family:'Cinzel',serif;font-size:1.9rem;background:linear-gradient(130deg,#fff,#2bff7f,#d3c8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.6rem}.box{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1rem;margin:.75rem 0}.eq{background:#0c1320;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;text-align:center;margin:.45rem 0}.muted{color:var(--muted);font-size:.86rem}.final{border:2px solid var(--gold)}@media(max-width:760px){.sidebar{position:relative;width:100%;min-height:auto;border-right:none;border-bottom:1px solid var(--border)}.main{margin-left:0}}</style></head>
-<body><aside class="sidebar"><div class="logo"><div class="t">Maths DE Notes</div><div class="s">Question page</div></div><div class="sec">Core</div><a class="item" href="math-hub.html">Hub</a><a class="item" href="math-concepts.html">Patterns + Exam Readiness</a><a class="item" href="math-questions.html">All Questions/Examples</a><a class="item" href="math-solutions.html">Solutions Only</a><a class="item" href="math-neural.html">Neural Network View</a><div class="sec">Question Pages</div><a class="item" href="math-q1-separable-tan.html">Q1 Separable (tan)</a><a class="item" href="math-q2-homogeneous-vx.html">Q2 Homogeneous</a><a class="item active" href="math-q3-cot.html">Q3 Cot Variant</a><a class="item" href="math-q4-sectan.html">Q4 SecTan Variant</a><div class="sec">Practice</div><a class="item" href="math-flashcards.html?set=variants">Flashcards</a></aside>
-<main class="main"><div class="inner"><h1>Q3 · Cot Variant</h1><div class="box"><div class="eq">$$\frac{dx}{x}=\cot y\,dy$$</div><p class="muted">Use $\int\cot y\,dy=\ln|\sin y|$.</p></div><div class="box"><div class="eq">$$\ln|x|=\ln|\sin y|+C\Rightarrow \ln\left|\frac{x}{\sin y}\right|=C$$</div></div><div class="box final"><div class="eq">$$\boxed{\frac{x}{\sin y}=C}$$</div></div></div></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Q3 · Cot Variant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+  <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#07101a;--panel:#121c2e;--panel2:#0e1726;--border:#243553;--text:#eaf1ff;--muted:#90a4ca;--green:#2bff7f;--gold:#ffd166;--violet:#7f5af0}
+    body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;display:flex}
+    .sidebar{width:260px;min-height:100vh;background:#0d1522;border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;padding:1rem .75rem;overflow:auto}.logo{padding:.45rem .55rem 1rem;border-bottom:1px solid var(--border);margin-bottom:.75rem}.logo .t{font-size:.96rem;font-weight:800}.logo .s{font-size:.69rem;color:var(--muted)}
+    .sec{font-size:.64rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700;padding:.75rem .5rem .35rem}.item{display:block;padding:.46rem .58rem;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.81rem;margin:.16rem 0}.item:hover{background:#1a2740;color:#fff}.item.active{background:rgba(127,90,240,.18);color:#d7ccff;border:1px solid rgba(127,90,240,.35)}
+    .main{margin-left:260px;flex:1}.inner{max-width:940px;margin:0 auto;padding:2rem 1.5rem 3rem}h1{font-family:'Cinzel',serif;font-size:2rem;background:linear-gradient(130deg,#fff,var(--green),#d7ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.45rem}
+    .lead{color:var(--muted);font-size:.9rem;line-height:1.7}.block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-top:.9rem}.eq{background:#0a1321;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;text-align:center;margin:.45rem 0}.step{font-size:.81rem;color:var(--muted);line-height:1.68;padding:.2rem 0}.step b{color:#fff}.final{border:2px solid var(--gold)}
+    @media(max-width:780px){.sidebar{position:relative;width:100%;min-height:auto;border-right:none;border-bottom:1px solid var(--border)}.main{margin-left:0}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar"><div class="logo"><div class="t">Maths DE Notes</div><div class="s">Question + memory cues</div></div>
+    <div class="sec">Core</div><a class="item" href="math-hub.html">Hub</a><a class="item" href="math-concepts.html">Patterns + Exam Readiness</a><a class="item" href="math-questions.html">All Questions/Examples</a><a class="item" href="math-solutions.html">Solutions Only</a><a class="item" href="math-neural.html">Neural Network View</a>
+    <div class="sec">Question Pages</div><a class="item" href="math-q1-separable-tan.html">Q1 Separable (tan)</a><a class="item" href="math-q2-homogeneous-vx.html">Q2 Homogeneous</a><a class="item active" href="math-q3-cot.html">Q3 Cot Variant</a><a class="item" href="math-q4-sectan.html">Q4 SecTan Variant</a><a class="item" href="math-q5-arcsin-symmetry.html">Q5 Arcsin Symmetry</a><a class="item" href="math-q6-root-coupled.html">Q6 Root Coupled</a><a class="item" href="math-q7-secsq-tan.html">Q7 SecSq-Tan</a><a class="item" href="math-q8-oneplusx2-xy.html">Q8 (1+x^2)dy-xy dx</a>
+    <div class="sec">Practice</div><a class="item" href="math-flashcards.html?set=variants">Flashcards</a>
+  </aside>
+
+  <main class="main"><div class="inner">
+    <h1>Q3 · Cot Variant</h1>
+    <p class="lead">Given: $\dfrac{dx}{x}=\cot y\,dy$</p>
+
+    <div class="block">
+      <div class="eq">$$\frac{dx}{x}=\cot y\,dy$$</div>
+      <div class="step"><b>Step 1:</b> Integrate both sides directly:</div>
+      <div class="eq">$$\int\frac{1}{x}dx=\int\cot y\,dy$$</div>
+      <div class="step"><b>Step 2:</b> Use standard integrals:</div>
+      <div class="eq">$$\ln|x|=\ln|\sin y|+C$$</div>
+      <div class="step"><b>Step 3:</b> Rearrange logs into one ratio:</div>
+      <div class="eq">$$\ln\left|\frac{x}{\sin y}\right|=C\Rightarrow \frac{x}{\sin y}=C$$</div>
+    </div>
+
+    <div class="block final"><div class="eq">$$\boxed{\frac{x}{\sin y}=C}$$</div></div>
+
+    <div class="block">
+      <div class="step"><b>Quick verification:</b> From $x=C\sin y$, differentiate: $dx=C\cos y\,dy$ and divide by $x=C\sin y$ to get $\dfrac{dx}{x}=\cot y\,dy$.</div>
+    </div>
+  </div></main>
+</body>
+</html>

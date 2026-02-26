@@ -622,6 +622,31 @@
             color: var(--gold)
         }
 
+        .variant-actions {
+            margin-top: .8rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .variant-open {
+            text-decoration: none;
+            border: 1px solid rgba(176, 106, 255, 0.35);
+            color: #d8ccff;
+            background: rgba(176, 106, 255, 0.12);
+            border-radius: 999px;
+            padding: .28rem .78rem;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            transition: background .2s, border-color .2s;
+        }
+
+        .variant-open:hover {
+            background: rgba(176, 106, 255, 0.24);
+            border-color: rgba(176, 106, 255, 0.55);
+        }
+
         /* ── SCROLLBAR ── */
         ::-webkit-scrollbar {
             width: 5px;
@@ -1038,8 +1063,8 @@
             </div>
         </div>
 
-        <!-- ══════════════ TRY IT ON BOTH PROBLEMS ══════════════ -->
-        <div class="sec ani" style="animation-delay:.75s">🧪 Apply the Pattern — Both Problems Solved the Same Way</div>
+        <!-- ══════════════ TRY IT ON MULTIPLE PROBLEMS ══════════════ -->
+        <div class="sec ani" style="animation-delay:.75s">🧪 Apply the Pattern — Multiple Exercises Solved the Same Way</div>
 
         <div class="variants ani" style="animation-delay:.78s">
 
@@ -1054,6 +1079,7 @@
                     <b>Room IV (Split):</b> Forced $=-10$V, Natural $=20e^{-200t}$<br />
                     <b>Room V (Blueprint):</b> $\frac{1}{200}\dot{v}+v=-10\,u(t)$
                 </div>
+                <div class="variant-actions"><a class="variant-open" href="rc-ex78-example.html">Open Page</a></div>
             </div>
 
             <div class="variant">
@@ -1067,6 +1093,35 @@
                     <b>Room IV (Split):</b> Forced $=20$V, Natural $=-20e^{-1000t}$<br />
                     <b>Room V (Blueprint):</b> $10^{-3}\dot{v}+v=20\,u(t)$
                 </div>
+                <div class="variant-actions"><a class="variant-open" href="rc-ex78-exercise.html">Open Page</a></div>
+            </div>
+
+            <div class="variant">
+                <div class="variant-label">Exercise 7-10 · Zero-State RC (Fig 7-19)</div>
+                <div class="variant-eq">$$v_C(t)=v_C(\infty)+\big[v_C(0)-v_C(\infty)\big]e^{-t/\tau}$$</div>
+                <div class="variant-ans">
+                    <b>Room I (Recognize):</b> zero-state first-order RC charging form<br />
+                    <b>Room II (Flip/τ):</b> $\tau = RC = 5\text{ ms}$ so $k=1/\tau=200$<br />
+                    <b>Room III Freeze:</b> $v_C(0)=0$ (uncharged capacitor)<br />
+                    <b>Room III Melt:</b> $v_C(\infty)=2.5\text{ V}$ (DC Thevenin target)<br />
+                    <b>Room IV (Split):</b> $v_C(t)=2.5+\big(0-2.5\big)e^{-200t}$<br />
+                    <b>Room V (Simplify):</b> $\boxed{v_C(t)=2.5\left(1-e^{-200t}\right)\text{ V},\; t\ge 0}$
+                </div>
+                <div class="variant-actions"><a class="variant-open" href="rc-ex710.html">Open Page</a></div>
+            </div>
+
+            <div class="variant">
+                <div class="variant-label">Exercise 7-11 · Zero-State RL (Fig 7-19)</div>
+                <div class="variant-eq">$$i_L(t)=i_L(\infty)+\big[i_L(0)-i_L(\infty)\big]e^{-t/\tau}$$</div>
+                <div class="variant-ans">
+                    <b>Room I (Recognize):</b> zero-state first-order RL charging form<br />
+                    <b>Room II (Flip/τ):</b> $\tau=L/R=200\text{ ns}$ so $k=1/\tau=5\times 10^6$<br />
+                    <b>Room III Freeze:</b> $i_L(0)=0$ (zero-state inductor current)<br />
+                    <b>Room III Melt:</b> $i_L(\infty)=0.5\text{ mA}$<br />
+                    <b>Room IV (Split):</b> $i_L(t)=0.5+\big(0-0.5\big)e^{-5\times10^6 t}$ mA<br />
+                    <b>Room V (Simplify):</b> $\boxed{i_L(t)=0.5\left(1-e^{-5\times10^6 t}\right)\text{ mA},\; t\ge 0}$
+                </div>
+                <div class="variant-actions"><a class="variant-open" href="rc-ex711.html">Open Page</a></div>
             </div>
 
             <div class="variant" style="border-color:rgba(176,106,255,0.3)">
