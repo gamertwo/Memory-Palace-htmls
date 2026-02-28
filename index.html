@@ -1,12 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pattern Palace · First-Order RC · Solve Any Problem</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pattern Palace</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
         rel="stylesheet" />
     <script>
         MathJax = {
@@ -21,11 +20,15 @@
         *::after {
             box-sizing: border-box;
             margin: 0;
-            padding: 0
+            padding: 0;
         }
 
         :root {
-            --bg: #05080f;
+            --bg: #111111;
+            --sidebar: #161616;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888;
             --cyan: #00e5ff;
             --gold: #ffc947;
             --violet: #b06aff;
@@ -33,1326 +36,669 @@
             --red: #ff4d6a;
             --orange: #ff9500;
             --pink: #ff6eb4;
-            --panel: rgba(10, 12, 28, 0.9);
+            --hover: #1e1e1e;
+            --card: #181818;
         }
 
         html {
-            scroll-behavior: smooth
+            scroll-behavior: smooth;
         }
 
         body {
             background: var(--bg);
-            font-family: 'Outfit', sans-serif;
-            color: #dde8ff;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* atmosphere */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse 55% 35% at 10% 15%, rgba(80, 0, 180, 0.16) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 88% 80%, rgba(0, 160, 200, 0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 70% 25% at 50% 105%, rgba(255, 100, 0, 0.07) 0%, transparent 70%);
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background-image:
-                linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
-            background-size: 48px 48px;
-        }
-
-        .page {
-            position: relative;
-            z-index: 1;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 1.4rem 8rem
-        }
-
-        /* ── HEADER ── */
-        .header {
-            text-align: center;
-            padding: 3.5rem 1rem 2.5rem
-        }
-
-        .tag {
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(176, 106, 255, 0.18), rgba(0, 229, 255, 0.12));
-            border: 1px solid var(--violet);
-            border-radius: 999px;
-            padding: .4rem 1.8rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .68rem;
-            color: var(--violet);
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0 22px rgba(176, 106, 255, 0.4);
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.7rem, 4.5vw, 3rem);
-            font-weight: 900;
-            background: linear-gradient(130deg, #fff 0%, var(--cyan) 55%, var(--violet) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.12;
-            letter-spacing: .02em;
-            margin-bottom: .7rem;
-        }
-
-        .header p {
-            font-size: .95rem;
-            color: rgba(200, 215, 255, 0.5);
-            max-width: 580px;
-            margin: 0 auto
-        }
-
-        /* ── BIG IDEA BOX ── */
-        .idea-box {
-            background: linear-gradient(135deg, rgba(0, 60, 100, 0.55), rgba(40, 0, 100, 0.55));
-            border: 2px solid var(--cyan);
-            border-radius: 22px;
-            padding: 2.2rem 2.5rem;
-            max-width: 740px;
-            margin: 2.5rem auto 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 60px rgba(0, 229, 255, 0.3), inset 0 0 40px rgba(0, 229, 255, 0.04);
-            animation: ideaGlow 5s ease-in-out infinite;
-        }
-
-        @keyframes ideaGlow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 60px rgba(0, 229, 255, 0.3), inset 0 0 40px rgba(0, 229, 255, 0.04)
-            }
-
-            50% {
-                box-shadow: 0 0 90px rgba(0, 229, 255, 0.5), inset 0 0 60px rgba(0, 229, 255, 0.07)
-            }
-        }
-
-        .idea-label {
-            font-size: .62rem;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            color: var(--cyan);
-            font-weight: 700;
-            margin-bottom: 1rem
-        }
-
-        .idea-form {
-            font-size: clamp(1rem, 2.8vw, 1.55rem);
-            color: #fff;
-            margin-bottom: 1.2rem
-        }
-
-        .idea-desc {
-            font-size: .85rem;
-            color: rgba(180, 210, 255, 0.6);
-            line-height: 1.7
-        }
-
-        .idea-desc b {
-            color: #fff
-        }
-
-        .idea-desc .hi {
-            color: var(--cyan);
-            font-weight: 700
-        }
-
-        /* ── SECTION TITLE ── */
-        .sec {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 3.5rem 0 1.6rem;
-            font-size: .75rem;
-            font-weight: 700;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            color: rgba(176, 106, 255, 0.5);
+            font-size: 15px;
         }
 
-        .sec::before,
-        .sec::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: rgba(176, 106, 255, 0.15)
-        }
-
-        /* ── PATTERN FLOW (horizontal steps) ── */
-        .flow {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 0;
-            background: var(--panel);
-            border: 1px solid rgba(176, 106, 255, 0.18);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .flow-step {
-            padding: 1.5rem 1.2rem;
-            position: relative;
-            border-right: 1px solid rgba(176, 106, 255, 0.12);
-            transition: background .3s;
-            cursor: pointer;
-        }
-
-        .flow-step:last-child {
-            border-right: none
-        }
-
-        .flow-step:hover {
-            background: rgba(176, 106, 255, 0.07)
-        }
-
-        .flow-arrow {
-            position: absolute;
-            right: -13px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.1rem;
-            color: rgba(176, 106, 255, 0.4);
-            z-index: 2;
-            display: none;
-        }
-
-        @media(min-width:500px) {
-            .flow-arrow {
-                display: block
-            }
-        }
-
-        .flow-step:last-child .flow-arrow {
-            display: none
-        }
-
-        .fs-num {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--st-c, var(--violet));
-            color: #000;
-            font-weight: 900;
-            font-size: .85rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: .7rem;
-            box-shadow: 0 0 12px var(--st-c, var(--violet));
-        }
-
-        .fs-title {
-            font-size: .82rem;
-            font-weight: 700;
-            color: var(--st-c, var(--violet));
-            margin-bottom: .35rem
-        }
-
-        .fs-body {
-            font-size: .76rem;
-            color: rgba(200, 215, 255, 0.55);
-            line-height: 1.55
-        }
-
-        /* ── PALACE ROOMS (concept rooms) ── */
-        .rooms {
+        .sidebar {
+            width: 240px;
+            min-height: 100vh;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            gap: 1.6rem
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 50;
+            overflow-y: auto;
         }
 
-        .room {
-            display: grid;
-            grid-template-columns: 90px 1fr;
-            background: var(--panel);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(176, 106, 255, 0.15);
-            transition: box-shadow .35s, transform .35s;
-            backdrop-filter: blur(14px);
-        }
-
-        .room:hover {
-            box-shadow: 0 0 40px var(--rc)18;
-            transform: translateX(4px);
-        }
-
-        .room-left {
-            background: var(--rc);
+        .sb-logo {
+            padding: 1.1rem 1rem .8rem;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: .4rem;
-            padding: 1rem .5rem;
-            min-height: 140px;
+            gap: .6rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: .4rem;
         }
 
-        .room-left .ricon {
-            font-size: 1.8rem
-        }
-
-        .room-left .rnum {
-            font-family: 'Cinzel', serif;
+        .sb-logo-icon {
             font-size: 1.2rem;
-            font-weight: 900;
-            color: rgba(0, 0, 0, 0.75);
+        }
+
+        .sb-logo-text {
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .sb-logo-sub {
+            font-size: .65rem;
+            color: var(--muted);
+            letter-spacing: .05em;
+        }
+
+        .sb-section {
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: .9rem 1rem .3rem;
+        }
+
+        .sb-item {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            padding: .38rem 1rem;
+            font-size: .82rem;
+            color: var(--muted);
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 0 .4rem;
+            transition: background .15s, color .15s;
+        }
+
+        .sb-item:hover {
+            background: var(--hover);
+            color: var(--text);
+        }
+
+        .sb-item.active {
+            background: rgba(176, 106, 255, .12);
+            color: var(--violet);
+        }
+
+        .sb-item .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            opacity: .5;
+            flex-shrink: 0;
+        }
+
+        .sb-divider {
+            height: 1px;
+            background: var(--border);
+            margin: .5rem .8rem;
+        }
+
+        .main {
+            margin-left: 240px;
+            flex: 1;
+            min-height: 100vh;
+            padding: 0 0 6rem;
+        }
+
+        .main-inner {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 3rem 3rem 4rem;
+        }
+
+        .breadcrumb {
+            font-size: .75rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        .breadcrumb .sep {
+            opacity: .35;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-emoji {
+            font-size: 2.8rem;
+            margin-bottom: .6rem;
             line-height: 1;
         }
 
-        .room-left .rlabel {
-            font-size: .55rem;
+        .page-header h1 {
+            font-size: 2rem;
             font-weight: 700;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        .room-right {
-            padding: 1.6rem 1.8rem
-        }
-
-        .room-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--rc);
-            margin-bottom: .2rem
-        }
-
-        .room-sub {
-            font-size: .76rem;
-            color: rgba(200, 215, 255, 0.42);
-            margin-bottom: 1rem
-        }
-
-        /* PATTERN TRIGGER */
-        .trigger {
-            background: rgba(0, 0, 0, 0.4);
-            border-left: 3px solid var(--rc);
-            border-radius: 0 10px 10px 0;
-            padding: .85rem 1.1rem;
-            margin: .5rem 0;
-        }
-
-        .trigger-lbl {
-            font-size: .58rem;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: var(--rc);
-            margin-bottom: .4rem
-        }
-
-        .trigger-q {
-            font-size: .88rem;
             color: #fff;
+            margin-bottom: .5rem;
+            letter-spacing: -.02em;
+        }
+
+        .page-header p {
+            font-size: .9rem;
+            color: var(--muted);
+            line-height: 1.6;
+            max-width: 640px;
+        }
+
+        .callout {
+            background: rgba(176, 106, 255, .06);
+            border: 1px solid rgba(176, 106, 255, .2);
+            border-left: 3px solid var(--violet);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .callout-title {
+            font-size: .7rem;
             font-weight: 600;
-            margin-bottom: .25rem
-        }
-
-        .trigger-text {
-            font-size: .8rem;
-            color: rgba(200, 215, 255, 0.6);
-            line-height: 1.6
-        }
-
-        .trigger-text em {
-            color: var(--rc);
-            font-style: normal;
-            font-weight: 700
-        }
-
-        /* FORMULA DISPLAY */
-        .fbox {
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 12px;
-            padding: .95rem 1.2rem;
-            margin: .6rem 0;
-            text-align: center;
-            transition: border-color .3s;
-        }
-
-        .room:hover .fbox {
-            border-color: color-mix(in srgb, var(--rc) 30%, transparent)
-        }
-
-        .fbox.key {
-            border-color: var(--rc);
-            box-shadow: 0 0 16px color-mix(in srgb, var(--rc) 40%, transparent)
-        }
-
-        .fbox-lbl {
-            font-size: .58rem;
-            letter-spacing: .16em;
-            text-transform: uppercase;
-            color: rgba(200, 215, 255, 0.35);
-            margin-bottom: .45rem
-        }
-
-        .fbox-note {
-            font-size: .78rem;
-            color: rgba(200, 215, 255, 0.55);
-            margin-top: .45rem;
-            line-height: 1.5
-        }
-
-        /* SCENE (visceral image) */
-        .scene {
-            background: rgba(176, 106, 255, 0.05);
-            border: 1px dashed rgba(176, 106, 255, 0.22);
-            border-radius: 10px;
-            padding: .85rem 1rem;
-            margin: .5rem 0;
-        }
-
-        .scene-lbl {
-            font-size: .58rem;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            color: var(--violet);
-            font-weight: 700;
-            margin-bottom: .4rem
-        }
-
-        .scene-text {
-            font-size: .82rem;
-            color: rgba(200, 215, 255, 0.65);
-            line-height: 1.7
-        }
-
-        .scene-text .vi {
-            color: var(--pink);
-            font-weight: 700
-        }
-
-        /* vivid image */
-        .scene-text .ac {
-            color: var(--cyan);
-            font-weight: 700
-        }
-
-        /* action */
-        .scene-text .co {
-            color: var(--gold);
-            font-weight: 700
-        }
-
-        /* concept */
-
-        /* STEPS inside a room */
-        .steps {
-            list-style: none;
-            margin-top: .6rem
-        }
-
-        .steps li {
-            display: flex;
-            align-items: flex-start;
-            gap: .65rem;
-            padding: .45rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: .82rem;
-            line-height: 1.55;
-            color: rgba(200, 215, 255, 0.68);
-        }
-
-        .steps li:last-child {
-            border-bottom: none
-        }
-
-        .snum {
-            flex-shrink: 0;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--rc);
-            color: #000;
-            font-size: .65rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 2px;
-        }
-
-        /* RECOGNITION BADGE */
-        .badge {
-            display: inline-block;
-            padding: .22rem .85rem;
-            border-radius: 999px;
-            font-size: .65rem;
-            font-weight: 700;
             letter-spacing: .1em;
             text-transform: uppercase;
-            border: 1px solid currentColor;
-            margin: .2rem .15rem;
-        }
-
-        /* ── UNIVERSAL SOLVER CARD ── */
-        .solver {
-            background: linear-gradient(135deg, rgba(0, 50, 80, 0.55), rgba(50, 0, 100, 0.55));
-            border: 2px solid var(--gold);
-            border-radius: 22px;
-            padding: 2rem 2.4rem;
-            margin: 2rem 0;
-            box-shadow: 0 0 50px rgba(255, 201, 71, 0.25);
-        }
-
-        .solver-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--gold);
-            margin-bottom: 1.4rem;
-            text-align: center;
-        }
-
-        .solver-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem
-        }
-
-        .solver-card {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 14px;
-            border: 1px solid rgba(255, 201, 71, 0.2);
-            padding: 1.1rem 1.2rem;
-        }
-
-        .sc-q {
-            font-size: .65rem;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-            color: rgba(255, 201, 71, 0.5);
+            color: var(--violet);
             margin-bottom: .5rem;
-            font-weight: 700
         }
 
-        .sc-trigger {
-            font-size: .85rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: .4rem
+        .callout-body {
+            font-size: .88rem;
+            color: rgba(200, 215, 255, .75);
+            line-height: 1.7;
         }
 
-        .sc-how {
-            font-size: .78rem;
-            color: rgba(200, 215, 255, 0.6);
-            line-height: 1.55
+        .callout.gold {
+            border-left-color: var(--gold);
+            background: rgba(255, 201, 71, .05);
+            border-color: rgba(255, 201, 71, .2);
         }
 
-        .sc-formula {
-            margin-top: .5rem;
-            font-size: .85rem;
-            text-align: center
-        }
-
-        /* ── VARIANT EXAMPLES ── */
-        .variants {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.2rem;
-            margin: 1.5rem 0
-        }
-
-        .variant {
-            background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 16px;
-            padding: 1.4rem;
-            transition: border-color .25s, transform .25s;
-        }
-
-        .variant:hover {
-            border-color: rgba(255, 201, 71, 0.4);
-            transform: translateY(-4px)
-        }
-
-        .variant-label {
-            font-size: .62rem;
-            letter-spacing: .15em;
-            text-transform: uppercase;
+        .callout.gold .callout-title {
             color: var(--gold);
-            font-weight: 700;
-            margin-bottom: .7rem
         }
 
-        .variant-eq {
-            font-size: .95rem;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 8px;
-            padding: .7rem .5rem;
-            margin: .5rem 0
-        }
-
-        .variant-ans {
-            font-size: .75rem;
-            color: rgba(200, 215, 255, 0.55);
-            line-height: 1.6;
-            margin-top: .5rem
-        }
-
-        .variant-ans b {
-            color: var(--gold)
-        }
-
-        .variant-actions {
-            margin-top: .8rem;
+        .section-head {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 2.5rem 0 1rem;
             display: flex;
-            justify-content: flex-end;
+            align-items: center;
+            gap: .6rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: .6rem;
         }
 
-        .variant-open {
-            text-decoration: none;
-            border: 1px solid rgba(176, 106, 255, 0.35);
-            color: #d8ccff;
-            background: rgba(176, 106, 255, 0.12);
-            border-radius: 999px;
-            padding: .28rem .78rem;
-            font-size: .68rem;
+        .moves-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: .9rem;
+        }
+
+        .move-chip {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .move-num {
+            font-size: .7rem;
             font-weight: 700;
             letter-spacing: .08em;
             text-transform: uppercase;
-            transition: background .2s, border-color .2s;
+            margin-bottom: .4rem;
         }
 
-        .variant-open:hover {
-            background: rgba(176, 106, 255, 0.24);
-            border-color: rgba(176, 106, 255, 0.55);
-        }
-
-        
-        .recall-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 1rem;
-            margin: 1.2rem 0 1.8rem;
-        }
-
-        .recall-card {
-            background: var(--panel);
-            border: 1px solid rgba(0, 229, 255, 0.22);
-            border-radius: 14px;
-            padding: .95rem 1rem;
-        }
-
-        .recall-card summary {
-            cursor: pointer;
+        .move-name {
+            font-size: .92rem;
+            font-weight: 600;
             color: #fff;
-            font-size: .86rem;
-            font-weight: 700;
-            line-height: 1.45;
-            list-style: none;
+            margin-bottom: .35rem;
         }
 
-        .recall-card summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .recall-card .ans {
-            margin-top: .7rem;
-            padding-top: .7rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: .8rem;
-            color: rgba(200, 215, 255, 0.72);
+        .move-desc {
+            font-size: .82rem;
+            color: var(--muted);
             line-height: 1.6;
         }
 
-        body.study-mode::before,
-        body.study-mode::after,
-        body.study-mode .scene,
-        body.study-mode .idea-box {
-            display: none;
+        .problems-grid {
+            display: grid;
+            gap: 1rem;
         }
 
-        body.study-mode .ani {
-            animation: none !important;
-            opacity: 1 !important;
-            transform: none !important;
+        .problem-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 4px 1fr;
         }
 
-        body.study-mode .room,
-        body.study-mode .variant,
-        body.study-mode .solver,
-        body.study-mode .flow {
-            backdrop-filter: none;
-            box-shadow: none;
-            transition: none;
+        .pc-stripe {
+            background: var(--pc);
         }
 
-        body.study-mode .room:hover,
-        body.study-mode .variant:hover {
-            transform: none;
-            box-shadow: none;
-        }
-        /* ── SCROLLBAR ── */
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px
+        .pc-body {
+            padding: 1rem 1rem 1.1rem;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: rgba(176, 106, 255, 0.35);
-            border-radius: 4px
+        .pc-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: .6rem;
         }
 
-        /* ── ANIMATIONS ── */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(26px)
+        .pc-label {
+            font-size: .68rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: .2rem;
+        }
+
+        .pc-title {
+            font-size: .98rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.35;
+        }
+
+        .pc-icon {
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        .pc-eq {
+            font-size: .88rem;
+            color: rgba(220, 230, 255, .82);
+            margin-bottom: .8rem;
+            overflow-x: auto;
+        }
+
+        .pc-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: .5rem;
+            margin-bottom: .9rem;
+        }
+
+        .pc-fact {
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid rgba(255, 255, 255, .04);
+            border-radius: 8px;
+            padding: .55rem .65rem;
+            font-size: .78rem;
+            color: var(--muted);
+        }
+
+        .pc-fact span {
+            display: block;
+            font-size: .65rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: .15rem;
+        }
+
+        .pc-fact b {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .pc-actions {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: .52rem .8rem;
+            border: 1px solid color-mix(in srgb, var(--pc) 50%, #ffffff 10%);
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-size: .8rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, .02);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, .05);
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                display: none;
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        .ani {
-            opacity: 0;
-            animation: fadeUp .65s cubic-bezier(.25, .8, .25, 1) both
-        }
-
-        @media(max-width:580px) {
-            .room {
-                grid-template-columns: 64px 1fr
+            .main {
+                margin-left: 0;
             }
 
-            .room-right {
-                padding: 1.2rem
+            .main-inner {
+                padding: 1.5rem 1rem 3rem;
             }
         }
     </style>
 </head>
-
 <body>
-    <div
-        style="position:relative;z-index:10;display:flex;gap:.6rem;flex-wrap:wrap;padding:1rem 1.4rem .4rem;max-width:1200px;margin:0 auto">
-        <a href="hub.html"
-            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">Hub</a>
-        <a href="rc-ex78-exercise.html"
-            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">Ex 7-8 Palace</a>
-        <a href="index.html"
-            style="background:#b06aff;border:1px solid #b06aff;border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;text-decoration:none">Pattern Palace</a>
-        <a href="pattern-history.html"
-            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">History</a>
-        <a href="flashcards.html"
-            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">Anki Mode</a>
-        <button id="study-toggle" type="button"
-            style="background:rgba(0,229,255,.11);border:1px solid rgba(0,229,255,.35);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8deaff;cursor:pointer">Study Mode: Off</button>
-    </div>
-    <div class="page">
-
-        <!-- ══════════════ HEADER ══════════════ -->
-        <header class="header ani" style="animation-delay:.05s">
-            <div class="tag">⚡ Pattern Palace · First-Order RC · Magnetic Memory Method</div>
-            <h1>Recognize the Pattern.<br />Solve Any RC Problem.</h1>
-            <p>This palace doesn't store numbers. It stores the <strong>mental moves</strong> — the cognitive machinery
-                that works on any first-order RC circuit you encounter.</p>
-
-            <div class="idea-box">
-                <div class="idea-label">⬡ The Universal First-Order RC Template</div>
-                <div class="idea-form">
-                    $$x(t) = \underbrace{x(\infty)}_{\text{forced}} + \underbrace{\bigl[x(0) -
-                    x(\infty)\bigr]}_{\text{difference}}\, e^{-t/\tau}$$
-                </div>
-                <div class="idea-desc">
-                    Every single first-order circuit response — no matter what the numbers are — <b>fits this one
-                        skeleton</b>.
-                    Your job is never to memorize the numbers. Your job is to <span class="hi">read the skeleton</span>
-                    and <span class="hi">extract the bones</span>.
-                </div>
-            </div>
-        </header>
-
-        <!-- ══════════════ PROCESS FLOW ══════════════ -->
-        <div class="sec ani" style="animation-delay:.2s">🧭 The 5-Move Mental Algorithm</div>
-
-        <div class="flow ani" style="animation-delay:.23s">
-            <div class="flow-step" role="button" tabindex="0" aria-label="Step 1 recognize the pattern" style="--st-c:#00e5ff">
-                <div class="flow-arrow">▶</div>
-                <div class="fs-num" style="background:#00e5ff">1</div>
-                <div class="fs-title" style="color:#00e5ff">RECOGNIZE</div>
-                <div class="fs-body">See $Ae^{-kt}$ in the equation → first-order RC confirmed</div>
-            </div>
-            <div class="flow-step" role="button" tabindex="0" aria-label="Step 2 read tau" style="--st-c:#ffc947">
-                <div class="flow-arrow">▶</div>
-                <div class="fs-num" style="background:#ffc947">2</div>
-                <div class="fs-title" style="color:#ffc947">READ τ</div>
-                <div class="fs-body">Exponent coefficient $k$ → flip it: $\tau = 1/k$</div>
-            </div>
-            <div class="flow-step" role="button" tabindex="0" aria-label="Step 3 freeze at t equals zero" style="--st-c:#2bff7f">
-                <div class="flow-arrow">▶</div>
-                <div class="fs-num" style="background:#2bff7f">3</div>
-                <div class="fs-title" style="color:#2bff7f">FREEZE t=0</div>
-                <div class="fs-body">$e^0 = 1$ → every term alive → that's your initial value</div>
-            </div>
-            <div class="flow-step" role="button" tabindex="0" aria-label="Step 4 let time go to infinity" style="--st-c:#ff4d6a">
-                <div class="flow-arrow">▶</div>
-                <div class="fs-num" style="background:#ff4d6a">4</div>
-                <div class="fs-title" style="color:#ff4d6a">LET t→∞</div>
-                <div class="fs-body">$e^{-\infty}=0$ → transient dies → only DC term survives</div>
-            </div>
-            <div class="flow-step" role="button" tabindex="0" aria-label="Step 5 build the ODE" style="--st-c:#b06aff">
-                <div class="flow-arrow">▶</div>
-                <div class="fs-num" style="background:#b06aff">5</div>
-                <div class="fs-title" style="color:#b06aff">BUILD ODE</div>
-                <div class="fs-body">$\tau\,\dot{x} + x = x(\infty)\cdot u(t)$</div>
+    <aside class="sidebar">
+        <div class="sb-logo">
+            <div class="sb-logo-icon">🏛</div>
+            <div>
+                <div class="sb-logo-text">Pattern Palace</div>
+                <div class="sb-logo-sub">First-order circuits</div>
             </div>
         </div>
 
-        <!-- ══════════════ PALACE ROOMS ══════════════ -->
-        <div class="sec ani" style="animation-delay:.3s">🏛 Palace Rooms — One Mental Move Per Room</div>
+        <div class="sb-section">Library</div>
+        <a class="sb-item active" href="index.html"><span>🏛</span> Pattern Palace</a>
+        <a class="sb-item" href="hub.html"><span>🏠</span> Hub</a>
 
-        <div class="rooms">
+        <div class="sb-section">Problem Pages</div>
+        <a class="sb-item" href="rc-ex78-example.html"><span><div class="dot" style="color:#00e5ff"></div></span> Example 7-8</a>
+        <a class="sb-item" href="rc-ex78-exercise.html"><span><div class="dot" style="color:#2bff7f"></div></span> Exercise 7-8</a>
+        <a class="sb-item" href="rc-ex710-example.html"><span><div class="dot" style="color:#f6c56e"></div></span> Example 7-10</a>
+        <a class="sb-item" href="rc-ex710.html"><span><div class="dot" style="color:#ff9500"></div></span> Exercise 7-10</a>
+        <a class="sb-item" href="rc-ex711-example.html"><span><div class="dot" style="color:#c7b7ff"></div></span> Example 7-11</a>
+        <a class="sb-item" href="rc-ex711.html"><span><div class="dot" style="color:#ff6eb4"></div></span> Exercise 7-11</a>
+        <a class="sb-item" href="rc-ex712.html"><span><div class="dot" style="color:#8fd6ff"></div></span> Exercise 7-12</a>
+        <a class="sb-item" href="rc-design712.html"><span><div class="dot" style="color:#ffd08a"></div></span> Design Ex 7-12</a>
+        <a class="sb-item" href="rl-design714.html"><span><div class="dot" style="color:#a8f0c6"></div></span> Design Ex 7-14</a>
+        <a class="sb-item" href="rl-ex713-example.html"><span><div class="dot" style="color:#9fd3ff"></div></span> Example 7-13</a>
+        <a class="sb-item" href="rl-ex717.html"><span><div class="dot" style="color:#ffcf9d"></div></span> Exercise 7-17</a>
 
-            <!-- ──────── ROOM 1: RECOGNITION ──────── -->
-            <div class="room ani" style="--rc:#00e5ff;animation-delay:.33s">
-                <div class="room-left" style="background:#00e5ff18;border-right:2px solid #00e5ff">
-                    <div class="ricon">👁</div>
-                    <div class="rnum" style="color:#00e5ff">I</div>
-                    <div class="rlabel" style="color:#00e5ff55">Entry<br />Hall</div>
-                </div>
-                <div class="room-right">
-                    <div class="room-title">The Recognition Move</div>
-                    <div class="room-sub">What to look for the moment you see any equation</div>
+        <div class="sb-divider"></div>
+        <div class="sb-section">Study</div>
+        <a class="sb-item" href="pattern-history.html"><span>📚</span> Pattern History</a>
+        <a class="sb-item" href="flashcards.html?set=all"><span>🃏</span> Flashcards</a>
+    </aside>
 
-                    <div class="trigger">
-                        <div class="trigger-lbl">👁 Pattern Trigger — You see this:</div>
-                        <div class="trigger-q">Any equation with $e^{-(\text{something})t}$</div>
-                        <div class="trigger-text">
-                            Your brain fires: <em>"First-order circuit. Natural response decaying. I know this
-                                skeleton."</em><br />
-                            Doesn't matter if it's $v_C$, $i_L$, $v_R$ — the shape is always the same.
-                        </div>
-                    </div>
+    <main class="main">
+        <div class="main-inner">
+            <div class="breadcrumb">
+                <span>RC Circuit Notes</span><span class="sep">/</span><span style="color:var(--text)">Pattern Palace</span>
+            </div>
 
-                    <div class="fbox key">
-                        <div class="fbox-lbl">The Skeleton You Are Reading</div>
-                        $$x(t) = \underbrace{A}_{\text{forced}} + \underbrace{B}_{\text{amplitude}} \cdot e^{-t/\tau}$$
-                        <div class="fbox-note">$A$ = where it ends up &nbsp;·&nbsp; $B$ = how far it has to travel
-                            &nbsp;·&nbsp; $\tau$ = how fast it gets there</div>
-                    </div>
+            <div class="page-header">
+                <div class="page-emoji">🏛</div>
+                <h1>Pattern Palace</h1>
+                <p>This page now uses the same structured library layout as the hub. It is the main entry point for the memory-palace method: learn the universal skeleton, then open any dedicated problem page for the full walkthrough.</p>
+            </div>
 
-                    <div class="scene">
-                        <div class="scene-lbl">🏛 Memory Palace Scene (Entry Hall)</div>
-                        <div class="scene-text">
-                            You walk into the Entry Hall. On the wall is a <span class="vi">giant glowing
-                                skeleton</span> —
-                            $A + Be^{-t/\tau}$ carved in neon.
-                            Every time you see an equation with <span class="ac">$e$ raised to a negative power of
-                                $t$</span>,
-                            this skeleton flashes in your mind automatically.
-                            It's your <span class="co">pattern lock screen</span> — the door opens only when you
-                            recognize it.
-                        </div>
-                    </div>
+            <div class="callout gold">
+                <div class="callout-title">The One Skeleton</div>
+                <div class="callout-body">
+                    Every first-order circuit page on this site reduces to the same backbone:
+                    $$x(t)=x(\infty)+\big[x(0)-x(\infty)\big]e^{-t/\tau}$$
+                    Your job is always the same: identify the state variable, freeze the initial value, melt the final value, get $\tau$, and then rebuild the response or the circuit.
                 </div>
             </div>
 
-            <!-- ──────── ROOM 2: TIME CONSTANT ──────── -->
-            <div class="room ani" style="--rc:#ffc947;animation-delay:.4s">
-                <div class="room-left" style="background:#ffc94718;border-right:2px solid #ffc947">
-                    <div class="ricon">⏱</div>
-                    <div class="rnum" style="color:#ffc947">II</div>
-                    <div class="rlabel" style="color:#ffc94755">Kitchen</div>
+            <div class="section-head">🏛 The 5-Move Algorithm</div>
+            <div class="moves-strip">
+                <div class="move-chip" style="--mc:#00e5ff">
+                    <div class="move-num" style="color:#00e5ff">I · Recognize</div>
+                    <div class="move-name">What family is this?</div>
+                    <div class="move-desc">Decide if the waveform or circuit is RC or RL, and pick the correct state variable first.</div>
                 </div>
-                <div class="room-right">
-                    <div class="room-title">The Flip Move — Extracting τ</div>
-                    <div class="room-sub">The exponent tells you everything about speed</div>
-
-                    <div class="trigger">
-                        <div class="trigger-lbl">👁 Pattern Trigger — You see this form:</div>
-                        <div class="trigger-q">$e^{-k\,t}$ where $k$ is a number</div>
-                        <div class="trigger-text">
-                            Your brain fires: <em>"The coefficient in the exponent is $1/\tau$. Flip it."</em><br />
-                            Always and without exception: <em>bigger $k$ = faster decay = smaller $\tau$</em>.
-                        </div>
-                    </div>
-
-                    <div class="fbox key">
-                        <div class="fbox-lbl">The One Operation You Do</div>
-                        $$e^{-k\,t} \;\xrightarrow{\text{flip}}\; \tau = \frac{1}{k}$$
-                        <div class="fbox-note">
-                            If you see $e^{-1000t}$ → $\tau = 1/1000 = 1\text{ ms}$<br />
-                            If you see $e^{-200t}$ → $\tau = 1/200 = 5\text{ ms}$<br />
-                            If you see $e^{-50t}$ → $\tau = 1/50 = 20\text{ ms}$
-                        </div>
-                    </div>
-
-                    <div class="scene">
-                        <div class="scene-lbl">🏛 Memory Palace Scene (Kitchen)</div>
-                        <div class="scene-text">
-                            In the Kitchen, a chef <span class="vi">grabs a fraction and physically flips it
-                                upside-down</span>,
-                            slamming it on the counter. The number on top becomes the bottom.
-                            That's all. <span class="ac">Flip the exponent. Get τ.</span>
-                            The faster it decays, the hotter the stove — <span class="co">large $k$ = small $\tau$ =
-                                very hot</span>.
-                        </div>
-                    </div>
-
-                    <div class="trigger" style="border-left-color:var(--violet);">
-                        <div class="trigger-lbl" style="color:var(--violet)">💡 Physical Intuition (Why This Works)
-                        </div>
-                        <div class="trigger-text">
-                            $\tau = RC$ for a series RC circuit. Bigger resistance or bigger capacitance → slower
-                            charge/discharge → bigger $\tau$.
-                            The exponent $k = 1/RC$ — it literally is 1 divided by the time constant.
-                        </div>
-                    </div>
+                <div class="move-chip" style="--mc:#ffc947">
+                    <div class="move-num" style="color:#ffc947">II · Freeze</div>
+                    <div class="move-name">Read the initial value</div>
+                    <div class="move-desc">Use the pre-switch steady-state circuit. Capacitor voltage and inductor current cannot jump.</div>
+                </div>
+                <div class="move-chip" style="--mc:#2bff7f">
+                    <div class="move-num" style="color:#2bff7f">III · Melt</div>
+                    <div class="move-name">Read the final value</div>
+                    <div class="move-desc">Use the long-time post-switch circuit where the exponential has died out.</div>
+                </div>
+                <div class="move-chip" style="--mc:#ff9500">
+                    <div class="move-num" style="color:#ff9500">IV · Flip</div>
+                    <div class="move-name">Get the time constant</div>
+                    <div class="move-desc">Read the exponent coefficient directly or compute $\tau = RC$ / $\tau = L/R$ from the post-switch circuit.</div>
+                </div>
+                <div class="move-chip" style="--mc:#b06aff">
+                    <div class="move-num" style="color:#b06aff">V · Build</div>
+                    <div class="move-name">Write the answer</div>
+                    <div class="move-desc">Assemble the response, recover the ODE, or reverse-engineer the design depending on the problem type.</div>
                 </div>
             </div>
 
-            <!-- ──────── ROOM 3: BOUNDARY CONDITIONS ──────── -->
-            <div class="room ani" style="--rc:#2bff7f;animation-delay:.47s">
-                <div class="room-left" style="background:#2bff7f18;border-right:2px solid #2bff7f">
-                    <div class="ricon">🔬</div>
-                    <div class="rnum" style="color:#2bff7f">III</div>
-                    <div class="rlabel" style="color:#2bff7f55">Bedroom</div>
-                </div>
-                <div class="room-right">
-                    <div class="room-title">The Freeze/Melt Moves — Boundary Conditions</div>
-                    <div class="room-sub">Two key substitutions that extract initial and final values</div>
-
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.5rem 0">
-                        <div>
-                            <div class="trigger" style="margin:0">
-                                <div class="trigger-lbl">❄️ FREEZE: $t=0$</div>
-                                <div class="trigger-q">$e^{0} = 1$</div>
-                                <div class="trigger-text">Every term is fully alive. No decay has happened yet. Sum them
-                                    all → <em>initial value $x(0)$</em></div>
+            <div class="section-head">📚 Problem Library</div>
+            <div class="problems-grid">
+                <div class="problem-card" style="--pc:#00e5ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Given Response</div>
+                                <div class="pc-title">Example 7-8 · RC sign change</div>
                             </div>
+                            <div class="pc-icon">⚡</div>
                         </div>
-                        <div>
-                            <div class="trigger" style="margin:0;border-left-color:#ff4d6a">
-                                <div class="trigger-lbl" style="color:#ff4d6a">🔥 MELT: $t\to\infty$</div>
-                                <div class="trigger-q">$e^{-\infty} = 0$</div>
-                                <div class="trigger-text">Transient term dies completely. Only the <span
-                                        class="ac">non-exponential terms</span> survive → <em>forced response
-                                        $x(\infty)$</em></div>
+                        <div class="pc-eq">$$v_C(t)=20e^{-200t}-10\text{ V}$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RC response read</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Read $\tau$, $v(0)$, $v(\infty)$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex78-example.html" style="--pc:#00e5ff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Given Response</div>
+                                <div class="pc-title">Exercise 7-8 · RC charging</div>
                             </div>
+                            <div class="pc-icon">🔋</div>
                         </div>
-                    </div>
-
-                    <div class="fbox key">
-                        <div class="fbox-lbl">The Two Substitutions</div>
-                        $$x(0) = A + B\cdot e^0 = A + B$$
-                        $$x(\infty) = A + B\cdot 0 = A$$
-                    </div>
-
-                    <div class="scene">
-                        <div class="scene-lbl">🏛 Memory Palace Scene (Bedroom)</div>
-                        <div class="scene-text">
-                            The bedroom has two light switches on opposite walls.<br /><br />
-                            <span class="vi">Left switch (FREEZE)</span>: you flip it <span class="ac">OFF → time stops
-                                at $t=0$</span>.
-                            The exponential is frozen at full amplitude ($e^0=1$). Read every term — that's your
-                            start.<br /><br />
-                            <span class="vi">Right switch (MELT)</span>: you hold it down until <span class="ac">the
-                                exponential melts away to nothing</span>.
-                            What's left glowing on the wall — just the DC term — that's your endpoint.
+                        <div class="pc-eq">$$v_C(t)=20-20e^{-1000t}\text{ V}$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RC response read</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Charge-up form</b></div>
                         </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex78-exercise.html" style="--pc:#2bff7f">Open Page →</a></div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ──────── ROOM 4: DECOMPOSITION ──────── -->
-            <div class="room ani" style="--rc:#ff4d6a;animation-delay:.54s">
-                <div class="room-left" style="background:#ff4d6a18;border-right:2px solid #ff4d6a">
-                    <div class="ricon">✂️</div>
-                    <div class="rnum" style="color:#ff4d6a">IV</div>
-                    <div class="rlabel" style="color:#ff4d6a55">Living<br />Room</div>
-                </div>
-                <div class="room-right">
-                    <div class="room-title">The Split Move — Natural vs. Forced</div>
-                    <div class="room-sub">Every response is two things glued together. Learn to see both.</div>
-
-                    <div class="fbox key">
-                        <div class="fbox-lbl">The Decomposition — Always True</div>
-                        $$\underbrace{x(t)}_{\text{total}} = \underbrace{x(\infty)}_{\substack{\text{forced}\\\text{(DC
-                        input)}}} + \underbrace{[x(0)-x(\infty)]\,e^{-t/\tau}}_{\substack{\text{natural}\\\text{(circuit
-                        memory)}}}$$
-                    </div>
-
-                    <ul class="steps">
-                        <li><span class="snum">→</span><b>Forced</b> = where the circuit is <em>being driven to</em> by
-                            the input source. Determined entirely by the source, not the initial state.</li>
-                        <li><span class="snum">→</span><b>Natural</b> = how much the circuit deviates from forced,
-                            decaying away. It "remembers" the initial condition and forgets it at rate $1/\tau$.</li>
-                        <li><span class="snum">→</span>If $x(0) = x(\infty)$: natural term = 0, no transient. Already at
-                            steady state.</li>
-                        <li><span class="snum">→</span>If $x(0) = 0$: coefficient = $-x(\infty)$. Starts at zero,
-                            charges up to $x(\infty)$.</li>
-                    </ul>
-
-                    <div class="scene">
-                        <div class="scene-lbl">🏛 Memory Palace Scene (Living Room)</div>
-                        <div class="scene-text">
-                            The living room sofa has a <span class="vi">seam down the middle</span>.
-                            Left cushion = <span class="co">forced</span> (a glowing DC power cable plugged in — the
-                            input source owns it).
-                            Right cushion = <span class="co">natural</span> (a spring that's compressed or stretched —
-                            the circuit's own memory, slowly releasing).
-                            <span class="ac">Pull the cushions apart and you understand the whole response.</span>
+                <div class="problem-card" style="--pc:#f6c56e">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RL Switching</div>
+                                <div class="pc-title">Example 7-10 · Find current after switching</div>
+                            </div>
+                            <div class="pc-icon">🧲</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ──────── ROOM 5: ODE ──────── -->
-            <div class="room ani" style="--rc:#b06aff;animation-delay:.61s">
-                <div class="room-left" style="background:#b06aff18;border-right:2px solid #b06aff">
-                    <div class="ricon">📐</div>
-                    <div class="rnum" style="color:#b06aff">V</div>
-                    <div class="rlabel" style="color:#b06aff55">Study<br />Room</div>
-                </div>
-                <div class="room-right">
-                    <div class="room-title">The Blueprint Move — Building the ODE</div>
-                    <div class="room-sub">Read the solution backwards to find the equation that produced it</div>
-
-                    <div class="trigger">
-                        <div class="trigger-lbl">👁 Pattern Trigger</div>
-                        <div class="trigger-q">Given a response, reconstruct the governing equation</div>
-                        <div class="trigger-text">
-                            The ODE for any first-order circuit with a step input follows the same blueprint.
-                            Once you read $\tau$ and $x(\infty)$, the ODE is immediate.
+                        <div class="pc-eq">Use $i(0)$, $i(\infty)$, and $\tau=\dfrac{L}{R_1}$ to rebuild $i(t)$.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RL switch analysis</b></div>
+                            <div class="pc-fact"><span>Task</span><b>State transition</b></div>
                         </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex710-example.html" style="--pc:#f6c56e">Open Page →</a></div>
                     </div>
+                </div>
 
-                    <div class="fbox key">
-                        <div class="fbox-lbl">Universal First-Order ODE Blueprint</div>
-                        $$\tau\,\frac{dx}{dt} + x = x(\infty)\cdot u(t)$$
-                        <div class="fbox-note">
-                            Left side: <b>τ × (rate of change) + current value</b> = how the circuit behaves<br />
-                            Right side: <b>the forcing function</b> — what it's being driven toward × unit step
+                <div class="problem-card" style="--pc:#ff9500">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Zero-State RC</div>
+                                <div class="pc-title">Exercise 7-10 · Find $v_C(t)$</div>
+                            </div>
+                            <div class="pc-icon">🔌</div>
                         </div>
-                    </div>
-
-                    <ul class="steps">
-                        <li><span class="snum">1</span>Read $\tau$ from the exponent (flip move from Room II)</li>
-                        <li><span class="snum">2</span>Read $x(\infty)$ by melting the equation (melt move from Room
-                            III)</li>
-                        <li><span class="snum">3</span>Plug both into $\tau\,\dot{x} + x = x(\infty)\,u(t)$ — done</li>
-                    </ul>
-
-                    <div class="scene">
-                        <div class="scene-lbl">🏛 Memory Palace Scene (Study Room)</div>
-                        <div class="scene-text">
-                            The study room has a <span class="vi">blueprint pinned to the wall</span> — always the same
-                            blueprint.
-                            Left beam of the blueprint says <span class="co">"$\tau\,\dot{x}+x$"</span>.
-                            Right beam says <span class="co">"$x(\infty)$"</span>.
-                            You just fill in the numbers you already extracted from the other rooms.
-                            <span class="ac">The blueprint never changes — only the numbers do.</span>
+                        <div class="pc-eq">$$v_C(t)=2.5(1-e^{-200t})$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RC charging</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Room-by-room derivation</b></div>
                         </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex710.html" style="--pc:#ff9500">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#c7b7ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RC State Variable First</div>
+                                <div class="pc-title">Example 7-11 · Solve $v_C(t)$, then get $i_R(t)$</div>
+                            </div>
+                            <div class="pc-icon">🪙</div>
+                        </div>
+                        <div class="pc-eq">Solve the capacitor voltage first, then convert using Ohm's law.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RC switch analysis</b></div>
+                            <div class="pc-fact"><span>Task</span><b>State variable selection</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex711-example.html" style="--pc:#c7b7ff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ff6eb4">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Zero-State RL</div>
+                                <div class="pc-title">Exercise 7-11 · Find $i_L(t)$</div>
+                            </div>
+                            <div class="pc-icon">🔁</div>
+                        </div>
+                        <div class="pc-eq">$$i_L(t)=0.5(1-e^{-5\times 10^6 t})\text{ mA}$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RL charging</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Room-by-room derivation</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex711.html" style="--pc:#ff6eb4">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#8fd6ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RL Switching</div>
+                                <div class="pc-title">Exercise 7-12 · Find $i(t)$ after switch opens</div>
+                            </div>
+                            <div class="pc-icon">🪫</div>
+                        </div>
+                        <div class="pc-eq">Use the post-switch resistance and current continuity to build the response.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RL switch analysis</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Has advanced sidebar</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex712.html" style="--pc:#8fd6ff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffd08a">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RC Design</div>
+                                <div class="pc-title">Design Example 7-12 · Pick $R$ and $C$</div>
+                            </div>
+                            <div class="pc-icon">🛠</div>
+                        </div>
+                        <div class="pc-eq">Given $$v_C(t)=50-100e^{-2000t},$$ design a valid first-order RC circuit.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>Reverse design</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Use $\tau=RC$ backward</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-design712.html" style="--pc:#ffd08a">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#a8f0c6">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RL Design</div>
+                                <div class="pc-title">Design Exercise 7-14 · Pick $L$ and $R$</div>
+                            </div>
+                            <div class="pc-icon">🔧</div>
+                        </div>
+                        <div class="pc-eq">Given $$i_L(t)=5-5e^{-500t}\text{ mA},$$ design a valid first-order RL circuit.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>Reverse design</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Use $\tau=L/R$ backward</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rl-design714.html" style="--pc:#a8f0c6">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#9fd3ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Given Response</div>
+                                <div class="pc-title">Example 7-13 · Read the RL Thevenin model</div>
+                            </div>
+                            <div class="pc-icon">🧭</div>
+                        </div>
+                        <div class="pc-eq">$$i_L(t)=50+100e^{-5000t}\text{ mA}$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RL model recovery</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Read $R_T$ and $v_T$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rl-ex713-example.html" style="--pc:#9fd3ff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffcf9d">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Pure Natural Response</div>
+                                <div class="pc-title">Exercise 7-17 · Find $v_O(t)$ from the circuit</div>
+                            </div>
+                            <div class="pc-icon">🎯</div>
+                        </div>
+                        <div class="pc-eq">Find $$v_O(t),\quad t\ge 0$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RL natural response</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Derive $v_O(0^+)$ from KCL</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rl-ex717.html" style="--pc:#ffcf9d">Open Page →</a></div>
                     </div>
                 </div>
             </div>
 
-        </div>
-
-        <!-- ══════════════ UNIVERSAL SOLVER ══════════════ -->
-        <div class="sec ani" style="animation-delay:.68s">🔑 Universal Solver — Apply to Any Problem</div>
-
-        <div class="solver ani" style="animation-delay:.71s">
-            <div class="solver-title">🏛 Walk the Palace → Answer Any Question → In 30 Seconds</div>
-            <div class="solver-grid">
-                <div class="solver-card">
-                    <div class="sc-q">Q: What is the time constant?</div>
-                    <div class="sc-trigger">→ Go to Room II (Kitchen)</div>
-                    <div class="sc-how">Find the exponent coefficient $k$. Flip it.</div>
-                    <div class="sc-formula">$$\tau = \frac{1}{k}$$</div>
-                </div>
-                <div class="solver-card">
-                    <div class="sc-q">Q: What is the initial value?</div>
-                    <div class="sc-trigger">→ Go to Room III (Bedroom · left switch)</div>
-                    <div class="sc-how">Freeze time. Substitute $t=0$. Calculate.</div>
-                    <div class="sc-formula">$$x(0) = A + B$$</div>
-                </div>
-                <div class="solver-card">
-                    <div class="sc-q">Q: What is the forced / final response?</div>
-                    <div class="sc-trigger">→ Go to Room III (Bedroom · right switch)</div>
-                    <div class="sc-how">Melt the exponential. Only DC survives.</div>
-                    <div class="sc-formula">$$x(\infty) = A$$</div>
-                </div>
-                <div class="solver-card">
-                    <div class="sc-q">Q: What is the differential equation?</div>
-                    <div class="sc-trigger">→ Go to Room V (Study)</div>
-                    <div class="sc-how">Read $\tau$ and $x(\infty)$, fill the blueprint.</div>
-                    <div class="sc-formula">$$\tau\dot{x} + x = x(\infty)\,u(t)$$</div>
-                </div>
-                <div class="solver-card">
-                    <div class="sc-q">Q: When does $x(t) = 0$?</div>
-                    <div class="sc-trigger">→ Set equation = 0 → isolate exponential</div>
-                    <div class="sc-how">Divide, then take $\ln$ of both sides.</div>
-                    <div class="sc-formula">$$t = \frac{-\ln(\text{ratio})}{k}$$</div>
-                </div>
-                <div class="solver-card">
-                    <div class="sc-q">Q: What type of response is it?</div>
-                    <div class="sc-trigger">→ Go to Room IV (Living Room)</div>
-                    <div class="sc-how">Split at the seam: forced DC + natural exponential.</div>
-                    <div class="sc-formula">$$x = x_F + x_N$$</div>
-                </div>
-            </div>
-        
-        <div class="sec ani" style="animation-delay:.73s">Active Recall - Test Before Reveal</div>
-        <div class="recall-grid ani" style="animation-delay:.74s">
-            <details class="recall-card">
-                <summary>Prompt 1: You see <code>e^{-k t}</code>. What is the immediate move?</summary>
-                <div class="ans">Answer: Read <code>k = 1/\tau</code>, then flip it to get <code>\tau = 1/k</code>.</div>
-            </details>
-            <details class="recall-card">
-                <summary>Prompt 2: How do you extract <code>x(0)</code> and <code>x(\infty)</code>?</summary>
-                <div class="ans">Answer: Freeze at <code>t=0</code> for <code>x(0)</code>; melt at <code>t\to\infty</code> so the exponential dies and only forced/DC remains.</div>
-            </details>
-            <details class="recall-card">
-                <summary>Prompt 3: Rebuild the first-order ODE from response form.</summary>
-                <div class="ans">Answer: Use <code>\tau\dot{x} + x = x(\infty)u(t)</code> with <code>\tau</code> from exponent and <code>x(\infty)</code> from melt.</div>
-            </details>
-            <details class="recall-card">
-                <summary>Prompt 4: What are forced and natural parts?</summary>
-                <div class="ans">Answer: Forced is the long-term target from the source; natural is the decaying memory term that depends on initial condition.</div>
-            </details>
-        </div>
-        <!-- ══════════════ TRY IT ON MULTIPLE PROBLEMS ══════════════ -->
-        <div class="sec ani" style="animation-delay:.75s">🧪 Apply the Pattern — Multiple Exercises Solved the Same Way</div>
-
-        <div class="variants ani" style="animation-delay:.78s">
-
-            <div class="variant">
-                <div class="variant-label">Example 7-8 · The First Problem</div>
-                <div class="variant-eq">$$v_C(t) = 20e^{-200t} - 10\text{ V}$$</div>
-                <div class="variant-ans">
-                    <b>Room I (Recognize):</b> $e^{-200t}$ → it's first-order RC ✓<br />
-                    <b>Room II (Flip):</b> $k=200$ → $\tau = 1/200 = 5\text{ ms}$<br />
-                    <b>Room III Freeze</b> ($t=0$): $20(1)-10 = +10\text{ V}$<br />
-                    <b>Room III Melt</b> ($t\to\infty$): $20(0)-10 = -10\text{ V}$<br />
-                    <b>Room IV (Split):</b> Forced $=-10$V, Natural $=20e^{-200t}$<br />
-                    <b>Room V (Blueprint):</b> $\frac{1}{200}\dot{v}+v=-10\,u(t)$
-                </div>
-                <div class="variant-actions"><a class="variant-open" href="rc-ex78-example.html">Open Page</a></div>
-            </div>
-
-            <div class="variant">
-                <div class="variant-label">Exercise 7-8 · This Problem</div>
-                <div class="variant-eq">$$v_C(t) = 20 - 20e^{-1000t}\text{ V}$$</div>
-                <div class="variant-ans">
-                    <b>Room I (Recognize):</b> $e^{-1000t}$ → it's first-order RC ✓<br />
-                    <b>Room II (Flip):</b> $k=1000$ → $\tau = 1/1000 = 1\text{ ms}$<br />
-                    <b>Room III Freeze</b> ($t=0$): $20-20(1) = 0\text{ V}$<br />
-                    <b>Room III Melt</b> ($t\to\infty$): $20-20(0) = 20\text{ V}$<br />
-                    <b>Room IV (Split):</b> Forced $=20$V, Natural $=-20e^{-1000t}$<br />
-                    <b>Room V (Blueprint):</b> $10^{-3}\dot{v}+v=20\,u(t)$
-                </div>
-                <div class="variant-actions"><a class="variant-open" href="rc-ex78-exercise.html">Open Page</a></div>
-            </div>
-
-            <div class="variant">
-                <div class="variant-label">Exercise 7-10 · Zero-State RC (Fig 7-19)</div>
-                <div class="variant-eq">$$v_C(t)=v_C(\infty)+\big[v_C(0)-v_C(\infty)\big]e^{-t/\tau}$$</div>
-                <div class="variant-ans">
-                    <b>Room I (Recognize):</b> zero-state first-order RC charging form<br />
-                    <b>Room II (Flip/τ):</b> $\tau = RC = 5\text{ ms}$ so $k=1/\tau=200$<br />
-                    <b>Room III Freeze:</b> $v_C(0)=0$ (uncharged capacitor)<br />
-                    <b>Room III Melt:</b> $v_C(\infty)=2.5\text{ V}$ (DC Thevenin target)<br />
-                    <b>Room IV (Split):</b> $v_C(t)=2.5+\big(0-2.5\big)e^{-200t}$<br />
-                    <b>Room V (Simplify):</b> $\boxed{v_C(t)=2.5\left(1-e^{-200t}\right)\text{ V},\; t\ge 0}$
-                </div>
-                <div class="variant-actions"><a class="variant-open" href="rc-ex710.html">Open Page</a></div>
-            </div>
-
-            <div class="variant">
-                <div class="variant-label">Example 7-10 · RL Switching (Fig 7-22)</div>
-                <div class="variant-eq">$$i(t)=\big[i(0)-i(\infty)\big]e^{-t/\tau}+i(\infty)$$</div>
-                <div class="variant-ans">
-                    <b>Room I (Recognize):</b> first-order RL transition after switching<br />
-                    <b>Room II (Initial):</b> $i(0)=\dfrac{V_A}{R_1+R_2}$ from the pre-switch steady state<br />
-                    <b>Room III (Final):</b> switch shorts $R_2$, so $i(\infty)=\dfrac{V_A}{R_1}$<br />
-                    <b>Room IV (Flip/τ):</b> $\tau=\dfrac{L}{R_1}$, so the exponential is $e^{-R_1 t/L}$<br />
-                    <b>Room V (Build):</b> $\boxed{i(t)=\left[\dfrac{V_A}{R_1+R_2}-\dfrac{V_A}{R_1}\right]e^{-R_1 t/L}+\dfrac{V_A}{R_1}}$
-                </div>
-                <div class="variant-actions"><a class="variant-open" href="rc-ex710-example.html">Open Page</a></div>
-            </div>
-
-            <div class="variant">
-                <div class="variant-label">Exercise 7-11 · Zero-State RL (Fig 7-19)</div>
-                <div class="variant-eq">$$i_L(t)=i_L(\infty)+\big[i_L(0)-i_L(\infty)\big]e^{-t/\tau}$$</div>
-                <div class="variant-ans">
-                    <b>Room I (Recognize):</b> zero-state first-order RL charging form<br />
-                    <b>Room II (Flip/τ):</b> $\tau=L/R=200\text{ ns}$ so $k=1/\tau=5\times 10^6$<br />
-                    <b>Room III Freeze:</b> $i_L(0)=0$ (zero-state inductor current)<br />
-                    <b>Room III Melt:</b> $i_L(\infty)=0.5\text{ mA}$<br />
-                    <b>Room IV (Split):</b> $i_L(t)=0.5+\big(0-0.5\big)e^{-5\times10^6 t}$ mA<br />
-                    <b>Room V (Simplify):</b> $\boxed{i_L(t)=0.5\left(1-e^{-5\times10^6 t}\right)\text{ mA},\; t\ge 0}$
-                </div>
-                <div class="variant-actions"><a class="variant-open" href="rc-ex711.html">Open Page</a></div>
-            </div>
-
-            <div class="variant">
-                <div class="variant-label">Example 7-11 · RC State Variable First (Fig 7-23)</div>
-                <div class="variant-eq">$$v_C(t)=\big[v_C(0)-v_C(\infty)\big]e^{-t/\tau}+v_C(\infty)$$</div>
-                <div class="variant-ans">
-                    <b>Room I (Recognize):</b> asked for resistor current, but capacitor voltage is the real state variable<br />
-                    <b>Room II (Initial):</b> open-switch divider gives $v_C(0)=30\text{ V}$<br />
-                    <b>Room III (Final):</b> closed switch shorts 10-k$\Omega$, so $v_C(\infty)=25\text{ V}$<br />
-                    <b>Room IV (Flip/τ):</b> $R_T=20k\parallel 20k=10k$, so $\tau=R_TC=1\text{ ms}$<br />
-                    <b>Room V (Convert):</b> $v_C(t)=5e^{-1000t}+25$, then $i_R(t)=\dfrac{v_C(t)}{20k}=0.25e^{-1000t}+1.25\text{ mA}$
-                </div>
-                <div class="variant-actions"><a class="variant-open" href="rc-ex711-example.html">Open Page</a></div>
-            </div>
-
-            <div class="variant">
-                <div class="variant-label">Exercise 7-12 · RL Switching Opens (Fig 7-22)</div>
-                <div class="variant-eq">$$i(t)=\big[i(0)-i(\infty)\big]e^{-t/\tau}+i(\infty)$$</div>
-                <div class="variant-ans">
-                    <b>Room I (Recognize):</b> first-order RL transition after the switch opens<br />
-                    <b>Room II (Initial):</b> closed switch bypasses $R_2$, so $i(0)=\dfrac{V_A}{R_1}$<br />
-                    <b>Room III (Final):</b> open switch restores $R_2$, so $i(\infty)=\dfrac{V_A}{R_1+R_2}$<br />
-                    <b>Room IV (Flip/τ):</b> $\tau=\dfrac{L}{R_1+R_2}$, so the exponential is $e^{-(R_1+R_2)t/L}$<br />
-                    <b>Room V (Build):</b> $\boxed{i(t)=\left[\dfrac{V_A}{R_1}-\dfrac{V_A}{R_1+R_2}\right]e^{-(R_1+R_2)t/L}+\dfrac{V_A}{R_1+R_2}}$
-                </div>
-                <div class="variant-actions"><a class="variant-open" href="rc-ex712.html">Open Page</a></div>
-            </div>
-
-            <div class="variant" style="border-color:rgba(176,106,255,0.3)">
-                <div class="variant-label" style="color:var(--violet)">Any Future Problem · Same 5 Moves</div>
-                <div class="variant-eq">$$x(t) = \underbrace{A}_{\text{melt}} + \underbrace{B}_{\text{freeze-A}}
-                    e^{-\overbrace{k}^{\text{flip}}t}$$</div>
-                <div class="variant-ans">
-                    <b>Room I:</b> Spot $e^{-kt}$ → first-order RC<br />
-                    <b>Room II:</b> Flip $k$ → $\tau$<br />
-                    <b>Room III:</b> $t=0$ (freeze) → $x(0)$ &nbsp;|&nbsp; $t\to\infty$ (melt) → $x(\infty)$<br />
-                    <b>Room IV:</b> Forced $= A$, Natural $= Be^{-t/\tau}$<br />
-                    <b>Room V:</b> $\tau\dot{x}+x=A\,u(t)$<br />
-                    <b style="color:var(--violet)">The structure is identical. Every time.</b>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ══════════════ PALACE RULES ══════════════ -->
-        <div class="sec ani" style="animation-delay:.82s">📖 How to Practice This Palace</div>
-        <div style="background:var(--panel);border:1px solid rgba(176,106,255,0.18);border-radius:18px;padding:1.8rem;backdrop-filter:blur(12px)"
-            class="ani" style="animation-delay:.85s">
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem">
-                <div>
-                    <div
-                        style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:.5rem">
-                        The Walk (30 sec)</div>
-                    <div style="font-size:.8rem;color:rgba(200,215,255,0.58);line-height:1.65">
-                        Close eyes. Walk: <b style="color:#fff">Entry Hall → Kitchen → Bedroom → Living Room →
-                            Study</b>.
-                        At each room, perform the mental move. Don't think about numbers — think about the operation.
-                    </div>
-                </div>
-                <div>
-                    <div
-                        style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.5rem">
-                        What You're Training</div>
-                    <div style="font-size:.8rem;color:rgba(200,215,255,0.58);line-height:1.65">
-                        Pattern recognition, not recall. You're training your brain to <b style="color:#fff">see the
-                            skeleton before the numbers</b>.
-                        At exam time, you recognize the form instantly and the moves fire automatically.
-                    </div>
-                </div>
-                <div>
-                    <div
-                        style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:.5rem">
-                        Spaced Practice</div>
-                    <div style="font-size:.8rem;color:rgba(200,215,255,0.58);line-height:1.65">
-                        Use spaced retrieval on exact days: Day 0, Day 1, Day 3, Day 7. In each session, close the answer first, then solve one fresh random case with new $k$, $A$, and $B$ values.
-                        <b style="color:#fff">The palace bootstrapped your intuition.</b>
-                    </div>
+            <div class="section-head">🧠 How To Use This</div>
+            <div class="callout">
+                <div class="callout-title">Study Workflow</div>
+                <div class="callout-body">
+                    Open a page, walk the rooms in order, and do not skip the circuit-reading step. For given-response pages, read the waveform first. For switching pages, derive the initial and final values from the circuit. For design pages, run the logic backward from the target waveform.
                 </div>
             </div>
         </div>
-
-    </div>
-
-    <script>
-        // Intersection observer — all .ani elements
-        const io = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.style.animationPlayState = 'running';
-                    io.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.07 });
-
-        document.querySelectorAll('.ani').forEach(el => {
-            el.style.animationPlayState = 'paused';
-            io.observe(el);
-        });
-
-        // 3D tilt on rooms
-        document.querySelectorAll('.room').forEach(room => {
-            room.addEventListener('mousemove', e => {
-                if (document.body.classList.contains('study-mode')) return;
-                const r = room.getBoundingClientRect();
-                const x = (e.clientX - r.left) / r.width - 0.5;
-                const y = (e.clientY - r.top) / r.height - 0.5;
-                room.style.transform = `perspective(900px) rotateX(${-y * 3}deg) rotateY(${x * 4}deg) translateX(4px)`;
-            });
-            room.addEventListener('mouseleave', () => { room.style.transform = ''; });
-        });
-
-        // Flow steps pulse (mouse + keyboard)
-        document.querySelectorAll('.flow-step').forEach(step => {
-            const pulse = () => {
-                step.style.transform = 'scale(0.96)';
-                setTimeout(() => { step.style.transform = ''; }, 150);
-            };
-
-            step.addEventListener('click', pulse);
-            step.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    pulse();
-                }
-            });
-        });
-
-        const studyToggle = document.getElementById('study-toggle');
-        if (studyToggle) {
-            studyToggle.addEventListener('click', () => {
-                document.body.classList.toggle('study-mode');
-                const on = document.body.classList.contains('study-mode');
-                document.querySelectorAll('.room').forEach(room => { room.style.transform = ''; });
-                studyToggle.textContent = on ? 'Study Mode: On' : 'Study Mode: Off';
-            });
-        }
-    </script>
+    </main>
 </body>
-
 </html>
-
-

@@ -48,6 +48,106 @@ a{color:inherit}
   border-radius:18px;
   padding:1.2rem;
 }
+.palace-toggle{
+  position:fixed;
+  top:1rem;
+  right:1rem;
+  z-index:30;
+  border:1px solid var(--line);
+  background:rgba(19,24,33,.94);
+  color:var(--accent);
+  border-radius:999px;
+  padding:.7rem 1rem;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 10px 28px rgba(0,0,0,.25);
+}
+.palace-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(5,7,12,.5);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  z-index:20;
+}
+.palace-backdrop.open{
+  opacity:1;
+  pointer-events:auto;
+}
+.palace-sidebar{
+  position:fixed;
+  top:0;
+  right:0;
+  width:min(420px,92vw);
+  height:100vh;
+  padding:1rem;
+  background:rgba(15,19,27,.98);
+  border-left:1px solid var(--line);
+  transform:translateX(100%);
+  transition:transform .25s ease;
+  z-index:25;
+  overflow:auto;
+}
+.palace-sidebar.open{
+  transform:translateX(0);
+}
+.palace-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  margin-bottom:1rem;
+}
+.palace-head h2{
+  font-size:1rem;
+  color:var(--accent);
+}
+.palace-close{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  color:var(--text);
+  border-radius:10px;
+  padding:.45rem .7rem;
+  font:inherit;
+  cursor:pointer;
+}
+.palace-intro{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:1rem;
+}
+.palace-stack{
+  display:grid;
+  gap:.8rem;
+}
+.palace-block{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.palace-block h3{
+  font-size:.92rem;
+  color:var(--accent);
+  margin-bottom:.45rem;
+}
+.palace-block p,.palace-block li{
+  color:var(--muted);
+  line-height:1.7;
+}
+.palace-block ul{
+  padding-left:1.1rem;
+}
+.palace-mini{
+  margin-top:.5rem;
+  padding:.7rem .8rem;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(255,255,255,.02);
+  overflow:auto;
+}
 .hero h1{
   font-family:'Cinzel',serif;
   font-size:clamp(1.9rem,4vw,3rem);
@@ -107,6 +207,87 @@ a{color:inherit}
 </style>
 </head>
 <body>
+<button class="palace-toggle" type="button" id="palaceToggle" aria-expanded="false" aria-controls="palaceSidebar">Open Memory Palace</button>
+<div class="palace-backdrop" id="palaceBackdrop"></div>
+<aside class="palace-sidebar" id="palaceSidebar" aria-hidden="true">
+  <div class="palace-head">
+    <h2>Memory Palace Major System</h2>
+    <button class="palace-close" type="button" id="palaceClose">Close</button>
+  </div>
+  <p class="palace-intro">Use the same route every time for this RC example: identify the true state variable, freeze the old capacitor voltage, melt the new capacitor voltage, compute the post-switch Thevenin resistance, then convert the state variable into the asked current.</p>
+  <div class="palace-stack">
+    <section class="palace-block">
+      <h3>Foundation: Pick the Right State Variable</h3>
+      <p>This example asks for resistor current, but the capacitor voltage is the easier quantity to store in the palace. The page works because you solve the state variable first and only convert at the end.</p>
+      <div class="palace-mini">State variable first: $$v_C(t) \rightarrow i_R(t)=\frac{v_C(t)}{20k}$$</div>
+    </section>
+    <section class="palace-block">
+      <h3>Principle 1: Do Not Trap Yourself</h3>
+      <ul>
+        <li>Start with the switch action.</li>
+        <li>Then move outward in one direction only: pre-switch divider, post-switch divider, Thevenin resistance, response, current conversion.</li>
+        <li>Do not start from the asked current, because that traps you before you know the capacitor voltage.</li>
+      </ul>
+    </section>
+    <section class="palace-block">
+      <h3>Principle 2: Do Not Cross Your Own Path</h3>
+      <ul>
+        <li>First freeze the old steady-state circuit to get <code>v_C(0)</code>.</li>
+        <li>Then move once to the new steady-state circuit to get <code>v_C(infinity)</code>.</li>
+        <li>Then find the post-switch resistance seen by the capacitor to get <code>tau</code>.</li>
+        <li>Only after that build <code>v_C(t)</code> and convert to <code>i_R(t)</code>.</li>
+      </ul>
+    </section>
+    <section class="palace-block">
+      <h3>Principle 3: Peer Versus Enter</h3>
+      <p>Use snapshots instead of mentally crawling through every branch:</p>
+      <ul>
+        <li>Snapshot A: switch open for a long time, capacitor open-circuit, read the divider voltage.</li>
+        <li>Snapshot B: switch closed for a long time, 10-k branch shorted, read the new divider voltage.</li>
+        <li>Snapshot C: source set to zero, look back into the capacitor terminals, read <code>R_T</code>.</li>
+      </ul>
+    </section>
+    <section class="palace-block">
+      <h3>Principle 4: Select Stations With Care</h3>
+      <ul>
+        <li>Station 1: What changed when the switch moved?</li>
+        <li>Station 2: What is <code>v_C(0)</code> from the old divider?</li>
+        <li>Station 3: What is <code>v_C(infinity)</code> from the new divider?</li>
+        <li>Station 4: What is <code>R_T</code> after switching?</li>
+        <li>Station 5: What is <code>tau = R_T C</code>?</li>
+        <li>Station 6: Build <code>v_C(t)</code>.</li>
+        <li>Station 7: Convert that voltage into <code>i_R(t)</code>.</li>
+      </ul>
+    </section>
+    <section class="palace-block">
+      <h3>Apply the Palace to This Circuit</h3>
+      <ul>
+        <li>Open-switch steady state gives <code>v_C(0)=30 V</code>.</li>
+        <li>Closed-switch steady state gives <code>v_C(infinity)=25 V</code>.</li>
+        <li>With the source zeroed after switching, the capacitor sees <code>20k || 20k = 10k</code>.</li>
+        <li>So <code>tau = (10k)(0.1 microF) = 1 ms</code>.</li>
+      </ul>
+      <div class="palace-mini">$$v_C(t)=\big[30-25\big]e^{-1000t}+25=5e^{-1000t}+25$$</div>
+      <div class="palace-mini">$$i_R(t)=\frac{v_C(t)}{20k}=0.25e^{-1000t}+1.25\text{ mA}$$</div>
+    </section>
+    <section class="palace-block">
+      <h3>General Equations You Store at the End</h3>
+      <div class="palace-mini">$$v_C(t)=\big[v_C(0)-v_C(\infty)\big]e^{-t/\tau}+v_C(\infty)$$</div>
+      <div class="palace-mini">$$\tau\frac{dv_C}{dt}+v_C=v_C(\infty)u(t)$$</div>
+      <div class="palace-mini">$$\tau=R_TC$$</div>
+      <div class="palace-mini">$$i_R(t)=\frac{v_C(t)}{R} \quad \text{if the resistor is in parallel with the capacitor}$$</div>
+    </section>
+    <section class="palace-block">
+      <h3>Amplify the Palace</h3>
+      <ul>
+        <li>Make the open-switch scene and closed-switch scene visibly different in your mind.</li>
+        <li>See the 10-k branch disappear when the switch closes.</li>
+        <li>Make the capacitor node glow, because that node voltage is the key memory anchor.</li>
+        <li>Then walk the stations in the same order every time.</li>
+      </ul>
+    </section>
+  </div>
+</aside>
 <main class="shell">
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
@@ -228,5 +409,27 @@ a{color:inherit}
     </div>
   </section>
 </main>
+<script>
+const palaceToggle = document.getElementById('palaceToggle');
+const palaceSidebar = document.getElementById('palaceSidebar');
+const palaceBackdrop = document.getElementById('palaceBackdrop');
+const palaceClose = document.getElementById('palaceClose');
+
+function setPalace(open) {
+  palaceSidebar.classList.toggle('open', open);
+  palaceBackdrop.classList.toggle('open', open);
+  palaceToggle.setAttribute('aria-expanded', String(open));
+  palaceSidebar.setAttribute('aria-hidden', String(!open));
+}
+
+palaceToggle.addEventListener('click', () => setPalace(true));
+palaceClose.addEventListener('click', () => setPalace(false));
+palaceBackdrop.addEventListener('click', () => setPalace(false));
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    setPalace(false);
+  }
+});
+</script>
 </body>
 </html>
