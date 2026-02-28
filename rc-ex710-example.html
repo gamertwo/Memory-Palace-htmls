@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>RL Exercise 7-11 | Rooms + Memory Cues</title>
+<title>RL Example 7-10 | Rooms + Memory Cues</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
 <script>
 MathJax = {
@@ -111,13 +111,13 @@ a{color:inherit}
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
     <a href="hub.html">Hub</a>
-    <a href="rc-ex78-example.html">Back: Example 7-8</a>
+    <a href="rc-ex710.html">Exercise 7-10</a>
   </nav>
 
   <section class="hero">
-    <h1>Exercise 7-11</h1>
-    <p>This page now follows the same simplified study order as 7-10, but for the RL current response.</p>
-    <div class="eq">$$i_L(t)=0.5\left(1-e^{-5\times10^6 t}\right)\text{ mA},\quad t\ge 0$$</div>
+    <h1>Example 7-10</h1>
+    <p>This page follows the same simplified study order, but for the RL example where the switch changes the resistance seen by the inductor.</p>
+    <div class="eq">$$i(t)=\left[\frac{V_A}{R_1+R_2}-\frac{V_A}{R_1}\right]e^{-R_1 t/L}+\frac{V_A}{R_1},\quad t\ge 0$$</div>
   </section>
 
   <section class="panel section">
@@ -126,61 +126,74 @@ a{color:inherit}
       <article class="room">
         <h2>Room 1: Recognize the Pattern</h2>
         <ul>
-          <li>$i_L(t)=0.5(1-e^{-5\times10^6 t})$ matches the zero-state RL charging form $A(1-e^{-t/\tau})$.</li>
-          <li>So the inductor current starts at $0$ and rises toward $A$.</li>
+          <li>This is a first-order RL response in the standard form $$i(t)=\big[i(0)-i(\infty)\big]e^{-t/\tau}+i(\infty).$$</li>
+          <li>The current transitions from the initial value to the final value with one exponential term.</li>
         </ul>
       </article>
 
       <article class="room">
-        <h2>Room 2: Read the Final (Target) Current</h2>
+        <h2>Room 2: Read the Initial Current</h2>
         <ul>
-          <li>Compare $i_L(t)=A(1-e^{-t/\tau})$ with $i_L(t)=0.5(1-e^{-5\times10^6 t})$.</li>
-          <li>Therefore $A=i_L(\infty)=0.5\text{ mA}$.</li>
+          <li>Before switching, the circuit has been in steady state for a long time.</li>
+          <li>So the inductor acts like a short circuit for the initial-condition circuit.</li>
+          <li>That makes the initial current $$i(0)=\frac{V_A}{R_1+R_2}.$$</li>
         </ul>
       </article>
 
       <article class="room">
-        <h2>Room 3: Extract the Time Constant $\tau$</h2>
+        <h2>Room 3: Read the Final Current</h2>
         <ul>
-          <li>The exponent is $-5\times10^6 t$.</li>
-          <li>Match $e^{-t/\tau}$ with $e^{-5\times10^6 t}$, so $\frac{1}{\tau}=5\times10^6$.</li>
-          <li>$$\tau=\frac{1}{5\times10^6}=2\times10^{-7}\text{ s}=200\text{ ns}.$$</li>
+          <li>After the switch closes, $R_2$ is shorted out.</li>
+          <li>At long time, the inductor again behaves like a short circuit.</li>
+          <li>So the final current is $$i(\infty)=\frac{V_A}{R_1}.$$</li>
         </ul>
       </article>
 
       <article class="room">
-        <h2>Room 4: Check Initial and Steady-State Values</h2>
+        <h2>Room 4: Extract the Time Constant $\tau$</h2>
         <ul>
-          <li>At $t=0$: $$i_L(0)=0.5(1-e^0)=0.5(1-1)=0\text{ mA}.$$</li>
-          <li>As $t\to\infty$: $e^{-5\times10^6 t}\to 0$, so $$i_L(\infty)=0.5(1-0)=0.5\text{ mA}.$$</li>
+          <li>For an RL circuit, $$\tau=\frac{L}{R_N}.$$</li>
+          <li>After switching, the inductor sees $R_N=R_1$ because $R_2$ is bypassed.</li>
+          <li>So $$\tau=\frac{L}{R_1}.$$</li>
+          <li>That means $$e^{-t/\tau}=e^{-R_1 t/L}.$$</li>
         </ul>
       </article>
 
       <article class="room">
-        <h2>Room 5: Split Into Forced + Natural Parts</h2>
+        <h2>Room 5: Build the Response</h2>
         <ul>
-          <li>Expand: $$i_L(t)=0.5-0.5e^{-5\times10^6 t}\text{ mA}.$$</li>
-          <li>Forced part = $0.5\text{ mA}$.</li>
-          <li>Natural part = $-0.5e^{-5\times10^6 t}\text{ mA}$.</li>
+          <li>Use the universal first-order form $$i(t)=\big[i(0)-i(\infty)\big]e^{-t/\tau}+i(\infty).$$</li>
+          <li>Substitute the values:</li>
+          <li>$$i(t)=\left[\frac{V_A}{R_1+R_2}-\frac{V_A}{R_1}\right]e^{-R_1 t/L}+\frac{V_A}{R_1},\quad t\ge 0.$$</li>
         </ul>
       </article>
 
       <article class="room">
-        <h2>Room 6: Rebuild the Governing First-Order ODE</h2>
+        <h2>Room 6: Split Into Forced + Natural Parts</h2>
         <ul>
-          <li>Standard first-order RL form: $$\tau\frac{di_L}{dt}+i_L=i_L(\infty)u(t).$$</li>
-          <li>Substitute $\tau=2\times10^{-7}$ and $i_L(\infty)=0.5$.</li>
-          <li>$$2\times10^{-7}\frac{di_L}{dt}+i_L=0.5u(t),\quad t\ge 0.$$</li>
+          <li>Forced part = $$\frac{V_A}{R_1}.$$</li>
+          <li>Natural part = $$\left[\frac{V_A}{R_1+R_2}-\frac{V_A}{R_1}\right]e^{-R_1 t/L}.$$</li>
+          <li>The bracket is the gap between where the current starts and where it will settle.</li>
         </ul>
       </article>
 
       <article class="room">
-        <h2>Room 7: Quick Verification</h2>
+        <h2>Room 7: Rebuild the Governing First-Order ODE</h2>
         <ul>
-          <li>Differentiate: $$\frac{di_L}{dt}=0.5\left(5\times10^6\right)e^{-5\times10^6 t}=2.5\times10^6 e^{-5\times10^6 t}.$$</li>
-          <li>Substitute into the left side:</li>
-          <li>$$2\times10^{-7}\left(2.5\times10^6 e^{-5\times10^6 t}\right)+0.5\left(1-e^{-5\times10^6 t}\right)=0.5e^{-5\times10^6 t}+0.5-0.5e^{-5\times10^6 t}=0.5.$$</li>
-          <li>So the left side matches the right side $0.5u(t)$ for $t&gt;0$.</li>
+          <li>Standard RL form: $$\tau\frac{di}{dt}+i=i(\infty)u(t).$$</li>
+          <li>Substitute $$\tau=\frac{L}{R_1}\quad \text{and}\quad i(\infty)=\frac{V_A}{R_1}.$$</li>
+          <li>So the governing equation is $$\frac{L}{R_1}\frac{di}{dt}+i=\frac{V_A}{R_1}u(t),\quad t\ge 0.$$</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 8: Quick Verification</h2>
+        <ul>
+          <li>Let $$B=\frac{V_A}{R_1+R_2}-\frac{V_A}{R_1}.$$ Then $$i(t)=Be^{-R_1 t/L}+\frac{V_A}{R_1}.$$</li>
+          <li>Differentiate: $$\frac{di}{dt}=B\left(-\frac{R_1}{L}\right)e^{-R_1 t/L}.$$</li>
+          <li>Now compute the left side:</li>
+          <li>$$\frac{L}{R_1}\frac{di}{dt}+i=-Be^{-R_1 t/L}+Be^{-R_1 t/L}+\frac{V_A}{R_1}=\frac{V_A}{R_1}.$$</li>
+          <li>So the left side matches the right side $$\frac{V_A}{R_1}u(t)$$ for $t&gt;0$.</li>
         </ul>
       </article>
     </div>
@@ -191,19 +204,19 @@ a{color:inherit}
     <div class="memory">
       <div class="cue">
         <h3>Clue 1</h3>
-        <p>If you see $A(1-e^{-t/\tau})$, think "starts at zero, rises to $A$."</p>
+        <p>For first-order RL, always look for three things first: $i(0)$, $i(\infty)$, and $\tau=L/R_N$.</p>
       </div>
       <div class="cue">
         <h3>Clue 2</h3>
-        <p>The number outside the parentheses is the final value.</p>
+        <p>At DC steady state, the inductor behaves like a short circuit.</p>
       </div>
       <div class="cue">
         <h3>Clue 3</h3>
-        <p>The exponent coefficient is the reciprocal of the time constant.</p>
+        <p>The resistor seen by the inductor after the switch moves is the one that controls the time constant.</p>
       </div>
       <div class="cue">
         <h3>Clue 4</h3>
-        <p>For this pattern, the ODE is always $\tau \dot x + x = X_{\infty}$.</p>
+        <p>The coefficient on the exponential is always the gap: initial value minus final value.</p>
       </div>
     </div>
   </section>

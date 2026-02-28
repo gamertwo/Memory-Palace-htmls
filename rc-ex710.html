@@ -1,1 +1,212 @@
-﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>RC Exercise 7-10 · Open Page</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:'Outfit',sans-serif;background:#05080f;color:#e6eeff;min-height:100vh;padding:2rem}.wrap{max-width:960px;margin:0 auto}h1{font-family:'Cinzel',serif;font-size:2rem;margin-bottom:.6rem;background:linear-gradient(130deg,#fff,#ff9500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.card{background:rgba(10,12,28,.9);border:1px solid rgba(255,149,0,.28);border-radius:14px;padding:1rem;margin-top:.8rem}.eq{background:#0c1320;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.6rem .8rem;text-align:center;margin:.5rem 0}.s{font-size:.84rem;color:rgba(220,230,255,.68);line-height:1.65}.links{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}.links a{text-decoration:none;padding:.38rem .72rem;border-radius:8px;border:1px solid rgba(255,149,0,.35);color:#ffc48d;font-size:.78rem}</style></head><body><div class="wrap"><div class="links"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a></div><h1>Exercise 7-10</h1><div class="card"><div class="eq">$$v_C(t)=2.5\left(1-e^{-200t}\right)\text{ V},\quad t\ge 0$$</div><div class="s">Zero-state RC response with \(v_C(0)=0\), \(v_C(\infty)=2.5\text{ V}\), and \(\tau=RC=5\text{ ms}\) so exponent is \(-200t\).</div></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RC Exercise 7-10 | Rooms + Memory Cues</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:980px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.9rem,4vw,3rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.section{margin-top:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p{line-height:1.75;color:var(--muted)}
+.memory{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.85rem;
+}
+.cue{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.cue h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.45rem;
+}
+.cue p{color:var(--muted);line-height:1.7}
+@media (max-width:700px){
+  .shell{padding:1rem .85rem 2rem}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rc-ex711.html">Next: 7-11</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 7-10</h1>
+    <p>This page is now rebuilt in the exact study order: recognize, extract, check, split, rebuild, verify.</p>
+    <div class="eq">$$v_C(t)=2.5\left(1-e^{-200t}\right),\quad t\ge 0$$</div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Rooms</div>
+    <div class="rooms">
+      <article class="room">
+        <h2>Room 1: Recognize the Pattern</h2>
+        <ul>
+          <li>$v_C(t)=2.5(1-e^{-200t})$ matches the zero-state RC charging form $A(1-e^{-t/\tau})$.</li>
+          <li>So the capacitor starts at $0\text{ V}$ and rises toward $A$.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 2: Read the Final (Target) Voltage</h2>
+        <ul>
+          <li>Compare $v_C(t)=A(1-e^{-t/\tau})$ with $v_C(t)=2.5(1-e^{-200t})$.</li>
+          <li>Therefore $A=v_C(\infty)=2.5\text{ V}$.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 3: Extract the Time Constant $\tau$</h2>
+        <ul>
+          <li>The exponent is $-200t$.</li>
+          <li>Match $e^{-t/\tau}$ with $e^{-200t}$, so $\frac{1}{\tau}=200$.</li>
+          <li>$$\tau=\frac{1}{200}=0.005\text{ s}=5\text{ ms}.$$</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 4: Check Initial and Steady-State Values</h2>
+        <ul>
+          <li>At $t=0$: $$v_C(0)=2.5(1-e^0)=2.5(1-1)=0\text{ V}.$$</li>
+          <li>As $t\to\infty$: $e^{-200t}\to 0$, so $$v_C(\infty)=2.5(1-0)=2.5\text{ V}.$$</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 5: Split Into Forced + Natural Parts</h2>
+        <ul>
+          <li>Expand: $$v_C(t)=2.5-2.5e^{-200t}.$$</li>
+          <li>Forced part = $2.5\text{ V}$.</li>
+          <li>Natural part = $-2.5e^{-200t}$.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 6: Rebuild the Governing First-Order ODE</h2>
+        <ul>
+          <li>Standard first-order RC form: $$\tau\frac{dv_C}{dt}+v_C=v_C(\infty)u(t).$$</li>
+          <li>Substitute $\tau=0.005$ and $v_C(\infty)=2.5$.</li>
+          <li>$$0.005\frac{dv_C}{dt}+v_C=2.5u(t),\quad t\ge 0.$$</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 7: Quick Verification</h2>
+        <ul>
+          <li>Differentiate: $$\frac{dv_C}{dt}=500e^{-200t}.$$</li>
+          <li>Substitute into the left side:</li>
+          <li>$$0.005(500e^{-200t})+2.5(1-e^{-200t})=2.5e^{-200t}+2.5-2.5e^{-200t}=2.5.$$</li>
+          <li>So the left side matches the right side $2.5u(t)$ for $t&gt;0$.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Memory Clues</div>
+    <div class="memory">
+      <div class="cue">
+        <h3>Clue 1</h3>
+        <p>If you see $A(1-e^{-t/\tau})$, think "starts at zero, rises to $A$."</p>
+      </div>
+      <div class="cue">
+        <h3>Clue 2</h3>
+        <p>The number outside the parentheses is the final value.</p>
+      </div>
+      <div class="cue">
+        <h3>Clue 3</h3>
+        <p>The exponent coefficient is the reciprocal of the time constant.</p>
+      </div>
+      <div class="cue">
+        <h3>Clue 4</h3>
+        <p>For this pattern, the ODE is always $\tau \dot v + v = V_{\infty}$.</p>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

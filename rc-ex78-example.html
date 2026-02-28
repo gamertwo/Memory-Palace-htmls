@@ -1,10 +1,220 @@
-﻿<!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>RC Example 7-8 · Open Page</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RC Example 7-8 | Full Walkthrough</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:'Outfit',sans-serif;background:#05080f;color:#e6eeff;min-height:100vh;padding:2rem} .wrap{max-width:900px;margin:0 auto} h1{font-family:'Cinzel',serif;font-size:2rem;margin-bottom:.6rem;background:linear-gradient(130deg,#fff,#00e5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent} .card{background:rgba(10,12,28,.9);border:1px solid rgba(176,106,255,.25);border-radius:14px;padding:1rem;margin-top:.8rem} .eq{background:#0c1320;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.6rem .8rem;text-align:center;margin:.5rem 0} .s{font-size:.84rem;color:rgba(220,230,255,.68);line-height:1.65} .links{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem} .links a{text-decoration:none;padding:.38rem .72rem;border-radius:8px;border:1px solid rgba(176,106,255,.3);color:#c9bcff;font-size:.78rem}
-</style></head><body><div class="wrap"><div class="links"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a></div><h1>Example 7-8</h1><div class="card"><div class="eq">$$v_C(t)=20e^{-200t}-10\text{ V}$$</div><div class="s">\(\tau=1/200=5\text{ ms}\), \(v_C(0)=10\text{ V}\), \(v_C(\infty)=-10\text{ V}\), and \(\tfrac{1}{200}\dot v_C+v_C=-10u(t)\).</div></div></div></body></html>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06111e;
+  --bg2:#0d1f31;
+  --panel:rgba(8,19,35,.84);
+  --line:rgba(0,229,255,.22);
+  --accent:#00e5ff;
+  --accent2:#7af8ff;
+  --text:#ebf6ff;
+  --muted:rgba(235,246,255,.74);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(0,229,255,.18), transparent 28rem),
+    radial-gradient(circle at bottom left, rgba(122,248,255,.12), transparent 24rem),
+    linear-gradient(145deg,var(--bg),var(--bg2));
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.nav a,.jump{
+  text-decoration:none;
+  border:1px solid var(--line);
+  color:var(--accent2);
+  padding:.6rem .9rem;
+  border-radius:999px;
+  font-size:.86rem;
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:24px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 18px 44px rgba(0,0,0,.28);
+}
+.hero{padding:1.5rem}
+.eyebrow{
+  color:var(--accent2);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:.76rem;
+  font-weight:700;
+}
+h1{
+  margin-top:.55rem;
+  font-family:'Cinzel',serif;
+  font-size:clamp(2rem,5vw,3.4rem);
+  line-height:1.05;
+}
+.lede{margin-top:.8rem;color:var(--muted);max-width:64ch;line-height:1.7}
+.eq{
+  margin-top:1.1rem;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:1rem;
+  text-align:center;
+  overflow:auto;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.25rem}
+.card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:18px;
+  padding:1rem;
+}
+.label{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);font-weight:700}
+.card p,.room p,.room li,.recall{color:var(--muted);line-height:1.7}
+.section{margin-top:1.4rem}
+.section-title{
+  margin-bottom:.9rem;
+  font-size:1.08rem;
+  font-weight:800;
+  color:var(--accent2);
+}
+.panel{padding:1.35rem}
+.rooms{display:grid;gap:.9rem}
+.room{
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.025);
+}
+.room h2{font-size:1rem;margin-bottom:.45rem}
+.room ul{padding-left:1.1rem;margin-top:.45rem}
+details{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  padding:.95rem 1rem;
+  background:rgba(255,255,255,.025);
+}
+details+details{margin-top:.8rem}
+summary{cursor:pointer;font-weight:700}
+.recall{margin-top:.55rem}
+@media (max-width:700px){
+  .shell{padding:1rem 1rem 3rem}
+  .hero,.panel{border-radius:18px}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rc-ex78-exercise.html">Next: Exercise 7-8</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Full Problem Page</div>
+    <h1>Example 7-8</h1>
+    <p class="lede">This page keeps the same palace method as the main lesson, but anchored to this exact problem so you can rehearse the move sequence without bouncing back to pattern-only notes.</p>
+    <div class="eq">$$v_C(t)=20e^{-200t}-10\text{ V}$$</div>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Recognize</div>
+        <p>The exponential term means a first-order natural response is present. This is still the same RC story.</p>
+      </div>
+      <div class="card">
+        <div class="label">Flip</div>
+        <p>$k=200$, so $\tau=\frac{1}{200}=5\text{ ms}$. The exponent tells you the time constant immediately.</p>
+      </div>
+      <div class="card">
+        <div class="label">Freeze / Melt</div>
+        <p>At $t=0$, $v_C(0)=10\text{ V}$. As $t\to\infty$, the exponential dies and the response settles at $-10\text{ V}$.</p>
+      </div>
+      <div class="card">
+        <div class="label">Blueprint</div>
+        <p>The forced target is $-10\text{ V}$, so the governing form is $$\frac{1}{200}\dot v_C+v_C=-10u(t).$$</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Room-By-Room Walkthrough</div>
+    <div class="rooms">
+      <article class="room">
+        <h2>Room I: Recognize the Pattern</h2>
+        <p>Spot the single decaying exponential. That is your signal that the response belongs to the first-order RC family.</p>
+      </article>
+      <article class="room">
+        <h2>Room II: Flip the Exponent</h2>
+        <p>Read the exponent as $e^{-t/\tau}$ in disguise. Since $e^{-200t}=e^{-t/\tau}$, the only matching value is $\tau=1/200$ seconds.</p>
+      </article>
+      <article class="room">
+        <h2>Room III: Freeze and Melt</h2>
+        <ul>
+          <li>Freeze at $t=0$: $20(1)-10=10\text{ V}$.</li>
+          <li>Melt at $t\to\infty$: $20(0)-10=-10\text{ V}$.</li>
+        </ul>
+      </article>
+      <article class="room">
+        <h2>Room IV: Split the Response</h2>
+        <p>Separate the expression into destination plus decaying memory:</p>
+        <p>Forced part: $-10\text{ V}$</p>
+        <p>Natural part: $20e^{-200t}$</p>
+      </article>
+      <article class="room">
+        <h2>Room V: Rebuild the ODE</h2>
+        <p>Use the standard first-order form $\tau\dot x + x = x(\infty)u(t)$ with $\tau=1/200$ and $x(\infty)=-10$.</p>
+        <p>That gives $$\frac{1}{200}\dot v_C+v_C=-10u(t).$$</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Memory Cues</div>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Cue 1</div>
+        <p>Exponent coefficient = reciprocal of time constant.</p>
+      </div>
+      <div class="card">
+        <div class="label">Cue 2</div>
+        <p>The constant outside the exponential is not always the final value. Only the non-decaying term survives the melt.</p>
+      </div>
+      <div class="card">
+        <div class="label">Cue 3</div>
+        <p>If the final value is negative, the source/forcing side of the ODE is negative too.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Active Recall</div>
+    <details>
+      <summary>What is the first move when you see $20e^{-200t}-10$?</summary>
+      <div class="recall">Identify the decaying exponential and classify it as first-order RC behavior.</div>
+    </details>
+    <details>
+      <summary>Which term becomes the final value?</summary>
+      <div class="recall">The standalone constant term, because the exponential collapses to zero as time grows.</div>
+    </details>
+    <details>
+      <summary>What should you remember if the answer choices show $\tau$ instead of $k$?</summary>
+      <div class="recall">Flip the exponent coefficient: $k=200$ means $\tau=1/200$ seconds.</div>
+    </details>
+  </section>
+</main>
+</body>
+</html>

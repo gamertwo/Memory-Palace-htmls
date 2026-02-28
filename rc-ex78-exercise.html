@@ -1,1 +1,220 @@
-﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>RC Exercise 7-8 · Open Page</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:'Outfit',sans-serif;background:#05080f;color:#e6eeff;min-height:100vh;padding:2rem}.wrap{max-width:900px;margin:0 auto}h1{font-family:'Cinzel',serif;font-size:2rem;margin-bottom:.6rem;background:linear-gradient(130deg,#fff,#2bff7f);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.card{background:rgba(10,12,28,.9);border:1px solid rgba(43,255,127,.25);border-radius:14px;padding:1rem;margin-top:.8rem}.eq{background:#0c1320;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.6rem .8rem;text-align:center;margin:.5rem 0}.s{font-size:.84rem;color:rgba(220,230,255,.68);line-height:1.65}.links{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}.links a{text-decoration:none;padding:.38rem .72rem;border-radius:8px;border:1px solid rgba(43,255,127,.3);color:#a8ffcb;font-size:.78rem}</style></head><body><div class="wrap"><div class="links"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a></div><h1>Exercise 7-8</h1><div class="card"><div class="eq">$$v_C(t)=20-20e^{-1000t}\text{ V}$$</div><div class="s">\(\tau=1\text{ ms}\), \(v_C(0)=0\), \(v_C(\infty)=20\text{ V}\), and ODE form \(10^{-3}\dot v_C+v_C=20u(t)\).</div></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RC Exercise 7-8 | Full Walkthrough</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b140a;
+  --bg2:#17301f;
+  --panel:rgba(10,22,12,.84);
+  --line:rgba(43,255,127,.22);
+  --accent:#2bff7f;
+  --accent2:#baffd6;
+  --text:#f3fff8;
+  --muted:rgba(243,255,248,.76);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(43,255,127,.18), transparent 28rem),
+    radial-gradient(circle at bottom left, rgba(186,255,214,.10), transparent 24rem),
+    linear-gradient(145deg,var(--bg),var(--bg2));
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  color:var(--accent2);
+  padding:.6rem .9rem;
+  border-radius:999px;
+  font-size:.86rem;
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:24px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 18px 44px rgba(0,0,0,.28);
+}
+.hero{padding:1.5rem}
+.eyebrow{
+  color:var(--accent2);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:.76rem;
+  font-weight:700;
+}
+h1{
+  margin-top:.55rem;
+  font-family:'Cinzel',serif;
+  font-size:clamp(2rem,5vw,3.4rem);
+  line-height:1.05;
+}
+.lede{margin-top:.8rem;color:var(--muted);max-width:64ch;line-height:1.7}
+.eq{
+  margin-top:1.1rem;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:1rem;
+  text-align:center;
+  overflow:auto;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.25rem}
+.card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:18px;
+  padding:1rem;
+}
+.label{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);font-weight:700}
+.card p,.room p,.room li,.recall{color:var(--muted);line-height:1.7}
+.section{margin-top:1.4rem}
+.section-title{
+  margin-bottom:.9rem;
+  font-size:1.08rem;
+  font-weight:800;
+  color:var(--accent2);
+}
+.panel{padding:1.35rem}
+.rooms{display:grid;gap:.9rem}
+.room{
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.025);
+}
+.room h2{font-size:1rem;margin-bottom:.45rem}
+.room ul{padding-left:1.1rem;margin-top:.45rem}
+details{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  padding:.95rem 1rem;
+  background:rgba(255,255,255,.025);
+}
+details+details{margin-top:.8rem}
+summary{cursor:pointer;font-weight:700}
+.recall{margin-top:.55rem}
+@media (max-width:700px){
+  .shell{padding:1rem 1rem 3rem}
+  .hero,.panel{border-radius:18px}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rc-ex710.html">Next: Exercise 7-10</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Full Problem Page</div>
+    <h1>Exercise 7-8</h1>
+    <p class="lede">This exercise now stands on its own page with the same palace cues as the main lesson, so the problem is not reduced to a single pattern label.</p>
+    <div class="eq">$$v_C(t)=20-20e^{-1000t}\text{ V}$$</div>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Recognize</div>
+        <p>The response has the classic first-order charging shape: final constant minus a decaying exponential.</p>
+      </div>
+      <div class="card">
+        <div class="label">Flip</div>
+        <p>$k=1000$, so $\tau=\frac{1}{1000}=1\text{ ms}$. This is a fast RC response.</p>
+      </div>
+      <div class="card">
+        <div class="label">Freeze / Melt</div>
+        <p>At $t=0$, $v_C(0)=0\text{ V}$. At long time, the exponential disappears and the final value is $20\text{ V}$.</p>
+      </div>
+      <div class="card">
+        <div class="label">Blueprint</div>
+        <p>With $\tau=10^{-3}$ and final target $20\text{ V}$, the ODE is $$10^{-3}\dot v_C+v_C=20u(t).$$</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Room-By-Room Walkthrough</div>
+    <div class="rooms">
+      <article class="room">
+        <h2>Room I: Recognize the Pattern</h2>
+        <p>The structure is "destination minus memory." That is the standard charging response form for a first-order RC system.</p>
+      </article>
+      <article class="room">
+        <h2>Room II: Flip the Exponent</h2>
+        <p>Match $e^{-1000t}$ with $e^{-t/\tau}$. This forces $\tau=1/1000$ seconds.</p>
+      </article>
+      <article class="room">
+        <h2>Room III: Freeze and Melt</h2>
+        <ul>
+          <li>Freeze at $t=0$: $20-20(1)=0\text{ V}$.</li>
+          <li>Melt at $t\to\infty$: $20-20(0)=20\text{ V}$.</li>
+        </ul>
+      </article>
+      <article class="room">
+        <h2>Room IV: Split the Response</h2>
+        <p>Forced part: $20\text{ V}$</p>
+        <p>Natural part: $-20e^{-1000t}$</p>
+        <p>The negative sign simply says the response starts below the final target and rises upward.</p>
+      </article>
+      <article class="room">
+        <h2>Room V: Rebuild the ODE</h2>
+        <p>Use $\tau\dot x + x = x(\infty)u(t)$.</p>
+        <p>Substitute $\tau=10^{-3}$ and $x(\infty)=20$ to get $$10^{-3}\dot v_C+v_C=20u(t).$$</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Memory Cues</div>
+    <div class="grid">
+      <div class="card">
+        <div class="label">Cue 1</div>
+        <p>If the constant term is positive and the exponential is subtracted, expect a charging curve rising toward that constant.</p>
+      </div>
+      <div class="card">
+        <div class="label">Cue 2</div>
+        <p>Freeze tells you where the capacitor starts. Melt tells you where the source wants it to end.</p>
+      </div>
+      <div class="card">
+        <div class="label">Cue 3</div>
+        <p>The natural term is the gap: $v(0)-v(\infty)=0-20=-20$.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Active Recall</div>
+    <details>
+      <summary>Why is the natural term negative here?</summary>
+      <div class="recall">Because the response begins below the final value, so the decaying correction is a negative gap that shrinks to zero.</div>
+    </details>
+    <details>
+      <summary>What single number tells you the time constant?</summary>
+      <div class="recall">The exponent coefficient. Here $1000$ means $\tau=1/1000$ seconds.</div>
+    </details>
+    <details>
+      <summary>How can you rebuild the whole response from memory?</summary>
+      <div class="recall">Use final value plus initial-minus-final times $e^{-t/\tau}$.</div>
+    </details>
+  </section>
+</main>
+</body>
+</html>

@@ -598,8 +598,11 @@
         <a class="sb-item" href="index.html"><span>🔋</span> Exercise 7-8</a>
         <a class="sb-item" href="pattern-history.html#79a"><span>📐</span> Exercise 7-9 (a)</a>
         <a class="sb-item" href="pattern-history.html#79b"><span>🌀</span> Exercise 7-9 (b)</a>
+        <a class="sb-item" href="#ex710a"><span>🧲</span> Example 7-10</a>
         <a class="sb-item" href="#ex710"><span>🔌</span> Exercise 7-10</a>
         <a class="sb-item" href="#ex711"><span>🔁</span> Exercise 7-11</a>
+        <a class="sb-item" href="#ex711a"><span>🪙</span> Example 7-11</a>
+        <a class="sb-item" href="#ex712"><span>🪫</span> Exercise 7-12</a>
 
         <div class="sb-divider"></div>
         <div class="sb-section">Study</div>
@@ -762,6 +765,30 @@
                     </div>
                 </div>
 
+                <!-- EXAMPLE 7-10 -->
+                <div class="problem-card" id="ex710a" style="--pc:#f6c56e">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div class="pc-title-wrap">
+                                <div class="pc-label">Example 7-10 · RL Switching · Fig 7-22</div>
+                                <div class="pc-title">Inductor current with switch changing the seen resistance</div>
+                            </div>
+                            <div class="pc-icon">🧲</div>
+                        </div>
+                        <div class="pc-eq">$i(t)=\left[\frac{V_A}{R_1+R_2}-\frac{V_A}{R_1}\right]e^{-R_1t/L}+\frac{V_A}{R_1}$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>i(0) =</span><b>$V_A/(R_1+R_2)$</b></div>
+                            <div class="pc-fact"><span>i(∞) =</span><b>$V_A/R_1$</b></div>
+                            <div class="pc-fact"><span>τ =</span><b>$L/R_1$</b></div>
+                            <div class="pc-fact"><span>Pattern:</span><b>RL first-order transition</b></div>
+                        </div>
+                        <div class="pc-actions">
+                            <a class="btn-outline" href="rc-ex710-example.html" style="--pc:#f6c56e">Open Page →</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- EXERCISE 7-10 -->
                 <div class="problem-card" id="ex710" style="--pc:#ff9500">
                     <div class="pc-stripe"></div>
@@ -781,7 +808,7 @@
                             <div class="pc-fact"><span>B =</span><b>0 − 2.5 = −2.5</b></div>
                         </div>
                         <div class="pc-actions">
-                            <a class="btn-outline" href="pattern-history.html" style="--pc:#ff9500">Open Page →</a>
+                            <a class="btn-outline" href="rc-ex710.html" style="--pc:#ff9500">Open Page →</a>
                             <button class="btn-flash" style="background:#ff9500"
                                 onclick="location.href='flashcards.html?set=ex710&back=hub'">🃏 Flash Me</button>
                         </div>
@@ -807,9 +834,57 @@
                             <div class="pc-fact"><span>k =</span><b>5×10⁶ s⁻¹ (very fast!)</b></div>
                         </div>
                         <div class="pc-actions">
-                            <a class="btn-outline" href="pattern-history.html" style="--pc:#ff6eb4">Open Page →</a>
+                            <a class="btn-outline" href="rc-ex711.html" style="--pc:#ff6eb4">Open Page →</a>
                             <button class="btn-flash" style="background:#ff6eb4"
                                 onclick="location.href='flashcards.html?set=ex711&back=hub'">🃏 Flash Me</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXAMPLE 7-11 -->
+                <div class="problem-card" id="ex711a" style="--pc:#c7b7ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div class="pc-title-wrap">
+                                <div class="pc-label">Example 7-11 · RC Switching · Fig 7-23</div>
+                                <div class="pc-title">Solve capacitor voltage first, then convert to resistor current</div>
+                            </div>
+                            <div class="pc-icon">🪙</div>
+                        </div>
+                        <div class="pc-eq">$i_R(t)=0.25e^{-1000t}+1.25\;\text{mA}$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>v(0) =</span><b>30 V</b></div>
+                            <div class="pc-fact"><span>v(∞) =</span><b>25 V</b></div>
+                            <div class="pc-fact"><span>τ =</span><b>1 ms</b></div>
+                            <div class="pc-fact"><span>Move:</span><b>Find $v_C(t)$ first</b></div>
+                        </div>
+                        <div class="pc-actions">
+                            <a class="btn-outline" href="rc-ex711-example.html" style="--pc:#c7b7ff">Open Page →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXERCISE 7-12 -->
+                <div class="problem-card" id="ex712" style="--pc:#8fd6ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div class="pc-title-wrap">
+                                <div class="pc-label">Exercise 7-12 · RL Switching · Fig 7-22</div>
+                                <div class="pc-title">Switch opens, inductor sees more resistance</div>
+                            </div>
+                            <div class="pc-icon">🪫</div>
+                        </div>
+                        <div class="pc-eq">$i(t)=\left[\frac{V_A}{R_1}-\frac{V_A}{R_1+R_2}\right]e^{-(R_1+R_2)t/L}+\frac{V_A}{R_1+R_2}$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>i(0) =</span><b>$V_A/R_1$</b></div>
+                            <div class="pc-fact"><span>i(∞) =</span><b>$V_A/(R_1+R_2)$</b></div>
+                            <div class="pc-fact"><span>τ =</span><b>$L/(R_1+R_2)$</b></div>
+                            <div class="pc-fact"><span>Pattern:</span><b>RL decay to lower DC value</b></div>
+                        </div>
+                        <div class="pc-actions">
+                            <a class="btn-outline" href="rc-ex712.html" style="--pc:#8fd6ff">Open Page →</a>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -216,7 +216,7 @@
             position: relative;
             border-right: 1px solid rgba(176, 106, 255, 0.12);
             transition: background .3s;
-            cursor: default;
+            cursor: pointer;
         }
 
         .flow-step:last-child {
@@ -647,6 +647,70 @@
             border-color: rgba(176, 106, 255, 0.55);
         }
 
+        
+        .recall-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+            margin: 1.2rem 0 1.8rem;
+        }
+
+        .recall-card {
+            background: var(--panel);
+            border: 1px solid rgba(0, 229, 255, 0.22);
+            border-radius: 14px;
+            padding: .95rem 1rem;
+        }
+
+        .recall-card summary {
+            cursor: pointer;
+            color: #fff;
+            font-size: .86rem;
+            font-weight: 700;
+            line-height: 1.45;
+            list-style: none;
+        }
+
+        .recall-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .recall-card .ans {
+            margin-top: .7rem;
+            padding-top: .7rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: .8rem;
+            color: rgba(200, 215, 255, 0.72);
+            line-height: 1.6;
+        }
+
+        body.study-mode::before,
+        body.study-mode::after,
+        body.study-mode .scene,
+        body.study-mode .idea-box {
+            display: none;
+        }
+
+        body.study-mode .ani {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        body.study-mode .room,
+        body.study-mode .variant,
+        body.study-mode .solver,
+        body.study-mode .flow {
+            backdrop-filter: none;
+            box-shadow: none;
+            transition: none;
+        }
+
+        body.study-mode .room:hover,
+        body.study-mode .variant:hover {
+            transform: none;
+            box-shadow: none;
+        }
         /* ── SCROLLBAR ── */
         ::-webkit-scrollbar {
             width: 5px;
@@ -692,20 +756,17 @@
     <div
         style="position:relative;z-index:10;display:flex;gap:.6rem;flex-wrap:wrap;padding:1rem 1.4rem .4rem;max-width:1200px;margin:0 auto">
         <a href="hub.html"
-            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">🏠
-            Hub</a>
-        <a href="../rc-memory-palace/index.html"
-            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">⚡
-            Ex 7-8 Palace</a>
+            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">Hub</a>
+        <a href="rc-ex78-exercise.html"
+            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">Ex 7-8 Palace</a>
         <a href="index.html"
-            style="background:#b06aff;border:1px solid #b06aff;border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;text-decoration:none">🏛
-            Pattern Palace</a>
+            style="background:#b06aff;border:1px solid #b06aff;border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;text-decoration:none">Pattern Palace</a>
         <a href="pattern-history.html"
-            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">📚
-            History</a>
+            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">History</a>
         <a href="flashcards.html"
-            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">🃏
-            Anki Mode</a>
+            style="background:rgba(176,106,255,.1);border:1px solid rgba(176,106,255,.25);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b06aff;text-decoration:none">Anki Mode</a>
+        <button id="study-toggle" type="button"
+            style="background:rgba(0,229,255,.11);border:1px solid rgba(0,229,255,.35);border-radius:999px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8deaff;cursor:pointer">Study Mode: Off</button>
     </div>
     <div class="page">
 
@@ -735,31 +796,31 @@
         <div class="sec ani" style="animation-delay:.2s">🧭 The 5-Move Mental Algorithm</div>
 
         <div class="flow ani" style="animation-delay:.23s">
-            <div class="flow-step" style="--st-c:#00e5ff">
+            <div class="flow-step" role="button" tabindex="0" aria-label="Step 1 recognize the pattern" style="--st-c:#00e5ff">
                 <div class="flow-arrow">▶</div>
                 <div class="fs-num" style="background:#00e5ff">1</div>
                 <div class="fs-title" style="color:#00e5ff">RECOGNIZE</div>
                 <div class="fs-body">See $Ae^{-kt}$ in the equation → first-order RC confirmed</div>
             </div>
-            <div class="flow-step" style="--st-c:#ffc947">
+            <div class="flow-step" role="button" tabindex="0" aria-label="Step 2 read tau" style="--st-c:#ffc947">
                 <div class="flow-arrow">▶</div>
                 <div class="fs-num" style="background:#ffc947">2</div>
                 <div class="fs-title" style="color:#ffc947">READ τ</div>
                 <div class="fs-body">Exponent coefficient $k$ → flip it: $\tau = 1/k$</div>
             </div>
-            <div class="flow-step" style="--st-c:#2bff7f">
+            <div class="flow-step" role="button" tabindex="0" aria-label="Step 3 freeze at t equals zero" style="--st-c:#2bff7f">
                 <div class="flow-arrow">▶</div>
                 <div class="fs-num" style="background:#2bff7f">3</div>
                 <div class="fs-title" style="color:#2bff7f">FREEZE t=0</div>
                 <div class="fs-body">$e^0 = 1$ → every term alive → that's your initial value</div>
             </div>
-            <div class="flow-step" style="--st-c:#ff4d6a">
+            <div class="flow-step" role="button" tabindex="0" aria-label="Step 4 let time go to infinity" style="--st-c:#ff4d6a">
                 <div class="flow-arrow">▶</div>
                 <div class="fs-num" style="background:#ff4d6a">4</div>
                 <div class="fs-title" style="color:#ff4d6a">LET t→∞</div>
                 <div class="fs-body">$e^{-\infty}=0$ → transient dies → only DC term survives</div>
             </div>
-            <div class="flow-step" style="--st-c:#b06aff">
+            <div class="flow-step" role="button" tabindex="0" aria-label="Step 5 build the ODE" style="--st-c:#b06aff">
                 <div class="flow-arrow">▶</div>
                 <div class="fs-num" style="background:#b06aff">5</div>
                 <div class="fs-title" style="color:#b06aff">BUILD ODE</div>
@@ -1061,8 +1122,26 @@
                     <div class="sc-formula">$$x = x_F + x_N$$</div>
                 </div>
             </div>
+        
+        <div class="sec ani" style="animation-delay:.73s">Active Recall - Test Before Reveal</div>
+        <div class="recall-grid ani" style="animation-delay:.74s">
+            <details class="recall-card">
+                <summary>Prompt 1: You see <code>e^{-k t}</code>. What is the immediate move?</summary>
+                <div class="ans">Answer: Read <code>k = 1/\tau</code>, then flip it to get <code>\tau = 1/k</code>.</div>
+            </details>
+            <details class="recall-card">
+                <summary>Prompt 2: How do you extract <code>x(0)</code> and <code>x(\infty)</code>?</summary>
+                <div class="ans">Answer: Freeze at <code>t=0</code> for <code>x(0)</code>; melt at <code>t\to\infty</code> so the exponential dies and only forced/DC remains.</div>
+            </details>
+            <details class="recall-card">
+                <summary>Prompt 3: Rebuild the first-order ODE from response form.</summary>
+                <div class="ans">Answer: Use <code>\tau\dot{x} + x = x(\infty)u(t)</code> with <code>\tau</code> from exponent and <code>x(\infty)</code> from melt.</div>
+            </details>
+            <details class="recall-card">
+                <summary>Prompt 4: What are forced and natural parts?</summary>
+                <div class="ans">Answer: Forced is the long-term target from the source; natural is the decaying memory term that depends on initial condition.</div>
+            </details>
         </div>
-
         <!-- ══════════════ TRY IT ON MULTIPLE PROBLEMS ══════════════ -->
         <div class="sec ani" style="animation-delay:.75s">🧪 Apply the Pattern — Multiple Exercises Solved the Same Way</div>
 
@@ -1111,6 +1190,19 @@
             </div>
 
             <div class="variant">
+                <div class="variant-label">Example 7-10 · RL Switching (Fig 7-22)</div>
+                <div class="variant-eq">$$i(t)=\big[i(0)-i(\infty)\big]e^{-t/\tau}+i(\infty)$$</div>
+                <div class="variant-ans">
+                    <b>Room I (Recognize):</b> first-order RL transition after switching<br />
+                    <b>Room II (Initial):</b> $i(0)=\dfrac{V_A}{R_1+R_2}$ from the pre-switch steady state<br />
+                    <b>Room III (Final):</b> switch shorts $R_2$, so $i(\infty)=\dfrac{V_A}{R_1}$<br />
+                    <b>Room IV (Flip/τ):</b> $\tau=\dfrac{L}{R_1}$, so the exponential is $e^{-R_1 t/L}$<br />
+                    <b>Room V (Build):</b> $\boxed{i(t)=\left[\dfrac{V_A}{R_1+R_2}-\dfrac{V_A}{R_1}\right]e^{-R_1 t/L}+\dfrac{V_A}{R_1}}$
+                </div>
+                <div class="variant-actions"><a class="variant-open" href="rc-ex710-example.html">Open Page</a></div>
+            </div>
+
+            <div class="variant">
                 <div class="variant-label">Exercise 7-11 · Zero-State RL (Fig 7-19)</div>
                 <div class="variant-eq">$$i_L(t)=i_L(\infty)+\big[i_L(0)-i_L(\infty)\big]e^{-t/\tau}$$</div>
                 <div class="variant-ans">
@@ -1122,6 +1214,32 @@
                     <b>Room V (Simplify):</b> $\boxed{i_L(t)=0.5\left(1-e^{-5\times10^6 t}\right)\text{ mA},\; t\ge 0}$
                 </div>
                 <div class="variant-actions"><a class="variant-open" href="rc-ex711.html">Open Page</a></div>
+            </div>
+
+            <div class="variant">
+                <div class="variant-label">Example 7-11 · RC State Variable First (Fig 7-23)</div>
+                <div class="variant-eq">$$v_C(t)=\big[v_C(0)-v_C(\infty)\big]e^{-t/\tau}+v_C(\infty)$$</div>
+                <div class="variant-ans">
+                    <b>Room I (Recognize):</b> asked for resistor current, but capacitor voltage is the real state variable<br />
+                    <b>Room II (Initial):</b> open-switch divider gives $v_C(0)=30\text{ V}$<br />
+                    <b>Room III (Final):</b> closed switch shorts 10-k$\Omega$, so $v_C(\infty)=25\text{ V}$<br />
+                    <b>Room IV (Flip/τ):</b> $R_T=20k\parallel 20k=10k$, so $\tau=R_TC=1\text{ ms}$<br />
+                    <b>Room V (Convert):</b> $v_C(t)=5e^{-1000t}+25$, then $i_R(t)=\dfrac{v_C(t)}{20k}=0.25e^{-1000t}+1.25\text{ mA}$
+                </div>
+                <div class="variant-actions"><a class="variant-open" href="rc-ex711-example.html">Open Page</a></div>
+            </div>
+
+            <div class="variant">
+                <div class="variant-label">Exercise 7-12 · RL Switching Opens (Fig 7-22)</div>
+                <div class="variant-eq">$$i(t)=\big[i(0)-i(\infty)\big]e^{-t/\tau}+i(\infty)$$</div>
+                <div class="variant-ans">
+                    <b>Room I (Recognize):</b> first-order RL transition after the switch opens<br />
+                    <b>Room II (Initial):</b> closed switch bypasses $R_2$, so $i(0)=\dfrac{V_A}{R_1}$<br />
+                    <b>Room III (Final):</b> open switch restores $R_2$, so $i(\infty)=\dfrac{V_A}{R_1+R_2}$<br />
+                    <b>Room IV (Flip/τ):</b> $\tau=\dfrac{L}{R_1+R_2}$, so the exponential is $e^{-(R_1+R_2)t/L}$<br />
+                    <b>Room V (Build):</b> $\boxed{i(t)=\left[\dfrac{V_A}{R_1}-\dfrac{V_A}{R_1+R_2}\right]e^{-(R_1+R_2)t/L}+\dfrac{V_A}{R_1+R_2}}$
+                </div>
+                <div class="variant-actions"><a class="variant-open" href="rc-ex712.html">Open Page</a></div>
             </div>
 
             <div class="variant" style="border-color:rgba(176,106,255,0.3)">
@@ -1170,8 +1288,7 @@
                         style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:.5rem">
                         Spaced Practice</div>
                     <div style="font-size:.8rem;color:rgba(200,215,255,0.58);line-height:1.65">
-                        Walk the palace + apply to a new random $k$ and $A,B$ value each session.
-                        After 5 sessions, the 5 moves are automatic — no palace needed anymore.
+                        Use spaced retrieval on exact days: Day 0, Day 1, Day 3, Day 7. In each session, close the answer first, then solve one fresh random case with new $k$, $A$, and $B$ values.
                         <b style="color:#fff">The palace bootstrapped your intuition.</b>
                     </div>
                 </div>
@@ -1199,6 +1316,7 @@
         // 3D tilt on rooms
         document.querySelectorAll('.room').forEach(room => {
             room.addEventListener('mousemove', e => {
+                if (document.body.classList.contains('study-mode')) return;
                 const r = room.getBoundingClientRect();
                 const x = (e.clientX - r.left) / r.width - 0.5;
                 const y = (e.clientY - r.top) / r.height - 0.5;
@@ -1207,14 +1325,34 @@
             room.addEventListener('mouseleave', () => { room.style.transform = ''; });
         });
 
-        // Flow steps hover ripple
+        // Flow steps pulse (mouse + keyboard)
         document.querySelectorAll('.flow-step').forEach(step => {
-            step.addEventListener('click', () => {
+            const pulse = () => {
                 step.style.transform = 'scale(0.96)';
                 setTimeout(() => { step.style.transform = ''; }, 150);
+            };
+
+            step.addEventListener('click', pulse);
+            step.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    pulse();
+                }
             });
         });
+
+        const studyToggle = document.getElementById('study-toggle');
+        if (studyToggle) {
+            studyToggle.addEventListener('click', () => {
+                document.body.classList.toggle('study-mode');
+                const on = document.body.classList.contains('study-mode');
+                document.querySelectorAll('.room').forEach(room => { room.style.transform = ''; });
+                studyToggle.textContent = on ? 'Study Mode: On' : 'Study Mode: Off';
+            });
+        }
     </script>
 </body>
 
 </html>
+
+
