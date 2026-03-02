@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Solutions + Memory Cues</title>
@@ -29,8 +29,8 @@ p.lead{color:var(--muted);font-size:.9rem;line-height:1.7}
 </style></head>
 <body>
 <aside class="sidebar"><div class="logo"><div class="t">Maths DE Notes</div><div class="s">Solutions + memory cues</div></div>
-<div class="sec">Core</div><a class="item" href="math-hub.html">Hub</a><a class="item" href="math-concepts.html">Patterns + Exam Readiness</a><a class="item" href="math-questions.html">All Questions/Examples</a><a class="item active" href="math-solutions.html">Solutions Only</a><a class="item" href="math-neural.html">Neural Network View</a>
-<div class="sec">Question Pages</div><a class="item" href="math-q1-separable-tan.html">Q1 Separable (tan)</a><a class="item" href="math-q2-homogeneous-vx.html">Q2 Homogeneous</a><a class="item" href="math-q3-cot.html">Q3 Cot Variant</a><a class="item" href="math-q4-sectan.html">Q4 SecTan Variant</a><a class="item" href="math-q5-arcsin-symmetry.html">Q5 Arcsin Symmetry</a><a class="item" href="math-q6-root-coupled.html">Q6 Root Coupled</a><a class="item" href="math-q7-secsq-tan.html">Q7 SecSq-Tan</a><a class="item" href="math-q8-oneplusx2-xy.html">Q8 (1+x^2)dy-xy dx</a>
+<div class="sec">Core</div><a class="item" href="math-index.html">Hub</a><a class="item" href="math-concepts.html">Patterns + Exam Readiness</a><a class="item" href="math-questions.html">All Questions/Examples</a><a class="item active" href="math-solutions.html">Solutions Only</a><a class="item" href="math-neural.html">Neural Network View</a>
+<div class="sec">Question Pages</div><a class="item" href="math-q1-separable-tan.html">Q1 Separable (tan)</a><a class="item" href="math-q2-homogeneous-vx.html">Q2 Homogeneous</a><a class="item" href="math-q3-cot.html">Q3 Cot Variant</a><a class="item" href="math-q4-sectan.html">Q4 SecTan Variant</a><a class="item" href="math-q5-arcsin-symmetry.html">Q5 Arcsin Symmetry</a><a class="item" href="math-q6-root-coupled.html">Q6 Root Coupled</a><a class="item" href="math-q7-secsq-tan.html">Q7 SecSq-Tan</a><a class="item" href="math-q8-oneplusx2-xy.html">Q8 (1+x^2)dy-xy dx</a><a class="item" href="math-q9-expplusone-sinx.html">Q9 $(e^y+1)\sin x</a><a class="item" href="math-q10-exp-tan-cube.html">Q10 $(1-e^x)^3</a><a class="item" href="math-q11-expplus2-cosx.html">Q11 $(e^y+2)\cos x</a><a class="item" href="math-q12-exp-y-linearized.html">Q12 $e^y=$ form</a><a class="item" href="math-q13-tan-z-sub.html">Q13 $\sin(y-x)$</a>
 <div class="sec">Practice</div><a class="item" href="math-flashcards.html?set=all">Flashcards</a></aside>
 
 <main class="main"><div class="inner">
@@ -92,6 +92,57 @@ $$\Rightarrow \ln|y|=\frac12\ln(1+x^2)+C\Rightarrow y=C\sqrt{1+x^2}$$</div><div 
   <div class="cue"><div class="t">Integral Cue</div><div class="b"><b>Half-Log Chamber:</b> $\int x/(1+x^2)\,dx=\frac12\ln(1+x^2)$.</div></div>
 </div></div>
 
+<div class="sol" id="q9" style="--qc:#2bff7f"><h3>Q9. $\left(e^y+1\right)\cos x\,dx + e^y\sin x\,dy = 0$</h3><div class="eq">$$\cos x\,dx \Rightarrow \sin x,\qquad e^y\,dy \Rightarrow e^y+1$$
+$$\Rightarrow \text{candidate product } \left(e^y+1\right)\sin x$$
+$$d\!\left[\left(e^y+1\right)\sin x\right]=\left(e^y+1\right)\cos x\,dx+e^y\sin x\,dy$$
+$$\Rightarrow d\!\left[\left(e^y+1\right)\sin x\right]=0\Rightarrow \left(e^y+1\right)\sin x=C$$</div><div class="small">Final: $\boxed{\left(e^y+1\right)\sin x=C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Trigger Cue</div><div class="b"><b>Product Detector:</b> both terms fit one product-rule derivative.</div></div>
+  <div class="cue"><div class="t">Anchor Cue</div><div class="b"><b>Sine Anchor:</b> $\cos x\,dx$ points directly to $\sin x$.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Exact Collapse:</b> once the full differential is seen, set it to zero and seal with $C$.</div></div>
+</div></div>
+
+<div class="sol" id="q10" style="--qc:#ffd166"><h3>Q10. $3e^x\tan y\,dx + \left(1-e^x\right)\sec^2 y\,dy = 0$</h3><div class="eq">$$u=1-e^x,\;du=-e^x\,dx$$
+$$\Rightarrow -3\tan y\,du+u\sec^2 y\,dy=0$$
+$$\Rightarrow -3\frac{du}{u}+\frac{\sec^2 y}{\tan y}dy=0$$
+$$\Rightarrow -3\ln|u|+\ln|\tan y|=C$$
+$$\Rightarrow \left(1-e^x\right)^3=C\tan y$$</div><div class="small">Final: $\boxed{\left(1-e^x\right)^3=C\tan y}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Sub Cue</div><div class="b"><b>Bracket Switch:</b> set $u=1-e^x$ immediately.</div></div>
+  <div class="cue"><div class="t">Sign Cue</div><div class="b"><b>Minus Trap:</b> $du=-e^x dx$ gives the sign you must keep.</div></div>
+  <div class="cue"><div class="t">Trig Cue</div><div class="b"><b>Log-Tan Lock:</b> $\sec^2 y/\tan y$ integrates to $\ln|\tan y|$.</div></div>
+</div></div>
+
+<div class="sol" id="q11" style="--qc:#00d1ff"><h3>Q11. $\left(e^y+2\right)\sin x\,dx - e^y\cos x\,dy = 0$</h3><div class="eq">$$\sin x\,dx \Rightarrow -\cos x,\qquad e^y\,dy \Rightarrow e^y+2$$
+$$\Rightarrow \text{candidate } -\left(e^y+2\right)\cos x$$
+$$d\!\left[-\left(e^y+2\right)\cos x\right]=\left(e^y+2\right)\sin x\,dx-e^y\cos x\,dy$$
+$$\Rightarrow -\left(e^y+2\right)\cos x=C \Rightarrow \left(e^y+2\right)\cos x=C$$</div><div class="small">Final: $\boxed{\left(e^y+2\right)\cos x=C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Sign Cue</div><div class="b"><b>Cos Flip:</b> $\sin x\,dx$ points to $-\cos x$, not $\cos x$.</div></div>
+  <div class="cue"><div class="t">Bracket Cue</div><div class="b"><b>Exponential Shell:</b> $e^y\,dy$ still points to the full bracket $e^y+$ constant.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Constant Cleanup:</b> absorb the overall minus sign into $C$ at the end.</div></div>
+</div></div>
+
+<div class="sol" id="q12" style="--qc:#2bff7f"><h3>Q12. $\dfrac{dy}{dx}=e^{x-y}+x^2e^{-y}$</h3><div class="eq">$$\frac{dy}{dx}=e^{-y}(e^x+x^2)$$
+$$\Rightarrow e^y\frac{dy}{dx}=e^x+x^2$$
+$$\Rightarrow \frac{d}{dx}(e^y)=e^x+x^2$$
+$$\Rightarrow e^y=e^x+\frac{x^3}{3}+C$$</div><div class="small">Final: $\boxed{e^y=e^x+\frac{x^3}{3}+C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Factor Cue</div><div class="b"><b>Common Exponential:</b> factor out $e^{-y}$ first.</div></div>
+  <div class="cue"><div class="t">Derivative Cue</div><div class="b"><b>Left-Side Upgrade:</b> $e^y y'$ is $\dfrac{d}{dx}(e^y)$.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Direct Integral:</b> once linearized, integrate term by term.</div></div>
+</div></div>
+
+<div class="sol" id="q13" style="--qc:#ffd166"><h3>Q13. $\dfrac{dy}{dx}=1+\tan(y-x)$</h3><div class="eq">$$z=y-x,\qquad \frac{dz}{dx}=\frac{dy}{dx}-1$$
+$$\Rightarrow \frac{dz}{dx}=\tan z$$
+$$\Rightarrow \cot z\,dz=dx$$
+$$\Rightarrow \ln|\sin z|=x+C$$
+$$\Rightarrow \sin(y-x)=Ce^x$$</div><div class="small">Final: $\boxed{\sin(y-x)=Ce^x}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Sub Cue</div><div class="b"><b>Given Substitution:</b> use $z=y-x$ immediately.</div></div>
+  <div class="cue"><div class="t">Trig Cue</div><div class="b"><b>Cot Route:</b> $1/\tan z=\cot z$ gives the standard integral.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Exponentiate:</b> turn the log form into the sine form.</div></div>
+</div></div>
 </div></main>
 </body></html>
 
