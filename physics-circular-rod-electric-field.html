@@ -130,6 +130,59 @@ a{color:inherit}
   border-style:dashed;
   background:rgba(255,255,255,.02);
 }
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.modal-copy{color:var(--muted);line-height:1.7;font-size:.88rem;margin-bottom:.75rem}
+.prompt-box{
+  width:100%;
+  min-height:300px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
 @media (max-width:760px){
   .shell{padding:1rem .85rem 2rem}
   .content-grid{grid-template-columns:1fr}
@@ -149,6 +202,9 @@ a{color:inherit}
     <h1>Electric Field of a Charged Circular Rod</h1>
     <p>This page uses the same room-by-room layout and connected memory-palace sidebar as the charged-ring page. The main result is the field at the center of symmetry of a 120 degree uniformly charged arc.</p>
     <div class="eq">$$\vec E=\frac{0.83Q}{4\pi\varepsilon_0 r^2}\,\hat{\imath}\quad\text{(toward the rod)}$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
   </section>
 
   <div class="content-grid">
@@ -306,5 +362,59 @@ a{color:inherit}
     </aside>
   </div>
 </main>
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the solution flow. Use it to test alternate one-paragraph memory palaces from another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this physics derivation. The paragraph should preserve the logic order, keep each step linked to the next, and feel like one continuous route through the solution. Do not use bullet points.
+
+Source material:
+1. Model the 120 degree arc as many tiny charge elements with dq = lambda ds.
+2. Each tiny element produces dE = (1 / 4 pi epsilon_0) (lambda ds / r^2) at the center.
+3. Pair symmetric elements above and below the x-axis.
+4. Their y-components cancel and their x-components add, so only dE_x = dE cos(theta) is integrated.
+5. Replace ds by r d(theta), so dE_x = (1 / 4 pi epsilon_0) (lambda / r) cos(theta) d(theta).
+6. Integrate theta from -60 degrees to +60 degrees.
+7. The trig integral gives E = [lambda / (4 pi epsilon_0 r)] [sin(theta)] from -60 degrees to +60 degrees = (1.73 lambda) / (4 pi epsilon_0 r).
+8. The 120 degree arc length is L = 2 pi r / 3.
+9. Therefore lambda = Q / L = 3Q / (2 pi r) ≈ 0.477Q / r.
+10. Substitute lambda to get E ≈ 0.83Q / (4 pi epsilon_0 r^2), directed toward the rod along the x-axis.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+<script>
+const arcModal = document.getElementById('prompt-modal');
+const arcTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  arcModal.classList.add('open');
+  arcModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    arcModal.classList.remove('open');
+    arcModal.setAttribute('aria-hidden', 'true');
+  });
+});
+arcModal.addEventListener('click', (event) => {
+  if (event.target === arcModal) {
+    arcModal.classList.remove('open');
+    arcModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(arcTextarea.value);
+  } catch (error) {
+    arcTextarea.focus();
+    arcTextarea.select();
+  }
+});
+</script>
 </body>
 </html>

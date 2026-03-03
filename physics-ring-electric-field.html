@@ -122,6 +122,59 @@ a{color:inherit}
   border-style:dashed;
   background:rgba(255,255,255,.02);
 }
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.modal-copy{color:var(--muted);line-height:1.7;font-size:.88rem;margin-bottom:.75rem}
+.prompt-box{
+  width:100%;
+  min-height:280px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
 @media (max-width:700px){
   .shell{padding:1rem .85rem 2rem}
   .content-grid{grid-template-columns:1fr}
@@ -141,6 +194,9 @@ a{color:inherit}
     <h1>The Electric Field Due to a Charged Ring</h1>
     <p>This page follows the same room-by-room format as the circuit pages. It derives the electric field on the axis of a uniformly charged ring.</p>
     <div class="eq">$$E=\frac{qz}{4\pi\varepsilon_0\left(z^2+R^2\right)^{3/2}}$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
   </section>
 
   <div class="content-grid">
@@ -278,5 +334,59 @@ a{color:inherit}
     </aside>
   </div>
 </main>
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt already includes the worked derivation. Paste it into any AI tool and ask for a different one-paragraph memory palace.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this physics derivation. The paragraph should preserve the order of the solution, keep the logic linked, and use vivid locations or transitions so each step naturally leads to the next. Do not rewrite the derivation as bullet points. Keep the result concise but complete.
+
+Source material:
+1. Start with Coulomb's law for a tiny charge element: dE = (1 / 4 pi epsilon_0) (dq / r^2).
+2. For a uniform ring, replace dq by lambda ds.
+3. On the axis of the ring, r^2 = z^2 + R^2.
+4. By symmetry, sideways components cancel, so only the axial component survives: dE_z = dE cos(theta).
+5. From geometry, cos(theta) = z / sqrt(z^2 + R^2).
+6. Therefore dE_z = [z lambda / (4 pi epsilon_0 (z^2 + R^2)^(3/2))] ds.
+7. Integrate ds around the full ring to get 2 pi R.
+8. Replace lambda (2 pi R) with total charge q.
+9. Final result: E = qz / [4 pi epsilon_0 (z^2 + R^2)^(3/2)].
+10. Extra memory anchors: at z = 0 the field is zero, and for z much larger than R the result approaches the point-charge form.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+<script>
+const ringModal = document.getElementById('prompt-modal');
+const ringTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ringModal.classList.add('open');
+  ringModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ringModal.classList.remove('open');
+    ringModal.setAttribute('aria-hidden', 'true');
+  });
+});
+ringModal.addEventListener('click', (event) => {
+  if (event.target === ringModal) {
+    ringModal.classList.remove('open');
+    ringModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(ringTextarea.value);
+  } catch (error) {
+    ringTextarea.focus();
+    ringTextarea.select();
+  }
+});
+</script>
 </body>
 </html>

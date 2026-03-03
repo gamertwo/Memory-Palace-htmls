@@ -104,10 +104,7 @@ a{color:inherit}
   margin-bottom:.35rem;
 }
 .mini p{color:var(--muted);line-height:1.7}
-.palace-sidebar{
-  position:sticky;
-  top:1rem;
-}
+.palace-sidebar{position:sticky;top:1rem}
 .palace-intro{
   color:var(--muted);
   line-height:1.7;
@@ -195,12 +192,12 @@ a{color:inherit}
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
     <a href="hub.html">Hub</a>
-    <a href="physics-ring-electric-field.html">Back: Charged Ring</a>
+    <a href="physics-charged-disk-electric-field.html">Original Disk Page</a>
   </nav>
 
   <section class="hero">
     <h1>The Electric Field Due to a Charged Disk</h1>
-    <p>This uses the same logic as the ring problem, but now the disk is built from many concentric rings and then integrated from the center to the outer radius.</p>
+    <p>This page now uses the same rooms-and-memory-palace structure as the main charged-disk page. It builds the disk from concentric rings, integrates from the center to the edge, and keeps the infinite-sheet limit as the last anchor.</p>
     <div class="eq">$$E=\frac{\sigma}{2\varepsilon_0}\left(1-\frac{z}{\sqrt{z^2+R^2}}\right)$$</div>
     <div class="tool-row">
       <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
@@ -262,8 +259,7 @@ a{color:inherit}
             <h2>Room 6: Evaluate the Limits</h2>
             <ul>
               <li>So</li>
-              <li>$$E=\frac{\sigma z}{4\varepsilon_0}\left[\frac{z^2+r^2}{-1/2}\right]^{-1/2}_0^R
-              =\frac{\sigma z}{4\varepsilon_0}\left[-2(z^2+r^2)^{-1/2}\right]_0^R.$$</li>
+              <li>$$E=\frac{\sigma z}{4\varepsilon_0}\left[-2(z^2+r^2)^{-1/2}\right]_0^R.$$</li>
               <li>This gives</li>
               <li>$$E=\frac{\sigma z}{2\varepsilon_0}\left(\frac{1}{z}-\frac{1}{\sqrt{z^2+R^2}}\right).$$</li>
             </ul>
@@ -286,7 +282,7 @@ a{color:inherit}
         <div class="section-title">Connection to the Ring Page</div>
         <div class="mini">
           <h3>Same Core Idea</h3>
-          <p>This page is just one level above the charged-ring derivation. There, one ring was the final object. Here, one ring is only the differential element, and then you integrate those rings from $r=0$ to $R$.</p>
+          <p>This file now follows the same presentation pattern as the main disk page: one thin ring is the differential element, then those rings are integrated from the center to the outer edge, and the sheet limit becomes the final physical checkpoint.</p>
         </div>
       </section>
     </div>
@@ -300,7 +296,7 @@ a{color:inherit}
           <p>Do not attack the whole disk at once. Cut it into thin concentric rings.</p>
         </div>
         <div class="transition">
-          <h3>Transition 1 → 2</h3>
+          <h3>Transition 1 to 2</h3>
           <p>Once one thin ring is chosen, its charge must be written from surface density.</p>
         </div>
         <div class="station">
@@ -308,7 +304,7 @@ a{color:inherit}
           <p>Use $$dq=\sigma dA=\sigma(2\pi r\,dr).$$</p>
         </div>
         <div class="transition">
-          <h3>Transition 2 → 3</h3>
+          <h3>Transition 2 to 3</h3>
           <p>Now that the charge of one ring is known, import the ring field formula from the previous problem.</p>
         </div>
         <div class="station">
@@ -316,7 +312,7 @@ a{color:inherit}
           <p>Treat each tiny ring as a charged ring on the axis.</p>
         </div>
         <div class="transition">
-          <h3>Transition 3 → 4</h3>
+          <h3>Transition 3 to 4</h3>
           <p>After substitution, the only variable left is the ring radius $$r$$, so the next move is a radial integral.</p>
         </div>
         <div class="station">
@@ -324,7 +320,7 @@ a{color:inherit}
           <p>Integrate from the center $$r=0$$ to the outer edge $$r=R.$$</p>
         </div>
         <div class="transition">
-          <h3>Transition 4 → 5</h3>
+          <h3>Transition 4 to 5</h3>
           <p>The integrand has $$2r\,dr$$ attached to $$z^2+r^2$$, so a direct substitution is forced.</p>
         </div>
         <div class="station">
@@ -332,7 +328,7 @@ a{color:inherit}
           <p>Set $$X=z^2+r^2$$ so the power integral becomes standard.</p>
         </div>
         <div class="transition">
-          <h3>Transition 5 → 6</h3>
+          <h3>Transition 5 to 6</h3>
           <p>Once the antiderivative is known, the remaining task is just endpoint evaluation.</p>
         </div>
         <div class="station">
@@ -340,7 +336,7 @@ a{color:inherit}
           <p>Evaluate at $$r=R$$ and $$r=0$$ to get the finite-disk formula.</p>
         </div>
         <div class="transition">
-          <h3>Transition 6 → 7</h3>
+          <h3>Transition 6 to 7</h3>
           <p>The last natural question is what happens when the disk becomes huge.</p>
         </div>
         <div class="station">
@@ -351,13 +347,14 @@ a{color:inherit}
     </aside>
   </div>
 </main>
+
 <div class="modal" id="prompt-modal" aria-hidden="true">
   <div class="modal-card">
     <div class="modal-head">
       <h3>AI Memory Palace Prompt</h3>
       <button class="ghost-btn" type="button" data-close-prompt>Close</button>
     </div>
-    <p class="modal-copy">This popup stores the full solution flow as an AI prompt. Use it to test different one-paragraph memory palace outputs for the same derivation.</p>
+    <p class="modal-copy">This prompt is prefilled with the solution flow. Use it to test alternate one-paragraph memory palaces from another AI.</p>
     <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this physics derivation. Keep the sequence faithful to the solution, make each step trigger the next, and use vivid spatial imagery. Do not use bullet points or separate sections.
 
 Source material:
@@ -378,6 +375,7 @@ Source material:
     </div>
   </div>
 </div>
+
 <script>
 const diskModal = document.getElementById('prompt-modal');
 const diskTextarea = document.getElementById('prompt-text');
