@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Charged Particle in an Electric Field | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.7rem,4vw,2.7rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.7rem;
+}
+.fact{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:320px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="physics-charged-disk-electric-field.html">Back: Charged Disk</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Motion of a Charged Particle in an Electric Field</h1>
+    <p>This sample problem treats the drop like horizontal motion plus vertical acceleration. The electric field gives the vertical force, so the deflection is found with basic kinematics after the travel time between the plates is computed.</p>
+    <div class="eq">$$y=\frac{QEL^2}{2mv_x^2}=6.4\times10^{-4}\text{ m}=0.64\text{ mm}$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Given Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Mass</div><div class="v">$$m=1.3\times10^{-10}\,\text{kg}$$</div></div>
+          <div class="fact"><div class="k">Charge Magnitude</div><div class="v">$$Q=1.5\times10^{-13}\,\text{C}$$</div></div>
+          <div class="fact"><div class="k">Plate Length</div><div class="v">$$L=1.6\,\text{cm}=1.6\times10^{-2}\,\text{m}$$</div></div>
+          <div class="fact"><div class="k">Horizontal Speed</div><div class="v">$$v_x=18\,\text{m/s}$$</div></div>
+          <div class="fact"><div class="k">Electric Field</div><div class="v">$$E=1.4\times10^6\,\text{N/C}$$</div></div>
+          <div class="fact"><div class="k">Ignore</div><div class="v">Gravitational force is negligible.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Use the Electric Force</h2>
+            <ul>
+              <li>The vertical force comes from the electric field:</li>
+              <li>$$F=QE.$$</li>
+              <li>So the vertical acceleration is</li>
+              <li>$$a_y=\frac{F}{m}=\frac{QE}{m}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Find the Time Between the Plates</h2>
+            <ul>
+              <li>The particle moves horizontally with constant speed.</li>
+              <li>So</li>
+              <li>$$L=v_xt \qquad \Rightarrow \qquad t=\frac{L}{v_x}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Use Vertical Kinematics</h2>
+            <ul>
+              <li>The initial vertical velocity is zero.</li>
+              <li>So the vertical deflection is</li>
+              <li>$$y=\frac{1}{2}a_yt^2.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Substitute $a_y$ and $t$</h2>
+            <ul>
+              <li>Insert $$a_y=\frac{QE}{m}$$ and $$t=\frac{L}{v_x}:$$</li>
+              <li>$$y=\frac{1}{2}\left(\frac{QE}{m}\right)\left(\frac{L}{v_x}\right)^2.$$</li>
+              <li>So</li>
+              <li>$$y=\frac{QEL^2}{2mv_x^2}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Insert the Numerical Values</h2>
+            <ul>
+              <li>$$y=\frac{(1.5\times10^{-13})(1.4\times10^6)(1.6\times10^{-2})^2}{2(1.3\times10^{-10})(18)^2}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Final Answer</h2>
+            <ul>
+              <li>Evaluating gives</li>
+              <li>$$y=6.4\times10^{-4}\,\text{m}.$$</li>
+              <li>Therefore</li>
+              <li>$$\boxed{y=0.64\,\text{mm}}.$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Key Physics Shortcut</div>
+        <div class="mini">
+          <h3>Split the Motion</h3>
+          <p>The easiest way to remember this is to split the problem into two independent parts: horizontal motion only gives the travel time, and vertical motion only gives the deflection. The electric field affects the vertical direction, not the horizontal speed.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This path is a straight causal chain: force creates acceleration, horizontal travel gives time, and time feeds into the vertical displacement formula.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Force Gate</h3>
+          <p>Begin with the electric push: $$F=QE.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>Once the force is known, mass immediately converts it into vertical acceleration.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Acceleration Bridge</h3>
+          <p>Store $$a_y=\dfrac{QE}{m}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>The deflection cannot be found without the time inside the plate region.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Time Tunnel</h3>
+          <p>Use horizontal motion only: $$t=\dfrac{L}{v_x}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>With acceleration and time both known, kinematics becomes automatic.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Drop Chamber</h3>
+          <p>Apply $$y=\dfrac{1}{2}a_yt^2.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>Now replace both hidden pieces and compress the expression into one final formula.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Formula Vault</h3>
+          <p>Seal the shortcut: $$y=\dfrac{QEL^2}{2mv_x^2}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>The only thing left is substitution and unit conversion.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Answer Plate</h3>
+          <p>Evaluate to get $$0.64\text{ mm}.$$</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full solution flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this physics derivation. Keep the steps in order, make each step lead naturally to the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The electric field provides the vertical force F = QE.
+2. The vertical acceleration is a_y = F/m = QE/m.
+3. The particle moves horizontally with constant speed, so the time in the plate region is t = L / v_x.
+4. The initial vertical velocity is zero.
+5. Therefore the vertical deflection is y = (1/2) a_y t^2.
+6. Substitute a_y and t to get y = (1/2)(QE/m)(L/v_x)^2.
+7. Simplify to y = QEL^2 / (2mv_x^2).
+8. Insert the numbers: Q = 1.5 x 10^-13 C, E = 1.4 x 10^6 N/C, L = 1.6 x 10^-2 m, m = 1.3 x 10^-10 kg, v_x = 18 m/s.
+9. The result is y = 6.4 x 10^-4 m = 0.64 mm.
+10. Core memory idea: split the motion into horizontal time-finding and vertical drop-finding.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const motionModal = document.getElementById('prompt-modal');
+const motionTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  motionModal.classList.add('open');
+  motionModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    motionModal.classList.remove('open');
+    motionModal.setAttribute('aria-hidden', 'true');
+  });
+});
+motionModal.addEventListener('click', (event) => {
+  if (event.target === motionModal) {
+    motionModal.classList.remove('open');
+    motionModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(motionTextarea.value);
+  } catch (error) {
+    motionTextarea.focus();
+    motionTextarea.select();
+  }
+});
+</script>
+</body>
+</html>

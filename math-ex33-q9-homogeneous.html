@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.3 Q9 | Homogeneous Equation</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08111b;--bg2:#132536;--panel:#101a28;--panel2:#172536;--line:rgba(255,255,255,.08);--accent:#ffd166;--accent2:#7ce8ff;--text:#eef6ff;--muted:rgba(238,246,255,.76);--glow:0 0 0 1px rgba(124,232,255,.45),0 0 24px rgba(124,232,255,.08)}
+body{font-family:'Outfit',sans-serif;color:var(--text);min-height:100vh;background:radial-gradient(circle at top right,rgba(124,232,255,.14),transparent 34%),radial-gradient(circle at bottom left,rgba(255,209,102,.1),transparent 28%),linear-gradient(180deg,var(--bg),var(--bg2))}
+a{color:inherit}
+.shell{max-width:1120px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .95rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel{background:rgba(16,26,40,.92);border:1px solid var(--line);border-radius:20px;padding:1.25rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.9rem,4vw,3rem);margin-bottom:.55rem}
+.hero p,.answer-box p,.palace-copy,.thread-detail,.room li,.room p{color:var(--muted);line-height:1.75}
+.eq{margin-top:.95rem;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:.95rem;text-align:center;overflow:auto}
+.layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.95fr);gap:1rem;margin-top:1rem;align-items:start}
+.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.rooms{display:grid;gap:.85rem}
+.room{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:1rem;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent2)}
+.room ul{padding-left:1.2rem}
+.room.active{border-color:rgba(124,232,255,.5);transform:translateY(-2px);box-shadow:var(--glow)}
+.palace{position:sticky;top:1rem}
+.palace-paragraph{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:1rem}
+.palace-line{display:block;position:relative;padding:.7rem .8rem;border-radius:12px;color:var(--muted);cursor:pointer;transition:background .2s ease,color .2s ease,transform .2s ease}
+.palace-line+.palace-line{margin-top:.35rem}
+.palace-line::after{content:'';position:absolute;left:calc(100% + .45rem);top:50%;width:0;height:2px;background:linear-gradient(90deg,var(--accent2),rgba(124,232,255,0));transform:translateY(-50%);transition:width .22s ease}
+.palace-line::before{content:attr(data-thread);position:absolute;left:calc(100% + 7.2rem);top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--accent2);opacity:0;transition:opacity .2s ease;white-space:nowrap}
+.palace-line:hover,.palace-line.active{background:rgba(124,232,255,.08);color:var(--text);transform:translateX(3px)}
+.palace-line:hover::after,.palace-line.active::after{width:6.2rem}
+.palace-line:hover::before,.palace-line.active::before{opacity:1}
+.thread-panel{margin-top:.9rem;background:rgba(255,255,255,.025);border:1px dashed rgba(124,232,255,.28);border-radius:14px;padding:.9rem}
+.thread-label{font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent2);font-weight:800}
+.thread-target{margin-top:.45rem;font-weight:700}
+.answer-box{margin-top:1rem;background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(124,232,255,.03));border:1px solid rgba(255,209,102,.28);border-radius:16px;padding:1rem}
+@media (max-width:880px){.layout{grid-template-columns:1fr}.palace{position:static}.palace-line::before{left:calc(100% + 5.5rem)}}
+@media (max-width:640px){.shell{padding:1rem .85rem 2rem}.palace-line::after,.palace-line::before{display:none}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="math-index.html">Math Hub</a>
+    <a href="math-questions.html">Question Bank</a>
+    <a href="math-solutions.html">Solutions</a>
+  </nav>
+  <section class="hero">
+    <h1>Exercise 3.3 Question 9</h1>
+    <p>First write it in $\dfrac{dy}{dx}$ form, then use $y=vx$ and split the $v$-integral into a power term plus a logarithm.</p>
+    <div class="eq">$$(x^2+y^2)\,dy=xy\,dx$$</div>
+  </section>
+  <div class="layout">
+    <section class="panel">
+      <div class="section-title">Rooms</div>
+      <div class="rooms">
+        <article class="room" id="room-1">
+          <h2>Room 1: Convert to Ratio Form</h2>
+          <ul>
+            <li>Rewrite as</li>
+            <li>$$\frac{dy}{dx}=\frac{xy}{x^2+y^2}.$$</li>
+            <li>Now divide by $$x^2:$$</li>
+            <li>$$\frac{dy}{dx}=\frac{\left(\frac{y}{x}\right)}{1+\left(\frac{y}{x}\right)^2}.$$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-2">
+          <h2>Room 2: Use $y=vx$</h2>
+          <ul>
+            <li>Put $$y=vx,$$ so</li>
+            <li>$$\frac{dy}{dx}=v+x\frac{dv}{dx}.$$</li>
+            <li>Then</li>
+            <li>$$v+x\frac{dv}{dx}=\frac{v}{1+v^2}.$$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-3">
+          <h2>Room 3: Simplify</h2>
+          <ul>
+            <li>Subtract $v$ from both sides:</li>
+            <li>$$x\frac{dv}{dx}=\frac{v}{1+v^2}-v=-\frac{v^3}{1+v^2}.$$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-4">
+          <h2>Room 4: Separate Variables</h2>
+          <ul>
+            <li>Bring the $v$ expression left:</li>
+            <li>$$\frac{1+v^2}{v^3}\,dv=-\frac{dx}{x}.$$</li>
+            <li>That is</li>
+            <li>$$\left(v^{-3}+v^{-1}\right)dv=-\frac{dx}{x}.$$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-5">
+          <h2>Room 5: Integrate</h2>
+          <ul>
+            <li>Integrate both sides:</li>
+            <li>$$\int \left(v^{-3}+v^{-1}\right)dv=-\int \frac{dx}{x}.$$</li>
+            <li>$$-\frac{1}{2v^2}+\ln|v|=-\ln|x|+C.$$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-6">
+          <h2>Room 6: Back-Substitute</h2>
+          <ul>
+            <li>Put back $$v=\frac{y}{x}:$$</li>
+            <li>$$-\frac{x^2}{2y^2}+\ln\left|\frac{y}{x}\right|=-\ln|x|+C.$$</li>
+            <li>Since $$\ln\left|\frac{y}{x}\right|=\ln|y|-\ln|x|,$$ the log terms in $x$ cancel.</li>
+            <li>So</li>
+            <li>$$\boxed{-\frac{x^2}{2y^2}+\ln|y|=C}.$$</li>
+            <li>In textbook shorthand for positive $y$, this is $$\boxed{-\frac{x^2}{2y^2}+\log y=C}.$$</li>
+          </ul>
+        </article>
+      </div>
+      <div class="answer-box">
+        <div class="section-title" style="margin-bottom:.55rem">Final Answer</div>
+        <p>The homogeneous substitution gives $$\boxed{-\frac{x^2}{2y^2}+\ln|y|=C}.$$ In textbook shorthand, this is $$\boxed{-\frac{x^2}{2y^2}+\log y=C}.$$</p>
+      </div>
+    </section>
+    <aside class="panel palace">
+      <div class="section-title">Memory Palace Thread</div>
+      <p class="palace-copy">Hover any line and it lights up the matching room.</p>
+      <p class="palace-paragraph">
+        <span class="palace-line active" tabindex="0" data-target="room-1" data-thread="-> Room 1" data-title="Room 1: Ratio Form" data-detail="First convert the equation to dy over dx form and then rewrite the right side using y over x.">At the first gate, the equation is tilted into $\dfrac{dy}{dx}$ form until the whole right side depends on $\dfrac{y}{x}$.</span>
+        <span class="palace-line" tabindex="0" data-target="room-2" data-thread="-> Room 2" data-title="Room 2: Substitute" data-detail="Once the ratio is visible, use the standard homogeneous substitution y = vx.">In the next corridor, the homogeneous switch replaces $y$ with $vx$.</span>
+        <span class="palace-line" tabindex="0" data-target="room-3" data-thread="-> Room 3" data-title="Room 3: Simplify" data-detail="Subtract the common v term so the derivative becomes a rational power in v.">Then the loose $v$ disappears and the right side collapses into a negative $v^3$ fraction.</span>
+        <span class="palace-line" tabindex="0" data-target="room-4" data-thread="-> Room 4" data-title="Room 4: Separate" data-detail="Move the v-expression left and split it into two standard integrals.">A split tunnel turns the left side into one power-rule lane and one log lane.</span>
+        <span class="palace-line" tabindex="0" data-target="room-5" data-thread="-> Room 5" data-title="Room 5: Integrate" data-detail="Integrate the power term and the v inverse term, while the x side gives a negative logarithm.">Inside the integration chamber, one term gives $-1/(2v^2)$ and the other opens a logarithm.</span>
+        <span class="palace-line" tabindex="0" data-target="room-6" data-thread="-> Room 6" data-title="Room 6: Back-Sub" data-detail="Replace v by y/x and cancel the x logs to leave only the y logarithm.">At the last vault, $v$ turns back into $\dfrac{y}{x}$ and the x-logs cancel, leaving the final $-\dfrac{x^2}{2y^2}+\log y$ form.</span>
+      </p>
+      <div class="thread-panel">
+        <div class="thread-label">Active Thread</div>
+        <div class="thread-target" id="thread-target">Room 1: Ratio Form</div>
+        <div class="thread-detail" id="thread-detail">First convert the equation to dy over dx form and then rewrite the right side using y over x.</div>
+      </div>
+    </aside>
+  </div>
+</main>
+<script>
+const lines = document.querySelectorAll('.palace-line');
+const rooms = document.querySelectorAll('.room');
+const targetLabel = document.getElementById('thread-target');
+const detailLabel = document.getElementById('thread-detail');
+function activateThread(line) {
+  const targetId = line.dataset.target;
+  lines.forEach((item) => item.classList.toggle('active', item === line));
+  rooms.forEach((room) => room.classList.toggle('active', room.id === targetId));
+  targetLabel.textContent = line.dataset.title;
+  detailLabel.textContent = line.dataset.detail;
+}
+lines.forEach((line) => {
+  line.addEventListener('mouseenter', () => activateThread(line));
+  line.addEventListener('focus', () => activateThread(line));
+  line.addEventListener('click', () => activateThread(line));
+});
+activateThread(lines[0]);
+</script>
+</body>
+</html>

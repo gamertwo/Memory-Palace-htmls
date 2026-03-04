@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RC Exercise 7-19 | Dominant Exponential + Graph</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --cyan:#7ce8ff;
+  --green:#8fe6c4;
+  --red:#ff8b8b;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1120px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.plot-note{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(155px,1fr));
+  gap:.75rem;
+}
+.fact{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.plot-wrap{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:.8rem;
+}
+.legend{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-bottom:.7rem;
+}
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:.82rem;
+  color:var(--muted);
+}
+.swatch{
+  width:12px;
+  height:12px;
+  border-radius:999px;
+}
+.swatch.input{background:var(--cyan)}
+.swatch.cap{background:var(--green)}
+.swatch.max{background:var(--red)}
+.plot-frame{
+  width:100%;
+  border:1px solid rgba(255,255,255,.04);
+  border-radius:12px;
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:360px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rc-ex718.html">Prev: 7-18</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 7-19</h1>
+    <p>The circuit is driven by an exponential source, so the response contains two exponentials: the source exponential and the RC natural exponential. The main tasks are to identify the dominant one, plot the source and capacitor voltage together, and find the maximum capacitor voltage and when it occurs.</p>
+    <div class="eq">$$v_C(t)=20e^{-50t}-25e^{-100t}\,\text{V},\qquad V_{\max}=4\,\text{V at }t=\frac{\ln 2.5}{50}\approx 18.3\,\text{ms}$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Thevenin Resistance</div><div class="v">$$R_T=100\,\text{k}\Omega$$</div></div>
+          <div class="fact"><div class="k">Capacitor</div><div class="v">$$C=0.1\,\mu\text{F}=10^{-7}\,\text{F}$$</div></div>
+          <div class="fact"><div class="k">Input</div><div class="v">$$v_S(t)=10e^{-50t}\,\text{V}$$</div></div>
+          <div class="fact"><div class="k">Initial Voltage</div><div class="v">$$v_C(0)=-5\,\text{V}$$</div></div>
+          <div class="fact"><div class="k">Time Constant</div><div class="v">$$\tau=R_TC=0.01\,\text{s}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Read the Natural Exponential</h2>
+            <ul>
+              <li>Since $$\tau=R_TC=0.01\,\text{s},$$ the natural response decays as</li>
+              <li>$$e^{-t/\tau}=e^{-100t}.$$</li>
+              <li>So the circuit's own decay rate is $$100\,\text{s}^{-1}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Read the Forcing Exponential</h2>
+            <ul>
+              <li>The source is</li>
+              <li>$$v_S(t)=10e^{-50t}\,\text{V}.$$</li>
+              <li>So the forcing decay rate is $$50\,\text{s}^{-1}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Decide the Dominant Exponential</h2>
+            <ul>
+              <li>The smaller decay rate dies more slowly.</li>
+              <li>Since $$50&lt;100,$$ the slower term is</li>
+              <li>$$\boxed{e^{-50t}}.$$</li>
+              <li>So the source exponential is the dominant exponential.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Reuse the Exponential-Forcing RC Formula</h2>
+            <ul>
+              <li>From the forced-response template,</li>
+              <li>$$v_C(t)=\left[V_0-\frac{V_A}{1-\alpha RC}\right]e^{-t/RC}+\frac{V_A}{1-\alpha RC}e^{-\alpha t}.$$</li>
+              <li>Here</li>
+              <li>$$V_0=-5,\qquad V_A=10,\qquad \alpha=50,\qquad RC=0.01.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Compute the Coefficients</h2>
+            <ul>
+              <li>$$1-\alpha RC=1-(50)(0.01)=0.5.$$</li>
+              <li>So</li>
+              <li>$$\frac{V_A}{1-\alpha RC}=\frac{10}{0.5}=20.$$</li>
+              <li>And</li>
+              <li>$$V_0-\frac{V_A}{1-\alpha RC}=-5-20=-25.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Write the Capacitor Voltage</h2>
+            <ul>
+              <li>Substitute the values:</li>
+              <li>$$\boxed{v_C(t)=20e^{-50t}-25e^{-100t}\,\text{V}},\qquad t\ge 0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Find the Maximum Time</h2>
+            <ul>
+              <li>Differentiate:</li>
+              <li>$$\frac{dv_C}{dt}=-1000e^{-50t}+2500e^{-100t}.$$</li>
+              <li>Set the derivative to zero:</li>
+              <li>$$2500e^{-100t}=1000e^{-50t}.$$</li>
+              <li>So</li>
+              <li>$$e^{50t}=2.5 \qquad \Rightarrow \qquad t_{\max}=\frac{\ln 2.5}{50}\approx 0.0183\,\text{s}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Find the Maximum Voltage</h2>
+            <ul>
+              <li>At $$t_{\max},$$ let $$x=e^{-50t_{\max}}=\frac{1}{2.5}=0.4.$$</li>
+              <li>Then $$e^{-100t_{\max}}=x^2=0.16.$$</li>
+              <li>So</li>
+              <li>$$V_{\max}=20(0.4)-25(0.16)=8-4=4\,\text{V}.$$</li>
+              <li>Therefore</li>
+              <li>$$\boxed{V_{\max}=4\,\text{V at }t\approx 18.3\,\text{ms}}.$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Graph</div>
+        <div class="plot-wrap">
+          <div class="legend">
+            <div class="legend-item"><span class="swatch input"></span><span>Input: $$v_S(t)=10e^{-50t}$$</span></div>
+            <div class="legend-item"><span class="swatch cap"></span><span>Capacitor: $$v_C(t)=20e^{-50t}-25e^{-100t}$$</span></div>
+            <div class="legend-item"><span class="swatch max"></span><span>Peak: $$4\,\text{V at }18.3\,\text{ms}$$</span></div>
+          </div>
+          <svg id="response-plot" class="plot-frame" viewBox="0 0 640 320" aria-label="Voltage response graph"></svg>
+          <p class="plot-note">The cyan curve is the source, which decays slowly from 10 V. The green curve is the capacitor voltage, which starts at -5 V, rises past zero, peaks at 4 V, and then follows the slower source exponential.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Key Shortcut</div>
+        <div class="mini">
+          <h3>Compare Decay Rates First</h3>
+          <p>For this kind of question, do not start with differentiation. First compare the forcing rate and the natural rate. That immediately tells you the dominant exponential. Only after the full response is written should you differentiate to locate the maximum.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This path is ordered by control: first compare the two exponential clocks, then write the full response, then use calculus only at the end to find the peak.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Clock Gate</h3>
+          <p>Read the natural clock $$e^{-100t}$$ from $$RC.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>Once the circuit clock is known, compare it with the source clock.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Source Clock</h3>
+          <p>Read the forcing exponential $$e^{-50t}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>The slower clock dominates later, so the next room decides the winner.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Dominance Vault</h3>
+          <p>Store $$e^{-50t}$$ as the dominant exponential.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>Now the full response can be built using the forcing-response template.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Template Hall</h3>
+          <p>Insert $$V_0,\ V_A,\ \alpha,\ RC$$ into the standard formula.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>The coefficients must be simplified before the final waveform is clear.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Coefficient Lock</h3>
+          <p>Compute $$20$$ and $$-25$$ to get the final voltage expression.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>Once the response exists, the graph tells you there is a peak, so calculus becomes necessary.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Slope Door</h3>
+          <p>Set $$dv_C/dt=0$$ to locate the maximum time.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 6 to 7</h3>
+          <p>After the peak time is known, plug it back once to get the peak voltage.</p>
+        </div>
+        <div class="station">
+          <h3>Station 7: Peak Seal</h3>
+          <p>Store $$V_{\max}=4\,\text{V}$$ at $$18.3\,\text{ms}.$$</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full solution flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this RC derivation. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The circuit has R_T = 100 kΩ and C = 0.1 microfarad, so RC = 0.01 s and the natural exponential is e^(-100 t).
+2. The input is 10 e^(-50 t) V, so the forcing exponential is e^(-50 t).
+3. Compare the rates: 50 is smaller than 100, so e^(-50 t) decays more slowly and is the dominant exponential.
+4. Use the exponential-forcing RC response formula with V_0 = -5, V_A = 10, alpha = 50, and RC = 0.01.
+5. Compute 1 - alpha RC = 1 - 0.5 = 0.5.
+6. Therefore V_A / (1 - alpha RC) = 10 / 0.5 = 20.
+7. Then V_0 - V_A / (1 - alpha RC) = -5 - 20 = -25.
+8. So the capacitor voltage is v_C(t) = 20 e^(-50 t) - 25 e^(-100 t).
+9. Differentiate: dv_C/dt = -1000 e^(-50 t) + 2500 e^(-100 t).
+10. Set dv_C/dt = 0 to find the peak: e^(50 t) = 2.5, so t_max = ln(2.5)/50 ≈ 18.3 ms.
+11. At that time, the capacitor voltage reaches 4 V.
+12. Plot the input and capacitor voltage on the same graph, and note that the capacitor curve eventually follows the slower source exponential.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex719Modal = document.getElementById('prompt-modal');
+const ex719Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex719Modal.classList.add('open');
+  ex719Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex719Modal.classList.remove('open');
+    ex719Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex719Modal.addEventListener('click', (event) => {
+  if (event.target === ex719Modal) {
+    ex719Modal.classList.remove('open');
+    ex719Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(ex719Textarea.value);
+  } catch (error) {
+    ex719Textarea.focus();
+    ex719Textarea.select();
+  }
+});
+
+const svg = document.getElementById('response-plot');
+const NS = 'http://www.w3.org/2000/svg';
+const width = 640;
+const height = 320;
+const pad = { left: 56, right: 18, top: 18, bottom: 42 };
+const plotW = width - pad.left - pad.right;
+const plotH = height - pad.top - pad.bottom;
+const tMax = 0.06;
+const yMin = -6;
+const yMax = 11;
+const tPeak = Math.log(2.5) / 50;
+const vPeak = 4;
+
+function xScale(t) {
+  return pad.left + (t / tMax) * plotW;
+}
+
+function yScale(v) {
+  return pad.top + ((yMax - v) / (yMax - yMin)) * plotH;
+}
+
+function make(tag, attrs = {}) {
+  const el = document.createElementNS(NS, tag);
+  Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+  return el;
+}
+
+for (let i = 0; i <= 6; i += 1) {
+  const t = (tMax / 6) * i;
+  const x = xScale(t);
+  svg.appendChild(make('line', {
+    x1: x, y1: pad.top, x2: x, y2: height - pad.bottom,
+    stroke: 'rgba(255,255,255,0.06)', 'stroke-width': '1'
+  }));
+  const label = make('text', {
+    x, y: height - 16, fill: 'rgba(247,241,232,0.72)', 'font-size': '11', 'text-anchor': 'middle'
+  });
+  label.textContent = `${Math.round(t * 1000)} ms`;
+  svg.appendChild(label);
+}
+
+[-5, 0, 5, 10].forEach((v) => {
+  const y = yScale(v);
+  svg.appendChild(make('line', {
+    x1: pad.left, y1: y, x2: width - pad.right, y2: y,
+    stroke: 'rgba(255,255,255,0.06)', 'stroke-width': '1'
+  }));
+  const label = make('text', {
+    x: 42, y: y + 4, fill: 'rgba(247,241,232,0.72)', 'font-size': '11', 'text-anchor': 'end'
+  });
+  label.textContent = `${v} V`;
+  svg.appendChild(label);
+});
+
+svg.appendChild(make('line', {
+  x1: pad.left, y1: height - pad.bottom, x2: width - pad.right, y2: height - pad.bottom,
+  stroke: 'rgba(247,241,232,0.7)', 'stroke-width': '1.6'
+}));
+svg.appendChild(make('line', {
+  x1: pad.left, y1: pad.top, x2: pad.left, y2: height - pad.bottom,
+  stroke: 'rgba(247,241,232,0.7)', 'stroke-width': '1.6'
+}));
+
+function buildPath(fn) {
+  let d = '';
+  const samples = 180;
+  for (let i = 0; i <= samples; i += 1) {
+    const t = (tMax / samples) * i;
+    const x = xScale(t);
+    const y = yScale(fn(t));
+    d += `${i === 0 ? 'M' : 'L'} ${x.toFixed(2)} ${y.toFixed(2)} `;
+  }
+  return d.trim();
+}
+
+const sourcePath = make('path', {
+  d: buildPath((t) => 10 * Math.exp(-50 * t)),
+  fill: 'none',
+  stroke: '#7ce8ff',
+  'stroke-width': '3'
+});
+svg.appendChild(sourcePath);
+
+const capPath = make('path', {
+  d: buildPath((t) => 20 * Math.exp(-50 * t) - 25 * Math.exp(-100 * t)),
+  fill: 'none',
+  stroke: '#8fe6c4',
+  'stroke-width': '3'
+});
+svg.appendChild(capPath);
+
+svg.appendChild(make('line', {
+  x1: xScale(tPeak), y1: yScale(yMin), x2: xScale(tPeak), y2: yScale(vPeak),
+  stroke: '#ff8b8b', 'stroke-width': '1.6', 'stroke-dasharray': '6 5'
+}));
+svg.appendChild(make('circle', {
+  cx: xScale(tPeak), cy: yScale(vPeak), r: '5', fill: '#ff8b8b'
+}));
+
+const peakText = make('text', {
+  x: xScale(tPeak) + 10, y: yScale(vPeak) - 10,
+  fill: '#ffb3b3', 'font-size': '12'
+});
+peakText.textContent = 'Peak: 4 V';
+svg.appendChild(peakText);
+
+const xAxisText = make('text', {
+  x: width - 18, y: height - 16, fill: 'rgba(247,241,232,0.72)', 'font-size': '12', 'text-anchor': 'end'
+});
+xAxisText.textContent = 'time';
+svg.appendChild(xAxisText);
+
+const yAxisText = make('text', {
+  x: 18, y: 16, fill: 'rgba(247,241,232,0.72)', 'font-size': '12'
+});
+yAxisText.textContent = 'voltage';
+svg.appendChild(yAxisText);
+</script>
+</body>
+</html>

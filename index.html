@@ -420,6 +420,10 @@
         <a class="sb-item" href="rc-ex712.html"><span><div class="dot" style="color:#8fd6ff"></div></span> Exercise 7-12</a>
         <a class="sb-item" href="rc-design712.html"><span><div class="dot" style="color:#ffd08a"></div></span> Design Ex 7-12</a>
         <a class="sb-item" href="rl-design714.html"><span><div class="dot" style="color:#a8f0c6"></div></span> Design Ex 7-14</a>
+        <a class="sb-item" href="rc-ex715-example.html"><span><div class="dot" style="color:#7ce8ff"></div></span> Example 7-15</a>
+        <a class="sb-item" href="rc-ex716-example.html"><span><div class="dot" style="color:#c6b7ff"></div></span> Example 7-16</a>
+        <a class="sb-item" href="rc-ex718.html"><span><div class="dot" style="color:#8fe6c4"></div></span> Exercise 7-18</a>
+        <a class="sb-item" href="rc-ex719.html"><span><div class="dot" style="color:#9bd7ff"></div></span> Exercise 7-19</a>
         <a class="sb-item" href="rl-ex713-example.html"><span><div class="dot" style="color:#9fd3ff"></div></span> Example 7-13</a>
         <a class="sb-item" href="rl-ex717.html"><span><div class="dot" style="color:#ffcf9d"></div></span> Exercise 7-17</a>
 
@@ -649,6 +653,82 @@
                             <div class="pc-fact"><span>Task</span><b>Use $\tau=L/R$ backward</b></div>
                         </div>
                         <div class="pc-actions"><a class="btn-outline" href="rl-design714.html" style="--pc:#a8f0c6">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#7ce8ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RC Forced Response</div>
+                                <div class="pc-title">Example 7-15 Â· Exponential input response</div>
+                            </div>
+                            <div class="pc-icon">E</div>
+                        </div>
+                        <div class="pc-eq">Keep the natural RC decay, guess a matching exponential forced term, then use $v(0)=V_0$ to lock the final constant.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RC with exponential forcing</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Two exponentials in one response</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex715-example.html" style="--pc:#7ce8ff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#c6b7ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RC Sinusoidal Forcing</div>
+                                <div class="pc-title">Example 7-16 - Switch + sinusoidal source</div>
+                            </div>
+                            <div class="pc-icon">S</div>
+                        </div>
+                        <div class="pc-eq">Reduce to Thevenin seen by the capacitor, solve $$2\times 10^{-3}\frac{dv(t)}{dt}+v(t)=10\sin(1000t),\ t\ge 0,$$ then apply the zero-input initial condition.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RC with sinusoidal forcing</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Natural + forced sinusoid</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex716-example.html" style="--pc:#c6b7ff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#8fe6c4">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RC With Exponential Source</div>
+                                <div class="pc-title">Exercise 7-18 Â· Find $v_C(t)$ and $i_C(t)$</div>
+                            </div>
+                            <div class="pc-icon">C</div>
+                        </div>
+                        <div class="pc-eq">Use a Thevenin reduction first, then reuse the exponential-forcing RC template to get the capacitor voltage and current.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RC with Thevenin reduction</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Find both voltage and current</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex718.html" style="--pc:#8fe6c4">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#9bd7ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">RC Peak Response</div>
+                                <div class="pc-title">Exercise 7-19 Â· Dominant exponential + graph</div>
+                            </div>
+                            <div class="pc-icon">G</div>
+                        </div>
+                        <div class="pc-eq">Compare the source exponential with the circuit exponential, build $v_C(t)$, then find the peak value and time. Includes an on-page graph of input and capacitor voltage.</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Type</span><b>RC with exponential input</b></div>
+                            <div class="pc-fact"><span>Task</span><b>Dominant term + maximum + graph</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="rc-ex719.html" style="--pc:#9bd7ff">Open Page -></a></div>
                     </div>
                 </div>
 

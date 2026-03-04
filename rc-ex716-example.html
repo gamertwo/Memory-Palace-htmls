@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RC Example 7-16 | Sinusoidal Forcing Response</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(155px,1fr));
+  gap:.75rem;
+}
+.fact{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:360px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rc-ex715-example.html">Prev: 7-15</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Example 7-16</h1>
+    <p>The switch has been open for a long time and closes at $t=0$. First convert the source-resistor side to its Thevenin view, then solve the first-order differential equation with a sinusoidal forcing term. Finally, apply the initial condition.</p>
+    <div class="eq">$$v(t)=4e^{-500t}-4\cos(1000t)+2\sin(1000t)\ \text{V},\qquad t\ge 0$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source</div><div class="v">$$v_S(t)=20\sin(1000t)\,u(t)\ \text{V}$$</div></div>
+          <div class="fact"><div class="k">Resistors</div><div class="v">$$4\,\text{k}\Omega,\ 4\,\text{k}\Omega$$</div></div>
+          <div class="fact"><div class="k">Capacitor</div><div class="v">$$C=1\,\mu\text{F}$$</div></div>
+          <div class="fact"><div class="k">Initial State</div><div class="v">Switch open for long time, so $$v(0)=0.$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Find the Thevenin Voltage Seen by the Capacitor</h2>
+            <ul>
+              <li>Use voltage division between equal $$4\,\text{k}\Omega$$ resistors:</li>
+              <li>$$v_T(t)=\frac{4}{4+4}v_S(t)=\frac{1}{2}\cdot 20\sin(1000t)=10\sin(1000t)\ \text{V}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Find Thevenin Resistance and Time Constant</h2>
+            <ul>
+              <li>With source turned off, the two $$4\,\text{k}\Omega$$ resistors are in parallel:</li>
+              <li>$$R_T=4\,\text{k}\Omega \parallel 4\,\text{k}\Omega=2\,\text{k}\Omega.$$</li>
+              <li>So</li>
+              <li>$$\tau=R_TC=(2\times10^3)(1\times10^{-6})=2\times10^{-3}\ \text{s}=\frac{1}{500}\ \text{s}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Write the Differential Equation</h2>
+            <ul>
+              <li>The first-order RC equation becomes</li>
+              <li>$$2\times10^{-3}\frac{dv(t)}{dt}+v(t)=10\sin(1000t),\qquad t\ge 0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Write Natural and Forced Forms</h2>
+            <ul>
+              <li>Natural part:</li>
+              <li>$$v_N(t)=Ke^{-500t}.$$</li>
+              <li>Forced guess (sinusoidal input):</li>
+              <li>$$v_F(t)=a\cos(1000t)+b\sin(1000t).$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Substitute Forced Form and Collect Terms</h2>
+            <ul>
+              <li>Substituting $$v_F$$ gives</li>
+              <li>$$2\times10^{-3}\!\left[-1000a\sin(1000t)+1000b\cos(1000t)\right]+a\cos(1000t)+b\sin(1000t)=10\sin(1000t).$$</li>
+              <li>Collecting cosine and sine terms:</li>
+              <li>$$(a+2b)\cos(1000t)+(-2a+b-10)\sin(1000t)=0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Solve for $a$ and $b$</h2>
+            <ul>
+              <li>From coefficient matching:</li>
+              <li>$$a+2b=0,\qquad -2a+b=10.$$</li>
+              <li>So</li>
+              <li>$$a=-4,\qquad b=2.$$</li>
+              <li>Hence</li>
+              <li>$$v_F(t)=-4\cos(1000t)+2\sin(1000t).$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Build Total Response and Apply Initial Condition</h2>
+            <ul>
+              <li>Total response:</li>
+              <li>$$v(t)=Ke^{-500t}-4\cos(1000t)+2\sin(1000t).$$</li>
+              <li>At $$t=0,$$</li>
+              <li>$$v(0)=K-4.$$</li>
+              <li>Given zero initial capacitor voltage, $$v(0)=0,$$ so $$K=4.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Final Answer</h2>
+            <ul>
+              <li>$$\boxed{v(t)=4e^{-500t}-4\cos(1000t)+2\sin(1000t)\ \text{V}},\qquad t\ge 0.$$</li>
+              <li>Equivalent amplitude-phase form for the sinusoidal part:</li>
+              <li>$$-4\cos(1000t)+2\sin(1000t)=4.47\cos(1000t-153.4^\circ).$$</li>
+              <li>So</li>
+              <li>$$v(t)=4e^{-500t}+4.47\cos(1000t-153.4^\circ)\ \text{V},\qquad t\ge 0.$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Key Shortcut</div>
+        <div class="mini">
+          <h3>Fourier-Coefficient Guess</h3>
+          <p>For sinusoidal forcing in first-order circuits, the fast path is: keep the natural exponential, guess a forced combination of cosine and sine, solve the two linear equations for coefficients, then apply the initial condition to fix the natural constant.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This route stays strict: Thevenin first, time constant second, coefficient matching third, and initial condition last.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Divider Gate</h3>
+          <p>Shrink the source side to $$v_T(t)=10\sin(1000t).$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>After the Thevenin voltage, the capacitor still needs the resistance it sees.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Parallel Bridge</h3>
+          <p>Store $$R_T=2\,\text{k}\Omega$$ and $$\tau=1/500\ \text{s}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>Once $$\tau$$ is known, the first-order differential equation is immediate.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: ODE Hall</h3>
+          <p>Write $$2\times10^{-3}\dot v+v=10\sin(1000t).$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>The input is sinusoidal, so the forced guess must carry both sine and cosine pieces.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Coefficient Lab</h3>
+          <p>Use $$a\cos(1000t)+b\sin(1000t)$$ and match coefficients.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>After solving for $$a$$ and $$b$$, only the natural constant is unknown.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Initial Lock</h3>
+          <p>Apply $$v(0)=0$$ to get $$K=4.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>With all constants fixed, only the final cleaned expression remains.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Final Vault</h3>
+          <p>Seal $$v(t)=4e^{-500t}-4\cos(1000t)+2\sin(1000t).$$</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full derivation. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this RC derivation. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The source is v_s(t) = 20 sin(1000 t) u(t) V.
+2. By voltage division with two equal 4 kΩ resistors, the Thevenin voltage seen by the capacitor is v_T(t) = 10 sin(1000 t) V.
+3. With source turned off, the two 4 kΩ resistors are in parallel, so R_T = 2 kΩ.
+4. With C = 1 microfarad, the time constant is tau = R_T C = 2 x 10^-3 s = 1/500 s.
+5. The differential equation is 2 x 10^-3 dv/dt + v(t) = 10 sin(1000 t), t >= 0.
+6. Natural response is v_N(t) = K e^(-500 t).
+7. Forced response guess is v_F(t) = a cos(1000 t) + b sin(1000 t).
+8. Substituting and collecting terms gives (a + 2b) cos(1000 t) + (-2a + b - 10) sin(1000 t) = 0.
+9. Solve the two equations: a + 2b = 0 and -2a + b = 10, so a = -4 and b = 2.
+10. Total response is v(t) = K e^(-500 t) - 4 cos(1000 t) + 2 sin(1000 t).
+11. Initial condition is v(0) = 0, so K = 4.
+12. Final answer is v(t) = 4 e^(-500 t) - 4 cos(1000 t) + 2 sin(1000 t), t >= 0.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex716Modal = document.getElementById('prompt-modal');
+const ex716Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex716Modal.classList.add('open');
+  ex716Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex716Modal.classList.remove('open');
+    ex716Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex716Modal.addEventListener('click', (event) => {
+  if (event.target === ex716Modal) {
+    ex716Modal.classList.remove('open');
+    ex716Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(ex716Textarea.value);
+  } catch (error) {
+    ex716Textarea.focus();
+    ex716Textarea.select();
+  }
+});
+</script>
+</body>
+</html>
