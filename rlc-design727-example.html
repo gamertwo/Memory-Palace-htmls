@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RLC Design Example 7-27 | Design a Parallel RLC Circuit for a Target Damping Ratio and Natural Frequency</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="rlc-study-page.css" />
+<link rel="stylesheet" href="linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="linear-review.js" defer></script>
+<style>:root{--accent:#84b6ff}</style>
+</head>
+<body>
+<main class="shell"><nav class="nav"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a><a href="rlc-eval734.html">Back: Eval Ex 7-34</a></nav>
+<section class="hero"><h1>Design Example 7-27</h1><p>Design a parallel RLC circuit with $$\zeta=0.5$$ and $$\omega_0=25\ \text{krad/s}.$$ Turn those targets into coefficient constraints, choose one convenient component, and solve for the other two.</p><div class="eq">$$s^2+\frac{1}{RC}s+\frac{1}{LC}=0$$
+$$\frac{1}{RC}=2\zeta\omega_0=25\times10^3,\qquad \frac{1}{LC}=\omega_0^2=6.25\times10^8$$</div><div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div></section>
+<div class="content-grid"><div class="main-stack">
+<section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Target Damping</div><div class="v">$$\zeta=0.5$$</div></div><div class="fact"><div class="k">Target Frequency</div><div class="v">$$\omega_0=25\times10^3\ \text{rad/s}$$</div></div><div class="fact"><div class="k">Chosen Resistor</div><div class="v">$$R=10\ \text{k}\Omega$$</div></div><div class="fact"><div class="k">Solved Capacitor</div><div class="v">$$C=4000\ \text{pF}$$</div></div><div class="fact"><div class="k">Solved Inductor</div><div class="v">$$L=0.4\ \text{H}$$</div></div><div class="fact"><div class="k">Design Freedom</div><div class="v">Three parameters, two constraints</div></div></div></section>
+<section class="panel"><div class="section-title">Answer Board</div><div class="facts"><div class="fact"><div class="k">Constraint 1</div><div class="v">$$\frac{1}{RC}=25\times10^3$$</div></div><div class="fact"><div class="k">Constraint 2</div><div class="v">$$\frac{1}{LC}=6.25\times10^8$$</div></div><div class="fact"><div class="k">One Valid Design</div><div class="v">$$\boxed{R=10\ \text{k}\Omega,\ C=4000\ \text{pF},\ L=0.4\ \text{H}}$$</div></div><div class="fact"><div class="k">Design Note</div><div class="v">Many other designs are valid.</div></div></div></section>
+<section class="panel"><div class="section-title">Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Start from the Parallel Form</h2><ul><li>Use $$s^2+\frac{1}{RC}s+\frac{1}{LC}=0.$$</li><li>Compare with $$s^2+2\zeta\omega_0s+\omega_0^2=0.$$</li></ul></article><article class="room"><h2>Room 2: Convert the Design Targets</h2><ul><li>From $$\zeta=0.5$$ and $$\omega_0=25\times10^3,$$</li><li>$$\frac{1}{RC}=2\zeta\omega_0=25\times10^3.$$</li><li>Also $$\frac{1}{LC}=\omega_0^2=(25\times10^3)^2=6.25\times10^8.$$</li></ul></article><article class="room"><h2>Room 3: Choose One Component</h2><ul><li>There are three parameters and two equations.</li><li>Choose $$R=10\ \text{k}\Omega.$$</li></ul></article><article class="room"><h2>Room 4: Solve for C</h2><ul><li>$$C=1/((10\times10^3)(25\times10^3))=4\times10^{-9}\ \text{F}=4000\ \text{pF}.$$</li></ul></article><article class="room"><h2>Room 5: Solve for L</h2><ul><li>$$L=1/(C\omega_0^2)=1/((4\times10^{-9})(6.25\times10^8))=0.4\ \text{H}.$$</li></ul></article><article class="room"><h2>Room 6: Final Design Logic</h2><ul><li>The chosen set meets both the damping-ratio and natural-frequency targets.</li><li>Many other designs are possible because one component remains free.</li></ul></article></div><div class="mini"><h3>Fast Memory Rule</h3><p>Convert $$\zeta$$ and $$\omega_0$$ into the coefficient of $$s$$ and the constant term, then pick one component and let the equations solve the rest.</p></div></section>
+</div><aside class="palace-sidebar"><div class="section-title">Memory Palace Path</div><p class="palace-intro">This path moves from the target damping pair to one valid parallel RLC design.</p><div class="path"><div class="station"><h3>Station 1: Target Board</h3><p>Translate $$\zeta$$ and $$\omega_0$$ into coefficient constraints.</p></div><div class="transition"><h3>Transition 1 to 2</h3><p>Two equations leave one component free.</p></div><div class="station"><h3>Station 2: Choice Lever</h3><p>Pick $$R=10\ \text{k}\Omega.$$</p></div><div class="transition"><h3>Transition 2 to 3</h3><p>Now solve directly for $$C$$ and $$L.$$</p></div><div class="station"><h3>Station 3: Design Exit</h3><p>Finish with $$C=4000\ \text{pF}$$ and $$L=0.4\ \text{H}.$$</p></div></div></aside></div></main>
+<div class="modal" id="prompt-modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div><p class="modal-copy">This prompt is prefilled with the full Design Example 7-27 flow.</p><textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this parallel RLC design example. Keep the order exact, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The design targets are zeta=0.5 and omega0=25 krad/s.
+2. The parallel RLC characteristic equation is s^2+1/(RC)s+1/(LC)=0.
+3. Matching coefficients gives 1/(RC)=25x10^3 and 1/(LC)=6.25x10^8.
+4. Choose R=10 kilo-ohms.
+5. Solve C=4000 pF.
+6. Solve L=0.4 H.
+7. Many other designs are also valid.</textarea><div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div></div></div>
+<script>const modal=document.getElementById('prompt-modal');const textarea=document.getElementById('prompt-text');document.querySelector('[data-open-prompt]').addEventListener('click',()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');});document.querySelectorAll('[data-close-prompt]').forEach((button)=>{button.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');});});modal.addEventListener('click',(event)=>{if(event.target===modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}});document.getElementById('copy-prompt').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(textarea.value);}catch(error){textarea.focus();textarea.select();}});</script>
+</body>
+</html>

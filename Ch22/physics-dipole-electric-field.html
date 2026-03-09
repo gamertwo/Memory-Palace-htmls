@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>A Dipole in an Electric Field | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.75rem,4vw,2.75rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.7rem;
+}
+.fact{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:340px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="physics-charged-particle-electric-field-motion.html">Back: Charged Particle Motion</a>
+  </nav>
+
+  <section class="hero">
+    <h1>A Dipole in an Electric Field</h1>
+    <p>This page covers both parts in your screenshot: the torque that tends to align a dipole with a uniform electric field, and the potential energy expression that explains stable and unstable orientation.</p>
+    <div class="eq">$$\tau=pE\sin\theta,\qquad \vec{\tau}=\vec{p}\times\vec{E},\qquad U=-\vec{p}\cdot\vec{E}=-pE\cos\theta$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Core Definitions</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Dipole Charges</div><div class="v">Two charges: $$+q$$ and $$-q$$</div></div>
+          <div class="fact"><div class="k">Separation</div><div class="v">Distance between charges: $$d$$</div></div>
+          <div class="fact"><div class="k">Dipole Moment</div><div class="v">$$\vec p=q\vec d$$ from negative to positive</div></div>
+          <div class="fact"><div class="k">Field</div><div class="v">Uniform external field $$\vec E$$</div></div>
+          <div class="fact"><div class="k">Angle</div><div class="v">$$\theta$$ is angle between $$\vec p$$ and $$\vec E$$</div></div>
+          <div class="fact"><div class="k">Physical Result</div><div class="v">Net force is zero, but torque is nonzero unless aligned</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Torque on a Dipole</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Forces on Each Charge</h2>
+            <ul>
+              <li>On $$+q$$, force magnitude is $$F=qE$$ along $$\vec E.$$</li>
+              <li>On $$-q$$, force magnitude is also $$F=qE$$ opposite to $$\vec E.$$</li>
+              <li>These two forces cancel in translation, so net force is zero.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Build the Couple</h2>
+            <ul>
+              <li>The equal and opposite forces act at different points, so they form a couple.</li>
+              <li>Perpendicular moment arm of each force about center is $$\frac{d}{2}\sin\theta.$$</li>
+              <li>Total torque magnitude:</li>
+              <li>$$\tau=F\left(\frac{d}{2}\sin\theta\right)+F\left(\frac{d}{2}\sin\theta\right)=Fd\sin\theta.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Substitute $$F=qE$$ and $$p=qd$$</h2>
+            <ul>
+              <li>Replace $$F$$ in $$\tau=Fd\sin\theta$$:</li>
+              <li>$$\tau=(qE)d\sin\theta=(qd)E\sin\theta.$$</li>
+              <li>Using $$p=qd$$ gives</li>
+              <li>$$\boxed{\tau=pE\sin\theta}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Vector Form and Direction</h2>
+            <ul>
+              <li>Vector form is</li>
+              <li>$$\boxed{\vec\tau=\vec p\times\vec E}.$$</li>
+              <li>Direction follows right-hand rule and tends to rotate the dipole toward alignment with $$\vec E.$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Potential Energy of a Dipole</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 5: Start From Rotational Work</h2>
+            <ul>
+              <li>Field torque tries to reduce $$\theta.$$</li>
+              <li>For a slow external rotation, potential-energy change is related by</li>
+              <li>$$dU=-\tau\,d\theta=-pE\sin\theta\,d\theta.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Integrate</h2>
+            <ul>
+              <li>Integrate from a reference angle to $$\theta$$:</li>
+              <li>$$U(\theta)-U(\theta_0)=-\int_{\theta_0}^{\theta}pE\sin\phi\,d\phi.$$</li>
+              <li>So</li>
+              <li>$$U(\theta)-U(\theta_0)=-pE\left[\cos\theta_0-\cos\theta\right].$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Choose the Common Reference</h2>
+            <ul>
+              <li>Set $$U=0$$ at $$\theta_0=90^\circ$$ where $$\cos\theta_0=0.$$</li>
+              <li>Then</li>
+              <li>$$\boxed{U(\theta)=-pE\cos\theta}.$$</li>
+              <li>Equivalent vector form:</li>
+              <li>$$\boxed{U=-\vec p\cdot\vec E}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Stability Meaning</h2>
+            <ul>
+              <li>Minimum energy at $$\theta=0$$ (aligned): $$U_{\min}=-pE.$$</li>
+              <li>Maximum energy at $$\theta=\pi$$ (anti-aligned): $$U_{\max}=+pE.$$</li>
+              <li>This is why a dipole tends to align with the field direction.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Key Physics Shortcut</div>
+        <div class="mini">
+          <h3>One-Line Memory Rule</h3>
+          <p>If you remember only one chain, keep this: opposite forces make a couple, the couple gives $$\tau=pE\sin\theta,$$ and integrating torque gives $$U=-pE\cos\theta.$$ Alignment means lower energy.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This path is split exactly like the textbook: first torque, then potential energy, with each station forcing the next formula.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Two-Charge Gate</h3>
+          <p>Place $$+q$$ and $$-q$$ in a uniform field and note equal force magnitudes.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>No net translation means the only effect left is rotation.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Couple Bridge</h3>
+          <p>Store the pair-torque geometry with moment arm $$\frac{d}{2}\sin\theta.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>Once geometry is fixed, substitution turns force form into dipole form.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Torque Vault</h3>
+          <p>Seal $$\tau=pE\sin\theta$$ and $$\vec\tau=\vec p\times\vec E.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>Torque formula immediately opens the energy section via rotational work.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Work Corridor</h3>
+          <p>Write $$dU=-\tau\,d\theta=-pE\sin\theta\,d\theta.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>Integrate and pick the standard reference at ninety degrees.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Energy Chamber</h3>
+          <p>Lock $$U=-pE\cos\theta=-\vec p\cdot\vec E.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>Energy extremes then explain which orientation is stable.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Alignment Seal</h3>
+          <p>Minimum at $$\theta=0,$$ maximum at $$\theta=\pi.$$</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full solution flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this dipole-in-electric-field derivation. Keep the steps in order, make each step lead naturally to the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. A dipole has charges +q and -q separated by distance d, with dipole moment p = qd directed from negative to positive.
+2. In a uniform electric field E, forces on the two charges are equal in magnitude qE and opposite in direction.
+3. Net force is zero, but the pair forms a couple, so there is a torque.
+4. Each force has moment arm (d/2) sin(theta), giving total torque tau = F d sin(theta).
+5. Substitute F = qE, then tau = qEd sin(theta) = pE sin(theta).
+6. Vector torque form is tau-vector = p-vector cross E-vector.
+7. For potential energy, use dU = -tau d(theta) = -pE sin(theta) d(theta).
+8. Integrate to get U(theta) - U(theta0) = -integral pE sin(phi) d(phi).
+9. Choose U = 0 at theta0 = 90 degrees, then U(theta) = -pE cos(theta).
+10. Vector form is U = -p-vector dot E-vector.
+11. Minimum energy is at theta = 0 (aligned), maximum at theta = pi (anti-aligned).
+12. Final memory chain: torque aligns the dipole, and energy explains why alignment is stable.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const dipoleModal = document.getElementById('prompt-modal');
+const dipoleTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  dipoleModal.classList.add('open');
+  dipoleModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    dipoleModal.classList.remove('open');
+    dipoleModal.setAttribute('aria-hidden', 'true');
+  });
+});
+dipoleModal.addEventListener('click', (event) => {
+  if (event.target === dipoleModal) {
+    dipoleModal.classList.remove('open');
+    dipoleModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(dipoleTextarea.value);
+  } catch (error) {
+    dipoleTextarea.focus();
+    dipoleTextarea.select();
+  }
+});
+</script>
+</body>
+</html>

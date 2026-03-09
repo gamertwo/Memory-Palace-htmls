@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.5 Q2 | First-Order Linear Equation</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.5rem}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}
+.main-stack{display:grid;gap:1rem}
+.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.rooms{display:grid;gap:.85rem}
+.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.75rem}
+.fact{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.75rem}
+.fact .k{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.25rem}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{margin-top:.75rem;padding:.75rem .85rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.transition{border-style:dashed;background:rgba(255,255,255,.02)}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}
+.modal.open{display:flex}
+.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{width:100%;min-height:340px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="math-index.html">Math Hub</a>
+    <a href="math-ex35-q1-linear.html">Prev: Ex 3.5 Q1</a>
+    <a href="math-ex35-q3-linear.html">Next: Ex 3.5 Q3</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 3.5 Question 2</h1>
+    <p>This one looks different because it is given in differential form, but after rearrangement it becomes a linear equation in $$y.$$ Then the integrating-factor method works exactly the same way.</p>
+    <div class="eq">$$(2y-3x)\,dx+x\,dy=0\qquad\Longrightarrow\qquad x^2y=x^3+C$$</div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Original Form</div><div class="v">$$(2y-3x)\,dx+x\,dy=0$$</div></div>
+          <div class="fact"><div class="k">Standard Form</div><div class="v">$$y'+\frac{2}{x}y=3$$</div></div>
+          <div class="fact"><div class="k">Here</div><div class="v">$$P(x)=\frac{2}{x},\quad Q(x)=3$$</div></div>
+          <div class="fact"><div class="k">Integrating Factor</div><div class="v">$$\mu(x)=e^{\int 2/x\,dx}=x^2$$</div></div>
+          <div class="fact"><div class="k">Textbook Form</div><div class="v">$$yx^2=x^3+C$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Rearrange into $$dy/dx$$ Form</h2>
+            <ul>
+              <li>Start from</li>
+              <li>$$(2y-3x)\,dx+x\,dy=0.$$</li>
+              <li>Move the differential form into derivative form:</li>
+              <li>$$x\frac{dy}{dx}=3x-2y.$$</li>
+              <li>Now divide by $$x:$$</li>
+              <li>$$\frac{dy}{dx}+\frac{2}{x}y=3.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Read Off the Integrating Factor</h2>
+            <ul>
+              <li>This is linear with</li>
+              <li>$$P(x)=\frac{2}{x}.$$</li>
+              <li>So</li>
+              <li>$$\mu(x)=e^{\int \frac{2}{x}\,dx}=e^{2\ln|x|}=x^2.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Multiply Through by $$x^2$$</h2>
+            <ul>
+              <li>Multiply the whole equation by $$x^2:$$</li>
+              <li>$$x^2\frac{dy}{dx}+2xy=3x^2.$$</li>
+              <li>The left side is</li>
+              <li>$$\frac{d}{dx}(x^2y).$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Integrate</h2>
+            <ul>
+              <li>So we get</li>
+              <li>$$\frac{d}{dx}(x^2y)=3x^2.$$</li>
+              <li>Integrate both sides:</li>
+              <li>$$x^2y=\int 3x^2\,dx=x^3+C.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Final Answer</h2>
+            <ul>
+              <li>The textbook answer is</li>
+              <li>$$\boxed{x^2y=x^3+C}.$$</li>
+              <li>Equivalently, $$y=x+\dfrac{C}{x^2}.$$</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>When an equation is given as $$M\,dx+N\,dy=0,$$ first see whether it can be rearranged into $$y'+P(x)y=Q(x).$$ Once that happens, it becomes a standard linear-equation problem.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This route begins with rearrangement, then becomes a normal integrating-factor problem.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Differential Gate</h3><p>Convert $$(2y-3x)\,dx+x\,dy=0$$ into $$dy/dx$$ form.</p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>Once $$y'$$ is isolated, the coefficient of $$y$$ becomes visible.</p></div>
+        <div class="station"><h3>Station 2: IF Desk</h3><p>Read $$P(x)=2/x$$ and store $$\mu=x^2.$$</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>Multiply by $$x^2$$ so the left side fuses into one derivative.</p></div>
+        <div class="station"><h3>Station 3: Product Hall</h3><p>Recognize $$x^2y'+2xy=\dfrac{d}{dx}(x^2y).$$</p></div>
+        <div class="transition"><h3>Transition 3 to 4</h3><p>Only one elementary integral remains.</p></div>
+        <div class="station"><h3>Station 4: Integral Vault</h3><p>Integrate $$3x^2$$ to get $$x^3+C.$$</p></div>
+        <div class="transition"><h3>Transition 4 to 5</h3><p>The result is already in textbook form.</p></div>
+        <div class="station"><h3>Station 5: Final Seal</h3><p>Lock $$x^2y=x^3+C.$$</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full solution flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this first-order linear differential-equation solution. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. Start from (2y - 3x) dx + x dy = 0.
+2. Convert to derivative form: x y' = 3x - 2y.
+3. Divide by x to get y' + (2/x)y = 3.
+4. This is linear with P(x) = 2/x.
+5. The integrating factor is mu(x) = e^(integral 2/x dx) = x^2.
+6. Multiply through by x^2.
+7. Then x^2 y' + 2xy = 3x^2.
+8. The left side is d(x^2 y)/dx.
+9. Integrate to get x^2 y = x^3 + C.
+10. Final answer is x^2 y = x^3 + C.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex35q2Modal = document.getElementById('prompt-modal');
+const ex35q2Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex35q2Modal.classList.add('open');
+  ex35q2Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex35q2Modal.classList.remove('open');
+    ex35q2Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex35q2Modal.addEventListener('click', (event) => {
+  if (event.target === ex35q2Modal) {
+    ex35q2Modal.classList.remove('open');
+    ex35q2Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(ex35q2Textarea.value); }
+  catch (error) { ex35q2Textarea.focus(); ex35q2Textarea.select(); }
+});
+</script>
+</body>
+</html>

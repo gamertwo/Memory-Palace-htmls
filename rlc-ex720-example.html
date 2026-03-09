@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RLC Example 7-20 | Parallel Zero-Input Responses</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.75rem,4vw,2.75rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.7rem;
+}
+.fact{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:340px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rlc-ex719-example.html">Back: Example 7-19</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Example 7-20</h1>
+    <p>For a parallel RLC circuit with $$R=500\ \Omega,$$ $$C=1\ \mu\text{F},$$ $$L=0.2\ \text{H},$$ $$I_0=50\ \text{mA},$$ and $$V_0=0\ \text{V},$$ find the zero-input responses of the inductor current, resistor current, and capacitor voltage.</p>
+    <div class="eq">$$s^2+2000s+5\times 10^6=0,\qquad s_{1,2}=-1000\pm j2000$$
+    $$i_L(t)=50e^{-1000t}\cos 2000t+25e^{-1000t}\sin 2000t\ \text{mA}$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Resistance</div><div class="v">$$R=500\ \Omega$$</div></div>
+          <div class="fact"><div class="k">Capacitance</div><div class="v">$$C=1\times 10^{-6}\ \text{F}$$</div></div>
+          <div class="fact"><div class="k">Inductance</div><div class="v">$$L=0.2\ \text{H}$$</div></div>
+          <div class="fact"><div class="k">Initial Current</div><div class="v">$$i_L(0)=I_0=50\ \text{mA}$$</div></div>
+          <div class="fact"><div class="k">Initial Voltage</div><div class="v">$$v_C(0)=V_0=0\ \text{V}$$</div></div>
+          <div class="fact"><div class="k">Parallel Facts</div><div class="v">$$v_L=v_C=v_R,\quad i_R=\dfrac{v}{R},\quad i_C=C\dfrac{dv}{dt}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Answer Board</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Inductor Current</div><div class="v">$$i_L(t)=50e^{-1000t}\cos 2000t+25e^{-1000t}\sin 2000t\ \text{mA}$$</div></div>
+          <div class="fact"><div class="k">Capacitor Voltage</div><div class="v">$$v_C(t)=-25e^{-1000t}\sin 2000t\ \text{V}$$</div></div>
+          <div class="fact"><div class="k">Resistor Current</div><div class="v">$$i_R(t)=-50e^{-1000t}\sin 2000t\ \text{mA}$$</div></div>
+          <div class="fact"><div class="k">Extra Check</div><div class="v">$$i_C(t)=-50e^{-1000t}\cos 2000t+25e^{-1000t}\sin 2000t\ \text{mA}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Write the Parallel Characteristic Equation</h2>
+            <ul>
+              <li>For a zero-input parallel RLC circuit, use</li>
+              <li>$$LCs^2+\frac{L}{R}s+1=0.$$</li>
+              <li>Substitute the values:</li>
+              <li>$$0.2(10^{-6})s^2+\frac{0.2}{500}s+1=0,$$</li>
+              <li>so</li>
+              <li>$$2\times 10^{-7}s^2+4\times 10^{-4}s+1=0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Find the Roots and Pick the Form</h2>
+            <ul>
+              <li>The roots are</li>
+              <li>$$s_{1,2}=-1000\pm j2000.$$</li>
+              <li>Because the roots are complex conjugates, the current has the underdamped form</li>
+              <li>$$i_L(t)=K_1e^{-1000t}\cos 2000t+K_2e^{-1000t}\sin 2000t.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Use the Current Initial Condition</h2>
+            <ul>
+              <li>At $$t=0,$$ the cosine term is 1 and the sine term is 0.</li>
+              <li>So</li>
+              <li>$$i_L(0)=I_0=50=K_1\ \text{mA}.$$</li>
+              <li>Therefore</li>
+              <li>$$K_1=50.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Convert the Voltage Initial Condition into a Derivative Condition</h2>
+            <ul>
+              <li>For the inductor,</li>
+              <li>$$v_L(t)=L\frac{di_L(t)}{dt}=v_C(t).$$</li>
+              <li>Since $$v_C(0)=0,$$ we need</li>
+              <li>$$\left.\frac{di_L}{dt}\right|_0=0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Differentiate and Solve for $$K_2$$</h2>
+            <ul>
+              <li>Differentiating gives</li>
+              <li>$$\frac{di_L}{dt}=e^{-1000t}\left[(-1000K_1+2000K_2)\cos 2000t+(-1000K_2-2000K_1)\sin 2000t\right].$$</li>
+              <li>At $$t=0,$$ the sine term vanishes, so</li>
+              <li>$$0=-1000K_1+2000K_2.$$</li>
+              <li>With $$K_1=50,$$</li>
+              <li>$$K_2=25.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Final Inductor Current</h2>
+            <ul>
+              <li>Substitute the constants back into the template:</li>
+              <li>$$\boxed{i_L(t)=50e^{-1000t}\cos 2000t+25e^{-1000t}\sin 2000t\ \text{mA}}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Use the Current to Get the Voltage</h2>
+            <ul>
+              <li>Differentiate the final current and multiply by $$L=0.2\ \text{H}.$$</li>
+              <li>The cosine term cancels because of the derivative condition, leaving</li>
+              <li>$$v_L(t)=L\frac{di_L}{dt}=-25e^{-1000t}\sin 2000t\ \text{V}.$$</li>
+              <li>Since all three branches are in parallel,</li>
+              <li>$$\boxed{v_C(t)=v_L(t)=-25e^{-1000t}\sin 2000t\ \text{V}}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Get the Resistor Current and Check KCL</h2>
+            <ul>
+              <li>Use Ohm's law on the resistor branch:</li>
+              <li>$$i_R(t)=\frac{v_C(t)}{R}=\frac{-25e^{-1000t}\sin 2000t}{500}.$$</li>
+              <li>So</li>
+              <li>$$\boxed{i_R(t)=-50e^{-1000t}\sin 2000t\ \text{mA}}.$$</li>
+              <li>If you also compute $$i_C=C\,dv_C/dt,$$ the three branch currents add to zero, as KCL requires.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Fast Memory Rule</h3>
+          <p>Parallel RLC zero-input work here runs in one chain: solve the parallel characteristic equation, build the underdamped inductor-current form, use $$i_L(0)$$ and $$v_C(0)=L\,di_L/dt$$ to find the constants, then get voltage and resistor current from that one current waveform.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Start from the parallel characteristic equation, then walk from current to voltage to the resistor branch. Each station exists because the previous one forces it.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Parallel Gate</h3>
+          <p>Store $$LCs^2+\frac{L}{R}s+1=0.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>Once the coefficients are known, the next step is the root pattern.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Root Vault</h3>
+          <p>Keep $$-1000\pm j2000$$ and the underdamped current form.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>The template is useless until the initial conditions pin down the constants.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Current Lock</h3>
+          <p>Use $$i_L(0)=50\ \text{mA}$$ to set $$K_1=50.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>The zero initial capacitor voltage becomes a derivative condition on the inductor current.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Derivative Bridge</h3>
+          <p>Use $$v_C(0)=v_L(0)=L\,di_L/dt|_0=0$$ to solve for $$K_2.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>Once both constants are known, the full current waveform is fixed.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Current Chamber</h3>
+          <p>Seal the final $$i_L(t).$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>The current immediately generates voltage through the inductor law.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Voltage Hall</h3>
+          <p>Turn $$L\,di_L/dt$$ into $$v_C(t).$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 6 to 7</h3>
+          <p>Once the voltage exists, the resistor branch is just Ohm's law.</p>
+        </div>
+        <div class="station">
+          <h3>Station 7: Branch Exit</h3>
+          <p>Store $$i_R=v/R$$ and remember KCL closes the loop.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full Example 7-20 flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this parallel RLC zero-input example. Keep the solution order exact, make each step trigger the next one, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The circuit is a parallel RLC with R = 500 ohms, C = 1 microfarad, L = 0.2 H, I0 = 50 mA, and V0 = 0 V.
+2. Use the parallel characteristic equation LC s^2 + (L/R) s + 1 = 0.
+3. Substituting the values gives 2 x 10^-7 s^2 + 4 x 10^-4 s + 1 = 0.
+4. The roots are s = -1000 plus or minus j2000, so the zero-input inductor current is underdamped.
+5. Write iL(t) = K1 e^(-1000 t) cos 2000 t + K2 e^(-1000 t) sin 2000 t.
+6. Apply iL(0) = 50 mA to get K1 = 50.
+7. Because vC(0) = vL(0) = L diL/dt at t = 0 equals zero, the derivative condition gives K2 = 25.
+8. Therefore iL(t) = 50 e^(-1000 t) cos 2000 t + 25 e^(-1000 t) sin 2000 t mA.
+9. Use vL = L diL/dt and the shared parallel voltage to get vC(t) = -25 e^(-1000 t) sin 2000 t V.
+10. Use iR = vC / R to get iR(t) = -50 e^(-1000 t) sin 2000 t mA.
+11. The final memory chain is: characteristic equation, roots, current template, two initial conditions, then voltage and branch current.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex720Modal = document.getElementById('prompt-modal');
+const ex720Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex720Modal.classList.add('open');
+  ex720Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex720Modal.classList.remove('open');
+    ex720Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex720Modal.addEventListener('click', (event) => {
+  if (event.target === ex720Modal) {
+    ex720Modal.classList.remove('open');
+    ex720Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(ex720Textarea.value);
+  } catch (error) {
+    ex720Textarea.focus();
+    ex720Textarea.select();
+  }
+});
+</script>
+</body>
+</html>

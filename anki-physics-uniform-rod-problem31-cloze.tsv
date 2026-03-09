@@ -1,0 +1,18 @@
+Rod length in Problem 31 is {{c1::8.15 cm = 0.0815 m}}.	Unit conversion anchor from given data.	physics rod_field problem31
+Total rod charge is {{c1::-4.23 fC = -4.23 x 10^-15 C}}.	Keep sign for direction later.	physics rod_field problem31
+For a uniformly charged rod, linear charge density is {{c1::lambda = Q_rod / L}}.	Definition of uniform linear charge density.	physics rod_field problem31
+Numerically, {{c1::lambda = -5.19 x 10^-14 C/m}}.	From Q_rod = -4.23e-15 C and L = 0.0815 m.	physics rod_field problem31
+If x is measured from left rod end, point P is at {{c1::x = L + a}}.	Geometry setup used for integration.	physics rod_field problem31
+A small rod segment has charge {{c1::dq = lambda dx}}.	Elemental charge for integration.	physics rod_field problem31
+Distance from element at x to point P is {{c1::r = L + a - x}}.	Used in Coulomb denominator.	physics rod_field problem31
+Differential x-component field at P is {{c1::dE_x = (1/(4 pi eps0)) * lambda dx / (L + a - x)^2}}.	Only x-component survives for this geometry.	physics rod_field problem31
+Integral setup is {{c1::E_x = (lambda/(4 pi eps0)) integral_0^L dx/(L + a - x)^2}}.	Main integral form for part (b).	physics rod_field problem31
+Key integral result: {{c1::integral_0^L dx/(L + a - x)^2 = 1/a - 1/(L + a) = L/[a(L+a)]}}.	Algebra simplification step.	physics rod_field problem31
+Exact field expression is {{c1::E_x = lambda L/(4 pi eps0 a(L+a)) = -q/(4 pi eps0 a(L+a))}}.	Use q as positive magnitude with explicit minus sign.	physics rod_field problem31
+At a = 0.120 m, the field is {{c1::E_x = -1.57 x 10^-3 N/C}}.	Magnitude is 1.57 x 10^-3 N/C.	physics rod_field problem31
+Negative E_x means direction is {{c1::-x direction (180 deg from +x axis)}}.	Part (c) direction interpretation.	physics rod_field problem31
+For a >> L, use approximation {{c1::L + a approx a}}.	This converts exact rod expression to far-field form.	physics rod_field problem31
+Far-field approximation becomes {{c1::E_x approx -q/(4 pi eps0 a^2)}}.	Same form as point charge at large distance.	physics rod_field problem31
+At a = 50 m, approximate field is {{c1::E_x approx -1.52 x 10^-8 N/C}}.	Magnitude is 1.52 x 10^-8 N/C.	physics rod_field problem31
+If the rod is replaced by a point charge -q, the field at 50 m is {{c1::-1.52 x 10^-8 N/C}}.	Matches the far-field rod result.	physics rod_field problem31
+Memory chain: {{c1::density -> dq -> geometry r -> integrate dE_x -> sign -> far-field limit}}.	One-line recall path for full solution.	physics rod_field problem31

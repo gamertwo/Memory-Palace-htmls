@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>C Syntax and Core Functions | Chapters 1-6 | Memory Palace</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="linear-review.css" />
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+code,pre{
+  font-family:Consolas,'Courier New',monospace;
+}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.75rem,4vw,2.75rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  overflow:auto;
+}
+.eq pre{
+  white-space:pre-wrap;
+  line-height:1.65;
+  color:var(--text);
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.7rem;
+}
+.fact{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.code-slab{
+  margin-top:.65rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  white-space:pre-wrap;
+  line-height:1.65;
+  color:var(--text);
+  overflow:auto;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:360px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+  </nav>
+
+  <section class="hero">
+    <h1>C Syntax and Core Functions</h1>
+    <p>This page compresses Chapters 1 through 6 into one memory-palace route: program skeleton, console I/O, operators, control flow, functions, random numbers, math helpers, arrays, strings, format specifiers, and escape sequences.</p>
+    <div class="eq"><pre>#include &lt;stdio.h&gt;
+
+int main(void) {
+  printf("Hello, world!\n");
+  return 0;
+}</pre></div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Map</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Program Start</div><div class="v"><code>int main(void) { ... }</code></div></div>
+          <div class="fact"><div class="k">Core I/O</div><div class="v"><code>printf</code>, <code>scanf</code>, <code>puts</code>, <code>fgets</code>, <code>getchar</code>, <code>putchar</code></div></div>
+          <div class="fact"><div class="k">Decision Tools</div><div class="v"><code>if</code>, <code>else</code>, <code>switch</code></div></div>
+          <div class="fact"><div class="k">Loops</div><div class="v"><code>while</code>, <code>for</code>, <code>do ... while</code></div></div>
+          <div class="fact"><div class="k">Function Pattern</div><div class="v"><code>prototype -&gt; definition -&gt; return</code></div></div>
+          <div class="fact"><div class="k">Library Helpers</div><div class="v"><code>rand</code>, <code>srand</code>, <code>pow</code>, <code>sqrt</code>, <code>fabs</code>, <code>ceil</code>, <code>floor</code></div></div>
+          <div class="fact"><div class="k">Array Rule</div><div class="v">Indexes run from <code>0</code> to <code>size - 1</code></div></div>
+          <div class="fact"><div class="k">Common Traps</div><div class="v"><code>=</code> vs <code>==</code>, missing <code>&amp;</code> in <code>scanf</code>, forgotten semicolons</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Program Skeleton</h2>
+            <ul>
+              <li>Start with preprocessor directives like <code>#include &lt;stdio.h&gt;</code>.</li>
+              <li>Every C program begins execution in <code>int main(void)</code>.</li>
+              <li>Statements end with semicolons, but <code>#define</code> lines do not.</li>
+              <li>Braces group blocks of statements, and comments use <code>//</code> or <code>/* ... */</code>.</li>
+            </ul>
+            <pre class="code-slab">#include &lt;stdio.h&gt;
+#define PI 3.14159
+
+int main(void) {
+  /* program starts here */
+  return 0;
+}</pre>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Standard I/O</h2>
+            <ul>
+              <li><code>printf</code> prints formatted output.</li>
+              <li><code>scanf</code> reads input, and non-array variables need the address operator.</li>
+              <li><code>puts</code> prints a string with a newline.</li>
+              <li><code>getchar</code> reads one character, <code>putchar</code> writes one character, and <code>fgets</code> safely reads a full line.</li>
+            </ul>
+            <pre class="code-slab">int age;
+char name[40];
+
+printf("Enter age: ");
+scanf("%d", &amp;age);
+fgets(name, 40, stdin);</pre>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Operators and Expressions</h2>
+            <ul>
+              <li>Arithmetic uses <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, and <code>%</code>.</li>
+              <li>Assignments include <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, and <code>%=</code>.</li>
+              <li>Comparisons use <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, and <code>!=</code>.</li>
+              <li>Logic uses <code>&amp;&amp;</code>, <code>||</code>, and <code>!</code>. Increment and decrement use <code>++</code> and <code>--</code>.</li>
+              <li>The ternary operator is <code>(condition) ? true_value : false_value</code>, and <code>sizeof(type)</code> returns byte size.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Selection Statements</h2>
+            <ul>
+              <li>Use <code>if</code> for one-way decisions and <code>if ... else</code> for two-way decisions.</li>
+              <li>Use <code>switch</code> when testing one integer or character expression against many constant cases.</li>
+              <li><code>break</code> usually ends each <code>case</code> so execution does not fall through accidentally.</li>
+            </ul>
+            <pre class="code-slab">if (score &gt;= 50) {
+  puts("Pass");
+} else {
+  puts("Fail");
+}
+
+switch (grade) {
+  case 'A':
+    puts("Excellent");
+    break;
+  default:
+    puts("Keep working");
+}</pre>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Loops and Flow Control</h2>
+            <ul>
+              <li><code>while</code> checks first, then repeats.</li>
+              <li><code>for (init; cond; inc)</code> is strongest when counting.</li>
+              <li><code>do ... while</code> runs at least once because the test comes last.</li>
+              <li><code>break</code> exits a loop immediately, while <code>continue</code> skips to the next iteration.</li>
+            </ul>
+            <pre class="code-slab">for (i = 0; i &lt; 10; i++) {
+  if (i == 4) {
+    continue;
+  }
+  if (i == 8) {
+    break;
+  }
+}</pre>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Functions</h2>
+            <ul>
+              <li>A prototype declares the function before use.</li>
+              <li>The definition gives the parameter names and the body.</li>
+              <li>The <code>return</code> statement sends a value back for non-<code>void</code> functions.</li>
+            </ul>
+            <pre class="code-slab">int square(int number);
+
+int square(int number) {
+  return number * number;
+}</pre>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Random Numbers and Libraries</h2>
+            <ul>
+              <li><code>#include &lt;stdlib.h&gt;</code> gives access to <code>rand()</code> and <code>srand()</code>.</li>
+              <li><code>rand()</code> returns a pseudo-random integer.</li>
+              <li><code>srand(seed)</code> initializes the generator, often with <code>time(NULL)</code>.</li>
+            </ul>
+            <pre class="code-slab">#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+srand((unsigned int) time(NULL));
+value = rand();</pre>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Math Functions</h2>
+            <ul>
+              <li><code>#include &lt;math.h&gt;</code> exposes core math helpers.</li>
+              <li><code>pow(x, y)</code> raises <code>x</code> to the power <code>y</code>.</li>
+              <li><code>sqrt(x)</code>, <code>fabs(x)</code>, <code>ceil(x)</code>, and <code>floor(x)</code> handle roots, absolute values, and rounding.</li>
+            </ul>
+            <pre class="code-slab">double a = pow(2.0, 3.0);
+double b = sqrt(49.0);
+double c = fabs(-7.25);
+double d = ceil(3.14);
+double e = floor(3.14);</pre>
+          </article>
+
+          <article class="room">
+            <h2>Room 9: Arrays and Strings</h2>
+            <ul>
+              <li>An array declaration reserves contiguous storage, for example <code>int values[5];</code>.</li>
+              <li>Initialization can set every element explicitly or zero the whole array with <code>{0}</code>.</li>
+              <li>Subscripts begin at <code>0</code>, so the last valid index is <code>size - 1</code>.</li>
+              <li>Two-dimensional arrays use row and column brackets.</li>
+              <li>A string is a character array that ends with the null character <code>'\0'</code>.</li>
+            </ul>
+            <pre class="code-slab">int values[5] = {1, 2, 3, 4, 5};
+int zeros[5] = {0};
+int table[3][4];
+char word[6] = "Hello";</pre>
+          </article>
+
+          <article class="room">
+            <h2>Room 10: Format Specifiers and Escapes</h2>
+            <ul>
+              <li>Core specifiers include <code>%d</code>, <code>%f</code>, <code>%lf</code>, <code>%c</code>, <code>%s</code>, and <code>%zu</code>.</li>
+              <li>Escape sequences include <code>\n</code>, <code>\t</code>, <code>\a</code>, <code>\\</code>, and <code>\"</code>.</li>
+              <li>These are essential for correct formatted input, output, and readable text layout.</li>
+            </ul>
+            <pre class="code-slab">printf("Name:\t%s\n", name);
+printf("Path: C:\\\\temp\\\\file.txt\n");
+printf("Quote: \"C syntax\"\n");</pre>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>High-Frequency Mistakes</h3>
+          <p>Keep four traps active in memory: missing semicolons, writing <code>=</code> when you meant <code>==</code>, forgetting <code>&amp;</code> in <code>scanf</code>, and reading outside valid array indexes.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">One-Pass Recall</div>
+        <div class="mini">
+          <h3>Compressed Memory Rule</h3>
+          <p>Think in one chain: the program starts with <code>#include</code> and <code>main</code>, talks through <code>printf</code> and <code>scanf</code>, decides with <code>if</code> or <code>switch</code>, repeats with loops, organizes work into functions, pulls helpers from <code>stdlib.h</code> and <code>math.h</code>, stores data in arrays, and prints everything correctly with format specifiers and escapes.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Walk the language from the front door of a program to the last console print. Each station exists because the previous one forces it.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Program Gate</h3>
+          <p>Store <code>#include</code>, <code>main</code>, semicolons, braces, constants, and comments.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>Once a program exists, it has to talk to the user through the console.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Console Desk</h3>
+          <p>Hold <code>printf</code>, <code>scanf</code>, <code>puts</code>, <code>getchar</code>, <code>putchar</code>, and <code>fgets</code>.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>After input and output, expressions must be built from operators.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Operator Bench</h3>
+          <p>Keep arithmetic, assignment, comparison, logical, increment, ternary, and <code>sizeof</code>.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>Once conditions exist, the next question is how the program decides where to go.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Decision Fork</h3>
+          <p>Choose between <code>if</code>, <code>if ... else</code>, and <code>switch</code>.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>After decisions, the code often needs repetition.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Loop Track</h3>
+          <p>Walk through <code>while</code>, <code>for</code>, <code>do ... while</code>, <code>break</code>, and <code>continue</code>.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>Repeated logic should be packaged, so functions become the next stop.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Function Office</h3>
+          <p>Prototype first, define second, return a value if needed.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 6 to 7</h3>
+          <p>Functions often depend on libraries, so the route moves to helper shelves.</p>
+        </div>
+        <div class="station">
+          <h3>Station 7: Library Shelf</h3>
+          <p>Put random-number tools in <code>stdlib.h</code> and math tools in <code>math.h</code>.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 7 to 8</h3>
+          <p>Once helpers are available, data needs a place to live.</p>
+        </div>
+        <div class="station">
+          <h3>Station 8: Array Warehouse</h3>
+          <p>Store one-dimensional arrays, two-dimensional tables, and null-terminated strings.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 8 to 9</h3>
+          <p>The last step is presenting and reading data correctly.</p>
+        </div>
+        <div class="station">
+          <h3>Station 9: Format Terminal</h3>
+          <p>Keep specifiers like <code>%d</code> and escapes like <code>\n</code> ready for final output.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full Chapters 1 to 6 syntax flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this C programming syntax summary from Chapters 1 through 6. Keep the sequence faithful to the study flow, make each station cause the next one, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. Program structure starts with preprocessor directives like #include <stdio.h>.
+2. Execution begins in int main(void), statements end with semicolons, braces create blocks, #define creates symbolic constants, and comments use // or /* ... */.
+3. Standard I/O includes printf, scanf, puts, getchar, putchar, and fgets.
+4. scanf needs the address operator for ordinary variables.
+5. Essential operators include arithmetic, assignment, relational, equality, logical, increment and decrement, ternary, parentheses for precedence, and sizeof.
+6. Selection statements are if, if ... else, and switch with case, break, and default.
+7. Iteration statements are while, for, and do ... while, with break and continue for flow control.
+8. Functions use prototypes, definitions, parameters, and return values.
+9. Random-number work uses rand and srand from stdlib.h, often with time(NULL) as the seed.
+10. Math helpers from math.h include pow, sqrt, fabs, ceil, and floor.
+11. Arrays use bracket notation, indexing begins at 0, two-dimensional arrays use rows and columns, and strings are char arrays ending with '\0'.
+12. Core conversion specifiers include %d, %f, %lf, %c, %s, and %zu.
+13. Core escape sequences include \n, \t, \a, \\, and \".</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const cSyntaxModal = document.getElementById('prompt-modal');
+const cSyntaxTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  cSyntaxModal.classList.add('open');
+  cSyntaxModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    cSyntaxModal.classList.remove('open');
+    cSyntaxModal.setAttribute('aria-hidden', 'true');
+  });
+});
+cSyntaxModal.addEventListener('click', (event) => {
+  if (event.target === cSyntaxModal) {
+    cSyntaxModal.classList.remove('open');
+    cSyntaxModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(cSyntaxTextarea.value);
+  } catch (error) {
+    cSyntaxTextarea.focus();
+    cSyntaxTextarea.select();
+  }
+});
+</script>
+</body>
+</html>

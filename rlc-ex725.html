@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RLC Exercise 7-25 | Series Zero-Input Voltage and Current</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.75rem,4vw,2.75rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.7rem;
+}
+.fact{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:340px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rlc-ex720-example.html">Back: Example 7-20</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 7-25</h1>
+    <p>For a series RLC circuit with $$R=250\ \Omega,$$ $$L=10\ \text{mH},$$ $$C=1\ \mu\text{F},$$ $$V_0=0,$$ and $$I_0=30\ \text{mA},$$ find the capacitor voltage and inductor current for $$t\ge 0.$$</p>
+    <div class="eq">$$s^2+25000s+10^8=0,\qquad s_1=-5000,\ s_2=-20000$$
+    $$v_C(t)=2e^{-5000t}-2e^{-20000t}\ \text{V},\qquad i_L(t)=-10e^{-5000t}+40e^{-20000t}\ \text{mA}$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Resistance</div><div class="v">$$R=250\ \Omega$$</div></div>
+          <div class="fact"><div class="k">Inductance</div><div class="v">$$L=10\times 10^{-3}\ \text{H}$$</div></div>
+          <div class="fact"><div class="k">Capacitance</div><div class="v">$$C=1\times 10^{-6}\ \text{F}$$</div></div>
+          <div class="fact"><div class="k">Initial Voltage</div><div class="v">$$v_C(0)=V_0=0$$</div></div>
+          <div class="fact"><div class="k">Initial Current</div><div class="v">$$i_L(0)=I_0=30\ \text{mA}$$</div></div>
+          <div class="fact"><div class="k">Series Rule</div><div class="v">$$i_L(t)=i_C(t)=C\dfrac{dv_C}{dt}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Answer Board</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Capacitor Voltage</div><div class="v">$$v_C(t)=2e^{-5000t}-2e^{-20000t}\ \text{V}$$</div></div>
+          <div class="fact"><div class="k">Inductor Current</div><div class="v">$$i_L(t)=-10e^{-5000t}+40e^{-20000t}\ \text{mA}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Write the Series Characteristic Equation</h2>
+            <ul>
+              <li>For a zero-input series RLC circuit, use</li>
+              <li>$$s^2+\frac{R}{L}s+\frac{1}{LC}=0.$$</li>
+              <li>Substitute the values:</li>
+              <li>$$s^2+\frac{250}{0.01}s+\frac{1}{0.01\times 10^{-6}}=0.$$</li>
+              <li>So</li>
+              <li>$$s^2+25000s+10^8=0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Find the Two Real Roots</h2>
+            <ul>
+              <li>Factoring or solving gives</li>
+              <li>$$s_1=-5000,\qquad s_2=-20000.$$</li>
+              <li>So the capacitor-voltage template is</li>
+              <li>$$v_C(t)=K_1e^{-5000t}+K_2e^{-20000t}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Apply the Initial Voltage</h2>
+            <ul>
+              <li>At $$t=0,$$</li>
+              <li>$$v_C(0)=K_1+K_2=0.$$</li>
+              <li>Therefore</li>
+              <li>$$K_2=-K_1.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Convert the Initial Current into a Slope</h2>
+            <ul>
+              <li>Because the current is the same through every series element,</li>
+              <li>$$i_L(t)=i_C(t)=C\frac{dv_C}{dt}.$$</li>
+              <li>Differentiate the voltage template:</li>
+              <li>$$\frac{dv_C}{dt}=-5000K_1e^{-5000t}-20000K_2e^{-20000t}.$$</li>
+              <li>At $$t=0,$$</li>
+              <li>$$I_0=C(-5000K_1-20000K_2).$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Solve for $$K_1$$ and $$K_2$$</h2>
+            <ul>
+              <li>Use $$C=10^{-6}\ \text{F}$$ and $$I_0=30\ \text{mA}=0.03\ \text{A}.$$</li>
+              <li>Then</li>
+              <li>$$0.03=10^{-6}(-5000K_1-20000K_2).$$</li>
+              <li>With $$K_2=-K_1,$$ this becomes</li>
+              <li>$$0.03=10^{-6}(15000K_1),$$ so $$K_1=2$$ and $$K_2=-2.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Final Capacitor Voltage</h2>
+            <ul>
+              <li>Substitute the constants into the voltage template:</li>
+              <li>$$\boxed{v_C(t)=2e^{-5000t}-2e^{-20000t}\ \text{V}}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Differentiate to Get the Inductor Current</h2>
+            <ul>
+              <li>Differentiate the final voltage:</li>
+              <li>$$\frac{dv_C}{dt}=-10000e^{-5000t}+40000e^{-20000t}.$$</li>
+              <li>Multiply by $$C=10^{-6}\ \text{F}:$$</li>
+              <li>$$i_L(t)=10^{-6}\left(-10000e^{-5000t}+40000e^{-20000t}\right).$$</li>
+              <li>So</li>
+              <li>$$\boxed{i_L(t)=-10e^{-5000t}+40e^{-20000t}\ \text{mA}}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Read the Shape</h2>
+            <ul>
+              <li>The circuit is overdamped because the roots are two different real negatives.</li>
+              <li>The faster $$e^{-20000t}$$ term dies first, so the slower $$e^{-5000t}$$ term dominates later time.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Fast Memory Rule</h3>
+          <p>For a series zero-input problem with voltage as the state variable, write the two-root voltage form, use $$v_C(0)$$ to connect the constants, use $$i=C\,dv/dt$$ for the slope condition, then differentiate once more to recover the current.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This route begins with the series characteristic equation and ends with current recovered from the voltage derivative.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Series Gate</h3>
+          <p>Store $$s^2+\frac{R}{L}s+\frac{1}{LC}=0.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>Once the coefficients are fixed, the roots determine the waveform form.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Root Hall</h3>
+          <p>Keep the two real roots $$-5000$$ and $$-20000.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>The general voltage form needs initial conditions before it becomes useful.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Voltage Lock</h3>
+          <p>Use $$v_C(0)=0$$ to connect $$K_1$$ and $$K_2.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>The second condition comes from the series current relation.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Slope Bridge</h3>
+          <p>Use $$i=C\,dv_C/dt$$ with $$I_0=30\ \text{mA}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>Once the constants are solved, the complete voltage waveform is done.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Voltage Chamber</h3>
+          <p>Seal $$v_C(t)=2e^{-5000t}-2e^{-20000t}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>The current is now only one derivative away.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Current Exit</h3>
+          <p>Differentiate once and multiply by $$C$$ to get $$i_L(t).$$</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full Exercise 7-25 flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this series RLC zero-input exercise. Keep the solution order strict, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The circuit is series RLC with R = 250 ohms, L = 10 mH, C = 1 microfarad, V0 = 0, and I0 = 30 mA.
+2. Use the series characteristic equation s^2 + (R/L)s + 1/(LC) = 0.
+3. Substituting the values gives s^2 + 25000s + 10^8 = 0.
+4. The roots are -5000 and -20000, so write vC(t) = K1 e^(-5000t) + K2 e^(-20000t).
+5. Apply vC(0) = 0 to get K1 + K2 = 0.
+6. Use the series current relation iL = iC = C dvC/dt.
+7. Apply I0 = 30 mA at t = 0 to solve the constants and get K1 = 2 and K2 = -2.
+8. Therefore vC(t) = 2 e^(-5000t) - 2 e^(-20000t) volts.
+9. Differentiate and multiply by C to get iL(t) = -10 e^(-5000t) + 40 e^(-20000t) mA.
+10. Final memory chain: characteristic equation, roots, voltage template, initial voltage, slope from current, final voltage, then final current.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex725Modal = document.getElementById('prompt-modal');
+const ex725Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex725Modal.classList.add('open');
+  ex725Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex725Modal.classList.remove('open');
+    ex725Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex725Modal.addEventListener('click', (event) => {
+  if (event.target === ex725Modal) {
+    ex725Modal.classList.remove('open');
+    ex725Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(ex725Textarea.value);
+  } catch (error) {
+    ex725Textarea.focus();
+    ex725Textarea.select();
+  }
+});
+</script>
+</body>
+</html>

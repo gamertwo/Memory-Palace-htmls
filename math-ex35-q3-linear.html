@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.5 Q3 | First-Order Linear Equation</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.5rem}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}
+.main-stack{display:grid;gap:1rem}
+.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.rooms{display:grid;gap:.85rem}
+.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.75rem}
+.fact{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.75rem}
+.fact .k{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.25rem}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{margin-top:.75rem;padding:.75rem .85rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.transition{border-style:dashed;background:rgba(255,255,255,.02)}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}
+.modal.open{display:flex}
+.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{width:100%;min-height:340px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="math-index.html">Math Hub</a>
+    <a href="math-ex35-q2-linear.html">Prev: Ex 3.5 Q2</a>
+    <a href="math-ex35-q4-linear.html">Next: Ex 3.5 Q4</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 3.5 Question 3</h1>
+    <p>This is a linear equation with a trigonometric coefficient. The key observation is that the integrating factor for $$\cot x$$ is $$\sin x,$$ which turns the left side into the derivative of $$y\sin x.$$</p>
+    <div class="eq">$$\frac{dy}{dx}+y\cot x=\cos x\qquad\Longrightarrow\qquad y\sin x=\frac{\sin^2 x}{2}+C$$</div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Method</div><div class="v">First-order linear ODE</div></div>
+          <div class="fact"><div class="k">Standard Form</div><div class="v">$$y'+(\cot x)y=\cos x$$</div></div>
+          <div class="fact"><div class="k">Here</div><div class="v">$$P(x)=\cot x,\quad Q(x)=\cos x$$</div></div>
+          <div class="fact"><div class="k">Integrating Factor</div><div class="v">$$\mu(x)=e^{\int \cot x\,dx}=\sin x$$</div></div>
+          <div class="fact"><div class="k">Textbook Form</div><div class="v">$$y\sin x=\frac{\sin^2 x}{2}+C$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Identify the Linear Form</h2>
+            <ul>
+              <li>The equation is already in the standard linear form</li>
+              <li>$$y'+P(x)y=Q(x).$$</li>
+              <li>Here</li>
+              <li>$$P(x)=\cot x,\qquad Q(x)=\cos x.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Compute the Integrating Factor</h2>
+            <ul>
+              <li>Use</li>
+              <li>$$\mu(x)=e^{\int P(x)\,dx}.$$</li>
+              <li>So</li>
+              <li>$$\mu(x)=e^{\int \cot x\,dx}=e^{\ln|\sin x|}.$$</li>
+              <li>On a fixed interval, write</li>
+              <li>$$\mu(x)=\sin x.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Multiply Through by $$\sin x$$</h2>
+            <ul>
+              <li>Multiply the whole equation by $$\sin x:$$</li>
+              <li>$$\sin x\frac{dy}{dx}+y\sin x\cot x=\sin x\cos x.$$</li>
+              <li>Since $$\sin x\cot x=\cos x,$$ this becomes</li>
+              <li>$$\sin x\frac{dy}{dx}+y\cos x=\sin x\cos x.$$</li>
+              <li>The left side is</li>
+              <li>$$\frac{d}{dx}(y\sin x).$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Integrate</h2>
+            <ul>
+              <li>So the equation reduces to</li>
+              <li>$$\frac{d}{dx}(y\sin x)=\sin x\cos x.$$</li>
+              <li>Integrate both sides:</li>
+              <li>$$y\sin x=\int \sin x\cos x\,dx.$$</li>
+              <li>Use $$u=\sin x,$$ so $$du=\cos x\,dx.$$</li>
+              <li>Then</li>
+              <li>$$y\sin x=\int u\,du=\frac{u^2}{2}+C=\frac{\sin^2 x}{2}+C.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Final Answer</h2>
+            <ul>
+              <li>The textbook answer is</li>
+              <li>$$\boxed{y\sin x=\frac{\sin^2 x}{2}+C}.$$</li>
+              <li>Equivalently, $$y=\frac{\sin x}{2}+C\csc x$$ on intervals where $$\sin x\neq0.$$</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>Whenever the coefficient of $$y$$ is $$\cot x,$$ check whether multiplying by $$\sin x$$ will create a product derivative. That pattern appears constantly in trig-based linear equations.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This route is linear-method plus one trig simplification: find the integrating factor, multiply, collapse to a product derivative, integrate once.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Linear Gate</h3><p>Tag the equation as $$y'+(\cot x)y=\cos x.$$</p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>Once $$P(x)=\cot x$$ is visible, the integrating factor follows.</p></div>
+        <div class="station"><h3>Station 2: IF Desk</h3><p>Store $$\mu(x)=e^{\int\cot x\,dx}=\sin x.$$</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>Multiply by $$\sin x$$ so the trig term can simplify.</p></div>
+        <div class="station"><h3>Station 3: Product Hall</h3><p>Turn $$\sin x\,y'+y\cos x$$ into $$\dfrac{d}{dx}(y\sin x).$$</p></div>
+        <div class="transition"><h3>Transition 3 to 4</h3><p>With the left side exact, only the trig integral remains.</p></div>
+        <div class="station"><h3>Station 4: Integral Vault</h3><p>Integrate $$\sin x\cos x$$ to get $$\sin^2 x/2+C.$$</p></div>
+        <div class="transition"><h3>Transition 4 to 5</h3><p>The answer is already in the exact textbook form.</p></div>
+        <div class="station"><h3>Station 5: Final Seal</h3><p>Lock $$y\sin x=\frac{\sin^2 x}{2}+C.$$</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full solution flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this first-order linear differential-equation solution. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The equation is y' + y cot x = cos x, already in linear form y' + P(x)y = Q(x).
+2. Here P(x) = cot x and Q(x) = cos x.
+3. The integrating factor is mu(x) = e^(integral cot x dx) = sin x on a fixed interval.
+4. Multiply the whole equation by sin x.
+5. That gives sin x y' + y cos x = sin x cos x.
+6. The left side is the product derivative d(y sin x)/dx.
+7. So d(y sin x)/dx = sin x cos x.
+8. Integrate both sides.
+9. The integral of sin x cos x is sin^2 x / 2.
+10. Final answer is y sin x = sin^2 x / 2 + C.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex35q3Modal = document.getElementById('prompt-modal');
+const ex35q3Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex35q3Modal.classList.add('open');
+  ex35q3Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex35q3Modal.classList.remove('open');
+    ex35q3Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex35q3Modal.addEventListener('click', (event) => {
+  if (event.target === ex35q3Modal) {
+    ex35q3Modal.classList.remove('open');
+    ex35q3Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(ex35q3Textarea.value); }
+  catch (error) { ex35q3Textarea.focus(); ex35q3Textarea.select(); }
+});
+</script>
+</body>
+</html>

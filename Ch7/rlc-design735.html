@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RLC Design Exercise 7-35 | Design a Series RLC Circuit with Fixed Capacitance</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="rlc-study-page.css" />
+<link rel="stylesheet" href="linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="linear-review.js" defer></script>
+<style>:root{--accent:#ffe08c}</style>
+</head>
+<body>
+<main class="shell"><nav class="nav"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a><a href="rlc-design727-example.html">Back: Design Ex 7-27</a></nav>
+<section class="hero"><h1>Design Exercise 7-35</h1><p>Design a series RLC circuit with $$\zeta=1.5$$ and $$\omega_0=50\ \text{krad/s}.$$ The capacitor is fixed at $$0.1\ \mu\text{F},$$ so there is only one valid solution.</p><div class="eq">$$s^2+\frac{R}{L}s+\frac{1}{LC}=0$$
+$$\frac{R}{L}=2\zeta\omega_0=150\times10^3,\qquad \frac{1}{LC}=\omega_0^2=2.5\times10^9$$
+$$\boxed{R=600\ \Omega,\quad L=4\ \text{mH}}$$</div><div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div></section>
+<div class="content-grid"><div class="main-stack">
+<section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Target Damping</div><div class="v">$$\zeta=1.5$$</div></div><div class="fact"><div class="k">Target Frequency</div><div class="v">$$\omega_0=50\times10^3\ \text{rad/s}$$</div></div><div class="fact"><div class="k">Fixed Capacitor</div><div class="v">$$C=0.1\ \mu\text{F}=10^{-7}\ \text{F}$$</div></div><div class="fact"><div class="k">Solved Inductor</div><div class="v">$$L=4\ \text{mH}$$</div></div><div class="fact"><div class="k">Solved Resistor</div><div class="v">$$R=600\ \Omega$$</div></div><div class="fact"><div class="k">Design Freedom</div><div class="v">None once $$C$$ is fixed</div></div></div></section>
+<section class="panel"><div class="section-title">Answer Board</div><div class="facts"><div class="fact"><div class="k">Constraint 1</div><div class="v">$$R/L=150\times10^3$$</div></div><div class="fact"><div class="k">Constraint 2</div><div class="v">$$1/(LC)=2.5\times10^9$$</div></div><div class="fact"><div class="k">Unique Answer</div><div class="v">$$\boxed{R=600\ \Omega,\ L=4\ \text{mH}}$$</div></div></div></section>
+<section class="panel"><div class="section-title">Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Match the Series Standard Form</h2><ul><li>Use $$s^2+\frac{R}{L}s+\frac{1}{LC}=0.$$</li><li>Compare with $$s^2+2\zeta\omega_0s+\omega_0^2=0.$$</li></ul></article><article class="room"><h2>Room 2: Convert the Design Targets</h2><ul><li>$$R/L=2\zeta\omega_0=2(1.5)(50\times10^3)=150\times10^3.$$</li><li>$$1/(LC)=\omega_0^2=(50\times10^3)^2=2.5\times10^9.$$</li></ul></article><article class="room"><h2>Room 3: Use the Fixed Capacitor</h2><ul><li>The capacitor is given: $$C=0.1\ \mu\text{F}=10^{-7}\ \text{F}.$$</li><li>This removes the free-choice step that appears in the open design examples.</li></ul></article><article class="room"><h2>Room 4: Solve for the Inductor</h2><ul><li>$$L=1/(C\omega_0^2)=1/((10^{-7})(2.5\times10^9))=4\times10^{-3}\ \text{H}=4\ \text{mH}.$$</li></ul></article><article class="room"><h2>Room 5: Solve for the Resistor</h2><ul><li>Now use $$R/L=150\times10^3.$$</li><li>$$R=(150\times10^3)(4\times10^{-3})=600\ \Omega.$$</li></ul></article><article class="room"><h2>Room 6: Why the Answer Is Unique</h2><ul><li>With $$C$$ fixed, the two equations determine $$L$$ and $$R$$ exactly.</li><li>There is no remaining design freedom.</li></ul></article></div><div class="mini"><h3>Fast Memory Rule</h3><p>When one energy-storage component is fixed, design freedom disappears. Use $$\omega_0$$ to solve the other storage element and $$\zeta$$ to solve the resistor.</p></div></section>
+</div><aside class="palace-sidebar"><div class="section-title">Memory Palace Path</div><p class="palace-intro">This path starts with the target damping pair and ends at the unique component solution.</p><div class="path"><div class="station"><h3>Station 1: Target Match</h3><p>Turn $$\zeta$$ and $$\omega_0$$ into the two series coefficient constraints.</p></div><div class="transition"><h3>Transition 1 to 2</h3><p>The fixed capacitor removes the free-choice step.</p></div><div class="station"><h3>Station 2: Inductor Lock</h3><p>Use $$1/(LC)=\omega_0^2$$ to get $$L=4\ \text{mH}.$$</p></div><div class="transition"><h3>Transition 2 to 3</h3><p>With $$L$$ known, the damping equation gives $$R.$$</p></div><div class="station"><h3>Station 3: Unique Exit</h3><p>Finish with $$R=600\ \Omega.$$</p></div></div></aside></div></main>
+<div class="modal" id="prompt-modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div><p class="modal-copy">This prompt is prefilled with the full Design Exercise 7-35 flow.</p><textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this series RLC design exercise with a fixed capacitor. Keep the order exact, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The design targets are zeta=1.5 and omega0=50 krad/s.
+2. The capacitor is fixed at 0.1 microfarad.
+3. The series characteristic equation is s^2+(R/L)s+1/(LC)=0.
+4. Matching to the standard form gives R/L=150x10^3 and 1/(LC)=2.5x10^9.
+5. Use the fixed capacitor to solve L=4 mH.
+6. Then solve R=600 ohms.
+7. Because C is fixed, there is only one solution.</textarea><div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div></div></div>
+<script>const modal=document.getElementById('prompt-modal');const textarea=document.getElementById('prompt-text');document.querySelector('[data-open-prompt]').addEventListener('click',()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');});document.querySelectorAll('[data-close-prompt]').forEach((button)=>{button.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');});});modal.addEventListener('click',(event)=>{if(event.target===modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}});document.getElementById('copy-prompt').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(textarea.value);}catch(error){textarea.focus();textarea.select();}});</script>
+</body>
+</html>

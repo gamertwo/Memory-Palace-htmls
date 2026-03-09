@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RLC Example 7-19 | Recover R, L, Current, and Initial State</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="page-visit-tracker.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:.75rem;
+}
+.fact{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem;display:grid;gap:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.tool-btn:disabled,.ghost-btn:disabled{opacity:.45;cursor:not-allowed}
+.review-panel{display:grid;gap:1rem}
+.review-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.review-copy{color:var(--muted);line-height:1.75;max-width:46rem}
+.review-actions{display:flex;gap:.65rem;flex-wrap:wrap}
+.review-progress{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+}
+.review-track{
+  flex:1;
+  height:6px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,.08);
+}
+.review-fill{
+  height:100%;
+  width:0;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ffd08a,#f0ab5c);
+  transition:width .3s ease;
+}
+.review-step{font-size:.78rem;color:var(--muted);white-space:nowrap}
+.review-banner{
+  display:none;
+  padding:.75rem .9rem;
+  border-radius:12px;
+  border:1px solid rgba(255,208,138,.22);
+  background:rgba(255,208,138,.08);
+  color:var(--text);
+  line-height:1.65;
+}
+.review-banner.show{display:block}
+.review-card{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:1rem;
+}
+.review-kicker{
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.4rem;
+}
+.review-room-title{
+  font-size:1.2rem;
+  line-height:1.35;
+  margin-bottom:.4rem;
+}
+.review-room-prompt{color:var(--muted);line-height:1.75}
+.review-stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+  gap:.65rem;
+  margin-top:.9rem;
+}
+.review-stat{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.7rem .75rem;
+}
+.review-stat-label{
+  font-size:.68rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.2rem;
+}
+.review-stat-value{
+  color:var(--text);
+  font-weight:700;
+  line-height:1.45;
+}
+.review-answer-wrap{margin-top:1rem}
+.review-hidden-state{
+  border:1px dashed var(--line);
+  border-radius:14px;
+  padding:1rem;
+  background:rgba(255,255,255,.02);
+}
+.review-hidden-state p{color:var(--muted);line-height:1.75;margin-bottom:.8rem}
+.review-answer{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+  background:rgba(255,255,255,.02);
+}
+.review-answer[hidden]{display:none}
+.review-answer h2{
+  font-size:1rem;
+  color:var(--accent);
+  margin-bottom:.55rem;
+}
+.review-answer ul{padding-left:1.2rem}
+.review-answer li,.review-answer p{line-height:1.75;color:var(--muted)}
+.review-dock,
+.palace-path-section{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.dock-copy{margin-bottom:.75rem}
+.review-block{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.85rem;
+}
+.review-block + .review-block{margin-top:.75rem}
+.review-block h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.4rem;
+}
+.slider-row{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+.confidence-slider{
+  flex:1;
+  accent-color:#ffd08a;
+}
+.confidence-value{
+  min-width:52px;
+  text-align:right;
+  font-size:.95rem;
+  font-weight:800;
+  color:var(--accent);
+}
+.rating-buttons{
+  display:grid;
+  gap:.55rem;
+}
+.rate-btn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.8rem;
+  border-radius:12px;
+  padding:.7rem .8rem;
+  border:1px solid var(--line);
+  background:#141922;
+  color:var(--text);
+  font:inherit;
+  cursor:pointer;
+  text-align:left;
+}
+.rate-btn strong{font-size:.9rem}
+.rate-btn small{display:block;color:var(--muted);font-size:.72rem;margin-top:.1rem}
+.rate-btn span{
+  font-size:.75rem;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.rate-btn:hover:not(:disabled){background:rgba(255,255,255,.06)}
+.rate-btn:disabled{opacity:.45;cursor:not-allowed}
+.rate-hard{border-color:rgba(255,110,120,.35);color:#ffb2b8}
+.rate-medium{border-color:rgba(255,208,138,.35);color:#ffd08a}
+.rate-easy{border-color:rgba(123,255,196,.35);color:#aaf0cf}
+.review-note{margin-top:.55rem;font-size:.76rem;color:var(--muted);line-height:1.65}
+.history-list,.tracker-list{display:grid;gap:.55rem}
+.history-empty,.tracker-empty{
+  color:var(--muted);
+  font-size:.78rem;
+  line-height:1.65;
+}
+.history-item,.tracker-item{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:.6rem .7rem;
+  background:rgba(255,255,255,.03);
+}
+.history-row,.tracker-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+}
+.history-meta,.tracker-meta{
+  margin-top:.3rem;
+  font-size:.74rem;
+  color:var(--muted);
+  line-height:1.55;
+}
+.history-badge,.tracker-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:60px;
+  padding:.22rem .55rem;
+  border-radius:999px;
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border:1px solid var(--line);
+}
+.badge-hard{color:#ffb2b8;border-color:rgba(255,110,120,.35)}
+.badge-medium{color:#ffd08a;border-color:rgba(255,208,138,.35)}
+.badge-easy{color:#aaf0cf;border-color:rgba(123,255,196,.35)}
+.badge-none{color:var(--muted)}
+.tracker-item.active{
+  border-color:rgba(255,208,138,.32);
+  box-shadow:0 0 0 1px rgba(255,208,138,.18) inset;
+}
+.tracker-title{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--text);
+}
+.tracker-score{
+  font-size:.8rem;
+  color:var(--accent);
+  font-weight:700;
+}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:360px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+  .review-progress{align-items:flex-start;flex-direction:column}
+  .review-step{white-space:normal}
+  .slider-row{align-items:flex-start;flex-direction:column}
+  .confidence-value{text-align:left}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rlc-ex718-example.html">Prev: Ex 7-18</a>
+    <a href="rlc-design723.html">Next: Design Ex 7-23</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Example 7-19</h1>
+    <p>A series RLC circuit has the zero-input capacitor voltage $$v_C(t)=10e^{-1000t}\sin(2000t)\ \text{V},\quad t\ge 0,$$ across a $$1\times 10^{-6}\ \text{F}$$ capacitor. From that one waveform, recover the circuit characteristic equation, find $$R$$ and $$L,$$ compute the inductor current, and read the initial state values.</p>
+    <div class="eq">$$v_C(t)=10e^{-1000t}\sin(2000t)\ \text{V}$$
+$$s_{1,2}=-1000\pm j2000,\qquad s^2+\frac{R}{L}s+\frac{1}{LC}=0$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" id="jump-review">Linear Review</button>
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">          <div class="fact"><div class="k">Given Voltage</div><div class="v">$$v_C(t)=10e^{-1000t}\sin(2000t)\ \text{V}$$</div></div>
+          <div class="fact"><div class="k">Capacitance</div><div class="v">$$C=1\times 10^{-6}\ \text{F}$$</div></div>
+          <div class="fact"><div class="k">Damping Read</div><div class="v">$$\alpha=1000\ \text{rad/s},\quad \omega_d=2000\ \text{rad/s}$$</div></div>
+          <div class="fact"><div class="k">Characteristic Equation</div><div class="v">$$s^2+2000s+5\times 10^6=0$$</div></div>
+          <div class="fact"><div class="k">Recovered Elements</div><div class="v">$$L=0.2\ \text{H},\quad R=400\ \Omega$$</div></div>
+          <div class="fact"><div class="k">State Values</div><div class="v">$$v_C(0)=0,\quad i_L(0)=20\ \text{mA}$$</div></div></div></section>
+      <section class="panel"><div class="section-title">Answer Board</div><div class="facts">          <div class="fact"><div class="k">Part (a)</div><div class="v">$$s^2+2000s+5\times 10^6=0$$</div></div>
+          <div class="fact"><div class="k">Part (b)</div><div class="v">$$L=0.2\ \text{H},\quad R=400\ \Omega$$</div></div>
+          <div class="fact"><div class="k">Part (c)</div><div class="v">$$i_L(t)=-10e^{-1000t}\sin(2000t)+20e^{-1000t}\cos(2000t)\ \text{mA},\quad t\ge 0$$</div></div>
+          <div class="fact"><div class="k">Part (d)</div><div class="v">$$v_C(0)=0,\quad i_L(0)=20\ \text{mA}$$</div></div></div></section>
+      <section class="panel review-panel" id="linear-review">
+        <div class="review-top"><div><div class="section-title">Linear Review Mode</div><p class="review-copy">This review is sequential, not random. It starts at Room 1 and moves to the last room in order. Reveal a room, score it from the right side as hard, medium, or easy, add your own confidence percentage, and the page remembers every attempt in this browser.</p></div><div class="review-actions"><button class="tool-btn" type="button" id="review-restart">Restart From Room 1</button><button class="ghost-btn" type="button" id="review-continue">Continue Saved Position</button></div></div>
+        <div class="review-progress"><div class="review-track"><div class="review-fill" id="review-fill"></div></div><div class="review-step" id="review-step">Room 1 of 1</div></div>
+        <div class="review-banner" id="review-banner"></div>
+        <div class="review-card"><div class="review-kicker" id="review-kicker">Current Room</div><h2 class="review-room-title" id="review-room-title">Room 1</h2><p class="review-room-prompt" id="review-room-prompt">Try to recall this room from memory first. Reveal it only when you want to check yourself.</p><div class="review-stats"><div class="review-stat"><div class="review-stat-label">Attempts</div><div class="review-stat-value" id="stat-attempts">0</div></div><div class="review-stat"><div class="review-stat-label">Easy</div><div class="review-stat-value" id="stat-easy">0</div></div><div class="review-stat"><div class="review-stat-label">Medium</div><div class="review-stat-value" id="stat-medium">0</div></div><div class="review-stat"><div class="review-stat-label">Hard</div><div class="review-stat-value" id="stat-hard">0</div></div><div class="review-stat"><div class="review-stat-label">Last Rating</div><div class="review-stat-value" id="stat-rating">None yet</div></div><div class="review-stat"><div class="review-stat-label">Last Confidence</div><div class="review-stat-value" id="stat-confidence">--</div></div></div><div class="review-answer-wrap"><div class="review-hidden-state" id="review-hidden"><p id="review-hidden-copy">Reveal the current room when you are ready. After that, use the right sidebar to save easy, medium, or hard with your percentage.</p><button class="tool-btn" type="button" id="review-reveal">Reveal Room</button></div><div class="review-answer" id="review-answer" hidden></div></div></div>
+      </section>
+      <section class="panel"><div class="section-title">Rooms</div><div class="rooms">          <article class="room">
+            <h2>Room 1: Read the Root Pattern from the Waveform</h2>
+            <ul>
+              <li>The voltage is a damped sine, so the circuit must be underdamped.</li>
+              <li>From $$10e^{-1000t}\sin(2000t),$$ read $$\alpha=1000$$ and $$\omega_d=2000.$$</li>
+              <li>That means the roots are $$s_{1,2}=-1000\pm j2000.$$</li>
+            </ul>
+          </article>
+          <article class="room">
+            <h2>Room 2: Rebuild the Characteristic Equation</h2>
+            <ul>
+              <li>Form the quadratic from the roots: $$\left(s+1000-j2000\right)\left(s+1000+j2000\right)=0.$$</li>
+              <li>Multiply the conjugate pair.</li>
+              <li>The characteristic equation becomes $$s^2+2000s+5\times 10^6=0.$$</li>
+            </ul>
+          </article>
+          <article class="room">
+            <h2>Room 3: Compare with the Series RLC Standard Form</h2>
+            <ul>
+              <li>A series RLC circuit has characteristic equation $$s^2+\frac{R}{L}s+\frac{1}{LC}=0.$$</li>
+              <li>Matching coefficients with $$s^2+2000s+5\times 10^6=0$$ gives</li>
+              <li>$$\frac{R}{L}=2000,\qquad \frac{1}{LC}=5\times 10^6.$$</li>
+            </ul>
+          </article>
+          <article class="room">
+            <h2>Room 4: Solve for the Inductance</h2>
+            <ul>
+              <li>Given $$C=1\times 10^{-6}\ \text{F},$$ use $$\dfrac{1}{LC}=5\times 10^6.$$</li>
+              <li>Then $$LC=2\times 10^{-7},$$ so $$L=\dfrac{2\times 10^{-7}}{10^{-6}}=0.2\ \text{H}. $$</li>
+            </ul>
+          </article>
+          <article class="room">
+            <h2>Room 5: Solve for the Resistance</h2>
+            <ul>
+              <li>Use $$\dfrac{R}{L}=2000$$ with $$L=0.2\ \text{H}. $$</li>
+              <li>Then $$R=2000(0.2)=400\ \Omega.$$</li>
+              <li>Now both unknown circuit elements are identified.</li>
+            </ul>
+          </article>
+          <article class="room">
+            <h2>Room 6: Find the Inductor Current</h2>
+            <ul>
+              <li>In a series circuit, $$i_L(t)=i_C(t).$$</li>
+              <li>Use $$i_C(t)=C\,\dfrac{dv_C}{dt}. $$</li>
+              <li>Differentiate the given voltage: $$\dfrac{dv_C}{dt}=10e^{-1000t}\left(2000\cos(2000t)-1000\sin(2000t)\right).$$</li>
+              <li>Multiply by $$C=10^{-6}\ \text{F}$$ to get $$\boxed{i_L(t)=-10e^{-1000t}\sin(2000t)+20e^{-1000t}\cos(2000t)\ \text{mA}}.$$</li>
+            </ul>
+          </article>
+          <article class="room">
+            <h2>Room 7: Read the Initial State Values</h2>
+            <ul>
+              <li>At $$t=0,$$ the sine term vanishes, so $$v_C(0)=0.$$</li>
+              <li>For the current, substitute $$t=0$$ into the derived expression.</li>
+              <li>That gives $$i_L(0)=-10(1)(0)+20(1)(1)=20\ \text{mA}. $$</li>
+            </ul>
+          </article>
+          <article class="room">
+            <h2>Room 8: Quick Consistency Check</h2>
+            <ul>
+              <li>The current formula gives $$i_L(0)=20\ \text{mA},$$ which matches the direct inspection.</li>
+              <li>The voltage formula gives $$v_C(0)=0,$$ because $$\sin 0=0.$$</li>
+              <li>So the reconstructed equation, the recovered elements, and the state variables all fit one coherent underdamped series RLC model.</li>
+            </ul>
+          </article></div><div class="mini"><h3>Read the Roots Directly</h3><p>When a second-order response is already written as a damped sine or cosine, do not start from circuit algebra. Read the real decay rate and oscillation frequency from the waveform, rebuild the roots, and compare the resulting quadratic with the standard characteristic equation.</p></div></section>
+      <section class="panel"><div class="section-title">Key Shortcut</div><div class="mini"><h3>Waveform-to-Circuit Rule</h3><p>A damped sinusoid tells you the root pair immediately. Once the roots are known, expand the characteristic equation and match coefficients with the circuit form. That reverse-engineers the element values without redrawing the circuit.</p></div></section>
+    </div>
+    <aside class="palace-sidebar">
+      <section class="review-dock"><div class="section-title">Review Controls</div><p class="palace-intro dock-copy">The buttons below stay linear: rate the current room and the review jumps to the next room. Your previous scores and confidence percentages stay visible on retries.</p><div class="review-block"><h3>Confidence</h3><div class="slider-row"><input class="confidence-slider" id="review-confidence" type="range" min="0" max="100" step="5" value="50" /><div class="confidence-value" id="review-confidence-value">50%</div></div><p class="review-note">Use this for how much of the room you know. The saved percentage appears again while you move through the later rooms.</p></div><div class="review-block"><h3>Rate This Room</h3><div class="rating-buttons"><button class="rate-btn rate-hard" type="button" data-rating="hard" disabled><div><strong>Hard</strong><small>needs another pass</small></div><span>save + next</span></button><button class="rate-btn rate-medium" type="button" data-rating="medium" disabled><div><strong>Medium</strong><small>partly remembered</small></div><span>save + next</span></button><button class="rate-btn rate-easy" type="button" data-rating="easy" disabled><div><strong>Easy</strong><small>felt solid</small></div><span>save + next</span></button></div><p class="review-note" id="review-action-note">Reveal the room first. Rating is locked until the current room is open.</p></div><div class="review-block"><h3>Previous Attempts</h3><div class="history-list" id="review-history"></div></div><div class="review-block"><h3>Room Tracker</h3><div class="tracker-list" id="review-room-tracker"></div></div></section>
+      <section class="palace-path-section"><div class="section-title">Memory Palace Path</div><p class="palace-intro">This path starts from one given damped sine, then walks backward to the roots, the characteristic equation, the element values, the current, and the initial state.</p><div class="path">        <div class="station">
+          <h3>Station 1: Read the Root Pattern from the Waveform</h3>
+          <p>A damped sine immediately reveals the complex root pair $$-1000\pm j2000.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>Once the roots are visible, multiply the two factors to reconstruct the characteristic equation.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Rebuild the Characteristic Equation</h3>
+          <p>The conjugate factors expand into $$s^2+2000s+5\times 10^6=0.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>Now compare that equation with the series RLC standard form to recover the element values.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Compare with the Series RLC Standard Form</h3>
+          <p>Coefficient matching gives two constraints: $$R/L=2000$$ and $$1/(LC)=5\times 10^6.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>The capacitance is already known, so solve the constant-term constraint for $$L$$ first.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Solve for the Inductance</h3>
+          <p>The constant term fixes the inductance at $$0.2\ \text{H}. $$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>Once $$L$$ is known, the damping coefficient equation gives the resistance directly.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Solve for the Resistance</h3>
+          <p>The damping term gives $$R=400\ \Omega. $$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>With the circuit recovered, differentiate the capacitor voltage to get the series current.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Find the Inductor Current</h3>
+          <p>Differentiate the voltage, multiply by $$C,$$ and the current becomes $$-10e^{-1000t}\sin(2000t)+20e^{-1000t}\cos(2000t)$$ mA.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 6 to 7</h3>
+          <p>After the current expression is known, the initial state values can be read almost by inspection.</p>
+        </div>
+        <div class="station">
+          <h3>Station 7: Read the Initial State Values</h3>
+          <p>The initial states are $$v_C(0)=0$$ and $$i_L(0)=20\ \text{mA}. $$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 7 to 8</h3>
+          <p>One quick check confirms that the current expression is consistent with the recovered state values.</p>
+        </div>
+        <div class="station">
+          <h3>Station 8: Quick Consistency Check</h3>
+          <p>Everything closes consistently: roots, circuit values, current, and initial states all match.</p>
+        </div></div></section>
+    </aside>
+  </div>
+</main>
+<div class="modal" id="prompt-modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div><p class="modal-copy">This prompt is prefilled with the reverse-engineering flow for Example 7-19. Use it to test alternate one-paragraph memory palaces in another AI.</p><textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this second-order series RLC reverse-engineering problem. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The given zero-input capacitor voltage is v_C(t) = 10 e^-1000t sin(2000t) V.
+2. Because the waveform is a damped sine, the circuit is underdamped.
+3. Read the roots as -1000 +/- j2000.
+4. Build the characteristic equation from the conjugate factors to get s^2 + 2000s + 5 x 10^6 = 0.
+5. Compare with the series RLC form s^2 + (R/L)s + 1/(LC) = 0.
+6. This gives R/L = 2000 and 1/(LC) = 5 x 10^6.
+7. With C = 1 x 10^-6 F, solve to get L = 0.2 H.
+8. Then R = 2000L = 400 ohms.
+9. In a series circuit, i_L(t) = i_C(t) = C dv_C/dt.
+10. Differentiate the voltage and simplify to i_L(t) = -10e^-1000t sin(2000t) + 20e^-1000t cos(2000t) mA.
+11. Read the initial states: v_C(0) = 0 and i_L(0) = 20 mA.
+12. Final concept: the waveform already contains the roots, and the roots contain the circuit.</textarea><div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div></div></div>
+<script>
+const ex721Modal = document.getElementById('prompt-modal');
+const ex721Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex721Modal.classList.add('open');
+  ex721Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex721Modal.classList.remove('open');
+    ex721Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex721Modal.addEventListener('click', (event) => {
+  if (event.target === ex721Modal) {
+    ex721Modal.classList.remove('open');
+    ex721Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(ex721Textarea.value);
+  } catch (error) {
+    ex721Textarea.focus();
+    ex721Textarea.select();
+  }
+});
+
+const reviewSourceRooms = Array.from(document.querySelectorAll('.rooms > .room'));
+const reviewRooms = reviewSourceRooms.map((room, index) => {
+  const clone = room.cloneNode(true);
+  const heading = clone.querySelector('h2');
+  const titleText = heading ? heading.textContent.replace(/\s+/g, ' ').trim().replace(/\$\$/g, '') : `Room ${index + 1}`;
+  const titleHtml = heading ? heading.innerHTML : `Room ${index + 1}`;
+  if (heading) heading.remove();
+  return {
+    id: `room-${index + 1}`,
+    order: index + 1,
+    titleText,
+    titleHtml,
+    shortTitle: titleText.replace(/^Room\s+\d+:\s*/i, ''),
+    bodyHtml: clone.innerHTML.trim()
+  };
+});
+
+const reviewElements = {
+  panel: document.getElementById('linear-review'),
+  jump: document.getElementById('jump-review'),
+  restart: document.getElementById('review-restart'),
+  resume: document.getElementById('review-continue'),
+  reveal: document.getElementById('review-reveal'),
+  fill: document.getElementById('review-fill'),
+  step: document.getElementById('review-step'),
+  banner: document.getElementById('review-banner'),
+  kicker: document.getElementById('review-kicker'),
+  title: document.getElementById('review-room-title'),
+  prompt: document.getElementById('review-room-prompt'),
+  hidden: document.getElementById('review-hidden'),
+  hiddenCopy: document.getElementById('review-hidden-copy'),
+  answer: document.getElementById('review-answer'),
+  statAttempts: document.getElementById('stat-attempts'),
+  statEasy: document.getElementById('stat-easy'),
+  statMedium: document.getElementById('stat-medium'),
+  statHard: document.getElementById('stat-hard'),
+  statRating: document.getElementById('stat-rating'),
+  statConfidence: document.getElementById('stat-confidence'),
+  confidence: document.getElementById('review-confidence'),
+  confidenceValue: document.getElementById('review-confidence-value'),
+  actionNote: document.getElementById('review-action-note'),
+  history: document.getElementById('review-history'),
+  tracker: document.getElementById('review-room-tracker'),
+  rateButtons: Array.from(document.querySelectorAll('.rate-btn'))
+};
+
+const reviewStorageKey = ((location.pathname.split('/').pop() || 'study_page').replace(/\W+/g, '_')) + '_linear_review_v1';
+
+function makeDefaultRoomReview() {
+  return {
+    attempts: 0,
+    counts: { easy: 0, medium: 0, hard: 0 },
+    lastRating: '',
+    lastPercentage: null,
+    history: []
+  };
+}
+
+function loadReviewState() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(reviewStorageKey) || '{}');
+    return {
+      currentIndex: Number.isInteger(parsed.currentIndex) && parsed.currentIndex >= 0 && parsed.currentIndex < reviewRooms.length ? parsed.currentIndex : 0,
+      rooms: parsed.rooms && typeof parsed.rooms === 'object' ? parsed.rooms : {}
+    };
+  } catch (error) {
+    return { currentIndex: 0, rooms: {} };
+  }
+}
+
+const reviewState = loadReviewState();
+let activeReviewIndex = 0;
+let reviewRevealed = false;
+
+function saveReviewState() {
+  try {
+    localStorage.setItem(reviewStorageKey, JSON.stringify(reviewState));
+  } catch (error) {}
+}
+
+function getRoomReview(index) {
+  const roomId = reviewRooms[index].id;
+  if (!reviewState.rooms[roomId]) reviewState.rooms[roomId] = makeDefaultRoomReview();
+  const roomReview = reviewState.rooms[roomId];
+  roomReview.counts = roomReview.counts || { easy: 0, medium: 0, hard: 0 };
+  roomReview.history = Array.isArray(roomReview.history) ? roomReview.history : [];
+  return roomReview;
+}
+
+function formatRating(rating) {
+  if (!rating) return 'None yet';
+  return rating.charAt(0).toUpperCase() + rating.slice(1);
+}
+
+function formatRatingClass(rating) {
+  return rating ? `badge-${rating}` : 'badge-none';
+}
+
+function formatStamp(isoString) {
+  if (!isoString) return 'Just now';
+  const date = new Date(isoString);
+  if (Number.isNaN(date.getTime())) return 'Saved earlier';
+  return date.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+}
+
+function typesetFragment(element) {
+  if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+    MathJax.typesetPromise([element]).catch(() => {});
+  }
+}
+
+function setBanner(message) {
+  if (!message) {
+    reviewElements.banner.classList.remove('show');
+    reviewElements.banner.textContent = '';
+    return;
+  }
+  reviewElements.banner.textContent = message;
+  reviewElements.banner.classList.add('show');
+}
+
+function syncConfidenceDisplay() {
+  reviewElements.confidenceValue.textContent = `${reviewElements.confidence.value}%`;
+}
+
+function updateResumeButton() {
+  const savedIndex = reviewState.currentIndex;
+  const hasSavedPosition = savedIndex > 0 && savedIndex < reviewRooms.length;
+  reviewElements.resume.disabled = !hasSavedPosition;
+  reviewElements.resume.textContent = hasSavedPosition ? `Continue at Room ${savedIndex + 1}` : 'Continue Saved Position';
+}
+
+function renderHistory(index) {
+  const roomReview = getRoomReview(index);
+  if (!roomReview.history.length) {
+    reviewElements.history.innerHTML = '<div class="history-empty">No saved attempts yet for this room.</div>';
+    return;
+  }
+
+  reviewElements.history.innerHTML = roomReview.history.slice(-5).reverse().map((entry) => `
+    <div class="history-item">
+      <div class="history-row">
+        <span class="history-badge ${formatRatingClass(entry.rating)}">${formatRating(entry.rating)}</span>
+        <strong>${entry.percentage}%</strong>
+      </div>
+      <div class="history-meta">${formatStamp(entry.at)}<br />Easy ${roomReview.counts.easy} | Medium ${roomReview.counts.medium} | Hard ${roomReview.counts.hard}</div>
+    </div>
+  `).join('');
+}
+
+function renderTracker() {
+  if (!reviewRooms.length) {
+    reviewElements.tracker.innerHTML = '<div class="tracker-empty">No rooms found for review.</div>';
+    return;
+  }
+
+  reviewElements.tracker.innerHTML = reviewRooms.map((room, index) => {
+    const roomReview = getRoomReview(index);
+    const savedPercentage = roomReview.lastPercentage === null ? '--' : `${roomReview.lastPercentage}%`;
+    const savedRating = formatRating(roomReview.lastRating);
+    return `
+      <div class="tracker-item ${index === activeReviewIndex ? 'active' : ''}">
+        <div class="tracker-top">
+          <div class="tracker-title">Room ${room.order}: ${room.shortTitle}</div>
+          <div class="tracker-score">${savedPercentage}</div>
+        </div>
+        <div class="tracker-meta">${savedRating} | E ${roomReview.counts.easy} / M ${roomReview.counts.medium} / H ${roomReview.counts.hard}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderReview() {
+  if (!reviewRooms.length) return;
+
+  const room = reviewRooms[activeReviewIndex];
+  const roomReview = getRoomReview(activeReviewIndex);
+  const progressPercent = ((activeReviewIndex + 1) / reviewRooms.length) * 100;
+
+  reviewElements.fill.style.width = `${Math.max(0, Math.min(100, progressPercent))}%`;
+  reviewElements.step.textContent = `Room ${room.order} of ${reviewRooms.length}`;
+  reviewElements.kicker.textContent = roomReview.attempts ? `Current Room | ${roomReview.attempts} saved attempt${roomReview.attempts === 1 ? '' : 's'}` : 'Current Room | first pass';
+  reviewElements.title.innerHTML = room.titleHtml;
+  reviewElements.prompt.textContent = reviewRevealed
+    ? 'Room revealed. Pick a confidence percentage on the right, then save hard, medium, or easy to move forward.'
+    : 'Try to recall this room from memory first. Reveal it only when you want to check yourself.';
+  reviewElements.hiddenCopy.textContent = reviewRevealed
+    ? 'This room is already open. Score it from the right side when you are ready to advance.'
+    : 'Reveal the current room when you are ready. After that, use the right sidebar to save easy, medium, or hard with your percentage.';
+
+  reviewElements.statAttempts.textContent = String(roomReview.attempts);
+  reviewElements.statEasy.textContent = String(roomReview.counts.easy || 0);
+  reviewElements.statMedium.textContent = String(roomReview.counts.medium || 0);
+  reviewElements.statHard.textContent = String(roomReview.counts.hard || 0);
+  reviewElements.statRating.textContent = formatRating(roomReview.lastRating);
+  reviewElements.statConfidence.textContent = roomReview.lastPercentage === null ? '--' : `${roomReview.lastPercentage}%`;
+
+  reviewElements.confidence.value = roomReview.lastPercentage === null ? 50 : roomReview.lastPercentage;
+  syncConfidenceDisplay();
+
+  reviewElements.hidden.hidden = reviewRevealed;
+  reviewElements.answer.hidden = !reviewRevealed;
+  reviewElements.answer.innerHTML = reviewRevealed ? room.bodyHtml : '';
+  if (reviewRevealed) typesetFragment(reviewElements.answer);
+  typesetFragment(reviewElements.title);
+
+  reviewElements.rateButtons.forEach((button) => {
+    button.disabled = !reviewRevealed;
+  });
+  reviewElements.actionNote.textContent = reviewRevealed
+    ? 'Saving a rating also saves the current percentage and moves directly to the next room.'
+    : 'Reveal the room first. Rating is locked until the current room is open.';
+
+  renderHistory(activeReviewIndex);
+  renderTracker();
+  updateResumeButton();
+}
+
+function revealCurrentRoom() {
+  reviewRevealed = true;
+  setBanner('');
+  renderReview();
+}
+
+function jumpToReviewPanel() {
+  reviewElements.panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function moveToRoom(index) {
+  activeReviewIndex = Math.max(0, Math.min(reviewRooms.length - 1, index));
+  reviewRevealed = false;
+  renderReview();
+}
+
+function recordRoomResult(rating) {
+  if (!reviewRevealed || !reviewRooms.length) return;
+
+  const roomReview = getRoomReview(activeReviewIndex);
+  const percentage = Number(reviewElements.confidence.value);
+  const completedRoomOrder = reviewRooms[activeReviewIndex].order;
+  roomReview.attempts += 1;
+  roomReview.counts[rating] = (roomReview.counts[rating] || 0) + 1;
+  roomReview.lastRating = rating;
+  roomReview.lastPercentage = percentage;
+  roomReview.history.push({
+    rating,
+    percentage,
+    at: new Date().toISOString()
+  });
+  if (roomReview.history.length > 20) roomReview.history = roomReview.history.slice(-20);
+
+  const nextIndex = activeReviewIndex + 1;
+  reviewState.currentIndex = nextIndex < reviewRooms.length ? nextIndex : 0;
+  saveReviewState();
+
+  if (nextIndex < reviewRooms.length) {
+    activeReviewIndex = nextIndex;
+    reviewRevealed = false;
+    setBanner(`Saved Room ${completedRoomOrder} as ${formatRating(rating)} at ${percentage}%. Moving to Room ${nextIndex + 1}.`);
+    renderReview();
+    jumpToReviewPanel();
+    return;
+  }
+
+  activeReviewIndex = 0;
+  reviewRevealed = false;
+  setBanner(`Sequence complete. The last room was saved as ${formatRating(rating)} at ${percentage}%. The next retry starts again from Room 1 with all previous attempts preserved.`);
+  renderReview();
+  jumpToReviewPanel();
+}
+
+reviewElements.jump.addEventListener('click', () => {
+  jumpToReviewPanel();
+  setBanner('');
+});
+
+reviewElements.restart.addEventListener('click', () => {
+  reviewState.currentIndex = 0;
+  saveReviewState();
+  moveToRoom(0);
+  setBanner('Sequence reset to Room 1. Saved room history is still preserved.');
+  jumpToReviewPanel();
+});
+
+reviewElements.resume.addEventListener('click', () => {
+  moveToRoom(reviewState.currentIndex || 0);
+  setBanner(reviewState.currentIndex ? `Continuing from Room ${reviewState.currentIndex + 1}.` : 'No saved position beyond Room 1, so the sequence remains at Room 1.');
+  jumpToReviewPanel();
+});
+
+reviewElements.reveal.addEventListener('click', () => {
+  revealCurrentRoom();
+  jumpToReviewPanel();
+});
+
+reviewElements.confidence.addEventListener('input', syncConfidenceDisplay);
+
+reviewElements.rateButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    recordRoomResult(button.dataset.rating);
+  });
+});
+
+syncConfidenceDisplay();
+renderReview();
+</script>
+</body>
+</html>

@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MangaDex Search Deck | Live API Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#0f1013;
+  --bg-soft:#171a21;
+  --panel:#1d222c;
+  --panel-2:#242a35;
+  --line:rgba(255,255,255,.1);
+  --text:#f5f1e8;
+  --muted:rgba(245,241,232,.72);
+  --hot:#ff6a3d;
+  --cyan:#72f2ff;
+  --gold:#ffcf66;
+  --lime:#bcff65;
+  --shadow:0 22px 55px rgba(0,0,0,.35);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  font-family:'Manrope',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,106,61,.2),transparent 28%),
+    radial-gradient(circle at 84% 12%,rgba(114,242,255,.16),transparent 24%),
+    linear-gradient(145deg,#0f1013 0%,#131720 42%,#0b0d12 100%);
+  position:relative;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.14;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.32) 1px,transparent 1px),
+    linear-gradient(135deg,transparent 0 42%,rgba(255,255,255,.05) 42% 44%,transparent 44% 100%);
+  background-size:20px 20px,100% 100%;
+  mix-blend-mode:screen;
+}
+
+a{
+  color:inherit;
+}
+
+.page{
+  width:min(1180px,calc(100% - 2rem));
+  margin:0 auto;
+  padding:1.25rem 0 3rem;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:1.1rem;
+  background:linear-gradient(145deg,rgba(29,34,44,.9),rgba(20,23,31,.94));
+  box-shadow:var(--shadow);
+}
+
+.hero::after{
+  content:'MANGA';
+  position:absolute;
+  right:-1rem;
+  bottom:-1.35rem;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,18vw,13rem);
+  line-height:.8;
+  letter-spacing:.04em;
+  color:rgba(255,255,255,.035);
+  pointer-events:none;
+}
+
+.topbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.7rem;
+  margin-bottom:1rem;
+}
+
+.topbar a{
+  text-decoration:none;
+  padding:.7rem 1rem;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  color:var(--gold);
+  font-weight:700;
+  font-size:.92rem;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(280px,.85fr);
+  gap:1rem;
+}
+
+.eyebrow{
+  color:var(--cyan);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:.78rem;
+  font-weight:800;
+}
+
+.hero-copy h1{
+  margin-top:.45rem;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.4rem,10vw,6rem);
+  line-height:.9;
+  letter-spacing:.03em;
+}
+
+.lede{
+  margin-top:.9rem;
+  max-width:62ch;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+.lede code,
+.api-note code,
+.request-url{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+.hero-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.8rem;
+  margin-top:1.1rem;
+}
+
+.stat{
+  min-width:136px;
+  padding:.95rem 1rem;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+}
+
+.stat-value{
+  display:block;
+  font-size:1.4rem;
+  font-weight:800;
+}
+
+.stat-label{
+  display:block;
+  margin-top:.15rem;
+  color:var(--muted);
+  font-size:.86rem;
+}
+
+.hero-side{
+  display:grid;
+  gap:.9rem;
+}
+
+.api-note,
+.request-box{
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:1rem;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+}
+
+.api-note h2,
+.results-head h2{
+  font-size:1.15rem;
+}
+
+.api-note p,
+.request-box p,
+.control-copy,
+.summary-text,
+.feedback{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.api-note{
+  position:relative;
+}
+
+.api-note::before{
+  content:'Fix';
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  padding:.2rem .55rem;
+  border-radius:999px;
+  background:rgba(188,255,101,.12);
+  color:var(--lime);
+  font-size:.72rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.request-box{
+  display:grid;
+  gap:.55rem;
+}
+
+.box-label{
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--cyan);
+  font-weight:800;
+}
+
+.request-url{
+  display:block;
+  padding:.85rem;
+  border-radius:16px;
+  background:#10131a;
+  border:1px solid rgba(255,255,255,.08);
+  color:#ffd4b7;
+  overflow-wrap:anywhere;
+  font-size:.88rem;
+}
+
+.controls{
+  margin-top:1rem;
+  padding:1rem;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:rgba(18,20,26,.86);
+  box-shadow:var(--shadow);
+}
+
+.control-bar{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:end;
+  margin-bottom:.95rem;
+}
+
+.control-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;
+  letter-spacing:.04em;
+}
+
+.search-form{
+  display:grid;
+  grid-template-columns:minmax(0,1.4fr) 140px 170px auto;
+  gap:.8rem;
+}
+
+.field{
+  display:grid;
+  gap:.35rem;
+}
+
+.field span{
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  font-weight:800;
+  color:var(--cyan);
+}
+
+.field input,
+.field select{
+  width:100%;
+  border:none;
+  outline:none;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:var(--text);
+  padding:.95rem 1rem;
+  font:inherit;
+}
+
+.switch{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.8rem;
+  min-height:57px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--panel);
+  padding:.8rem 1rem;
+  color:var(--text);
+}
+
+.switch input{
+  inline-size:1.1rem;
+  block-size:1.1rem;
+  accent-color:var(--hot);
+}
+
+.search-btn{
+  align-self:end;
+  border:none;
+  border-radius:16px;
+  padding:0 1.2rem;
+  min-height:57px;
+  font:inherit;
+  font-weight:800;
+  color:#0d0d0f;
+  background:linear-gradient(135deg,var(--gold),var(--hot));
+  cursor:pointer;
+  box-shadow:0 14px 35px rgba(255,106,61,.28);
+  transition:transform .2s ease,filter .2s ease;
+}
+
+.search-btn:hover{
+  transform:translateY(-2px);
+  filter:saturate(1.08);
+}
+
+.chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.65rem;
+  margin-top:1rem;
+}
+
+.chip{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  color:var(--text);
+  border-radius:999px;
+  padding:.6rem .9rem;
+  cursor:pointer;
+  font:inherit;
+  font-weight:700;
+}
+
+.results{
+  margin-top:1rem;
+}
+
+.results-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:1rem;
+  margin-bottom:.8rem;
+}
+
+.feedback{
+  margin-bottom:1rem;
+  padding:.85rem 1rem;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+}
+
+.feedback[data-tone="loading"]{
+  color:#ffe6b4;
+  border-color:rgba(255,207,102,.22);
+  background:rgba(255,207,102,.08);
+}
+
+.feedback[data-tone="error"]{
+  color:#ffd5cf;
+  border-color:rgba(255,106,61,.25);
+  background:rgba(255,106,61,.09);
+}
+
+.feedback[data-tone="success"]{
+  color:#d8fff2;
+  border-color:rgba(114,242,255,.22);
+  background:rgba(114,242,255,.08);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1rem;
+}
+
+.card{
+  position:relative;
+  display:grid;
+  grid-template-rows:auto 1fr;
+  min-height:100%;
+  border:1px solid var(--line);
+  border-radius:24px;
+  overflow:hidden;
+  background:linear-gradient(180deg,rgba(36,42,53,.92),rgba(21,24,31,.95));
+  box-shadow:var(--shadow);
+  transform:translateY(18px);
+  opacity:0;
+  animation:rise .45s ease forwards;
+}
+
+.card:nth-child(2){animation-delay:.04s}
+.card:nth-child(3){animation-delay:.08s}
+.card:nth-child(4){animation-delay:.12s}
+.card:nth-child(5){animation-delay:.16s}
+.card:nth-child(6){animation-delay:.2s}
+
+.cover{
+  position:relative;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,rgba(255,106,61,.16),transparent 60%),
+    linear-gradient(135deg,#11151e,#262d39);
+}
+
+.cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.cover-fallback{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.4rem;
+  letter-spacing:.05em;
+  color:rgba(255,255,255,.75);
+  text-align:center;
+  padding:1rem;
+}
+
+.rating-badge{
+  position:absolute;
+  top:.8rem;
+  left:.8rem;
+  padding:.35rem .6rem;
+  border-radius:999px;
+  background:rgba(15,16,19,.78);
+  border:1px solid rgba(255,255,255,.1);
+  font-size:.72rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--gold);
+}
+
+.card-body{
+  display:grid;
+  gap:.9rem;
+  padding:1rem;
+}
+
+.card-title{
+  font-size:1.15rem;
+  line-height:1.25;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem;
+}
+
+.meta span,
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  padding:.35rem .55rem;
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:var(--muted);
+  font-size:.76rem;
+  font-weight:700;
+}
+
+.description{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:.92rem;
+}
+
+.tag-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem;
+}
+
+.card-actions{
+  display:flex;
+  gap:.65rem;
+  flex-wrap:wrap;
+}
+
+.link-btn{
+  text-decoration:none;
+  font-weight:800;
+  padding:.72rem .92rem;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+}
+
+.link-btn.primary{
+  color:#101113;
+  background:linear-gradient(135deg,var(--cyan),#b3fff0);
+  border:none;
+}
+
+.skeleton{
+  overflow:hidden;
+}
+
+.skeleton .cover,
+.skeleton .line,
+.skeleton .pill{
+  position:relative;
+  background:rgba(255,255,255,.06);
+}
+
+.skeleton .line,
+.skeleton .pill{
+  border-radius:999px;
+}
+
+.skeleton .line{
+  height:14px;
+}
+
+.skeleton .line.short{
+  width:42%;
+}
+
+.skeleton .line.mid{
+  width:74%;
+}
+
+.skeleton .pill{
+  width:88px;
+  height:30px;
+}
+
+.skeleton .cover::after,
+.skeleton .line::after,
+.skeleton .pill::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+  animation:shimmer 1.2s linear infinite;
+}
+
+@keyframes shimmer{
+  to{transform:translateX(100%)}
+}
+
+@keyframes rise{
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+@media (max-width:980px){
+  .hero-grid,
+  .search-form{
+    grid-template-columns:1fr;
+  }
+
+  .search-btn{
+    min-height:54px;
+  }
+}
+
+@media (max-width:720px){
+  .page{
+    width:min(100% - 1rem,1180px);
+    padding-top:.6rem;
+  }
+
+  .hero,
+  .controls{
+    padding:.85rem;
+  }
+
+  .results-head,
+  .control-bar{
+    align-items:start;
+    flex-direction:column;
+  }
+
+  .hero-copy h1{
+    font-size:clamp(2.7rem,18vw,4.5rem);
+  }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <section class="hero">
+    <nav class="topbar">
+      <a href="index.html">Home</a>
+      <a href="hub.html">Hub</a>
+      <a href="https://api.mangadex.org/docs/swagger.html" target="_blank" rel="noreferrer">API Docs</a>
+    </nav>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Live API demo</p>
+        <h1>MangaDex Search Deck</h1>
+        <p class="lede">Search manga titles directly from the live MangaDex API. This page uses <code>GET https://api.mangadex.org/manga</code>, because the docs page in your example returns HTML rather than JSON.</p>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-value" id="resultCount">0</span>
+            <span class="stat-label">results rendered</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="statusText">Ready</span>
+            <span class="stat-label">request state</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <section class="api-note">
+          <h2>API correction</h2>
+          <p>`https://api.mangadex.org/docs.html` is a documentation page, so `response.json()` will fail there. The actual JSON search endpoint is `https://api.mangadex.org/manga` with query params such as `title`, `limit`, `includes[]`, and `availableTranslatedLanguage[]`.</p>
+        </section>
+
+        <section class="request-box">
+          <span class="box-label">Last request</span>
+          <code class="request-url" id="requestUrl">https://api.mangadex.org/manga?title=one%20piece&amp;limit=8&amp;includes[]=cover_art</code>
+          <p>The page searches titles, pulls cover art relationships, and links each result back to MangaDex.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <div class="control-bar">
+      <div>
+        <p class="eyebrow">Search controls</p>
+        <h2 class="control-title">Build the request</h2>
+      </div>
+      <p class="control-copy">The form below builds a real request URL and fetches fresh data from MangaDex in the browser.</p>
+    </div>
+
+    <form class="search-form" id="searchForm">
+      <label class="field">
+        <span>Title</span>
+        <input id="titleInput" name="title" type="text" value="One Piece" placeholder="Search manga titles" autocomplete="off" />
+      </label>
+
+      <label class="field">
+        <span>Results</span>
+        <select id="limitInput" name="limit">
+          <option value="6">6</option>
+          <option value="8" selected>8</option>
+          <option value="12">12</option>
+          <option value="16">16</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>English only</span>
+        <span class="switch">
+          <span>Only show titles with English translations</span>
+          <input id="englishOnly" name="englishOnly" type="checkbox" checked />
+        </span>
+      </label>
+
+      <button class="search-btn" type="submit">Search now</button>
+    </form>
+
+    <div class="chip-row">
+      <button class="chip" type="button" data-query="One Piece">One Piece</button>
+      <button class="chip" type="button" data-query="Berserk">Berserk</button>
+      <button class="chip" type="button" data-query="Vagabond">Vagabond</button>
+      <button class="chip" type="button" data-query="Blue Lock">Blue Lock</button>
+      <button class="chip" type="button" data-query="Frieren">Frieren</button>
+    </div>
+  </section>
+
+  <section class="results">
+    <div class="results-head">
+      <div>
+        <p class="eyebrow">Results</p>
+        <h2>Live manga matches</h2>
+      </div>
+      <p class="summary-text" id="summaryText">Loading default search...</p>
+    </div>
+
+    <div class="feedback" id="feedback" data-tone="loading">Loading manga from MangaDex...</div>
+    <div class="grid" id="resultsGrid" aria-live="polite"></div>
+  </section>
+</main>
+
+<script>
+const API_BASE = 'https://api.mangadex.org/manga';
+const resultCount = document.getElementById('resultCount');
+const statusText = document.getElementById('statusText');
+const requestUrl = document.getElementById('requestUrl');
+const summaryText = document.getElementById('summaryText');
+const feedback = document.getElementById('feedback');
+const resultsGrid = document.getElementById('resultsGrid');
+const searchForm = document.getElementById('searchForm');
+const titleInput = document.getElementById('titleInput');
+const limitInput = document.getElementById('limitInput');
+const englishOnly = document.getElementById('englishOnly');
+const quickChips = document.querySelectorAll('.chip');
+
+let currentController;
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function chooseLocalizedText(record) {
+  if (!record || typeof record !== 'object') {
+    return '';
+  }
+
+  const preferredKeys = ['en', 'ja-ro', 'ja'];
+  for (const key of preferredKeys) {
+    if (typeof record[key] === 'string' && record[key].trim()) {
+      return record[key].trim();
+    }
+  }
+
+  for (const value of Object.values(record)) {
+    if (typeof value === 'string' && value.trim()) {
+      return value.trim();
+    }
+  }
+
+  return '';
+}
+
+function getTitle(attributes) {
+  const directTitle = chooseLocalizedText(attributes.title);
+  if (directTitle) {
+    return directTitle;
+  }
+
+  for (const altTitle of attributes.altTitles || []) {
+    const text = chooseLocalizedText(altTitle);
+    if (text) {
+      return text;
+    }
+  }
+
+  return 'Untitled manga';
+}
+
+function stripMarkdown(text) {
+  return String(text ?? '')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+    .replace(/[*_~`>#-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function truncate(text, maxLength) {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.slice(0, maxLength - 1).trimEnd() + '...';
+}
+
+function formatLabel(value) {
+  if (!value) {
+    return 'Unknown';
+  }
+
+  return String(value)
+    .replaceAll('-', ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function buildUrl(query) {
+  const url = new URL(API_BASE);
+  const title = query.title.trim();
+
+  url.searchParams.set('limit', String(query.limit));
+  url.searchParams.append('includes[]', 'cover_art');
+  url.searchParams.append('contentRating[]', 'safe');
+  url.searchParams.append('contentRating[]', 'suggestive');
+  url.searchParams.append('contentRating[]', 'erotica');
+
+  if (title) {
+    url.searchParams.set('title', title);
+  }
+
+  if (query.englishOnly) {
+    url.searchParams.append('availableTranslatedLanguage[]', 'en');
+  }
+
+  return url;
+}
+
+function setStatus(text, tone) {
+  statusText.textContent = text;
+  feedback.dataset.tone = tone;
+}
+
+function renderSkeletons(count) {
+  const cards = Array.from({ length: count }, () => `
+    <article class="card skeleton">
+      <div class="cover"></div>
+      <div class="card-body">
+        <div class="line mid"></div>
+        <div class="line short"></div>
+        <div class="meta">
+          <span class="pill"></span>
+          <span class="pill"></span>
+        </div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line short"></div>
+      </div>
+    </article>
+  `).join('');
+
+  resultsGrid.innerHTML = cards;
+}
+
+function getCoverUrl(manga) {
+  const cover = (manga.relationships || []).find((entry) => entry.type === 'cover_art' && entry.attributes?.fileName);
+  if (!cover) {
+    return '';
+  }
+
+  return `https://uploads.mangadex.org/covers/${manga.id}/${cover.attributes.fileName}`;
+}
+
+function createCardMarkup(manga) {
+  const attributes = manga.attributes;
+  const title = getTitle(attributes);
+  const description = truncate(stripMarkdown(chooseLocalizedText(attributes.description) || 'No description available.'), 220);
+  const coverUrl = getCoverUrl(manga);
+  const tagNames = (attributes.tags || [])
+    .map((tag) => chooseLocalizedText(tag.attributes?.name))
+    .filter(Boolean)
+    .slice(0, 4);
+  const languageCount = Array.isArray(attributes.availableTranslatedLanguages)
+    ? attributes.availableTranslatedLanguages.length
+    : 0;
+
+  const metaPills = [
+    attributes.year ? escapeHtml(attributes.year) : 'Year unknown',
+    escapeHtml(formatLabel(attributes.status)),
+    escapeHtml(formatLabel(attributes.originalLanguage)),
+    `${languageCount} languages`
+  ];
+
+  const coverMarkup = coverUrl
+    ? `<img src="${escapeHtml(coverUrl)}" alt="${escapeHtml(title)} cover" loading="lazy" />`
+    : `<div class="cover-fallback">${escapeHtml(title)}</div>`;
+
+  const tagMarkup = tagNames.length
+    ? tagNames.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')
+    : '<span class="tag">No tags</span>';
+
+  return `
+    <article class="card">
+      <div class="cover">
+        ${coverMarkup}
+        <span class="rating-badge">${escapeHtml(formatLabel(attributes.contentRating))}</span>
+      </div>
+      <div class="card-body">
+        <div>
+          <h3 class="card-title">${escapeHtml(title)}</h3>
+        </div>
+
+        <div class="meta">
+          ${metaPills.map((pill) => `<span>${pill}</span>`).join('')}
+        </div>
+
+        <p class="description">${escapeHtml(description)}</p>
+
+        <div class="tag-list">
+          ${tagMarkup}
+        </div>
+
+        <div class="card-actions">
+          <a class="link-btn primary" href="https://mangadex.org/title/${encodeURIComponent(manga.id)}" target="_blank" rel="noreferrer">Open on MangaDex</a>
+          <a class="link-btn" href="${escapeHtml(API_BASE + '/' + manga.id)}" target="_blank" rel="noreferrer">View JSON</a>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderResults(payload, searchTerm) {
+  const items = payload.data || [];
+
+  resultCount.textContent = String(items.length);
+  summaryText.textContent = searchTerm
+    ? `Showing ${items.length} result(s) for "${searchTerm}" out of ${payload.total ?? items.length} total matches.`
+    : `Showing ${items.length} manga entries from MangaDex.`;
+
+  if (!items.length) {
+    resultsGrid.innerHTML = '';
+    feedback.textContent = 'No matches found for that title. Try a broader query.';
+    setStatus('No matches', 'error');
+    return;
+  }
+
+  resultsGrid.innerHTML = items.map((manga) => createCardMarkup(manga)).join('');
+  feedback.textContent = 'Live data loaded successfully from MangaDex.';
+  setStatus('Loaded', 'success');
+}
+
+async function loadManga(query) {
+  if (currentController) {
+    currentController.abort();
+  }
+
+  currentController = new AbortController();
+  const url = buildUrl(query);
+
+  requestUrl.textContent = url.toString();
+  feedback.textContent = 'Loading manga from MangaDex...';
+  setStatus('Loading', 'loading');
+  renderSkeletons(Number(query.limit));
+
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      },
+      signal: currentController.signal
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    const payload = await response.json();
+    renderResults(payload, query.title.trim());
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      return;
+    }
+
+    resultsGrid.innerHTML = '';
+    resultCount.textContent = '0';
+    summaryText.textContent = 'The request did not complete.';
+    feedback.textContent = `Could not load data from MangaDex. ${error.message}`;
+    setStatus('Error', 'error');
+  }
+}
+
+function getFormQuery() {
+  return {
+    title: titleInput.value,
+    limit: Number(limitInput.value),
+    englishOnly: englishOnly.checked
+  };
+}
+
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  loadManga(getFormQuery());
+});
+
+quickChips.forEach((chip) => {
+  chip.addEventListener('click', () => {
+    titleInput.value = chip.dataset.query || '';
+    loadManga(getFormQuery());
+  });
+});
+
+loadManga(getFormQuery());
+</script>
+</body>
+</html>

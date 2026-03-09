@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.5 Q4 | First-Order Linear Equation</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.5rem}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}
+.main-stack{display:grid;gap:1rem}
+.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.rooms{display:grid;gap:.85rem}
+.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.75rem}
+.fact{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.75rem}
+.fact .k{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.25rem}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{margin-top:.75rem;padding:.75rem .85rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.transition{border-style:dashed;background:rgba(255,255,255,.02)}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}
+.modal.open{display:flex}
+.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{width:100%;min-height:340px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="math-index.html">Math Hub</a>
+    <a href="math-ex35-q3-linear.html">Prev: Ex 3.5 Q3</a>
+    <a href="math-ex35-q5-linear.html">Next: Ex 3.5 Q5</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 3.5 Question 4</h1>
+    <p>This one is linear, but the integrating factor is trigonometric and the right side needs one extra identity. Once you spot that $$e^{\int \sec x\,dx}=\sec x+\tan x,$$ the equation collapses into a product derivative.</p>
+    <div class="eq">$$\frac{dy}{dx}+y\sec x=\tan x\qquad\Longrightarrow\qquad y=1+\frac{C-x}{\sec x+\tan x}$$</div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Method</div><div class="v">First-order linear ODE</div></div>
+          <div class="fact"><div class="k">Standard Form</div><div class="v">$$y'+(\sec x)y=\tan x$$</div></div>
+          <div class="fact"><div class="k">Here</div><div class="v">$$P(x)=\sec x,\quad Q(x)=\tan x$$</div></div>
+          <div class="fact"><div class="k">Integrating Factor</div><div class="v">$$\mu(x)=e^{\int \sec x\,dx}=\sec x+\tan x$$</div></div>
+          <div class="fact"><div class="k">Useful Identity</div><div class="v">$$\tan^2 x=\sec^2 x-1$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Identify the Linear Form</h2>
+            <ul>
+              <li>The equation is already in linear form</li>
+              <li>$$y'+P(x)y=Q(x).$$</li>
+              <li>Here</li>
+              <li>$$P(x)=\sec x,\qquad Q(x)=\tan x.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Compute the Integrating Factor</h2>
+            <ul>
+              <li>Use</li>
+              <li>$$\mu(x)=e^{\int \sec x\,dx}.$$</li>
+              <li>From the standard integral,</li>
+              <li>$$\int \sec x\,dx=\ln|\sec x+\tan x|.$$</li>
+              <li>So on a fixed interval,</li>
+              <li>$$\mu(x)=\sec x+\tan x.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Multiply Through by $$\sec x+\tan x$$</h2>
+            <ul>
+              <li>Multiply the whole equation:</li>
+              <li>$$(\sec x+\tan x)\frac{dy}{dx}+y\sec x(\sec x+\tan x)=\tan x(\sec x+\tan x).$$</li>
+              <li>Because</li>
+              <li>$$\frac{d}{dx}(\sec x+\tan x)=\sec x(\sec x+\tan x),$$</li>
+              <li>the left side becomes</li>
+              <li>$$\frac{d}{dx}\left[y(\sec x+\tan x)\right].$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Simplify the Right Side</h2>
+            <ul>
+              <li>We must integrate</li>
+              <li>$$\tan x(\sec x+\tan x)=\sec x\tan x+\tan^2 x.$$</li>
+              <li>Use $$\tan^2 x=\sec^2 x-1$$ to get</li>
+              <li>$$\sec x\tan x+\sec^2 x-1=\frac{d}{dx}(\sec x+\tan x)-1.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Integrate</h2>
+            <ul>
+              <li>So the differential equation becomes</li>
+              <li>$$\frac{d}{dx}\left[y(\sec x+\tan x)\right]=\frac{d}{dx}(\sec x+\tan x)-1.$$</li>
+              <li>Integrate both sides:</li>
+              <li>$$y(\sec x+\tan x)=\sec x+\tan x-x+C.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Final Answer</h2>
+            <ul>
+              <li>Now divide by $$\sec x+\tan x:$$</li>
+              <li>$$y=\frac{\sec x+\tan x-x+C}{\sec x+\tan x}.$$</li>
+              <li>Split the fraction:</li>
+              <li>$$\boxed{y=1+\frac{C-x}{\sec x+\tan x}}.$$</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>After multiplying by $$\sec x+\tan x,$$ always check whether the right side can be rewritten using $$\tan^2 x=\sec^2 x-1.$$ That converts the messy trig product into something immediately integrable.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This path has one extra room compared with the easy linear cases: you must simplify the right side before integrating.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Linear Gate</h3><p>Read the equation as $$y'+(\sec x)y=\tan x.$$</p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>Once $$P(x)=\sec x$$ is identified, the integrating factor is fixed.</p></div>
+        <div class="station"><h3>Station 2: IF Desk</h3><p>Store $$\mu(x)=\sec x+\tan x.$$</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>Multiply by the integrating factor so the left side fuses into one derivative.</p></div>
+        <div class="station"><h3>Station 3: Product Hall</h3><p>Recognize $$\dfrac{d}{dx}[y(\sec x+\tan x)].$$</p></div>
+        <div class="transition"><h3>Transition 3 to 4</h3><p>The right side still looks rough, so use a trig identity before integrating.</p></div>
+        <div class="station"><h3>Station 4: Identity Vault</h3><p>Rewrite $$\sec x\tan x+\tan^2 x$$ as $$\dfrac{d}{dx}(\sec x+\tan x)-1.$$</p></div>
+        <div class="transition"><h3>Transition 4 to 5</h3><p>Now the integral is immediate.</p></div>
+        <div class="station"><h3>Station 5: Integral Seal</h3><p>Get $$y(\sec x+\tan x)=\sec x+\tan x-x+C.$$</p></div>
+        <div class="transition"><h3>Transition 5 to 6</h3><p>One division remains to isolate $$y.$$</p></div>
+        <div class="station"><h3>Station 6: Final Seal</h3><p>Lock $$y=1+\frac{C-x}{\sec x+\tan x}.$$</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full solution flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this first-order linear differential-equation solution. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The equation is y' + y sec x = tan x, already in linear form.
+2. Here P(x) = sec x and Q(x) = tan x.
+3. The integrating factor is mu(x) = e^(integral sec x dx) = sec x + tan x.
+4. Multiply the whole equation by sec x + tan x.
+5. Then the left side becomes d[y(sec x + tan x)]/dx.
+6. The right side is tan x(sec x + tan x) = sec x tan x + tan^2 x.
+7. Use tan^2 x = sec^2 x - 1 to rewrite the right side as d(sec x + tan x)/dx - 1.
+8. Integrate both sides to get y(sec x + tan x) = sec x + tan x - x + C.
+9. Divide by sec x + tan x.
+10. Final answer is y = 1 + (C - x)/(sec x + tan x).</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex35q4Modal = document.getElementById('prompt-modal');
+const ex35q4Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex35q4Modal.classList.add('open');
+  ex35q4Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex35q4Modal.classList.remove('open');
+    ex35q4Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex35q4Modal.addEventListener('click', (event) => {
+  if (event.target === ex35q4Modal) {
+    ex35q4Modal.classList.remove('open');
+    ex35q4Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(ex35q4Textarea.value); }
+  catch (error) { ex35q4Textarea.focus(); ex35q4Textarea.select(); }
+});
+</script>
+</body>
+</html>

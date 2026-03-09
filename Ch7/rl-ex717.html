@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 7-17 | Rooms + Memory Cues</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="linear-review.css" />
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:980px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.9rem,4vw,3rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.section{margin-top:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p{line-height:1.75;color:var(--muted)}
+.memory{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.85rem;
+}
+.cue{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.cue h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.45rem;
+}
+.cue p{color:var(--muted);line-height:1.7}
+@media (max-width:700px){
+  .shell{padding:1rem .85rem 2rem}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rl-ex713-example.html">Example 7-13</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 7-17</h1>
+    <p>This switching problem asks you to find the output voltage <code>v_O(t)</code> after the source moves from position A to B. Do not start from the final expression; build it from the switching logic, the initial value, and the time constant.</p>
+    <div class="eq">Find $$v_O(t),\quad t\ge 0$$</div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Rooms</div>
+    <div class="rooms">
+      <article class="room">
+        <h2>Room 1: Recognize the Pattern</h2>
+        <ul>
+          <li>This is a switching RL problem, so you should not assume the final formula first.</li>
+          <li>Find the post-switch final value, then use the pre-switch current to get the initial output at <code>t=0^+</code>.</li>
+          <li>Only after that can you decide the response is a pure natural decay.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 2: Read the Final Value</h2>
+        <ul>
+          <li>For $t\to\infty$, the inductor reaches DC steady state and behaves like a short circuit.</li>
+          <li>That shorts the middle node to ground.</li>
+          <li>The output node is then tied to ground through the 50-$\Omega$ branch on the left and the 25-$\Omega$ resistor on the right.</li>
+          <li>So the output settles to $$v_O(\infty)=0\text{ V}.$$</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 3: Derive the Initial Value From the Circuit</h2>
+        <ul>
+          <li>Before switching, the switch has been at A for a long time, so the inductor is a short circuit.</li>
+          <li>That makes the pre-switch inductor current $$i_L(0^-)=\frac{10}{50}=0.2\text{ A}.$$</li>
+          <li>Inductor current cannot jump, so $$i_L(0^+)=0.2\text{ A}$$ downward through the inductor.</li>
+          <li>At $t=0^+$, the switch moves to B, so the left source applies $-10\text{ V}$ to the first 50-$\Omega$ resistor.</li>
+          <li>Let the inductor node be $v_1$ and the output node be $v_O$.</li>
+          <li>KCL at the output node gives $$\frac{v_O-v_1}{50}+\frac{v_O}{25}=0 \quad\Rightarrow\quad v_1=3v_O.$$</li>
+          <li>KCL at the inductor node gives $$\frac{v_1+10}{50}+\frac{v_1-v_O}{50}+0.2=0.$$</li>
+          <li>Substitute $$v_1=3v_O$$ into that equation:</li>
+          <li>$$\frac{3v_O+10}{50}+\frac{3v_O-v_O}{50}+0.2=0.$$</li>
+          <li>That simplifies to $$\frac{5v_O+10}{50}+0.2=0,$$ so $$5v_O+10=-10,$$ and therefore $$v_O(0^+)=-4\text{ V}.$$</li>
+          <li>Now the negative sign is justified by the actual post-switch circuit, not guessed.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 4: Extract the Time Constant</h2>
+        <ul>
+          <li>Match $e^{-t/\tau}$ with $e^{-200t}$.</li>
+          <li>That gives $$\frac{1}{\tau}=200 \quad \Rightarrow \quad \tau=\frac{1}{200}=5\text{ ms}.$$</li>
+          <li>For an RL circuit, $$\tau=\frac{L}{R_N}.$$</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 5: Recover the Resistance Seen by the Inductor</h2>
+        <ul>
+          <li>The inductor value is $$L=150\text{ mH}=0.15\text{ H}.$$</li>
+          <li>Using $$\tau=\frac{L}{R_N},$$ the post-switch resistance is</li>
+          <li>$$R_N=\frac{L}{\tau}=\frac{0.15}{0.005}=30\Omega.$$</li>
+          <li>That matches the kind of equivalent resistance the inductor sees after the switch moves to B.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 6: Build the Output Form</h2>
+        <ul>
+          <li>Now that you know $$v_O(0^+)=-4\text{ V} \quad \text{and} \quad v_O(\infty)=0,$$ the forced term is zero.</li>
+          <li>For a pure natural response, use</li>
+          <li>$$v_O(t)=v_O(0)e^{-t/\tau}.$$</li>
+          <li>Substitute $$v_O(0)=-4 \quad \text{and} \quad \tau=5\text{ ms}:$$</li>
+          <li>$$v_O(t)=-4e^{-200t}\text{ V},\quad t\ge 0.$$</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 7: Rebuild the Governing ODE</h2>
+        <ul>
+          <li>A pure first-order natural response satisfies</li>
+          <li>$$\tau\frac{dv_O}{dt}+v_O=0.$$</li>
+          <li>With $$\tau=0.005,$$ the output obeys</li>
+          <li>$$0.005\frac{dv_O}{dt}+v_O=0,\quad t\ge 0.$$</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 8: Quick Verification</h2>
+        <ul>
+          <li>Differentiate the response:</li>
+          <li>$$\frac{dv_O}{dt}=800e^{-200t}.$$</li>
+          <li>Substitute into the left side:</li>
+          <li>$$0.005\left(800e^{-200t}\right)-4e^{-200t}=4e^{-200t}-4e^{-200t}=0.$$</li>
+          <li>So the waveform is exactly a valid pure natural first-order response.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel section">
+    <div class="section-title">Memory Clues</div>
+    <div class="memory">
+      <div class="cue">
+        <h3>Clue 1</h3>
+        <p>No constant term means no forced term. The whole waveform is natural response only.</p>
+      </div>
+      <div class="cue">
+        <h3>Clue 2</h3>
+        <p>For pure natural response, the waveform is just initial value times the decaying exponential.</p>
+      </div>
+      <div class="cue">
+        <h3>Clue 3</h3>
+        <p>For RL, use the inductor value and <code>tau</code> to recover the resistance seen after switching: <code>R_N = L / tau</code>.</p>
+      </div>
+      <div class="cue">
+        <h3>Clue 4</h3>
+        <p>If the waveform decays to zero, the governing ODE has zero on the right side.</p>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

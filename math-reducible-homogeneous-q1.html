@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Reducible to Homogeneous Q1 | Shift of Origin Method</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#08111b;
+  --bg2:#132536;
+  --panel:#101a28;
+  --panel2:#172536;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd166;
+  --accent2:#7ce8ff;
+  --text:#eef6ff;
+  --muted:rgba(238,246,255,.76);
+  --glow:0 0 0 1px rgba(124,232,255,.45),0 0 24px rgba(124,232,255,.08);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top right,rgba(124,232,255,.14),transparent 34%),
+    radial-gradient(circle at bottom left,rgba(255,209,102,.1),transparent 28%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+}
+a{color:inherit}
+.shell{max-width:1120px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .95rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel{
+  background:rgba(16,26,40,.92);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:1.25rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.9rem,4vw,3rem);
+  margin-bottom:.55rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.95rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:.95rem;
+  text-align:center;
+  overflow:auto;
+}
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.95fr);
+  gap:1rem;
+  margin-top:1rem;
+  align-items:start;
+}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.guide-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:.8rem;
+  margin-bottom:1rem;
+}
+.guide-card{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:1rem;
+}
+.guide-card h3{
+  font-size:.95rem;
+  color:var(--accent2);
+  margin-bottom:.45rem;
+}
+.guide-card p{
+  color:var(--muted);
+  line-height:1.72;
+  font-size:.9rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:1rem;
+  transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent2);
+}
+.room-intro{
+  margin-bottom:.7rem;
+  color:rgba(238,246,255,.9);
+  line-height:1.72;
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p{line-height:1.78;color:var(--muted)}
+.room.active{
+  border-color:rgba(124,232,255,.5);
+  transform:translateY(-2px);
+  box-shadow:var(--glow);
+}
+.note{
+  margin-top:.8rem;
+  padding:.75rem .85rem;
+  background:rgba(255,255,255,.03);
+  border:1px dashed rgba(124,232,255,.28);
+  border-radius:14px;
+  color:var(--muted);
+  line-height:1.72;
+}
+.note b{color:var(--accent2)}
+.palace{position:sticky;top:1rem}
+.palace-copy{color:var(--muted);line-height:1.8;margin-bottom:.9rem}
+.palace-paragraph{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:1rem;
+}
+.palace-line{
+  display:block;
+  position:relative;
+  padding:.7rem .8rem;
+  border-radius:12px;
+  color:var(--muted);
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,transform .2s ease;
+}
+.palace-line + .palace-line{margin-top:.35rem}
+.palace-line::after{
+  content:'';
+  position:absolute;
+  left:calc(100% + .45rem);
+  top:50%;
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--accent2),rgba(124,232,255,0));
+  transform:translateY(-50%);
+  transition:width .22s ease;
+}
+.palace-line::before{
+  content:attr(data-thread);
+  position:absolute;
+  left:calc(100% + 7.2rem);
+  top:50%;
+  transform:translateY(-50%);
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:var(--accent2);
+  opacity:0;
+  transition:opacity .2s ease;
+  white-space:nowrap;
+}
+.palace-line:hover,
+.palace-line.active{
+  background:rgba(124,232,255,.08);
+  color:var(--text);
+  transform:translateX(3px);
+}
+.palace-line:hover::after,
+.palace-line.active::after{width:6.2rem}
+.palace-line:hover::before,
+.palace-line.active::before{opacity:1}
+.thread-panel{
+  margin-top:.9rem;
+  background:rgba(255,255,255,.025);
+  border:1px dashed rgba(124,232,255,.28);
+  border-radius:14px;
+  padding:.9rem;
+}
+.thread-label{
+  font-size:.74rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--accent2);
+  font-weight:800;
+}
+.thread-target{margin-top:.45rem;font-weight:700}
+.thread-detail{margin-top:.35rem;color:var(--muted);line-height:1.7}
+.answer-box{
+  margin-top:1rem;
+  background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(124,232,255,.03));
+  border:1px solid rgba(255,209,102,.28);
+  border-radius:16px;
+  padding:1rem;
+}
+.answer-box p{color:var(--muted);line-height:1.75}
+@media (max-width:880px){
+  .layout{grid-template-columns:1fr}
+  .palace{position:static}
+  .palace-line::before{left:calc(100% + 5.5rem)}
+}
+@media (max-width:640px){
+  .shell{padding:1rem .85rem 2rem}
+  .palace-line::after,.palace-line::before{display:none}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="math-index.html">Math Hub</a>
+    <a href="math-questions.html">Question Bank</a>
+    <a href="math-solutions.html">Solutions</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Reducible to Homogeneous - Question 1</h1>
+    <p>This equation looks close to homogeneous, but it is not directly usable with $y=vx$ because the constants $-20$ and $-10$ spoil the ratio pattern. The clean way is to translate the variables first, so the linear expressions become pure first-degree forms in the new coordinates, and only then apply the homogeneous substitution.</p>
+    <div class="eq">$$\frac{dy}{dx}=\frac{2x+9y-20}{6x+2y-10}$$</div>
+  </section>
+
+  <div class="layout">
+    <section class="panel">
+      <div class="section-title">Method Preview</div>
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h3>Why Direct $$y=vx$$ Fails</h3>
+          <p>If you try $y=vx$ immediately, the constants remain in the numerator and denominator, so the equation does not reduce to a function of $v$ alone. That means it is not directly homogeneous in the original variables.</p>
+        </div>
+        <div class="guide-card">
+          <h3>What the Shift Does</h3>
+          <p>We move the origin to the point where both linear expressions become zero. After that shift, the constants disappear and the equation becomes homogeneous in the new variables $X$ and $Y$.</p>
+        </div>
+        <div class="guide-card">
+          <h3>What Success Looks Like</h3>
+          <p>Once the equation becomes a ratio of degree-1 forms, the substitution $Y=vX$ works exactly like an ordinary homogeneous differential equation, and the rest becomes separation plus back-substitution.</p>
+        </div>
+      </div>
+
+      <div class="section-title">Rooms</div>
+      <div class="rooms">
+        <article class="room" id="room-1">
+          <h2>Room 1: Translate Variables to Kill Constants</h2>
+          <p class="room-intro">The real obstacle is the constant part of the two linear expressions. So instead of attacking the differential equation directly, we first shift the coordinate system to a better origin.</p>
+          <ul>
+            <li>Set a translated coordinate system:</li>
+            <li>$$x=X+h,\qquad y=Y+k.$$</li>
+            <li>Now rewrite the numerator:</li>
+            <li>$$2x+9y-20=2(X+h)+9(Y+k)-20=(2X+9Y)+(2h+9k-20).$$</li>
+            <li>Rewrite the denominator too:</li>
+            <li>$$6x+2y-10=6(X+h)+2(Y+k)-10=(6X+2Y)+(6h+2k-10).$$</li>
+            <li>To make the new equation homogeneous, force both constant brackets to become zero:</li>
+            <li>$$2h+9k-20=0,\qquad 6h+2k-10=0.$$</li>
+            <li>Solving gives $$h=1,\qquad k=2.$$</li>
+            <li>So the useful translated variables are</li>
+            <li>$$X=x-1,\qquad Y=y-2.$$</li>
+            <li>Because the shift is by constants only, derivatives do not change:</li>
+            <li>$$\frac{dy}{dx}=\frac{dY}{dX}.$$</li>
+          </ul>
+          <div class="note"><b>Checkpoint:</b> the shift is chosen so that the intersection point of the two lines $$2x+9y-20=0$$ and $$6x+2y-10=0$$ becomes the new origin. That is the geometric reason the constants disappear.</div>
+        </article>
+
+        <article class="room" id="room-2">
+          <h2>Room 2: Reduced Homogeneous Equation</h2>
+          <p class="room-intro">Now substitute the translated variables into the differential equation. This is the payoff for Room 1: the constant clutter is gone.</p>
+          <ul>
+            <li>After substitution, the equation becomes</li>
+            <li>$$\frac{dY}{dX}=\frac{2X+9Y}{6X+2Y}.$$</li>
+            <li>Both numerator and denominator are first-degree expressions in $$X$$ and $$Y.$$</li>
+            <li>That means the right side depends only on the ratio $$Y/X,$$ so the equation is now homogeneous.</li>
+          </ul>
+          <div class="note"><b>Why this matters:</b> now the standard homogeneous substitution is legal. Before translation it was not.</div>
+        </article>
+
+        <article class="room" id="room-3">
+          <h2>Room 3: Put $$Y=vX$$</h2>
+          <p class="room-intro">This is the standard homogeneous move. Once the right side is a function of $$Y/X$$, write $$Y=vX$$ and convert the derivative.</p>
+          <ul>
+            <li>Use</li>
+            <li>$$Y=vX \qquad \Rightarrow \qquad \frac{dY}{dX}=v+X\frac{dv}{dX}.$$</li>
+            <li>Also $$\dfrac{Y}{X}=v,$$ so the right side becomes</li>
+            <li>$$\frac{2X+9Y}{6X+2Y}=\frac{2+9v}{6+2v}.$$</li>
+            <li>Hence</li>
+            <li>$$v+X\frac{dv}{dX}=\frac{2+9v}{6+2v}.$$</li>
+            <li>Now isolate the derivative term:</li>
+            <li>$$X\frac{dv}{dX}=\frac{2+9v-v(6+2v)}{6+2v}=\frac{2+3v-2v^2}{6+2v}.$$</li>
+            <li>Factor numerator and denominator:</li>
+            <li>$$X\frac{dv}{dX}=\frac{(2-v)(2v+1)}{2(v+3)}.$$</li>
+          </ul>
+          <div class="note"><b>Checkpoint:</b> the whole purpose of $$Y=vX$$ is to turn a two-variable equation into a one-variable equation in $$v$$, with $$X$$ appearing only through $$dX/X$$.</div>
+        </article>
+
+        <article class="room" id="room-4">
+          <h2>Room 4: Separate and Integrate</h2>
+          <p class="room-intro">Once the equation is in $$v$$ and $$X$$, it becomes an ordinary separable equation. This room is just algebra plus controlled integration.</p>
+          <ul>
+            <li>Separate the variables:</li>
+            <li>$$\frac{2(v+3)}{(2-v)(2v+1)}\,dv=\frac{dX}{X}.$$</li>
+            <li>Now split the left side into partial fractions:</li>
+            <li>$$\frac{2(v+3)}{(2-v)(2v+1)}=\frac{A}{2-v}+\frac{B}{2v+1}.$$</li>
+            <li>Solving gives $$A=2,\quad B=2,$$ so</li>
+            <li>$$\frac{2(v+3)}{(2-v)(2v+1)}=\frac{2}{2-v}+\frac{2}{2v+1}.$$</li>
+            <li>Integrate term by term:</li>
+            <li>$$\int \frac{2}{2-v}\,dv+\int \frac{2}{2v+1}\,dv=\int \frac{dX}{X}.$$</li>
+            <li>$$-2\ln|2-v|+\ln|2v+1|=\ln|X|+C.$$</li>
+            <li>Combine the logarithms into one expression:</li>
+            <li>$$\ln\left|\frac{2v+1}{(2-v)^2}\right|=\ln|X|+C.$$</li>
+          </ul>
+          <div class="note"><b>Anti-mistake check:</b> the first log has a negative sign because $$\int \frac{1}{2-v}\,dv=-\ln|2-v|$$, not $$+\ln|2-v|$$.</div>
+        </article>
+
+        <article class="room" id="room-5">
+          <h2>Room 5: Back-Substitute</h2>
+          <p class="room-intro">The hard part is over. Now convert the logarithmic relation into algebra, then undo both substitutions in the correct order: first $$v\to Y/X$$, then $$X,Y\to x,y$$.</p>
+          <ul>
+            <li>Exponentiate the logarithmic equation:</li>
+            <li>$$\frac{2v+1}{(2-v)^2}=CX.$$</li>
+            <li>Now put $$v=\dfrac{Y}{X}:$$</li>
+            <li>$$\frac{2\left(\frac{Y}{X}\right)+1}{\left(2-\frac{Y}{X}\right)^2}=CX.$$</li>
+            <li>Simplify numerator and denominator carefully:</li>
+            <li>$$\frac{\frac{2Y+X}{X}}{\frac{(2X-Y)^2}{X^2}}=CX.$$</li>
+            <li>That gives</li>
+            <li>$$\frac{X(2Y+X)}{(2X-Y)^2}=CX.$$</li>
+            <li>Cancel the common factor $$X$$ into the constant:</li>
+            <li>$$\frac{2Y+X}{(2X-Y)^2}=C.$$</li>
+            <li>So the reduced-variable answer is</li>
+            <li>$$\boxed{(2X-Y)^2=C(2Y+X)}.$$</li>
+            <li>Now return to the original variables:</li>
+            <li>$$2X-Y=2(x-1)-(y-2)=2x-y,$$</li>
+            <li>$$2Y+X=2(y-2)+(x-1)=x+2y-5.$$</li>
+            <li>Therefore</li>
+            <li>$$\boxed{(2x-y)^2=C(x+2y-5)}.$$</li>
+          </ul>
+          <div class="note"><b>Final logic:</b> the answer still contains the effect of both substitutions. If you skip the translation back from $$X,Y$$ to $$x,y$$, you stop one step too early.</div>
+        </article>
+      </div>
+
+      <div class="answer-box">
+        <div class="section-title" style="margin-bottom:.55rem">Final Answer</div>
+        <p>Using translation + homogeneous substitution, the required solution is $$\boxed{(2x-y)^2=C(x+2y-5)}.$$ The important idea is not just the algebra: this problem teaches that when constants stop an equation from being directly homogeneous, you should first shift the origin to the right point and only then use the standard homogeneous method.</p>
+      </div>
+
+      <div class="guide-grid" style="margin-top:1rem;margin-bottom:0">
+        <div class="guide-card">
+          <h3>Quick Recognition Rule</h3>
+          <p>If numerator and denominator are linear in $$x,y$$ but include constants, test whether a translation $$x=X+h,\ y=Y+k$$ can remove those constants. That is the standard trigger for the reducible-to-homogeneous method.</p>
+        </div>
+        <div class="guide-card">
+          <h3>Most Common Mistake</h3>
+          <p>Students often jump to $$y=vx$$ too early. That fails here because the constants do not disappear until after the shift. The translation is not optional; it is the enabling step.</p>
+        </div>
+        <div class="guide-card">
+          <h3>Fast Verification Idea</h3>
+          <p>You can verify the final form by differentiating implicitly, but the cleaner check is conceptual: the shifted equation is homogeneous, the substitution is valid, and every reverse substitution was handled consistently.</p>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel palace">
+      <div class="section-title">Memory Palace Thread</div>
+      <p class="palace-copy">Hover each line to trace exactly which room it belongs to.</p>
+      <p class="palace-paragraph">
+        <span class="palace-line active" tabindex="0" data-target="room-1" data-thread="-> Room 1" data-title="Room 1: Shift Origin" data-detail="First remove constants by choosing the translation that makes numerator and denominator linear homogeneous in X and Y.">At the first gate, two balance equations pick the shift $x=X+1,\ y=Y+2$ so all constants disappear.</span>
+        <span class="palace-line" tabindex="0" data-target="room-2" data-thread="-> Room 2" data-title="Room 2: Homogeneous Form" data-detail="After shifting, the differential equation becomes a ratio of first-degree forms in X and Y.">In the next hall, the reduced equation is now truly homogeneous and ready for ratio substitution.</span>
+        <span class="palace-line" tabindex="0" data-target="room-3" data-thread="-> Room 3" data-title="Room 3: Y=vX" data-detail="Use Y=vX and transform dY/dX into v + X dv/dX, then simplify to a separable v-equation.">Then the $Y=vX$ machine expands derivatives and compresses everything into one rational expression in $v$.</span>
+        <span class="palace-line" tabindex="0" data-target="room-4" data-thread="-> Room 4" data-title="Room 4: Integrate" data-detail="Separate variables, split into partial fractions, and integrate logs on both sides.">A fraction corridor splits into two log doors, giving a clean logarithmic identity.</span>
+        <span class="palace-line" tabindex="0" data-target="room-5" data-thread="-> Room 5" data-title="Room 5: Back-Substitute" data-detail="Replace v by Y/X and then X,Y by x,y to reach the final textbook answer.">At the final vault, $v$ turns back to $Y/X$, then $X,Y$ return to $x,y$, sealing $(2x-y)^2=C(x+2y-5)$.</span>
+      </p>
+
+      <div class="thread-panel">
+        <div class="thread-label">Active Thread</div>
+        <div class="thread-target" id="thread-target">Room 1: Shift Origin</div>
+        <div class="thread-detail" id="thread-detail">First remove constants by choosing the translation that makes numerator and denominator linear homogeneous in X and Y.</div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script>
+const lines = document.querySelectorAll('.palace-line');
+const rooms = document.querySelectorAll('.room');
+const targetLabel = document.getElementById('thread-target');
+const detailLabel = document.getElementById('thread-detail');
+
+function activateThread(line) {
+  const targetId = line.dataset.target;
+  lines.forEach((item) => item.classList.toggle('active', item === line));
+  rooms.forEach((room) => room.classList.toggle('active', room.id === targetId));
+  targetLabel.textContent = line.dataset.title;
+  detailLabel.textContent = line.dataset.detail;
+}
+
+lines.forEach((line) => {
+  line.addEventListener('mouseenter', () => activateThread(line));
+  line.addEventListener('focus', () => activateThread(line));
+  line.addEventListener('click', () => activateThread(line));
+});
+
+activateThread(lines[0]);
+</script>
+</body>
+</html>
+

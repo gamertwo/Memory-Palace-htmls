@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RL Exercise 7-20 | Sinusoidal Steady-State Response</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="linear-review.css" />
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:.75rem;
+}
+.fact{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:360px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rc-ex719.html">Prev: 7-19</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 7-20</h1>
+    <p>Find the sinusoidal steady-state output voltage for the RL network when the source current is $$i_s(t)=I_A\cos(\omega t)\,u(t).$$ Treat the circuit in the frequency domain: convert the parallel RL branch to one equivalent impedance, multiply by the source current phasor, then return to time domain.</p>
+    <div class="eq">$$v_o(t)=\frac{I_A\omega L}{\sqrt{1+\left(\frac{\omega L}{R}\right)^2}}\cos(\omega t+\theta)\ \text{V},\qquad \theta=\tan^{-1}\!\left(\frac{R}{\omega L}\right),\qquad t\ge 0$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Input Current</div><div class="v">$$i_s(t)=I_A\cos(\omega t)\,u(t)\ \text{A}$$</div></div>
+          <div class="fact"><div class="k">Resistor Branch</div><div class="v">Impedance $$Z_R=R$$</div></div>
+          <div class="fact"><div class="k">Inductor Branch</div><div class="v">Impedance $$Z_L=j\omega L$$</div></div>
+          <div class="fact"><div class="k">Output</div><div class="v">Voltage across the parallel RL pair: $$v_o(t)$$</div></div>
+          <div class="fact"><div class="k">Goal</div><div class="v">Sinusoidal steady-state amplitude and phase</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Move to Phasor Domain</h2>
+            <ul>
+              <li>For sinusoidal steady state, ignore startup transient and solve with phasors.</li>
+              <li>Source current phasor:</li>
+              <li>$$\tilde I_s=I_A\angle 0^\circ.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Build the RL Equivalent Admittance</h2>
+            <ul>
+              <li>Parallel branches add in admittance form:</li>
+              <li>$$Y=\frac{1}{R}+\frac{1}{j\omega L}=\frac{1}{R}-j\frac{1}{\omega L}.$$</li>
+              <li>Equivalent impedance is $$Z=\frac{1}{Y}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Write the Equivalent Impedance Explicitly</h2>
+            <ul>
+              <li>Using parallel form directly:</li>
+              <li>$$Z=\frac{R(j\omega L)}{R+j\omega L}.$$</li>
+              <li>This is the impedance seen by the source current.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Magnitude of the Transfer From Current to Voltage</h2>
+            <ul>
+              <li>Output phasor is $$\tilde V_o=\tilde I_s Z.$$</li>
+              <li>Magnitude:</li>
+              <li>$$|Z|=\frac{\omega LR}{\sqrt{R^2+(\omega L)^2}}=\frac{\omega L}{\sqrt{1+\left(\frac{\omega L}{R}\right)^2}}.$$</li>
+              <li>So amplitude is</li>
+              <li>$$|\tilde V_o|=I_A|Z|=\frac{I_A\omega L}{\sqrt{1+\left(\frac{\omega L}{R}\right)^2}}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Phase Angle</h2>
+            <ul>
+              <li>For $$Z=\frac{R(j\omega L)}{R+j\omega L},$$ its phase is</li>
+              <li>$$\angle Z=\tan^{-1}\!\left(\frac{R}{\omega L}\right)=\theta.$$</li>
+              <li>Since the source phasor angle is zero, output phase is also $$+\theta.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Return to Time Domain</h2>
+            <ul>
+              <li>Convert phasor back to cosine form:</li>
+              <li>$$v_o(t)=|\tilde V_o|\cos(\omega t+\theta).$$</li>
+              <li>Therefore</li>
+              <li>$$\boxed{v_o(t)=\frac{I_A\omega L}{\sqrt{1+\left(\frac{\omega L}{R}\right)^2}}\cos(\omega t+\theta)\ \text{V}},\quad t\ge 0,$$</li>
+              <li>with $$\theta=\tan^{-1}\!\left(\frac{R}{\omega L}\right).$$</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Frequency Check</h3>
+          <p>Low frequency: $$\omega\to 0$$ makes amplitude approach 0 V (inductor branch nearly short, little output voltage). High frequency: $$\omega\to\infty$$ makes amplitude approach $$I_AR$$ (inductor branch opens, current effectively through resistor branch).</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Key Shortcut</div>
+        <div class="mini">
+          <h3>Current Source Into Parallel Network</h3>
+          <p>When the input is current and the output is voltage across a linear network, first find the equivalent impedance at that frequency, then use $$\tilde V=\tilde I Z.$$ Magnitude gives amplitude, angle gives phase.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Start from phasors, not differential equations. The path is impedance-first, then amplitude, then phase.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Source Gate</h3>
+          <p>Store $$\tilde I_s=I_A\angle 0^\circ.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>The source alone does nothing until the RL branch is collapsed to one equivalent value.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Admittance Bridge</h3>
+          <p>Build $$Y=\frac{1}{R}+\frac{1}{j\omega L}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>Invert admittance to reach impedance so voltage can be found by $$V=IZ.$$</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Impedance Hall</h3>
+          <p>Lock $$Z=\frac{R(j\omega L)}{R+j\omega L}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>Now split the same impedance into two outputs: size and angle.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Magnitude Vault</h3>
+          <p>Keep $$|V_o|=\frac{I_A\omega L}{\sqrt{1+(\omega L/R)^2}}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>After amplitude, only phase remains to complete the waveform.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Phase Door</h3>
+          <p>Set $$\theta=\tan^{-1}\!\left(\frac{R}{\omega L}\right).$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>Combine amplitude and phase into one cosine for final steady-state output.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Final Seal</h3>
+          <p>Write $$v_o(t)=|V_o|\cos(\omega t+\theta).$$</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full derivation flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this sinusoidal steady-state RL derivation. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. Input current is i_s(t) = I_A cos(omega t) u(t), so source phasor is I_A angle 0.
+2. For steady-state sinusoidal analysis, move to phasor domain.
+3. For the parallel RL network, write total admittance Y = 1/R + 1/(j omega L).
+4. Equivalent impedance is Z = 1/Y = R(j omega L)/(R + j omega L).
+5. Output phasor voltage is V_o = I_s Z.
+6. Magnitude of impedance is |Z| = omega L / sqrt(1 + (omega L / R)^2).
+7. Therefore output amplitude is |V_o| = I_A omega L / sqrt(1 + (omega L / R)^2).
+8. Phase of Z is theta = tan^-1(R / omega L), so the output leads the input by theta.
+9. Convert back to time domain:
+   v_o(t) = [I_A omega L / sqrt(1 + (omega L / R)^2)] cos(omega t + theta), t >= 0.
+10. Final phase expression: theta = tan^-1(R / omega L).
+11. Low-frequency check: omega -> 0 gives near-zero output amplitude.
+12. High-frequency check: omega -> infinity gives output amplitude approaching I_A R.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex720Modal = document.getElementById('prompt-modal');
+const ex720Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex720Modal.classList.add('open');
+  ex720Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex720Modal.classList.remove('open');
+    ex720Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex720Modal.addEventListener('click', (event) => {
+  if (event.target === ex720Modal) {
+    ex720Modal.classList.remove('open');
+    ex720Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(ex720Textarea.value);
+  } catch (error) {
+    ex720Textarea.focus();
+    ex720Textarea.select();
+  }
+});
+</script>
+</body>
+</html>

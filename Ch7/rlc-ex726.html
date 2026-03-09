@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RLC Exercise 7-26 | Recover the Circuit from Zero-Input Responses</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.75rem,4vw,2.75rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.7rem;
+}
+.fact{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:340px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rlc-ex725.html">Back: Exercise 7-25</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 7-26</h1>
+    <p>A series RLC circuit has the zero-input responses $$v_C(t)=2000te^{-500t}\ \text{V}$$ and $$i_L(t)=3.2e^{-500t}-1600te^{-500t}\ \text{mA}.$$ Find the characteristic equation, the initial state values, and the element values $$R,$$ $$L,$$ and $$C.$$</p>
+    <div class="eq">$$v_C(t)=2000te^{-500t}\ \text{V},\qquad i_L(t)=3.2e^{-500t}-1600te^{-500t}\ \text{mA}$$
+    $$s^2+1000s+25\times 10^4=0,\qquad R=2.5\ \text{k}\Omega,\ L=2.5\ \text{H},\ C=1.6\ \mu\text{F}$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given Voltage</div><div class="v">$$v_C(t)=2000te^{-500t}\ \text{V}$$</div></div>
+          <div class="fact"><div class="k">Given Current</div><div class="v">$$i_L(t)=3.2e^{-500t}-1600te^{-500t}\ \text{mA}$$</div></div>
+          <div class="fact"><div class="k">Root Clue</div><div class="v">The factor $$te^{-500t}$$ signals a repeated root at $$s=-500.$$</div></div>
+          <div class="fact"><div class="k">Series Rule</div><div class="v">$$i_L(t)=i_C(t)=C\dfrac{dv_C}{dt}$$</div></div>
+          <div class="fact"><div class="k">Target Form</div><div class="v">$$s^2+\frac{R}{L}s+\frac{1}{LC}=0$$</div></div>
+          <div class="fact"><div class="k">Key Move</div><div class="v">Use the current response at $$t=0$$ to recover $$C$$ first.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Answer Board</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Characteristic Equation</div><div class="v">$$s^2+1000s+25\times 10^4=0$$</div></div>
+          <div class="fact"><div class="k">Initial Values</div><div class="v">$$V_0=0,\qquad I_0=3.2\ \text{mA}$$</div></div>
+          <div class="fact"><div class="k">Element Values</div><div class="v">$$R=2.5\ \text{k}\Omega,\qquad L=2.5\ \text{H},\qquad C=1.6\ \mu\text{F}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Recognize the Repeated Root</h2>
+            <ul>
+              <li>The voltage contains the factor $$te^{-500t}.$$</li>
+              <li>That is the standard critical-damping signature for a repeated root.</li>
+              <li>So the characteristic equation must have</li>
+              <li>$$s_1=s_2=-500.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Build the Characteristic Equation</h2>
+            <ul>
+              <li>A repeated root at $$-500$$ means</li>
+              <li>$$\left(s+500\right)^2=0.$$</li>
+              <li>Expand it:</li>
+              <li>$$s^2+1000s+250000=0.$$</li>
+              <li>So</li>
+              <li>$$\boxed{s^2+1000s+25\times 10^4=0}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Read the Initial Voltage</h2>
+            <ul>
+              <li>Evaluate the given voltage at $$t=0.$$</li>
+              <li>Because of the factor $$t,$$</li>
+              <li>$$v_C(0)=2000(0)e^0=0.$$</li>
+              <li>Therefore</li>
+              <li>$$\boxed{V_0=0}. $$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Read the Initial Current</h2>
+            <ul>
+              <li>Evaluate the given current at $$t=0.$$</li>
+              <li>The exponential becomes 1 and the term with $$t$$ disappears.</li>
+              <li>So</li>
+              <li>$$i_L(0)=3.2\ \text{mA}.$$</li>
+              <li>Therefore</li>
+              <li>$$\boxed{I_0=3.2\ \text{mA}}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Differentiate the Voltage to Recover $$C$$</h2>
+            <ul>
+              <li>For a series circuit,</li>
+              <li>$$i_L(t)=i_C(t)=C\frac{dv_C}{dt}.$$</li>
+              <li>Differentiate the voltage:</li>
+              <li>$$\frac{dv_C}{dt}=2000e^{-500t}-10^6te^{-500t}.$$</li>
+              <li>At $$t=0,$$</li>
+              <li>$$\left.\frac{dv_C}{dt}\right|_0=2000.$$</li>
+              <li>So</li>
+              <li>$$0.0032=C(2000),\qquad C=1.6\times 10^{-6}\ \text{F}. $$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Match the Constant Term to Find $$L$$</h2>
+            <ul>
+              <li>For a series RLC circuit, the normalized equation is</li>
+              <li>$$s^2+\frac{R}{L}s+\frac{1}{LC}=0.$$</li>
+              <li>Match the constant term:</li>
+              <li>$$\frac{1}{LC}=250000.$$</li>
+              <li>With $$C=1.6\times 10^{-6},$$</li>
+              <li>$$L=\frac{1}{250000(1.6\times 10^{-6})}=2.5\ \text{H}. $$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Match the Linear Term to Find $$R$$</h2>
+            <ul>
+              <li>Match the coefficient of $$s$$:</li>
+              <li>$$\frac{R}{L}=1000.$$</li>
+              <li>With $$L=2.5\ \text{H},$$</li>
+              <li>$$R=1000(2.5)=2500\ \Omega=2.5\ \text{k}\Omega.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Final Check</h2>
+            <ul>
+              <li>The given responses are now fully consistent with the recovered circuit:</li>
+              <li>$$\boxed{R=2.5\ \text{k}\Omega,\ L=2.5\ \text{H},\ C=1.6\ \mu\text{F}}.$$</li>
+              <li>The repeated root explains the critical-damping form with the factor $$te^{-500t}.$$</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Fast Memory Rule</h3>
+          <p>When a zero-input response includes $$te^{-\alpha t},$$ think repeated root first, then read initial values directly, use $$i=C\,dv/dt$$ to recover $$C,$$ and finish by matching the characteristic-equation coefficients for $$L$$ and $$R.$$</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This route starts from the repeated-root clue and walks backward from waveform to circuit elements.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Repeated-Root Gate</h3>
+          <p>See $$te^{-500t}$$ and lock the repeated root at $$-500.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>Once the repeated root is known, the characteristic equation is forced.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Equation Vault</h3>
+          <p>Expand $$\left(s+500\right)^2$$ into the normalized series equation.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>After the equation is fixed, read the initial state values directly from the responses.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: State Desk</h3>
+          <p>Take $$V_0=0$$ from the voltage and $$I_0=3.2\ \text{mA}$$ from the current.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>The current-voltage relation gives the first element value.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Capacitance Bridge</h3>
+          <p>Use $$i=C\,dv/dt$$ at $$t=0$$ to solve for $$C.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>With $$C$$ known, the constant term of the characteristic equation gives $$L.$$</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Inductance Hall</h3>
+          <p>Match $$1/(LC)=250000$$ to get $$L=2.5\ \text{H}.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>The linear term then gives the last missing element.</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Resistance Exit</h3>
+          <p>Use $$R/L=1000$$ to get $$R=2.5\ \text{k}\Omega.$$</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full Exercise 7-26 flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this reverse-engineering series RLC exercise. Keep the logic order exact, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The given zero-input responses are vC(t) = 2000 t e^(-500t) volts and iL(t) = 3.2 e^(-500t) - 1600 t e^(-500t) mA.
+2. The factor t e^(-500t) signals a repeated root at s = -500.
+3. Therefore the characteristic equation is (s + 500)^2 = s^2 + 1000s + 250000 = 0.
+4. Read the initial values directly: vC(0) = 0 and iL(0) = 3.2 mA.
+5. Use the series relation iL = iC = C dvC/dt.
+6. Differentiate vC(t) and evaluate the derivative at t = 0 to get dvC/dt = 2000.
+7. Since iL(0) = 3.2 mA, solve 0.0032 = C(2000) to get C = 1.6 microfarads.
+8. Match the constant term 1/(LC) = 250000 to get L = 2.5 H.
+9. Match the linear term R/L = 1000 to get R = 2.5 kilo-ohms.
+10. Final memory chain: repeated root, characteristic equation, initial values, capacitance from the slope, then inductance and resistance from coefficient matching.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex726Modal = document.getElementById('prompt-modal');
+const ex726Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  ex726Modal.classList.add('open');
+  ex726Modal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    ex726Modal.classList.remove('open');
+    ex726Modal.setAttribute('aria-hidden', 'true');
+  });
+});
+ex726Modal.addEventListener('click', (event) => {
+  if (event.target === ex726Modal) {
+    ex726Modal.classList.remove('open');
+    ex726Modal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(ex726Textarea.value);
+  } catch (error) {
+    ex726Textarea.focus();
+    ex726Textarea.select();
+  }
+});
+</script>
+</body>
+</html>

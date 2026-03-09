@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RLC Exercise 7-29 | Capacitor Sweep in a Series RLC Step Response</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}
+.shell{max-width:1160px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:.5rem}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,.95fr);gap:1rem;align-items:start;margin-top:1rem}
+.main-stack{display:grid;gap:1rem}
+.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.rooms{display:grid;gap:.85rem}
+.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.plot-note{line-height:1.75;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}
+.fact{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:.75rem}
+.fact .k{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{margin-top:.75rem;padding:.75rem .85rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.transition{border-style:dashed;background:rgba(255,255,255,.02)}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.plot-wrap{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);padding:1rem}
+.plot-legend{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:.75rem}
+.legend-item{display:flex;align-items:center;gap:.45rem;color:var(--muted);font-size:.82rem}
+.legend-swatch{width:16px;height:3px;border-radius:999px}
+#c-sweep-plot{width:100%;height:auto;display:block;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}
+.modal.open{display:flex}
+.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{width:100%;min-height:360px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell"><nav class="nav"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a><a href="rlc-ex722-example.html">Back: Example 7-22</a></nav>
+<section class="hero"><h1>Exercise 7-29</h1><p>Keep the series RLC step-response setup from Example 7-22, but vary the capacitor instead of the resistor. The goal is to track how the capacitor sweep changes the capacitor voltage waveform, the damping ratio, and the natural frequency.</p><div class="eq">$$\omega_n=\frac{1}{\sqrt{LC}},\qquad \zeta=\frac{R}{2}\sqrt{\frac{C}{L}}$$
+$$R=1\ \text{k}\Omega,\quad L=2\ \text{H},\quad V_A=10\ \text{V},\quad v_C(0)=-5\ \text{V},\quad i(0)=0$$</div><div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div></section>
+<div class="content-grid"><div class="main-stack">
+<section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Fixed Resistance</div><div class="v">$$R=1\ \text{k}\Omega$$</div></div><div class="fact"><div class="k">Fixed Inductance</div><div class="v">$$L=2\ \text{H}$$</div></div><div class="fact"><div class="k">Nominal Capacitance</div><div class="v">$$C=0.5\ \mu\text{F}$$</div></div><div class="fact"><div class="k">Critical Capacitance</div><div class="v">$$C_{\text{crit}}=\frac{4L}{R^2}=8\ \mu\text{F}$$</div></div><div class="fact"><div class="k">Natural Frequency Trend</div><div class="v">Increasing $$C$$ decreases $$\omega_n.$$</div></div><div class="fact"><div class="k">Damping Trend</div><div class="v">Increasing $$C$$ increases $$\zeta.$$</div></div></div></section>
+<section class="panel"><div class="section-title">Answer Board</div><div class="facts"><div class="fact"><div class="k">Case C</div><div class="v">If $$C&lt;8\ \mu\text{F},$$ the response is underdamped and oscillatory.</div></div><div class="fact"><div class="k">Case B</div><div class="v">If $$C=8\ \mu\text{F},$$ the response is critically damped.</div></div><div class="fact"><div class="k">Case A</div><div class="v">If $$C&gt;8\ \mu\text{F},$$ the response is overdamped.</div></div><div class="fact"><div class="k">Main Conclusion</div><div class="v">Increasing $$C$$ lowers the oscillation frequency and raises the damping ratio, so both the wiggle spacing and the decay character change.</div></div></div></section>
+<section class="panel"><div class="section-title">Capacitor Sweep Plot</div><div class="plot-wrap"><div class="plot-legend"><div class="legend-item"><span class="legend-swatch" style="background:#7ce8ff"></span><span>$$C=0.5\ \mu\text{F}$$, Case C</span></div><div class="legend-item"><span class="legend-swatch" style="background:#ffd66e"></span><span>$$C=8\ \mu\text{F}$$, Case B</span></div><div class="legend-item"><span class="legend-swatch" style="background:#ff9f80"></span><span>$$C=20\ \mu\text{F}$$, Case A</span></div></div><svg id="c-sweep-plot" viewBox="0 0 760 360" aria-label="Capacitor sweep plot"></svg><p class="plot-note">This plot is generated from the state equations $$\dot v_C=i/C$$ and $$\dot i=(V_A-Ri-v_C)/L$$ with the shared initial conditions $$v_C(0)=-5\ \text{V}$$ and $$i(0)=0.$$ It shows the same trend stated in the textbook answer: bigger $$C$$ pushes the system from underdamped to critical to overdamped while also reducing the oscillation frequency.</p></div></section>
+<section class="panel"><div class="section-title">Rooms</div><div class="rooms">
+<article class="room"><h2>Room 1: Start from the Same Series RLC Model</h2><ul><li>The capacitor voltage satisfies</li><li>$$\frac{d^2v_C}{dt^2}+\frac{R}{L}\frac{dv_C}{dt}+\frac{1}{LC}v_C=\frac{V_A}{LC}.$$</li><li>Only $$C$$ is changing in this exercise.</li></ul></article>
+<article class="room"><h2>Room 2: Separate What Stays Fixed</h2><ul><li>With $$R=1\ \text{k}\Omega$$ and $$L=2\ \text{H},$$ the damping coefficient is fixed at</li><li>$$\alpha=\frac{R}{2L}=250\ \text{rad/s}. $$</li><li>That means the resistor is no longer the sweep knob.</li></ul></article>
+<article class="room"><h2>Room 3: Track the Natural Frequency</h2><ul><li>The natural frequency is</li><li>$$\omega_n=\frac{1}{\sqrt{LC}}.$$</li><li>So increasing $$C$$ makes $$\omega_n$$ smaller.</li><li>The oscillation spacing grows wider as the capacitor gets larger.</li></ul></article>
+<article class="room"><h2>Room 4: Track the Damping Ratio</h2><ul><li>The damping ratio is</li><li>$$\zeta=\frac{\alpha}{\omega_n}=\frac{R}{2}\sqrt{\frac{C}{L}}.$$</li><li>So increasing $$C$$ makes $$\zeta$$ larger.</li><li>This is why the response becomes less oscillatory as $$C$$ increases.</li></ul></article>
+<article class="room"><h2>Room 5: Find the Critical Boundary</h2><ul><li>Critical damping occurs at $$\zeta=1.$$</li><li>Solving gives</li><li>$$C_{\text{crit}}=\frac{4L}{R^2}=8\ \mu\text{F}. $$</li><li>That divides the sweep into Cases C, B, and A.</li></ul></article>
+<article class="room"><h2>Room 6: Classify the Three Representative Curves</h2><ul><li>$$C=0.5\ \mu\text{F} &lt; 8\ \mu\text{F}$$ gives Case C, underdamped.</li><li>$$C=8\ \mu\text{F}$$ gives Case B, critically damped.</li><li>$$C=20\ \mu\text{F} &gt; 8\ \mu\text{F}$$ gives Case A, overdamped.</li></ul></article>
+<article class="room"><h2>Room 7: Compare This Sweep with the Resistor Sweep</h2><ul><li>Changing $$R$$ mainly changes damping because $$\omega_n=1/\sqrt{LC}$$ stays fixed.</li><li>Changing $$C$$ changes both $$\zeta$$ and $$\omega_n.$$</li><li>So the envelope and the oscillation spacing both move.</li></ul></article>
+<article class="room"><h2>Room 8: Final Memory Pattern</h2><ul><li>Bigger capacitor means slower natural rhythm and heavier damping.</li><li>The sweep direction is</li><li>$$\text{Case C} \rightarrow \text{Case B} \rightarrow \text{Case A}$$</li><li>as $$C$$ increases through the critical value.</li></ul></article>
+</div><div class="mini"><h3>Fast Memory Rule</h3><p>For this series RLC family, increasing $$C$$ pulls the natural frequency down and pushes the damping ratio up. That is why the waveform both slows down and loses its oscillation as the capacitor grows.</p></div></section>
+</div><aside class="palace-sidebar"><div class="section-title">Memory Palace Path</div><p class="palace-intro">Move through this path as a capacitor sweep story: keep $$R$$ and $$L$$ fixed, then watch the capacitor push the waveform through the three damping cases.</p><div class="path"><div class="station"><h3>Station 1: Frequency Door</h3><p>Read $$\omega_n=1/\sqrt{LC}$$ and watch it shrink as $$C$$ grows.</p></div><div class="transition"><h3>Transition 1 to 2</h3><p>Once the natural frequency drops, ask what happens to the damping ratio.</p></div><div class="station"><h3>Station 2: Damping Ramp</h3><p>Use $$\zeta=(R/2)\sqrt{C/L}$$ and let the capacitor push the system upward.</p></div><div class="transition"><h3>Transition 2 to 3</h3><p>The critical point splits the sweep into the three cases.</p></div><div class="station"><h3>Station 3: Critical Marker</h3><p>Lock in $$C_{\text{crit}}=8\ \mu\text{F}.$$</p></div><div class="transition"><h3>Transition 3 to 4</h3><p>Now map each representative curve onto a damping case.</p></div><div class="station"><h3>Station 4: Case Gallery</h3><p>Small $$C$$ is Case C, boundary $$C$$ is Case B, and large $$C$$ is Case A.</p></div></div></aside></div></main>
+<div class="modal" id="prompt-modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div><p class="modal-copy">This prompt is prefilled with the Exercise 7-29 capacitor-sweep logic.</p><textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this capacitor-sweep series RLC exercise. Keep the order exact, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The fixed values are R=1 kilo-ohm, L=2 H, VA=10 V, vC(0)=-5 V, and i(0)=0.
+2. The series RLC capacitor-voltage equation is vC'' + (R/L)vC' + (1/LC)vC = VA/(LC).
+3. The natural frequency is omega_n = 1/sqrt(LC), so increasing C decreases omega_n.
+4. The damping ratio is zeta = (R/2)sqrt(C/L), so increasing C increases zeta.
+5. Critical damping occurs at Ccrit = 4L/R^2 = 8 microfarads.
+6. Therefore C less than 8 microfarads is Case C, C equal to 8 microfarads is Case B, and C greater than 8 microfarads is Case A.
+7. Compared with varying R, varying C changes both the damping and the oscillation frequency.
+8. The main conclusion is that larger C makes the response slower and less oscillatory.</textarea><div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div></div></div>
+<script>
+const ex729Modal = document.getElementById('prompt-modal');
+const ex729Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => { ex729Modal.classList.add('open'); ex729Modal.setAttribute('aria-hidden', 'false'); });
+document.querySelectorAll('[data-close-prompt]').forEach((button) => { button.addEventListener('click', () => { ex729Modal.classList.remove('open'); ex729Modal.setAttribute('aria-hidden', 'true'); }); });
+ex729Modal.addEventListener('click', (event) => { if (event.target === ex729Modal) { ex729Modal.classList.remove('open'); ex729Modal.setAttribute('aria-hidden', 'true'); } });
+document.getElementById('copy-prompt').addEventListener('click', async () => { try { await navigator.clipboard.writeText(ex729Textarea.value); } catch (error) { ex729Textarea.focus(); ex729Textarea.select(); } });
+
+(function renderCapSweepPlot() {
+  const svg = document.getElementById('c-sweep-plot');
+  if (!svg) return;
+  const W = 760;
+  const H = 360;
+  const m = { l: 60, r: 18, t: 18, b: 42 };
+  const innerW = W - m.l - m.r;
+  const innerH = H - m.t - m.b;
+  const cases = [
+    { c: 0.5e-6, color: '#7ce8ff', label: '0.5 uF' },
+    { c: 8e-6, color: '#ffd66e', label: '8 uF' },
+    { c: 20e-6, color: '#ff9f80', label: '20 uF' }
+  ];
+  const R = 1000;
+  const L = 2;
+  const VA = 10;
+  const tMax = 0.02;
+  const dt = 2.5e-5;
+  function integrate(C) {
+    let v = -5;
+    let i = 0;
+    const data = [];
+    for (let t = 0; t <= tMax + 1e-12; t += dt) {
+      data.push({ t, v });
+      const f = (state) => ({ dv: state.i / C, di: (VA - R * state.i - state.v) / L });
+      const k1 = f({ v, i });
+      const k2 = f({ v: v + 0.5 * dt * k1.dv, i: i + 0.5 * dt * k1.di });
+      const k3 = f({ v: v + 0.5 * dt * k2.dv, i: i + 0.5 * dt * k2.di });
+      const k4 = f({ v: v + dt * k3.dv, i: i + dt * k3.di });
+      v += dt * (k1.dv + 2 * k2.dv + 2 * k3.dv + k4.dv) / 6;
+      i += dt * (k1.di + 2 * k2.di + 2 * k3.di + k4.di) / 6;
+    }
+    return data;
+  }
+  const series = cases.map((entry) => ({ ...entry, data: integrate(entry.c) }));
+  const allY = series.flatMap((entry) => entry.data.map((point) => point.v));
+  let yMin = Math.min(...allY);
+  let yMax = Math.max(...allY);
+  yMin = Math.floor(yMin - 1);
+  yMax = Math.ceil(yMax + 1);
+  const xScale = (t) => m.l + (t / tMax) * innerW;
+  const yScale = (y) => m.t + (1 - (y - yMin) / (yMax - yMin)) * innerH;
+  const pathFor = (data) => data.map((point, index) => `${index === 0 ? 'M' : 'L'} ${xScale(point.t).toFixed(2)} ${yScale(point.v).toFixed(2)}`).join(' ');
+  let markup = '';
+  for (let gx = 0; gx <= 10; gx += 1) {
+    const x = m.l + innerW * gx / 10;
+    markup += `<line x1="${x}" y1="${m.t}" x2="${x}" y2="${H - m.b}" stroke="rgba(255,255,255,0.07)" />`;
+    const tMs = (tMax * gx / 10 * 1000).toFixed(0);
+    markup += `<text x="${x}" y="${H - 14}" text-anchor="middle" font-size="11" fill="rgba(247,241,232,0.66)">${tMs} ms</text>`;
+  }
+  for (let gy = 0; gy <= 8; gy += 1) {
+    const y = m.t + innerH * gy / 8;
+    const value = (yMax - (yMax - yMin) * gy / 8).toFixed(1);
+    markup += `<line x1="${m.l}" y1="${y}" x2="${W - m.r}" y2="${y}" stroke="rgba(255,255,255,0.07)" />`;
+    markup += `<text x="${m.l - 10}" y="${y + 4}" text-anchor="end" font-size="11" fill="rgba(247,241,232,0.66)">${value}</text>`;
+  }
+  markup += `<line x1="${m.l}" y1="${H - m.b}" x2="${W - m.r}" y2="${H - m.b}" stroke="rgba(247,241,232,0.28)" />`;
+  markup += `<line x1="${m.l}" y1="${m.t}" x2="${m.l}" y2="${H - m.b}" stroke="rgba(247,241,232,0.28)" />`;
+  markup += `<text x="${W / 2}" y="${H - 2}" text-anchor="middle" font-size="12" fill="rgba(247,241,232,0.78)">Time</text>`;
+  markup += `<text x="18" y="${H / 2}" text-anchor="middle" font-size="12" fill="rgba(247,241,232,0.78)" transform="rotate(-90 18 ${H / 2})">Capacitor voltage (V)</text>`;
+  series.forEach((entry) => {
+    markup += `<path d="${pathFor(entry.data)}" fill="none" stroke="${entry.color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`;
+  });
+  markup += `<text x="${xScale(0.003)}" y="${yScale(17)}" font-size="12" fill="#7ce8ff">Case C</text>`;
+  markup += `<text x="${xScale(0.009)}" y="${yScale(12)}" font-size="12" fill="#ffd66e">Case B</text>`;
+  markup += `<text x="${xScale(0.012)}" y="${yScale(6)}" font-size="12" fill="#ff9f80">Case A</text>`;
+  svg.innerHTML = markup;
+})();
+</script>
+</body>
+</html>

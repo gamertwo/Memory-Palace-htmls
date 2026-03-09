@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Uniform Rod Electric Field | Problem 31 | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --bg2:#1a1e27;
+  --panel:#131821;
+  --panel2:#191f2a;
+  --line:rgba(255,255,255,.08);
+  --accent:#ffd08a;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.78);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.85rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero,.panel,.palace-sidebar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.2rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.7rem,4vw,2.7rem);
+  margin-bottom:.5rem;
+}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{
+  margin-top:.9rem;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  text-align:center;
+  overflow:auto;
+}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.rooms{display:grid;gap:.85rem}
+.room{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.room h2{
+  font-size:1rem;
+  margin-bottom:.55rem;
+  color:var(--accent);
+}
+.room ul{padding-left:1.2rem}
+.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.facts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.7rem;
+}
+.fact{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.25rem;
+}
+.fact .v{color:var(--muted);line-height:1.6}
+.mini{
+  margin-top:.75rem;
+  padding:.75rem .85rem;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.mini h3,.station h3,.transition h3{
+  font-size:.9rem;
+  color:var(--accent);
+  margin-bottom:.35rem;
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+}
+.transition{
+  border-style:dashed;
+  background:rgba(255,255,255,.02);
+}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(6,8,12,.74);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{
+  width:100%;
+  min-height:340px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:.9rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="physics-dipole-electric-field.html">Back: Dipole</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Problem 31: Field of a Uniformly Charged Rod</h1>
+    <p>A rod of length $$L=8.15\text{ cm}$$ carries total charge $$-q=-4.23\text{ fC}$$ uniformly. Find charge density, the electric field at point $$P$$ located a distance $$a$$ from the rod end, the direction, and the far-field approximation comparison.</p>
+    <div class="eq">$$\lambda=-\frac{q}{L},\qquad E_x=-\frac{q}{4\pi\varepsilon_0\,a(L+a)},\qquad E_x(a\gg L)\approx-\frac{q}{4\pi\varepsilon_0 a^2}$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Given Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Rod Length</div><div class="v">$$L=8.15\text{ cm}=0.0815\text{ m}$$</div></div>
+          <div class="fact"><div class="k">Total Charge</div><div class="v">$$Q_{\text{rod}}=-4.23\text{ fC}=-4.23\times10^{-15}\text{ C}$$</div></div>
+          <div class="fact"><div class="k">Point Location</div><div class="v">$$P$$ is at $$x=L+a$$ from left rod end</div></div>
+          <div class="fact"><div class="k">Part (b)</div><div class="v">Use $$a=0.120\text{ m}$$</div></div>
+          <div class="fact"><div class="k">Part (d,e)</div><div class="v">Use $$a=50\text{ m}$$</div></div>
+          <div class="fact"><div class="k">Constant</div><div class="v">$$k=\frac{1}{4\pi\varepsilon_0}=8.99\times10^9$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution (a) to (f)</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Part (a) Linear Charge Density</h2>
+            <ul>
+              <li>For uniform distribution,</li>
+              <li>$$\lambda=\frac{Q_{\text{rod}}}{L}=\frac{-4.23\times10^{-15}}{0.0815}=-5.19\times10^{-14}\text{ C/m}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Part (b) Set Up the Integral</h2>
+            <ul>
+              <li>Choose x-axis along the rod with origin at left end.</li>
+              <li>For element $$dx$$ at position $$x$$, charge is $$dq=\lambda\,dx.$$</li>
+              <li>Distance from element to point $$P$$ is $$r=(L+a)-x.$$</li>
+              <li>Its field contribution at $$P$$ is purely x-direction:</li>
+              <li>$$dE_x=\frac{1}{4\pi\varepsilon_0}\frac{dq}{r^2}=\frac{\lambda}{4\pi\varepsilon_0}\frac{dx}{(L+a-x)^2}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Integrate from $$x=0$$ to $$x=L$$</h2>
+            <ul>
+              <li>$$E_x=\frac{\lambda}{4\pi\varepsilon_0}\int_0^L\frac{dx}{(L+a-x)^2}.$$</li>
+              <li>The integral evaluates to</li>
+              <li>$$\int_0^L\frac{dx}{(L+a-x)^2}=\frac{1}{a}-\frac{1}{L+a}=\frac{L}{a(L+a)}.$$</li>
+              <li>So</li>
+              <li>$$E_x=\frac{\lambda L}{4\pi\varepsilon_0\,a(L+a)}=-\frac{q}{4\pi\varepsilon_0\,a(L+a)}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Numerical Field for $$a=0.120\text{ m}$$</h2>
+            <ul>
+              <li>Use $$q=4.23\times10^{-15}\text{ C}$$ as magnitude and keep the minus sign in formula:</li>
+              <li>$$E_x=-\frac{(8.99\times10^9)(4.23\times10^{-15})}{(0.120)(0.0815+0.120)}\text{ N/C}.$$</li>
+              <li>$$\boxed{E_x=-1.57\times10^{-3}\text{ N/C}},\qquad |E_x|=1.57\times10^{-3}\text{ N/C}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Part (c) Direction</h2>
+            <ul>
+              <li>The negative sign means the field is along $$-x$$ direction.</li>
+              <li>So relative to +x axis, direction is $$180^\circ$$ (or $$-180^\circ$$).</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Part (d) Large-Distance Approximation</h2>
+            <ul>
+              <li>If $$a\gg L,$$ then $$L+a\approx a.$$</li>
+              <li>So the exact expression becomes</li>
+              <li>$$E_x\approx-\frac{q}{4\pi\varepsilon_0 a^2}.$$</li>
+              <li>At $$a=50\text{ m},$$</li>
+              <li>$$\boxed{E_x\approx-1.52\times10^{-8}\text{ N/C}},\qquad |E_x|\approx1.52\times10^{-8}\text{ N/C}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Parts (e) and (f) Replace Rod by Point Charge</h2>
+            <ul>
+              <li>Replace rod by one particle of charge $$-q=-4.23\text{ fC}$$ at rod location.</li>
+              <li>Field at $$a=50\text{ m}$$ is exactly point-charge form:</li>
+              <li>$$E_x=-\frac{q}{4\pi\varepsilon_0 a^2}=-1.52\times10^{-8}\text{ N/C}.$$</li>
+              <li>Magnitude matches part (d), confirming far-field behavior.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Key Physics Shortcut</div>
+        <div class="mini">
+          <h3>Rod to Point-Charge Limit</h3>
+          <p>Once you derive the exact rod field $$E_x=-q/[4\pi\varepsilon_0\,a(L+a)],$$ the far limit is immediate by replacing $$L+a$$ with $$a.$$ That gives the point-charge behavior at large distance.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">The route is strict: density first, geometry second, integration third, then signs and approximation.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Density Desk</h3>
+          <p>Compute $$\lambda=Q/L$$ and keep the negative sign.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>After density, every tiny slice has charge $$dq=\lambda dx.$$</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Geometry Bridge</h3>
+          <p>Distance to point $$P$$ is $$r=L+a-x.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>With $$dq$$ and $$r$$ fixed, Coulomb differential is ready.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Integral Hall</h3>
+          <p>Integrate $$dE_x\propto dx/(L+a-x)^2$$ from $$0$$ to $$L.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 3 to 4</h3>
+          <p>The exact formula gives both magnitude and direction in one shot.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Sign Vault</h3>
+          <p>Negative result means field points toward the rod, along $$-x.$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 4 to 5</h3>
+          <p>For very large distance, treat the rod as almost a point charge.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Far-Field Door</h3>
+          <p>Use $$L+a\approx a$$ to get $$E_x\approx-q/(4\pi\varepsilon_0 a^2).$$</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 5 to 6</h3>
+          <p>This is exactly the same as replacing the rod by one charge $$-q.$$</p>
+        </div>
+        <div class="station">
+          <h3>Station 6: Match Seal</h3>
+          <p>At $$a=50\text{ m},$$ both methods give $$|E_x|=1.52\times10^{-8}\text{ N/C}.$$</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full solution flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this uniformly charged rod electric-field derivation. Keep steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. Given: rod length L = 0.0815 m, total charge Qrod = -4.23e-15 C, and point P at distance a from rod end.
+2. Uniform linear charge density is lambda = Qrod/L = -5.19e-14 C/m.
+3. Put x-axis along rod from x = 0 to x = L and place P at x = L + a.
+4. A small segment dx has charge dq = lambda dx.
+5. Distance from segment to P is r = L + a - x.
+6. Differential field at P is dEx = (1/(4 pi eps0)) * dq / r^2.
+7. Integrate Ex = (lambda/(4 pi eps0)) integral_0^L dx/(L + a - x)^2.
+8. Integral result is (1/a - 1/(L + a)) = L/[a(L + a)].
+9. Exact field becomes Ex = lambda L/(4 pi eps0 a(L + a)) = -q/(4 pi eps0 a(L + a)).
+10. For a = 0.120 m, Ex = -1.57e-3 N/C and magnitude is 1.57e-3 N/C.
+11. Negative sign means field is along -x direction.
+12. For a >> L, use L + a approx a, so Ex approx -q/(4 pi eps0 a^2); at a = 50 m, magnitude is 1.52e-8 N/C, same as replacing rod by point charge -q.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const rodModal = document.getElementById('prompt-modal');
+const rodTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  rodModal.classList.add('open');
+  rodModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    rodModal.classList.remove('open');
+    rodModal.setAttribute('aria-hidden', 'true');
+  });
+});
+rodModal.addEventListener('click', (event) => {
+  if (event.target === rodModal) {
+    rodModal.classList.remove('open');
+    rodModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(rodTextarea.value);
+  } catch (error) {
+    rodTextarea.focus();
+    rodTextarea.select();
+  }
+});
+</script>
+</body>
+</html>
