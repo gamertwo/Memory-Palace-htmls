@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>RLC Example 7-21 | Parallel Zero-Input Switch Response</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090e;
+  --surface:#111520;
+  --surface2:#161b26;
+  --border:rgba(255,255,255,.07);
+  --border2:rgba(255,255,255,.13);
+  --text:#eef0f5;
+  --muted:#8e96b0;
+  --dimmed:#4a526a;
+
+  --over:#ff6b6b;
+  --over-dim:rgba(255,107,107,.1);
+  --over-border:rgba(255,107,107,.22);
+
+  --c1:#c084fc; /* station 1 */
+  --c1d:rgba(192,132,252,.1);
+  --c1b:rgba(192,132,252,.22);
+
+  --c2:#fb923c; /* station 2 */
+  --c2d:rgba(251,146,60,.1);
+  --c2b:rgba(251,146,60,.22);
+
+  --c3:#f43f5e; /* station 3 */
+  --c3d:rgba(244,63,94,.1);
+  --c3b:rgba(244,63,94,.22);
+
+  --c4:#22d3ee; /* station 4 */
+  --c4d:rgba(34,211,238,.1);
+  --c4b:rgba(34,211,238,.22);
+
+  --c5:#fbbf24; /* station 5 */
+  --c5d:rgba(251,191,36,.1);
+  --c5b:rgba(251,191,36,.22);
+
+  --accent:#818cf8;
+  --accent-dim:rgba(129,140,248,.1);
+  --accent-border:rgba(129,140,248,.22);
+}
+
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+.bg-glow{position:fixed;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(129,140,248,.04) 0%,transparent 70%);top:-350px;right:-350px;pointer-events:none;z-index:0;}
+.shell{max-width:1140px;margin:0 auto;padding:2.5rem 1.2rem 5rem;position:relative;z-index:1;}
+
+/* NAV */
+.topnav{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.topnav a{text-decoration:none;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);border-radius:6px;padding:.38rem .75rem;background:var(--surface);transition:all .18s;}
+.topnav a:hover{color:var(--text);border-color:var(--accent);background:var(--accent-dim);}
+
+/* HERO */
+.hero{margin-bottom:2rem;padding:2rem;background:var(--surface);border:1px solid var(--border2);border-radius:20px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;top:0;right:0;width:350px;height:350px;background:radial-gradient(circle at top right,rgba(129,140,248,.06) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:4px;padding:.25rem .6rem;margin-bottom:1rem;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:.8rem;background:linear-gradient(135deg,#eef0f5 0%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--muted);line-height:1.8;font-size:.95rem;max-width:820px;margin-bottom:1.5rem;}
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.75rem;margin-bottom:1.5rem;}
+.formula-box{background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:.9rem 1.1rem;text-align:center;}
+.formula-label{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmed);margin-bottom:.4rem;}
+.hero-btns{display:flex;gap:.6rem;flex-wrap:wrap;}
+.btn{font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.04em;border-radius:8px;padding:.5rem 1.1rem;cursor:pointer;transition:all .2s;border:1px solid;}
+.btn-primary{background:var(--accent-dim);border-color:var(--accent-border);color:var(--accent);}
+.btn-primary:hover{background:rgba(129,140,248,.18);}
+.btn-ghost{background:var(--surface2);border-color:var(--border2);color:var(--muted);}
+.btn-ghost:hover{color:var(--text);}
+
+/* SECTION TITLE */
+.sec-title{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmed);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* FLOW BANNER */
+.flow-banner{margin-bottom:2rem;padding:1.3rem 1.6rem;border-radius:16px;background:linear-gradient(135deg,var(--accent-dim),rgba(129,140,248,.03));border:1px solid var(--accent-border);display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start;}
+.flow-icon{font-size:2rem;}
+.flow-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.35rem;}
+.flow-body{color:var(--muted);font-size:.88rem;line-height:1.75;}
+.flow-chain{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;margin-top:.7rem;}
+.flow-step{font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:600;padding:.25rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border2);color:var(--text);}
+.flow-arr{color:var(--dimmed);font-size:.85rem;}
+
+/* QUICK DATA */
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.7rem;margin-bottom:2rem;}
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.85rem 1rem;transition:border-color .18s;}
+.qcard:hover{border-color:var(--border2);}
+.qlabel{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmed);margin-bottom:.35rem;}
+.qval{color:var(--text);line-height:1.6;font-size:.88rem;}
+
+/* ANSWER CARDS */
+.answer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.85rem;margin-bottom:2rem;}
+.acard{border-radius:14px;border:1px solid var(--over-border);background:var(--over-dim);padding:1rem 1.2rem;}
+.acard-label{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--over);margin-bottom:.5rem;}
+.acard-eq{font-size:.9rem;color:var(--text);line-height:1.7;}
+
+/* STEP TABS */
+.steps-section{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;margin-bottom:2rem;}
+.stabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.2rem;padding-bottom:.9rem;border-bottom:1px solid var(--border);}
+.stab{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;border:1px solid var(--border);border-radius:7px;padding:.4rem .82rem;cursor:pointer;color:var(--muted);background:transparent;transition:all .18s;}
+.stab:hover{color:var(--text);border-color:var(--border2);}
+.stab.active{color:var(--text);background:var(--surface2);border-color:var(--border2);}
+.stab.active.t1{color:var(--c1);border-color:var(--c1b);background:var(--c1d);}
+.stab.active.t2{color:var(--c2);border-color:var(--c2b);background:var(--c2d);}
+.stab.active.t3{color:var(--c4);border-color:var(--c4b);background:var(--c4d);}
+.stab.active.t4{color:var(--c5);border-color:var(--c5b);background:var(--c5d);}
+
+.spanel{display:none;}
+.spanel.active{display:grid;gap:.8rem;animation:fu .28s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.step{display:grid;grid-template-columns:34px 1fr;gap:.85rem;align-items:start;}
+.step-n{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;font-family:'Syne',sans-serif;flex-shrink:0;}
+.t1 .step-n{background:var(--c1d);color:var(--c1);}
+.t2 .step-n{background:var(--c2d);color:var(--c2);}
+.t3 .step-n{background:var(--c4d);color:var(--c4);}
+.t4 .step-n{background:var(--c5d);color:var(--c5);}
+.step-h{font-weight:700;color:var(--text);font-size:.9rem;margin-bottom:.28rem;}
+.step-b{color:var(--muted);font-size:.84rem;line-height:1.78;}
+
+/* ═══ MEMORY PALACE STATIONS ═══ */
+.palace-section{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;margin-bottom:2rem;}
+.palace-intro{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
+.palace-stations{display:grid;gap:.85rem;}
+
+.station{border-radius:16px;border:1px solid var(--border);background:var(--surface2);overflow:hidden;}
+.station.s1{border-color:var(--c1b);}
+.station.s2{border-color:var(--c2b);}
+.station.s3{border-color:var(--c3b);}
+.station.s4{border-color:var(--c4b);}
+.station.s5{border-color:var(--c5b);}
+
+.station-header{padding:1rem 1.3rem;display:grid;grid-template-columns:52px 1fr auto;gap:.9rem;align-items:center;cursor:pointer;transition:background .18s;}
+.station-header:hover{background:rgba(255,255,255,.02);}
+
+.station-badge{width:44px;height:44px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem;gap:.1rem;}
+.s1 .station-badge{background:var(--c1d);}
+.s2 .station-badge{background:var(--c2d);}
+.s3 .station-badge{background:var(--c3d);}
+.s4 .station-badge{background:var(--c4d);}
+.s5 .station-badge{background:var(--c5d);}
+.badge-num{font-size:.55rem;font-weight:800;letter-spacing:.08em;}
+.s1 .badge-num{color:var(--c1);}
+.s2 .badge-num{color:var(--c2);}
+.s3 .badge-num{color:var(--c3);}
+.s4 .badge-num{color:var(--c4);}
+.s5 .badge-num{color:var(--c5);}
+
+.station-meta{}
+.station-locus-tag{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.1rem;}
+.s1 .station-locus-tag{color:var(--c1);}
+.s2 .station-locus-tag{color:var(--c2);}
+.s3 .station-locus-tag{color:var(--c3);}
+.s4 .station-locus-tag{color:var(--c4);}
+.s5 .station-locus-tag{color:var(--c5);}
+.station-title{font-family:'Syne',sans-serif;font-size:.98rem;font-weight:800;color:var(--text);}
+.station-sub{font-size:.77rem;color:var(--muted);margin-top:.08rem;}
+
+.station-chevron{font-size:.72rem;color:var(--dimmed);transition:transform .28s;}
+.station.open .station-chevron{transform:rotate(180deg);}
+.s1.open .station-chevron{color:var(--c1);}
+.s2.open .station-chevron{color:var(--c2);}
+.s3.open .station-chevron{color:var(--c3);}
+.s4.open .station-chevron{color:var(--c4);}
+.s5.open .station-chevron{color:var(--c5);}
+
+.station-body{display:none;border-top:1px solid var(--border);padding:1.3rem;}
+.station.open .station-body{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;animation:fu .25s ease;}
+@media(max-width:680px){.station.open .station-body{grid-template-columns:1fr}}
+
+/* image side */
+.locus-image{border-radius:12px;padding:1.1rem;border:1px solid;}
+.s1 .locus-image{background:var(--c1d);border-color:var(--c1b);}
+.s2 .locus-image{background:var(--c2d);border-color:var(--c2b);}
+.s3 .locus-image{background:var(--c3d);border-color:var(--c3b);}
+.s4 .locus-image{background:var(--c4d);border-color:var(--c4b);}
+.s5 .locus-image{background:var(--c5d);border-color:var(--c5b);}
+
+.locus-scene-title{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem;}
+.s1 .locus-scene-title{color:var(--c1);}
+.s2 .locus-scene-title{color:var(--c2);}
+.s3 .locus-scene-title{color:var(--c3);}
+.s4 .locus-scene-title{color:var(--c4);}
+.s5 .locus-scene-title{color:var(--c5);}
+.locus-scene{font-size:.87rem;color:var(--text);line-height:1.85;}
+.locus-scene em{font-style:italic;opacity:.8;}
+
+/* math side */
+.station-math{border-radius:12px;padding:1rem;background:var(--surface);border:1px solid var(--border2);}
+.math-label{font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmed);margin-bottom:.45rem;}
+.math-content ul{padding-left:1.2rem;}
+.math-content li{font-size:.83rem;color:var(--muted);line-height:1.88;margin-bottom:.12rem;}
+
+.station-connector{padding:.6rem 1rem;font-size:.78rem;color:var(--dimmed);font-style:italic;text-align:center;border-top:1px dashed var(--border);}
+
+/* ═══ CONNECTED PALACE CARD ═══ */
+.connected-palace{
+  border-radius:20px;
+  border:2px solid;
+  border-image:linear-gradient(135deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5)) 1;
+  border-image-slice:1;
+  background:var(--surface);
+  padding:2rem;
+  margin-bottom:2rem;
+  position:relative;
+  overflow:hidden;
+}
+.connected-palace::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,132,252,.04),rgba(251,146,60,.03),rgba(244,63,94,.03),rgba(34,211,238,.03),rgba(251,191,36,.04));
+  pointer-events:none;
+}
+.cp-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;position:relative;}
+.cp-icon{font-size:2.2rem;}
+.cp-title-block{}
+.cp-label{font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmed);margin-bottom:.25rem;}
+.cp-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--text);}
+.cp-sub{font-size:.82rem;color:var(--muted);margin-top:.15rem;}
+
+/* story segments */
+.palace-story{display:grid;gap:1rem;position:relative;}
+.palace-story::before{
+  content:'';
+  position:absolute;
+  left:19px;top:0;bottom:0;
+  width:2px;
+  background:linear-gradient(180deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5));
+  opacity:.3;
+}
+.story-seg{display:grid;grid-template-columns:40px 1fr;gap:1rem;align-items:start;}
+.seg-dot{
+  width:40px;height:40px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+  flex-shrink:0;
+  border:2px solid;
+  position:relative;
+  z-index:1;
+}
+.seg1 .seg-dot{background:var(--c1d);border-color:var(--c1b);}
+.seg2 .seg-dot{background:var(--c2d);border-color:var(--c2b);}
+.seg3 .seg-dot{background:var(--c3d);border-color:var(--c3b);}
+.seg4 .seg-dot{background:var(--c4d);border-color:var(--c4b);}
+.seg5 .seg-dot{background:var(--c5d);border-color:var(--c5b);}
+
+.seg-content{padding-top:.45rem;padding-bottom:.65rem;}
+.seg-heading{font-weight:800;font-size:.92rem;margin-bottom:.4rem;}
+.seg1 .seg-heading{color:var(--c1);}
+.seg2 .seg-heading{color:var(--c2);}
+.seg3 .seg-heading{color:var(--c3);}
+.seg4 .seg-heading{color:var(--c4);}
+.seg5 .seg-heading{color:var(--c5);}
+.seg-text{font-size:.88rem;color:var(--muted);line-height:1.85;}
+.seg-text strong{color:var(--text);font-weight:700;}
+.seg-anchor{display:inline-block;margin-top:.55rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;padding:.3rem .7rem;border-radius:6px;border:1px solid var(--border2);background:var(--surface);color:var(--text);}
+
+/* DETAIL ROOMS */
+.rooms-section{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;margin-bottom:2rem;}
+.ritem{border:1px solid var(--border);border-radius:11px;margin-bottom:.6rem;overflow:hidden;transition:border-color .18s;}
+.ritem:hover,.ritem.open{border-color:var(--border2);}
+.rtrig{width:100%;background:none;border:none;padding:.8rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.8rem;cursor:pointer;text-align:left;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:.88rem;font-weight:700;}
+.rtrig:hover{background:rgba(255,255,255,.02);}
+.rchev{font-size:.7rem;color:var(--dimmed);transition:transform .25s;flex-shrink:0;}
+.ritem.open .rchev{transform:rotate(180deg);color:var(--accent);}
+.rbody{display:none;padding:.15rem 1rem .85rem;border-top:1px solid var(--border);}
+.ritem.open .rbody{display:block;}
+.rbody ul{padding-left:1.2rem;}
+.rbody li{font-size:.83rem;color:var(--muted);line-height:1.85;margin-bottom:.1rem;}
+
+/* FLIP RECALL */
+.recall-section{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;margin-bottom:2rem;}
+.recall-intro{color:var(--muted);font-size:.83rem;line-height:1.65;margin-bottom:1.2rem;}
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.8rem;}
+.fc{height:150px;perspective:1000px;cursor:pointer;}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.fc.flipped .fc-inner{transform:rotateY(180deg);}
+.fcf,.fcb{position:absolute;inset:0;border-radius:12px;border:1px solid var(--border2);padding:.9rem;display:flex;flex-direction:column;justify-content:center;align-items:center;backface-visibility:hidden;text-align:center;}
+.fcf{background:var(--surface2);border-color:rgba(129,140,248,.18);}
+.fcb{transform:rotateY(180deg);}
+.fc-tag{font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.fc-q{font-size:.84rem;font-weight:600;color:var(--text);line-height:1.45;}
+.fc-a{font-size:.8rem;color:var(--text);line-height:1.6;}
+.fc-hint{font-size:.6rem;color:var(--dimmed);margin-top:.4rem;}
+.fcf .fc-tag{color:var(--accent);}
+.fc.f1 .fcb{background:var(--c1d);border-color:var(--c1b);}.fc.f1 .fc-tag{color:var(--c1);}
+.fc.f2 .fcb{background:var(--c2d);border-color:var(--c2b);}.fc.f2 .fc-tag{color:var(--c2);}
+.fc.f3 .fcb{background:var(--c3d);border-color:var(--c3b);}.fc.f3 .fc-tag{color:var(--c3);}
+.fc.f4 .fcb{background:var(--c4d);border-color:var(--c4b);}.fc.f4 .fc-tag{color:var(--c4);}
+.fc.f5 .fcb{background:var(--c5d);border-color:var(--c5b);}.fc.f5 .fc-tag{color:var(--c5);}
+
+/* Palace callout */
+.palace-callout{
+  display:flex;align-items:flex-start;gap:1rem;
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:14px;padding:1.2rem 1.4rem;
+  margin-bottom:1rem;
+}
+
+.seg6 .seg-dot{background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.22);}
+.seg6 .seg-heading{color:#f43f5e;}
+.seg7 .seg-dot{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.22);}
+.seg7 .seg-heading{color:#a78bfa;}
+
+/* ═══ SPEED READER ═══ */
+.sr-trigger-row{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.75rem;
+  margin-top:1.5rem;
+  padding-top:1.2rem;
+  border-top:1px solid var(--border);
+}
+.sr-trigger-label{font-size:.75rem;color:var(--muted);font-style:italic;}
+
+.sr-launch-btn{
+  display:flex;align-items:center;gap:.6rem;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.85rem;font-weight:800;
+  padding:.65rem 1.4rem;
+  border-radius:10px;
+  border:1px solid;
+  cursor:pointer;
+  transition:all .22s;
+  background:linear-gradient(135deg,var(--c1d),var(--c2d),var(--c3d));
+  border-color:rgba(192,132,252,.35);
+  color:var(--text);
+  letter-spacing:.03em;
+}
+.sr-launch-btn:hover{
+  background:linear-gradient(135deg,rgba(192,132,252,.2),rgba(251,146,60,.18),rgba(244,63,94,.15));
+  border-color:rgba(192,132,252,.55);
+  box-shadow:0 0 24px rgba(192,132,252,.2);
+}
+.sr-launch-icon{font-size:1.1rem;}
+
+/* The reader overlay */
+.sr-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(4,5,10,.96);
+  backdrop-filter:blur(12px);
+  z-index:200;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+}
+.sr-overlay.active{display:flex;}
+
+/* Progress bar at very top */
+.sr-progress-wrap{
+  position:fixed;top:0;left:0;right:0;
+  height:3px;
+  background:rgba(255,255,255,.06);
+  z-index:201;
+}
+.sr-progress-fill{
+  height:100%;
+  width:0%;
+  transition:width .15s linear;
+  background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5));
+  border-radius:0 2px 2px 0;
+}
+
+/* Station badge at top */
+.sr-station-badge{
+  position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:.38rem .9rem;
+  border-radius:20px;
+  border:1px solid;
+  transition:all .4s ease;
+  z-index:201;
+  white-space:nowrap;
+}
+
+/* Close button top right */
+.sr-close{
+  position:fixed;top:1.1rem;right:1.2rem;
+  width:34px;height:34px;
+  border-radius:50%;
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--border2);
+  cursor:pointer;
+  color:var(--muted);
+  font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  z-index:201;
+  transition:all .18s;
+}
+.sr-close:hover{background:rgba(255,255,255,.13);color:var(--text);}
+
+/* Main display */
+.sr-display{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:760px;
+  min-height:220px;
+  position:relative;
+}
+
+/* Context strip: prev | WORD | next */
+.sr-context{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:1.2rem;
+  width:100%;
+  margin-bottom:.5rem;
+  min-height:2.2rem;
+}
+.sr-prev,.sr-next{
+  font-size:1.1rem;
+  color:var(--dimmed);
+  font-family:'Space Grotesk',sans-serif;
+  transition:opacity .15s;
+  min-width:80px;
+  text-align:right;
+  opacity:.5;
+}
+.sr-next{text-align:left;}
+
+/* The focal word */
+.sr-word{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.4rem,6vw,4.2rem);
+  font-weight:800;
+  text-align:center;
+  min-height:1.2em;
+  line-height:1.15;
+  letter-spacing:-.01em;
+  transition:color .18s;
+  position:relative;
+  max-width:680px;
+  word-break:break-word;
+}
+
+/* ORP marker — the focal point line */
+.sr-word::before{
+  content:'';
+  position:absolute;
+  left:50%;transform:translateX(-50%);
+  bottom:-6px;
+  width:3px;height:3px;
+  border-radius:50%;
+  background:currentColor;
+  opacity:.5;
+}
+
+/* Formula display — monospace, smaller, with glow */
+.sr-word.is-math{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(1.4rem,3.5vw,2.4rem);
+  letter-spacing:-.02em;
+}
+.sr-word.is-heading{
+  font-size:clamp(1.6rem,4vw,2.8rem);
+  letter-spacing:-.02em;
+}
+
+/* Type indicator */
+.sr-type-badge{
+  font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .55rem;border-radius:4px;
+  margin-top:1rem;
+  height:1.5rem;
+  display:flex;align-items:center;
+  transition:all .25s;
+}
+
+/* Speed label */
+.sr-speed-label{
+  font-size:.68rem;color:var(--dimmed);
+  margin-top:.4rem;
+  height:1.1rem;
+  display:flex;align-items:center;gap:.3rem;
+  transition:opacity .2s;
+}
+.sr-speed-bar{
+  display:flex;gap:2px;align-items:center;
+}
+.sr-speed-pip{
+  width:5px;height:10px;
+  border-radius:2px;
+  background:var(--dimmed);
+  transition:background .2s, height .2s;
+}
+.sr-speed-pip.lit{height:14px;}
+
+/* Controls */
+.sr-controls{
+  display:flex;
+  align-items:center;
+  gap:.85rem;
+  margin-top:2rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.sr-btn{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.8rem;font-weight:700;
+  border-radius:8px;padding:.55rem 1.1rem;
+  border:1px solid var(--border2);
+  background:var(--surface2);
+  color:var(--text);
+  cursor:pointer;
+  transition:all .18s;
+  display:flex;align-items:center;gap:.4rem;
+}
+.sr-btn:hover{background:rgba(255,255,255,.08);}
+.sr-btn.sr-play-pause{
+  padding:.55rem 1.5rem;
+  font-size:.9rem;
+}
+.sr-btn.sr-play-pause.playing{
+  background:var(--accent-dim);
+  border-color:var(--accent-border);
+  color:var(--accent);
+}
+
+.sr-speed-group{
+  display:flex;align-items:center;gap:.3rem;
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  padding:.25rem;
+}
+.sr-spd-btn{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;font-weight:700;
+  padding:.3rem .55rem;border-radius:5px;
+  border:none;cursor:pointer;
+  color:var(--muted);background:transparent;
+  transition:all .15s;
+}
+.sr-spd-btn:hover{color:var(--text);}
+.sr-spd-btn.active{
+  background:var(--accent-dim);
+  color:var(--accent);
+}
+
+.sr-pos-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;color:var(--dimmed);
+  min-width:60px;text-align:center;
+}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px);z-index:100;align-items:center;justify-content:center;padding:1rem;}
+.modal.open{display:flex;}
+.modal-card{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;max-width:620px;width:100%;max-height:82vh;overflow-y:auto;}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.modal-head h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;}
+.modal-copy{color:var(--muted);font-size:.83rem;line-height:1.75;margin-bottom:1rem;}
+.prompt-box{width:100%;min-height:200px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:.9rem;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.76rem;line-height:1.7;resize:vertical;margin-bottom:1rem;}
+.modal-actions{display:flex;gap:.6rem;justify-content:flex-end;}
+@media(max-width:640px){.flip-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<main class="shell">
+
+  <nav class="topnav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rlc-ex720-example.html">← Ex 7-20</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="hero-tag">Parallel RLC · Zero-Input · Switch Response</div>
+    <h1>Example 7-21</h1>
+    <p class="hero-sub">The switch has been open for a long time and closes at $t=0.$ Find the initial conditions, inductor current, and capacitor voltage for $t\ge0.$ The post-switch network is a zero-input parallel RLC — overdamped, two real unequal roots.</p>
+    <div class="formula-grid">
+      <div class="formula-box">
+        <div class="formula-label">Initial Conditions</div>
+        $$v_C(0)=0,\qquad i_L(0)=\frac{9}{250+50}=30\ \text{mA}$$
+      </div>
+      <div class="formula-box">
+        <div class="formula-label">Final Answers</div>
+        $$i_L(t)=30.3e^{-50.51t}-0.309e^{-4950t}\ \text{mA}$$
+        $$v_C(t)=-1.53e^{-50.51t}+1.53e^{-4950t}\ \text{V}$$
+      </div>
+    </div>
+    <div class="hero-btns">
+      <button class="btn btn-primary" data-open-prompt>AI Prompt</button>
+      <button class="btn btn-ghost" id="go-recall">Test My Memory</button>
+      <button class="btn btn-ghost" id="go-palace">Jump to Full Palace</button>
+    </div>
+  </section>
+
+  <!-- FLOW BANNER -->
+  <div class="flow-banner reveal">
+    <div class="flow-icon">⚡</div>
+    <div>
+      <div class="flow-title">The Solution Chain</div>
+      <div class="flow-body">Every switch problem follows one locked sequence. Memorize the chain, not the arithmetic.</div>
+      <div class="flow-chain">
+        <span class="flow-step" style="color:var(--c1)">Steady State</span><span class="flow-arr">→</span>
+        <span class="flow-step" style="color:var(--c2)">Roots</span><span class="flow-arr">→</span>
+        <span class="flow-step" style="color:var(--c3)">Template + IC₁</span><span class="flow-arr">→</span>
+        <span class="flow-step" style="color:var(--c4)">Derivative IC + Solve</span><span class="flow-arr">→</span>
+        <span class="flow-step" style="color:var(--c5)">$v_C$ + $i_{sw}$</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK DATA -->
+  <div class="sec-title reveal">Quick Data</div>
+  <div class="qgrid reveal">
+    <div class="qcard"><div class="qlabel">Initial Voltage</div><div class="qval">$v_C(0)=0\ \text{V}$</div></div>
+    <div class="qcard"><div class="qlabel">Initial Current</div><div class="qval">$i_L(0)=30\ \text{mA}$</div></div>
+    <div class="qcard"><div class="qlabel">Post-switch: R, L, C</div><div class="qval">$50\ \Omega,\ 1\ \text{H},\ 4\ \mu\text{F}$</div></div>
+    <div class="qcard"><div class="qlabel">Char. Equation</div><div class="qval">$LCs^2+\frac{L}{R}s+1=0$</div></div>
+    <div class="qcard"><div class="qlabel">Roots</div><div class="qval">$s_1=-50.51,\quad s_2=-4950$</div></div>
+    <div class="qcard"><div class="qlabel">Case</div><div class="qval">Overdamped — two real unequal roots</div></div>
+  </div>
+
+  <!-- ANSWER BOARD -->
+  <div class="sec-title reveal">Answer Board</div>
+  <div class="answer-grid reveal">
+    <div class="acard"><div class="acard-label">Part (a) — Initial Conditions</div><div class="acard-eq">$v_C(0)=0,\quad i_L(0)=30\ \text{mA}$</div></div>
+    <div class="acard"><div class="acard-label">Part (b) — Inductor Current</div><div class="acard-eq">$i_L(t)=30.3e^{-50.51t}-0.309e^{-4950t}\ \text{mA}$</div></div>
+    <div class="acard"><div class="acard-label">Part (c) — Capacitor Voltage</div><div class="acard-eq">$v_C(t)=-1.53e^{-50.51t}+1.53e^{-4950t}\ \text{V}$</div></div>
+    <div class="acard"><div class="acard-label">Switch Current</div><div class="acard-eq">$i_{sw}=\dfrac{v_C}{50}+\dfrac{9-v_C}{250}$</div></div>
+  </div>
+
+  <!-- STEP-BY-STEP TABS -->
+  <div class="sec-title reveal">Step-by-Step Algebra</div>
+  <div class="steps-section reveal">
+    <div class="stabs">
+      <button class="stab t1 active" data-tab="ic">Initial Conditions</button>
+      <button class="stab t2" data-tab="roots">Roots & Template</button>
+      <button class="stab t3" data-tab="const">Solve Constants</button>
+      <button class="stab t4" data-tab="vc">$v_C$ & $i_{sw}$</button>
+    </div>
+    <div class="spanel t1 active" id="sp-ic">
+      <div class="step"><div class="step-n">1</div><div><div class="step-h">Inductor is a short at DC</div><div class="step-b">Before $t=0$ the switch has been open long enough for all transients to die. The inductor has zero impedance to DC — it is a copper wire. All source current flows through it.</div></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-h">Capacitor is an open at DC</div><div class="step-b">The capacitor blocks DC entirely. No current reaches it, so no voltage builds across it. Therefore $v_C(0)=0.$</div></div></div>
+      <div class="step"><div class="step-n">3</div><div><div class="step-h">KVL for the initial current</div><div class="step-b">$$i_L(0)=\frac{9}{250+50}=\frac{9}{300}=30\ \text{mA}$$</div></div></div>
+    </div>
+    <div class="spanel t2" id="sp-roots">
+      <div class="step"><div class="step-n">1</div><div><div class="step-h">Write the parallel characteristic equation</div><div class="step-b">$$LCs^2+\frac{L}{R}s+1=0$$</div></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-h">Substitute values and find roots</div><div class="step-b">$L=1,\ C=4\times10^{-6},\ R=50.$ Roots: $s_1=-50.51$ and $s_2=-4950.$</div></div></div>
+      <div class="step"><div class="step-n">3</div><div><div class="step-h">Two real unequal roots → overdamped template</div><div class="step-b">$$i_L(t)=K_1e^{-50.51t}+K_2e^{-4950t}$$</div></div></div>
+    </div>
+    <div class="spanel t3" id="sp-const">
+      <div class="step"><div class="step-n">1</div><div><div class="step-h">Apply $i_L(0)=30\ \text{mA}$ — Equation 1</div><div class="step-b">$$K_1+K_2=30\times10^{-3}$$</div></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-h">Convert $v_C(0)=0$ into derivative condition</div><div class="step-b">$v_C(0)=v_L(0)=L\dot i_L(0)=0.$ Since $L=1$: $\dot i_L(0)=0.$<br>Differentiate template at $t=0$: $$-50.51K_1-4950K_2=0\quad\text{(Equation 2)}$$</div></div></div>
+      <div class="step"><div class="step-n">3</div><div><div class="step-h">Solve the 2×2 system</div><div class="step-b">$K_1=30.3\ \text{mA},\quad K_2=-0.309\ \text{mA}$<br>$$i_L(t)=30.3e^{-50.51t}-0.309e^{-4950t}\ \text{mA}$$</div></div></div>
+    </div>
+    <div class="spanel t4" id="sp-vc">
+      <div class="step"><div class="step-n">1</div><div><div class="step-h">Differentiate $i_L$ using $v_C=L\,di_L/dt$</div><div class="step-b">$$v_C(t)=-1.53e^{-50.51t}+1.53e^{-4950t}\ \text{V}$$</div></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-h">Switch current from branch currents</div><div class="step-b">$$i_{sw}(t)=\frac{v_C}{50}+\frac{9-v_C}{250}$$</div></div></div>
+    </div>
+  </div>
+
+  <!-- MEMORY PALACE STATIONS -->
+  <div class="sec-title reveal">Memory Palace — Five Vivid Stations</div>
+  <div class="palace-section reveal">
+    <p class="palace-intro">Each station is a location you physically walk through. The image at each location is deliberately bizarre and exaggerated — because strange images stick. The math sits beside each image so you can connect the scene to the equation directly. Open each station to read both.</p>
+    <div class="palace-stations">
+
+      <!-- STATION 1 -->
+      <div class="station s1" id="st1">
+        <div class="station-header" onclick="toggleStation('st1')">
+          <div class="station-badge"><span style="font-size:1.3rem">🧲</span><span class="badge-num">STATION 1</span></div>
+          <div class="station-meta">
+            <div class="station-locus-tag">Location · Your front door</div>
+            <div class="station-title">The Frozen Doorstep</div>
+            <div class="station-sub">Pre-switch steady state → $v_C(0)=0$ and $i_L(0)=30\ \text{mA}$</div>
+          </div>
+          <span class="station-chevron">▼</span>
+        </div>
+        <div class="station-body">
+          <div class="locus-image">
+            <div class="locus-scene-title">The Vivid Scene</div>
+            <div class="locus-scene">
+              You approach your front door and find it completely <strong>frozen solid</strong> — not locked, just suspended in time, every atom perfectly still. You press your ear to it and hear nothing. This is the pre-switch world: nothing moving, nothing changing. You reach for the inductor — it has turned into a <strong>thick copper chain lying flat on the welcome mat</strong>, zero resistance, letting all current pass. You look for the capacitor — it has turned into a <strong>glass arch with no wires touching it</strong>, floating above the doorstep like a monument. Completely open. No charge has built up inside it. You read the number "9 V" on the source mounted above the door and divide it by the two resistors standing as bouncers on either side of the path: 9 ÷ 300 = 30 mA walking through.
+            </div>
+          </div>
+          <div class="station-math">
+            <div class="math-label">What this station encodes</div>
+            <div class="math-content"><ul>
+              <li>Inductor = short circuit at DC → zero voltage, carries all current</li>
+              <li>Capacitor = open circuit at DC → no current, no stored voltage</li>
+              <li>$v_C(0) = 0$</li>
+              <li>$i_L(0) = \dfrac{9}{250+50} = \dfrac{9}{300} = 30\ \text{mA}$</li>
+              <li>Both values survive the switching instant unchanged</li>
+            </ul></div>
+          </div>
+        </div>
+        <div class="station-connector">The door unfreezes. The switch closes. Walk to Station 2 →</div>
+      </div>
+
+      <!-- STATION 2 -->
+      <div class="station s2" id="st2">
+        <div class="station-header" onclick="toggleStation('st2')">
+          <div class="station-badge"><span style="font-size:1.3rem">🗿</span><span class="badge-num">STATION 2</span></div>
+          <div class="station-meta">
+            <div class="station-locus-tag">Location · Your hallway</div>
+            <div class="station-title">Two Statues in the Hallway</div>
+            <div class="station-sub">Characteristic roots → $s_1=-50.51$ (slow giant) and $s_2=-4950$ (vanishing sprite)</div>
+          </div>
+          <span class="station-chevron">▼</span>
+        </div>
+        <div class="station-body">
+          <div class="locus-image">
+            <div class="locus-scene-title">The Vivid Scene</div>
+            <div class="locus-scene">
+              You step inside and immediately bump into two stone statues blocking the hallway. The <strong>first statue is enormous</strong> — a slow, lumbering giant carved from granite, labeled <em>−50.51</em> on its chest. It barely moves, its exponential decay so slow you can watch it shrink in real time. The <strong>second statue is tiny and barely visible</strong> — a sprite carved from smoke, labeled <em>−4950</em> on its chest. It disappears so fast that by the time you blink it is nearly gone. These two statues represent the two roots. They are real, not complex, so there is no ringing or oscillating — just two different rates of vanishing. The giant dominates the long run. The sprite is gone almost instantly.
+            </div>
+          </div>
+          <div class="station-math">
+            <div class="math-label">What this station encodes</div>
+            <div class="math-content"><ul>
+              <li>Parallel RLC char. equation: $LCs^2+\dfrac{L}{R}s+1=0$</li>
+              <li>$L=1\ \text{H},\ C=4\times10^{-6}\ \text{F},\ R=50\ \Omega$</li>
+              <li>$s_1=-50.51$ — the giant (slow decay, long tail)</li>
+              <li>$s_2=-4950$ — the sprite (fast decay, vanishes instantly)</li>
+              <li>Two real unequal roots → overdamped → two-exponential template</li>
+            </ul></div>
+          </div>
+        </div>
+        <div class="station-connector">The statues point to the living room. The template is nailed to the door. →</div>
+      </div>
+
+      <!-- STATION 3 -->
+      <div class="station s3" id="st3">
+        <div class="station-header" onclick="toggleStation('st3')">
+          <div class="station-badge"><span style="font-size:1.3rem">🔥</span><span class="badge-num">STATION 3</span></div>
+          <div class="station-meta">
+            <div class="station-locus-tag">Location · Your living room</div>
+            <div class="station-title">The Template Nailed to the Wall</div>
+            <div class="station-sub">Overdamped template + first IC → $K_1+K_2=30\times10^{-3}$</div>
+          </div>
+          <span class="station-chevron">▼</span>
+        </div>
+        <div class="station-body">
+          <div class="locus-image">
+            <div class="locus-scene-title">The Vivid Scene</div>
+            <div class="locus-scene">
+              You walk into your living room and see a <strong>giant burning equation nailed to the wall</strong>: $K_1e^{-50.51t}+K_2e^{-4950t}$. The two roots from the hallway statues have transformed into exponential arms — each statue has melted into its own term. This transformation is how you remember it: <em>the statues become the exponentials.</em> You reach out and plug in $t=0$. Both exponentials snap to 1. You read the initial current off a tag hanging from the formula: 30 mA. You write the first equation on a chalkboard: $K_1+K_2=30\times10^{-3}$. One equation. Two unknowns. You need a second equation.
+            </div>
+          </div>
+          <div class="station-math">
+            <div class="math-label">What this station encodes</div>
+            <div class="math-content"><ul>
+              <li>Template: $i_L(t)=K_1e^{-50.51t}+K_2e^{-4950t}$</li>
+              <li>At $t=0$: $K_1\cdot1 + K_2\cdot1 = i_L(0)$</li>
+              <li>$$K_1+K_2=30\times10^{-3}\quad\text{(Equation 1)}$$</li>
+              <li>One equation, two unknowns — need the derivative condition</li>
+            </ul></div>
+          </div>
+        </div>
+        <div class="station-connector">You need a second equation. Walk to the kitchen — it hides in the voltage. →</div>
+      </div>
+
+      <!-- STATION 4 -->
+      <div class="station s4" id="st4">
+        <div class="station-header" onclick="toggleStation('st4')">
+          <div class="station-badge"><span style="font-size:1.3rem">🔤</span><span class="badge-num">STATION 4</span></div>
+          <div class="station-meta">
+            <div class="station-locus-tag">Location · Your kitchen</div>
+            <div class="station-title">Decoding the Voltage Letter by Letter</div>
+            <div class="station-sub">Derivative IC → $-50.51K_1 - 4950K_2 = 0$ → solve $K_1$, $K_2$</div>
+          </div>
+          <span class="station-chevron">▼</span>
+        </div>
+        <div class="station-body">
+          <div class="locus-image">
+            <div class="locus-scene-title">The Vivid Scene</div>
+            <div class="locus-scene">
+              In the kitchen, you find a <strong>refrigerator covered in magnetic alphabet letters</strong>, each spelling out a step of the translation — one letter at a time, systematically, no skipping. You work through them in order: <strong>A</strong> — $v_C(0)=0$ is given. <strong>B</strong> — The inductor law says $v_C=v_L=L\dot i_L$. <strong>C</strong> — Since $L=1$, that means $\dot i_L(0)=0$. <strong>D</strong> — Differentiate the template. <strong>E</strong> — At $t=0$ the differentiated template gives $-50.51K_1-4950K_2=0$. That is Equation 2. You solve both equations on the kitchen counter: $K_1=30.3$ mA, $K_2=-0.309$ mA. The sprite statue had a minus sign all along — it subtracts.
+            </div>
+          </div>
+          <div class="station-math">
+            <div class="math-label">What this station encodes</div>
+            <div class="math-content"><ul>
+              <li>$v_C(0)=v_L(0)=L\dot i_L(0)=0 \Rightarrow \dot i_L(0)=0$</li>
+              <li>Differentiate template at $t=0$:</li>
+              <li>$$-50.51K_1-4950K_2=0\quad\text{(Equation 2)}$$</li>
+              <li>Solve system: $K_1=30.3\ \text{mA},\quad K_2=-0.309\ \text{mA}$</li>
+              <li>$$i_L(t)=30.3e^{-50.51t}-0.309e^{-4950t}\ \text{mA}$$</li>
+            </ul></div>
+          </div>
+        </div>
+        <div class="station-connector">The current is sealed. One differentiation separates you from the voltage. Walk to the final room. →</div>
+      </div>
+
+      <!-- STATION 5 -->
+      <div class="station s5" id="st5">
+        <div class="station-header" onclick="toggleStation('st5')">
+          <div class="station-badge"><span style="font-size:1.3rem">👑</span><span class="badge-num">STATION 5</span></div>
+          <div class="station-meta">
+            <div class="station-locus-tag">Location · Your study / throne room</div>
+            <div class="station-title">The Final Judgment Room</div>
+            <div class="station-sub">Differentiate once → $v_C(t)$; sum branches → $i_{sw}(t)$</div>
+          </div>
+          <span class="station-chevron">▼</span>
+        </div>
+        <div class="station-body">
+          <div class="locus-image">
+            <div class="locus-scene-title">The Vivid Scene</div>
+            <div class="locus-scene">
+              You enter your study and sit in the large chair at the desk. On the desk sits a single lever. You pull it once — this is the differentiation. The inductor current formula churns through it and out pours the capacitor voltage. The giant's arm reverses sign — what was $+30.3$ mA becomes $-1.53$ V. The sprite's arm also reverses — what was $-0.309$ mA becomes $+1.53$ V. Symmetrical, equal and opposite in the voltage. You look out the window and see two wires hanging from the switch node. You call them in: the 50 Ω branch carries $v_C/50$, the 250 Ω branch carries $(9-v_C)/250$. You add them. The judgment is complete. The palace is finished.
+            </div>
+          </div>
+          <div class="station-math">
+            <div class="math-label">What this station encodes</div>
+            <div class="math-content"><ul>
+              <li>$v_C(t)=L\,\dfrac{di_L}{dt}$ with $L=1$</li>
+              <li>$$v_C(t)=-1.53e^{-50.51t}+1.53e^{-4950t}\ \text{V}$$</li>
+              <li>Note: signs flip on both terms relative to $i_L$</li>
+              <li>$i_{sw}=i_{50}+i_{250}=\dfrac{v_C}{50}+\dfrac{9-v_C}{250}$</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SPEED READER TRIGGER -->
+    <div class="sr-trigger-row">
+      <span class="sr-trigger-label">Auto-adjusting speed reader — slows on formulas & headings, faster on plain text</span>
+      <button class="sr-launch-btn" id="sr-launch">
+        <span class="sr-launch-icon">⚡</span>
+        Speed Read the Palace
+      </button>
+    </div>
+  </div>
+
+  <!-- SPEED READER OVERLAY -->
+  <div class="sr-overlay" id="sr-overlay">
+    <div class="sr-progress-wrap"><div class="sr-progress-fill" id="sr-prog"></div></div>
+    <div class="sr-station-badge" id="sr-badge">🧲 Station 1</div>
+    <button class="sr-close" id="sr-close" title="Close">✕</button>
+
+    <div class="sr-display">
+      <div class="sr-context">
+        <span class="sr-prev" id="sr-prev"></span>
+        <span class="sr-word" id="sr-word">Ready</span>
+        <span class="sr-next" id="sr-next"></span>
+      </div>
+      <div class="sr-type-badge" id="sr-type-badge"></div>
+      <div class="sr-speed-label" id="sr-speed-label">
+        <span id="sr-speed-txt"></span>
+        <div class="sr-speed-bar" id="sr-speed-bar">
+          <div class="sr-speed-pip" id="sp1"></div>
+          <div class="sr-speed-pip" id="sp2"></div>
+          <div class="sr-speed-pip" id="sp3"></div>
+          <div class="sr-speed-pip" id="sp4"></div>
+          <div class="sr-speed-pip" id="sp5"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sr-controls">
+      <button class="sr-btn sr-play-pause" id="sr-pp">▶ Play</button>
+      <div class="sr-speed-group">
+        <button class="sr-spd-btn" data-mult="0.5">0.5×</button>
+        <button class="sr-spd-btn active" data-mult="1">1×</button>
+        <button class="sr-spd-btn" data-mult="1.5">1.5×</button>
+        <button class="sr-spd-btn" data-mult="2">2×</button>
+      </div>
+      <span class="sr-pos-label" id="sr-pos">0 / 0</span>
+    </div>
+  </div>
+
+  <!-- DETAIL ROOMS -->
+  <div class="sec-title reveal">Full Detail Rooms</div>
+  <div class="rooms-section reveal">
+    <div class="ritem"><button class="rtrig" onclick="toggleR(this)"><span>Room 1 — Read the Initial Conditions</span><span class="rchev">▼</span></button><div class="rbody"><ul><li>Before switching, the circuit is in steady state: inductor = short, capacitor = open.</li><li>$v_C(0)=0,\quad i_L(0)=9/(250+50)=30\ \text{mA}.$</li></ul></div></div>
+    <div class="ritem"><button class="rtrig" onclick="toggleR(this)"><span>Room 2 — Write the Parallel Characteristic Equation</span><span class="rchev">▼</span></button><div class="rbody"><ul><li>$LCs^2+\frac{L}{R}s+1=0.$ With given values: $s_1=-50.51,\ s_2=-4950.$</li></ul></div></div>
+    <div class="ritem"><button class="rtrig" onclick="toggleR(this)"><span>Room 3 — Pick the Overdamped Template</span><span class="rchev">▼</span></button><div class="rbody"><ul><li>$i_L(t)=K_1e^{-50.51t}+K_2e^{-4950t}.$</li></ul></div></div>
+    <div class="ritem"><button class="rtrig" onclick="toggleR(this)"><span>Room 4 — Apply $i_L(0)=30\ \text{mA}$ → Equation 1</span><span class="rchev">▼</span></button><div class="rbody"><ul><li>$K_1+K_2=30\times10^{-3}.$</li></ul></div></div>
+    <div class="ritem"><button class="rtrig" onclick="toggleR(this)"><span>Room 5 — Convert $v_C(0)=0$ into Derivative Condition → Equation 2</span><span class="rchev">▼</span></button><div class="rbody"><ul><li>$v_C(0)=L\dot i_L(0)=0 \Rightarrow \dot i_L(0)=0.$</li><li>Differentiate template at $t=0$: $-50.51K_1-4950K_2=0.$</li></ul></div></div>
+    <div class="ritem"><button class="rtrig" onclick="toggleR(this)"><span>Room 6 — Solve $K_1$ and $K_2$</span><span class="rchev">▼</span></button><div class="rbody"><ul><li>$K_1=30.3\ \text{mA},\quad K_2=-0.309\ \text{mA}.$</li><li>$i_L(t)=30.3e^{-50.51t}-0.309e^{-4950t}\ \text{mA}.$</li></ul></div></div>
+    <div class="ritem"><button class="rtrig" onclick="toggleR(this)"><span>Room 7 — Differentiate for $v_C(t)$</span><span class="rchev">▼</span></button><div class="rbody"><ul><li>$v_C(t)=L\,di_L/dt=-1.53e^{-50.51t}+1.53e^{-4950t}\ \text{V}.$</li></ul></div></div>
+    <div class="ritem"><button class="rtrig" onclick="toggleR(this)"><span>Room 8 — Recover the Switch Current</span><span class="rchev">▼</span></button><div class="rbody"><ul><li>$i_{sw}=v_C/50+(9-v_C)/250.$</li></ul></div></div>
+  </div>
+
+  <!-- RECALL FLIP CARDS -->
+  <div class="sec-title reveal" id="recall-anchor">Recall Test</div>
+  <div class="recall-section reveal">
+    <p class="recall-intro">Each card maps to one station of the palace. Try to see the vivid image before you flip.</p>
+    <div class="flip-grid">
+      <div class="fc f1" onclick="flipCard(this)"><div class="fc-inner"><div class="fcf"><div class="fc-tag">🧲 Frozen Doorstep</div><div class="fc-q">What are $v_C(0)$ and $i_L(0)$?</div><div class="fc-hint">tap to flip</div></div><div class="fcb"><div class="fc-tag">Station 1</div><div class="fc-a">$v_C(0)=0$ (cap. = open arch)<br>$i_L(0)=9/300=30\ \text{mA}$ (ind. = copper chain)</div></div></div></div>
+      <div class="fc f2" onclick="flipCard(this)"><div class="fc-inner"><div class="fcf"><div class="fc-tag">🗿 Two Statues</div><div class="fc-q">Name the two roots and what they represent.</div><div class="fc-hint">tap to flip</div></div><div class="fcb"><div class="fc-tag">Station 2</div><div class="fc-a">$s_1=-50.51$ giant (slow)<br>$s_2=-4950$ sprite (vanishes instantly)</div></div></div></div>
+      <div class="fc f3" onclick="flipCard(this)"><div class="fc-inner"><div class="fcf"><div class="fc-tag">🔥 Template on Wall</div><div class="fc-q">What is the template and what does IC₁ give?</div><div class="fc-hint">tap to flip</div></div><div class="fcb"><div class="fc-tag">Station 3</div><div class="fc-a">$K_1e^{-50.51t}+K_2e^{-4950t}$<br>IC₁: $K_1+K_2=30\times10^{-3}$</div></div></div></div>
+      <div class="fc f4" onclick="flipCard(this)"><div class="fc-inner"><div class="fcf"><div class="fc-tag">🔤 Alphabet Kitchen</div><div class="fc-q">How does $v_C(0)=0$ give Equation 2?</div><div class="fc-hint">tap to flip</div></div><div class="fcb"><div class="fc-tag">Station 4</div><div class="fc-a">$v_C(0)=L\dot i_L(0)=0\Rightarrow\dot i_L(0)=0$<br>$\Rightarrow -50.51K_1-4950K_2=0$</div></div></div></div>
+      <div class="fc f4" onclick="flipCard(this)"><div class="fc-inner"><div class="fcf"><div class="fc-tag">🔤 Alphabet Kitchen</div><div class="fc-q">What are $K_1$ and $K_2$?</div><div class="fc-hint">tap to flip</div></div><div class="fcb"><div class="fc-tag">Station 4</div><div class="fc-a">$K_1=30.3\ \text{mA}$<br>$K_2=-0.309\ \text{mA}$</div></div></div></div>
+      <div class="fc f5" onclick="flipCard(this)"><div class="fc-inner"><div class="fcf"><div class="fc-tag">👑 Judgment Room</div><div class="fc-q">What is $v_C(t)$?</div><div class="fc-hint">tap to flip</div></div><div class="fcb"><div class="fc-tag">Station 5</div><div class="fc-a">$-1.53e^{-50.51t}+1.53e^{-4950t}\ \text{V}$<br>Signs flip vs. $i_L$ — both terms reverse</div></div></div></div>
+      <div class="fc f5" onclick="flipCard(this)"><div class="fc-inner"><div class="fcf"><div class="fc-tag">👑 Judgment Room</div><div class="fc-q">How is $i_{sw}$ found?</div><div class="fc-hint">tap to flip</div></div><div class="fcb"><div class="fc-tag">Station 5</div><div class="fc-a">$v_C/50 + (9-v_C)/250$<br>Sum of both resistor branch currents</div></div></div></div>
+      <div class="fc f1" onclick="flipCard(this)"><div class="fc-inner"><div class="fcf"><div class="fc-tag">Full Chain</div><div class="fc-q">Name all five station locations in order.</div><div class="fc-hint">tap to flip</div></div><div class="fcb"><div class="fc-tag">The Route</div><div class="fc-a">Front door → Hallway → Living room → Kitchen → Study</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       COMPLETE MEMORY PALACE — CONCEPT & PATTERN FOCUSED
+  ═══════════════════════════════════════════════════ -->
+  <div class="sec-title reveal" id="palace-anchor">The Complete Memory Palace</div>
+
+  <div class="palace-callout reveal">
+    <div style="font-size:1.6rem;flex-shrink:0;">🏛️</div>
+    <div>
+      <div style="font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:var(--text);margin-bottom:.3rem;">This palace is about the pattern — not the numbers</div>
+      <div style="font-size:.85rem;color:var(--muted);line-height:1.7;">The specific values of this example live in the worked sections above. This palace encodes the <strong style="color:var(--text)">7 things you must own to solve any parallel RLC switch problem</strong> — how to recognise it, the solving sequence, the general formulas, what to hunt for, what damping feels like, how resistance controls the roots, and the three possible response shapes.</div>
+    </div>
+  </div>
+
+  <div class="connected-palace reveal">
+    <div class="cp-header">
+      <div class="cp-icon">🏠</div>
+      <div class="cp-title-block">
+        <div class="cp-label">One Connected Narrative · Seven Rooms · Read once, then close your eyes and walk it</div>
+        <div class="cp-title">Your House — Seven Rooms, Seven Patterns</div>
+        <div class="cp-sub">Each room is one concept you must own before touching any RLC problem. No specific numbers — pure transferable pattern.</div>
+      </div>
+    </div>
+
+    <div class="palace-story" id="palace-story">
+
+      <div class="story-seg seg1">
+        <div class="seg-dot">🔍</div>
+        <div class="seg-content">
+          <div class="seg-heading">The Porch — How to Recognise This Problem Type</div>
+          <div class="seg-text">
+            Before you even open the door, you scan the porch for three clues. First: a <strong>light switch on the wall</strong> — it cuts time in half. Everything before it is frozen steady state. Everything after is natural response, driven by stored energy alone. Second: three components hanging <strong>side by side, sharing the same two wires</strong> — parallel topology, not a series chain. Third: a red stamp reading <strong>no source after switching</strong> — zero-input means the response comes entirely from what was already stored in the inductor and capacitor. Spot these three together and you know immediately: this is a zero-input parallel RLC natural response. That identification unlocks the door.
+          </div>
+          <span class="seg-anchor">Switch · Parallel topology · Zero-input → this problem type</span>
+        </div>
+      </div>
+
+      <div class="story-seg seg2">
+        <div class="seg-dot">🏭</div>
+        <div class="seg-content">
+          <div class="seg-heading">The Hallway — The Five-Station Assembly Line</div>
+          <div class="seg-text">
+            Inside, the hallway is a factory floor. A conveyor belt runs through <strong>five numbered stations</strong> and every RLC problem — this one and every future one — must pass through all five in order. <strong>Station 1:</strong> freeze the pre-switch circuit, inductor becomes a short, capacitor becomes an open, read $i_L(0)$ and $v_C(0)$. <strong>Station 2:</strong> write the characteristic equation for the topology. <strong>Station 3:</strong> compute $\alpha$ and $\omega_0$, compare them, name the damping case. <strong>Station 4:</strong> write the response template that matches the case. <strong>Station 5:</strong> apply the two initial conditions to get two equations, solve for $K_1$ and $K_2$, write the final waveform. The belt only moves forward. No station can be skipped.
+          </div>
+          <span class="seg-anchor">ICs → Char. Eq. → $\alpha$ vs $\omega_0$ → Template → Solve $K_1, K_2$</span>
+        </div>
+      </div>
+
+      <div class="story-seg seg3">
+        <div class="seg-dot">⚒️</div>
+        <div class="seg-content">
+          <div class="seg-heading">The Garage — Four Weapons That Never Change</div>
+          <div class="seg-text">
+            The garage has a blacksmith's bench. <strong>Four weapons hang on the wall</strong> — the formulas that are true regardless of what numbers the problem gives you. First: the <strong>characteristic equation</strong> — parallel form $LCs^2 + \frac{L}{R}s + 1 = 0$, series form $LCs^2 + R_T C s + 1 = 0$. Second: the <strong>damping constant</strong> $\alpha$ — forged from $R$ alone. Parallel: $\alpha = \frac{1}{2RC}$. Series: $\alpha = \frac{R_T}{2L}$. Third: the <strong>natural frequency</strong> $\omega_0 = \frac{1}{\sqrt{LC}}$ — forged from $L$ and $C$ only, never from $R$. Fourth: the <strong>root formula</strong> $s_{1,2} = -\alpha \pm \sqrt{\alpha^2 - \omega_0^2}$ — the blade that cuts the quadratic. These four weapons are the same in every problem.
+          </div>
+          <span class="seg-anchor">$LCs^2+\tfrac{L}{R}s+1=0 \quad \alpha=\tfrac{1}{2RC} \quad \omega_0=\tfrac{1}{\sqrt{LC}} \quad s=-\alpha\pm\sqrt{\alpha^2-\omega_0^2}$</span>
+        </div>
+      </div>
+
+      <div class="story-seg seg4">
+        <div class="seg-dot">🎯</div>
+        <div class="seg-content">
+          <div class="seg-heading">The Kitchen — Two Checklists and Two Empty Jars</div>
+          <div class="seg-text">
+            The kitchen has two checklists pinned to the wall and two empty jars on the counter. The <strong>red checklist</strong> is for before the switch: the inductor is a <strong>copper chain on the floor</strong> (short circuit, zero voltage) — read its current from the source network. The capacitor is a <strong>glass arch with no wires</strong> (open circuit) — read the voltage across it. Those two are the initial conditions you carry into the analysis. The <strong>blue checklist</strong> is for after the switch: topology, values of $R$, $L$, $C$, then compute $\alpha$ and $\omega_0$. The two jars are labelled $K_1$ and $K_2$ — you cannot leave until both are filled. The <strong>first jar</strong> is filled by plugging $t=0$ into the response template. The <strong>second jar</strong> is filled by using the inductor voltage law $v_L = L\,\dot{i}_L$ or capacitor current law $i_C = C\,\dot{v}_C$ to convert the second initial condition into a derivative condition, then differentiating the template and evaluating at $t=0$.
+          </div>
+          <span class="seg-anchor">Before: $i_L(0)$ and $v_C(0)$ · After: $\alpha$, $\omega_0$, classify · Fill $K_1$ and $K_2$</span>
+        </div>
+      </div>
+
+      <div class="story-seg seg5">
+        <div class="seg-dot">🌤️</div>
+        <div class="seg-content">
+          <div class="seg-heading">The Living Room — Three Windows, Three Weathers</div>
+          <div class="seg-text">
+            The living room has three windows — look through each one and feel the damping case, not just calculate it. The <strong>first window shows heavy fog</strong>: two grey layers settling toward the ground at different speeds, no ripples, no ringing — that is overdamped. When $\alpha > \omega_0$ the radical is positive, the roots are two distinct negative real numbers, the response is two separate exponential decays and nothing oscillates. The <strong>second window shows perfectly still air</strong>, the fastest possible calm after a storm with zero lingering swirl — that is critically damped. When $\alpha = \omega_0$ the radical is zero, one repeated root, and the $t$ multiplier in the template is mathematically forced. The <strong>third window shows a bell ringing</strong>, each peal slightly quieter — that is underdamped. When $\alpha < \omega_0$ the radical is negative, roots are complex conjugates, the response oscillates while the exponential envelope shrinks. The real part of each root gives the decay rate. The imaginary part $\omega_d = \sqrt{\omega_0^2 - \alpha^2}$ gives the ringing frequency.
+          </div>
+          <span class="seg-anchor">Fog: $\alpha{>}\omega_0$, real roots · Still air: $\alpha{=}\omega_0$, repeated root · Bell: $\alpha{<}\omega_0$, complex roots</span>
+        </div>
+      </div>
+
+      <div class="story-seg seg6">
+        <div class="seg-dot">🔥</div>
+        <div class="seg-content">
+          <div class="seg-heading">The Boiler Room — What R Does and How Roots Are Born</div>
+          <div class="seg-text">
+            The boiler room has two input pipes feeding a furnace. The <strong>left pipe is labelled R</strong> — feed resistance in and it produces $\alpha$ alone. $R$ cannot reach $\omega_0$ under any circumstances. The <strong>right pipe is labelled L and C</strong> — feed them in together and they produce $\omega_0$ alone. The most counter-intuitive fact in parallel circuits: <strong>more resistance means less damping</strong>. Because $\alpha = \frac{1}{2RC}$, a larger $R$ makes $\alpha$ smaller, pushing the circuit toward underdamped oscillation. In series circuits it is exactly the opposite — $\alpha = \frac{R_T}{2L}$ puts $R$ in the numerator, so more resistance means more damping. Once you have both $\alpha$ and $\omega_0$, the root blade cuts: positive under the radical gives two real roots, zero gives one repeated root, negative gives a complex conjugate pair where the imaginary part becomes the damped oscillation frequency $\omega_d$.
+          </div>
+          <span class="seg-anchor">Parallel: $R\uparrow \Rightarrow \alpha\downarrow \Rightarrow$ more oscillation · Series: $R\uparrow \Rightarrow \alpha\uparrow \Rightarrow$ more damping</span>
+        </div>
+      </div>
+
+      <div class="story-seg seg7">
+        <div class="seg-dot">🏆</div>
+        <div class="seg-content">
+          <div class="seg-heading">The Study — Three Trophies, Three Answer Shapes</div>
+          <div class="seg-text">
+            The study has three trophy pedestals — the three possible shapes your final answer can take. <strong>Trophy one is a forked road</strong>: the overdamped response $K_1 e^{s_1 t} + K_2 e^{s_2 t}$, two arms decaying independently at the two different root rates. <strong>Trophy two is a single arrow with a clock attached</strong>: the critically damped response $(K_1 + K_2 t)e^{-\alpha t}$, where the clock — the $t$ multiplier — is not a choice but a mathematical requirement imposed by the repeated root. <strong>Trophy three is a diminishing spiral</strong>: the underdamped response $e^{-\alpha t}(K_1 \cos\omega_d t + K_2 \sin\omega_d t)$, where the exponential is the shrinking envelope and the cosine-sine pair is the oscillation inside it. In every case the same closing law applies: <strong>the roots decide which trophy shape you're building, and the two initial conditions inscribe the exact waveform on it.</strong> Also remember: once you have $i_L(t)$, one differentiation through $v_C = L\,di_L/dt$ gives you $v_C(t)$ for free. No new constants needed.
+          </div>
+          <span class="seg-anchor">Roots → shape · ICs → waveform · $v_C = L\,di_L/dt$ always</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SPEED READER TRIGGER -->
+    <div class="sr-trigger-row">
+      <span class="sr-trigger-label">Auto-adjusting speed reader · slows on formulas and anchors · faster on plain narrative · Space to pause · ← → to step</span>
+      <button class="sr-launch-btn" id="sr-launch">
+        <span class="sr-launch-icon">⚡</span>
+        Speed Read the Palace
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="btn btn-ghost" data-close-prompt>Close</button></div>
+    <p class="modal-copy">Prefilled with the full Example 7-21 flow, structured as a walk through five rooms of a house.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this switch-driven parallel RLC example. Use a walk through five rooms of a house. Make each image bizarre and exaggerated so it sticks. Keep steps in order. Do not use bullet points.
+
+Source material:
+1. Front door: Before switching, inductor = short, capacitor = open. vC(0)=0, iL(0)=9/(250+50)=30 mA.
+2. Hallway: Post-switch parallel RLC characteristic equation gives two roots s1=-50.51 (slow giant) and s2=-4950 (vanishing sprite). Overdamped.
+3. Living room: Template iL(t)=K1 e^(-50.51t)+K2 e^(-4950t). Plug in iL(0): K1+K2=30e-3 (Equation 1).
+4. Kitchen: Convert vC(0)=L diL/dt at t=0=0 to get -50.51K1-4950K2=0 (Equation 2). Solve: K1=30.3 mA, K2=-0.309 mA.
+5. Study: Differentiate once for vC(t)=-1.53e^(-50.51t)+1.53e^(-4950t) V. Switch current = vC/50 + (9-vC)/250.</textarea>
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="copy-prompt">Copy Prompt</button>
+      <button class="btn btn-ghost" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+document.querySelectorAll('.stab').forEach(t=>{
+  t.addEventListener('click',function(){
+    const id='sp-'+this.dataset.tab;
+    document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.spanel').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(id).classList.add('active');
+    if(window.MathJax)MathJax.typesetPromise();
+  });
+});
+
+function toggleStation(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+  if(el.classList.contains('open')&&window.MathJax)MathJax.typesetPromise([el]);
+}
+
+function toggleR(btn){
+  const item=btn.closest('.ritem');
+  item.classList.toggle('open');
+  if(item.classList.contains('open')&&window.MathJax)MathJax.typesetPromise([item]);
+}
+
+function flipCard(card){
+  card.classList.toggle('flipped');
+  setTimeout(()=>{if(window.MathJax)MathJax.typesetPromise([card]);},80);
+}
+
+document.getElementById('go-recall').addEventListener('click',()=>{
+  document.getElementById('recall-anchor').scrollIntoView({behavior:'smooth',block:'start'});
+});
+document.getElementById('go-palace').addEventListener('click',()=>{
+  document.getElementById('palace-anchor').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+const modal=document.getElementById('prompt-modal');
+document.querySelector('[data-open-prompt]').addEventListener('click',()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');});
+document.querySelectorAll('[data-close-prompt]').forEach(b=>b.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}));
+modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}});
+document.getElementById('copy-prompt').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(document.getElementById('prompt-text').value);}
+  catch{const t=document.getElementById('prompt-text');t.focus();t.select();}
+});
+
+// ═══════════════════════════════════════════════
+// SPEED READER ENGINE
+// ═══════════════════════════════════════════════
+
+(function(){
+
+  // ── Station metadata — 7 rooms ──
+  const STATIONS = [
+    { emoji:'🔍', label:'Room 1 · Recognise',     color:'var(--c1)', dim:'var(--c1d)', border:'var(--c1b)' },
+    { emoji:'🏭', label:'Room 2 · Assembly Line', color:'var(--c2)', dim:'var(--c2d)', border:'var(--c2b)' },
+    { emoji:'⚒️', label:'Room 3 · Formulas',      color:'var(--c3)', dim:'var(--c3d)', border:'var(--c3b)' },
+    { emoji:'🎯', label:'Room 4 · Hunt',           color:'var(--c4)', dim:'var(--c4d)', border:'var(--c4b)' },
+    { emoji:'🌤️', label:'Room 5 · Damping',        color:'var(--c5)', dim:'var(--c5d)', border:'var(--c5b)' },
+    { emoji:'🔥', label:'Room 6 · Roots',          color:'#f43f5e',  dim:'rgba(244,63,94,.12)',  border:'rgba(244,63,94,.25)' },
+    { emoji:'🏆', label:'Room 7 · Answer Shapes',  color:'#a78bfa',  dim:'rgba(167,139,250,.12)',border:'rgba(167,139,250,.25)' },
+  ];
+
+  // ── Token type definitions ──
+  // delay multiplier relative to base speed
+  const TYPE = {
+    HEADING:   { id:'heading',  label:'📍 Station heading',   mult:2.2,  cls:'is-heading' },
+    MATH:      { id:'math',     label:'∑ Formula — slowing',  mult:3.8,  cls:'is-math'    },
+    NUMBER:    { id:'number',   label:'# Number',             mult:1.8,  cls:''           },
+    TECHNICAL: { id:'tech',     label:'⚙ Technical term',     mult:1.6,  cls:''           },
+    SHORT:     { id:'short',    label:'',                     mult:0.55, cls:''           },
+    NORMAL:    { id:'normal',   label:'',                     mult:1.0,  cls:''           },
+  };
+
+  // ── Extract tokens from palace story ──
+  function extractTokens(){
+    const tokens = [];
+    const segs = document.querySelectorAll('#palace-story .story-seg');
+
+    segs.forEach((seg, si) => {
+      // Station boundary marker
+      tokens.push({ kind:'station', stationIdx: si });
+
+      // Heading
+      const heading = seg.querySelector('.seg-heading');
+      if(heading){
+        const words = heading.textContent.trim().split(/\s+/);
+        words.forEach((w,wi)=>{
+          tokens.push({ text: w, type: TYPE.HEADING, stationIdx: si, isFirst: wi===0 });
+        });
+        tokens.push({ kind:'pause', ms:600, stationIdx: si });
+      }
+
+      // Body text — parse HTML preserving $...$ math blocks
+      const body = seg.querySelector('.seg-text');
+      if(body){
+        const raw = body.innerHTML;
+        // Split by $...$ math spans — keep math as single tokens
+        const parts = raw.split(/(\$[^$]+\$)/g);
+        parts.forEach(part => {
+          if(part.startsWith('$') && part.endsWith('$')){
+            // It's a math expression
+            const mathText = part.slice(1,-1);
+            tokens.push({ text: mathText, type: TYPE.MATH, stationIdx: si, raw: part });
+          } else {
+            // Strip remaining HTML tags
+            const stripped = part.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&gt;/g,'>').replace(/&lt;/g,'<').replace(/&nbsp;/g,' ').replace(/\s+/g,' ');
+            const words = stripped.trim().split(/\s+/).filter(w=>w.length>0);
+            words.forEach(w => {
+              if(!w) return;
+              const clean = w.replace(/[""'']/g,'');
+              const type = classifyWord(clean);
+              tokens.push({ text: w, type, stationIdx: si });
+            });
+          }
+        });
+      }
+
+      // Anchor equation
+      const anchor = seg.querySelector('.seg-anchor');
+      if(anchor){
+        tokens.push({ kind:'pause', ms:300, stationIdx: si });
+        const mathText = anchor.textContent.trim();
+        if(mathText){
+          tokens.push({ text: mathText, type: TYPE.MATH, stationIdx: si });
+        }
+        tokens.push({ kind:'pause', ms:500, stationIdx: si });
+      }
+
+      tokens.push({ kind:'pause', ms:700, stationIdx: si });
+    });
+
+    return tokens;
+  }
+
+  function classifyWord(w){
+    if(!w || w.length <= 1) return TYPE.SHORT;
+    // Math operators or LaTeX-like content
+    if(/[=+\-×÷±∓∑∫√∞Ω∂]/.test(w)) return TYPE.MATH;
+    // Inline formulas that slipped through (contain ^ or _ or numbers+letters mixed like K1, s1, mA)
+    if(/\^|_|\\|[A-Za-z]\d|\d[A-Za-z]/.test(w)) return TYPE.TECHNICAL;
+    // Pure numbers, decimal numbers, values like -50.51, 4950
+    if(/^-?\d[\d.,]*$/.test(w)) return TYPE.NUMBER;
+    // Technical words
+    if(/^(inductor|capacitor|resistor|overdamped|underdamped|critically|exponential|characteristic|differentiat|equation|template|derivative|parallel|series|KVL|RLC|initial|condition|constant|voltage|current|circuit|impedance|impedance|frequency|switch|branch|transient|steady)$/i.test(w)) return TYPE.TECHNICAL;
+    // Short function words
+    if(w.length <= 2) return TYPE.SHORT;
+    return TYPE.NORMAL;
+  }
+
+  // ── Base delay at 1x speed (ms) ──
+  const BASE_MS = 260;
+  let speedMult = 1.0;
+  let tokens = [];
+  let cursor = 0;
+  let playing = false;
+  let timer = null;
+
+  // ── DOM refs ──
+  const overlay    = document.getElementById('sr-overlay');
+  const wordEl     = document.getElementById('sr-word');
+  const prevEl     = document.getElementById('sr-prev');
+  const nextEl     = document.getElementById('sr-next');
+  const progEl     = document.getElementById('sr-prog');
+  const badgeEl    = document.getElementById('sr-badge');
+  const ppBtn      = document.getElementById('sr-pp');
+  const posEl      = document.getElementById('sr-pos');
+  const typeBadge  = document.getElementById('sr-type-badge');
+  const speedTxt   = document.getElementById('sr-speed-txt');
+  const pips       = [1,2,3,4,5].map(i=>document.getElementById('sp'+i));
+
+  // ── Launch ──
+  document.getElementById('sr-launch').addEventListener('click', ()=>{
+    tokens = extractTokens().filter(t => t.kind !== 'station'); // station markers handled separately
+    tokens = extractTokens(); // re-extract with station markers included
+    cursor = 0;
+    playing = false;
+    overlay.classList.add('active');
+    renderFrame();
+  });
+
+  document.getElementById('sr-close').addEventListener('click', stop);
+  document.addEventListener('keydown', e=>{
+    if(!overlay.classList.contains('active')) return;
+    if(e.code === 'Space'){ e.preventDefault(); togglePlay(); }
+    if(e.code === 'Escape'){ stop(); }
+    if(e.code === 'ArrowRight'){ stepForward(); }
+    if(e.code === 'ArrowLeft'){ stepBack(); }
+  });
+
+  ppBtn.addEventListener('click', togglePlay);
+
+  // Speed buttons
+  document.querySelectorAll('.sr-spd-btn').forEach(btn=>{
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.sr-spd-btn').forEach(b=>b.classList.remove('active'));
+      this.classList.add('active');
+      speedMult = parseFloat(this.dataset.mult);
+    });
+  });
+
+  function stop(){
+    clearTimeout(timer);
+    playing = false;
+    overlay.classList.remove('active');
+    ppBtn.textContent = '▶ Play';
+    ppBtn.classList.remove('playing');
+  }
+
+  function togglePlay(){
+    if(playing){ pause(); } else { play(); }
+  }
+
+  function play(){
+    playing = true;
+    ppBtn.innerHTML = '⏸ Pause';
+    ppBtn.classList.add('playing');
+    scheduleNext();
+  }
+
+  function pause(){
+    playing = false;
+    clearTimeout(timer);
+    ppBtn.innerHTML = '▶ Play';
+    ppBtn.classList.remove('playing');
+  }
+
+  function stepForward(){
+    if(cursor < tokens.length - 1){ cursor++; renderFrame(); }
+  }
+  function stepBack(){
+    if(cursor > 0){ cursor--; renderFrame(); }
+  }
+
+  function scheduleNext(){
+    if(!playing) return;
+    const tok = tokens[cursor];
+    if(!tok){ pause(); return; }
+
+    // Handle non-display tokens (station markers, pauses)
+    if(tok.kind === 'station' || tok.kind === 'pause'){
+      const pauseMs = tok.kind === 'pause' ? tok.ms : 200;
+      timer = setTimeout(()=>{
+        cursor++;
+        if(cursor >= tokens.length){ pause(); return; }
+        renderFrame();
+        scheduleNext();
+      }, pauseMs / speedMult);
+      return;
+    }
+
+    // Calculate delay
+    const baseDelay = BASE_MS;
+    const typeDelay = baseDelay * tok.type.mult;
+    // Extra time for longer tokens
+    const lenFactor = Math.min(1 + tok.text.length * 0.018, 2.2);
+    const delay = (typeDelay * lenFactor) / speedMult;
+
+    timer = setTimeout(()=>{
+      cursor++;
+      if(cursor >= tokens.length){ pause(); return; }
+      renderFrame();
+      scheduleNext();
+    }, delay);
+  }
+
+  function renderFrame(){
+    const tok = tokens[cursor];
+    if(!tok) return;
+
+    // Skip rendering for invisible tokens but still update station
+    if(tok.kind === 'station'){
+      updateStation(tok.stationIdx);
+      updateProgress();
+      return;
+    }
+    if(tok.kind === 'pause'){
+      updateProgress();
+      return;
+    }
+
+    // Find prev/next visible tokens
+    let prevTok = null, nextTok = null;
+    for(let i = cursor-1; i >= 0; i--){
+      if(tokens[i].text){ prevTok = tokens[i]; break; }
+    }
+    for(let i = cursor+1; i < tokens.length; i++){
+      if(tokens[i].text){ nextTok = tokens[i]; break; }
+    }
+
+    const type = tok.type;
+    const displayText = tok.text;
+
+    // Word display
+    wordEl.textContent = displayText;
+    wordEl.className   = 'sr-word' + (type.cls ? ' '+type.cls : '');
+    wordEl.style.color = getStationColor(tok.stationIdx);
+
+    // Context
+    prevEl.textContent = prevTok ? prevTok.text : '';
+    nextEl.textContent = nextTok ? nextTok.text : '';
+
+    // Type badge
+    if(type.label){
+      typeBadge.textContent = type.label;
+      typeBadge.style.cssText = `
+        background:${getStationDim(tok.stationIdx)};
+        border:1px solid ${getStationBorder(tok.stationIdx)};
+        color:${getStationColor(tok.stationIdx)};
+      `;
+    } else {
+      typeBadge.textContent = '';
+      typeBadge.style.cssText = '';
+    }
+
+    // Speed pips — show current relative speed
+    const relSpeed = (1 / type.mult); // higher mult = slower = fewer pips lit
+    const litCount = Math.round(relSpeed * 4) + 1; // 1–5
+    pips.forEach((p,i)=>{ p.classList.toggle('lit', i < litCount); p.style.background = i < litCount ? getStationColor(tok.stationIdx) : 'var(--dimmed)'; });
+
+    const wpm = Math.round((60000 / (BASE_MS * type.mult)) * speedMult);
+    speedTxt.textContent = type.id !== 'normal' ? `~${wpm} wpm` : '';
+
+    // Station badge
+    updateStation(tok.stationIdx);
+    updateProgress();
+
+    // Position counter (only real word tokens)
+    const realTokens = tokens.filter(t=>t.text);
+    const realIdx = realTokens.indexOf(tok);
+    posEl.textContent = `${realIdx+1} / ${realTokens.length}`;
+  }
+
+  function updateStation(idx){
+    if(idx === undefined || idx < 0 || idx >= STATIONS.length) return;
+    const s = STATIONS[idx];
+    badgeEl.textContent = s.emoji + ' ' + s.label;
+    badgeEl.style.background = s.dim;
+    badgeEl.style.borderColor = s.border;
+    badgeEl.style.color = s.color;
+  }
+
+  function updateProgress(){
+    const pct = (cursor / Math.max(tokens.length - 1, 1)) * 100;
+    progEl.style.width = pct + '%';
+  }
+
+  function getStationColor(idx){ if(idx===undefined||idx<0||idx>=5) return 'var(--text)'; return ['var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)'][idx]; }
+  function getStationDim(idx)  { if(idx===undefined||idx<0||idx>=5) return 'transparent'; return ['var(--c1d)','var(--c2d)','var(--c3d)','var(--c4d)','var(--c5d)'][idx]; }
+  function getStationBorder(idx){ if(idx===undefined||idx<0||idx>=5) return 'var(--border2)'; return ['var(--c1b)','var(--c2b)','var(--c3b)','var(--c4b)','var(--c5b)'][idx]; }
+
+})();
+
+</script>
+</body>
+</html>

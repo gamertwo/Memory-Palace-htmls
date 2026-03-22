@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 23 Memory Palace Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cinzel:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08111b;--bg2:#132536;--panel:#101a28;--line:rgba(255,255,255,.08);--accent:#ffd166;--accent2:#7ce8ff;--text:#eef6ff;--muted:rgba(238,246,255,.76);--shadow:0 24px 60px rgba(0,0,0,.34)}
+body{font-family:'Outfit',sans-serif;color:var(--text);min-height:100vh;background:radial-gradient(circle at top right,rgba(124,232,255,.14),transparent 34%),radial-gradient(circle at bottom left,rgba(255,209,102,.1),transparent 28%),linear-gradient(180deg,var(--bg),var(--bg2))}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .95rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel,.note{background:rgba(16,26,40,.92);border:1px solid var(--line);border-radius:24px;padding:1.25rem;box-shadow:var(--shadow)}
+.hero h1,.panel h2,.note h3{font-family:'Cinzel',serif}
+.hero h1{font-size:clamp(2rem,4vw,3.4rem);margin-bottom:.7rem}
+.hero p,.card p,.note p,.note li{color:var(--muted);line-height:1.75}
+.kicker{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);font-weight:800;margin-bottom:.55rem}
+.hero-meta{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem}
+.pill{border:1px solid var(--line);border-radius:999px;padding:.45rem .78rem;background:rgba(255,255,255,.03);color:var(--muted);font-size:.8rem}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.82fr);gap:1rem;align-items:start;margin-top:1rem}
+.panel h2{font-size:1.02rem;margin-bottom:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:.9rem}
+.card{display:block;text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:1rem;background:rgba(255,255,255,.03);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,.22);border-color:rgba(124,232,255,.34)}
+.card-top{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start;margin-bottom:.7rem}
+.card-index{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);font-weight:800}
+.card-type{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:800}
+.card h3{font-size:1rem;margin-bottom:.45rem}
+.card-formulas{display:grid;gap:.45rem;margin-top:.8rem}
+.card-formulas div{font-size:.82rem;line-height:1.65;padding-left:.65rem;border-left:2px solid rgba(124,232,255,.35);color:var(--muted)}
+.card-footer{display:flex;justify-content:space-between;gap:.75rem;margin-top:.9rem;color:var(--muted);font-size:.76rem}
+.card-footer span{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:999px;padding:.36rem .58rem;background:rgba(255,255,255,.03)}
+.stack{display:grid;gap:.9rem}
+.note h3{font-size:.95rem;margin-bottom:.45rem}
+.note ul{padding-left:1.1rem}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Chapter 23 Physics Track</a>
+    <a href="../index.html">Main Hub</a>
+  </nav>
+  <section class="hero">
+    <div class="kicker">Chapter 23 Memory Palace Track</div>
+    <h1>Concept Memory, Not Tiny Numbers</h1>
+    <p>This route turns Chapter 23 into simple memory palaces. Each page gives you a start formula, an end formula, a few rooms, and an interactive path so you remember the idea and the derivation direction instead of memorizing little values.</p>
+    <div class="hero-meta">
+      <span class="pill">Interactive palace path</span>
+      <span class="pill">Major-system friendly</span>
+      <span class="pill">Simple concept focus</span>
+    </div>
+  </section>
+  <div class="layout">
+    <section class="panel">
+      <h2>Memory Palace Pages</h2>
+      <div class="grid">
+        <a class="card" href="mp-major-system-foundation.html"><div class="card-top"><span class="card-index">MP-0</span><span class="card-type">Foundation</span></div><h3>Major System + Palace Route</h3><p>Build one reusable route for the whole chapter: law, surface, flux, charge, result.</p><div class="card-formulas"><div>Start: stable chapter route</div><div>End: one memory pattern for all pages</div></div><div class="card-footer"><span>5 rooms</span><span>Base method</span></div></a>
+        <a class="card" href="mp-gauss-law-core.html"><div class="card-top"><span class="card-index">MP-1</span><span class="card-type">Core Law</span></div><h3>Gauss's Law Core</h3><p>Remember the main statement of the law and what enclosed really means.</p><div class="card-formulas"><div>Start: flux through a closed surface</div><div>End: enclosed charge over epsilon naught</div></div><div class="card-footer"><span>5 rooms</span><span>Main idea</span></div></a>
+        <a class="card" href="mp-electric-flux-core.html"><div class="card-top"><span class="card-index">MP-2</span><span class="card-type">Flux</span></div><h3>Electric Flux Core</h3><p>Keep flux simple: field through area, signed by orientation, then summed.</p><div class="card-formulas"><div>Start: dot product view</div><div>End: closed-surface integral</div></div><div class="card-footer"><span>5 rooms</span><span>Meaning first</span></div></a>
+        <a class="card" href="mp-cylinder-flux-core.html"><div class="card-top"><span class="card-index">MP-3</span><span class="card-type">Example</span></div><h3>Closed Cylinder in Uniform Field</h3><p>Remember the cancellation story: left cap, wall, right cap.</p><div class="card-formulas"><div>Start: split the surface</div><div>End: negative plus zero plus positive equals zero</div></div><div class="card-footer"><span>5 rooms</span><span>Cancellation</span></div></a>
+        <a class="card" href="mp-cube-flux-core.html"><div class="card-top"><span class="card-index">MP-4</span><span class="card-type">Example</span></div><h3>Closed Cube in Nonuniform Field</h3><p>Keep the face-by-face logic clear without drowning in arithmetic.</p><div class="card-formulas"><div>Start: field has x and y parts</div><div>End: only matching faces contribute</div></div><div class="card-footer"><span>6 rooms</span><span>Component logic</span></div></a>
+        <a class="card" href="mp-flux-to-charge-core.html"><div class="card-top"><span class="card-index">MP-5</span><span class="card-type">Reverse Move</span></div><h3>Flux to Enclosed Charge</h3><p>When net flux is known, turn it into enclosed charge in one clean step.</p><div class="card-formulas"><div>Start: known net flux</div><div>End: q enclosed equals epsilon naught times flux</div></div><div class="card-footer"><span>4 rooms</span><span>Reverse law</span></div></a>
+        <a class="card" href="mp-net-charge-net-flux-core.html"><div class="card-top"><span class="card-index">MP-6</span><span class="card-type">Direct Move</span></div><h3>Net Charge to Net Flux</h3><p>If enclosed charge is known, move straight to total flux.</p><div class="card-formulas"><div>Start: known enclosed charge</div><div>End: flux equals charge over epsilon naught</div></div><div class="card-footer"><span>5 rooms</span><span>Only inside counts</span></div></a>
+        <a class="card" href="mp-sphere-and-sheet-core.html"><div class="card-top"><span class="card-index">MP-7</span><span class="card-type">Applications</span></div><h3>Sphere and Sheet Shortcuts</h3><p>Use symmetry to pull the field out of the integral and land on the standard forms.</p><div class="card-formulas"><div>Start: Gauss's law</div><div>End: sphere and sheet results</div></div><div class="card-footer"><span>6 rooms</span><span>Symmetry shortcut</span></div></a>
+        <a class="card" href="mp-planar-superposition-core.html"><div class="card-top"><span class="card-index">MP-8</span><span class="card-type">Plates</span></div><h3>Two Sheets, Three Regions</h3><p>Left, between, right: decide where arrows add and where they cancel.</p><div class="card-formulas"><div>Start: one-sheet field</div><div>End: region-by-region field story</div></div><div class="card-footer"><span>6 rooms</span><span>Arrow combining</span></div></a>
+        <a class="card" href="mp-spherical-symmetry-core.html"><div class="card-top"><span class="card-index">MP-9</span><span class="card-type">Sphere</span></div><h3>Spherical Symmetry Results</h3><p>Remember shell and solid-sphere inside/outside results from one radius story.</p><div class="card-formulas"><div>Start: epsilon naught E 4 pi r squared</div><div>End: shell-inside zero, solid-inside grows with r</div></div><div class="card-footer"><span>6 rooms</span><span>Radius story</span></div></a>
+      </div>
+    </section>
+    <aside class="stack">
+      <section class="note"><h3>How To Use This</h3><p>Say the start formula, walk the rooms in order, and finish by speaking the end formula. That gives you a clean beginning and ending anchor.</p></section>
+      <section class="note"><h3>Memory Rule</h3><ul><li>Do not memorize every number.</li><li>Do memorize the picture and the idea flow.</li><li>Do memorize the first formula and the final formula.</li></ul></section>
+      <section class="note"><h3>Major-System Angle</h3><p>You can add Major-system images to room numbers if you want, but the main memory tool here is the palace route itself.</p></section>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

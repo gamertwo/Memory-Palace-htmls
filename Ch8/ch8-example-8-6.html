@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-6 | Series RLC Circuit in the Phasor Domain</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_6">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-10.html">Next: Exercise 8-10</a><a href="ch8-exercise-8-9.html">Prev: Exercise 8-9</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-6</div>
+    <h1>Solve a Series RLC Circuit by Phasors</h1>
+    <p class="hero-sub">This is the full series-circuit movie: catch the source, convert each element to impedance, collapse the series path into one equivalent impedance, solve the current, then push that same current back through each element to recover all voltages and their waveforms.</p>
+    <div class="formula-block">$$v_s(t)=35\cos(1000t)\text{ V},\qquad R=50\,\Omega,\qquad C=10\,\mu\text{F},\qquad L=25\,\text{mH}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-6.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source Phasor</div><div class="v">$$V_s=35\angle0^\circ\text{ V}$$</div></div>
+          <div class="fact"><div class="k">Element Impedances</div><div class="v">$$Z_R=50,\qquad Z_L=j25,\qquad Z_C=-j100$$</div></div>
+          <div class="fact"><div class="k">Equivalent</div><div class="v">$$Z_{EQ}=50-j75=90.1\angle-56.3^\circ\,\Omega$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-6-room-1" data-room-id="ch8-example-8-6-room-1" data-room-title="Room 1: Convert the Source and Element Impedances" data-source-page="ch8-example-8-6.html" data-tags="convert,source,element,impedances">
+            <h2>Room 1: Convert the Source and Element Impedances</h2><ul><li>Read the source directly into phasor form: $$V_s=35\angle0^\circ\text{ V}.$$</li><li>For the resistor, $$Z_R=R=50\,\Omega.$$</li><li>For the inductor, $$Z_L=j\omega L=j(1000)(25\times10^{-3})=j25\,\Omega.$$</li><li>For the capacitor, $$Z_C=\dfrac{1}{j\omega C}=\dfrac{1}{j(1000)(10^{-5})}=-j100\,\Omega.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-6-room-2" data-room-id="ch8-example-8-6-room-2" data-room-title="Room 2: Collapse the Series Circuit" data-source-page="ch8-example-8-6.html" data-tags="collapse,series,circuit">
+            <h2>Room 2: Collapse the Series Circuit</h2><ul><li>Series impedances add directly, so $$Z_{EQ}=Z_R+Z_L+Z_C.$$</li><li>That gives $$Z_{EQ}=50+j25-j100=50-j75\,\Omega.$$</li><li>Now convert this rectangular form into polar form. The magnitude comes from the right-triangle length: $$|Z_{EQ}|=\sqrt{50^2+(-75)^2}=\sqrt{8125}=90.1.$$</li><li>The angle comes from the tangent ratio: $$\tan\theta=\frac{\text{imaginary part}}{\text{real part}}=\frac{-75}{50}=-1.5.$$ So $$\theta=\tan^{-1}(-1.5)=-56.3^\circ.$$</li><li>That negative angle is correct because $$50-j75$$ lies in quadrant IV: the real part is positive and the imaginary part is negative, so the phasor points down and to the right.</li><li>So the same impedance in polar form is $$Z_{EQ}=90.1\angle-56.3^\circ\,\Omega.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-6-room-3" data-room-id="ch8-example-8-6-room-3" data-room-title="Room 3: Solve the Series Current" data-source-page="ch8-example-8-6.html" data-tags="solve,series,current">
+            <h2>Room 3: Solve the Series Current</h2><ul><li>Use Ohm's law in phasor form: $$I=\dfrac{V_s}{Z_{EQ}}.$$</li><li>So $$I=\dfrac{35\angle0^\circ}{90.1\angle-56.3^\circ}=0.388\angle56.3^\circ\text{ A}.$$</li><li>The positive angle means the source voltage is behind the current here because the net impedance angle is negative.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-6-room-4" data-room-id="ch8-example-8-6-room-4" data-room-title="Room 4: Find the Element Voltages" data-source-page="ch8-example-8-6.html" data-tags="find,element,voltages">
+            <h2>Room 4: Find the Element Voltages</h2><ul><li>The same series current flows through all elements, so use $$V=ZI$$ on each one.</li><li>$$V_R=Z_RI=50(0.388\angle56.3^\circ)=19.4\angle56.3^\circ\text{ V}.$$</li><li>$$V_L=Z_LI=j25(0.388\angle56.3^\circ)=9.70\angle146.3^\circ\text{ V}.$$</li><li>$$V_C=Z_CI=-j100(0.388\angle56.3^\circ)=38.8\angle-33.7^\circ\text{ V}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-6-room-5" data-room-id="ch8-example-8-6-room-5" data-room-title="Room 5: Coat the Waveforms" data-source-page="ch8-example-8-6.html" data-tags="coat,waveforms">
+            <h2>Room 5: Coat the Waveforms</h2><ul><li>Now coat each phasor back into the time domain with the same $$\omega=1000.$$</li><li>$$i(t)=0.388\cos(1000t+56.3^\circ)\text{ A}$$</li><li>$$v_R(t)=19.4\cos(1000t+56.3^\circ)\text{ V}$$</li><li>$$v_L(t)=9.70\cos(1000t+146.3^\circ)\text{ V}$$</li><li>$$v_C(t)=38.8\cos(1000t-33.7^\circ)\text{ V}$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>In a series circuit, add impedances first and solve one current phasor. After that, every element voltage comes from reusing the same current with its own impedance.</p></div>
+        <div class="mini"><h3>Why The Inductor and Capacitor Voltages Split Apart</h3><p>The inductor adds $$+90^\circ$$ to the current angle, while the capacitor adds $$-90^\circ.$$ That is why $$V_L$$ and $$V_C$$ end up on opposite sides of the phasor plane even though the same current flows through both.</p></div>
+        <div class="mini"><h3>Why The $$Z_{EQ}$$ Angle Is Negative</h3><p>Picture $$50-j75$$ as a phasor arrow from the origin. It moves 50 units right on the real axis and 75 units down on the imaginary axis. That places it in quadrant IV, so the angle must be negative. The exact tilt comes from $$\tan\theta=-75/50,$$ which gives $$\theta=-56.3^\circ.$$</p></div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Walk this as one forward memory palace movie. The route is built to follow the linked-action style used in Magnetic Memory Method and Art of Memory discussions: one fixed path, one dominant action per station, and each station physically pushing the next.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Net Gate: Turn the Source into a Phasor</h3><p>You enter through the net gate and the waveform banner $$v_s(t)=35\cos(1000t)$$ is caught, stretched, and renamed as $$V_s=35\angle0^\circ.$$ The image itself performs the conversion from time-domain source to phasor source.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Chalk Wall: Pull Out Every $$Z$$</h3><p>The resistor, inductor, and capacitor are yanked onto a glowing wall. Their hidden impedance tags are pulled out and written as $$Z_R=50,$$ $$Z_L=j25,$$ and $$Z_C=-j100.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Series Mat: Fuse the Impedances</h3><p>All three $$Z$$ labels slide down the corridor onto one mat and fuse into the rectangular block $$Z_{EQ}=50+j25-j100=50-j75.$$ Once fused, only one equivalent impedance is left.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">92 Sword</div><h3>Sword Hall: Measure Magnitude and Angle</h3><p>A magnitude sword slices the rectangular block into a triangle. One edge measures $$|Z_{EQ}|=90.1,$$ and the sword point scratches $$\tan\theta=-75/50.$$ Because the block lies in quadrant IV, the sword forces the tilt down to $$-56.3^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Fire Hall: Reforge Polar $$Z$$ and Pull Out $$I$$</h3><p>The block is thrown into fire and reforged as $$Z_{EQ}=90.1\angle-56.3^\circ.$$ Then the source phasor hooks onto it and division pulls out the current arrow $$I=0.388\angle56.3^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Case Hall: Stamp Out the Voltage Phasors</h3><p>The current runs through three doors marked $$V=ZI.$$ Each door stamps one voltage phasor into the case: $$V_R=19.4\angle56.3^\circ,$$ $$V_L=9.70\angle146.3^\circ,$$ and $$V_C=38.8\angle-33.7^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Coat Exit: Wear the Waveforms</h3><p>At the exit, the 71-coat wraps every phasor back into cosine clothing, producing $$i(t),$$ $$v_R(t),$$ $$v_L(t),$$ and $$v_C(t).$$ The journey ends only when all four waveforms are dressed.</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Waveform Source</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Phasor Source</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Pull Out $$Z$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Combine $$Z$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Magnitude + Angle</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Polar $$Z_{EQ}$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Solve $$I$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Build $$V$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Waveforms</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed, press Enter to save, and keep the filename so you can mention that `.txt` file here later. Use `Shift+Enter` for a new line.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-example-8-6-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add more detail to the equivalent impedance room and make the movie arrows even more visual."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">If your browser supports the save picker, you can choose exactly where the `.txt` file goes. Otherwise it downloads automatically.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

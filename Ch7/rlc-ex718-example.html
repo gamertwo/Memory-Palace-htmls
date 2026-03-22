@@ -136,7 +136,7 @@ a{color:inherit}
   border-style:dashed;
   background:rgba(255,255,255,.02);
 }
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-row{display:flex;gap:.65rem;justify-content:flex-end;margin-top:.85rem;flex-wrap:wrap}
 .tool-btn,.ghost-btn{
   border:1px solid var(--line);
   border-radius:999px;
@@ -148,6 +148,7 @@ a{color:inherit}
   background:rgba(255,255,255,.03);
 }
 .tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.tool-btn.is-active{background:rgba(255,208,138,.16);border-color:rgba(255,208,138,.35);box-shadow:0 0 0 1px rgba(255,208,138,.18) inset}
 .tool-btn:disabled,.ghost-btn:disabled{opacity:.45;cursor:not-allowed}
 @media (max-width:760px){
   .shell{padding:1rem .85rem 2rem}
@@ -176,7 +177,7 @@ $$\text{Case A: }K_1e^{s_1 t}+K_2e^{s_2 t},\quad \text{Case B: }(K_1+K_2 t)e^{st
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="content-grid" data-view-panel="default">
     <div class="main-stack">
       <section class="panel">
         <div class="section-title">Quick Data</div>
@@ -347,6 +348,61 @@ $$\text{Case A: }K_1e^{s_1 t}+K_2e^{s_2 t},\quad \text{Case B: }(K_1+K_2 t)e^{st
         </div>
         </div>
       
+    </aside>
+  </div>
+
+  <div class="content-grid" data-view-panel="memory" hidden>
+    <div class="main-stack">
+      <section
+        class="panel"
+        data-view-label="Memory"
+        data-view-button-label="Memory"
+        data-review-mode-title="Memory Palace Review"
+        data-review-mode-copy="This memory route stores the logic of second-order zero-input responses by places, not by raw algebra. The palace teaches one law over and over: roots choose the template, initial conditions choose the constants."
+        data-review-prompt="Walk the palace in order first. Recall the image and the solving move attached to it before you reveal the room."
+        data-review-reveal-copy="Reveal the current memory room when you want to verify the palace image, then compare it with the worked showcase below."
+        data-review-action-copy="Rate how well you remembered both the image and the solving rule, then move forward."
+        data-view-hero-title="Example 7-18 Memory Palace"
+        data-view-hero-copy="This palace turns the three damping cases into a route: a template hall, an initial-condition lock, then three different doors for overdamped, critical, and underdamped motion. Each door reminds you that the roots pick the waveform form, and the same two initial conditions pick the constants."
+        data-view-hero-eq="Remember $$\text{roots} \rightarrow \text{template} \rightarrow \text{initial conditions} \rightarrow \text{constants} \rightarrow \text{waveform}.$$"
+      >
+        <div class="section-title">Memory Palace Route</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: The Template Hall</h2><ul><li>Three arches hang in one hall: two-real-root, repeated-root, and damped-sinusoid.</li><li>The hall teaches the master rule: the roots choose the response template before any constants are solved.</li><li>This example reuses roots from Example 7-17, so the first act is classification, not derivation.</li></ul></article>
+          <article class="room"><h2>Room 2: The Initial-Condition Lock</h2><ul><li>A double lock stores the same two keys for every case: $$v_C(0)=15\text{ V}$$ and $$\dot v_C(0)=0.$$</li><li>No matter which damping door opens, these two conditions solve the unknown constants.</li><li>The lock says: same starting data, different response shape.</li></ul></article>
+          <article class="room"><h2>Room 3: The Overdamped Stone Door</h2><ul><li>This heavy stone door corresponds to $$R=8.5\text{ k}\Omega$$ with roots $$-500$$ and $$-8000.$$</li><li>Stone means two separate real decays, so the form is a sum of two exponentials.</li><li>The palace stamp is that one equation gives the slow term and the other kills the fast mismatch.</li></ul></article>
+          <article class="room"><h2>Room 4: The Long-Tail Balcony</h2><ul><li>From the stone door you step onto a balcony where the slow exponential remains visible long after the fast one vanishes.</li><li>This balcony helps you remember why the overdamped response looks like one dominant tail plus one quick correction.</li><li>The showcased waveform is the proof of that picture.</li></ul></article>
+          <article class="room"><h2>Room 5: The Critical Mirror</h2><ul><li>A mirror split perfectly down the middle stores $$R=4\text{ k}\Omega$$ and the repeated root $$-2000.$$</li><li>The mirror means balance: the response is not two different exponentials but one repeated-root form with a multiplying $$t$$.</li><li>The palace lesson is that equal roots force the extra factor.</li></ul></article>
+          <article class="room"><h2>Room 6: The Fastest Corridor</h2><ul><li>This corridor narrows sharply and returns to zero as fast as possible without ringing.</li><li>It stores the idea of critical damping better than any formula: no oscillation, no split roots, fastest nonoscillatory return.</li><li>The worked showcase reminds you how that idea becomes $$15(1+2000t)e^{-2000t}.$$</li></ul></article>
+          <article class="room"><h2>Room 7: The Silver Sinusoid Chamber</h2><ul><li>A silver chamber rings softly for $$R=1\text{ k}\Omega,$$ where the roots are complex.</li><li>Silver ringing means underdamped motion: exponential envelope outside, sine-cosine content inside.</li><li>The two initial conditions still solve the constants, but now the constants sit inside a decaying oscillation.</li></ul></article>
+          <article class="room"><h2>Room 8: Solomon's Rule Table</h2><ul><li>At the end, a gold table states the whole law of the example.</li><li>First inspect the roots, then choose the matching template, then use the initial conditions, then write the exact waveform.</li><li>The memory seal is: roots decide the shape; initial conditions decide the exact answer.</li></ul></article>
+        </div>
+        <div class="mini"><h3>Palace Shortcut</h3><p>When you revisit this example, do not recompute everything from scratch. Walk the hall of templates first, choose the correct door from the roots, and then let the same two initial-condition keys unlock the constants.</p></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Recall Tokens</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Templates</div><div class="v">Three damping cases mean three waveform families.</div></div>
+          <div class="fact"><div class="k">Two Keys</div><div class="v">$$v_C(0)$$ and $$\dot v_C(0)$$ solve every case.</div></div>
+          <div class="fact"><div class="k">Stone / Mirror / Silver</div><div class="v">Overdamped, critical, underdamped.</div></div>
+          <div class="fact"><div class="k">Showcase Rule</div><div class="v">Reveal the memory room, then study the worked room beneath it.</div></div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Palace Path</div>
+      <p class="palace-intro">This route starts with waveform choice, not constant solving. The same initial-condition lock is carried through three different damping doors.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Template Hall</h3><p>Let the roots choose the form first.</p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>After the form is known, the same two initial conditions drive all three cases.</p></div>
+        <div class="station"><h3>Station 2: Initial-Condition Lock</h3><p>Carry $$v_C(0)=15$$ and $$\dot v_C(0)=0$$ everywhere.</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>The route now splits into overdamped, critical, and underdamped doors.</p></div>
+        <div class="station"><h3>Station 3: Stone Door</h3><p>Two real roots mean two exponentials.</p></div>
+        <div class="station"><h3>Station 4: Mirror Door</h3><p>A repeated root means the extra $$t$$ factor.</p></div>
+        <div class="station"><h3>Station 5: Silver Door</h3><p>Complex roots mean a decaying sinusoid.</p></div>
+      </div>
     </aside>
   </div>
 </main>

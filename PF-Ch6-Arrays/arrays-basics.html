@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Chapter 6 Arrays | Basics</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="pf_ch6_arrays_basics">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Arrays Index</a><a href="guide.html">Guide</a><a href="array-processing.html">Next: Processing</a><a href="strings-functions.html">Strings + Functions</a></nav>
+
+  <section class="hero">
+    <div class="tag">Syntax First</div>
+    <h1>Arrays Basics</h1>
+    <p class="hero-sub">This page trains the syntax flow that lets you write basic array code from memory: declare the container, respect the bounds, fill the slots, then sweep through them with a loop.</p>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Guideline Page</a><button class="tool-btn" type="button" data-jump="memory-anchor">Memory Focus</button><button class="tool-btn" type="button" data-jump="path-anchor">Palace Path</button><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="study-grid two-col">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Core Syntax</div><div class="v"><span class="inline-code">type name[size];</span></div></div>
+          <div class="fact"><div class="k">Valid Indices</div><div class="v"><span class="inline-code">0</span> to <span class="inline-code">size - 1</span></div></div>
+          <div class="fact"><div class="k">Main Loop</div><div class="v"><span class="inline-code">for (int i = 0; i &lt; size; ++i)</span></div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Flow</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: What An Array Is</h2><ul><li>An array stores multiple values of the same type in consecutive memory locations.</li><li>Its size is fixed when you declare it.</li><li>If you only declare it, the values are not automatically useful.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int grades[5];</code></pre></article>
+          <article class="room"><h2>Room 2: Declaration Syntax</h2><ul><li>Write the shape as <span class="inline-code">dataType arrayName[arraySize];</span></li><li>Example: <span class="inline-code">int c[5];</span></li><li>The brackets belong to the container syntax, not to the variable type.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int c[5];
+double marks[100];
+char name[20];</code></pre></article>
+          <article class="room"><h2>Room 3: Indexing Rules</h2><ul><li>Use <span class="inline-code">array[index]</span> to access an element.</li><li>The first index is <span class="inline-code">0</span>, not <span class="inline-code">1</span>.</li><li>For size <span class="inline-code">n</span>, valid indices are <span class="inline-code">0</span> through <span class="inline-code">n - 1</span>.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>c[0] = 10;
+c[2] = 30;
+int x = c[2] + c[3];</code></pre></article>
+          <article class="room"><h2>Room 4: Initialization Patterns</h2><ul><li>Use an initializer list like <span class="inline-code">int a[5] = {32, 27, 64, 18, 95};</span></li><li>Partial initialization fills the remaining values with <span class="inline-code">0</span>.</li><li>You can also fill values in a loop using <span class="inline-code">a[i] = ...;</span></li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int a[5] = {32, 27, 64, 18, 95};
+int p[5] = {0};
+int q[] = {1, 2, 3, 4, 5};</code></pre></article>
+          <article class="room"><h2>Room 5: Writing Flow</h2><ul><li>Write starter code in this order: declare, initialize, traverse, use.</li><li>The traversal skeleton is <span class="inline-code">for (int i = 0; i &lt; SIZE; ++i)</span>.</li><li>Once the loop is there, you only have to decide what line belongs inside it.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>for (int i = 0; i &lt; SIZE; ++i) {
+    printf("%d\n", n[i]);
+}</code></pre></article>
+        </div>
+        <div class="drill-card"><h3>Write-From-Memory Block</h3><pre class="code-block"><code>#include &lt;stdio.h&gt;
+#define SIZE 5
+
+int main(void) {
+    int n[SIZE] = {0};
+
+    for (int i = 0; i &lt; SIZE; ++i) {
+        n[i] = 2 + 2 * i;
+    }
+
+    return 0;
+}</code></pre></div>
+      </section>
+
+      <section class="panel" id="memory-anchor">
+        <div class="section-title">Mnemonic Focus</div>
+        <div class="rooms">
+          <article class="memory-card"><h2>Peg 10: Toes</h2><p class="memory-copy">Use <span class="inline-code">10 = toes</span> for bounds. What do the toes remind you to count?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="m1">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="m1">Mark Remembered</button></div><p class="memory-status" data-memory-status="m1">Not marked yet.</p><div class="memory-answer" id="m1" hidden><ul><li>Count from <span class="inline-code">0</span> up to <span class="inline-code">size - 1</span>.</li><li>Never step outside the array, and never write a loop with <span class="inline-code">&lt;= size</span> when you mean <span class="inline-code">&lt; size</span>.</li></ul></div></article>
+          <article class="memory-card"><h2>Peg 21: Net</h2><p class="memory-copy">Use <span class="inline-code">21 = net</span> for the array container. What syntax does the net catch?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="m2">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="m2">Mark Remembered</button></div><p class="memory-status" data-memory-status="m2">Not marked yet.</p><div class="memory-answer" id="m2" hidden><ul><li>The net catches the whole declaration shape: <span class="inline-code">dataType name[size];</span></li><li>Example: <span class="inline-code">int c[5];</span></li></ul></div></article>
+          <article class="memory-card"><h2>Peg 35: Mail</h2><p class="memory-copy">Use <span class="inline-code">35 = mail</span> for filling slots. Which two fill patterns should you remember?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="m3">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="m3">Mark Remembered</button></div><p class="memory-status" data-memory-status="m3">Not marked yet.</p><div class="memory-answer" id="m3" hidden><ul><li>Initializer list: <span class="inline-code">int a[5] = {1, 2, 3, 4, 5};</span></li><li>Loop fill: <span class="inline-code">a[i] = 2 + 2 * i;</span></li></ul></div></article>
+          <article class="memory-card"><h2>Peg 34: Mower</h2><p class="memory-copy">Use <span class="inline-code">34 = mower</span> for traversal. What loop header should come out automatically?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="m4">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="m4">Mark Remembered</button></div><p class="memory-status" data-memory-status="m4">Not marked yet.</p><div class="memory-answer" id="m4" hidden><ul><li>The mower sweeps with <span class="inline-code">for (int i = 0; i &lt; SIZE; ++i)</span></li><li>Inside the loop, you read or write <span class="inline-code">a[i]</span></li></ul></div></article>
+          <article class="memory-card"><h2>Flow Rehearsal</h2><p class="memory-copy">What four words should trigger your writing flow on basic array questions?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="m5">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="m5">Mark Remembered</button></div><p class="memory-status" data-memory-status="m5">Not marked yet.</p><div class="memory-answer" id="m5" hidden><ul><li>Declare.</li><li>Initialize.</li><li>Traverse.</li><li>Use the element inside the loop.</li></ul></div></article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar" id="path-anchor">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Walk the basics in one route: 10 toes guard the bounds, 21 net catches the declaration, 35 mail fills the slots, and 34 mower sweeps across every index.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Toes Gate</h3><p>Count zero, one, two, up to the last valid index. The gate shuts before <span class="inline-code">size</span>.</p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>The toes walk into a giant net that catches five equal boxes.</p></div>
+        <div class="station"><h3>Station 2: Net Wall</h3><p>See <span class="inline-code">int c[5];</span> hanging on the wall as the standard declaration shape.</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>Letters and numbers get delivered into the netted boxes.</p></div>
+        <div class="station"><h3>Station 3: Mail Desk</h3><p>Mail drops values through an initializer list or one by one with <span class="inline-code">a[i] = ...;</span></p></div>
+        <div class="transition"><h3>Transition 3 to 4</h3><p>A mower starts moving from left to right.</p></div>
+        <div class="station"><h3>Station 4: Mower Lane</h3><p>The mower loops with <span class="inline-code">for (int i = 0; i &lt; SIZE; ++i)</span> and touches every slot once.</p></div>
+        <div class="transition"><h3>Transition 4 to 5</h3><p>The route ends when the loop body starts doing useful work.</p></div>
+        <div class="station"><h3>Station 5: First Code Block</h3><p>Say the full flow aloud: declare, initialize, traverse, use.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="copy">Use this prompt if you want an alternate one-paragraph palace for the same syntax flow.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for C arrays basics. Use the fixed Major pegs 10 = toes for bounds, 21 = net for array declaration, 35 = mail for filling slots, and 34 = mower for the traversal loop. Make the story teach the syntax type name[size];, index range 0 to size - 1, initializer or loop fill, and for (int i = 0; i &lt; SIZE; ++i). Keep it focused on writing code from memory, not on abstract theory.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

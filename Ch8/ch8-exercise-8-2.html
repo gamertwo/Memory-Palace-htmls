@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-2 | Phasors to Sinusoids</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_2">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-1.html">Prev: Exercise 8-1</a><a href="ch8-example-8-1.html">Next: Example 8-1</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-2</div>
+    <h1>Convert Phasors to Sinusoids</h1>
+    <p class="hero-sub">This page flips the direction: catch the phasor, recover the frequency from either $$f$$ or $$\omega,$$ simplify the phasor if necessary, and only then coat the result back into a cosine waveform. Parts (a) and (b) show how to move from a finished phasor into time-domain form, while part (c) trains the full cleanup route: rectangular addition, polar conversion, and then the final cosine waveform.</p>
+    <div class="formula-block">$$\text{(a) }V=169\angle-45^\circ\text{ V at }f=60\text{ Hz}$$ $$\text{(b) }V=10\angle90^\circ+66-j10\text{ V at }\omega=10\text{ krad/s}$$ $$\text{(c) }I=15+j5+10\angle180^\circ\text{ mA at }\omega=1000\text{ rad/s}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-2.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Time-Domain Form</div><div class="v">$$v(t)=M\cos(\omega t+\theta)$$</div></div>
+          <div class="fact"><div class="k">Frequency Link</div><div class="v">$$\omega=2\pi f$$</div></div>
+          <div class="fact"><div class="k">Rectangular Cleanup</div><div class="v">Add rectangular pieces first, then convert to polar if needed.</div></div>
+          <div class="fact"><div class="k">Coat Rule</div><div class="v">Magnitude stays the cosine amplitude, phase stays the phase shift, and $$\omega$$ must be written correctly in the final waveform.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-2-room-1" data-room-id="ch8-exercise-8-2-room-1" data-room-title="Room 1: Part (a)" data-source-page="ch8-exercise-8-2.html" data-tags="part">
+            <h2>Room 1: Part (a)</h2><ul><li>The phasor is already in polar form: $$V=169\angle-45^\circ.$$ That means magnitude $$169$$ and phase $$-45^\circ.$$</li><li>To write the waveform, we need the angular frequency. Since $$f=60\text{ Hz},$$ use $$\omega=2\pi f=2\pi(60)\approx377\text{ rad/s}.$$</li><li>Now coat the phasor back into cosine form using $$M\angle\theta\rightarrow M\cos(\omega t+\theta).$$</li><li>So the magnitude $$169$$ becomes the cosine amplitude, the phase $$-45^\circ$$ stays the phase shift, and the recovered frequency becomes $$377t.$$</li><li>Therefore $$\boxed{v(t)=169\cos(377t-45^\circ)\text{ V}}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-2-room-2" data-room-id="ch8-exercise-8-2-room-2" data-room-title="Room 2: Part (b) Clean the Phasor First" data-source-page="ch8-exercise-8-2.html" data-tags="part,clean,phasor,first">
+            <h2>Room 2: Part (b) Clean the Phasor First</h2><ul><li>This phasor is not clean yet because it is written as a sum: $$10\angle90^\circ+66-j10.$$</li><li>Convert the polar term to rectangular form before adding. Use $$M\angle\theta=M(\cos\theta+j\sin\theta).$$</li><li>So $$10\angle90^\circ=10(\cos90^\circ+j\sin90^\circ).$$</li><li>Since $$\cos90^\circ=0$$ and $$\sin90^\circ=1,$$ this becomes $$10(0+j)=j10.$$</li><li>Now add the rectangular pieces: $$V=j10+66-j10=66.$$ The imaginary parts cancel completely.</li><li>The given angular frequency is already supplied: $$\omega=10\text{ krad/s}=10^4\text{ rad/s}.$$</li><li>Because the cleaned phasor is just $$66,$$ its magnitude is $$66$$ and its phase is $$0^\circ.$$</li><li>So the waveform is $$\boxed{v(t)=66\cos(10^4t)\text{ V}}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-2-room-3" data-room-id="ch8-exercise-8-2-room-3" data-room-title="Room 3: Part (c) Rectangular Addition" data-source-page="ch8-exercise-8-2.html" data-tags="part,rectangular,addition">
+            <h2>Room 3: Part (c) Rectangular Addition</h2><ul><li>The phasor is $$I=15+j5+10\angle180^\circ\text{ mA}.$$ The rectangular part $$15+j5$$ is already ready for addition.</li><li>So only the polar term must be converted first: $$10\angle180^\circ=10(\cos180^\circ+j\sin180^\circ).$$</li><li>Since $$\cos180^\circ=-1$$ and $$\sin180^\circ=0,$$ this becomes $$-10+j0.$$</li><li>Now add real parts together and imaginary parts together:</li><li>$$I=(15+j5)+(-10+j0)=(15-10)+j(5+0)=5+j5\text{ mA}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-2-room-4" data-room-id="ch8-exercise-8-2-room-4" data-room-title="Room 4: Part (c) Polar Form" data-source-page="ch8-exercise-8-2.html" data-tags="part,polar,form">
+            <h2>Room 4: Part (c) Polar Form</h2><ul><li>Now convert the cleaned rectangular phasor $$5+j5$$ into polar form.</li><li>The magnitude is the distance from the origin: $$|I|=\sqrt{5^2+5^2}=\sqrt{50}=7.07\text{ mA}.$$</li><li>The angle comes from $$\tan\theta=\dfrac{\text{imaginary part}}{\text{real part}}=\dfrac{5}{5}=1.$$</li><li>So $$\theta=45^\circ.$$ Both parts are positive, so the phasor lies in quadrant I and $$45^\circ$$ is correct without any extra quadrant adjustment.</li><li>Therefore $$I=7.07\angle45^\circ\text{ mA}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-2-room-5" data-room-id="ch8-exercise-8-2-room-5" data-room-title="Room 5: Coat Back to the Waveform" data-source-page="ch8-exercise-8-2.html" data-tags="coat,back,waveform">
+            <h2>Room 5: Coat Back to the Waveform</h2><ul><li>Now the phasor is clean: magnitude $$7.07,$$ phase $$45^\circ.$$</li><li>Use the given angular frequency $$\omega=1000\text{ rad/s}.$$</li><li>Apply the coat rule $$M\angle\theta\rightarrow M\cos(\omega t+\theta).$$</li><li>That means amplitude $$7.07,$$ frequency term $$1000t,$$ and phase shift $$+45^\circ.$$</li><li>Therefore $$\boxed{i(t)=7.07\cos(1000t+45^\circ)\text{ mA}}.$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>When a phasor is already in clean polar form, coat it back immediately: magnitude becomes amplitude, phase becomes the phase shift, and the correct $$\omega$$ must be inserted. When the phasor is a sum, first clean it in rectangular form, then convert to polar only if the final waveform needs a single magnitude-angle form.</p></div>
+        <div class="mini"><h3>How To Reverse The Direction</h3><p>Going from phasor to waveform is the reverse of the usual read: instead of pulling magnitude and phase out of a cosine, you now place them back into the cosine. The frequency information must also be handled carefully. If the problem gives $$f,$$ convert it to $$\omega$$ using $$2\pi f.$$ If the problem already gives $$\omega,$$ keep it exactly as written in the final waveform.</p></div>
+        <div class="mini"><h3>Why Part (c) Takes Longer</h3><p>Part (c) is the full route. You start with a mixed-form phasor, convert the polar piece into rectangular form, add the rectangular components, rebuild one clean polar phasor from the result, and only then return to the time domain. That is why part (c) is the best practice problem on this page.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

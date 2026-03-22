@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Major System Guide | Bernoulli Memory Pegs</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78);--good:#8ee7b0;--bad:#ff9a9a}body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}a{color:inherit}.shell{max-width:1180px;margin:0 auto;padding:2rem 1rem 3rem}.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}.hero,.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}.hero{margin-bottom:1rem}.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:.55rem}.hero p,.copy,.panel p,.list li,.guide-table td,.guide-table th,.peg-note{line-height:1.75;color:var(--muted)}.hero-sub{max-width:940px}.hero .tool-row{display:flex;gap:.65rem;flex-wrap:wrap;justify-content:flex-start;margin-top:1rem}.tool-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03);text-decoration:none}.grid{display:grid;gap:1rem}.two-col{grid-template-columns:1.15fr .85fr}.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}.fact,.peg-card,.mini,.do-card,.dont-card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.75rem}.fact .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.25rem}.fact .v{color:var(--text);font-weight:600}.peg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}.peg-card h3,.mini h3,.do-card h3,.dont-card h3{font-size:.95rem;color:var(--accent);margin-bottom:.45rem}.peg-word{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--text);margin:.15rem 0 .4rem}.peg-num{display:inline-flex;align-items:center;justify-content:center;min-width:46px;padding:.2rem .55rem;border-radius:999px;background:rgba(255,208,138,.08);border:1px solid rgba(255,208,138,.22);color:var(--accent);font-weight:700;font-size:.8rem;margin-bottom:.4rem}.guide-table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}.guide-table th,.guide-table td{padding:.9rem;vertical-align:top;border-bottom:1px solid var(--line);text-align:left}.guide-table th{color:var(--accent);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em}.guide-table tr:last-child td{border-bottom:none}.list{padding-left:1.15rem}.do-card{border-color:rgba(142,231,176,.18)}.dont-card{border-color:rgba(255,154,154,.18)}.do-card h3{color:var(--good)}.dont-card h3{color:var(--bad)}.stack{display:grid;gap:1rem}.tag{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,208,138,.22);background:rgba(255,208,138,.08);border-radius:999px;padding:.35rem .7rem;font-size:.72rem;color:var(--accent);margin-bottom:.9rem}.formula{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.85rem;overflow:auto;margin:.65rem 0}.source-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.9rem}.source-row a{text-decoration:none;color:var(--accent)}@media (max-width:900px){.two-col{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav"><a href="math-index.html">Math Hub</a><a href="math-ex36-q1-bernoulli.html">Ex 3.6 Q1</a><a href="math-ex36-q2-bernoulli.html">Ex 3.6 Q2</a><a href="math-ex36-q3-bernoulli.html">Ex 3.6 Q3</a><a href="math-ex36-q4-bernoulli.html">Ex 3.6 Q4</a><a href="math-ex36-q5-bernoulli.html">Ex 3.6 Q5</a><a href="math-ex36-q6-bernoulli.html">Ex 3.6 Q6</a><a href="math-ex36-q7-bernoulli.html">Ex 3.6 Q7</a><a href="math-ex36-q8-bernoulli.html">Ex 3.6 Q8</a><a href="math-ex36-q9-bernoulli.html">Ex 3.6 Q9</a><a href="math-ex36-q10-bernoulli.html">Ex 3.6 Q10</a></nav>
+  <section class="hero">
+    <div class="tag">Major System + Formula Movies</div>
+    <h1>Bernoulli Major Guide</h1>
+    <p class="hero-sub">This page is the fixed rulebook for the peg system used on Exercise 3.6 Q1 to Q10. The goal is not to invent new images for every question. The goal is to reuse the same sound-based Major pegs every time, then hang the formulas on them. Use the Major System for the order of the steps, then use a small symbol-image bank for the recurring formula pieces.</p>
+    <div class="tool-row"><a class="tool-btn" href="#pegs">Peg Table</a><a class="tool-btn" href="#symbols">Symbol Bank</a><a class="tool-btn" href="#formulas">Formula Table</a><a class="tool-btn" href="#rules">Do and Do Not</a></div>
+  </section>
+
+  <div class="grid two-col">
+    <section class="panel">
+      <div class="section-title">Digit Sounds</div>
+      <p class="copy">The Major System is sound-based, not letter-based. Use the consonant sounds below to keep your peg words stable.</p>
+      <div class="facts" style="margin-top:.9rem">
+        <div class="fact"><div class="k">0</div><div class="v">s, z</div></div>
+        <div class="fact"><div class="k">1</div><div class="v">t, d</div></div>
+        <div class="fact"><div class="k">2</div><div class="v">n</div></div>
+        <div class="fact"><div class="k">3</div><div class="v">m</div></div>
+        <div class="fact"><div class="k">4</div><div class="v">r</div></div>
+        <div class="fact"><div class="k">5</div><div class="v">l</div></div>
+        <div class="fact"><div class="k">6</div><div class="v">sh, ch, j</div></div>
+        <div class="fact"><div class="k">7</div><div class="v">k, g</div></div>
+        <div class="fact"><div class="k">8</div><div class="v">f, v</div></div>
+        <div class="fact"><div class="k">9</div><div class="v">p, b</div></div>
+      </div>
+      <div class="mini" style="margin-top:1rem"><h3>Use This Idea</h3><p>We are not converting entire formulas into long digit strings. We are using a small fixed peg set to label repeated formula families, then a small fixed image alphabet to make recurring symbols visual.</p></div>
+    </section>
+
+    <section class="panel" id="rules">
+      <div class="section-title">What To Do</div>
+      <div class="stack">
+        <div class="do-card"><h3>Do</h3><ul class="list"><li>Keep the same peg words on every question.</li><li>Attach the whole formula family to one peg, not every symbol to a new peg.</li><li>Say the peg words before the formulas when you review: "net, knife, fire, mat, case, coat."</li><li>Memorize the bridge step explicitly. The swap is not enough by itself.</li><li>Give repeated symbols like $$1/y,$$ the prime, $$\int,$$ $$e,$$ and $$+C$$ stable images.</li></ul></div>
+        <div class="dont-card"><h3>Do Not</h3><ul class="list"><li>Do not create a brand-new peg word on every page.</li><li>Do not switch peg words because another image feels cooler that day.</li><li>Do not memorize only the final answer and skip the product-rule step.</li><li>Do not forget the sign when the reciprocal swap creates a minus sign.</li><li>Do not back-substitute too early if the linear ODE is not finished yet.</li></ul></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel" id="pegs" style="margin-top:1rem">
+    <div class="section-title">Universal Peg Table</div>
+    <div class="peg-grid">
+      <article class="peg-card"><div class="peg-num">21</div><h3>Net</h3><div class="peg-word">Swap Peg</div><p class="peg-note">Use this for the helper variable. In q1, q3, q4 it catches $$z=1/y.$$ In q2 it catches $$z=y^{-3}.$$ In q5 it catches $$u=\sin y.$$</p></article>
+      <article class="peg-card"><div class="peg-num">28</div><h3>Knife</h3><div class="peg-word">Integral Peg</div><p class="peg-note">Use this every time you see an integral sign. The knife cuts out the antiderivative, especially inside the integrating-factor rule and the final integration step.</p></article>
+      <article class="peg-card"><div class="peg-num">84</div><h3>Fire</h3><div class="peg-word">Exponential Peg</div><p class="peg-note">Use this for the universal integrating-factor formula $$\mu(x)=e^{\int P(x)\,dx}.$$ Even when the answer simplifies to $$\sec x$$ or $$x^{-3},$$ the fire reminds you that the rule started from an exponential.</p></article>
+      <article class="peg-card"><div class="peg-num">31</div><h3>Mat</h3><div class="peg-word">Product-Rule Peg</div><p class="peg-note">Use this for the collapse into one derivative: $$\dfrac{d}{dx}(\mu \cdot \text{helper})=\mu Q.$$ The whole line lands on the mat after multiplying by $$\mu.$$</p></article>
+      <article class="peg-card"><div class="peg-num">70</div><h3>Case</h3><div class="peg-word">Constant Peg</div><p class="peg-note">Use this for the arbitrary constant $$+C.$$ The case always drops after integration. If an initial condition exists, the case is later opened and fixed.</p></article>
+      <article class="peg-card"><div class="peg-num">71</div><h3>Coat</h3><div class="peg-word">Back-Sub Peg</div><p class="peg-note">Use this for putting the original variable back on. After solving for the helper variable, the coat restores $$y$$ or the original form.</p></article>
+    </div>
+  </section>
+
+  <section class="panel" id="symbols" style="margin-top:1rem">
+    <div class="section-title">Formula Symbol Bank</div>
+    <p class="copy">Use the Major pegs for the order of the solution, then use a fixed image alphabet for the recurring formula pieces. This follows the equation-memory idea from Art of Memory math discussions and the Magnetic Memory Method advice to prepare symbol systems instead of leaving notation abstract.</p>
+    <table class="guide-table">
+      <thead>
+        <tr>
+          <th>Formula Piece</th>
+          <th>Fixed Image</th>
+          <th>Memory Job</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>$$\dfrac{1}{y}$$</td>
+          <td>One candle above a yoyo</td>
+          <td>The single object above the yoyo gives you the reciprocal of $$y.$$ Use it anywhere the Bernoulli swap becomes reciprocal.</td>
+        </tr>
+        <tr>
+          <td>$$\dfrac{1}{x}$$</td>
+          <td>One candle above an x-mark</td>
+          <td>Use this on pages like q7 where the reciprocal helper is built from $$x$$ instead of $$y.$$ Keep the same reciprocal idea, just move it onto the x-mark.</td>
+        </tr>
+        <tr>
+          <td>$$y^n$$</td>
+          <td>Yoyo climbing a ladder</td>
+          <td>The ladder turns plain $$y$$ into a power. More steps on the ladder means a higher power or heavier exponent move.</td>
+        </tr>
+        <tr>
+          <td>$$y^2$$</td>
+          <td>Two yoyos fused into one square block</td>
+          <td>Use this for the square helper on q8 and q10. The fusion image tells you the page wants $$z=y^2,$$ not a reciprocal helper.</td>
+        </tr>
+        <tr>
+          <td>$$y'$$ or $$z'$$</td>
+          <td>A dart stabbed into the symbol</td>
+          <td>The dart marks the derivative. A dart in the yoyo means $$y',$$ while a dart in the helper means $$z'$$ or $$u'.$$</td>
+        </tr>
+        <tr>
+          <td>$$\int$$</td>
+          <td>Knife</td>
+          <td>The knife cuts the antiderivative. This stays locked to the Major peg $$28=\text{knife}.$$</td>
+        </tr>
+        <tr>
+          <td>$$e^{(\cdot)}$$</td>
+          <td>Fire or furnace</td>
+          <td>The exponential is always lit by fire. This stays locked to $$84=\text{fire}.$$</td>
+        </tr>
+        <tr>
+          <td>$$\mu$$</td>
+          <td>Mug</td>
+          <td>The mug holds the integrating factor. Fire lights the mug because $$\mu=e^{\int Pdx}.$$</td>
+        </tr>
+        <tr>
+          <td>$$\dfrac{d}{dx}(\cdot)$$</td>
+          <td>Drill moving along an x-track</td>
+          <td>Use the drill for the derivative operator when the whole product becomes one derivative on the mat.</td>
+        </tr>
+        <tr>
+          <td>$$\sin y$$</td>
+          <td>Singer holding a yoyo</td>
+          <td>Useful in q5. The singer tells you sine and the yoyo keeps the variable visible.</td>
+        </tr>
+        <tr>
+          <td>$$\cos y$$</td>
+          <td>Coat wrapped around a yoyo</td>
+          <td>Useful in q5. The coat reminds you of cosine and also pairs well with the final coat peg for restoration.</td>
+        </tr>
+        <tr>
+          <td>$$\tan x$$</td>
+          <td>Tan fan on an x-mark</td>
+          <td>The fan gives tangent and keeps the trig coefficient visually separate from the helper variable.</td>
+        </tr>
+        <tr>
+          <td>$$\sec x$$</td>
+          <td>Security guard on an x-mark</td>
+          <td>The guard gives secant. This is especially useful in q3, q4, and q5.</td>
+        </tr>
+        <tr>
+          <td>$$+C$$</td>
+          <td>Case or briefcase</td>
+          <td>The case drops after integration and may later be opened to fix the constant from an initial condition.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Core Formula Workflow</div>
+    <div class="formula">$$\text{Swap} \rightarrow \text{Bridge Step} \rightarrow \mu(x)=e^{\int P(x)\,dx} \rightarrow \frac{d}{dx}(\mu\cdot\text{helper})=\mu Q \rightarrow \mu\cdot\text{helper}=\int \mu Q\,dx + C \rightarrow \text{Back-substitute}$$</div>
+    <table class="guide-table">
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Formula</th>
+          <th>Peg</th>
+          <th>Mnemonic Job</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. Swap</td>
+          <td>$$z=\frac{1}{y},\quad z=y^{1-n},\quad u=\sin y$$</td>
+          <td>`21 net`</td>
+          <td>The net catches the new helper variable.</td>
+        </tr>
+        <tr>
+          <td>2. Bridge</td>
+          <td>Replace the old nonlinear pieces with the helper and helper-derivative.</td>
+          <td>`21 net` again</td>
+          <td>The net is thrown across the whole equation, not just the definition line.</td>
+        </tr>
+        <tr>
+          <td>3. Integrating factor</td>
+          <td>$$\mu(x)=e^{\int P(x)\,dx}$$</td>
+          <td>`28 knife` + `84 fire`</td>
+          <td>The knife cuts the integral. The fire lights the exponential rule.</td>
+        </tr>
+        <tr>
+          <td>4. Product rule</td>
+          <td>$$\frac{d}{dx}(\mu\cdot\text{helper})=\mu Q$$</td>
+          <td>`31 mat`</td>
+          <td>The multiplied equation lands on one derivative.</td>
+        </tr>
+        <tr>
+          <td>5. Constant</td>
+          <td>$$\mu\cdot\text{helper}=\int \mu Q\,dx + C$$</td>
+          <td>`70 case`</td>
+          <td>The case drops after integration.</td>
+        </tr>
+        <tr>
+          <td>6. Restore original variable</td>
+          <td>Replace $$z$$ or $$u$$ with the original expression in $$y.$$</td>
+          <td>`71 coat`</td>
+          <td>The coat puts the original variable back on.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">How To Memorize A Formula</div>
+    <div class="formula">$$\text{Order Peg} + \text{Symbol Images} + \text{One Moving Scene}$$</div>
+    <table class="guide-table">
+      <thead>
+        <tr>
+          <th>Move</th>
+          <th>What To Do</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. Chunk it</td>
+          <td>Break the formula into swap, bridge, integrating factor, product rule, constant, and finish.</td>
+          <td>For q3: $$z=1/y \rightarrow z'+\tan xz=\sec x \rightarrow \mu=\sec x \rightarrow z\sec x=\tan x+C.$$</td>
+        </tr>
+        <tr>
+          <td>2. Add symbol images</td>
+          <td>Give the repeated symbols stable images so the formula stops looking abstract.</td>
+          <td>A yoyo for $$y,$$ a dart for the prime, a tan fan, a security guard, and the case for $$+C.$$</td>
+        </tr>
+        <tr>
+          <td>3. Make one action scene</td>
+          <td>Do not leave the symbols static. Make them cut, burn, wrap, fall, or swap.</td>
+          <td>The knife cuts the integral, fire lights the mug, the mat catches the product derivative, and the case drops.</td>
+        </tr>
+        <tr>
+          <td>4. Add extra senses</td>
+          <td>Add sound, heat, motion, pressure, or surprise so the movie sticks.</td>
+          <td>The knife scrapes, the fire roars, the case thuds to the floor, and the coat wraps itself back on.</td>
+        </tr>
+        <tr>
+          <td>5. Rewrite cold</td>
+          <td>After replaying the movie, write the formula once without looking.</td>
+          <td>Say the peg chain first, replay the image chain second, then write the line.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" id="formulas" style="margin-top:1rem">
+    <div class="section-title">Q1 to Q10 Formula Table</div>
+    <table class="guide-table">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Swap Formula</th>
+          <th>IF Formula</th>
+          <th>Mat Formula</th>
+          <th>Case / Coat Finish</th>
+          <th>Formula Movie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="math-ex36-q1-bernoulli.html">Q1</a></td>
+          <td>$$z=\frac{1}{y},\quad z'=-\frac{1}{y^2}y'$$</td>
+          <td>$$\mu=e^{\int 1\,dx}=e^x$$</td>
+          <td>$$\frac{d}{dx}(ze^x)=-2x$$</td>
+          <td>$$ze^x=-x^2+C \rightarrow e^x+x^2y+Cy=0$$</td>
+          <td>Net catches the reciprocal yoyo, fire lights $$e^x,$$ the mat catches $$ze^x,$$ then the case drops and the coat restores $$y.$$</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q2-bernoulli.html">Q2</a></td>
+          <td>$$z=y^{-3},\quad z'=-3y^{-4}y'$$</td>
+          <td>$$\mu=e^{\int -3/x\,dx}=x^{-3}$$</td>
+          <td>$$\frac{d}{dx}(zx^{-3})=-2x$$</td>
+          <td>$$zx^{-3}=-x^2+C \rightarrow \frac{1}{y^3}=Cx^3-x^5$$</td>
+          <td>Net catches a yoyo on a three-step ladder, knife cuts $$-3/x,$$ fire settles to $$x^{-3},$$ then the case and coat finish the power form.</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q3-bernoulli.html">Q3</a></td>
+          <td>$$z=\frac{1}{y},\quad z'=-\frac{1}{y^2}y'$$</td>
+          <td>$$\mu=e^{\int \tan x\,dx}=\sec x$$</td>
+          <td>$$\frac{d}{dx}(z\sec x)=\sec^2x$$</td>
+          <td>$$z\sec x=\tan x+C \rightarrow \sec x=(\tan x+C)y$$</td>
+          <td>Net catches the reciprocal yoyo, the tan fan meets the security guard, then the case drops and the coat puts $$y$$ back in.</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q4-bernoulli.html">Q4</a></td>
+          <td>$$z=\frac{1}{y},\quad z'=-\frac{1}{y^2}y'$$</td>
+          <td>$$\mu=e^{\int 2\tan x\,dx}=\sec^2x$$</td>
+          <td>$$\frac{d}{dx}(z\sec^2x)=-\tan^2x\sec^2x$$</td>
+          <td>$$z\sec^2x=-\frac{\tan^3x}{3}+C,\; C=1 \rightarrow \frac{1}{y}\sec^2x=1-\frac{\tan^3x}{3}$$</td>
+          <td>The tan fan doubles, the security guard squares up, the case drops, then the initial condition opens the case and fixes it to $$1.$$</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q5-bernoulli.html">Q5</a></td>
+          <td>$$u=\sin y,\quad u'=\cos y\,y'$$</td>
+          <td>$$\mu=e^{\int \tan x\,dx}=\sec x$$</td>
+          <td>$$\frac{d}{dx}(u\sec x)=1$$</td>
+          <td>$$u\sec x=x+C \rightarrow \sin y\sec x=x+C$$</td>
+          <td>A coat wraps the yoyo, the singer appears as $$\sin y,$$ the tan fan meets the security guard, and the case plus coat finish the line.</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q6-bernoulli.html">Q6</a></td>
+          <td>$$z=\frac{1}{y},\quad z'=-\frac{1}{y^2}y'$$</td>
+          <td>$$\mu=e^{\int -\tan x\,dx}=\cos x$$</td>
+          <td>$$\frac{d}{dx}(z\cos x)=-1$$</td>
+          <td>$$z\cos x=-x+C \rightarrow y(x+C)+\cos x=0$$</td>
+          <td>The reciprocal yoyo meets a backward tan fan, the fire cools into $$\cos x,$$ and the coat restores $$y$$ inside the final product with $$x+C.$$</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q7-bernoulli.html">Q7</a></td>
+          <td>$$z=\frac{1}{x},\quad z'=-\frac{1}{x^2}x'$$</td>
+          <td>$$\mu=e^{\int -1/y\,dy}=1/y$$</td>
+          <td>$$\frac{d}{dy}(z/y)=1/y$$</td>
+          <td>$$z/y=\log y+C \rightarrow \frac{1}{xy}=\log(Cy)$$</td>
+          <td>The reciprocal image moves onto an x-mark, the fire settles into $$1/y,$$ and the coat restores the final reciprocal product $$1/(xy).$$</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q8-bernoulli.html">Q8</a></td>
+          <td>$$z=y^2,\quad z'=2yy'$$</td>
+          <td>$$\mu=e^{\int 2/x\,dx}=x^2$$</td>
+          <td>$$\frac{d}{dx}(zx^2)=-2x^3-2x^2$$</td>
+          <td>$$zx^2=-\frac{x^4}{2}-\frac{2x^3}{3}+C \rightarrow x^2y^2=-\frac{x^4}{2}-\frac{2x^3}{3}+C$$</td>
+          <td>Two yoyos fuse into a square helper, the fire hardens into $$x^2,$$ and the case plus coat restore the squared answer.</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q9-bernoulli.html">Q9</a></td>
+          <td>$$z=y^{-2},\quad z'=-2y^{-3}y'$$</td>
+          <td>$$\mu=e^{\int -2\,dx}=e^{-2x}$$</td>
+          <td>$$\frac{d}{dx}(ze^{-2x})=-6e^{-x}$$</td>
+          <td>$$ze^{-2x}=6e^{-x}+C \rightarrow \frac{1}{y^2}=6e^x+Ce^{2x}$$</td>
+          <td>The power-yoyo drops into a reciprocal-square pit, the fire lights $$e^{-2x},$$ and the coat restores $$1/y^2.$$</td>
+        </tr>
+        <tr>
+          <td><a href="math-ex36-q10-bernoulli.html">Q10</a></td>
+          <td>$$z=y^2,\quad z'=2yy'$$</td>
+          <td>$$\mu=e^{\int -1/x\,dx}=1/x$$</td>
+          <td>$$\frac{d}{dx}(z/x)=-1/x$$</td>
+          <td>$$z/x=-\log x+C \rightarrow y^2/x+\log x=C$$</td>
+          <td>The square helper lands on the mat as $$d(z/x)/dx,$$ then the case and coat finish the logarithm form.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">One-Line Review</div>
+    <div class="formula">$$21\text{ net} \rightarrow 28\text{ knife} + 84\text{ fire} \rightarrow 31\text{ mat} \rightarrow 70\text{ case} \rightarrow 71\text{ coat}$$</div>
+    <p class="copy">If you can say that chain and instantly attach the formulas, the Bernoulli and square-swap workflows are already chunked into one reusable memory routine.</p>
+    <div class="source-row"><a href="https://artofmemory.com/wiki/Mnemonics_for_Mathematics/" target="_blank" rel="noreferrer">Art of Memory: Mnemonics for Mathematics</a><a href="https://www.magneticmemorymethod.com/major-system/" target="_blank" rel="noreferrer">Magnetic Memory Method: Major System</a><a href="https://artofmemory.com/blog/major-system/" target="_blank" rel="noreferrer">Art of Memory: Major System</a></div>
+  </section>
+</main>
+</body>
+</html>

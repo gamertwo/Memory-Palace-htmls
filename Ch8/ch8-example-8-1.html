@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-1 | Add Two Voltage Phasors</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_1">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-3.html">Next: Exercise 8-3</a><a href="ch8-exercise-8-2.html">Prev: Exercise 8-2</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-1</div>
+    <h1>Add Two Voltage Phasors</h1>
+    <p class="hero-sub">This example trains the full addition flow: catch both sinusoids, confirm the common frequency, convert to phasors, add in rectangular form, and coat the result back into one clean cosine.</p>
+    <div class="formula-block">$$v_1(t)=10\cos(1000t-45^\circ)\text{ V}\qquad v_2(t)=5\cos(1000t+30^\circ)\text{ V}$$ $$v(t)=v_1(t)+v_2(t)$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-1.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Common Frequency</div><div class="v">Both waveforms use $$\omega=1000,$$ so phasor addition is allowed.</div></div>
+          <div class="fact"><div class="k">Phasors</div><div class="v">$$V_1=10\angle-45^\circ,\qquad V_2=5\angle30^\circ$$</div></div>
+          <div class="fact"><div class="k">Goal</div><div class="v">Add in rectangular form, then return to polar and finally to one sinusoid.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-1-room-1" data-room-id="ch8-example-8-1-room-1" data-room-title="Room 1: Catch and Match" data-source-page="ch8-example-8-1.html" data-tags="catch,match">
+            <h2>Room 1: Catch and Match</h2><ul><li>Each waveform is already written in cosine-reference form, so you may read amplitude and phase directly into phasor form: $$V_1=10\angle-45^\circ,\quad V_2=5\angle30^\circ.$$</li><li>The coefficient in front of cosine becomes the phasor magnitude, and the angle inside cosine becomes the phasor angle.</li><li>Before adding anything, check the angular frequency. Both waves use $$\omega=1000,$$ so they rotate at the same rate and belong in one phasor picture.</li><li>If the frequencies were different, you would not combine them into one single phasor sum.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-1-room-2" data-room-id="ch8-example-8-1-room-2" data-room-title="Room 2: Split $$V_1$$" data-source-page="ch8-example-8-1.html" data-tags="split">
+            <h2>Room 2: Split $$V_1$$</h2><ul><li>To add phasors safely, move from polar form to rectangular form with $$M\angle\theta=M(\cos\theta+j\sin\theta).$$</li><li>So $$V_1=10(\cos-45^\circ+j\sin-45^\circ).$$</li><li>Now evaluate the trig pieces: $$\cos-45^\circ=\frac{\sqrt2}{2}\approx0.707$$ and $$\sin-45^\circ=-\frac{\sqrt2}{2}\approx-0.707.$$</li><li>Multiply each piece by $$10.$$ The real part becomes $$10(0.707)=7.07,$$ and the imaginary part becomes $$10(-0.707)=-7.07.$$</li><li>Therefore $$V_1=7.07-j7.07\text{ V}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-1-room-3" data-room-id="ch8-example-8-1-room-3" data-room-title="Room 3: Split $$V_2$$" data-source-page="ch8-example-8-1.html" data-tags="split">
+            <h2>Room 3: Split $$V_2$$</h2><ul><li>Use the same rectangular conversion on the second phasor: $$V_2=5(\cos30^\circ+j\sin30^\circ).$$</li><li>Here $$\cos30^\circ=\frac{\sqrt3}{2}\approx0.866$$ and $$\sin30^\circ=\frac12.$$</li><li>So the real part is $$5(0.866)=4.33,$$ while the imaginary part is $$5(0.5)=2.50.$$</li><li>That gives $$V_2=4.33+j2.50\text{ V}.$$</li><li>Now both phasors are written in rectangular form, which means their horizontal parts and vertical parts can be added separately.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-1-room-4" data-room-id="ch8-example-8-1-room-4" data-room-title="Room 4: Add on the Mat" data-source-page="ch8-example-8-1.html" data-tags="">
+            <h2>Room 4: Add on the Mat</h2><ul><li>Add real parts to real parts and imaginary parts to imaginary parts:</li><li>$$V=V_1+V_2=(7.07+4.33)+j(-7.07+2.50).$$</li><li>So $$V=11.4-j4.57\text{ V}.$$</li><li>Now rebuild polar form. The magnitude is $$|V|=\sqrt{11.4^2+(-4.57)^2}\approx12.3.$$</li><li>The angle comes from $$\theta=\tan^{-1}\left(\frac{-4.57}{11.4}\right)\approx-21.8^\circ.$$ Because the real part is positive and the imaginary part is negative, the phasor sits in quadrant IV, so a negative angle is correct.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-1-room-5" data-room-id="ch8-example-8-1-room-5" data-room-title="Room 5: Coat the Answer" data-source-page="ch8-example-8-1.html" data-tags="coat,answer">
+            <h2>Room 5: Coat the Answer</h2><ul><li>The final phasor is $$\boxed{V=12.3\angle-21.8^\circ\text{ V}}.$$</li><li>Now move back to the time domain. Keep the same angular frequency $$\omega=1000,$$ because addition did not change the frequency.</li><li>Use the coat rule $$M\angle\theta\rightarrow M\cos(\omega t+\theta).$$</li><li>That gives $$\boxed{v(t)=12.3\cos(1000t-21.8^\circ)\text{ V}}.$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Read from cosine to polar quickly. Save rectangular form only for the actual addition. Then move right back to the cleaner polar answer before coating the sinusoid.</p></div>
+        <div class="mini"><h3>Why Rectangular Form Comes First</h3><p>The waveforms are given in cosine form, so each one is easy to read as a polar phasor. But the moment you need to add two phasors, rectangular form becomes the safer language because you can add horizontal parts together and vertical parts together. That is why $$V_1$$ and $$V_2$$ are first split into real and imaginary pieces before the final magnitude-angle answer is rebuilt.</p></div>
+        <div class="mini"><h3>How To Think About The Split</h3><p>Every polar phasor is just one arrow. Converting to rectangular form answers two questions: how far right or left does the arrow reach, and how far up or down does it reach? The cosine of the angle gives the horizontal real part, while the sine gives the vertical imaginary part. Once you see those as coordinates, the addition step becomes much easier to trust.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

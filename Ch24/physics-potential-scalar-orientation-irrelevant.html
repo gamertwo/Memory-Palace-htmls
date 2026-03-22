@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Potential Is Not a Vector | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<link rel="stylesheet" href="chapter24-problem.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<script src="chapter24-problem.js" defer></script>
+<style>
+.psi-ring{position:absolute;left:50%;top:50%;width:164px;height:164px;transform:translate(-50%,-50%);border:2px solid rgba(255,255,255,.26);border-radius:50%}
+.psi-arc{position:absolute;left:50%;top:50%;width:168px;height:168px;transform:translate(-50%,-50%) rotate(-18deg);border:2px dashed transparent;border-top-color:rgba(212,106,156,.86);border-right-color:rgba(212,106,156,.86);border-radius:50%}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 24</a>
+    <a href="physics-net-potential-several-charges.html">Back: 24-3</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">24-4 | Concept + Problem: Scalar vs Vector</div>
+    <h1>Potential Is Not a Vector; Orientation Is Irrelevant</h1>
+    <p>Twelve electrons equally spaced on a circle make a clean contrast. The potential at the center depends only on the scalar sum of identical contributions, while the electric field at the same center can cancel completely by symmetry and then reappear when the symmetry is broken.</p>
+    <div class="hero-grid">
+      <div class="eq">$$V=-12\frac{1}{4\pi\varepsilon_0}\frac{e}{R}=-\frac{3e}{\pi\varepsilon_0 R},\qquad \vec E=0\text{ for the full circle, but }\vec E\neq0\text{ for the 120^\circ arc}$$</div>
+      <div class="hero-side">
+        <h2>What To Notice</h2>
+        <ul>
+          <li>Potential is scalar, so rotating charges around the center does not change their individual distances to the center.</li>
+          <li>Field is vector, so directional cancellation matters.</li>
+          <li>Breaking symmetry leaves $$V$$ unchanged but changes $$\vec E.$$</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt="prompt-modal">AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Equal Circle</div><div class="v">All 12 electrons remain a distance $$R$$ from the center.</div></div>
+          <div class="fact"><div class="k">Potential</div><div class="v">Each electron contributes the same scalar amount $$-\dfrac{1}{4\pi\varepsilon_0}\dfrac{e}{R}.$$</div></div>
+          <div class="fact"><div class="k">Field</div><div class="v">The full circle is symmetric enough to make the center field cancel to zero.</div></div>
+          <div class="fact"><div class="k">Arc Case</div><div class="v">Moving the electrons into a 120-degree arc leaves the center potential the same but produces a net field toward the arc.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Potential Only Cares About Distance and Sign</h2>
+            <ul>
+              <li>At the center $$C,$$ every electron is the same distance $$R$$ away.</li>
+              <li>Each one contributes the same negative scalar potential.</li>
+              <li>So the total potential is just 12 identical terms added together.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Write the Center Potential</h2>
+            <ul>
+              <li>The contribution of one electron is $$-\dfrac{1}{4\pi\varepsilon_0}\dfrac{e}{R}.$$</li>
+              <li>Multiplying by 12 gives $$V=-12\dfrac{1}{4\pi\varepsilon_0}\dfrac{e}{R}.$$</li>
+              <li>The compact form is $$V=-\dfrac{3e}{\pi\varepsilon_0 R}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Why the Field Is Zero for the Full Circle</h2>
+            <ul>
+              <li>The electric field is a vector, so equal and opposite contributions can cancel.</li>
+              <li>For every electron on the circle, another sits opposite it.</li>
+              <li>At the center, those paired field contributions cancel exactly.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Change the Arrangement Without Changing the Radius</h2>
+            <ul>
+              <li>Now slide the same 12 electrons along the circle into a 120-degree arc.</li>
+              <li>No electron changes its distance from the center.</li>
+              <li>So the potential contribution of each electron remains the same.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Potential Stays the Same</h2>
+            <ul>
+              <li>Because each electron is still distance $$R$$ away, the scalar sum is unchanged.</li>
+              <li>The center potential is still the same value from the full-circle case.</li>
+              <li>This is the page’s headline claim: orientation does not matter for scalar potential.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Field No Longer Cancels</h2>
+            <ul>
+              <li>The arc arrangement is not symmetric around the center.</li>
+              <li>So the field contributions no longer cancel to zero.</li>
+              <li>The net field points toward the charge distribution because the electrons are negative.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Keep the Contrast Straight</h2>
+            <ul>
+              <li>Potential: scalar, algebraic, orientation-irrelevant here.</li>
+              <li>Field: vector, directional, symmetry-sensitive.</li>
+              <li>This contrast is one of the most useful intuition checks in Chapter 24.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Problem Figures</div>
+        <div class="figure-grid">
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="psi-ring"></div>
+              <div class="dot" style="left:calc(50% - 6px);top:calc(50% - 6px)"></div>
+              <div class="charge negative" style="left:calc(50% - 8px);top:28px"></div>
+              <div class="charge negative" style="left:calc(50% + 48px);top:44px"></div>
+              <div class="charge negative" style="left:calc(50% + 84px);top:88px"></div>
+              <div class="charge negative" style="left:calc(50% + 84px);top:146px"></div>
+              <div class="charge negative" style="left:calc(50% + 48px);top:190px"></div>
+              <div class="charge negative" style="left:calc(50% - 8px);top:206px"></div>
+              <div class="charge negative" style="left:calc(50% - 64px);top:190px"></div>
+              <div class="charge negative" style="left:calc(50% - 100px);top:146px"></div>
+              <div class="charge negative" style="left:calc(50% - 100px);top:88px"></div>
+              <div class="charge negative" style="left:calc(50% - 64px);top:44px"></div>
+              <div class="charge negative" style="left:calc(50% + 22px);top:30px"></div>
+              <div class="charge negative" style="left:calc(50% - 40px);top:30px"></div>
+              <div class="label" style="left:calc(50% - 12px);top:calc(50% + 16px)">$$C$$</div>
+              <div class="label" style="left:18px;top:20px">12 electrons on a full circle</div>
+              <div class="label" style="right:18px;bottom:20px">$$\vec E=0$$ by symmetry</div>
+            </div>
+            <h3>Full Circle</h3>
+            <p>The center field cancels because the arrangement is perfectly symmetric, but the potential stays strongly negative because all 12 scalar contributions add.</p>
+          </div>
+
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="psi-ring" style="border-style:dashed;opacity:.42"></div>
+              <div class="psi-arc"></div>
+              <div class="dot" style="left:calc(50% - 6px);top:calc(50% - 6px)"></div>
+              <div class="charge negative" style="left:calc(50% + 44px);top:42px"></div>
+              <div class="charge negative" style="left:calc(50% + 72px);top:76px"></div>
+              <div class="charge negative" style="left:calc(50% + 84px);top:118px"></div>
+              <div class="charge negative" style="left:calc(50% + 76px);top:160px"></div>
+              <div class="charge negative" style="left:calc(50% + 48px);top:194px"></div>
+              <div class="charge negative" style="left:calc(50% + 10px);top:210px"></div>
+              <div class="arrow" style="left:132px;top:124px;width:86px;transform:rotate(-12deg);--c:var(--blue)"></div>
+              <div class="label" style="left:18px;top:20px">same radius $$R$$, new orientation</div>
+              <div class="label" style="left:108px;top:136px">net $$\vec E$$ toward arc</div>
+              <div class="label" style="right:18px;bottom:20px">same $$V$$ at $$C$$</div>
+            </div>
+            <h3>120-Degree Arc</h3>
+            <p>Rearranging the electrons along the same circle preserves the center potential but destroys the directional cancellation of the field.</p>
+          </div>
+        </div>
+        <div class="mini" style="margin-top:1rem">
+          <h3>Fast Check</h3>
+          <p>If the point-to-charge distances stay the same, potential may stay unchanged even when the picture rotates. The field does not enjoy that privilege.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">See a ring of electrons, then squeeze them into an arc and watch only the field react.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A circular clock of 12 electrons surrounds the center point $$C.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>All 12 electrons pour identical negative drops into one black bowl marked $$V.$$</p></div>
+        <div class="station"><h3>Station 2</h3><p>Opposite electron pairs fire field arrows that cancel in midair, leaving $$\vec E=0.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The entire ring squeezes into a pink 120-degree arc without changing radius.</p></div>
+        <div class="station"><h3>Station 3</h3><p>The black potential bowl stays at the same level, but the field arrows stop cancelling and lean toward the arc.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The exit sign splits in two: scalar on one side, vector on the other.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The final line reads: same distances can preserve potential while symmetry breaking changes the field.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt is built around the contrast between scalar potential and vector electric field.</p>
+    <textarea class="prompt-box" readonly>Create a memory palace in exactly one connected paragraph for the sample problem showing that electric potential is not a vector and orientation is irrelevant. Keep the logic in order, make each image force the next one, and do not use bullet points.
+
+1. Start with 12 electrons equally spaced on a circle of radius R around center C.
+2. Add their scalar potentials at the center to get V = -12 times 1 over 4 pi epsilon_0 times e over R.
+3. Make the electric field at the center cancel to zero by symmetry.
+4. Then slide the same 12 electrons into a 120-degree arc while keeping every electron the same distance R from the center.
+5. Keep the potential unchanged because the distances did not change.
+6. Change the electric field so it no longer cancels and points toward the arc of negative charge.
+7. End with the lesson that potential is scalar but electric field is vector.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" data-copy-prompt>Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+</body>
+</html>

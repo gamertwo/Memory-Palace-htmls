@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Electric Field Due to a Dipole | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.85rem,4vw,2.85rem);margin-bottom:.5rem}.hero p{color:var(--muted);line-height:1.75}.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}.main-stack{display:grid;gap:1rem}.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}.fact{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:.75rem}.fact .k{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem}.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}.rooms{display:grid;gap:.85rem}.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}.room ul{padding-left:1.2rem}.mini{margin-top:.75rem;padding:.8rem .9rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}.palace-sidebar{position:sticky;top:1rem}.path{display:grid;gap:.65rem}.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.transition{border-style:dashed;background:rgba(255,255,255,.02)}.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}.modal.open{display:flex}.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}.modal-head h3{font-size:1rem;color:var(--accent)}.prompt-box{width:100%;min-height:320px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 22</a>
+    <a href="physics-point-charge-superposition.html">Back: Point Charge</a>
+  </nav>
+  <section class="hero">
+    <h1>The Electric Field Due to an Electric Dipole</h1>
+    <p>This page fills the chapter concept that is separate from torque-on-a-dipole. Here the dipole itself is the source, and we derive the field on the dipole axis before taking the far-field limit and rewriting the result with dipole moment.</p>
+    <div class="eq">$$E=\frac{1}{4\pi\varepsilon_0}\left[\frac{q}{(z-d/2)^2}-\frac{q}{(z+d/2)^2}\right],\qquad E\approx\frac{1}{2\pi\varepsilon_0}\frac{p}{z^3}$$</div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Core Definitions</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Dipole</div><div class="v">Two charges $$+q$$ and $$-q$$ separated by distance $$d.$$</div></div>
+          <div class="fact"><div class="k">Axis Point</div><div class="v">Observation point lies on the dipole axis a distance $$z$$ from the center.</div></div>
+          <div class="fact"><div class="k">Moment</div><div class="v">Dipole moment magnitude is $$p=qd.$$</div></div>
+          <div class="fact"><div class="k">Far Field</div><div class="v">Use $$d/(2z)\ll1$$ when the point is far from the dipole size.</div></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: Place the Point on the Axis</h2><ul><li>Put the dipole center on a straight axis and place the observation point a distance $$z$$ away.</li><li>The two source charges are not equally far from that point.</li><li>So their field magnitudes differ.</li></ul></article>
+          <article class="room"><h2>Room 2: Write the Two Distances</h2><ul><li>The near and far distances are</li><li>$$r_+=z-\frac d2,\qquad r_-=z+\frac d2.$$</li><li>These distances control the two inverse-square terms.</li></ul></article>
+          <article class="room"><h2>Room 3: Subtract the Two Contributions</h2><ul><li>At the observation point the two fields lie along one line.</li><li>So the exact field is the difference</li><li>$$E=\frac{1}{4\pi\varepsilon_0}\left[\frac{q}{(z-d/2)^2}-\frac{q}{(z+d/2)^2}\right].$$</li></ul></article>
+          <article class="room"><h2>Room 4: Expose the Small Ratio</h2><ul><li>Factor out $$q/(4\pi\varepsilon_0 z^2).$$</li><li>The exact expression now contains the small ratio $$d/(2z).$$</li><li>That prepares the far-field limit cleanly.</li></ul></article>
+          <article class="room"><h2>Room 5: Use the Far-Field Limit</h2><ul><li>When $$d/(2z)\ll1,$$ the dipole looks tiny compared with the observation distance.</li><li>The exact field simplifies to</li><li>$$E\approx\frac{1}{2\pi\varepsilon_0}\frac{qd}{z^3}.$$</li></ul></article>
+          <article class="room"><h2>Room 6: Replace $$qd$$ by Dipole Moment</h2><ul><li>Use the definition $$p=qd.$$</li><li>The far-axis field becomes</li><li>$$\boxed{E\approx\frac{1}{2\pi\varepsilon_0}\frac{p}{z^3}}.$$</li></ul></article>
+          <article class="room"><h2>Room 7: Keep the Main Comparison</h2><ul><li>A point-charge field falls as $$1/r^2.$$</li><li>A dipole field falls faster, as $$1/r^3$$ in the far region.</li><li>That faster decay is the physical signature of a dipole source.</li></ul></article>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Detailed Notes</div>
+        <div class="mini"><h3>Why the Field Does Not Cancel Completely</h3><p>The two charges are equal and opposite, but the observation point is closer to one than the other. Because the electric field follows an inverse-square law, the nearer contribution wins slightly and a nonzero net field survives.</p></div>
+        <div class="mini"><h3>Do Not Confuse Two Different Dipole Pages</h3><p>This page is about the field produced by a dipole. The separate dipole-in-an-electric-field page is about an external field acting on the dipole and producing torque and potential energy.</p></div>
+      </section>
+    </div>
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Center, distances, subtraction, approximation, dipole moment, then the $$1/z^3$$ identity.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A dipole stands on a straight hallway and an observation point waits farther up the same line.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>You must measure the point's distance from each charge separately.</p></div>
+        <div class="station"><h3>Station 2</h3><p>Two rulers appear: $$z-d/2$$ to the nearer charge and $$z+d/2$$ to the farther one.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>Now each charge throws a field arrow and the two arrows oppose each other.</p></div>
+        <div class="station"><h3>Station 3</h3><p>The stronger near arrow subtracts the weaker far arrow.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>When the dipole is tiny compared with the viewing distance, the exact expression should simplify.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The messy formula collapses into a clean $$qd/z^3$$ pattern.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The product $$qd$$ needs a permanent name.</p></div>
+        <div class="station"><h3>Station 5</h3><p>A glowing marker labeled $$p$$ replaces $$qd$$ and stamps the final far-field result.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">Use this to regenerate the dipole-source derivation as one connected memory route.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for the electric field due to an electric dipole on its axis. Keep the steps in order, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+
+1. Place a dipole with charges +q and -q separated by distance d, and put the observation point on the dipole axis a distance z from the center.
+2. Write the two distances to the point: r+ = z - d/2 and r- = z + d/2.
+3. The two field contributions lie on the same axis but oppose each other.
+4. Write the exact field as E = (1 / 4 pi eps0)[ q/(z - d/2)^2 - q/(z + d/2)^2 ].
+5. Factor the expression so the small ratio d/(2z) becomes visible.
+6. In the far-field region use d/(2z) << 1 to simplify the exact result.
+7. Get E approx (1 / 2 pi eps0)(qd / z^3).
+8. Replace qd by the dipole moment p.
+9. Final result: E approx (1 / 2 pi eps0)(p / z^3), so the dipole field falls as 1/z^3.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+<script>
+const dipoleFieldModal = document.getElementById('prompt-modal');
+const dipoleFieldTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => { dipoleFieldModal.classList.add('open'); dipoleFieldModal.setAttribute('aria-hidden', 'false'); });
+document.querySelectorAll('[data-close-prompt]').forEach((button) => { button.addEventListener('click', () => { dipoleFieldModal.classList.remove('open'); dipoleFieldModal.setAttribute('aria-hidden', 'true'); }); });
+dipoleFieldModal.addEventListener('click', (event) => { if (event.target === dipoleFieldModal) { dipoleFieldModal.classList.remove('open'); dipoleFieldModal.setAttribute('aria-hidden', 'true'); } });
+document.getElementById('copy-prompt').addEventListener('click', async () => { try { await navigator.clipboard.writeText(dipoleFieldTextarea.value); } catch (error) { dipoleFieldTextarea.focus(); dipoleFieldTextarea.select(); } });
+</script>
+</body>
+</html>

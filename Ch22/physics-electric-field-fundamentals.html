@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Electric Field Fundamentals | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:.5rem}
+.hero p{color:var(--muted);line-height:1.75}
+.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}
+.main-stack{display:grid;gap:1rem}
+.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}
+.fact{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:.75rem}
+.fact .k{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem}
+.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.rooms{display:grid;gap:.85rem}
+.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}
+.room ul{padding-left:1.2rem}
+.mini{margin-top:.75rem;padding:.8rem .9rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.65rem}
+.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.transition{border-style:dashed;background:rgba(255,255,255,.02)}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}
+.modal.open{display:flex}
+.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+.modal-head h3{font-size:1rem;color:var(--accent)}
+.prompt-box{width:100%;min-height:320px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 22</a>
+  </nav>
+
+  <section class="hero">
+    <h1>The Electric Field: Core Ideas</h1>
+    <p>This page covers the missing chapter foundation: what an electric field is, why a small positive test charge defines it, how force is recovered from the field, and how field lines encode direction and strength.</p>
+    <div class="eq">$$\vec E=\frac{\vec F}{q_0},\qquad \vec F=q\vec E$$</div>
+    <div class="tool-row">
+      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Core Definitions</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Meaning</div><div class="v">A source charge changes the space around it by setting up an electric field.</div></div>
+          <div class="fact"><div class="k">Definition</div><div class="v">Use a tiny positive test charge: $$\vec E=\vec F/q_0.$$</div></div>
+          <div class="fact"><div class="k">Vector</div><div class="v">Field has magnitude and direction at every point.</div></div>
+          <div class="fact"><div class="k">Force Rule</div><div class="v">Once field is known, any charge feels $$\vec F=q\vec E.$$</div></div>
+          <div class="fact"><div class="k">Field Lines</div><div class="v">They leave positive charges and end on negative charges.</div></div>
+          <div class="fact"><div class="k">Reading Strength</div><div class="v">Closer-spaced lines mean a stronger field.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: A Charge Alters Space</h2>
+            <ul>
+              <li>A charged particle does not wait for contact to matter.</li>
+              <li>Instead it creates an electric field in the surrounding region.</li>
+              <li>That field is the reason a second charge can later feel a force.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Probe with a Positive Test Charge</h2>
+            <ul>
+              <li>Place a tiny positive test charge $$q_0$$ at the point of interest.</li>
+              <li>If the source configuration exerts force $$\vec F$$, that force reveals the field direction.</li>
+              <li>The probe must be small so it does not noticeably disturb the original field.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Define the Field</h2>
+            <ul>
+              <li>The electric field is defined by</li>
+              <li>$$\boxed{\vec E=\frac{\vec F}{q_0}}.$$</li>
+              <li>This makes field a property of the sources, not of the specific test charge.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Recover the Force</h2>
+            <ul>
+              <li>Rearranging gives the working force equation</li>
+              <li>$$\boxed{\vec F=q\vec E}.$$</li>
+              <li>Positive charges are pushed along the field; negative charges are pushed opposite it.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Keep the Vector Nature</h2>
+            <ul>
+              <li>Field is not just size. It also has a direction at each point.</li>
+              <li>That is why fields from different sources must be added by vector rules.</li>
+              <li>This becomes critical in superposition problems.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Read Field Lines Properly</h2>
+            <ul>
+              <li>The tangent to a field line gives the direction of $$\vec E$$.</li>
+              <li>The local spacing of the lines shows how strong the field is.</li>
+              <li>Field lines start on positive charges and end on negative charges.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Translate Diagram into Motion</h2>
+            <ul>
+              <li>A positive charge initially accelerates along the field-line direction.</li>
+              <li>A negative charge initially accelerates opposite the field-line direction.</li>
+              <li>So a field diagram is really a force map for a positive test charge.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Detailed Notes</div>
+        <div class="mini">
+          <h3>Why the Definition Uses a Test Charge</h3>
+          <p>The ratio $$\vec F/q_0$$ removes the dependence on the chosen probe and isolates what belongs to the source configuration itself. That keeps the electric field concept clean and reusable.</p>
+        </div>
+        <div class="mini">
+          <h3>Common Mistake</h3>
+          <p>Students often treat field direction and force direction as always identical. That is only true for a positive charge. If the moving particle is negative, the force reverses relative to the field arrow.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Move from source charge to test charge, then to the field definition, then back to force, and finally into field-line interpretation.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A lone source charge stands in a room that is already filled with invisible influence.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>You need something small to reveal that influence.</p></div>
+        <div class="station"><h3>Station 2</h3><p>A tiny positive test charge is lowered in and a force arrow appears.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The force is not the field itself, so divide out the probe.</p></div>
+        <div class="station"><h3>Station 3</h3><p>The force arrow shrinks by $$q_0$$ and becomes the field arrow $$\vec E$$.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>Now any new charge must feel force from that arrow.</p></div>
+        <div class="station"><h3>Station 4</h3><p>A positive particle walks with the arrow while a negative one is dragged the other way.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>You now need a picture of the field everywhere at once.</p></div>
+        <div class="station"><h3>Station 5</h3><p>Field lines stream out of positive charges, dive into negative charges, and crowd together where the field is strongest.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">Use this to regenerate the concept as one connected memory route.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for the core concept of electric field. Keep the ideas in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+1. A source charge changes the space around it by setting up an electric field.
+2. To detect the field at a point, place a tiny positive test charge q0 there.
+3. If the source exerts force F on the test charge, define the field by E = F / q0.
+4. This means the field belongs to the source arrangement, not the test charge itself.
+5. Rearranging gives the force on any charge: F = qE.
+6. Positive charges feel force along E, while negative charges feel force opposite E.
+7. Electric field is a vector, so both magnitude and direction matter.
+8. Field lines show direction by their tangent and strength by their spacing.
+9. Field lines start on positive charges and end on negative charges.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+<script>
+const fundamentalsModal = document.getElementById('prompt-modal');
+const fundamentalsTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  fundamentalsModal.classList.add('open');
+  fundamentalsModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    fundamentalsModal.classList.remove('open');
+    fundamentalsModal.setAttribute('aria-hidden', 'true');
+  });
+});
+fundamentalsModal.addEventListener('click', (event) => {
+  if (event.target === fundamentalsModal) {
+    fundamentalsModal.classList.remove('open');
+    fundamentalsModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(fundamentalsTextarea.value);
+  } catch (error) {
+    fundamentalsTextarea.focus();
+    fundamentalsTextarea.select();
+  }
+});
+</script>
+</body>
+</html>

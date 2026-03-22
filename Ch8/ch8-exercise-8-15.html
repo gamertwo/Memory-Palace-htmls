@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-15 | Inductor Voltage from Example 8-10</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_15">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-10.html">Prev: Example 8-10</a><a href="ch8-application-example-8-11.html">Next: App Example 8-11</a></nav>
+  <section class="hero"><div class="tag">Exercise 8-15</div><h1>Pull the Inductor Voltage Out of Example 8-10</h1><p class="hero-sub">This page is a short but complete memory movie. You first catch the source current found in Example 8-10, then let the inductor impedance rotate that current by ninety degrees, stamp the inductor-voltage phasor, and finally coat it back into the time domain. The key memory move is angle addition: the inductor contributes a +90 degree turn.</p><div class="formula-block">$$v_L(t)=100\cos(2000t+143^\circ)\text{ V}$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-15.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">Use the solved current from Example 8-10 and the inductor impedance.</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the inductor voltage phasor $V_L$ and the waveform $v_L(t).$</div></div>
+          <div class="fact"><div class="k">Target</div><div class="v">This question is asking for the voltage across the inductor only.</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+          <div class="fact"><div class="k">Known Current</div><div class="v">$$I=0.2\angle53.1^\circ\text{ A}$$ from Example 8-10</div></div>
+          <div class="fact"><div class="k">Inductor Impedance</div><div class="v">$$Z_L=j\omega L=j500=500\angle90^\circ\,\Omega$$</div></div>
+          <div class="fact"><div class="k">Final Voltage</div><div class="v">$$V_L=100\angle143.1^\circ\text{ V}$$</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-15-room-1" data-room-id="ch8-exercise-8-15-room-1" data-room-title="Room 1: Catch the Current from Example 8-10" data-source-page="ch8-exercise-8-15.html" data-tags="catch,current,from,example">
+            <h2>Room 1: Catch the Current from Example 8-10</h2>
+            <ul>
+              <li>From Example 8-10, the source current is already known: $$I=0.2\angle53.1^\circ\text{ A}.$$</li>
+              <li>This is the same current through the series inductor, so there is no new circuit reduction here.</li>
+              <li>The whole page hangs on one rule: once $$I$$ and $$Z_L$$ are known, use $$V_L=Z_LI.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-15-room-2" data-room-id="ch8-exercise-8-15-room-2" data-room-title="Room 2: Pull Out the Inductor Impedance with $$\omega$$" data-source-page="ch8-exercise-8-15.html" data-tags="pull,inductor,impedance,with">
+            <h2>Room 2: Pull Out the Inductor Impedance with $$\omega$$</h2>
+            <ul>
+              <li>Use $$\omega=2000$$ and $$L=0.25\text{ H}$$ to get $$Z_L=j\omega L=j(2000)(0.25)=j500\,\Omega.$$</li>
+              <li>In polar form, $$j500=500\angle90^\circ.$$ The inductor contributes a positive ninety-degree rotation.</li>
+              <li>So the memory line is: inductive voltage means add ninety degrees to the current angle.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-15-room-3" data-room-id="ch8-exercise-8-15-room-3" data-room-title="Room 3: Multiply $$Z_L$$ and $$I$$ to Form the Phasor Voltage" data-source-page="ch8-exercise-8-15.html" data-tags="multiply,form,phasor,voltage">
+            <h2>Room 3: Multiply $$Z_L$$ and $$I$$ to Form the Phasor Voltage</h2>
+            <ul>
+              <li>Use $$V_L=Z_LI=(500\angle90^\circ)(0.2\angle53.1^\circ).$$</li>
+              <li>Multiply magnitudes: $$500\times0.2=100.$$</li>
+              <li>Add angles: $$90^\circ+53.1^\circ=143.1^\circ.$$</li>
+              <li>So $$V_L=100\angle143.1^\circ\text{ V}.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-15-room-4" data-room-id="ch8-exercise-8-15-room-4" data-room-title="Room 4: Why the Answer Matches in Both Cases" data-source-page="ch8-exercise-8-15.html" data-tags="answer,matches,both,cases">
+            <h2>Room 4: Why the Answer Matches in Both Cases</h2>
+            <ul>
+              <li>The textbook says the answer is the same for both cases because the Multisim check and the hand solution describe the same sinusoidal steady-state phasor.</li>
+              <li>Once the current and inductor impedance are fixed, the inductor voltage cannot come out differently.</li>
+              <li>So the memory sentence is: same current, same impedance, same inductor voltage.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-15-room-5" data-room-id="ch8-exercise-8-15-room-5" data-room-title="Room 5: Coat the Voltage Back into the Time Domain" data-source-page="ch8-exercise-8-15.html" data-tags="coat,voltage,back,into">
+            <h2>Room 5: Coat the Voltage Back into the Time Domain</h2>
+            <ul>
+              <li>Return the phasor to cosine form with the same angular frequency $$\omega=2000.$$</li>
+              <li>$$v_L(t)=100\cos(2000t+143.1^\circ)\text{ V}$$</li>
+              <li>Rounded to the textbook style, this is $$v_L(t)=100\cos(2000t+143^\circ)\text{ V}.$$</li>
+            </ul>
+          </article>
+        </div><div class="mini"><h3>Key Shortcut</h3><p>When an inductor voltage is built from a known current, memorize the phrase: keep the current, pull out $$j\omega L$$, multiply magnitudes, add ninety degrees.</p></div><div class="mini"><h3>Why This Flow Matters</h3><p>This page trains a reusable reflex. In Chapter 8, many follow-up questions are really asking whether you can take a solved current and quickly stamp the voltage of one element without redoing the whole circuit.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Make this a tiny but vivid route: current first, impedance second, angle turn third, waveform coat last.</p><div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Solved Current</h3><p>The net catches $$I=0.2\angle53.1^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write the Inductor Impedance</h3><p>Chalk pulls out $$j500=500\angle90^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Multiply to Make $$V_L$$</h3><p>The mat stamps $$100\angle143.1^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Lock the Same Answer</h3><p>The case reminds you the hand and Multisim answers agree.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Dress the Waveform</h3><p>The coat writes $$100\cos(2000t+143^\circ).$$</p></div>
+        </div><div class="flow-line"><span class="flow-pill">Catch $$I$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Pull $$Z_L$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Form $$V_L$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Confirm both cases</span><span class="flow-join">&rarr;</span><span class="flow-pill">Waveform</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-15-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more angle-addition reminder for the inductor voltage step."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+    </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

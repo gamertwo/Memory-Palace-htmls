@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-2 | Balanced Three-Phasor Sum</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_2">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-4.html">Next: Exercise 8-4</a><a href="ch8-exercise-8-3.html">Prev: Exercise 8-3</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-2</div>
+    <h1>Balanced Three-Phasor Sum</h1>
+    <p class="hero-sub">This example is the chapter's balance pattern. Three equal-amplitude phasors, separated by $$120^\circ,$$ cancel exactly when you add them in rectangular form.</p>
+    <div class="formula-block">$$i_A(t)=5\cos(377t+50^\circ)\text{ A}\qquad i_B(t)=5\cos(377t+170^\circ)\text{ A}$$ $$i_C(t)=5\cos(377t-70^\circ)\text{ A}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-2.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Phasors</div><div class="v">$$I_A=5\angle50^\circ,\quad I_B=5\angle170^\circ,\quad I_C=5\angle-70^\circ$$</div></div>
+          <div class="fact"><div class="k">Spacing</div><div class="v">Each phasor is displaced by $$120^\circ,$$ which is the balanced three-phase pattern.</div></div>
+          <div class="fact"><div class="k">Goal</div><div class="v">Show the phasor sum and waveform sum collapse to zero.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-2-room-1" data-room-id="ch8-example-8-2-room-1" data-room-title="Room 1: Convert $$I_A$$" data-source-page="ch8-example-8-2.html" data-tags="convert">
+            <h2>Room 1: Convert $$I_A$$</h2><ul><li>Start from the polar phasor $$I_A=5\angle50^\circ.$$ To move into rectangular form, use $$M\angle\theta=M(\cos\theta+j\sin\theta).$$</li><li>So $$I_A=5(\cos50^\circ+j\sin50^\circ).$$</li><li>Using $$\cos50^\circ\approx0.643$$ and $$\sin50^\circ\approx0.766,$$ the real part becomes $$5(0.643)=3.21$$ and the imaginary part becomes $$5(0.766)=3.83.$$</li><li>Therefore $$I_A=3.21+j3.83\text{ A}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-2-room-2" data-room-id="ch8-example-8-2-room-2" data-room-title="Room 2: Convert $$I_B$$" data-source-page="ch8-example-8-2.html" data-tags="convert">
+            <h2>Room 2: Convert $$I_B$$</h2><ul><li>Now convert $$I_B=5\angle170^\circ$$ in the same way: $$I_B=5(\cos170^\circ+j\sin170^\circ).$$</li><li>At $$170^\circ,$$ the phasor is almost on the negative real axis, so you should expect a large negative real part and a small positive imaginary part.</li><li>Numerically, $$\cos170^\circ\approx-0.985$$ and $$\sin170^\circ\approx0.174.$$</li><li>That gives $$I_B=-4.92+j0.87\text{ A}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-2-room-3" data-room-id="ch8-example-8-2-room-3" data-room-title="Room 3: Convert $$I_C$$" data-source-page="ch8-example-8-2.html" data-tags="convert">
+            <h2>Room 3: Convert $$I_C$$</h2><ul><li>For the third phasor, $$I_C=5\angle-70^\circ=5(\cos-70^\circ+j\sin-70^\circ).$$</li><li>Because the angle is negative, the arrow points below the real axis. So you should expect a positive real part and a negative imaginary part.</li><li>Using $$\cos-70^\circ\approx0.342$$ and $$\sin-70^\circ\approx-0.940,$$ you get $$I_C=1.71-j4.70\text{ A}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-2-room-4" data-room-id="ch8-example-8-2-room-4" data-room-title="Room 4: Add on the Mat" data-source-page="ch8-example-8-2.html" data-tags="">
+            <h2>Room 4: Add on the Mat</h2><ul><li>Add the three real parts together and the three imaginary parts together:</li><li>$$I_A+I_B+I_C=(3.21-4.92+1.71)+j(3.83+0.87-4.70).$$</li><li>The real components cancel to $$0,$$ and the imaginary components also cancel to $$0.$$</li><li>Therefore $$\boxed{I_A+I_B+I_C=0+j0\text{ A}}.$$</li><li>This cancellation is the rectangular proof that the three vectors close into a loop.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-2-room-5" data-room-id="ch8-example-8-2-room-5" data-room-title="Room 5: Interpret the Balance" data-source-page="ch8-example-8-2.html" data-tags="interpret,balance">
+            <h2>Room 5: Interpret the Balance</h2><ul><li>Equal magnitudes with $$120^\circ$$ spacing form a closed triangle in the phasor plane. No side is left over, so the vector sum is zero.</li><li>That geometric balance is exactly what the component arithmetic just confirmed.</li><li>So the current waveform sum is also zero: $$\boxed{i_A(t)+i_B(t)+i_C(t)=0.}$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>When you see equal magnitudes separated by $$120^\circ,$$ start expecting cancellation. The rectangular sum confirms it cleanly.</p></div>
+        <div class="mini"><h3>Why The Sum Is Zero</h3><p>Each phasor has the same length, but they point in directions spaced evenly around the phasor plane. When converted to rectangular form, the positive and negative horizontal parts cancel, and the positive and negative vertical parts cancel too. The zero answer is not magic; it is the component form of a perfectly balanced three-phase picture.</p></div>
+        <div class="mini"><h3>What The $$120^\circ$$ Pattern Is Doing</h3><p>Once one phasor is known, the other two are one-third of a turn away on either side. That symmetry means every component that points one way is matched by components from the other phasors pointing back. The rectangular arithmetic is simply the numerical shadow of that symmetry.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

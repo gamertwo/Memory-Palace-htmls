@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 8 Phasors | Guideline Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+</head>
+<body data-page-key="ch8_guide">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="ch8-exercise-8-1.html">Exercise 8-1</a><a href="ch8-example-8-5.html">Example 8-5</a><a href="ch8-example-8-6.html">Example 8-6</a><a href="ch8-example-8-9.html">Example 8-9</a><a href="ch8-example-8-10.html">Example 8-10</a></nav>
+
+  <section class="hero">
+    <div class="tag">Major System + Phasor Writing Flow</div>
+    <h1>Phasors Guideline Page</h1>
+    <p class="hero-sub">Use one fixed peg system for the whole Chapter 8 set. The goal is not to memorize random answers. The goal is to memorize the repeated phasor actions: catch the sinusoid, read the angle, split or combine components, add only same-frequency phasors, use $$j\omega$$ for derivatives, and then coat the result back into the time domain when needed.</p>
+    <div class="tool-row"><a class="tool-btn" href="#pegs">Peg Table</a><a class="tool-btn" href="#bank">Symbol Bank</a><a class="tool-btn" href="#rules">Do and Do Not</a><a class="tool-btn" href="#table">Question Table</a><a class="tool-btn" href="#request-anchor">Save Notes</a></div>
+  </section>
+
+  <div class="study-grid two-col">
+    <section class="panel">
+      <div class="section-title">Major System Digit Sounds</div>
+      <p class="copy">Keep the sound rules stable so the peg words stay stable.</p>
+      <div class="facts" style="margin-top:.9rem">
+        <div class="fact"><div class="k">0</div><div class="v">s, z</div></div>
+        <div class="fact"><div class="k">1</div><div class="v">t, d</div></div>
+        <div class="fact"><div class="k">2</div><div class="v">n</div></div>
+        <div class="fact"><div class="k">3</div><div class="v">m</div></div>
+        <div class="fact"><div class="k">4</div><div class="v">r</div></div>
+        <div class="fact"><div class="k">5</div><div class="v">l</div></div>
+        <div class="fact"><div class="k">6</div><div class="v">sh, ch, j</div></div>
+        <div class="fact"><div class="k">7</div><div class="v">k, g</div></div>
+        <div class="fact"><div class="k">8</div><div class="v">f, v</div></div>
+        <div class="fact"><div class="k">9</div><div class="v">p, b</div></div>
+      </div>
+      <div class="mini" style="margin-top:1rem"><h3>Important Rule</h3><p>Memorize the operation family attached to the peg, not a totally different image every time. The more fixed the phasor pegs are, the faster the chapter starts to feel automatic.</p></div>
+    </section>
+
+    <section class="panel" id="rules">
+      <div class="section-title">Do and Do Not</div>
+      <div class="study-grid">
+        <div class="mini do-card"><h3>Do</h3><ul class="list"><li>Check whether the job is waveform to phasor, phasor to waveform, addition, or derivative before touching the algebra.</li><li>Add phasors only when the frequencies match.</li><li>Use rectangular form for addition and polar form for clean final amplitude-angle answers.</li><li>Keep the cosine reference when converting back to the time domain.</li><li>Use one stable image for $$j$$, the angle, the real axis, and the imaginary axis.</li></ul></div>
+        <div class="mini dont-card"><h3>Do Not</h3><ul class="list"><li>Do not add sinusoids directly in the time domain when the chapter is training phasor addition.</li><li>Do not forget that $$\omega=2\pi f.$$</li><li>Do not lose the sign of the angle when converting quadrants.</li><li>Do not return to the time domain before the phasor is simplified.</li><li>Do not use the derivative property without multiplying by $$j\omega.$$</li></ul></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel" id="pegs" style="margin-top:1rem">
+    <div class="section-title">Universal Peg Table</div>
+    <div class="peg-grid">
+      <article class="peg-card"><div class="peg-num">21</div><h3>Net</h3><div class="peg-word">Catch Peg</div><p>The net catches the given sinusoid or phasor exactly as written so you do not lose amplitude, angle, or units.</p></article>
+      <article class="peg-card"><div class="peg-num">10</div><h3>Toes</h3><div class="peg-word">Frequency Peg</div><p>Use toes to check the frequency ground first. Same $$\omega$$ means you may add; different frequencies mean stop.</p></article>
+      <article class="peg-card"><div class="peg-num">28</div><h3>Knife</h3><div class="peg-word">Split Peg</div><p>The knife cuts polar form into rectangular pieces or splits a waveform into cosine and sine components.</p></article>
+      <article class="peg-card"><div class="peg-num">84</div><h3>Fire</h3><div class="peg-word">Polar Peg</div><p>Fire locks the magnitude-angle form. Use it when reading or rebuilding $$M\angle\theta.$$</p></article>
+      <article class="peg-card"><div class="peg-num">31</div><h3>Mat</h3><div class="peg-word">Sum Peg</div><p>The mat is where vectors land and combine. Use it for phasor addition in rectangular form.</p></article>
+      <article class="peg-card"><div class="peg-num">67</div><h3>Chalk</h3><div class="peg-word">j-Omega Peg</div><p>Use chalk for the derivative property. It writes the factor $$j\omega$$ across the phasor.</p></article>
+      <article class="peg-card"><div class="peg-num">70</div><h3>Case</h3><div class="peg-word">Result Peg</div><p>The case carries the final phasor after the work is done.</p></article>
+      <article class="peg-card"><div class="peg-num">71</div><h3>Coat</h3><div class="peg-word">Waveform Peg</div><p>The coat wraps the phasor back into the time-domain cosine when the problem asks for a sinusoid.</p></article>
+    </div>
+  </section>
+
+  <section class="panel" id="bank" style="margin-top:1rem">
+    <div class="section-title">Phasor Symbol Bank</div>
+    <table class="guide-table">
+      <thead>
+        <tr><th>Piece</th><th>Fixed Image</th><th>Memory Job</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>$$A\cos(\omega t+\phi)$$</td><td>Wave banner on a reel</td><td>The reel keeps amplitude, frequency, and phase packed together until the net catches the signal.</td></tr>
+        <tr><td>$$M\angle\theta$$</td><td>Flashlight pointed at an angle</td><td>The flashlight beam is the polar phasor. Brightness is magnitude and the tilt is phase.</td></tr>
+        <tr><td>Real part</td><td>Horizontal rail</td><td>Use the rail for the cosine or real-axis projection.</td></tr>
+        <tr><td>Imaginary part</td><td>Vertical ladder with $$j$$ painted on it</td><td>The ladder holds the $$j$$ component.</td></tr>
+        <tr><td>$$j$$</td><td>Blue hook</td><td>The hook reminds you the imaginary part turns the vector 90 degrees.</td></tr>
+        <tr><td>$$\omega$$</td><td>Spinning wheel</td><td>The wheel keeps the angular frequency visible and warns you to check it before adding.</td></tr>
+        <tr><td>$$j\omega$$</td><td>Blue hook tied to the spinning wheel</td><td>This is the derivative-property trigger.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Core Formula Map</div>
+    <table class="guide-table">
+      <thead>
+        <tr><th>Chapter 8 Job</th><th>Formula</th><th>Peg Hook</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Waveform to phasor</td><td>$$A\cos(\omega t+\phi)\rightarrow A\angle\phi$$</td><td>Net catches the cosine banner, fire lights the phasor arrow.</td></tr>
+        <tr><td>Phasor to waveform</td><td>$$M\angle\theta\rightarrow M\cos(\omega t+\theta)$$</td><td>Coat wraps the arrow back into a cosine wave.</td></tr>
+        <tr><td>Polar to rectangular</td><td>$$M\angle\theta=M(\cos\theta+j\sin\theta)$$</td><td>Knife cuts the arrow into real and imaginary pieces.</td></tr>
+        <tr><td>Rectangular to polar</td><td>$$a+jb\rightarrow \sqrt{a^2+b^2}\angle\tan^{-1}(b/a)$$</td><td>Fire rebuilds one clean magnitude-angle arrow.</td></tr>
+        <tr><td>Phasor addition</td><td>$$V=V_1+V_2+\cdots$$ in rectangular form</td><td>Mat is where the pieces land and combine.</td></tr>
+        <tr><td>Derivative property</td><td>$$\dfrac{d}{dt}\longleftrightarrow j\omega$$</td><td>Chalk writes $$j\omega$$ across the phasor.</td></tr>
+        <tr><td>Common $$90^\circ$$ rotation</td><td>$$j(a+jb)=-b+ja$$</td><td>Chalk spins the whole arrow one quarter-turn.</td></tr>
+        <tr><td>Sine bridge</td><td>$$\sin(\omega t)=\cos(\omega t-90^\circ)$$</td><td>Knife twists sine into cosine-reference form.</td></tr>
+        <tr><td>Frequency recovery</td><td>$$\omega=2\pi f$$</td><td>Toes stamp the correct floor before any addition or coating.</td></tr>
+        <tr><td>Element impedances</td><td>$$Z_R=R,\qquad Z_L=j\omega L,\qquad Z_C=\dfrac{1}{j\omega C}$$</td><td>Chalk writes the circuit identities before any voltage work begins.</td></tr>
+        <tr><td>Element voltage</td><td>$$V=ZI$$</td><td>Mat or knife applies the current to each element one at a time.</td></tr>
+        <tr><td>Series equivalent</td><td>$$Z_{EQ}=Z_1+Z_2+\cdots$$</td><td>Mat flattens one line of impedances into one total block.</td></tr>
+        <tr><td>Parallel impedance</td><td>$$Z_{EQ}=\dfrac{1}{\dfrac{1}{Z_1}+\dfrac{1}{Z_2}+\cdots}$$</td><td>Knife flips a branch cluster into one equivalent block.</td></tr>
+        <tr><td>Parallel admittance</td><td>$$Y_{EQ}=Y_1+Y_2+\cdots$$</td><td>Mat combines branch admittances when the circuit is parallel.</td></tr>
+        <tr><td>Voltage divider</td><td>$$V_O=\dfrac{Z_2}{Z_1+Z_2}V_S$$</td><td>Knife cuts the source across the two impedances in one ratio.</td></tr>
+        <tr><td>Current division</td><td>$$I_k=\dfrac{Y_k}{Y_1+Y_2+\cdots}I$$</td><td>Coat opens into separate sleeves and routes current into each branch.</td></tr>
+        <tr><td>Bridge balance</td><td>Match real and imaginary parts after equating bridge arms</td><td>Mat forces both sides of the bridge equation to balance component by component.</td></tr>
+        <tr><td>Resonant frequency</td><td>$$\omega_0=\dfrac{1}{\sqrt{LC}}$$</td><td>Fire locks the frequency where $$|Z_L|=|Z_C|.$$ </td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Flow For Writing Phasor Solutions</div>
+    <div class="flow-grid">
+      <div class="flow-step"><h3>1. Catch The Job</h3><p>Waveform to phasor, phasor to waveform, add, or differentiate.</p></div>
+      <div class="flow-step"><h3>2. Check Frequency</h3><p>If addition is involved, confirm the same $$\omega$$ before combining anything.</p></div>
+      <div class="flow-step"><h3>3. Choose Form</h3><p>Use polar for reading and final answers; use rectangular for addition.</p></div>
+      <div class="flow-step"><h3>4. Apply Property</h3><p>Add phasors or multiply by $$j\omega$$ only after the form is ready.</p></div>
+      <div class="flow-step"><h3>5. Coat The Result</h3><p>If the question wants a sinusoid, return to $$A\cos(\omega t+\phi).$$</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="table" style="margin-top:1rem">
+    <div class="section-title">Question Map</div>
+    <table class="guide-table">
+      <thead>
+        <tr><th>Page</th><th>Main Move</th><th>Memory Hook</th><th>Finish</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="ch8-exercise-8-1.html">Exercise 8-1</a></td><td>Sinusoid to phasor</td><td>Catch the waveform, cut to rectangular only if needed.</td><td>Box both polar and rectangular.</td></tr>
+        <tr><td><a href="ch8-exercise-8-2.html">Exercise 8-2</a></td><td>Phasor to sinusoid</td><td>Recover frequency first, then coat it back to cosine form.</td><td>Write $$A\cos(\omega t+\phi).$$</td></tr>
+        <tr><td><a href="ch8-example-8-1.html">Example 8-1</a></td><td>Add two phasors</td><td>Toes check frequency, knife splits, mat adds.</td><td>Return to one sinusoid.</td></tr>
+        <tr><td><a href="ch8-exercise-8-3.html">Exercise 8-3</a></td><td>Construct and add current phasors</td><td>Build both arrows, add on the mat, then coat the result.</td><td>One current waveform.</td></tr>
+        <tr><td><a href="ch8-example-8-2.html">Example 8-2</a></td><td>Balanced sum</td><td>Three equal phasors cancel on the mat.</td><td>Zero current.</td></tr>
+        <tr><td><a href="ch8-exercise-8-4.html">Exercise 8-4</a></td><td>Rotation check</td><td>Common rotation preserves the zero-sum balance.</td><td>Still zero.</td></tr>
+        <tr><td><a href="ch8-example-8-3.html">Example 8-3</a></td><td>Derivative property</td><td>Chalk writes $$j\omega$$ on the phasor.</td><td>Coat back to the derivative waveform.</td></tr>
+        <tr><td><a href="ch8-exercise-8-5.html">Exercise 8-5</a></td><td>Derivative phasor only</td><td>Apply $$j\omega$$ directly.</td><td>Box the derivative phasor.</td></tr>
+        <tr><td><a href="ch8-example-8-4.html">Example 8-4</a></td><td>Phasors to waveforms plus addition</td><td>Coat each input, then mat the sum in phasor form.</td><td>One output waveform.</td></tr>
+        <tr><td><a href="ch8-exercise-8-6.html">Exercise 8-6</a></td><td>Mixed cosine-sine to phasor</td><td>Knife splits the sine into a negative imaginary piece.</td><td>Box the one clean phasor.</td></tr>
+        <tr><td><a href="ch8-example-8-5.html">Example 8-5</a></td><td>Series RC phasor circuit</td><td>Convert elements to impedances, use $$V=ZI,$$ then add by KVL.</td><td>One steady-state voltage waveform.</td></tr>
+        <tr><td><a href="ch8-exercise-8-7.html">Exercise 8-7</a></td><td>Impedance-magnitude matching</td><td>Write the three magnitude formulas and solve equalities for $$\omega.$$ </td><td>Identify the resonant frequency.</td></tr>
+        <tr><td><a href="ch8-exercise-8-8.html">Exercise 8-8</a></td><td>Impedance from phasor ratio</td><td>Divide $$V$$ by $$I,$$ then cut the answer into rectangular form.</td><td>Box the impedance.</td></tr>
+        <tr><td><a href="ch8-exercise-8-9.html">Exercise 8-9</a></td><td>Element voltages in an LC circuit</td><td>Use one current through two opposite imaginary impedances.</td><td>State both waveforms and lead-lag laws.</td></tr>
+        <tr><td><a href="ch8-example-8-6.html">Example 8-6</a></td><td>Series RLC phasor circuit</td><td>Catch the source, write all impedances, flatten the series line, and reuse one current across every element.</td><td>Source current plus three voltage waveforms.</td></tr>
+        <tr><td><a href="ch8-exercise-8-10.html">Exercise 8-10</a></td><td>Reactance cancellation in series</td><td>Let $$j50$$ and $$-j50$$ collide, then fan the same current into three voltage phasors.</td><td>Current and three cosine voltages.</td></tr>
+        <tr><td><a href="ch8-design-example-8-7.html">Design Example 8-7</a></td><td>Divider-based impedance design</td><td>Use the divider ratio to solve a target relation between $$Z_1$$ and $$Z_2.$$ </td><td>One workable circuit realization.</td></tr>
+        <tr><td><a href="ch8-design-exercise-8-11.html">Design Exercise 8-11</a></td><td>Practical divider design</td><td>Translate the target output ratio into a realizable resistor-inductor network.</td><td>A concrete component choice.</td></tr>
+        <tr><td><a href="ch8-design-exercise-8-12.html">Design Exercise 8-12</a></td><td>Target load design</td><td>Turn a desired polar load into rectangular form, then choose standard parts close to it.</td><td>Nearest practical load values.</td></tr>
+        <tr><td><a href="ch8-exercise-8-13.html">Exercise 8-13</a></td><td>Maxwell bridge balance</td><td>Expand the bridge equation and match real and imaginary parts separately.</td><td>Relations for $$R_X$$ and $$C_X.$$ </td></tr>
+        <tr><td><a href="ch8-example-8-9.html">Example 8-9</a></td><td>Parallel admittance circuit</td><td>Flip each branch to admittance, add on the mat, then recover the common voltage and branch currents.</td><td>One voltage and two current waveforms.</td></tr>
+        <tr><td><a href="ch8-exercise-8-14.html">Exercise 8-14</a></td><td>Shifted-source parallel circuit</td><td>Reuse the admittance movie, but let the phase-shifted source drive a cleaner final voltage.</td><td>Voltage and three current waveforms.</td></tr>
+        <tr><td><a href="ch8-example-8-10.html">Example 8-10</a></td><td>Series-parallel current split</td><td>Shrink the inside parallel branch first, solve the source current, then reopen the split with current division.</td><td>Source, capacitor, and resistor currents.</td></tr>
+        <tr><td><a href="ch8-exercise-8-15.html">Exercise 8-15</a></td><td>Element voltage from a solved current</td><td>Carry the current in, apply $V_L=Z_LI,$ and add the inductor ninety-degree shift.</td><td>One inductor-voltage waveform.</td></tr>
+        <tr><td><a href="ch8-application-example-8-11.html">Application Example 8-11</a></td><td>Resonance derivation</td><td>Reduce the RC block, isolate the reactance lane, and set it to zero.</td><td>The Figure 8-25 resonance formula.</td></tr>
+        <tr><td><a href="ch8-exercise-8-16.html">Exercise 8-16</a></td><td>Resonance substitution</td><td>Plug values into the resonance formula and compute the real input impedance.</td><td>$omega_0$ and a purely real $Z_{EQ}.$</td></tr>
+        <tr><td><a href="ch8-example-8-12.html">Example 8-12</a></td><td>Purely resistive tuning</td><td>Set the imaginary lane to zero, solve for $C,$ then read the real lane.</td><td>A tuned capacitance and a real input resistance.</td></tr>
+        <tr><td><a href="ch8-exercise-8-17.html">Exercise 8-17</a></td><td>Untuned impedance evaluation</td><td>Reuse the same parent formula without forcing resonance.</td><td>A general complex $Z_{EQ}.$</td></tr>
+        <tr><td><a href="ch8-example-8-13.html">Example 8-13</a></td><td>Load compensation</td><td>Split the load into lanes and cancel only the reactive part.</td><td>A compensating capacitor choice.</td></tr>
+        <tr><td><a href="ch8-exercise-8-18.html">Exercise 8-18</a></td><td>Input reduction and cancellation</td><td>Reduce to one impedance, inspect the sign, then add the opposite reactance.</td><td>A cancelling series element.</td></tr>
+        <tr><td><a href="ch8-exercise-8-19.html">Exercise 8-19</a></td><td>Identify an element from $V/I$</td><td>Convert to phasors, divide, go rectangular, and read the sign.</td><td>The unknown device and its value.</td></tr>
+        <tr><td><a href="ch8-application-example-8-14.html">Application Example 8-14</a></td><td>RC low-pass transfer ratio</td><td>Write the divider ratio, take the magnitude, and lock the cutoff rule.</td><td>Low-pass behavior and $omega_c=1/RC.$</td></tr>
+        <tr><td><a href="ch8-design-exercise-8-20.html">Design Exercise 8-20</a></td><td>Low-pass design</td><td>Turn the cutoff formula into a fixed product $RC.$ </td><td>One practical RC pair.</td></tr>
+        <tr><td><a href="ch8-exercise-8-21.html">Exercise 8-21</a></td><td>RL high-pass ratio</td><td>Mirror the low-pass movie and lock the new cutoff rule.</td><td>High-pass behavior and $omega_c=R/L.$</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" id="request-anchor" style="margin-top:1rem">
+    <div class="section-title">Save Guide Notes</div>
+    <p class="copy">Type a reminder or change request for the Chapter 8 system, press Enter, and save the note as a `.txt` file you can mention later.</p>
+    <form class="request-form" data-txt-save>
+      <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-guide-request.txt" /></label>
+      <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a stronger memory movie for current division and branch admittance."></textarea></label>
+      <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+      <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+      <p class="memory-status" data-note-status>Nothing saved yet.</p>
+    </form>
+  </section>
+</main>
+<script src="study.js"></script>
+</body>
+</html>

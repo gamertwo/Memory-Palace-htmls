@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-8 | Find Impedance from Voltage and Current</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_8">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-9.html">Next: Exercise 8-9</a><a href="ch8-exercise-8-7.html">Prev: Exercise 8-7</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-8</div>
+    <h1>Find the Impedance of an Element</h1>
+    <p class="hero-sub">This page trains phasor division. Convert the voltage and current waveforms into phasors, divide to get the impedance in polar form, then if needed cut that polar result into rectangular form.</p>
+    <div class="formula-block">$$v(t)=50\cos(500t)\text{ V},\qquad i(t)=4\cos(500t-60^\circ)\text{ A}$$ $$\text{Find the impedance }Z\text{ of the element.}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-8.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Voltage Phasor</div><div class="v">$$V=50\angle0^\circ$$</div></div>
+          <div class="fact"><div class="k">Current Phasor</div><div class="v">$$I=4\angle-60^\circ$$</div></div>
+          <div class="fact"><div class="k">Core Rule</div><div class="v">$$Z=\dfrac{V}{I},$$ so divide magnitudes and subtract angles.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-8-room-1" data-room-id="ch8-exercise-8-8-room-1" data-room-title="Room 1: Convert the Waveforms to Phasors" data-source-page="ch8-exercise-8-8.html" data-tags="convert,waveforms,phasors">
+            <h2>Room 1: Convert the Waveforms to Phasors</h2><ul><li>The voltage waveform is $$v(t)=50\cos(500t),$$ so its phasor is $$V=50\angle0^\circ.$$</li><li>The current waveform is $$i(t)=4\cos(500t-60^\circ),$$ so its phasor is $$I=4\angle-60^\circ.$$</li><li>Both use the same $$\omega=500,$$ which is exactly what you want when comparing voltage and current of one element.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-8-room-2" data-room-id="ch8-exercise-8-8-room-2" data-room-title="Room 2: Divide to Get Impedance in Polar Form" data-source-page="ch8-exercise-8-8.html" data-tags="divide,impedance,polar,form">
+            <h2>Room 2: Divide to Get Impedance in Polar Form</h2><ul><li>Use the impedance definition $$Z=\dfrac{V}{I}.$$ In polar form, division is especially clean.</li><li>Divide the magnitudes: $$50/4=12.5.$$</li><li>Subtract the angles: $$0^\circ-(-60^\circ)=60^\circ.$$</li><li>So $$Z=12.5\angle60^\circ\,\Omega.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-8-room-3" data-room-id="ch8-exercise-8-8-room-3" data-room-title="Room 3: Cut the Polar Form into Rectangular Form" data-source-page="ch8-exercise-8-8.html" data-tags="polar,form,into,rectangular">
+            <h2>Room 3: Cut the Polar Form into Rectangular Form</h2><ul><li>Use $$M\angle\theta=M(\cos\theta+j\sin\theta).$$</li><li>So $$Z=12.5(\cos60^\circ+j\sin60^\circ).$$</li><li>With $$\cos60^\circ=\frac12$$ and $$\sin60^\circ=\frac{\sqrt3}{2}\approx0.866,$$ the real part is $$12.5(0.5)=6.25$$ and the imaginary part is $$12.5(0.866)=10.8.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-8-room-4" data-room-id="ch8-exercise-8-8-room-4" data-room-title="Room 4: Write the Rectangular Answer" data-source-page="ch8-exercise-8-8.html" data-tags="write,rectangular,answer">
+            <h2>Room 4: Write the Rectangular Answer</h2><ul><li>Therefore $$Z=6.25+j10.8\,\Omega.$$</li><li>The positive imaginary part tells you the element behaves inductively rather than capacitively.</li><li>So the answer may be boxed in either form: $$12.5\angle60^\circ\,\Omega$$ or $$6.25+j10.8\,\Omega.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-8-room-5" data-room-id="ch8-exercise-8-8-room-5" data-room-title="Room 5: Lock the Interpretation" data-source-page="ch8-exercise-8-8.html" data-tags="lock,interpretation">
+            <h2>Room 5: Lock the Interpretation</h2><ul><li>Because the voltage angle is ahead of the current angle by $$60^\circ,$$ the impedance angle is positive.</li><li>A positive impedance angle means the voltage leads the current, which is the signature of an inductive element.</li><li>So $$\boxed{Z=6.25+j10.8\,\Omega}$$ is the final rectangular answer.</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>For multiplication, add angles. For division, subtract angles. That one rule makes phasor impedance problems much faster.</p></div>
+        <div class="mini"><h3>Why The Angle Becomes Positive</h3><p>The voltage phasor sits at $$0^\circ,$$ while the current phasor sits at $$-60^\circ.$$ When you divide $$V$$ by $$I,$$ you subtract the current angle, so the minus sign flips and the impedance angle becomes $$+60^\circ.$$</p></div>
+        <div class="mini"><h3>Why The Answer Looks Inductive</h3><p>In rectangular form, a positive imaginary part means inductive behavior. If the imaginary part had been negative, the element would have looked capacitive instead.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

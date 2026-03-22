@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 8 Properties of Phasors</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="chapter8.css" />
+<link rel="stylesheet" href="../Ch7/linear-review.css" />
+<script src="../Ch7/page-visit-tracker.js" defer></script>
+<script src="../Ch7/linear-review.js" defer></script>
+</head>
+<body class="study-page">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Chapter 8 Home</a>
+    <a href="ch8-1-sinusoids-and-phasors.html">Back: 8-1</a>
+    <a href="ch8-additive-property.html">Next: Additive Property</a>
+  </nav>
+  <section class="hero">
+    <h1>Properties of Phasors</h1>
+    <p>This page isolates the conceptual rules before the examples start: what a phasor represents, why the cosine reference matters, and why same-frequency signals are the only ones you can combine directly in one phasor equation.</p>
+    <div class="eq">$$V=V_Ae^{j\phi}=V_A\angle\phi=V_A\cos\phi+jV_A\sin\phi$$</div>
+  </section>
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Keeps</div><div class="v">Amplitude and phase.</div></div>
+          <div class="fact"><div class="k">Omits</div><div class="v">Frequency, because frequency is common to the whole steady-state problem.</div></div>
+          <div class="fact"><div class="k">Needed</div><div class="v">A single frequency reference for all combined signals.</div></div>
+          <div class="fact"><div class="k">Best Use</div><div class="v">Algebra on sinusoids becomes complex-number algebra.</div></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-properties-of-phasors-room-1" data-room-id="ch8-properties-of-phasors-room-1" data-room-title="Room 1: The Meaning of the Phasor" data-source-page="ch8-properties-of-phasors.html" data-tags="meaning,phasor">
+            <h2>Room 1: The Meaning of the Phasor</h2><ul><li>The waveform and the phasor are related, but they are not the same object.</li><li>The waveform lives in time. The phasor is the constant complex label attached to that waveform.</li><li>So when you see $$V=12\angle -20^\circ,$$ that is not yet the full sinusoid until $$e^{j\omega t}$$ is restored.</li></ul></article>
+          <article class="room" id="room-ch8-properties-of-phasors-room-2" data-room-id="ch8-properties-of-phasors-room-2" data-room-title="Room 2: Same Frequency Is Required" data-source-page="ch8-properties-of-phasors.html" data-tags="same,frequency,required">
+            <h2>Room 2: Same Frequency Is Required</h2><ul><li>Phasor addition works only when all sinusoids have the same $$\omega.$$</li><li>If two signals rotate at different angular frequencies, they cannot share one common $$e^{j\omega t}$$ factor.</li><li>That is why the chapter always states a common frequency before adding phasors.</li></ul></article>
+          <article class="room" id="room-ch8-properties-of-phasors-room-3" data-room-id="ch8-properties-of-phasors-room-3" data-room-title="Room 3: Why Frequency Is Not Inside the Phasor" data-source-page="ch8-properties-of-phasors.html" data-tags="frequency,inside,phasor">
+            <h2>Room 3: Why Frequency Is Not Inside the Phasor</h2><ul><li>The full signal is $$v(t)=\Re\{Ve^{j\omega t}\}.$$</li><li>The factor $$e^{j\omega t}$$ already contains the frequency.</li><li>So the phasor only needs amplitude and phase angle.</li></ul></article>
+          <article class="room" id="room-ch8-properties-of-phasors-room-4" data-room-id="ch8-properties-of-phasors-room-4" data-room-title="Room 4: Choose the Convenient Form" data-source-page="ch8-properties-of-phasors.html" data-tags="choose,convenient,form">
+            <h2>Room 4: Choose the Convenient Form</h2><ul><li>Use polar form when reading magnitude and phase quickly.</li><li>Use rectangular form when adding or subtracting phasors.</li><li>Convert back to polar when you want the final sinusoid amplitude and angle.</li></ul></article>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+</body>
+</html>

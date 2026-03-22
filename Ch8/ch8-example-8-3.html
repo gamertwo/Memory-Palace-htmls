@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-3 | Derivative Property of Phasors</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_3">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-5.html">Next: Exercise 8-5</a><a href="ch8-exercise-8-4.html">Prev: Exercise 8-4</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-3</div>
+    <h1>Use the Derivative Property</h1>
+    <p class="hero-sub">This page trains the derivative reflex: catch the original cosine, write its phasor, let the chalk write $$j\omega$$ across it, and only then coat the derivative back into the time domain.</p>
+    <div class="formula-block">$$v(t)=15\cos(200t-30^\circ)\text{ V}\qquad \text{Find } \frac{dv(t)}{dt}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-3.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Original Phasor</div><div class="v">$$V=15\angle-30^\circ$$</div></div>
+          <div class="fact"><div class="k">Derivative Rule</div><div class="v">$$\dfrac{d}{dt}\longleftrightarrow j\omega$$</div></div>
+          <div class="fact"><div class="k">Angular Frequency</div><div class="v">$$\omega=200$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-3-room-1" data-room-id="ch8-example-8-3-room-1" data-room-title="Room 1: Catch the Original Wave" data-source-page="ch8-example-8-3.html" data-tags="catch,original,wave">
+            <h2>Room 1: Catch the Original Wave</h2><ul><li>Read the cosine directly into phasor form: $$V=15\angle-30^\circ.$$</li><li>The amplitude $$15$$ becomes the phasor magnitude, and the phase $$-30^\circ$$ becomes the phasor angle.</li><li>Keep the same angular frequency $$\omega=200.$$ The derivative changes amplitude and phase, but not the base frequency term inside the cosine.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-3-room-2" data-room-id="ch8-example-8-3-room-2" data-room-title="Room 2: Write the Chalk Factor" data-source-page="ch8-example-8-3.html" data-tags="write,chalk,factor">
+            <h2>Room 2: Write the Chalk Factor</h2><ul><li>The derivative property says that differentiating in the time domain corresponds to multiplying by $$j\omega$$ in the phasor domain.</li><li>So the derivative phasor is $$j\omega V=(j200)(15\angle-30^\circ).$$</li><li>This one factor does two jobs at once: $$\omega$$ changes the magnitude, while $$j$$ rotates the angle.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-3-room-3" data-room-id="ch8-example-8-3-room-3" data-room-title="Room 3: Combine Magnitude and Angle" data-source-page="ch8-example-8-3.html" data-tags="combine,magnitude,angle">
+            <h2>Room 3: Combine Magnitude and Angle</h2><ul><li>Rewrite the chalk factor in polar form. Because $$j$$ is a $$90^\circ$$ rotation, $$j200=200\angle90^\circ.$$</li><li>Now multiply in polar form by multiplying magnitudes and adding angles:</li><li>$$j\omega V=200\angle90^\circ\cdot15\angle-30^\circ.$$</li><li>The magnitude becomes $$200\times15=3000,$$ and the angle becomes $$90^\circ+(-30^\circ)=60^\circ.$$</li><li>So the derivative phasor is $$3000\angle60^\circ.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-3-room-4" data-room-id="ch8-example-8-3-room-4" data-room-title="Room 4: Build the Derivative Waveform" data-source-page="ch8-example-8-3.html" data-tags="build,derivative,waveform">
+            <h2>Room 4: Build the Derivative Waveform</h2><ul><li>The derivative keeps the same angular frequency $$\omega=200.$$</li><li>Now coat the phasor back into the time domain with $$M\angle\theta\rightarrow M\cos(\omega t+\theta).$$</li><li>That means amplitude $$3000,$$ frequency term $$200t,$$ and phase shift $$+60^\circ.$$</li><li>So $$\frac{dv(t)}{dt}=3000\cos(200t+60^\circ)\text{ V/s}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-3-room-5" data-room-id="ch8-example-8-3-room-5" data-room-title="Room 5: Lock the Pattern" data-source-page="ch8-example-8-3.html" data-tags="lock,pattern">
+            <h2>Room 5: Lock the Pattern</h2><ul><li>Differentiation in the time domain becomes multiplication by $$j\omega$$ in the phasor domain.</li><li>That means magnitude is multiplied by $$\omega$$ and angle increases by $$90^\circ.$$</li><li>So for any cosine phasor, the derivative rule is: stretch by $$\omega,$$ rotate forward by $$90^\circ,$$ then coat back if the question wants a waveform.</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>For derivatives, think "multiply the length by $$\omega$$ and rotate the arrow by $$+90^\circ$$" before you coat the final cosine.</p></div>
+        <div class="mini"><h3>Why $$j\omega$$ Does Both Jobs</h3><p>The factor $$\omega$$ changes the magnitude because differentiation scales the amplitude by angular frequency. The factor $$j$$ changes the angle because multiplying by $$j$$ is a quarter-turn in the phasor plane. So the derivative property is really two actions happening together: stretch by $$\omega$$ and rotate by $$90^\circ$$.</p></div>
+        <div class="mini"><h3>Why The Frequency Stays The Same</h3><p>Differentiation does not change the underlying oscillation rate. The signal still swings with the same $$\omega,$$ but its amplitude and phase shift change. That is why the final waveform keeps $$200t$$ even though the coefficient in front becomes much larger.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

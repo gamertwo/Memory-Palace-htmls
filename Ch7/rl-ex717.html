@@ -122,7 +122,7 @@ a{color:inherit}
     <div class="eq">Find $$v_O(t),\quad t\ge 0$$</div>
   </section>
 
-  <section class="panel section">
+  <section class="panel section" data-view-panel="default">
     <div class="section-title">Rooms</div>
     <div class="rooms">
       <article class="room">
@@ -214,7 +214,7 @@ a{color:inherit}
     </div>
   </section>
 
-  <section class="panel section">
+  <section class="panel section" data-view-panel="default">
     <div class="section-title">Memory Clues</div>
     <div class="memory">
       <div class="cue">
@@ -232,6 +232,140 @@ a{color:inherit}
       <div class="cue">
         <h3>Clue 4</h3>
         <p>If the waveform decays to zero, the governing ODE has zero on the right side.</p>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="panel section"
+    data-view-panel="memory"
+    data-view-label="Memory"
+    data-view-button-label="Memory"
+    data-review-mode-title="Memory Palace Review"
+    data-review-mode-copy="This mode is now a true memory palace. Each stop is a vivid locus inspired by classical and Renaissance memory arts: sacred architecture, striking statues and seals, a repeated cloister walk, alphabet pegs, and a throne-room summary. The goal is to remember the solving route by scene, not by tiny numbers."
+    data-review-prompt="Walk the palace in your head first. Try to recall the image, what it stands for, and the solving move attached to it before you reveal the room."
+    data-review-reveal-copy="Reveal the current locus when you want to check the image. Rate how well you remembered the palace scene and the solving move attached to it."
+    data-review-action-copy="Rate how solid the palace image felt in memory, then move to the next locus."
+    data-view-hero-title="Exercise 7-17 Memory Palace"
+    data-view-hero-copy="This view turns the exercise into a real palace walk. You enter through a Hermetic gate, pass Bruno-style seals and statues, circle a Phoenix cloister, cross an alphabet gallery, and finish in a Solomon throne room. Each place stores one solving move: identify the family, read the response type, recall the formulas, interpret roots and damping, use $$R_t$$ correctly, and recover the final waveform."
+    data-view-hero-eq="Walk $$\text{Gate} \rightarrow \text{Seals} \rightarrow \text{Cloister} \rightarrow \text{Alphabet Hall} \rightarrow \text{Throne Room}.$$"
+    hidden
+  >
+    <div class="section-title">Memory Palace Route</div>
+    <div class="rooms">
+      <article class="room">
+        <h2>Room 1: The Hermetic Gate</h2>
+        <ul>
+          <li>Picture a huge black bronze gate with three glowing emblems: a capacitor goblet, an inductor coil, and a two-element crown.</li>
+          <li>The guard at the door asks only one question: <strong>What family is this?</strong> RC, RL, or RLC.</li>
+          <li>If you see one energy-storage symbol, remember <strong>first order</strong>. If you see two, remember <strong>second order</strong>.</li>
+          <li>Above the gate is the first command of the palace: classify the family before you touch the numbers.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 2: Bruno's Hall of Thirty Statues</h2>
+        <ul>
+          <li>Imagine a corridor of statues, each holding a seal. You do not solve randomly; you walk statue to statue in order.</li>
+          <li>The first statue holds $$x(0^-)$$ and $$x(0^+)$$. It reminds you to use continuity: capacitor voltage cannot jump, inductor current cannot jump.</li>
+          <li>The second statue holds $$x(\infty)$$ and shows the DC ending: capacitor open, inductor short.</li>
+          <li>The third statue holds $$\tau$$ or the roots. It tells you to find the system speed before writing the waveform.</li>
+          <li>The fourth statue writes the final response form. The sequence is the seal: initial, final, speed, waveform.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 3: The Phoenix Cloister</h2>
+        <ul>
+          <li>Walk around a monastery cloister where the same route repeats again and again. This is the place of repetition, the Phoenix route.</li>
+          <li>At the first archway, a flame writes the first-order master form: $$x(t)=x(\infty)+\big[x(0^+)-x(\infty)\big]e^{-t/\tau}.$$</li>
+          <li>At the second archway, an RC tablet says $$\tau=R_{eq}C.$$</li>
+          <li>At the third archway, an RL anvil says $$\tau=\frac{L}{R_{eq}}.$$</li>
+          <li>At the fourth archway, a crown of sparks writes the second-order characteristic equation: $$s^2+2\alpha s+\omega_0^2=0.$$</li>
+          <li>The lesson of the cloister is repetition: same walk, same formulas, many different questions.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 4: The Mnemonic Alphabet Gallery</h2>
+        <ul>
+          <li>Now enter a long gallery where each symbol becomes a character, so formulas stop feeling abstract.</li>
+          <li>Let $$\tau$$ be a clock, because it measures how fast the scene fades.</li>
+          <li>Let $$\alpha$$ be a damp robe that smothers motion, because it represents damping strength.</li>
+          <li>Let $$\omega_0$$ be a ringing bell, because it is the natural frequency.</li>
+          <li>Let the roots $$s_1$$ and $$s_2$$ be two messengers carrying the actual modes of the response.</li>
+          <li>When you read a problem, convert symbols into pegs immediately so the equations become memorable objects, not dead letters.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 5: The Chamber of Roots and Dampness</h2>
+        <ul>
+          <li>Picture three fountains in one chamber.</li>
+          <li>The first fountain is filled with thick mud and has two separate stone drops. That is <strong>overdamped</strong>: two real roots, no oscillation, slow heavy return.</li>
+          <li>The second fountain is a perfectly balanced blade. That is <strong>critical damping</strong>: repeated root, fastest return without ringing.</li>
+          <li>The third fountain is a silver bowl shaking in circles under a shrinking veil. That is <strong>underdamped</strong>: complex roots and decaying oscillation.</li>
+          <li>Above the chamber wall is the test: $$\alpha&gt;\omega_0$$ overdamped, $$\alpha=\omega_0$$ critical, $$\alpha&lt;\omega_0$$ underdamped.</li>
+          <li>Memorize the meaning, not just the inequality: roots tell you the shape of the transient's death.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 6: The Resistance Treasury</h2>
+        <ul>
+          <li>In this vault, $$R_t$$ sits on a scale and controls how quickly the whole palace quiets down.</li>
+          <li>The keeper tells you: find the resistance <strong>seen by the storage element after switching</strong>.</li>
+          <li>If you are finding an equivalent resistance, independent sources are turned off while you look back into the network.</li>
+          <li>In first-order rooms, the treasure converts directly into time constant: $$\tau=R_{eq}C$$ or $$\tau=\frac{L}{R_{eq}}.$$</li>
+          <li>In second-order rooms, the treasure feeds damping through $$\alpha$$ and changes the roots.</li>
+          <li>The memory image is simple: resistance is the palace brake.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 7: The Scribe of Waveforms</h2>
+        <ul>
+          <li>A royal scribe writes four scrolls, one for each common transient shape.</li>
+          <li>Scroll one: pure first-order natural response, just initial value times a decay.</li>
+          <li>Scroll two: complete first-order response, final value plus a fading correction.</li>
+          <li>Scroll three: overdamped second-order response, a sum of two real exponentials.</li>
+          <li>Scroll four: critically damped and underdamped forms, including $$(A+Bt)e^{-\alpha t}$$ and $$e^{-\alpha t}\big(A\cos \omega_d t + B\sin \omega_d t\big).$$</li>
+          <li>The scribe's law is: once you know the family and the roots, the waveform form is no longer a guess.</li>
+        </ul>
+      </article>
+
+      <article class="room">
+        <h2>Room 8: Solomon's Throne Room</h2>
+        <ul>
+          <li>At the center of the palace sits a throne with the answer engraved on gold.</li>
+          <li>The wise judgment for this page is: one inductor means first-order RL.</li>
+          <li>The output dies to zero, so the response is a pure natural decay around zero.</li>
+          <li>The throne therefore commands the form first: $$v_O(t)=v_O(0^+)e^{-t/\tau}.$$</li>
+          <li>Only after the circuit work gives the actual values do you stamp the seal: $$v_O(t)=-4e^{-200t}\text{ V}.$$</li>
+          <li>The palace ending is the real lesson: family, continuity, final state, time scale, then waveform.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel section" data-view-panel="memory" hidden>
+    <div class="section-title">Recall Tokens</div>
+    <div class="memory">
+      <div class="cue">
+        <h3>Hermetic Gate</h3>
+        <p>Three symbols at the entrance ask the first question: RC, RL, or RLC. The family decides the law of motion.</p>
+      </div>
+      <div class="cue">
+        <h3>Thirty Statues</h3>
+        <p>Walk in order: initial condition, final value, speed parameter, waveform. The statue route prevents random solving.</p>
+      </div>
+      <div class="cue">
+        <h3>Phoenix Cloister</h3>
+        <p>Repeated arches hold the reusable formulas. The path repeats so the formulas repeat automatically.</p>
+      </div>
+      <div class="cue">
+        <h3>Solomon's Seal</h3>
+        <p>The final answer is a judgment, not a guess. Once the family and response type are known, the correct waveform form is already narrowed down.</p>
       </div>
     </div>
   </section>

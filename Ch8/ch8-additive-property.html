@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 8 Additive Property of Phasors</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="chapter8.css" />
+<link rel="stylesheet" href="../Ch7/linear-review.css" />
+<script src="../Ch7/page-visit-tracker.js" defer></script>
+<script src="../Ch7/linear-review.js" defer></script>
+</head>
+<body class="study-page">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Chapter 8 Home</a>
+    <a href="ch8-properties-of-phasors.html">Back: Properties</a>
+    <a href="ch8-derivative-property.html">Next: Derivative Property</a>
+  </nav>
+  <section class="hero">
+    <h1>Additive Property of Phasors</h1>
+    <p>When multiple sinusoids share the same frequency, their phasors add directly. This page turns the proof into a short path you can replay fast during review.</p>
+    <div class="eq">$$v(t)=v_1(t)+v_2(t)+\cdots+v_N(t)\quad\Longrightarrow\quad V=V_1+V_2+\cdots+V_N$$</div>
+  </section>
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Condition</div><div class="v">All sinusoids must have the same angular frequency.</div></div>
+          <div class="fact"><div class="k">Best Form</div><div class="v">Rectangular form makes phasor addition easiest.</div></div>
+          <div class="fact"><div class="k">Output</div><div class="v">Convert the final sum back to polar for the final waveform.</div></div>
+          <div class="fact"><div class="k">Picture</div><div class="v">It is just vector addition in the complex plane.</div></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-additive-property-room-1" data-room-id="ch8-additive-property-room-1" data-room-title="Room 1: Write Every Signal With the Same Rotating Factor" data-source-page="ch8-additive-property.html" data-tags="write,every,signal,with">
+            <h2>Room 1: Write Every Signal With the Same Rotating Factor</h2><ul><li>For same-frequency signals, $$v_k(t)=\Re\{V_ke^{j\omega t}\}.$$</li><li>Each signal has its own phasor $$V_k$$ but the same factor $$e^{j\omega t}.$$</li></ul></article>
+          <article class="room" id="room-ch8-additive-property-room-2" data-room-id="ch8-additive-property-room-2" data-room-title="Room 2: Add the Waveforms" data-source-page="ch8-additive-property.html" data-tags="waveforms">
+            <h2>Room 2: Add the Waveforms</h2><ul><li>Take $$v(t)=\sum v_k(t).$$</li><li>Because the real-part operator is additive, $$v(t)=\Re\{(V_1+V_2+\cdots+V_N)e^{j\omega t}\}.$$</li></ul></article>
+          <article class="room" id="room-ch8-additive-property-room-3" data-room-id="ch8-additive-property-room-3" data-room-title="Room 3: Read the Resulting Phasor" data-source-page="ch8-additive-property.html" data-tags="read,resulting,phasor">
+            <h2>Room 3: Read the Resulting Phasor</h2><ul><li>Compare the result to the standard phasor form $$v(t)=\Re\{Ve^{j\omega t}\}.$$</li><li>Therefore the new phasor is $$V=V_1+V_2+\cdots+V_N.$$</li></ul></article>
+          <article class="room" id="room-ch8-additive-property-room-4" data-room-id="ch8-additive-property-room-4" data-room-title="Room 4: Practical Workflow" data-source-page="ch8-additive-property.html" data-tags="practical,workflow">
+            <h2>Room 4: Practical Workflow</h2><ul><li>Convert each sinusoid to a phasor.</li><li>Change to rectangular form if needed.</li><li>Add real parts and imaginary parts.</li><li>Convert the sum to polar form and return to the time domain.</li></ul></article>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+</body>
+</html>

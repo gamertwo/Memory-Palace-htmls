@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-17 | Evaluate Zeq in Figure 8-25</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_17">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-12.html">Prev: Example 8-12</a><a href="ch8-example-8-13.html">Next: Example 8-13</a></nav>
+  <section class="hero"><div class="tag">Exercise 8-17</div><h1>Evaluate the Equivalent Impedance Without Tuning</h1><p class="hero-sub">This page reuses the Figure 8-25 formula, but now there is no resonance tuning. You simply substitute the given values into the equivalent-impedance formula and read both lanes of the answer. The memory emphasis is that the same parent formula can produce either a tuned real answer or a general complex answer depending on the frequency.</p><div class="formula-block">$$Z_{EQ}=500-j300\,\Omega$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-17.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">The Figure 8-25 values are fixed and the frequency is $1	ext{ krad/s}.$</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the equivalent impedance $Z_{EQ}$ of the circuit.</div></div>
+          <div class="fact"><div class="k">Target</div><div class="v">This is a direct evaluation question, not a tuning question.</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+          <div class="fact"><div class="k">Given Data</div><div class="v">$$\omega=1	ext{ krad/s},quad R=1	ext{ k}\Omega,quad L=200	ext{ mH},quad C=1\,\mu	ext{F}$$</div></div>
+          <div class="fact"><div class="k">Real Part</div><div class="v">$$R_{EQ}=500\,\Omega$$</div></div>
+          <div class="fact"><div class="k">Imaginary Part</div><div class="v">$$X_{EQ}=-300\,\Omega$$</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-17-room-1" data-room-id="ch8-exercise-8-17-room-1" data-room-title="Room 1: Bring in the Figure 8-25 Equivalent Formula" data-source-page="ch8-exercise-8-17.html" data-tags="bring,figure,equivalent,formula">
+            <h2>Room 1: Bring in the Figure 8-25 Equivalent Formula</h2>
+            <ul>
+              <li>From the application example, use $$Z_{EQ}=\frac{R}{1+(\omega RC)^2}+j\left[\omega L-\frac{\omega R^2C}{1+(\omega RC)^2}\right].$$</li>
+              <li>This exercise is again a substitution page, but this time you keep both the real and imaginary lanes.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-17-room-2" data-room-id="ch8-exercise-8-17-room-2" data-room-title="Room 2: Compute the Real Lane" data-source-page="ch8-exercise-8-17.html" data-tags="compute,real,lane">
+            <h2>Room 2: Compute the Real Lane</h2>
+            <ul>
+              <li>First evaluate $$\omega RC=(1000)(1000)(10^{-6})=1.$$</li>
+              <li>So $$R_{EQ}=\frac{R}{1+(\omega RC)^2}=\frac{1000}{1+1}=500\,\Omega.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-17-room-3" data-room-id="ch8-exercise-8-17-room-3" data-room-title="Room 3: Compute the Imaginary Lane" data-source-page="ch8-exercise-8-17.html" data-tags="compute,imaginary,lane">
+            <h2>Room 3: Compute the Imaginary Lane</h2>
+            <ul>
+              <li>Now use $$X_{EQ}=\omega L-\frac{\omega R^2C}{1+(\omega RC)^2}. $$</li>
+              <li>The first term is $$\omega L=(1000)(0.2)=200.$$</li>
+              <li>The second term is $$\frac{(1000)(1000^2)(10^{-6})}{1+1}=500.$$</li>
+              <li>So $$X_{EQ}=200-500=-300\,\Omega.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-17-room-4" data-room-id="ch8-exercise-8-17-room-4" data-room-title="Room 4: Reassemble the Complex Answer" data-source-page="ch8-exercise-8-17.html" data-tags="reassemble,complex,answer">
+            <h2>Room 4: Reassemble the Complex Answer</h2>
+            <ul>
+              <li>Combine the two lanes: $$Z_{EQ}=500-j300\,\Omega.$$</li>
+              <li>The negative imaginary part tells you the input looks net capacitive at this operating frequency.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-17-room-5" data-room-id="ch8-exercise-8-17-room-5" data-room-title="Room 5: State the Final Result for Both Methods" data-source-page="ch8-exercise-8-17.html" data-tags="state,final,result,both">
+            <h2>Room 5: State the Final Result for Both Methods</h2>
+            <ul>
+              <li>The textbook reports the same value for the hand solution and the Multisim check.</li>
+              <li>So for both parts, $$Z_{EQ}=500-j300\,\Omega.$$</li>
+              <li>This is the untuned version of the same parent circuit.</li>
+            </ul>
+          </article>
+        </div><div class="mini"><h3>Key Shortcut</h3><p>Use the same parent formula every time, but decide whether the question wants tuning or just direct evaluation.</p></div><div class="mini"><h3>Why This Flow Matters</h3><p>This page helps the Chapter 8 system feel unified. Once the equivalent formula is memorized, many later problems become pattern-recognition and substitution instead of fresh derivations.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Run the same route as the resonance page, but this time keep both lanes alive until the end.</p><div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Parent Formula</h3><p>The net carries in the Figure 8-25 equivalent formula.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$\omega RC=1$$</h3><p>Chalk simplifies the denominator immediately.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Read the Real Lane</h3><p>The mat stamps $$500\,\Omega.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Read the Imaginary Lane</h3><p>Fire stamps $$-300\,\Omega.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Complex Answer</h3><p>The coat boxes $$500-j300\,\Omega.$$</p></div>
+        </div><div class="flow-line"><span class="flow-pill">Catch formula</span><span class="flow-join">&rarr;</span><span class="flow-pill">Compute $$\omega RC$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Read real lane</span><span class="flow-join">&rarr;</span><span class="flow-pill">Read imag lane</span><span class="flow-join">&rarr;</span><span class="flow-pill">Box $$Z_{EQ}$$</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-17-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a stronger reminder about why a negative imaginary part means capacitive behavior."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+    </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.5 Q6 | First-Order Linear Equation</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="../linear-review.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}
+.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.5rem}
+.hero p{color:var(--muted);line-height:1.7}
+.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}
+.main-stack{display:grid;gap:1rem}
+.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.facts,.rooms,.path{display:grid;gap:.75rem}
+.facts{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.fact,.room,.station,.transition,.mini{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.fact .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.25rem}
+.fact .v,.room li,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
+.room h2,.mini h3,.station h3,.transition h3{font-size:.95rem;color:var(--accent);margin-bottom:.45rem}
+.room ul{padding-left:1.15rem}
+.palace-sidebar{position:sticky;top:1rem}
+.transition{border-style:dashed;background:rgba(255,255,255,.02)}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}
+.modal.open{display:flex}
+.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+.prompt-box{width:100%;min-height:260px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="math-index.html">Math Hub</a>
+    <a href="math-ex35-q5-linear.html">Prev: Ex 3.5 Q5</a>
+    <a href="math-ex35-q7-linear.html">Next: Ex 3.5 Q7</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Exercise 3.5 Question 6</h1>
+    <p>First divide by $$x+a$$. The equation becomes linear, the integrating factor is a negative power, and the right side collapses to a simple polynomial.</p>
+    <div class="eq">$$(x+a)\frac{dy}{dx}-3y=(x+a)^5\qquad\Longrightarrow\qquad \boxed{2y=(x+a)^5+2C(x+a)^3}$$</div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Standard Form</div><div class="v">$$y'-\frac{3}{x+a}y=(x+a)^4$$</div></div>
+          <div class="fact"><div class="k">Integrating Factor</div><div class="v">$$\mu(x)=e^{\int -3/(x+a)\,dx}=(x+a)^{-3}$$</div></div>
+          <div class="fact"><div class="k">Product Form</div><div class="v">$$\frac{d}{dx}\left[y(x+a)^{-3}\right]=x+a$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: Normalize</h2><ul><li>Divide by $$x+a$$:</li><li>$$\frac{dy}{dx}-\frac{3}{x+a}y=(x+a)^4.$$</li></ul></article>
+          <article class="room"><h2>Room 2: Integrating Factor</h2><ul><li>$$P(x)=-\frac{3}{x+a}$$ so</li><li>$$\mu(x)=e^{\int -3/(x+a)\,dx}=(x+a)^{-3}.$$</li></ul></article>
+          <article class="room"><h2>Room 3: Multiply Through</h2><ul><li>After multiplying by $$(x+a)^{-3},$$</li><li>$$\frac{d}{dx}\left[y(x+a)^{-3}\right]=x+a.$$</li></ul></article>
+          <article class="room"><h2>Room 4: Integrate</h2><ul><li>$$y(x+a)^{-3}=\int (x+a)\,dx=\frac{(x+a)^2}{2}+C.$$</li></ul></article>
+          <article class="room"><h2>Room 5: Final Answer</h2><ul><li>Multiply by $$(x+a)^3:$$</li><li>$$y=\frac{(x+a)^5}{2}+C(x+a)^3.$$</li><li>Hence $$\boxed{2y=(x+a)^5+2C(x+a)^3}.$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Here the integrating factor cancels most of the forcing power immediately. Always check that before expanding anything.</p></div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Normalize, store the negative-power integrating factor, then collect the easy polynomial integral.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Division Gate</h3><p>Divide by $$x+a$$ to expose the linear form.</p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>The coefficient of $$y$$ fixes the integrating factor.</p></div>
+        <div class="station"><h3>Station 2: Negative-Power Desk</h3><p>Store $$\mu(x)=(x+a)^{-3}.$$</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>Multiply through and cancel exponents.</p></div>
+        <div class="station"><h3>Station 3: Product Hall</h3><p>Recognize $$\dfrac{d}{dx}\left[y(x+a)^{-3}\right]=x+a.$$</p></div>
+        <div class="transition"><h3>Transition 3 to 4</h3><p>Now only one easy integral remains.</p></div>
+        <div class="station"><h3>Station 4: Final Seal</h3><p>Lock $$2y=(x+a)^5+2C(x+a)^3.$$</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">Use this prompt to generate alternate one-paragraph memory palaces.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this first-order linear differential-equation solution. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. Start from (x+a)y' - 3y = (x+a)^5.
+2. Divide by x+a to get y' - 3y/(x+a) = (x+a)^4.
+3. The integrating factor is (x+a)^(-3).
+4. Multiply through to get d[y(x+a)^(-3)]/dx = x+a.
+5. Integrate to get y(x+a)^(-3) = (x+a)^2/2 + C.
+6. Final answer is 2y = (x+a)^5 + 2C(x+a)^3.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex35q6Modal = document.getElementById('prompt-modal');
+const ex35q6Textarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => { ex35q6Modal.classList.add('open'); ex35q6Modal.setAttribute('aria-hidden', 'false'); });
+document.querySelectorAll('[data-close-prompt]').forEach((button) => button.addEventListener('click', () => { ex35q6Modal.classList.remove('open'); ex35q6Modal.setAttribute('aria-hidden', 'true'); }));
+ex35q6Modal.addEventListener('click', (event) => { if (event.target === ex35q6Modal) { ex35q6Modal.classList.remove('open'); ex35q6Modal.setAttribute('aria-hidden', 'true'); } });
+document.getElementById('copy-prompt').addEventListener('click', async () => { try { await navigator.clipboard.writeText(ex35q6Textarea.value); } catch (error) { ex35q6Textarea.focus(); ex35q6Textarea.select(); } });
+</script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

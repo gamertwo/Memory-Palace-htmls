@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Design Exercise 8-11 | Voltage Divider Output Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_design_exercise_8_11">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-design-exercise-8-12.html">Next: Design Exercise 8-12</a><a href="ch8-design-example-8-7.html">Prev: Design Example 8-7</a></nav>
+
+  <section class="hero">
+    <div class="tag">Design Exercise 8-11</div>
+    <h1>Design a Divider for a Shifted Cosine Output</h1>
+    <p class="hero-sub">This design page is now built around one memorization chain: confirm the phasors first, lock the divider ratio, lock the divider formula, rearrange it into a relation between $$Z_1$$ and $$Z_2,$$ convert that relation into polar form so the geometry is memorable, choose a practical $$Z_2$$ and know why, then use $$\omega$$ to pull out the final component values.</p>
+    <div class="formula-block">$$v_s(t)=50\cos(2000t)\text{ V},\qquad v_o(t)=25\cos(2000t-30^\circ)\text{ V}$$ $$V_O=\frac{Z_2}{Z_1+Z_2}V_S$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-design-exercise-8-11.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Confirmed Phasors</div><div class="v">$$V_S=50\angle0^\circ,\qquad V_O=25\angle-30^\circ$$</div></div>
+          <div class="fact"><div class="k">Target Ratio</div><div class="v">$$\frac{V_O}{V_S}=0.5\angle-30^\circ$$</div></div>
+          <div class="fact"><div class="k">Solved Relation</div><div class="v">$$Z_1=(0.7321+j1)Z_2=1.239\angle53.79^\circ Z_2$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-design-exercise-8-11-room-1" data-room-id="ch8-design-exercise-8-11-room-1" data-room-title="Room 1: Confirm the Phasors and the Divider Ratio" data-source-page="ch8-design-exercise-8-11.html" data-tags="confirm,phasors,divider,ratio">
+            <h2>Room 1: Confirm the Phasors and the Divider Ratio</h2>
+            <ul>
+              <li>The source is already in cosine-reference form, so $$V_S=50\angle0^\circ.$$</li>
+              <li>The required output is also already in cosine-reference form, so $$V_O=25\angle-30^\circ.$$</li>
+              <li>Before doing any design algebra, confirm the ratio you want the divider to produce: $$\frac{V_O}{V_S}=\frac{25\angle-30^\circ}{50\angle0^\circ}=0.5\angle-30^\circ.$$</li>
+              <li>This ratio is the design target you must memorize first, because the whole divider equation has to reproduce this exact magnitude and angle.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-design-exercise-8-11-room-2" data-room-id="ch8-design-exercise-8-11-room-2" data-room-title="Room 2: Lock the Divider Formula and Substitute the Ratio" data-source-page="ch8-design-exercise-8-11.html" data-tags="lock,divider,formula,substitute">
+            <h2>Room 2: Lock the Divider Formula and Substitute the Ratio</h2>
+            <ul>
+              <li>The formula to memorize is the divider law: $$V_O=\dfrac{Z_2}{Z_1+Z_2}V_S.$$</li>
+              <li>Divide both sides by $$V_S$$ so the ratio stands alone: $$\frac{V_O}{V_S}=\frac{Z_2}{Z_1+Z_2}.$$</li>
+              <li>Now substitute the confirmed target ratio: $$0.5\angle-30^\circ=\frac{Z_2}{Z_1+Z_2}.$$</li>
+              <li>This is the core design equation. Everything that follows is just rearranging this ratio into a usable relationship between the two impedances.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-design-exercise-8-11-room-3" data-room-id="ch8-design-exercise-8-11-room-3" data-room-title="Room 3: Rearrange for the Relation Between $$Z_1$$ and $$Z_2$$" data-source-page="ch8-design-exercise-8-11.html" data-tags="rearrange,relation,between">
+            <h2>Room 3: Rearrange for the Relation Between $$Z_1$$ and $$Z_2$$</h2>
+            <ul>
+              <li>Rearrange the divider equation so $$Z_1$$ stands alone: $$Z_1=\left(\frac{1}{0.5\angle-30^\circ}-1\right)Z_2.$$</li>
+              <li>Now simplify the coefficient carefully. Since $$\frac{1}{0.5\angle-30^\circ}=2\angle30^\circ,$$ convert that polar form into rectangular form: $$2\angle30^\circ=2(\cos30^\circ+j\sin30^\circ)=1.732+j1.$$</li>
+              <li>Subtract 1 from the real part: $$(1.732+j1)-1=0.7321+j1.$$</li>
+              <li>So the rectangular relation is $$Z_1=(0.7321+j1)Z_2.$$</li>
+              <li>Now extend the picture into polar form. The coefficient magnitude is $$\sqrt{0.7321^2+1^2}=1.239,$$ and the angle is $$\tan^{-1}\left(\frac{1}{0.7321}\right)=53.79^\circ.$$</li>
+              <li>So the same design relation in polar form is $$Z_1=1.239\angle53.79^\circ Z_2.$$ This polar version is useful because it tells you instantly that $$Z_1$$ must be larger than $$Z_2$$ and tilted into the inductive quadrant.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-design-exercise-8-11-room-4" data-room-id="ch8-design-exercise-8-11-room-4" data-room-title="Room 4: Choose a Practical $$Z_2$$ and Know Why" data-source-page="ch8-design-exercise-8-11.html" data-tags="choose,practical,know">
+            <h2>Room 4: Choose a Practical $$Z_2$$ and Know Why</h2>
+            <ul>
+              <li>This equation gives a family of valid solutions, not just one answer, so now you choose a practical $$Z_2.$$</li>
+              <li>A simple and useful choice is $$Z_2=1000\,\Omega.$$ This is nice because it is purely real, easy to implement as a standard resistor, and it keeps the arithmetic simple.</li>
+              <li>Substitute it into the relation: $$Z_1=(0.7321+j1)(1000)=732+j1000\,\Omega.$$</li>
+              <li>That means $$Z_1$$ contains a 732-ohm resistor part and an inductive reactance of $$+1000\,\Omega.$$</li>
+              <li>The reason this is a good choice is that it produces ordinary positive component values and a physically reasonable inductor instead of forcing awkward or nonphysical parts.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-design-exercise-8-11-room-5" data-room-id="ch8-design-exercise-8-11-room-5" data-room-title="Room 5: Use $$\omega$$ to Pull Out the Final Values" data-source-page="ch8-design-exercise-8-11.html" data-tags="omega,pull,final,values">
+            <h2>Room 5: Use $$\omega$$ to Pull Out the Final Values</h2>
+            <ul>
+              <li>Because $$\omega=2000,$$ the inductive part $$+j1000$$ means $$\omega L=1000,$$ so $$L=1000/2000=0.5\text{ H}.$$</li>
+              <li>The chosen $$Z_2$$ is purely real, so it is simply a 1-kΩ resistor.</li>
+              <li>The real part of $$Z_1$$ is another resistor: $$R=732\,\Omega.$$</li>
+              <li>So one practical final design is $$Z_2=1000\,\Omega$$ and $$Z_1=732+j1000\,\Omega,$$ implemented by a 1-kΩ resistor on one side and a 732-Ω resistor in series with a 0.5-H inductor on the other.</li>
+              <li>Other choices of $$Z_2$$ are possible, but this one is memorable because it uses a clean resistor for $$Z_2$$ and lets $$\omega$$ pull the inductance directly from $$+j1000.$$ </li>
+            </ul>
+          </article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>First memorize the confirmed phasors, then the target ratio, then the divider law. After that, the design becomes one rearrangement plus one practical choice.</p></div>
+        <div class="mini"><h3>Why The Polar Form of the Relation Helps</h3><p>The rectangular form $$0.7321+j1$$ is good for multiplying by your chosen $$Z_2,$$ but the polar form $$1.239\angle53.79^\circ$$ is easier to remember visually. It tells you the multiplier is larger than 1 and tilted into the positive imaginary direction, so $$Z_1$$ must have an inductive flavor.</p></div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Walk this as one linked design-palace route from the memory-forum style: confirm the phasors first, light the target ratio, lock the divider formula, stretch the algebra until $$Z_1$$ stands alone, rotate that relation into polar form, choose the most memorable $$Z_2$$ and know why, then let $$\omega$$ pull out the resistor and inductor values.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Net Gate: Confirm the Phasors</h3><p>The net catches the source and output phasors and makes you say them aloud: $$V_S=50\angle0^\circ$$ and $$V_O=25\angle-30^\circ.$$ Nothing moves forward until those two phasors are confirmed.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Ratio Hall: Ignite the Divider Target</h3><p>Fire burns the ratio onto the wall: $$V_O/V_S=0.5\angle-30^\circ.$$ This is the first major thing to memorize, because the divider must reproduce this exact magnitude and angle.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Chalk Wall: Lock the Divider Formula</h3><p>The divider law is painted huge: $$V_O=\dfrac{Z_2}{Z_1+Z_2}V_S.$$ Then it is simplified into ratio form and the target is pushed into it: $$0.5\angle-30^\circ=\dfrac{Z_2}{Z_1+Z_2}.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Algebra Mat: Stretch Until $$Z_1$$ Stands Alone</h3><p>The whole divider equation is rolled across the mat until the left side contains one clean block: $$Z_1=\left(\dfrac{1}{0.5\angle-30^\circ}-1\right)Z_2.$$ Then the mat simplifies the coefficient into $$0.7321+j1.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">92 Sword</div><h3>Sword Hall: Rotate the Relation into Polar Form</h3><p>A sword carves the coefficient into a triangle, measuring the magnitude $$1.239$$ and the angle $$53.79^\circ.$$ Now the relation is seen in both forms: $$Z_1=(0.7321+j1)Z_2=1.239\angle53.79^\circ Z_2.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Case Hall: Choose $$Z_2=1000$$ and Know Why</h3><p>The case presents different possible $$Z_2$$ blocks, but you deliberately choose $$Z_2=1000\,\Omega$$ because it is purely real, easy to build, and keeps the resulting design physically reasonable. Once dropped into the relation, it pulls out $$Z_1=732+j1000.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Omega Coat Exit: Pull Out the Final Values</h3><p>The $$\omega=2000$$ wheel and the coat wrap the impedance pieces into physical components: $$Z_2\to1\text{ k}\Omega,$$ the real part of $$Z_1$$ becomes $$732\,\Omega,$$ and $$+j1000$$ becomes $$L=0.5\text{ H}.$$ The route ends on the final built divider.</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Confirm Phasors</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Lock Ratio</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Divider Law</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Solve $$Z_1/Z_2$$ Relation</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Polar Form</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Choose $$Z_2$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Use $$\omega$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Final Design</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-design-exercise-8-11-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a stronger visual reason for why Z2=1000 ohms is a good choice."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script src="study.js"></script><script src="../linear-review.js" defer></script>
+</body>
+</html>

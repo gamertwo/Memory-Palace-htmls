@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-13 | Maxwell Bridge Balance</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_13">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-9.html">Next: Example 8-9</a><a href="ch8-design-exercise-8-12.html">Prev: Design Exercise 8-12</a></nav>
+  <section class="hero">
+    <div class="tag">Exercise 8-13</div>
+    <h1>Find the Maxwell Bridge Balance Relations</h1>
+    <p class="hero-sub">This page is now a fuller algebra-palace route: catch the bridge arms, lock the balance equation, substitute the parallel RC model for the unknown arm, clear the denominator, then split the equation into real and imaginary lanes so the two final formulas fall out cleanly.</p>
+    <div class="formula-block">$$Z_1=R_1+j\omega L_1,\qquad Z_2=R_2,\qquad Z_3=R_3,\qquad Z_X=R_X\parallel\frac{1}{j\omega C_X}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-13.html">Open in Memory Builder</a></div>
+  </section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Balance Law</div><div class="v">Use the bridge balance condition so opposite-arm ratios match.</div></div>
+          <div class="fact"><div class="k">Unknown Arm</div><div class="v">$$Z_X=\dfrac{R_X}{1+j\omega C_XR_X}$$</div></div>
+          <div class="fact"><div class="k">Answer</div><div class="v">$$R_X=\dfrac{R_2R_3}{R_1},\qquad C_X=\dfrac{L_1}{R_2R_3}$$</div></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-13-room-1" data-room-id="ch8-exercise-8-13-room-1" data-room-title="Room 1: Write the Bridge Balance Condition" data-source-page="ch8-exercise-8-13.html" data-tags="write,bridge,balance,condition">
+            <h2>Room 1: Write the Bridge Balance Condition</h2>
+            <ul>
+              <li>For bridge balance, the opposite-arm ratios must match. A convenient form here is $$\dfrac{Z_1}{Z_2}=\dfrac{Z_3}{Z_X}.$$</li>
+              <li>Rearrange immediately into a multiplication form that is easier to memorize: $$Z_1Z_X=Z_2Z_3.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-13-room-2" data-room-id="ch8-exercise-8-13-room-2" data-room-title="Room 2: Substitute the Arm Models" data-source-page="ch8-exercise-8-13.html" data-tags="substitute,models">
+            <h2>Room 2: Substitute the Arm Models</h2>
+            <ul>
+              <li>Use $$Z_1=R_1+j\omega L_1,\quad Z_2=R_2,\quad Z_3=R_3,\quad Z_X=\dfrac{R_X}{1+j\omega C_XR_X}.$$</li>
+              <li>Substituting into the balance equation gives $$\left(R_1+j\omega L_1\right)\frac{R_X}{1+j\omega C_XR_X}=R_2R_3.$$</li>
+              <li>At this point the whole puzzle is hidden in the denominator of the unknown arm, so the next move must clear it.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-13-room-3" data-room-id="ch8-exercise-8-13-room-3" data-room-title="Room 3: Clear the Denominator" data-source-page="ch8-exercise-8-13.html" data-tags="clear,denominator">
+            <h2>Room 3: Clear the Denominator</h2>
+            <ul>
+              <li>Multiply both sides by $$1+j\omega C_XR_X.$$</li>
+              <li>That produces $$R_X(R_1+j\omega L_1)=R_2R_3(1+j\omega C_XR_X).$$</li>
+              <li>This is the key balanced form because now both sides can be split into real and imaginary parts separately.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-13-room-4" data-room-id="ch8-exercise-8-13-room-4" data-room-title="Room 4: Match Real Parts" data-source-page="ch8-exercise-8-13.html" data-tags="match,real,parts">
+            <h2>Room 4: Match Real Parts</h2>
+            <ul>
+              <li>On the left, the real part is $$R_XR_1.$$</li>
+              <li>On the right, the real part is $$R_2R_3.$$</li>
+              <li>So the real-part equation is $$R_XR_1=R_2R_3,$$ which gives $$\boxed{R_X=\dfrac{R_2R_3}{R_1}}.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-13-room-5" data-room-id="ch8-exercise-8-13-room-5" data-room-title="Room 5: Match Imaginary Parts" data-source-page="ch8-exercise-8-13.html" data-tags="match,imaginary,parts">
+            <h2>Room 5: Match Imaginary Parts</h2>
+            <ul>
+              <li>On the left, the imaginary part is $$\omega L_1R_X.$$</li>
+              <li>On the right, the imaginary part is $$\omega C_XR_XR_2R_3.$$</li>
+              <li>Cancel the common factor $$\omega R_X,$$ giving $$L_1=C_XR_2R_3.$$</li>
+              <li>So the second balance formula is $$\boxed{C_X=\dfrac{L_1}{R_2R_3}}.$$</li>
+            </ul>
+          </article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Bridge problems become much calmer once you clear the denominator and then compare real and imaginary parts separately. That is the whole movie.</p></div>
+        <div class="mini"><h3>Why The Split Works</h3><p>Once the denominator is gone, the equation becomes one complex balance with a real lane and an imaginary lane. Matching those two lanes independently is what makes the unknown resistance and capacitance fall out cleanly.</p></div>
+      </section>
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Walk this like a real algebra palace: catch the bridge arms, lock the balance law, push the unknown arm model into the equation, clear the denominator, then split the equation into a real lane and an imaginary lane so the two final formulas drop out one after the other.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Net Gate: Catch All Four Arms</h3><p>The net catches $$Z_1,Z_2,Z_3,$$ and the unknown arm $$Z_X.$$ The unknown arm glows differently because it is really a parallel RC hidden inside one symbol.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Chalk Wall: Lock the Bridge Balance Law</h3><p>Chalk paints the balance equation huge across the bridge: $$\dfrac{Z_1}{Z_2}=\dfrac{Z_3}{Z_X},$$ then rewrites it into the more memorable product form $$Z_1Z_X=Z_2Z_3.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Knife Table: Insert the Unknown Arm Model</h3><p>The knife slices open $$Z_X$$ and reveals the inside mechanism $$\dfrac{R_X}{1+j\omega C_XR_X}.$$ That whole substituted block is pushed into the bridge equation.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Balance Mat: Clear the Denominator</h3><p>The mat rolls the equation flat until the denominator disappears, leaving $$R_X(R_1+j\omega L_1)=R_2R_3(1+j\omega C_XR_X).$$ Now the equation is ready to split into two clean lanes.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Fire Hall: Burn the Real Lane</h3><p>Fire lights only the real parts first, leaving $$R_XR_1=R_2R_3.$$ That instantly pulls out $$R_X=\dfrac{R_2R_3}{R_1}.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Case Hall: Seal the Imaginary Lane</h3><p>The remaining imaginary lane gives $$\omega L_1R_X=\omega C_XR_XR_2R_3.$$ After canceling the common pieces, the case seals $$C_X=\dfrac{L_1}{R_2R_3}.$$</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Catch Arms</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Balance Law</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Substitute $$Z_X$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Clear Denominator</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Real Lane</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Imaginary Lane</span>
+        </div>
+      </section>
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-13-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a slower explanation for the bridge-balance algebra."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script><script src="../linear-review.js" defer></script>
+</body>
+</html>

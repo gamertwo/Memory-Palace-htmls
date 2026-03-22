@@ -136,7 +136,7 @@ a{color:inherit}
   border-style:dashed;
   background:rgba(255,255,255,.02);
 }
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-row{display:flex;gap:.65rem;justify-content:flex-end;margin-top:.85rem;flex-wrap:wrap}
 .tool-btn,.ghost-btn{
   border:1px solid var(--line);
   border-radius:999px;
@@ -148,6 +148,7 @@ a{color:inherit}
   background:rgba(255,255,255,.03);
 }
 .tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.tool-btn.is-active{background:rgba(255,208,138,.16);border-color:rgba(255,208,138,.35);box-shadow:0 0 0 1px rgba(255,208,138,.18) inset}
 .modal{
   position:fixed;
   inset:0;
@@ -213,7 +214,7 @@ a{color:inherit}
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="content-grid" data-view-panel="default">
     <div class="main-stack">
       <section class="panel">
         <div class="section-title">Quick Data</div>
@@ -391,6 +392,37 @@ a{color:inherit}
         </div>
       </div>
     </aside>
+  </div>
+  <div class="content-grid" data-view-panel="memory" hidden>
+    <div class="main-stack">
+      <section
+        class="panel"
+        data-view-label="Memory"
+        data-view-button-label="Memory"
+        data-review-mode-title="Memory Palace Review"
+        data-review-mode-copy="This palace stores one parallel-RLC chain: equation, roots, current template, two initial conditions, then voltage and resistor current. The memory goal is to know which quantity generates the next one."
+        data-review-prompt="Walk the chain in order first: equation, roots, current, derivative condition, voltage, branch current."
+        data-review-reveal-copy="Reveal the current memory room when you are ready to compare it against the worked showcase beneath it."
+        data-review-action-copy="Rate how well you remembered the dependency chain, then move forward."
+        data-view-hero-title="Example 7-20 Memory Palace"
+        data-view-hero-copy="This memory route treats the parallel RLC solution like a relay race. The characteristic equation hands the baton to the roots, the roots hand it to the inductor-current form, the initial conditions lock the constants, and the current then generates both voltage and resistor current."
+        data-view-hero-eq="Remember $$\text{equation} \rightarrow \text{roots} \rightarrow i_L(t) \rightarrow v_C(t) \rightarrow i_R(t).$$"
+      >
+        <div class="section-title">Memory Palace Route</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: The Parallel Gate</h2><ul><li>The gate stores the parallel characteristic equation.</li><li>Everything else in the example flows from this entrance.</li></ul></article>
+          <article class="room"><h2>Room 2: The Root Vault</h2><ul><li>The roots sit in a vault as the underdamped pair.</li><li>The vault teaches that complex roots force the cosine-sine template.</li></ul></article>
+          <article class="room"><h2>Room 3: The Current Throne</h2><ul><li>The inductor current sits at the center because it is solved first.</li><li>This throne reminds you that other waveforms depend on it.</li></ul></article>
+          <article class="room"><h2>Room 4: The First Lock</h2><ul><li>The current initial condition locks $$K_1.$$</li><li>This is the easy key.</li></ul></article>
+          <article class="room"><h2>Room 5: The Derivative Bridge</h2><ul><li>The capacitor-voltage initial condition crosses over into a derivative condition on $$i_L.$$</li><li>This bridge locks $$K_2.$$</li></ul></article>
+          <article class="room"><h2>Room 6: The Current Seal</h2><ul><li>Once both constants are known, the inductor current is sealed.</li><li>The current waveform becomes the generator for everything downstream.</li></ul></article>
+          <article class="room"><h2>Room 7: The Voltage Hall</h2><ul><li>Differentiating the current and multiplying by $$L$$ produces the shared branch voltage.</li><li>This hall stores the parallel identity $$v_L=v_C=v_R.$$</li></ul></article>
+          <article class="room"><h2>Room 8: The Branch Exit</h2><ul><li>At the exit, Ohm's law turns the shared voltage into resistor current.</li><li>The last seal is KCL: the branch currents must fit together.</li></ul></article>
+        </div>
+      </section>
+      <section class="panel"><div class="section-title">Recall Tokens</div><div class="facts"><div class="fact"><div class="k">Parallel Gate</div><div class="v">Start with the characteristic equation.</div></div><div class="fact"><div class="k">Current Throne</div><div class="v">Solve $$i_L(t)$$ first.</div></div><div class="fact"><div class="k">Voltage Hall</div><div class="v">Differentiate current to get voltage.</div></div><div class="fact"><div class="k">Showcase</div><div class="v">Use the worked room beneath each locus.</div></div></div></section>
+    </div>
+    <aside class="palace-sidebar"><div class="section-title">Palace Path</div><p class="palace-intro">This route is a dependency chain: every later quantity is generated by an earlier one.</p><div class="path"><div class="station"><h3>Station 1: Gate</h3><p>Equation first.</p></div><div class="transition"><h3>Transition 1 to 2</h3><p>Roots choose the current form.</p></div><div class="station"><h3>Station 2: Current Throne</h3><p>Initial conditions fix $$i_L(t).$$</p></div><div class="transition"><h3>Transition 2 to 3</h3><p>Current then generates voltage and resistor current.</p></div><div class="station"><h3>Station 3: Branch Exit</h3><p>Voltage to resistor current is the last simple step.</p></div></div></aside>
   </div>
 </main>
 

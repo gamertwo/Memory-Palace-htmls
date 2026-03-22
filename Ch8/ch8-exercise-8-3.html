@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-3 | Add Two Current Phasors</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_3">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-2.html">Next: Example 8-2</a><a href="ch8-example-8-1.html">Prev: Example 8-1</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-3</div>
+    <h1>Construct and Add Current Phasors</h1>
+    <p class="hero-sub">This exercise repeats the additive-property flow with current signals. The muscle memory is the same: catch both waveforms, confirm the common angular frequency, convert to phasors, add in rectangular form, then coat the one result back into a cosine current.</p>
+    <div class="formula-block">$$i_1(t)=100\cos(2000t)\text{ mA}\qquad i_2(t)=50\cos(2000t-60^\circ)\text{ mA}$$ $$i(t)=i_1(t)+i_2(t)$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-3.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Phasors</div><div class="v">$$I_1=100\angle0^\circ,\qquad I_2=50\angle-60^\circ$$</div></div>
+          <div class="fact"><div class="k">Rectangular Pieces</div><div class="v">$$I_1=100+j0,\qquad I_2=25-j43.3\text{ mA}$$</div></div>
+          <div class="fact"><div class="k">Answer Form</div><div class="v">One current phasor and one final current waveform.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-3-room-1" data-room-id="ch8-exercise-8-3-room-1" data-room-title="Room 1: Match the Frequency" data-source-page="ch8-exercise-8-3.html" data-tags="match,frequency">
+            <h2>Room 1: Match the Frequency</h2><ul><li>Check the frequency before you add. Both currents use $$\omega=2000,$$ so they may be represented in one phasor diagram and added.</li><li>Now read the two cosines directly into polar phasor form: $$I_1=100\angle0^\circ,\quad I_2=50\angle-60^\circ.$$</li><li>The first current has phase $$0^\circ,$$ so its phasor lies exactly on the positive real axis.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-3-room-2" data-room-id="ch8-exercise-8-3-room-2" data-room-title="Room 2: Split the Second Current" data-source-page="ch8-exercise-8-3.html" data-tags="split,second,current">
+            <h2>Room 2: Split the Second Current</h2><ul><li>The first phasor is already easy in rectangular form: $$I_1=100\angle0^\circ=100+j0\text{ mA}.$$</li><li>Now convert the tilted phasor with $$M\angle\theta=M(\cos\theta+j\sin\theta).$$</li><li>So $$I_2=50(\cos-60^\circ+j\sin-60^\circ).$$</li><li>Use $$\cos-60^\circ=\frac12$$ and $$\sin-60^\circ=-\frac{\sqrt3}{2}\approx-0.866.$$</li><li>That gives real part $$50\cdot\frac12=25$$ and imaginary part $$50(-0.866)=-43.3.$$</li><li>Therefore $$I_2=25-j43.3\text{ mA}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-3-room-3" data-room-id="ch8-exercise-8-3-room-3" data-room-title="Room 3: Add on the Mat" data-source-page="ch8-exercise-8-3.html" data-tags="">
+            <h2>Room 3: Add on the Mat</h2><ul><li>Now both currents are in rectangular form, so add horizontal and vertical parts separately.</li><li>$$I=I_1+I_2=(100+25)+j(0-43.3).$$</li><li>So the combined current is $$I=125-j43.3\text{ mA}.$$</li><li>The positive real part and negative imaginary part tell you the sum sits in quadrant IV before you even rebuild the angle.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-3-room-4" data-room-id="ch8-exercise-8-3-room-4" data-room-title="Room 4: Rebuild Polar Form" data-source-page="ch8-exercise-8-3.html" data-tags="rebuild,polar,form">
+            <h2>Room 4: Rebuild Polar Form</h2><ul><li>Find the magnitude from the rectangular coordinates: $$|I|=\sqrt{125^2+43.3^2}\approx132\text{ mA}.$$</li><li>Find the angle from the tangent ratio: $$\theta=\tan^{-1}\left(\frac{-43.3}{125}\right)\approx-19.1^\circ.$$</li><li>Because the real part is positive and the imaginary part is negative, the phasor lies in quadrant IV, so the negative angle is the correct one.</li><li>Thus $$I=132\angle-19.1^\circ\text{ mA}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-3-room-5" data-room-id="ch8-exercise-8-3-room-5" data-room-title="Room 5: Coat the Final Wave" data-source-page="ch8-exercise-8-3.html" data-tags="coat,final,wave">
+            <h2>Room 5: Coat the Final Wave</h2><ul><li>Return to the time domain with the same angular frequency $$\omega=2000.$$</li><li>Use the coat rule $$M\angle\theta\rightarrow M\cos(\omega t+\theta).$$</li><li>That means amplitude $$132,$$ frequency term $$2000t,$$ and phase shift $$-19.1^\circ.$$</li><li>So $$\boxed{i(t)=132\cos(2000t-19.1^\circ)\text{ mA}}$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>The first current already lies on the real axis, so only the second current really needs the knife treatment before the mat addition.</p></div>
+        <div class="mini"><h3>Why The Addition Is Easy Here</h3><p>$$I_1$$ is already sitting on the positive real axis as $$100+j0,$$ so the only real conversion work is for $$I_2.$$ Once $$I_2$$ is split into its rectangular pieces, the addition becomes simple bookkeeping: add the real parts, add the imaginary parts, then rebuild one final magnitude-angle phasor from the result.</p></div>
+        <div class="mini"><h3>Rectangular Form As Coordinates</h3><p>Think of $$125-j43.3$$ as the point $$(125,-43.3)$$ in the phasor plane. The magnitude is then the distance from the origin, and the phase is the direction from the positive real axis. That geometric picture is why rectangular form is so useful right after addition.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

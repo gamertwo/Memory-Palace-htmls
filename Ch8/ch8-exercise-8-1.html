@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-1 | Sinusoids to Phasors</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_1">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-2.html">Next: Exercise 8-2</a><a href="ch8-example-8-1.html">Example 8-1</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-1</div>
+    <h1>Convert Sinusoids to Phasors</h1>
+    <p class="hero-sub">This page trains the first Chapter 8 reflex: catch the sinusoid exactly as written, keep the cosine reference, read amplitude and phase directly into polar form, and switch to rectangular form only when the job demands addition. Parts (a) and (b) are direct reads. Part (c) is the real training step because the two terms share the same angular frequency, so they can be converted to phasors and combined as one current.</p>
+    <div class="formula-block">$$\text{(a) }v(t)=20\cos(150t-60^\circ)\text{ V}\qquad \text{(b) }v(t)=10\cos(1000t+180^\circ)\text{ V}$$ $$\text{(c) }i(t)=-4\cos 3t+3\cos(3t-90^\circ)\text{ A}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-1.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Core Rule</div><div class="v">$$A\cos(\omega t+\phi)\rightarrow A\angle\phi$$</div></div>
+          <div class="fact"><div class="k">Rectangular Form</div><div class="v">$$M\angle\theta=M(\cos\theta+j\sin\theta),$$ which is the safe form for addition.</div></div>
+          <div class="fact"><div class="k">Part (c)</div><div class="v">Both terms use $$\omega=3,$$ so the phasor pieces belong on one addition mat.</div></div>
+          <div class="fact"><div class="k">Reading Rule</div><div class="v">Amplitude becomes magnitude, and the angle inside the cosine becomes the phasor angle.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-1-room-1" data-room-id="ch8-exercise-8-1-room-1" data-room-title="Room 1: Catch the Standard Form" data-source-page="ch8-exercise-8-1.html" data-tags="catch,standard,form">
+            <h2>Room 1: Catch the Standard Form</h2><ul><li>Use the cosine-reference rule $$A\cos(\omega t+\phi)\rightarrow A\angle\phi.$$</li><li>The coefficient in front of cosine becomes the phasor magnitude, and the angle inside the cosine becomes the phasor phase.</li><li>The frequency term such as $$150t$$ or $$1000t$$ tells you the angular frequency, but it does not enter the phasor angle itself.</li><li>If a negative amplitude appears, rewrite it as a positive amplitude with a $$180^\circ$$ phase shift so the phasor still fits the standard cosine rule.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-1-room-2" data-room-id="ch8-exercise-8-1-room-2" data-room-title="Room 2: Part (a)" data-source-page="ch8-exercise-8-1.html" data-tags="part">
+            <h2>Room 2: Part (a)</h2><ul><li>$$v(t)=20\cos(150t-60^\circ)\Rightarrow V=20\angle-60^\circ.$$</li><li>This read is direct: amplitude $$20$$ becomes magnitude $$20,$$ and phase $$-60^\circ$$ becomes the phasor angle.</li><li>To convert polar to rectangular, use $$M\angle\theta=M(\cos\theta+j\sin\theta).$$</li><li>So $$V=20(\cos-60^\circ+j\sin-60^\circ).$$</li><li>Now evaluate the trig parts: $$\cos-60^\circ=\frac{1}{2}$$ and $$\sin-60^\circ=-\frac{\sqrt{3}}{2}\approx-0.866.$$</li><li>Multiply each part by $$20:$$ the real part is $$20\cdot\frac{1}{2}=10,$$ and the imaginary part is $$20\cdot(-0.866)\approx-17.3.$$</li><li>Therefore $$V=10-j17.3\text{ V}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-1-room-3" data-room-id="ch8-exercise-8-1-room-3" data-room-title="Room 3: Part (b)" data-source-page="ch8-exercise-8-1.html" data-tags="part">
+            <h2>Room 3: Part (b)</h2><ul><li>$$v(t)=10\cos(1000t+180^\circ)\Rightarrow V=10\angle180^\circ.$$</li><li>Again the read is direct: magnitude $$10,$$ phase $$180^\circ.$$</li><li>Now convert to rectangular form with $$V=10(\cos180^\circ+j\sin180^\circ).$$</li><li>At $$180^\circ,$$ the phasor lies exactly on the negative real axis, so $$\cos180^\circ=-1$$ and $$\sin180^\circ=0.$$</li><li>That gives real part $$10(-1)=-10$$ and imaginary part $$10(0)=0.$$</li><li>So $$V=-10+j0\text{ V}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-1-room-4" data-room-id="ch8-exercise-8-1-room-4" data-room-title="Room 4: Part (c) Rectangular Combination" data-source-page="ch8-exercise-8-1.html" data-tags="part,rectangular,combination">
+            <h2>Room 4: Part (c) Rectangular Combination</h2><ul><li>First check whether the two terms can even be combined as phasors. They can, because both terms use the same angular frequency $$\omega=3.$$ That means both rotating arrows spin at the same rate, so they live in the same phasor picture and may be added.</li><li>If the frequencies were different, like one term with $$\omega=3$$ and another with $$\omega=5,$$ then they would not be combined into one single phasor.</li><li>Now look at the first term: $$-4\cos 3t.$$ The problem is the negative amplitude. Phasor form is easiest when the magnitude is positive, so we rewrite the signal without changing its meaning.</li><li>Use the identity $$-\cos\theta=\cos(\theta+180^\circ).$$ That is why $$-4\cos 3t=4\cos(3t+180^\circ).$$</li><li>This rewrite keeps the wave the same, but moves the minus sign into the phase angle. So now the term is in standard cosine form with positive magnitude.</li><li>Read it as a phasor: magnitude $$4,$$ phase $$180^\circ,$$ so the phasor is $$4\angle180^\circ.$$</li><li>Convert that to rectangular form using $$M(\cos\theta+j\sin\theta):$$ $$4\angle180^\circ=4(\cos180^\circ+j\sin180^\circ).$$</li><li>Since $$\cos180^\circ=-1$$ and $$\sin180^\circ=0,$$ this becomes $$4(-1+j0)=-4+j0.$$</li><li>Now do the second term: $$3\cos(3t-90^\circ).$$ This is already in standard cosine form, so it reads directly as $$3\angle-90^\circ.$$</li><li>Convert it to rectangular form: $$3(\cos-90^\circ+j\sin-90^\circ).$$ Since $$\cos-90^\circ=0$$ and $$\sin-90^\circ=-1,$$ this becomes $$3(0-j)=0-j3.$$</li><li>Now both phasors are in rectangular form, which is the safest form for addition because you add real parts together and imaginary parts together.</li><li>So $$I=(-4+j0)+(0-j3)=(-4+0)+j(0-3)=-4-j3\text{ A}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-1-room-5" data-room-id="ch8-exercise-8-1-room-5" data-room-title="Room 5: Part (c) Polar Finish" data-source-page="ch8-exercise-8-1.html" data-tags="part,polar,finish">
+            <h2>Room 5: Part (c) Polar Finish</h2><ul><li>Magnitude: $$|I|=\sqrt{(-4)^2+(-3)^2}=5.$$</li><li>The point $$(-4,-3)$$ is in quadrant III, so the final phase must point into the lower-left region.</li><li>That gives $$\theta=-143.1^\circ,$$ so $$\boxed{I=5\angle-143.1^\circ=-4-j3\text{ A}}.$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Use polar form when you are reading one sinusoid: amplitude becomes magnitude and the cosine angle becomes phase. Use rectangular form when you must add phasor pieces, because rectangular form separates the real axis part from the imaginary axis part. That is why parts (a) and (b) can be read quickly, but part (c) must pass through $$-4+j0$$ and $$0-j3$$ before the final polar answer is boxed.</p></div>
+        <div class="mini"><h3>Why Part (c) Works</h3><p>Phasor addition only makes sense when the sinusoids share one angular frequency. Here both terms use $$\omega=3,$$ so they can be viewed as two arrows in the same phasor plane. The negative cosine becomes a $$180^\circ$$ phasor, the $$-90^\circ$$ term supplies the negative imaginary part, and the rectangular sum tells you the exact combined current before you convert back to polar form.</p></div>
+        <div class="mini"><h3>How To Convert</h3><p>For every single term, follow the same three-step routine: first read the cosine into polar form, second expand $$M\angle\theta$$ into $$M(\cos\theta+j\sin\theta),$$ and third evaluate cosine for the real part and sine for the imaginary part. If you remember that “cosine gives the horizontal part and sine gives the vertical imaginary part,” the rectangular conversion becomes much easier to control.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

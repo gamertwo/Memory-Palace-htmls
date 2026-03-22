@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Gauss's Law and Net Flux | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --page:#0d131a;
+  --page-2:#18212c;
+  --paper:#141c25;
+  --ink:#eef3f8;
+  --muted:#9fb0c2;
+  --line:rgba(255,255,255,.12);
+  --olive:#b4cf62;
+  --green:#b4cf62;
+  --gold:#f1c453;
+  --orange:#ef9b45;
+  --blue:#7ea6e8;
+  --teal:#76d3c4;
+  --shadow:0 24px 56px rgba(0,0,0,.34);
+}
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:'Manrope',sans-serif;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(180,207,98,.15), transparent 20%),
+    radial-gradient(circle at 88% 18%, rgba(126,166,232,.12), transparent 18%),
+    linear-gradient(180deg, #081018, var(--page) 14%, var(--page-2));
+}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.84rem;
+  color:var(--muted);
+  background:rgba(255,255,255,.05);
+}
+.hero,.panel,.palace-sidebar{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:26px;
+  padding:1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 7px),
+    var(--paper);
+  box-shadow:var(--shadow);
+}
+.hero{position:relative;overflow:hidden}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-4rem;
+  top:-4rem;
+  width:16rem;
+  height:16rem;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(180,207,98,.22), rgba(180,207,98,0));
+}
+.sample-tag{
+  display:inline-block;
+  margin-bottom:.75rem;
+  padding:.38rem .7rem;
+  border-radius:999px;
+  background:rgba(180,207,98,.16);
+  color:#d6ef8c;
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--orange);
+  font-weight:800;
+  margin-bottom:.6rem;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4.5vw,3.55rem);
+  line-height:1;
+  max-width:14ch;
+  margin-bottom:.75rem;
+}
+.hero p{max-width:60rem;color:var(--muted);line-height:1.8}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(240px,.72fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.eq{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.05);
+  text-align:center;
+  overflow:auto;
+}
+.hero-side{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:1rem;
+  background:rgba(255,255,255,.05);
+}
+.hero-side h2,.room h2,.mini h3,.law-card h3,.sample-card h3,.station h3,.transition h3{
+  font-family:'Fraunces',serif;
+}
+.hero-side h2{font-size:1rem;margin-bottom:.45rem}
+.hero-side p,.hero-side li,.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.law-card p,.sample-card p{
+  color:var(--muted);
+  line-height:1.75;
+}
+.hero-side ul{padding-left:1.15rem}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.9rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.58rem .95rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--ink);
+  background:rgba(255,255,255,.05);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.09)}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.58fr) minmax(300px,.92fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--gold);
+  letter-spacing:.03em;
+  margin-bottom:.85rem;
+}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.75rem}
+.fact{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:.85rem;
+  background:rgba(255,255,255,.04);
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--olive);
+  margin-bottom:.3rem;
+  font-weight:800;
+}
+.rooms{display:grid;gap:.9rem}
+.room{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+}
+.room h2{font-size:1rem;color:var(--ink);margin-bottom:.45rem}
+.room ul{padding-left:1.2rem}
+.duo-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(260px,.9fr);
+  gap:1rem;
+}
+.law-card,.sample-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.04);
+}
+.law-box{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:1rem;
+  margin-top:.75rem;
+  background:linear-gradient(180deg, rgba(241,196,83,.08), rgba(255,255,255,.02));
+  text-align:center;
+}
+.law-box + .law-box{margin-top:.7rem}
+.coin-figure{
+  position:relative;
+  height:250px;
+  border:1px dashed rgba(118,211,196,.35);
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  overflow:hidden;
+  margin-bottom:.75rem;
+}
+.surface{
+  position:absolute;
+  left:58px;
+  top:28px;
+  width:180px;
+  height:170px;
+  border:3px solid rgba(214,231,176,.8);
+  border-radius:46% 40% 43% 48%;
+}
+.charge{
+  position:absolute;
+  width:26px;
+  height:16px;
+  border-radius:12px;
+  background:linear-gradient(135deg, #77d9cb, #329889);
+}
+.charge::after{
+  content:attr(data-q);
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-size:.62rem;
+  font-weight:800;
+  color:#06221c;
+}
+.q1{left:92px;top:54px}
+.q2{left:135px;top:126px}
+.q3{left:188px;top:106px}
+.q4{left:52px;top:176px}
+.q5{left:248px;top:188px}
+.coin{
+  position:absolute;
+  right:28px;
+  top:22px;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #e8edf2, #9eaab9 68%, #5f6771);
+  border:2px solid rgba(255,255,255,.35);
+}
+.surface-label{
+  position:absolute;
+  left:26px;
+  top:40px;
+  color:var(--muted);
+  font-size:.76rem;
+}
+.mini{
+  padding:.9rem 1rem;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+}
+.split{display:grid;gap:.75rem}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.68rem}
+.station,.transition{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.04);
+}
+.transition{
+  border-style:dashed;
+  background:rgba(239,155,69,.05);
+}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(10,12,16,.64);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(20,28,37,.96), rgba(20,28,37,.96)), var(--paper);
+  box-shadow:0 28px 90px rgba(0,0,0,.42);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{
+  font-family:'Fraunces',serif;
+  font-size:1rem;
+}
+.prompt-box{
+  width:100%;
+  min-height:320px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  color:var(--ink);
+  padding:.95rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:860px){
+  .hero-grid,.content-grid,.duo-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 23</a>
+    <a href="physics-enclosed-charge-closed-cube.html">Back: 23-5</a>
+  </nav>
+
+  <section class="hero">
+    <div class="sample-tag">Law + Sample Problem</div>
+    <div class="eyebrow">23-6 | Gauss's Law</div>
+    <h1>Gauss's Law and Net Flux</h1>
+    <p>Gauss's law ties together the two main quantities of this chapter: total electric flux through a closed Gaussian surface and the net charge enclosed by that surface. Once that connection is locked in, many sample problems become a quick question of which charges lie inside the chosen boundary.</p>
+    <div class="hero-grid">
+      <div class="eq">$$\Phi=\oint \vec E\cdot d\vec A,\qquad \varepsilon_0\Phi=q_{\mathrm{enc}},\qquad \oint \vec E\cdot d\vec A=\frac{q_{\mathrm{enc}}}{\varepsilon_0}$$</div>
+      <div class="hero-side">
+        <h2>Core Read</h2>
+        <ul>
+          <li>Closed-surface flux and enclosed charge are proportional.</li>
+          <li>Only the net enclosed charge matters.</li>
+          <li>Charges outside the surface do not appear in $$q_{\mathrm{enc}}.$$ </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Flux Form</div><div class="v">$$\Phi=\oint \vec E\cdot d\vec A$$ is the total electric flux through a closed surface.</div></div>
+          <div class="fact"><div class="k">Gauss Form</div><div class="v">$$\varepsilon_0\Phi=q_{\mathrm{enc}}$$ links flux directly to enclosed charge.</div></div>
+          <div class="fact"><div class="k">Key Filter</div><div class="v">Only charges inside the Gaussian surface count in the sum for $$q_{\mathrm{enc}}.$$ </div></div>
+          <div class="fact"><div class="k">Sample Result</div><div class="v">For the enclosed charges shown, the net flux is negative because the enclosed charge sum is negative.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: State the Law Plainly</h2>
+            <ul>
+              <li>Gauss's law says that net electric flux through a closed surface is related to the net charge enclosed by that surface.</li>
+              <li>The Gaussian surface can be real or imaginary, but it must be closed.</li>
+              <li>This law is one of the main structural laws of electrostatics.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Store the Equivalent Forms</h2>
+            <ul>
+              <li>$$\Phi=\oint \vec E\cdot d\vec A$$ defines the closed-surface flux.</li>
+              <li>$$\varepsilon_0\Phi=q_{\mathrm{enc}}$$ is the compact proportional form.</li>
+              <li>$$\oint \vec E\cdot d\vec A=\frac{q_{\mathrm{enc}}}{\varepsilon_0}$$ is the form most often used in problems.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Focus on Net Charge, Not Every Charge</h2>
+            <ul>
+              <li>All enclosed charges add algebraically to make $$q_{\mathrm{enc}}.$$</li>
+              <li>Positive charges raise the total and negative charges reduce it.</li>
+              <li>External charges do not appear in the enclosed-charge sum.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Sample Problem Setup</h2>
+            <ul>
+              <li>A Gaussian surface wraps around some charged plastic lumps and misses others.</li>
+              <li>The enclosed charges are $$q_1=+3.1\ \mathrm{nC},\ q_2=-5.9\ \mathrm{nC},\ q_3=-3.1\ \mathrm{nC}.$$</li>
+              <li>The charges $$q_4$$ and $$q_5$$ lie outside, so they are ignored.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Add Only the Enclosed Charges</h2>
+            <ul>
+              <li>Compute the enclosed total:</li>
+              <li>$$q_{\mathrm{enc}}=q_1+q_2+q_3=+3.1-5.9-3.1\ \mathrm{nC}=-5.9\ \mathrm{nC}.$$</li>
+              <li>The negative sign already hints that the net flux will be negative.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Convert Enclosed Charge into Flux</h2>
+            <ul>
+              <li>Use Gauss's law directly:</li>
+              <li>$$\Phi=\frac{q_{\mathrm{enc}}}{\varepsilon_0}=\frac{-5.9\times10^{-9}\ \mathrm C}{8.85\times10^{-12}\ \mathrm{C^2/(N\cdot m^2)}}.$$</li>
+              <li>That gives a negative result with units of $$\mathrm{N\cdot m^2/C}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Final Numerical Answer</h2>
+            <ul>
+              <li>$$\Phi\approx -670\ \mathrm{N\cdot m^2/C}.$$</li>
+              <li>The negative sign means net inward flux through the chosen surface.</li>
+              <li>That matches the fact that the enclosed charge sum is net negative.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Main Lesson of the Example</h2>
+            <ul>
+              <li>The problem never asked for the field at each point on the surface.</li>
+              <li>It only asked for net flux, so the enclosed-charge sum was enough.</li>
+              <li>This is the power of Gauss's law when the quantity asked is total flux or total enclosed charge.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Law and Example</div>
+        <div class="duo-grid">
+          <div class="law-card">
+            <h3>Gauss's Law Forms</h3>
+            <p>These are the three expressions to keep together in memory. They say the same thing, but each one is useful in a slightly different problem format.</p>
+            <div class="law-box">$$\Phi=\oint \vec E\cdot d\vec A$$</div>
+            <div class="law-box">$$\varepsilon_0\Phi=q_{\mathrm{enc}}$$</div>
+            <div class="law-box">$$\oint \vec E\cdot d\vec A=\frac{q_{\mathrm{enc}}}{\varepsilon_0}$$</div>
+            <div class="mini">
+              <h3>Fast Reading Rule</h3>
+              <p>If the problem gives charge and asks for net flux, divide by $$\varepsilon_0.$$ If the problem gives net flux and asks for enclosed charge, multiply by $$\varepsilon_0.$$</p>
+            </div>
+          </div>
+
+          <div class="sample-card">
+            <div class="coin-figure">
+              <div class="surface"></div>
+              <div class="surface-label">Gaussian surface S</div>
+              <div class="charge q1" data-q="q1"></div>
+              <div class="charge q2" data-q="q2"></div>
+              <div class="charge q3" data-q="q3"></div>
+              <div class="charge q4" data-q="q4"></div>
+              <div class="charge q5" data-q="q5"></div>
+              <div class="coin"></div>
+            </div>
+            <h3>Sample Problem Picture</h3>
+            <p>The surface loops around only three of the five charges. That means the entire flux calculation is controlled by those enclosed charges alone.</p>
+          </div>
+        </div>
+        <div class="split" style="margin-top:1rem">
+          <div class="mini">
+            <h3>What Stays Outside the Math</h3>
+            <p>Charges outside the Gaussian surface may affect the field locally, but they do not appear in the enclosed-charge total used by Gauss's law.</p>
+          </div>
+          <div class="mini">
+            <h3>Why the Sign Matters</h3>
+            <p>A negative enclosed charge produces negative net flux, which means that, overall, the field lines cross the surface inward more than outward.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Walk this route as a two-step chain: first memorize the law, then use it by summing only the charges trapped inside the boundary.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A bright law tablet hangs above a closed shell and reads: flux and enclosed charge belong together.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The tablet folds into three matching formulas so you can read the law in either direction.</p></div>
+        <div class="station"><h3>Station 2</h3><p>You step into a gallery of scattered charges, but only the ones inside the glowing boundary are counted.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>Three enclosed charges drop into a sum while the outside charges fall through trapdoors and vanish from the calculation.</p></div>
+        <div class="station"><h3>Station 3</h3><p>The enclosed sum turns negative, and the law machine converts it straight into negative flux.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A swirl of inward field lines surrounds the surface, confirming the sign physically.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The exit sign reads: for total flux, add only enclosed charge and divide by $$\varepsilon_0.$$ </p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt combines the formal statement of Gauss's law with a direct enclosed-charge-to-flux example.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for Gauss's law and a sample problem that uses it to find net electric flux from enclosed charge. Keep the logic in order, make each image force the next one, and use vivid spatial imagery. Do not use bullet points.
+
+1. Start by stating that Gauss's law relates the net electric flux through a closed Gaussian surface to the net charge enclosed by that surface.
+2. Show the equivalent forms Phi = closed integral of E dot dA, epsilon_0 Phi = q enclosed, and closed integral of E dot dA = q enclosed over epsilon_0.
+3. Emphasize that only the net enclosed charge matters.
+4. Introduce a Gaussian surface that encloses some charges and leaves others outside.
+5. Add only the enclosed charges algebraically.
+6. Use Phi = q enclosed over epsilon_0 to compute the net flux.
+7. End by interpreting the sign of the answer: negative enclosed charge gives negative net flux.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script>
+const gaussLawModal = document.getElementById('prompt-modal');
+const gaussLawTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  gaussLawModal.classList.add('open');
+  gaussLawModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    gaussLawModal.classList.remove('open');
+    gaussLawModal.setAttribute('aria-hidden', 'true');
+  });
+});
+gaussLawModal.addEventListener('click', (event) => {
+  if (event.target === gaussLawModal) {
+    gaussLawModal.classList.remove('open');
+    gaussLawModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(gaussLawTextarea.value);
+  } catch (error) {
+    gaussLawTextarea.focus();
+    gaussLawTextarea.select();
+  }
+});
+</script>
+</body>
+</html>

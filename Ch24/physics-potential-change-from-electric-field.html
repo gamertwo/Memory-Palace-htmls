@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Finding the Potential Change from the Electric Field | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<link rel="stylesheet" href="chapter24-problem.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<script src="chapter24-problem.js" defer></script>
+<style>
+.pcf-field{position:absolute;width:2px;height:184px;background:rgba(135,162,62,.52);top:30px}
+.pcf-point{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 5px rgba(255,255,255,.35)}
+.pcf-path{position:absolute;height:3px;background:var(--pink);transform-origin:left center}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 24</a>
+    <a href="physics-work-potential-energy-electric-field.html">Back: 24-1</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">24-2 | Sample Problem: Potential Difference from $$\vec E$$</div>
+    <h1>Finding the Potential Change from the Electric Field</h1>
+    <p>This page turns the line-integral definition of potential difference into a geometric story. One path is straight and one path bends, but both produce the same potential change because only the field-parallel component matters.</p>
+    <div class="hero-grid">
+      <div class="eq">$$V_f-V_i=-\int_i^f\vec E\cdot d\vec s=-Ed,\qquad \text{even when the path includes a perpendicular leg and a 45^\circ segment}$$</div>
+      <div class="hero-side">
+        <h2>What To Notice</h2>
+        <ul>
+          <li>Potential difference is defined by a line integral of $$\vec E\cdot d\vec s.$$</li>
+          <li>Any path segment perpendicular to the field contributes zero.</li>
+          <li>In a conservative field, different paths between the same endpoints give the same result.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt="prompt-modal">AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Start Formula</div><div class="v">Use $$V_f-V_i=-\int_i^f\vec E\cdot d\vec s.$$</div></div>
+          <div class="fact"><div class="k">Case (a)</div><div class="v">For a straight path parallel to the field in a uniform field, the integral collapses to $$-Ed.$$</div></div>
+          <div class="fact"><div class="k">Case (b)</div><div class="v">The first segment is perpendicular, so its contribution is zero.</div></div>
+          <div class="fact"><div class="k">Main Lesson</div><div class="v">The potential difference between fixed endpoints does not depend on the chosen path.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Begin with the Definition</h2>
+            <ul>
+              <li>The electric potential difference is the negative line integral of the electric field.</li>
+              <li>That means every path question becomes a dot-product question.</li>
+              <li>The geometry of the displacement matters segment by segment.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Straight Path Along the Field</h2>
+            <ul>
+              <li>In the first path, the displacement runs parallel to the field lines.</li>
+              <li>So $$\vec E\cdot d\vec s=E\,ds.$$</li>
+              <li>For a uniform field, integrating over length $$d$$ gives $$V_f-V_i=-Ed.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Interpret the Minus Sign</h2>
+            <ul>
+              <li>Moving in the field direction lowers the potential.</li>
+              <li>That is why the answer is negative.</li>
+              <li>The field points from higher potential toward lower potential.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Break the Bent Path into Pieces</h2>
+            <ul>
+              <li>The second route is easier if we split it into segments $$ic$$ and $$cf.$$</li>
+              <li>Line integrals add, so the total is the sum of the segment integrals.</li>
+              <li>This keeps the geometry clean.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Perpendicular Motion Changes Nothing</h2>
+            <ul>
+              <li>Along $$ic$$, the displacement is perpendicular to $$\vec E.$$</li>
+              <li>So $$\vec E\cdot d\vec s=0$$ for that entire segment.</li>
+              <li>Therefore $$V_c-V_i=0$$ and points $$i$$ and $$c$$ have the same potential.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Diagonal Segment Supplies All the Change</h2>
+            <ul>
+              <li>Along $$cf$$, the angle with the field is $$45^\circ.$$</li>
+              <li>The integral becomes $$-\int E\cos45^\circ\,ds.$$</li>
+              <li>Because the segment length is $$d/\cos45^\circ,$$ the cosines cancel and the result is again $$-Ed.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Path Independence Appears</h2>
+            <ul>
+              <li>Both routes connect the same initial and final points.</li>
+              <li>Both routes give exactly the same potential difference.</li>
+              <li>That is the operational meaning of path independence in electrostatics.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Keep the Practical Shortcut</h2>
+            <ul>
+              <li>Ignore path decorations and ask only how much displacement lies along the field direction.</li>
+              <li>Perpendicular wandering does not change the potential.</li>
+              <li>That shortcut makes many textbook diagrams much faster.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Problem Figures</div>
+        <div class="figure-grid">
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="pcf-field" style="left:58px"></div>
+              <div class="pcf-field" style="left:122px"></div>
+              <div class="pcf-field" style="left:186px"></div>
+              <div class="pcf-field" style="left:250px"></div>
+              <div class="pcf-point" style="left:106px;top:38px"></div>
+              <div class="pcf-point" style="left:106px;top:178px"></div>
+              <div class="pcf-path" style="left:113px;top:46px;width:140px;transform:rotate(90deg)"></div>
+              <div class="label" style="left:20px;top:24px">uniform $$\vec E$$</div>
+              <div class="label" style="left:124px;top:24px">$$i$$</div>
+              <div class="label" style="left:124px;top:198px">$$f$$</div>
+              <div class="label" style="right:18px;top:116px">straight path</div>
+            </div>
+            <h3>Case (a): Direct Drop</h3>
+            <p>When the path follows the field, the dot product is simple and the entire answer is just $$-Ed.$$</p>
+          </div>
+
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="pcf-field" style="left:58px"></div>
+              <div class="pcf-field" style="left:122px"></div>
+              <div class="pcf-field" style="left:186px"></div>
+              <div class="pcf-field" style="left:250px"></div>
+              <div class="pcf-point" style="left:98px;top:54px"></div>
+              <div class="pcf-point" style="left:220px;top:54px"></div>
+              <div class="pcf-point" style="left:220px;top:176px"></div>
+              <div class="pcf-path" style="left:105px;top:62px;width:122px"></div>
+              <div class="pcf-path" style="left:227px;top:62px;width:174px;transform:rotate(135deg)"></div>
+              <div class="label" style="left:114px;top:28px">$$i$$</div>
+              <div class="label" style="left:236px;top:28px">$$c$$</div>
+              <div class="label" style="left:236px;top:194px">$$f$$</div>
+              <div class="label" style="left:22px;top:24px">$$ic\perp \vec E$$</div>
+              <div class="label" style="right:20px;bottom:22px">$$cf$$ at $$45^\circ$$</div>
+            </div>
+            <h3>Case (b): Bent Route</h3>
+            <p>The first leg contributes nothing and the diagonal leg contributes exactly the same total potential change as the straight route.</p>
+          </div>
+        </div>
+        <div class="mini" style="margin-top:1rem">
+          <h3>Fast Check</h3>
+          <p>If your path contains a sideways segment, remove it mentally. Only the net displacement component along the field can change the electric potential.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Move from a straight elevator ride to a crooked hallway and notice that only the downward part changes the potential.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A hallway of parallel field lines runs from a high balcony to a lower floor.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>You ride a straight elevator from $$i$$ to $$f$$ and a sign flashes $$V_f-V_i=-Ed.$$</p></div>
+        <div class="station"><h3>Station 2</h3><p>The elevator opens into a sideways corridor from $$i$$ to $$c$$ where the field arrows point straight past you and do no work.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A glowing zero floats over the sideways hallway because $$\vec E\cdot d\vec s=0.$$</p></div>
+        <div class="station"><h3>Station 3</h3><p>From $$c$$ you slide down a 45-degree ramp to $$f,$$ and the cosine factor cancels with the longer ramp length.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The same orange ticket prints $$-Ed$$ again.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The exit plaque says “same endpoints, same potential difference” in large letters.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt emphasizes path independence and the zero contribution from perpendicular motion.</p>
+    <textarea class="prompt-box" readonly>Create a memory palace in exactly one connected paragraph for the sample problem on finding the potential change from the electric field. Keep the logic in order, make each image force the next one, and do not use bullet points.
+
+1. Start with a uniform electric field and two points i and f.
+2. Move directly from i to f along the field and store V_f minus V_i equals negative E d.
+3. Reset and split the path into two pieces, first a segment perpendicular to the field and then a diagonal segment.
+4. Make the perpendicular segment contribute zero because E dot ds is zero.
+5. Make the diagonal segment sit at 45 degrees.
+6. Let the cosine factor cancel with the longer path length so the result is still negative E d.
+7. End with the main lesson that electric potential difference between the same endpoints is path independent in an electrostatic field.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" data-copy-prompt>Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+</body>
+</html>

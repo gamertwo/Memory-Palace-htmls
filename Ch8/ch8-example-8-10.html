@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-10 | Series-Parallel RLC Currents</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_10">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-14.html">Prev: Exercise 8-14</a><a href="index.html">Next: Back to Index</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-10</div>
+    <h1>Reduce the Mixed RLC Circuit and Split the Currents</h1>
+    <p class="hero-sub">This page now uses the same heavier memory-movie treatment as the newer Chapter 8 pages. The route is: convert the source into a phasor, let omega pull out all the element impedances, shrink the inner parallel RC branch first, add the inductor in series to make one total impedance block, let division pull out the source current, then reopen the parallel chamber so current division can stamp the capacitor and resistor currents before the coat returns every result to the time domain.</p>
+    <div class="formula-block">$$v_s(t)=100\cos(2000t)\text{ V},\qquad L=250\,\text{mH},\qquad C=0.5\,\mu\text{F},\qquad R=3\,\text{k}\Omega$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-10.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source Phasor</div><div class="v">$$V_S=100\angle0^\circ\text{ V}$$</div></div>
+          <div class="fact"><div class="k">Element Impedances</div><div class="v">$$Z_L=j500,\qquad Z_C=-j1000,\qquad Z_R=3000$$</div></div>
+          <div class="fact"><div class="k">Final Current Block</div><div class="v">$$Z_{EQ}=300-j400,\qquad I=0.2\angle53.1^\circ\text{ A}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-10-room-1" data-room-id="ch8-example-8-10-room-1" data-room-title="Room 1: Convert the Source and Pull Out Every Element Impedance" data-source-page="ch8-example-8-10.html" data-tags="convert,source,pull,every">
+            <h2>Room 1: Convert the Source and Pull Out Every Element Impedance</h2>
+            <ul>
+              <li>The source is already in cosine form, so its phasor is read directly as $$V_S=100\angle0^\circ\text{ V}.$$</li>
+              <li>Now let $$\omega=2000$$ pull out the three element impedances.</li>
+              <li>The inductor gives $$Z_L=j\omega L=j(2000)(0.25)=j500\,\Omega.$$</li>
+              <li>The capacitor gives $$Z_C=\frac{1}{j\omega C}=\frac{1}{j(2000)(0.5\times10^{-6})}=-j1000\,\Omega.$$</li>
+              <li>The resistor stays real: $$Z_R=3000\,\Omega.$$</li>
+              <li>The memory cue is to see all three pieces before reducing anything: source first, omega second, impedances third.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-10-room-2" data-room-id="ch8-example-8-10-room-2" data-room-title="Room 2: Shrink the Inner Parallel RC Branch" data-source-page="ch8-example-8-10.html" data-tags="shrink,inner,parallel,branch">
+            <h2>Room 2: Shrink the Inner Parallel RC Branch</h2>
+            <ul>
+              <li>The resistor and capacitor share the same two nodes, so reduce that inner branch before touching the inductor.</li>
+              <li>Use parallel impedance: $$Z_{EQ1}=\frac{1}{\frac{1}{Z_C}+\frac{1}{Z_R}}=\frac{1}{\frac{1}{-j1000}+\frac{1}{3000}}.$$</li>
+              <li>Write the denominator in rectangular form: $$\frac{1}{-j1000}=j0.001,\qquad \frac{1}{3000}=0.0003333.$$ So the denominator is $$0.0003333+j0.001.$$</li>
+              <li>Taking the reciprocal collapses that branch to $$Z_{EQ1}=300-j900\,\Omega.$$ The branch is no longer a resistor and capacitor separately; it is now one equivalent block.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-10-room-3" data-room-id="ch8-example-8-10-room-3" data-room-title="Room 3: Add the Inductor in Series and Pull Out the Source Current" data-source-page="ch8-example-8-10.html" data-tags="inductor,series,pull,source">
+            <h2>Room 3: Add the Inductor in Series and Pull Out the Source Current</h2>
+            <ul>
+              <li>Now the inductor is in series with the new RC block, so add impedances directly: $$Z_{EQ}=Z_L+Z_{EQ1}=j500+(300-j900)=300-j400\,\Omega.$$</li>
+              <li>Convert that total to polar form because division by a phasor is easiest in polar language.</li>
+              <li>The magnitude is $$|Z_{EQ}|=\sqrt{300^2+(-400)^2}=500\,\Omega.$$</li>
+              <li>The angle is $$\theta=\tan^{-1}\left(\frac{-400}{300}\right)=-53.1^\circ,$$ so $$Z_{EQ}=500\angle-53.1^\circ\,\Omega.$$</li>
+              <li>Now divide: $$I=\frac{V_S}{Z_{EQ}}=\frac{100\angle0^\circ}{500\angle-53.1^\circ}=0.2\angle53.1^\circ\text{ A}.$$ In rectangular form, $$I=0.12+j0.16\text{ A}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-10-room-4" data-room-id="ch8-example-8-10-room-4" data-room-title="Room 4: Reopen the Parallel Chamber and Split into $$I_C$$ and $$I_R$$" data-source-page="ch8-example-8-10.html" data-tags="reopen,parallel,chamber,split">
+            <h2>Room 4: Reopen the Parallel Chamber and Split into $$I_C$$ and $$I_R$$</h2>
+            <ul>
+              <li>The total current $$I$$ enters the RC parallel chamber and must split between the capacitor and resistor.</li>
+              <li>Use current division in admittance form. The capacitor-branch current is $$I_C=\frac{Y_C}{Y_C+Y_R}I,$$ where $$Y_C=\frac{1}{-j1000}=j0.001$$ and $$Y_R=\frac{1}{3000}=0.0003333.$$</li>
+              <li>This gives $$I_C=-0.06+j0.18\text{ A}=0.19\angle71.6^\circ\text{ A}.$$</li>
+              <li>The resistor current is what remains: $$I_R=I-I_C=(0.12+j0.16)-(-0.06+j0.18)=0.06-j0.02\text{ A}=0.0632\angle-18.4^\circ\text{ A}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-10-room-5" data-room-id="ch8-example-8-10-room-5" data-room-title="Room 5: Coat the Final Currents Back into Time Form" data-source-page="ch8-example-8-10.html" data-tags="coat,final,currents,back">
+            <h2>Room 5: Coat the Final Currents Back into Time Form</h2>
+            <ul>
+              <li>Keep the same angular frequency $$\omega=2000$$ when you return to the time domain.</li>
+              <li>$$i(t)=0.2\cos(2000t+53.1^\circ)\text{ A}$$</li>
+              <li>$$i_C(t)=0.19\cos(2000t+71.6^\circ)\text{ A}$$</li>
+              <li>$$i_R(t)=0.0632\cos(2000t-18.4^\circ)\text{ A}$$</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>This is a nested-circuit memory problem. The parallel RC chamber must be shrunk first, because only after that can the outside series path be seen cleanly. Solve the big source current first, then reopen the inner branch and split it.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Why The Total Current Comes Before The Branch Currents</h3>
+          <p>The inductor sits before the parallel split, so the source current has to pass through the series path first. That is why the movie solves $$I$$ from the total impedance block before it ever tries to find $$I_C$$ or $$I_R.$$ </p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">This should feel like a proper memory-palace movie from the forums: fixed path, strong action, and each result physically turning into the next object.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Net Gate: Catch the Source and All Three Elements</h3><p>The net catches $$V_S=100\angle0^\circ$$ along with the resistor, capacitor, and inductor labels before anything starts moving.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Chalk Wall: Let Omega Pull Out Every $$Z$$</h3><p>The omega wheel spins and writes $$j500,$$ $$-j1000,$$ and $$3000$$ across the wall.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Knife Chamber: Shrink the RC Branch</h3><p>The knife seals the inner branch and compresses the resistor-capacitor pair into one block: $$300-j900.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Series Mat: Add the Inductor and Build One Big $$Z$$ Block</h3><p>The inductor lands on the mat, and the total block becomes $$300-j400.$$ The mat then stamps its polar badge: $$500\angle-53.1^\circ.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Fire Hall: Divide by the Big $$Z$$ Block to Pull Out $$I$$</h3><p>The source phasor is fired through the total impedance door, and division pulls out $$I=0.2\angle53.1^\circ.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Case Hall: Reopen the Branch and Stamp $$I_C$$ and $$I_R$$</h3><p>The current enters the RC chamber again. One door stamps $$I_C=0.19\angle71.6^\circ,$$ and the leftover stream forms $$I_R=0.0632\angle-18.4^\circ.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Coat Exit: Dress Every Current Back into Waves</h3><p>The coat wraps $$i(t), i_C(t), i_R(t)$$ in cosine form with the same $$\omega=2000.$$ </p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Catch $$V_S$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Pull Out $$Z_L,Z_C,Z_R$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Shrink RC Branch</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Build Total $$Z$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Solve $$I$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Split $$I_C, I_R$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Waveforms</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-example-8-10-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a more visual explanation for how the parallel RC branch collapses."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

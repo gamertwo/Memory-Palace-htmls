@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Enclosed Charge in a Nonuniform Field | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --page:#e8e1cf;
+  --page-2:#f5efdf;
+  --paper:#faf6ea;
+  --ink:#312b23;
+  --muted:#675f52;
+  --line:rgba(49,43,35,.14);
+  --olive:#97a44a;
+  --green:#8ea44b;
+  --gold:#caa11f;
+  --blue:#4a86d1;
+  --orange:#e28a43;
+  --shadow:0 24px 56px rgba(55,43,29,.14);
+}
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:'Manrope',sans-serif;
+  background:
+    radial-gradient(circle at 11% 8%, rgba(142,164,75,.15), transparent 20%),
+    radial-gradient(circle at 88% 18%, rgba(226,138,67,.12), transparent 18%),
+    linear-gradient(180deg, #d7ceb9, var(--page) 14%, var(--page-2));
+}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.84rem;
+  color:var(--muted);
+  background:rgba(255,255,255,.45);
+}
+.hero,.panel,.palace-sidebar{
+  border:1px solid rgba(49,43,35,.12);
+  border-radius:26px;
+  padding:1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.5)),
+    repeating-linear-gradient(0deg, rgba(49,43,35,.015) 0, rgba(49,43,35,.015) 1px, transparent 1px, transparent 7px),
+    var(--paper);
+  box-shadow:var(--shadow);
+}
+.hero{position:relative;overflow:hidden}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-4rem;
+  top:-4rem;
+  width:16rem;
+  height:16rem;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(142,164,75,.22), rgba(142,164,75,0));
+}
+.sample-tag{
+  display:inline-block;
+  margin-bottom:.75rem;
+  padding:.38rem .7rem;
+  border-radius:999px;
+  background:rgba(142,164,75,.18);
+  color:#5f7025;
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--green);
+  font-weight:800;
+  margin-bottom:.6rem;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4.5vw,3.55rem);
+  line-height:1;
+  max-width:15ch;
+  margin-bottom:.75rem;
+}
+.hero p{max-width:58rem;color:var(--muted);line-height:1.8}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(240px,.72fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.eq{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.55);
+  text-align:center;
+  overflow:auto;
+}
+.hero-side{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(250,241,227,.76));
+}
+.hero-side h2,.room h2,.mini h3,.key-card h3,.station h3,.transition h3{
+  font-family:'Fraunces',serif;
+}
+.hero-side h2{font-size:1rem;margin-bottom:.45rem}
+.hero-side p,.hero-side li,.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.key-card p{
+  color:var(--muted);
+  line-height:1.75;
+}
+.hero-side ul{padding-left:1.15rem}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.9rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.58rem .95rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--ink);
+  background:rgba(255,255,255,.5);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.72)}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.58fr) minmax(300px,.92fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--gold);
+  letter-spacing:.03em;
+  margin-bottom:.85rem;
+}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.75rem}
+.fact{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:.85rem;
+  background:rgba(255,255,255,.46);
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--olive);
+  margin-bottom:.3rem;
+  font-weight:800;
+}
+.rooms{display:grid;gap:.9rem}
+.room{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.28));
+}
+.room h2{font-size:1rem;color:var(--ink);margin-bottom:.45rem}
+.room ul{padding-left:1.2rem}
+.key-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(240px,.85fr);
+  gap:1rem;
+}
+.key-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.44);
+}
+.key-banner{
+  display:inline-block;
+  margin-bottom:.7rem;
+  padding:.35rem .72rem;
+  border-radius:999px;
+  background:rgba(226,138,67,.16);
+  color:#9a5a1b;
+  font-size:.74rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.mini{
+  padding:.9rem 1rem;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.42);
+}
+.split{display:grid;gap:.75rem}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.68rem}
+.station,.transition{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.44);
+}
+.transition{
+  border-style:dashed;
+  background:rgba(226,138,67,.05);
+}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(31,27,19,.56);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:1rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,238,223,.94)),
+    var(--paper);
+  box-shadow:0 28px 90px rgba(31,27,19,.34);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{
+  font-family:'Fraunces',serif;
+  font-size:1rem;
+}
+.prompt-box{
+  width:100%;
+  min-height:320px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.72);
+  color:var(--ink);
+  padding:.95rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+:root{
+  --page:#0d131a;
+  --page-2:#18212c;
+  --paper:#141c25;
+  --ink:#eef3f8;
+  --muted:#9fb0c2;
+  --line:rgba(255,255,255,.12);
+  --olive:#b4cf62;
+  --green:#b4cf62;
+  --gold:#f1c453;
+  --blue:#7ea6e8;
+  --orange:#ef9b45;
+  --shadow:0 24px 56px rgba(0,0,0,.34);
+}
+body{
+  background:
+    radial-gradient(circle at 11% 8%, rgba(180,207,98,.15), transparent 20%),
+    radial-gradient(circle at 88% 18%, rgba(239,155,69,.12), transparent 18%),
+    linear-gradient(180deg, #081018, var(--page) 14%, var(--page-2));
+}
+.nav a,.sample-tag,.eq,.hero-side,.tool-btn,.ghost-btn,.fact,.key-card,.mini,.station,.transition,.prompt-box{background:rgba(255,255,255,.05)}
+.hero,.panel,.palace-sidebar{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 7px),
+    var(--paper);
+}
+.room{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025))}
+.modal-card{background:linear-gradient(180deg, rgba(20,28,37,.96), rgba(20,28,37,.96)), var(--paper)}
+@media (max-width:860px){
+  .hero-grid,.content-grid,.key-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 23</a>
+    <a href="physics-flux-closed-cube-nonuniform-field.html">Back: 23-4</a>
+  </nav>
+
+  <section class="hero">
+    <div class="sample-tag">Sample Problem</div>
+    <div class="eyebrow">23-5 | Enclosed Charge in a Nonuniform Field</div>
+    <h1>Enclosed Charge in a Nonuniform Field</h1>
+    <p>This page finishes the cube example. Once the total electric flux through the six faces is known, Gauss's law turns that flux into net enclosed charge. The conceptual jump is small, but it is the whole point of introducing Gaussian surfaces in the first place.</p>
+    <div class="hero-grid">
+      <div class="eq">$$q_{\mathrm{enc}}=\varepsilon_0\Phi=(8.85\times10^{-12}\ \mathrm{C^2/(N\cdot m^2)})(24\ \mathrm{N\cdot m^2/C})\approx 2.1\times10^{-10}\ \mathrm C$$</div>
+      <div class="hero-side">
+        <h2>One-Step Finish</h2>
+        <ul>
+          <li>Take the net flux from the previous page.</li>
+          <li>Multiply by $$\varepsilon_0.$$</li>
+          <li>Read the sign to identify whether the enclosed charge is net positive or negative.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Known Flux</div><div class="v">From the cube page, the total flux is $$24\ \mathrm{N\cdot m^2/C}.$$</div></div>
+          <div class="fact"><div class="k">Gauss's Law</div><div class="v">For a closed surface, $$q_{\mathrm{enc}}=\varepsilon_0\Phi.$$</div></div>
+          <div class="fact"><div class="k">Sign</div><div class="v">Positive net flux implies net positive enclosed charge.</div></div>
+          <div class="fact"><div class="k">Result</div><div class="v">The cube encloses approximately $$2.1\times10^{-10}\ \mathrm C.$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Start from the Total Flux, Not from Scratch</h2>
+            <ul>
+              <li>The hard part was already done on the previous page by computing flux through each face.</li>
+              <li>Those six face contributions gave a net flux of $$24\ \mathrm{N\cdot m^2/C}.$$</li>
+              <li>Now Gauss's law converts that into charge.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Write Gauss's Law in the Charge Form</h2>
+            <ul>
+              <li>Start from $$\Phi=\oint \vec E\cdot d\vec A=\frac{q_{\mathrm{enc}}}{\varepsilon_0}.$$</li>
+              <li>Solve for enclosed charge:</li>
+              <li>$$q_{\mathrm{enc}}=\varepsilon_0\Phi.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Substitute the Known Flux</h2>
+            <ul>
+              <li>Insert $$\Phi=24\ \mathrm{N\cdot m^2/C}.$$</li>
+              <li>Also use $$\varepsilon_0=8.85\times10^{-12}\ \mathrm{C^2/(N\cdot m^2)}.$$</li>
+              <li>That makes the calculation numerical and direct.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Multiply the Numbers</h2>
+            <ul>
+              <li>$$q_{\mathrm{enc}}=(8.85\times10^{-12})(24)$$</li>
+              <li>$$q_{\mathrm{enc}}\approx 2.1\times10^{-10}\ \mathrm C$$</li>
+              <li>The units reduce to coulombs, as they must for charge.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Read the Sign Physically</h2>
+            <ul>
+              <li>The flux was positive, so more field leaves the surface than enters it.</li>
+              <li>That means the net enclosed charge is positive.</li>
+              <li>If the flux had been negative, the net enclosed charge would have been negative instead.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Key Idea of the Whole Chapter</h2>
+            <ul>
+              <li>Gauss's law does not require us to know every charge location inside the surface.</li>
+              <li>It only gives the net enclosed charge.</li>
+              <li>Many positive and negative charges could be inside, but their algebraic sum must equal the value found.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Final Answer</h2>
+            <ul>
+              <li>The cube encloses a net positive charge of about $$2.1\times10^{-10}\ \mathrm C.$$</li>
+              <li>This is the same physics statement as saying the cube has positive net outward flux.</li>
+              <li>The flux page and charge page are two ways of reading the same closed-surface information.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Key Idea</div>
+        <div class="key-grid">
+          <div class="key-card">
+            <div class="key-banner">Key Idea</div>
+            <h3>Flux First, Charge Second</h3>
+            <p>The net enclosed charge in a real or mathematical closed surface is related to total electric flux by Gauss's law. That means a complicated field calculation can end in a very compact charge result once the total flux is known.</p>
+            <div class="mini">
+              <h3>Compressed Summary</h3>
+              <p>From the six cube faces we found $$\Phi=24\ \mathrm{N\cdot m^2/C}.$$ Multiplying by $$\varepsilon_0$$ gives $$q_{\mathrm{enc}}\approx 2.1\times10^{-10}\ \mathrm C,$$ so the enclosure contains net positive charge.</p>
+            </div>
+          </div>
+
+          <div class="split">
+            <div class="mini">
+              <h3>What We Learn</h3>
+              <p>Unequal outward and inward flux means the field is being sourced net from inside the surface. Positive net outward flux means a net positive enclosed source.</p>
+            </div>
+            <div class="mini">
+              <h3>What We Do Not Learn</h3>
+              <p>Gauss's law here does not tell us where the charge sits inside the cube or how it is distributed. It only reveals the total enclosed charge.</p>
+            </div>
+            <div class="mini">
+              <h3>Bridge Forward</h3>
+              <p>This is the same move we will use in the high-symmetry cases: simplify the flux, then read off the charge or the field from Gauss's law.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Use this route as the final lock: once flux is known, charge is one Gauss's-law step away.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>You enter a vault carrying the cube's final flux receipt: $$24\ \mathrm{N\cdot m^2/C}.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A bronze law tablet slides down and asks you to trade flux for enclosed charge.</p></div>
+        <div class="station"><h3>Station 2</h3><p>The tablet rewrites itself as $$q_{\mathrm{enc}}=\varepsilon_0\Phi.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A glowing constant labeled $$\varepsilon_0$$ drops into the formula slot.</p></div>
+        <div class="station"><h3>Station 3</h3><p>The multiplication chamber flashes and condenses everything into $$2.1\times10^{-10}\ \mathrm C.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A positive sign lights the room because more field left the cube than entered.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The exit plaque reads: net outward flux means net positive enclosed charge.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt compresses the final Gauss's-law conversion from total flux to enclosed charge.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for finding enclosed charge from the previously computed electric flux through a closed cube. Keep the logic in order, make each image force the next one, and use vivid spatial imagery. Do not use bullet points.
+
+1. Start with the known total electric flux through the cube, 24 N m^2/C.
+2. Bring in Gauss's law for a closed surface and solve it for enclosed charge: q enclosed = epsilon_0 times flux.
+3. Insert epsilon_0 and the known flux into the formula.
+4. Multiply them to get approximately 2.1 times 10 to the minus 10 coulombs.
+5. Emphasize that the positive flux means the enclosed charge is net positive.
+6. End by clarifying that Gauss's law gives the net enclosed charge, not the exact arrangement of charges inside the cube.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script>
+const chargeModal = document.getElementById('prompt-modal');
+const chargeTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  chargeModal.classList.add('open');
+  chargeModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    chargeModal.classList.remove('open');
+    chargeModal.setAttribute('aria-hidden', 'true');
+  });
+});
+chargeModal.addEventListener('click', (event) => {
+  if (event.target === chargeModal) {
+    chargeModal.classList.remove('open');
+    chargeModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(chargeTextarea.value);
+  } catch (error) {
+    chargeTextarea.focus();
+    chargeTextarea.select();
+  }
+});
+</script>
+</body>
+</html>

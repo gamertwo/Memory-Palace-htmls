@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>RLC Example 7-17 | Characteristic Roots by Damping Case</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<script>
+MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'},startup:{ready(){MathJax.startup.defaultReady();document.dispatchEvent(new Event('mathjax-ready'));}}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090e;
+  --bg2:#0c0f17;
+  --surface:#111520;
+  --surface2:#161b26;
+  --border:rgba(255,255,255,.07);
+  --border2:rgba(255,255,255,.12);
+  --text:#eef0f5;
+  --muted:#8e96b0;
+  --dimmed:#5a6280;
+
+  /* Case colors */
+  --over:#ff6b6b;
+  --over-dim:rgba(255,107,107,.12);
+  --over-glow:rgba(255,107,107,.3);
+  --crit:#ffd166;
+  --crit-dim:rgba(255,209,102,.12);
+  --crit-glow:rgba(255,209,102,.3);
+  --under:#06d6a0;
+  --under-dim:rgba(6,214,160,.12);
+  --under-glow:rgba(6,214,160,.3);
+
+  --accent:#818cf8;
+  --accent-dim:rgba(129,140,248,.12);
+}
+
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ─── NOISE OVERLAY ─── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+/* ─── RADIAL GLOW ─── */
+.bg-glow{
+  position:fixed;
+  width:700px;height:700px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(129,140,248,.06) 0%, transparent 70%);
+  top:-200px;left:-200px;
+  pointer-events:none;z-index:0;
+}
+
+.shell{max-width:1140px;margin:0 auto;padding:2.5rem 1.2rem 4rem;position:relative;z-index:1}
+
+/* ─── NAV ─── */
+.topnav{
+  display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center;
+}
+.topnav a{
+  text-decoration:none;
+  font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);
+  border:1px solid var(--border2);
+  border-radius:6px;
+  padding:.4rem .8rem;
+  background:var(--surface);
+  transition:all .2s;
+}
+.topnav a:hover{color:var(--text);border-color:var(--accent);background:var(--accent-dim);}
+
+/* ─── HERO ─── */
+.hero{
+  margin-bottom:2rem;
+  padding:2rem 2rem 1.5rem;
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:'';
+  position:absolute;top:0;right:0;
+  width:300px;height:300px;
+  background:radial-gradient(circle at top right, rgba(129,140,248,.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-tag{
+  display:inline-block;
+  font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);
+  background:var(--accent-dim);
+  border:1px solid rgba(129,140,248,.25);
+  border-radius:4px;
+  padding:.28rem .6rem;
+  margin-bottom:1rem;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1.1;
+  margin-bottom:.8rem;
+  background:linear-gradient(135deg,#eef0f5 0%,#818cf8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  color:var(--muted);
+  line-height:1.75;
+  font-size:.97rem;
+  max-width:780px;
+  margin-bottom:1.4rem;
+}
+
+/* ─── MASTER FORMULA BOX ─── */
+.formula-banner{
+  background:var(--surface2);
+  border:1px solid var(--border2);
+  border-radius:14px;
+  padding:1.2rem 1.5rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+@media(max-width:600px){.formula-banner{grid-template-columns:1fr}}
+.formula-item{text-align:center}
+.formula-label{
+  font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dimmed);
+  margin-bottom:.5rem;
+}
+.formula-eq{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.95rem;
+  color:var(--text);
+}
+
+/* ─── SECTION TITLE ─── */
+.sec-title{
+  font-family:'Syne',sans-serif;
+  font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dimmed);
+  margin-bottom:1.2rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ─── QUICK DATA GRID ─── */
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:.75rem;
+  margin-bottom:2rem;
+}
+.qcard{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:.9rem 1rem;
+  transition:border-color .2s;
+}
+.qcard:hover{border-color:var(--border2);}
+.qcard-label{
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dimmed);
+  margin-bottom:.4rem;
+}
+.qcard-val{color:var(--text);line-height:1.6;font-size:.9rem;}
+
+/* ─── VISUAL COMPARATOR ─── */
+.comparator{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:18px;
+  padding:1.5rem;
+  margin-bottom:2rem;
+}
+.comp-title{
+  font-family:'Syne',sans-serif;
+  font-size:1rem;font-weight:800;
+  color:var(--text);
+  margin-bottom:.4rem;
+}
+.comp-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.4rem;}
+
+.comp-row{
+  display:grid;
+  grid-template-columns:140px 1fr 90px;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.comp-label{font-size:.82rem;font-weight:600;color:var(--muted);}
+.comp-bar-wrap{
+  background:rgba(255,255,255,.04);
+  border-radius:8px;
+  height:32px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+.comp-bar{
+  height:100%;
+  border-radius:8px;
+  display:flex;align-items:center;padding-left:.75rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;font-weight:600;
+  transition:width 1.2s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+.comp-bar::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.08) 100%);
+}
+.omega-line{
+  position:absolute;
+  height:100%;
+  width:2px;
+  top:0;
+  background:var(--accent);
+  z-index:2;
+}
+.omega-label{
+  position:absolute;
+  top:-20px;
+  transform:translateX(-50%);
+  font-size:.65rem;
+  color:var(--accent);
+  font-weight:700;
+  white-space:nowrap;
+}
+.comp-result{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.8rem;font-weight:600;
+  text-align:right;
+}
+
+/* ─── CASE CARDS ─── */
+.cases-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.25rem;
+  margin-bottom:2rem;
+}
+.case-card{
+  border-radius:18px;
+  border:1px solid var(--border);
+  overflow:hidden;
+  background:var(--surface);
+  transition:transform .25s, box-shadow .25s;
+}
+.case-card:hover{
+  transform:translateY(-3px);
+}
+.case-card.over{border-color:rgba(255,107,107,.25);}
+.case-card.over:hover{box-shadow:0 12px 40px var(--over-glow);}
+.case-card.crit{border-color:rgba(255,209,102,.25);}
+.case-card.crit:hover{box-shadow:0 12px 40px var(--crit-glow);}
+.case-card.under{border-color:rgba(6,214,160,.25);}
+.case-card.under:hover{box-shadow:0 12px 40px var(--under-glow);}
+
+.case-header{
+  padding:1.2rem 1.4rem;
+  display:flex;align-items:center;gap:.9rem;
+  border-bottom:1px solid var(--border);
+}
+.case-icon{
+  width:44px;height:44px;
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;
+  flex-shrink:0;
+}
+.over .case-icon{background:var(--over-dim);}
+.crit .case-icon{background:var(--crit-dim);}
+.under .case-icon{background:var(--under-dim);}
+.case-meta{}
+.case-letter{
+  font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:.15rem;
+}
+.over .case-letter{color:var(--over);}
+.crit .case-letter{color:var(--crit);}
+.under .case-letter{color:var(--under);}
+.case-name{
+  font-family:'Syne',sans-serif;
+  font-size:1.05rem;font-weight:800;
+  color:var(--text);
+}
+
+.case-body{padding:1.2rem 1.4rem;display:grid;gap:.85rem;}
+
+.case-resistance{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.03);
+  border-radius:8px;
+  padding:.6rem .85rem;
+  border:1px solid var(--border);
+}
+.case-resistance .rlabel{font-size:.7rem;color:var(--dimmed);font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.case-resistance .rval{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--text);font-weight:600;}
+
+.case-alpha{
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+}
+.alpha-badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.82rem;font-weight:600;
+  padding:.35rem .7rem;border-radius:6px;
+}
+.over .alpha-badge{background:var(--over-dim);color:var(--over);}
+.crit .alpha-badge{background:var(--crit-dim);color:var(--crit);}
+.under .alpha-badge{background:var(--under-dim);color:var(--under);}
+.alpha-compare{font-size:.8rem;color:var(--muted);}
+
+.case-roots{
+  border-radius:10px;
+  padding:.85rem 1rem;
+  border:1px solid var(--border2);
+}
+.over .case-roots{background:rgba(255,107,107,.05);}
+.crit .case-roots{background:rgba(255,209,102,.05);}
+.under .case-roots{background:rgba(6,214,160,.05);}
+.roots-label{font-size:.65rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--dimmed);margin-bottom:.4rem;}
+.roots-val{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.9rem;
+  color:var(--text);
+  line-height:1.7;
+}
+
+.case-why{
+  font-size:.82rem;
+  color:var(--muted);
+  line-height:1.7;
+  border-top:1px solid var(--border);
+  padding-top:.85rem;
+}
+
+/* ─── STEP REVEAL ─── */
+.steps-section{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:18px;
+  padding:1.5rem;
+  margin-bottom:2rem;
+}
+.steps-tabs{
+  display:flex;gap:.5rem;flex-wrap:wrap;
+  margin-bottom:1.2rem;
+  border-bottom:1px solid var(--border);
+  padding-bottom:1rem;
+}
+.step-tab{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.78rem;font-weight:700;letter-spacing:.05em;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:.45rem .9rem;
+  cursor:pointer;
+  color:var(--muted);
+  background:transparent;
+  transition:all .2s;
+}
+.step-tab:hover{color:var(--text);border-color:var(--border2);}
+.step-tab.active{color:var(--text);background:var(--surface2);border-color:var(--border2);}
+.step-tab.active.t-over{color:var(--over);border-color:rgba(255,107,107,.35);background:var(--over-dim);}
+.step-tab.active.t-crit{color:var(--crit);border-color:rgba(255,209,102,.35);background:var(--crit-dim);}
+.step-tab.active.t-under{color:var(--under);border-color:rgba(6,214,160,.35);background:var(--under-dim);}
+
+.step-panel{display:none;}
+.step-panel.active{display:grid;gap:.75rem;animation:fadeIn .3s ease;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.step{
+  display:grid;
+  grid-template-columns:32px 1fr;
+  gap:.9rem;
+  align-items:start;
+}
+.step-num{
+  width:32px;height:32px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:800;
+  flex-shrink:0;
+  font-family:'Syne',sans-serif;
+}
+.t-over .step-num{background:var(--over-dim);color:var(--over);}
+.t-crit .step-num{background:var(--crit-dim);color:var(--crit);}
+.t-under .step-num{background:var(--under-dim);color:var(--under);}
+.t-base .step-num{background:var(--accent-dim);color:var(--accent);}
+.step-content{}
+.step-head{font-weight:700;color:var(--text);margin-bottom:.3rem;font-size:.9rem;}
+.step-body{color:var(--muted);font-size:.85rem;line-height:1.75;}
+
+/* ─── MEMORY PALACE ─── */
+.palace-section{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:18px;
+  padding:1.5rem;
+  margin-bottom:2rem;
+}
+.palace-intro-text{
+  color:var(--muted);
+  font-size:.88rem;
+  line-height:1.75;
+  margin-bottom:1.4rem;
+  padding-bottom:1.2rem;
+  border-bottom:1px solid var(--border);
+}
+.palace-path{
+  display:grid;
+  gap:0;
+}
+.palace-stop{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:0 1.2rem;
+}
+.palace-stop-left{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.palace-node{
+  width:40px;height:40px;
+  border-radius:50%;
+  border:2px solid var(--border2);
+  background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;
+  color:var(--text);
+  flex-shrink:0;
+  font-family:'Syne',sans-serif;
+  z-index:1;
+  position:relative;
+}
+.palace-node.s-over{border-color:var(--over);background:var(--over-dim);color:var(--over);}
+.palace-node.s-crit{border-color:var(--crit);background:var(--crit-dim);color:var(--crit);}
+.palace-node.s-under{border-color:var(--under);background:var(--under-dim);color:var(--under);}
+.palace-node.s-accent{border-color:var(--accent);background:var(--accent-dim);color:var(--accent);}
+.palace-connector{
+  flex:1;
+  width:2px;
+  background:var(--border);
+  margin:.3rem 0;
+  min-height:24px;
+}
+.palace-stop-right{
+  padding-bottom:1.6rem;
+}
+.palace-stop-title{
+  font-weight:700;
+  font-size:.92rem;
+  color:var(--text);
+  margin-bottom:.3rem;
+  padding-top:.55rem;
+}
+.palace-stop-body{
+  font-size:.82rem;
+  color:var(--muted);
+  line-height:1.75;
+}
+
+/* ─── RECALL FLIP CARDS ─── */
+.recall-section{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:18px;
+  padding:1.5rem;
+  margin-bottom:2rem;
+}
+.recall-intro{
+  color:var(--muted);
+  font-size:.85rem;
+  line-height:1.6;
+  margin-bottom:1.2rem;
+}
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:.85rem;
+}
+.flip-card{
+  height:140px;
+  perspective:1000px;
+  cursor:pointer;
+}
+.flip-inner{
+  position:relative;
+  width:100%;height:100%;
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
+  transform-style:preserve-3d;
+}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+.flip-front,.flip-back{
+  position:absolute;inset:0;
+  border-radius:12px;
+  border:1px solid var(--border2);
+  padding:.9rem;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  backface-visibility:hidden;
+  text-align:center;
+}
+.flip-front{
+  background:var(--surface2);
+}
+.flip-back{
+  transform:rotateY(180deg);
+}
+.flip-tag{
+  font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:.5rem;
+}
+.flip-q{font-size:.88rem;font-weight:600;color:var(--text);}
+.flip-a{font-size:.82rem;color:var(--text);line-height:1.6;}
+.flip-hint{font-size:.65rem;color:var(--dimmed);margin-top:.5rem;}
+
+.flip-front .flip-tag{color:var(--accent);}
+.flip-front{border-color:rgba(129,140,248,.2);}
+
+/* Case colored backs */
+.flip-card.fc-over .flip-back{background:var(--over-dim);border-color:rgba(255,107,107,.3);}
+.flip-card.fc-over .flip-tag{color:var(--over);}
+.flip-card.fc-crit .flip-back{background:var(--crit-dim);border-color:rgba(255,209,102,.3);}
+.flip-card.fc-crit .flip-tag{color:var(--crit);}
+.flip-card.fc-under .flip-back{background:var(--under-dim);border-color:rgba(6,214,160,.3);}
+.flip-card.fc-under .flip-tag{color:var(--under);}
+.flip-card.fc-base .flip-back{background:var(--accent-dim);border-color:rgba(129,140,248,.3);}
+.flip-card.fc-base .flip-tag{color:var(--accent);}
+
+/* ─── SHORTCUT BANNER ─── */
+.shortcut-banner{
+  border-radius:16px;
+  padding:1.3rem 1.5rem;
+  display:flex;align-items:center;gap:1.2rem;
+  margin-bottom:2rem;
+  background:linear-gradient(135deg,var(--accent-dim),rgba(129,140,248,.05));
+  border:1px solid rgba(129,140,248,.25);
+}
+.shortcut-icon{font-size:1.8rem;flex-shrink:0;}
+.shortcut-title{
+  font-family:'Syne',sans-serif;
+  font-size:1rem;font-weight:800;
+  color:var(--accent);
+  margin-bottom:.3rem;
+}
+.shortcut-body{color:var(--muted);font-size:.85rem;line-height:1.7;}
+
+/* ─── LAYOUT ─── */
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.25rem;
+  margin-bottom:2rem;
+}
+@media(max-width:680px){.two-col{grid-template-columns:1fr}}
+@media(max-width:600px){.cases-grid{grid-template-columns:1fr}.comp-row{grid-template-columns:100px 1fr 70px}}
+
+/* ─── DETAIL ROOMS ACCORDION ─── */
+.rooms-section{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:18px;
+  padding:1.5rem;
+  margin-bottom:2rem;
+}
+.room-item{
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-bottom:.65rem;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.room-item:hover{border-color:var(--border2);}
+.room-item.open{border-color:var(--border2);}
+.room-trigger{
+  width:100%;
+  background:none;border:none;
+  padding:.85rem 1.1rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  cursor:pointer;
+  text-align:left;
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.9rem;font-weight:700;
+}
+.room-trigger:hover{background:rgba(255,255,255,.02);}
+.room-chevron{
+  width:20px;height:20px;
+  border-radius:50%;
+  background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:.7rem;
+  color:var(--dimmed);
+  transition:transform .3s,color .2s;
+}
+.room-item.open .room-chevron{transform:rotate(180deg);color:var(--accent);}
+.room-body{
+  display:none;
+  padding:.2rem 1.1rem 1rem;
+  border-top:1px solid var(--border);
+  background:rgba(255,255,255,.01);
+}
+.room-item.open .room-body{display:block;}
+.room-body ul{padding-left:1.3rem;}
+.room-body li{
+  font-size:.85rem;
+  color:var(--muted);
+  line-height:1.85;
+  margin-bottom:.2rem;
+}
+.room-badge{
+  font-size:.62rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:.2rem .5rem;border-radius:4px;
+  margin-right:.5rem;
+  flex-shrink:0;
+}
+.badge-over{background:var(--over-dim);color:var(--over);}
+.badge-crit{background:var(--crit-dim);color:var(--crit);}
+.badge-under{background:var(--under-dim);color:var(--under);}
+
+/* ─── PROGRESS ─── */
+.progress-bar-wrap{
+  background:rgba(255,255,255,.04);
+  border-radius:999px;
+  height:4px;
+  margin-top:1rem;
+  overflow:hidden;
+}
+.progress-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--under));
+  border-radius:999px;
+  width:0%;
+  transition:width .5s ease;
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ─── MODAL ─── */
+.modal{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(4px);
+  z-index:100;
+  align-items:center;justify-content:center;
+  padding:1rem;
+}
+.modal.open{display:flex;}
+.modal-card{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:18px;
+  padding:1.5rem;
+  max-width:600px;width:100%;
+  max-height:80vh;overflow-y:auto;
+}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.modal-head h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;}
+.modal-copy{color:var(--muted);font-size:.85rem;line-height:1.75;margin-bottom:1rem;}
+.prompt-box{
+  width:100%;
+  min-height:200px;
+  background:var(--surface2);
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:.9rem;
+  color:var(--muted);
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  line-height:1.7;
+  resize:vertical;
+  margin-bottom:1rem;
+}
+.modal-actions{display:flex;gap:.6rem;justify-content:flex-end;}
+.ghost-btn{
+  border:1px solid var(--border2);
+  border-radius:8px;
+  padding:.5rem 1rem;
+  font-size:.8rem;font-weight:700;
+  font-family:'Space Grotesk',sans-serif;
+  cursor:pointer;
+  color:var(--text);
+  background:var(--surface2);
+  transition:all .2s;
+}
+.ghost-btn:hover{background:rgba(255,255,255,.06);}
+.ghost-btn.primary{background:var(--accent-dim);border-color:rgba(129,140,248,.35);color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<main class="shell">
+
+  <!-- NAV -->
+  <nav class="topnav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rlc-ex718-example.html">Next: Ex 7-18 →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="hero-tag">Series RLC · Characteristic Roots</div>
+    <h1>Example 7-17</h1>
+    <p class="hero-sub">
+      A series RLC circuit has $C=0.25\times 10^{-6}\ \text{F}$ and $L=1\ \text{H}.$
+      Find the characteristic roots for $R_T = 8.5\ \text{k}\Omega,\ 4\ \text{k}\Omega,$ and $1\ \text{k}\Omega.$
+      The key insight: compute $\omega_0$ once, then compare each $\alpha = R_T/(2L)$ against it — the comparison immediately reveals the root type before any arithmetic.
+    </p>
+    <div class="formula-banner">
+      <div class="formula-item">
+        <div class="formula-label">Characteristic Equation</div>
+        <div class="formula-eq">$$LCs^2+R_TC s+1=0$$</div>
+      </div>
+      <div class="formula-item">
+        <div class="formula-label">Root Formula</div>
+        <div class="formula-eq">$$s_{1,2}=-\alpha\pm\sqrt{\alpha^2-\omega_0^2}$$</div>
+      </div>
+    </div>
+    <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap;">
+      <button class="ghost-btn primary" data-open-prompt>AI Prompt</button>
+      <button class="ghost-btn" id="scroll-to-recall">Test My Memory</button>
+    </div>
+  </section>
+
+  <!-- QUICK DATA -->
+  <div class="sec-title reveal">Quick Data</div>
+  <div class="quick-grid reveal">
+    <div class="qcard">
+      <div class="qcard-label">Capacitance</div>
+      <div class="qcard-val">$C=0.25\times 10^{-6}\ \text{F}$</div>
+    </div>
+    <div class="qcard">
+      <div class="qcard-label">Inductance</div>
+      <div class="qcard-val">$L=1\ \text{H}$</div>
+    </div>
+    <div class="qcard">
+      <div class="qcard-label">Undamped Frequency</div>
+      <div class="qcard-val">$\omega_0 = 2000\ \text{rad/s}$</div>
+    </div>
+    <div class="qcard">
+      <div class="qcard-label">Damping Constant</div>
+      <div class="qcard-val">$\alpha = R_T/(2L) = R_T/2$</div>
+    </div>
+    <div class="qcard">
+      <div class="qcard-label">Test Rule</div>
+      <div class="qcard-val">Compare $\alpha$ vs $\omega_0$</div>
+    </div>
+    <div class="qcard">
+      <div class="qcard-label">Three Cases</div>
+      <div class="qcard-val">A: over · B: critical · C: under</div>
+    </div>
+  </div>
+
+  <!-- SHORTCUT BANNER -->
+  <div class="shortcut-banner reveal">
+    <div class="shortcut-icon">⚡</div>
+    <div>
+      <div class="shortcut-title">One Comparison Rule</div>
+      <div class="shortcut-body">
+        Compute $\omega_0$ once. Then for each resistance, ask: is $\alpha$ greater than, equal to, or less than $\omega_0$?
+        That single comparison tells the root pattern — <strong style="color:var(--over)">overdamped</strong>, <strong style="color:var(--crit)">critically damped</strong>, or <strong style="color:var(--under)">underdamped</strong> — before you calculate anything.
+      </div>
+    </div>
+  </div>
+
+  <!-- VISUAL COMPARATOR -->
+  <div class="sec-title reveal">Visual: α vs ω₀ Comparison</div>
+  <div class="comparator reveal">
+    <div class="comp-title">Damping Constant vs Natural Frequency</div>
+    <div class="comp-sub">Each bar shows $\alpha$ for that resistance. The purple line marks $\omega_0 = 2000\ \text{rad/s}$ — the deciding threshold.</div>
+
+    <div class="comp-row" style="grid-template-columns:140px 1fr 110px;margin-bottom:.5rem;font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dimmed)">
+      <span>Resistance</span><span>α value (rad/s)</span><span>Result</span>
+    </div>
+
+    <div class="comp-row">
+      <span class="comp-label">$R_T = 8.5\ \text{k}\Omega$</span>
+      <div class="comp-bar-wrap" id="bar-wrap">
+        <div class="comp-bar" id="bar1" style="width:0%;background:var(--over);max-width:100%;">
+          <span style="font-size:.72rem;color:rgba(0,0,0,.8)">α = 4250</span>
+        </div>
+        <div class="omega-line" style="left:47.1%"><span class="omega-label">ω₀=2000</span></div>
+      </div>
+      <span class="comp-result" style="color:var(--over)">α &gt; ω₀</span>
+    </div>
+
+    <div class="comp-row">
+      <span class="comp-label">$R_T = 4\ \text{k}\Omega$</span>
+      <div class="comp-bar-wrap">
+        <div class="comp-bar" id="bar2" style="width:0%;background:var(--crit);">
+          <span style="font-size:.72rem;color:rgba(0,0,0,.8)">α = 2000</span>
+        </div>
+        <div class="omega-line" style="left:47.1%"></div>
+      </div>
+      <span class="comp-result" style="color:var(--crit)">α = ω₀</span>
+    </div>
+
+    <div class="comp-row">
+      <span class="comp-label">$R_T = 1\ \text{k}\Omega$</span>
+      <div class="comp-bar-wrap">
+        <div class="comp-bar" id="bar3" style="width:0%;background:var(--under);">
+          <span style="font-size:.72rem;color:rgba(0,0,0,.8)">α = 500</span>
+        </div>
+        <div class="omega-line" style="left:47.1%"></div>
+      </div>
+      <span class="comp-result" style="color:var(--under)">α &lt; ω₀</span>
+    </div>
+
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="comp-progress"></div></div>
+  </div>
+
+  <!-- THREE CASE CARDS -->
+  <div class="sec-title reveal">The Three Cases</div>
+  <div class="cases-grid reveal">
+
+    <!-- OVERDAMPED -->
+    <div class="case-card over">
+      <div class="case-header">
+        <div class="case-icon">🔩</div>
+        <div class="case-meta">
+          <div class="case-letter">Case A · Overdamped</div>
+          <div class="case-name">Two Real Unequal Roots</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-resistance">
+          <span class="rlabel">Resistance</span>
+          <span class="rval">$R_T = 8.5\ \text{k}\Omega$</span>
+        </div>
+        <div class="case-alpha">
+          <span class="alpha-badge">α = 4250</span>
+          <span class="alpha-compare">$\alpha > \omega_0$ · radical is positive</span>
+        </div>
+        <div class="case-roots">
+          <div class="roots-label">Characteristic Roots</div>
+          <div class="roots-val">
+            $s_{1,2} = -4250 \pm 3750$<br>
+            $s_1 = -500,\quad s_2 = -8000$
+          </div>
+        </div>
+        <div class="case-why">
+          The quantity under the radical is positive, so roots are <strong style="color:var(--over)">real and unequal</strong>. No imaginary part means no oscillation — the system decays monotonically along two different exponential curves.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRITICAL -->
+    <div class="case-card crit">
+      <div class="case-header">
+        <div class="case-icon">⚖️</div>
+        <div class="case-meta">
+          <div class="case-letter">Case B · Critical</div>
+          <div class="case-name">One Repeated Real Root</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-resistance">
+          <span class="rlabel">Resistance</span>
+          <span class="rval">$R_T = 4\ \text{k}\Omega$</span>
+        </div>
+        <div class="case-alpha">
+          <span class="alpha-badge">α = 2000</span>
+          <span class="alpha-compare">$\alpha = \omega_0$ · radical is zero</span>
+        </div>
+        <div class="case-roots">
+          <div class="roots-label">Characteristic Roots</div>
+          <div class="roots-val">
+            $s_{1,2} = -2000 \pm 0$<br>
+            $s_1 = s_2 = -2000$
+          </div>
+        </div>
+        <div class="case-why">
+          The radical collapses to zero, yielding one <strong style="color:var(--crit)">repeated real root</strong>. This is the knife-edge between non-oscillatory split-root behavior and oscillatory complex-root behavior.
+        </div>
+      </div>
+    </div>
+
+    <!-- UNDERDAMPED -->
+    <div class="case-card under">
+      <div class="case-header">
+        <div class="case-icon">🔔</div>
+        <div class="case-meta">
+          <div class="case-letter">Case C · Underdamped</div>
+          <div class="case-name">Complex Conjugate Roots</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-resistance">
+          <span class="rlabel">Resistance</span>
+          <span class="rval">$R_T = 1\ \text{k}\Omega$</span>
+        </div>
+        <div class="case-alpha">
+          <span class="alpha-badge">α = 500</span>
+          <span class="alpha-compare">$\alpha < \omega_0$ · radical is negative</span>
+        </div>
+        <div class="case-roots">
+          <div class="roots-label">Characteristic Roots</div>
+          <div class="roots-val">
+            $s_{1,2} = -500 \pm j500\sqrt{15}$
+          </div>
+        </div>
+        <div class="case-why">
+          A negative radicand yields <strong style="color:var(--under)">complex conjugate roots</strong>. The real part $-500$ sets the decay rate; the imaginary part $\pm 500\sqrt{15}$ sets the oscillation frequency.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STEP-BY-STEP SOLUTION -->
+  <div class="sec-title reveal">Step-by-Step Solution</div>
+  <div class="steps-section reveal">
+    <div class="steps-tabs">
+      <button class="step-tab t-base active" data-tab="setup">Setup</button>
+      <button class="step-tab t-over" data-tab="over">Case A — Overdamped</button>
+      <button class="step-tab t-crit" data-tab="crit">Case B — Critical</button>
+      <button class="step-tab t-under" data-tab="under">Case C — Underdamped</button>
+    </div>
+
+    <!-- SETUP -->
+    <div class="step-panel t-base active" id="panel-setup">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-head">Write the Series Characteristic Equation</div>
+          <div class="step-body">For a series RLC natural response, write $$LCs^2+R_TC s+1=0$$ once and keep it fixed. Substituting $L=1$ and $C=0.25\times 10^{-6}$ gives $0.25\times 10^{-6}s^2+0.25\times 10^{-6}R_T s+1=0.$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-head">Compute the Common Benchmark $\omega_0$</div>
+          <div class="step-body">$$\omega_0=\frac{1}{\sqrt{LC}}=\frac{1}{\sqrt{0.25\times 10^{-6}}}=2000\ \text{rad/s}$$ This is computed once and never changes. Every case shares this reference.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-head">Set Up the Comparison</div>
+          <div class="step-body">The damping constant is $\alpha=\dfrac{R_T}{2L}=\dfrac{R_T}{2}$ because $L=1\ \text{H}.$ Each resistance only changes $\alpha.$ The moment you know $\alpha$, compare it against $\omega_0=2000$ to predict the root type immediately.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERDAMPED -->
+    <div class="step-panel t-over" id="panel-over">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-head">Compute $\alpha$</div>
+          <div class="step-body">For $R_T=8500\ \Omega:$ $$\alpha=\frac{8500}{2\times 1}=4250\ \text{rad/s}$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-head">Compare with $\omega_0$</div>
+          <div class="step-body">Since $4250 > 2000,$ this is Case A (overdamped). The discriminant $\alpha^2 - \omega_0^2 = 4250^2 - 2000^2$ is positive, so roots are real and unequal.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-head">Calculate the Radical</div>
+          <div class="step-body">$$\sqrt{\alpha^2-\omega_0^2}=\sqrt{4250^2-2000^2}=\sqrt{(3750)^2}=3750$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-head">Find the Roots</div>
+          <div class="step-body">$$s_{1,2}=-4250\pm 3750$$ $$s_1=-4250+3750=\mathbf{-500}$$ $$s_2=-4250-3750=\mathbf{-8000}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRITICAL -->
+    <div class="step-panel t-crit" id="panel-crit">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-head">Compute $\alpha$</div>
+          <div class="step-body">For $R_T=4000\ \Omega:$ $$\alpha=\frac{4000}{2\times 1}=2000\ \text{rad/s}$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-head">Compare with $\omega_0$</div>
+          <div class="step-body">$\alpha = \omega_0 = 2000.$ This is Case B (critically damped). The discriminant is exactly zero.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-head">The Radical Collapses</div>
+          <div class="step-body">$$\sqrt{\alpha^2-\omega_0^2}=\sqrt{4\times 10^6-4\times 10^6}=\sqrt{0}=0$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-head">Find the Roots</div>
+          <div class="step-body">$$s_{1,2}=-2000\pm 0$$ $$s_1=s_2=\mathbf{-2000}$$ One repeated real root — the exact boundary between non-oscillatory and oscillatory behavior.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNDERDAMPED -->
+    <div class="step-panel t-under" id="panel-under">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-head">Compute $\alpha$</div>
+          <div class="step-body">For $R_T=1000\ \Omega:$ $$\alpha=\frac{1000}{2\times 1}=500\ \text{rad/s}$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-head">Compare with $\omega_0$</div>
+          <div class="step-body">Since $500 < 2000,$ this is Case C (underdamped). The discriminant $\alpha^2 - \omega_0^2 = 500^2 - 2000^2$ is negative → imaginary part → oscillation.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-head">Handle the Negative Radicand</div>
+          <div class="step-body">$$\sqrt{500^2-2000^2}=\sqrt{-15\cdot 500^2}=j\cdot 500\sqrt{15}$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-head">Find the Roots</div>
+          <div class="step-body">$$s_{1,2}=\mathbf{-500\pm j500\sqrt{15}}$$ Real part $-500$ = decay rate. Imaginary part $\pm 500\sqrt{15}$ = oscillation frequency.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMORY PALACE -->
+  <div class="sec-title reveal">Memory Palace Route</div>
+  <div class="palace-section reveal">
+    <p class="palace-intro-text">This memory route uses one fixed equation hall, one comparison chamber, and three damping doors. The route is designed to make the root pattern feel inevitable before any arithmetic starts. Walk: Equation Gate → Benchmark Courtyard → Balance Hall → Three Doors → Root Scrolls.</p>
+    <div class="palace-path">
+
+      <div class="palace-stop">
+        <div class="palace-stop-left">
+          <div class="palace-node s-accent">1</div>
+          <div class="palace-connector"></div>
+        </div>
+        <div class="palace-stop-right">
+          <div class="palace-stop-title">🏛️ The Bronze Equation Gate</div>
+          <div class="palace-stop-body">Picture a huge bronze gate engraved with the fixed series skeleton $LCs^2+R_TC s+1=0.$ The gate teaches the first rule: write the characteristic equation once before touching the cases. Nothing changes until the resistance changes, so the gate is the permanent frame.</div>
+        </div>
+      </div>
+
+      <div class="palace-stop">
+        <div class="palace-stop-left">
+          <div class="palace-node s-accent">2</div>
+          <div class="palace-connector"></div>
+        </div>
+        <div class="palace-stop-right">
+          <div class="palace-stop-title">🏙️ The Benchmark Courtyard</div>
+          <div class="palace-stop-body">In the courtyard, a tower marked $\omega_0$ stands unmoving at $2000\ \text{rad/s}.$ A second figure, $\alpha=R_T/(2L),$ changes clothes every time a new resistance enters. Compute $\omega_0$ once — it is the shared comparison point for all three cases.</div>
+        </div>
+      </div>
+
+      <div class="palace-stop">
+        <div class="palace-stop-left">
+          <div class="palace-node s-accent">3</div>
+          <div class="palace-connector"></div>
+        </div>
+        <div class="palace-stop-right">
+          <div class="palace-stop-title">⚖️ Bruno's Balance Hall</div>
+          <div class="palace-stop-body">A giant balance with $\alpha$ on one side and $\omega_0$ on the other. If $\alpha$ sinks lower (is larger), roots become two real unequal values. If the scale balances exactly, roots collapse into one repeated value. If $\alpha$ rises (is smaller), roots turn into a complex pair. This is the whole shortcut: compare first, classify second, compute third.</div>
+        </div>
+      </div>
+
+      <div class="palace-stop">
+        <div class="palace-stop-left">
+          <div class="palace-node s-over">A</div>
+          <div class="palace-connector"></div>
+        </div>
+        <div class="palace-stop-right">
+          <div class="palace-stop-title" style="color:var(--over)">🚪 The Overdamped Iron Door — $R_T = 8.5\ \text{k}\Omega$</div>
+          <div class="palace-stop-body">A heavy iron door that opens slowly. Behind it stands $\alpha = 4250,$ clearly larger than $\omega_0 = 2000.$ The iron door stores: positive radical → two real unequal roots → no oscillation. Memory stamp: $-4250 \pm 3750 \Rightarrow -500,\ -8000.$</div>
+        </div>
+      </div>
+
+      <div class="palace-stop">
+        <div class="palace-stop-left">
+          <div class="palace-node s-crit">B</div>
+          <div class="palace-connector"></div>
+        </div>
+        <div class="palace-stop-right">
+          <div class="palace-stop-title" style="color:var(--crit)">🪞 The Critical Mirror Door — $R_T = 4\ \text{k}\Omega$</div>
+          <div class="palace-stop-body">A mirror split exactly down the center. Here $\alpha = 2000$ meets $\omega_0 = 2000$ exactly, so the radical vanishes. One repeated real root, perfect balance, no extra split. Memory stamp: $s_1 = s_2 = -2000.$</div>
+        </div>
+      </div>
+
+      <div class="palace-stop">
+        <div class="palace-stop-left">
+          <div class="palace-node s-under">C</div>
+          <div class="palace-connector"></div>
+        </div>
+        <div class="palace-stop-right">
+          <div class="palace-stop-title" style="color:var(--under)">🔔 The Underdamped Silver Door — $R_T = 1\ \text{k}\Omega$</div>
+          <div class="palace-stop-body">A silver door vibrating with a soft ringing tone. Here $\alpha = 500$ is smaller than $\omega_0 = 2000,$ so the radical goes negative. Complex conjugates, oscillation with decay. Memory stamp: $-500 \pm j500\sqrt{15}.$</div>
+        </div>
+      </div>
+
+      <div class="palace-stop">
+        <div class="palace-stop-left">
+          <div class="palace-node s-accent">7</div>
+          <div class="palace-connector" style="background:transparent;"></div>
+        </div>
+        <div class="palace-stop-right">
+          <div class="palace-stop-title">🏆 Solomon's Root Table</div>
+          <div class="palace-stop-body">At the end of the palace, a gold table states the final law: <strong>write the equation → compute $\omega_0$ → compare $\alpha$ → classify → then calculate roots.</strong> Classification always comes before calculation.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RECALL FLIP CARDS -->
+  <div class="sec-title reveal" id="recall-section">Recall Test — Flip Cards</div>
+  <div class="recall-section reveal">
+    <p class="recall-intro">Click each card to reveal the answer. Try to recall before you flip.</p>
+    <div class="cards-grid">
+
+      <div class="flip-card fc-base" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-tag">Formula</div>
+            <div class="flip-q">What is $\omega_0$ for this circuit?</div>
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-tag">Answer</div>
+            <div class="flip-a">$$\omega_0 = \frac{1}{\sqrt{LC}} = 2000\ \text{rad/s}$$</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card fc-base" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-tag">Formula</div>
+            <div class="flip-q">What is $\alpha$ when $R_T = 4\ \text{k}\Omega$?</div>
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-tag">Answer</div>
+            <div class="flip-a">$\alpha = R_T/(2L) = 4000/2 = 2000\ \text{rad/s}$</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card fc-over" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-tag">Case A</div>
+            <div class="flip-q">What are the roots for $R_T = 8.5\ \text{k}\Omega$?</div>
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-tag">Overdamped</div>
+            <div class="flip-a">$s_1 = -500,\ s_2 = -8000$<br>Two real unequal roots</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card fc-crit" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-tag">Case B</div>
+            <div class="flip-q">What are the roots for $R_T = 4\ \text{k}\Omega$?</div>
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-tag">Critical</div>
+            <div class="flip-a">$s_1 = s_2 = -2000$<br>One repeated real root</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card fc-under" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-tag">Case C</div>
+            <div class="flip-q">What are the roots for $R_T = 1\ \text{k}\Omega$?</div>
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-tag">Underdamped</div>
+            <div class="flip-a">$s_{1,2} = -500 \pm j500\sqrt{15}$<br>Complex conjugates</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card fc-over" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-tag">Case A</div>
+            <div class="flip-q">What condition identifies Case A?</div>
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-tag">Overdamped</div>
+            <div class="flip-a">$\alpha > \omega_0$<br>Discriminant positive → two real unequal roots → no oscillation</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card fc-crit" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-tag">Case B</div>
+            <div class="flip-q">What condition identifies Case B?</div>
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-tag">Critical</div>
+            <div class="flip-a">$\alpha = \omega_0$<br>Discriminant = 0 → one repeated root</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card fc-under" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-tag">Case C</div>
+            <div class="flip-q">What condition identifies Case C?</div>
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-tag">Underdamped</div>
+            <div class="flip-a">$\alpha < \omega_0$<br>Discriminant negative → complex conjugates → oscillation</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DETAIL ROOMS ACCORDION -->
+  <div class="sec-title reveal">Full Detail Rooms</div>
+  <div class="rooms-section reveal">
+
+    <div class="room-item">
+      <button class="room-trigger" onclick="toggleRoom(this)">
+        <span>Room 1 — Write the Series Characteristic Equation</span>
+        <span class="room-chevron">▼</span>
+      </button>
+      <div class="room-body">
+        <ul>
+          <li>For a series RLC natural response, the characteristic equation is $LCs^2+R_TC s+1=0.$</li>
+          <li>Substitute $L=1$ and $C=0.25\times 10^{-6}:$</li>
+          <li>$0.25\times 10^{-6}s^2+0.25\times 10^{-6}R_T s+1=0.$</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <button class="room-trigger" onclick="toggleRoom(this)">
+        <span>Room 2 — Compute the Common Benchmark</span>
+        <span class="room-chevron">▼</span>
+      </button>
+      <div class="room-body">
+        <ul>
+          <li>The undamped natural frequency is $\omega_0=\dfrac{1}{\sqrt{LC}}=\dfrac{1}{\sqrt{0.25\times 10^{-6}}}=2000\ \text{rad/s}.$</li>
+          <li>The damping constant is $\alpha=\dfrac{R_T}{2L}=\dfrac{R_T}{2}$ because $L=1\ \text{H}.$</li>
+          <li>Now every case reduces to comparing $\alpha$ with $\omega_0.$</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <button class="room-trigger" onclick="toggleRoom(this)">
+        <span><span class="room-badge badge-over">Case A</span>Room 3 — Solve $R_T=8.5\ \text{k}\Omega$</span>
+        <span class="room-chevron">▼</span>
+      </button>
+      <div class="room-body">
+        <ul>
+          <li>For $R_T=8500\ \Omega,$ the damping constant is $\alpha=4250.$</li>
+          <li>Since $4250>2000,$ this is Case A and the roots are $s_{1,2}=-\alpha\pm\sqrt{\alpha^2-\omega_0^2}.$</li>
+          <li>Compute the radical: $\sqrt{4250^2-2000^2}=\sqrt{(3750)^2}=3750.$</li>
+          <li>Therefore $s_{1,2}=-4250\pm 3750,$ so the roots are $-500$ and $-8000.$</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <button class="room-trigger" onclick="toggleRoom(this)">
+        <span><span class="room-badge badge-over">Case A</span>Room 4 — Why This Is Case A</span>
+        <span class="room-chevron">▼</span>
+      </button>
+      <div class="room-body">
+        <ul>
+          <li>The quantity under the radical is positive, so the roots are real and unequal.</li>
+          <li>That is the textbook signature of Case A, the overdamped case.</li>
+          <li>Nothing oscillates here because there is no imaginary part in the roots.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <button class="room-trigger" onclick="toggleRoom(this)">
+        <span><span class="room-badge badge-crit">Case B</span>Room 5 — Solve $R_T=4\ \text{k}\Omega$</span>
+        <span class="room-chevron">▼</span>
+      </button>
+      <div class="room-body">
+        <ul>
+          <li>For $R_T=4000\ \Omega,$ the damping constant is $\alpha=2000.$</li>
+          <li>Now $\alpha=\omega_0,$ so the radical becomes zero.</li>
+          <li>The roots are $s_{1,2}=-2000\pm\sqrt{4\times 10^6-4\times 10^6}=-2000,-2000.$</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <button class="room-trigger" onclick="toggleRoom(this)">
+        <span><span class="room-badge badge-crit">Case B</span>Room 6 — Why This Is Case B</span>
+        <span class="room-chevron">▼</span>
+      </button>
+      <div class="room-body">
+        <ul>
+          <li>A zero quantity under the radical gives one repeated real root.</li>
+          <li>That is Case B, the critically damped case.</li>
+          <li>It sits exactly between the nonoscillatory split-root case and the oscillatory complex-root case.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <button class="room-trigger" onclick="toggleRoom(this)">
+        <span><span class="room-badge badge-under">Case C</span>Room 7 — Solve $R_T=1\ \text{k}\Omega$</span>
+        <span class="room-chevron">▼</span>
+      </button>
+      <div class="room-body">
+        <ul>
+          <li>For $R_T=1000\ \Omega,$ the damping constant is $\alpha=500.$</li>
+          <li>Since $500 < 2000,$ this is Case C and the roots are $s_{1,2}=-500\pm\sqrt{500^2-2000^2}.$</li>
+          <li>The radical becomes $\sqrt{-15\cdot 500^2}=500\sqrt{-15}=j500\sqrt{15}.$</li>
+          <li>Therefore $s_{1,2}=-500\pm j500\sqrt{15}.$</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <button class="room-trigger" onclick="toggleRoom(this)">
+        <span><span class="room-badge badge-under">Case C</span>Room 8 — Why This Is Case C</span>
+        <span class="room-chevron">▼</span>
+      </button>
+      <div class="room-body">
+        <ul>
+          <li>A negative quantity under the radical gives complex conjugate roots.</li>
+          <li>That is Case C, the underdamped case.</li>
+          <li>The real part $-500$ sets the decay rate, while the imaginary part $\pm 500\sqrt{15}$ sets the oscillation.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- AI PROMPT MODAL -->
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">This prompt is prefilled with the full classification flow for Example 7-17. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this second-order series RLC root-classification problem. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. Start with the series RLC characteristic equation LCs^2 + R_T C s + 1 = 0.
+2. Given L = 1 H and C = 0.25 x 10^-6 F, write 0.25 x 10^-6 s^2 + 0.25 x 10^-6 R_T s + 1 = 0.
+3. Compute the undamped natural frequency: omega_0 = 1/sqrt(LC) = 2000 rad/s.
+4. Use alpha = R_T / (2L) to classify each case.
+5. For R_T = 8.5 kOhm, alpha = 4250 > 2000, so case A.
+6. The roots are -4250 +/- sqrt(4250^2 - 2000^2) = -500 and -8000.
+7. For R_T = 4 kOhm, alpha = 2000 = omega_0, so case B.
+8. The roots are both -2000.
+9. For R_T = 1 kOhm, alpha = 500 < 2000, so case C.
+10. The roots are -500 +/- j500 sqrt(15).
+11. Final idea: compare alpha with omega_0 before solving, because that comparison tells the root pattern immediately.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn primary" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── SCROLL REVEAL ─── */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ─── ANIMATED BARS ─── */
+// α values: 4250, 2000, 500. Max representable = 5000 → map to 85%
+const barData = [{el:'bar1',pct:85},{el:'bar2',pct:47.1},{el:'bar3',pct:11.8}];
+const compProgress = document.getElementById('comp-progress');
+let barsAnimated = false;
+const barObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !barsAnimated){
+      barsAnimated=true;
+      barData.forEach((b,i)=>{
+        setTimeout(()=>{
+          document.getElementById(b.el).style.width = b.pct+'%';
+        },i*300);
+      });
+      setTimeout(()=>{ compProgress.style.width='100%'; }, 1200);
+    }
+  });
+},{threshold:0.3});
+const compEl = document.querySelector('.comparator');
+if(compEl) barObserver.observe(compEl);
+
+/* ─── STEP TABS ─── */
+document.querySelectorAll('.step-tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const targetId = 'panel-'+this.dataset.tab;
+    document.querySelectorAll('.step-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(targetId).classList.add('active');
+    if(window.MathJax) MathJax.typesetPromise();
+  });
+});
+
+/* ─── ACCORDION ─── */
+function toggleRoom(trigger){
+  const item = trigger.closest('.room-item');
+  item.classList.toggle('open');
+  if(item.classList.contains('open') && window.MathJax) MathJax.typesetPromise();
+}
+
+/* ─── SCROLL TO RECALL ─── */
+document.getElementById('scroll-to-recall').addEventListener('click',()=>{
+  document.getElementById('recall-section').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+/* ─── MODAL ─── */
+const modal = document.getElementById('prompt-modal');
+document.querySelector('[data-open-prompt]').addEventListener('click',()=>{
+  modal.classList.add('open');modal.setAttribute('aria-hidden','false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach(b=>b.addEventListener('click',()=>{
+  modal.classList.remove('open');modal.setAttribute('aria-hidden','true');
+}));
+modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}});
+document.getElementById('copy-prompt').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(document.getElementById('prompt-text').value);}
+  catch{const t=document.getElementById('prompt-text');t.focus();t.select();}
+});
+
+/* ─── RE-TYPESET ON FLIP ─── */
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    setTimeout(()=>{ if(window.MathJax) MathJax.typesetPromise([card]); },100);
+  });
+});
+</script>
+</body>
+</html>

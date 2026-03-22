@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Design Example 8-7 | Voltage Divider Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_design_example_8_7">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-design-exercise-8-11.html">Next: Design Exercise 8-11</a><a href="ch8-exercise-8-10.html">Prev: Exercise 8-10</a></nav>
+
+  <section class="hero">
+    <div class="tag">Design Example 8-7</div>
+    <h1>Design a Voltage Divider for a Target Output</h1>
+    <p class="hero-sub">This page turns a waveform target into a design route. The source stays in cosine-reference form, the output sine is converted into cosine-reference form first, the output phasor is built, the divider formula is locked, then the equation is rearranged until one impedance is written in terms of the other and finally converted into real components.</p>
+    <div class="formula-block">$$v_s(t)=15\cos(2000t)\text{ V},\qquad v_o(t)=2\sin(2000t)\text{ V}$$ $$V_O=\frac{Z_2}{Z_1+Z_2}V_S$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-design-example-8-7.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Input Phasor</div><div class="v">$$V_S=15\angle0^\circ=15+j0$$</div></div>
+          <div class="fact"><div class="k">Target Output</div><div class="v">$$V_O=2\angle-90^\circ=-j2$$</div></div>
+          <div class="fact"><div class="k">Design Move</div><div class="v">Lock the divider formula, solve for $$Z_1$$ in terms of $$Z_2,$$ then choose one practical impedance and pull out the real components.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-design-example-8-7-room-1" data-room-id="ch8-design-example-8-7-room-1" data-room-title="Room 1: Convert Input and Output to Phasors" data-source-page="ch8-design-example-8-7.html" data-tags="convert,input,output,phasors">
+            <h2>Room 1: Convert Input and Output to Phasors</h2>
+            <ul>
+              <li>The input is already in cosine-reference form, so it stays as it is: $$v_s(t)=15\cos(2000t)\;\longrightarrow\;V_S=15\angle0^\circ=15+j0.$$</li>
+              <li>The desired output is not in cosine-reference form, so convert it first using the bridge formula $$\sin(\omega t)=\cos(\omega t-90^\circ).$$</li>
+              <li>That gives $$2\sin(2000t)=2\cos(2000t-90^\circ).$$</li>
+              <li>Now the output can be read as a phasor: $$V_O=2\angle-90^\circ=-j2.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-design-example-8-7-room-2" data-room-id="ch8-design-example-8-7-room-2" data-room-title="Room 2: Lock the Divider Formula and Substitute the Phasors" data-source-page="ch8-design-example-8-7.html" data-tags="lock,divider,formula,substitute">
+            <h2>Room 2: Lock the Divider Formula and Substitute the Phasors</h2>
+            <ul>
+              <li>The formula to memorize is the divider law: $$V_O=\dfrac{Z_2}{Z_1+Z_2}V_S.$$</li>
+              <li>Push the phasor values into it: $$-j2=\frac{Z_2}{Z_1+Z_2}(15+j0).$$</li>
+              <li>This is the key design equation. From here the whole problem becomes rearranging the divider until one impedance is written in terms of the other.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-design-example-8-7-room-3" data-room-id="ch8-design-example-8-7-room-3" data-room-title="Room 3: Rearrange Until $$Z_1=(\cdots)Z_2$$" data-source-page="ch8-design-example-8-7.html" data-tags="rearrange,until,cdots">
+            <h2>Room 3: Rearrange Until $$Z_1=(\cdots)Z_2$$</h2>
+            <ul>
+              <li>Start from $$-j2=\dfrac{Z_2}{Z_1+Z_2}(15+j0).$$</li>
+              <li>Multiply both sides by $$Z_1+Z_2,$$ then divide by $$-j2,$$ so the unknown impedance block stands alone.</li>
+              <li>That gives $$Z_1=\frac{15+j2}{-j2}Z_2.$$</li>
+              <li>Simplify the coefficient: $$\frac{15+j2}{-j2}=-1+j7.5.$$</li>
+              <li>So the clean design condition is $$Z_1=(-1+j7.5)Z_2.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-design-example-8-7-room-4" data-room-id="ch8-design-example-8-7-room-4" data-room-title="Room 4: Choose One $$Z_2$$ and Let It Generate $$Z_1$$" data-source-page="ch8-design-example-8-7.html" data-tags="choose,generate">
+            <h2>Room 4: Choose One $$Z_2$$ and Let It Generate $$Z_1$$</h2>
+            <ul>
+              <li>Pick a practical capacitive block: $$Z_2=-j1000\,\Omega.$$</li>
+              <li>Substitute that into the design condition: $$Z_1=(-1+j7.5)(-j1000)=7500+j1000\,\Omega.$$</li>
+              <li>The equation has now pulled out two physical pieces from $$Z_1$$: a real resistor part $$7500$$ and an inductive reactance part $$+j1000.$$</li>
+              <li>So $$Z_1$$ can be realized as a 7500-ohm resistor in series with an inductor whose reactance is $$+1000\,\Omega.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-design-example-8-7-room-5" data-room-id="ch8-design-example-8-7-room-5" data-room-title="Room 5: Use $$\omega$$ to Pull Out the Component Values" data-source-page="ch8-design-example-8-7.html" data-tags="omega,pull,component,values">
+            <h2>Room 5: Use $$\omega$$ to Pull Out the Component Values</h2>
+            <ul>
+              <li>Because $$\omega=2000,$$ the inductive piece $$+j1000$$ means $$\omega L=1000,$$ so $$L=1000/2000=0.5\text{ H}.$$</li>
+              <li>The capacitive block $$Z_2=-j1000$$ means $$\dfrac{1}{\omega C}=1000,$$ so $$C=\dfrac{1}{2000\times1000}=0.5\,\mu\text{F}.$$</li>
+              <li>The resistor value is already pulled directly from the real part of $$Z_1,$$ so $$R=7500\,\Omega.$$</li>
+              <li>So one valid design is $$Z_1=7500+j1000$$ and $$Z_2=-j1000,$$ implemented with a 7.5-kΩ resistor, a 0.5-H inductor, and a 0.5-μF capacitor.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Design problems start by turning the output requirement into a phasor target. Once the target is in phasor form, the rest is algebra on the divider ratio.</p></div>
+        <div class="mini"><h3>Why The Output Becomes $$-j2$$</h3><p>Sine is not the default phasor reference in this chapter, so the first job is to rewrite it with the bridge formula $$\sin(\omega t)=\cos(\omega t-90^\circ).$$ That move translates the design target into the cosine-based phasor language the divider formula understands.</p></div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Walk this as one connected design-palace route in the style of the memory forums: keep cosine waveforms that already fit, convert the one that does not, form the output phasor, lock the divider law, rearrange to $$Z_1=(\cdots)Z_2,$$ choose a practical $$Z_2,$$ then let $$\omega$$ pull out the resistor, inductor, and capacitor values.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Net Gate: Keep the Cosine Source, Catch the Sine Output</h3><p>The source banner already wears cosine clothes, so it passes straight through as $$V_S=15\angle0^\circ.$$ The output banner arrives as a sine, so the gate marks it as not-ready and pushes it toward the conversion bridge.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Knife Bridge: Insert the Cosine-Conversion Formula</h3><p>The knife slices in the bridge formula $$\sin(\omega t)=\cos(\omega t-90^\circ).$$ That transforms $$2\sin(2000t)$$ into $$2\cos(2000t-90^\circ),$$ and from there the output phasor forms as $$V_O=2\angle-90^\circ=-j2.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Chalk Wall: Lock the Divider Formula</h3><p>The divider law is painted huge on the wall: $$V_O=\dfrac{Z_2}{Z_1+Z_2}V_S.$$ Then the phasor values are pushed into it, so the whole wall reads $$-j2=\dfrac{Z_2}{Z_1+Z_2}(15+j0).$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Algebra Mat: Rearrange Until $$Z_1$$ Stands Alone</h3><p>The whole divider equation is rolled across the mat and stretched until only one impedance block stands on the left: $$Z_1=\dfrac{15+j2}{-j2}Z_2.$$ Then the coefficient simplifies and the mat locks in $$Z_1=(-1+j7.5)Z_2.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Fire Hall: Feed One $$Z$$ into the Other</h3><p>You throw in the chosen block $$Z_2=-j1000.$$ Fire multiplies it through the ratio and pulls out $$Z_1=7500+j1000.$$ The equation itself reveals a real resistor part and an inductive reactance part.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Case Hall: Pull Out the Resistor Value</h3><p>The case opens and the real part of $$Z_1$$ falls out as $$R=7500\,\Omega.$$ What remains inside the case are the two reactance blocks: $$+j1000$$ and $$-j1000.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Omega Coat Exit: Turn Reactances into Components</h3><p>The $$\omega=2000$$ wheel and the coat wrap the reactance blocks into components: $$\omega L=1000\Rightarrow L=0.5\text{ H}$$ and $$1/(\omega C)=1000\Rightarrow C=0.5\,\mu\text{F}.$$ The final worn design is $$Z_1=7500+j1000$$ and $$Z_2=-j1000.$$</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Keep Cosine</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Convert Sine</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Form $$V_O$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Divider Formula</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Solve $$Z_1=(\cdots)Z_2$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Choose $$Z_2$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Pull Out $$R,L,C$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Final Design</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed, press Enter to save, and keep the filename so you can mention that `.txt` file here later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-design-example-8-7-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a slower explanation for how the divider equation is rearranged."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

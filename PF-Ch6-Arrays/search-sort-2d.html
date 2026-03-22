@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Chapter 6 Arrays | Search, Sort and 2D</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="pf_ch6_search_sort_2d">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Arrays Index</a><a href="guide.html">Guide</a><a href="strings-functions.html">Prev: Strings + Functions</a><a href="arrays-basics.html">Back To Basics</a></nav>
+
+  <section class="hero">
+    <div class="tag">Algorithms + Grids</div>
+    <h1>Linear Search, Bubble Sort And 2D Arrays</h1>
+    <p class="hero-sub">This page focuses on algorithm flow. Search checks one element at a time, bubble sort compares adjacent pairs and swaps with a temporary holder, and 2D arrays add one more index plus one more loop.</p>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Guideline Page</a><button class="tool-btn" type="button" data-jump="memory-anchor">Memory Focus</button><button class="tool-btn" type="button" data-jump="path-anchor">Palace Path</button><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="study-grid two-col">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Search Result</div><div class="v"><span class="inline-code">return i;</span> or <span class="inline-code">return -1;</span></div></div>
+          <div class="fact"><div class="k">Swap Pattern</div><div class="v"><span class="inline-code">temp = a[i]; a[i] = a[i+1]; a[i+1] = temp;</span></div></div>
+          <div class="fact"><div class="k">2D Syntax</div><div class="v"><span class="inline-code">int matrix[rows][cols];</span></div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Flow</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: Linear Search Logic</h2><ul><li>Start from the first element.</li><li>Compare each element to the key.</li><li>If found, return the index immediately. If never found, return <span class="inline-code">-1</span>.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>for (int i = 0; i &lt; size; ++i) {
+    if (arr[i] == key) {
+        return i;
+    }
+}</code></pre></article>
+          <article class="room"><h2>Room 2: Search Code Shape</h2><ul><li>Use a loop from <span class="inline-code">0</span> to <span class="inline-code">size - 1</span>.</li><li>Inside the loop, write <span class="inline-code">if (arr[i] == key) return i;</span></li><li>After the loop, write <span class="inline-code">return -1;</span></li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int linearSearch(const int arr[], int key, int size) {
+    for (int i = 0; i &lt; size; ++i) {
+        if (arr[i] == key) return i;
+    }
+    return -1;
+}</code></pre></article>
+          <article class="room"><h2>Room 3: Bubble Sort Logic</h2><ul><li>Compare adjacent pairs.</li><li>If the left value is larger, swap the pair.</li><li>Repeat passes until the array is sorted.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>if (a[i] &gt; a[i + 1]) {
+    int temp = a[i];
+    a[i] = a[i + 1];
+    a[i + 1] = temp;
+}</code></pre></article>
+          <article class="room"><h2>Room 4: 2D Array Syntax</h2><ul><li>A 2D array is a grid with rows and columns.</li><li>Declare it with <span class="inline-code">dataType name[rows][columns];</span></li><li>Access each value with two indices such as <span class="inline-code">matrix[r][c]</span></li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int matrix[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};</code></pre></article>
+          <article class="room"><h2>Room 5: Nested Loop Flow</h2><ul><li>Use one loop for rows and another loop inside it for columns.</li><li>The outer loop moves the row index.</li><li>The inner loop sweeps through each column of that row.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>for (int r = 0; r &lt; rows; ++r) {
+    for (int c = 0; c &lt; cols; ++c) {
+        printf("%d ", matrix[r][c]);
+    }
+}</code></pre></article>
+        </div>
+        <div class="drill-card"><h3>Code Block To Rehearse</h3><pre class="code-block"><code>int linearSearch(const int arr[], int key, int size) {
+    for (int i = 0; i &lt; size; ++i) {
+        if (arr[i] == key) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int matrix[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};</code></pre></div>
+      </section>
+
+      <section class="panel" id="memory-anchor">
+        <div class="section-title">Mnemonic Focus</div>
+        <div class="rooms">
+          <article class="memory-card"><h2>Peg 47: Rock</h2><p class="memory-copy">Use <span class="inline-code">47 = rock</span> for comparisons. What does the rock do in search and sort?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="a1">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="a1">Mark Remembered</button></div><p class="memory-status" data-memory-status="a1">Not marked yet.</p><div class="memory-answer" id="a1" hidden><ul><li>In search, the rock asks whether <span class="inline-code">arr[i] == key</span>.</li><li>In bubble sort, the rock asks whether <span class="inline-code">a[i] &gt; a[i+1]</span>.</li></ul></div></article>
+          <article class="memory-card"><h2>Peg 15: Towel</h2><p class="memory-copy">Use <span class="inline-code">15 = towel</span> for the swap. What exact code should the towel hold?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="a2">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="a2">Mark Remembered</button></div><p class="memory-status" data-memory-status="a2">Not marked yet.</p><div class="memory-answer" id="a2" hidden><ul><li><span class="inline-code">int temp = a[i];</span></li><li><span class="inline-code">a[i] = a[i + 1];</span></li><li><span class="inline-code">a[i + 1] = temp;</span></li></ul></div></article>
+          <article class="memory-card"><h2>Peg 70: Case</h2><p class="memory-copy">Use <span class="inline-code">70 = case</span> for returning a result. What does the case carry back in linear search?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="a3">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="a3">Mark Remembered</button></div><p class="memory-status" data-memory-status="a3">Not marked yet.</p><div class="memory-answer" id="a3" hidden><ul><li>If found, it carries back the index <span class="inline-code">i</span>.</li><li>If not found, it carries back <span class="inline-code">-1</span>.</li></ul></div></article>
+          <article class="memory-card"><h2>Peg 29: Knob</h2><p class="memory-copy">Use <span class="inline-code">29 = knob</span> for 2D arrays. What do the two knobs control?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="a4">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="a4">Mark Remembered</button></div><p class="memory-status" data-memory-status="a4">Not marked yet.</p><div class="memory-answer" id="a4" hidden><ul><li>The first knob is the row index.</li><li>The second knob is the column index.</li><li>Together they give <span class="inline-code">matrix[r][c]</span>.</li></ul></div></article>
+          <article class="memory-card"><h2>Peg 34: Mower</h2><p class="memory-copy">How does the mower change when you move from 1D arrays to 2D arrays?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="a5">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="a5">Mark Remembered</button></div><p class="memory-status" data-memory-status="a5">Not marked yet.</p><div class="memory-answer" id="a5" hidden><ul><li>One mower becomes two nested mowers.</li><li>The outer loop handles rows and the inner loop handles columns.</li></ul></div></article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar" id="path-anchor">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">This route moves from single-line decisions to grid movement: 47 rock compares, 70 case returns, 15 towel swaps, 29 knob controls row and column, and 34 mower becomes a nested sweep.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Rock Tunnel</h3><p>A rock checks each element against the search key.</p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>If the key matches, a locked case immediately leaves the tunnel.</p></div>
+        <div class="station"><h3>Station 2: Return Counter</h3><p>The case carries either the index or <span class="inline-code">-1</span>.</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>Nearby, two adjacent values need to switch places.</p></div>
+        <div class="station"><h3>Station 3: Towel Rack</h3><p>A towel holds one value while bubble sort swaps the pair.</p></div>
+        <div class="transition"><h3>Transition 3 to 4</h3><p>The floor opens into a control board with two knobs.</p></div>
+        <div class="station"><h3>Station 4: Knob Grid</h3><p>The first knob picks the row and the second picks the column of a 2D array.</p></div>
+        <div class="transition"><h3>Transition 4 to 5</h3><p>One mower becomes two nested mowers moving across the grid.</p></div>
+        <div class="station"><h3>Station 5: Nested Sweep</h3><p>Use the outer loop for rows and the inner loop for columns until the table is fully visited.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="copy">Use this prompt if you want a fresh palace for the search, sort, and 2D patterns.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for linear search, bubble sort, and 2D arrays in C. Use 47 = rock for comparisons, 70 = case for return values, 15 = towel for swapping adjacent values, 29 = knob for row and column indices, and 34 = mower for traversal loops. Include the key code shapes if (arr[i] == key) return i;, return -1;, the temp-swap block, matrix[r][c], and the idea of nested loops for rows and columns.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

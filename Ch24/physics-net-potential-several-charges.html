@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Net Potential of Several Charged Particles | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<link rel="stylesheet" href="chapter24-problem.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<script src="chapter24-problem.js" defer></script>
+<style>
+.nps-square{position:absolute;left:50%;top:50%;width:148px;height:148px;transform:translate(-50%,-50%);border:2px solid rgba(255,255,255,.26)}
+.nps-contour{position:absolute;left:50%;top:50%;width:210px;height:124px;transform:translate(-28%,-22%) rotate(14deg);border:2px dashed rgba(212,106,156,.8);border-radius:54% 46% 58% 42% / 52% 42% 58% 48%}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 24</a>
+    <a href="physics-potential-change-from-electric-field.html">Back: 24-2</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">24-3 | Sample Problem: Scalar Superposition</div>
+    <h1>Net Potential of Several Charged Particles</h1>
+    <p>At the center of a square, the potential from four corner charges is a pure scalar sum. Because each corner is the same distance from the center, the geometry collapses and only the algebra of the charge values remains.</p>
+    <div class="hero-grid">
+      <div class="eq">$$V=\sum_{i=1}^{4}\frac{1}{4\pi\varepsilon_0}\frac{q_i}{r_i}=\frac{1}{4\pi\varepsilon_0}\frac{q_1+q_2+q_3+q_4}{0.919\,\text{m}}\approx350\,\text{V}$$</div>
+      <div class="hero-side">
+        <h2>What To Notice</h2>
+        <ul>
+          <li>The four corner charges are $$+12\,\text{nC}, +31\,\text{nC}, -24\,\text{nC}, +17\,\text{nC}.$$</li>
+          <li>The center is the same distance from all four charges: $$r=d/\sqrt2=0.919\,\text{m}.$$</li>
+          <li>Potential adds as a scalar, so direction never enters this calculation.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt="prompt-modal">AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Geometry</div><div class="v">Square side length $$d=1.3\,\text{m}$$ gives center-to-corner distance $$r=d/\sqrt2.$$</div></div>
+          <div class="fact"><div class="k">Charge Sum</div><div class="v">$$q_1+q_2+q_3+q_4=(12+31-24+17)\,\text{nC}=36\,\text{nC}.$$</div></div>
+          <div class="fact"><div class="k">Superposition</div><div class="v">Potential is the algebraic sum of each charge contribution.</div></div>
+          <div class="fact"><div class="k">Answer</div><div class="v">The center potential is positive because the positive charges win the sum.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Start with the Scalar Formula</h2>
+            <ul>
+              <li>The potential at a point is the sum of the potentials from each charge.</li>
+              <li>For four charges, $$V=\sum \dfrac{1}{4\pi\varepsilon_0}\dfrac{q_i}{r_i}.$$</li>
+              <li>No vector components are needed.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Notice the Symmetry of Distance</h2>
+            <ul>
+              <li>Point $$P$$ is at the center of the square.</li>
+              <li>So each charge sits the same distance from $$P.$$</li>
+              <li>That lets us factor the common distance out of the sum.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Compute the Center-to-Corner Distance</h2>
+            <ul>
+              <li>For a square of side $$d,$$ the diagonal is $$d\sqrt2.$$</li>
+              <li>The center is halfway along that diagonal, so $$r=d/\sqrt2.$$</li>
+              <li>With $$d=1.3\,\text{m},$$ the common distance is $$0.919\,\text{m}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Add the Charges Algebraically</h2>
+            <ul>
+              <li>Now combine the charge values: $$12+31-24+17=36.$$</li>
+              <li>So the net numerator is $$36\times10^{-9}\,\text{C}.$$</li>
+              <li>The negative charge matters, but only by subtraction.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Substitute Once</h2>
+            <ul>
+              <li>Insert the charge sum and common distance into the potential formula.</li>
+              <li>That yields $$V=\dfrac{1}{4\pi\varepsilon_0}\dfrac{36\times10^{-9}\,\text{C}}{0.919\,\text{m}}.$$</li>
+              <li>The computation is straightforward because the geometry was simplified first.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Read the Sign of the Result</h2>
+            <ul>
+              <li>The answer comes out positive: about $$350\,\text{V}.$$</li>
+              <li>That means the positive charges outweigh the lone negative contribution.</li>
+              <li>If the charge sum had been negative, the potential would have been negative too.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Keep the Big Lesson</h2>
+            <ul>
+              <li>Potential cares about scalar addition, not geometric cancellation of directions.</li>
+              <li>Equal distances can turn a multi-charge problem into one clean numerator sum.</li>
+              <li>This is the chapter’s easiest example of potential superposition.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Problem Figures</div>
+        <div class="figure-grid">
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="nps-square"></div>
+              <div class="charge positive" style="left:calc(50% - 82px);top:calc(50% - 82px)"></div>
+              <div class="charge positive" style="left:calc(50% + 66px);top:calc(50% - 82px)"></div>
+              <div class="charge negative" style="left:calc(50% - 82px);top:calc(50% + 66px)"></div>
+              <div class="charge positive" style="left:calc(50% + 66px);top:calc(50% + 66px)"></div>
+              <div class="dot" style="left:calc(50% - 6px);top:calc(50% - 6px)"></div>
+              <div class="label" style="left:calc(50% - 104px);top:calc(50% - 108px)">$$q_1=+12\,\text{nC}$$</div>
+              <div class="label" style="left:calc(50% + 18px);top:calc(50% - 108px)">$$q_2=+31\,\text{nC}$$</div>
+              <div class="label" style="left:calc(50% - 114px);top:calc(50% + 90px)">$$q_3=-24\,\text{nC}$$</div>
+              <div class="label" style="left:calc(50% + 18px);top:calc(50% + 90px)">$$q_4=+17\,\text{nC}$$</div>
+              <div class="label" style="left:calc(50% - 14px);top:calc(50% + 20px)">$$P$$</div>
+            </div>
+            <h3>Center of the Square</h3>
+            <p>All four charges are equally far from the center, so the spatial part of the formula is identical for every term.</p>
+          </div>
+
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="nps-contour"></div>
+              <div class="charge positive" style="left:44px;top:88px"></div>
+              <div class="charge negative" style="left:138px;top:38px"></div>
+              <div class="charge positive" style="left:242px;top:140px"></div>
+              <div class="dot" style="left:180px;top:108px"></div>
+              <div class="label" style="left:20px;top:28px">equipotential-style contour</div>
+              <div class="label" style="left:152px;top:122px">$$V\approx350\,\text{V}$$</div>
+            </div>
+            <h3>Potential Landscape</h3>
+            <p>Potential can be visualized as a scalar landscape: it rises near positive charge and falls near negative charge, but the value at a point is still just one number.</p>
+          </div>
+        </div>
+        <div class="mini" style="margin-top:1rem">
+          <h3>Fast Check</h3>
+          <p>If every charge is the same distance from the point, add the charges first. That usually reveals the sign of the answer before you finish the arithmetic.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Stand at the center of a square and let four corner charges pour scalar potential into one shared bowl.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>You enter a square courtyard with four glowing charges at the corners and a marker $$P$$ at the center.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>Each corner sends an equal-length pipe toward the center to show the same radius $$r=d/\sqrt2.$$</p></div>
+        <div class="station"><h3>Station 2</h3><p>The four charge labels drop into one bowl and merge into a single number: $$36\,\text{nC}.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A sign over the bowl says “potential is scalar, so just add.”</p></div>
+        <div class="station"><h3>Station 3</h3><p>The bowl empties through the factor $$1/(4\pi\varepsilon_0 r)$$ and fills a meter reading $$350\,\text{V}.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The positive charges cheer louder than the one negative charge.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The exit line reads: equal distance means one shared denominator, then the charges decide the sign.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt focuses on scalar superposition at the center of a square.</p>
+    <textarea class="prompt-box" readonly>Create a memory palace in exactly one connected paragraph for the sample problem on the net potential of several charged particles. Keep the logic in order, make each image force the next one, and do not use bullet points.
+
+1. Start at the center of a square with four charges at the corners.
+2. Use the values +12 nC, +31 nC, -24 nC, and +17 nC.
+3. Show that the center is the same distance from every corner, with r = d over square root of 2 and d = 1.3 m.
+4. Make electric potential a scalar sum, not a vector sum.
+5. Add the charges first to get 36 nC.
+6. Divide by the common distance 0.919 m inside the factor 1 over 4 pi epsilon_0.
+7. End with the result V about 350 V and the lesson that potential superposition is algebraic.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" data-copy-prompt>Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+</body>
+</html>

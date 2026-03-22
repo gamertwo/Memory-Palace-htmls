@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-9 | Inductor and Capacitor Voltages</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_9">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-5.html">Review Example 8-5</a><a href="ch8-exercise-8-8.html">Prev: Exercise 8-8</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-9</div>
+    <h1>Find Element Impedances and Voltages in an LC Series Circuit</h1>
+    <p class="hero-sub">This exercise blends the impedance formulas with element-voltage phasors and waveform coating. Catch the current source, compute the inductor and capacitor impedances, find each phasor voltage with $$V=ZI,$$ then coat those voltages back into time-domain signals and interpret the lead-lag relationships.</p>
+    <div class="formula-block">$$L=12\,\text{mH},\qquad C=20\,\text{pF},\qquad i_L(t)=20\cos(10^6 t)\text{ mA}$$ $$\text{Find }Z_L,\;Z_C,\;V_L,\;V_C,\;v_L(t),\;v_C(t)\text{ and the lead-lag facts.}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-9.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Current Phasor</div><div class="v">$$I=20\angle0^\circ\text{ mA}=0.02\angle0^\circ\text{ A}$$</div></div>
+          <div class="fact"><div class="k">Impedance Rules</div><div class="v">$$Z_L=j\omega L,\qquad Z_C=\frac{1}{j\omega C}$$</div></div>
+          <div class="fact"><div class="k">Big Idea</div><div class="v">Use the same current phasor through both series elements, then compute each voltage from its own impedance.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-9-room-1" data-room-id="ch8-exercise-8-9-room-1" data-room-title="Room 1: Convert the Current and Element Impedances" data-source-page="ch8-exercise-8-9.html" data-tags="convert,current,element,impedances">
+            <h2>Room 1: Convert the Current and Element Impedances</h2><ul><li>The current waveform is $$i_L(t)=20\cos(10^6 t)\text{ mA},$$ so the phasor current is $$I=20\angle0^\circ\text{ mA}=0.02\angle0^\circ\text{ A}.$$</li><li>For the inductor, $$Z_L=j\omega L=j(10^6)(12\times10^{-3})=j12{,}000=j12\text{ k}\Omega.$$</li><li>For the capacitor, $$Z_C=\dfrac{1}{j\omega C}=\dfrac{1}{j(10^6)(20\times10^{-12})}=-j50{,}000=-j50\text{ k}\Omega.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-9-room-2" data-room-id="ch8-exercise-8-9-room-2" data-room-title="Room 2: Find the Inductor Voltage" data-source-page="ch8-exercise-8-9.html" data-tags="find,inductor,voltage">
+            <h2>Room 2: Find the Inductor Voltage</h2><ul><li>Use $$V_L=Z_LI.$$</li><li>So $$V_L=(j12{,}000)(0.02\angle0^\circ)=j240\text{ V}.$$</li><li>In polar form that is $$V_L=240\angle90^\circ\text{ V}.$$</li><li>The positive imaginary direction matches the idea that inductor voltage leads current by $$90^\circ.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-9-room-3" data-room-id="ch8-exercise-8-9-room-3" data-room-title="Room 3: Find the Capacitor Voltage" data-source-page="ch8-exercise-8-9.html" data-tags="find,capacitor,voltage">
+            <h2>Room 3: Find the Capacitor Voltage</h2><ul><li>Now use $$V_C=Z_CI.$$</li><li>So $$V_C=(-j50{,}000)(0.02\angle0^\circ)=-j1000\text{ V}.$$</li><li>In polar form that is $$V_C=1000\angle-90^\circ\text{ V}.$$</li><li>The negative imaginary direction matches the capacitor idea that voltage lags current by $$90^\circ.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-9-room-4" data-room-id="ch8-exercise-8-9-room-4" data-room-title="Room 4: Coat the Time-Domain Voltages" data-source-page="ch8-exercise-8-9.html" data-tags="coat,time,domain,voltages">
+            <h2>Room 4: Coat the Time-Domain Voltages</h2><ul><li>Now move back to the time domain with the same angular frequency $$\omega=10^6.$$</li><li>For the inductor: $$\boxed{v_L(t)=240\cos(10^6 t+90^\circ)\text{ V}}.$$</li><li>For the capacitor: $$\boxed{v_C(t)=1000\cos(10^6 t-90^\circ)\text{ V}}.$$</li><li>Notice that the capacitor has the larger voltage magnitude because its reactance magnitude is larger here.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-9-room-5" data-room-id="ch8-exercise-8-9-room-5" data-room-title="Room 5: State the Lead-Lag Relationships" data-source-page="ch8-exercise-8-9.html" data-tags="state,lead,relationships">
+            <h2>Room 5: State the Lead-Lag Relationships</h2><ul><li>For the inductor, voltage leads current by $$90^\circ,$$ so the current lags the inductor voltage by $$90^\circ.$$</li><li>For the capacitor, current leads voltage by $$90^\circ.$$</li><li>So the key facts are $$\boxed{\text{current lags }v_L\text{ by }90^\circ}$$ and $$\boxed{\text{current leads }v_C\text{ by }90^\circ}.$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Once the current phasor is known, the whole exercise is just repeated use of the two impedance formulas and $$V=ZI.$$ The only change from one element to the other is whether the impedance points up or down the imaginary axis.</p></div>
+        <div class="mini"><h3>Why The Inductor and Capacitor Point Opposite Ways</h3><p>Inductor impedance is positive imaginary, so it rotates the voltage upward to $$+90^\circ.$$ Capacitor impedance is negative imaginary, so it rotates the voltage downward to $$-90^\circ.$$ That sign difference is the whole reason the two lead-lag statements come out opposite.</p></div>
+        <div class="mini"><h3>How To Read The Lead-Lag Statement</h3><p>If voltage is at $$+90^\circ$$ while current is at $$0^\circ,$$ voltage is ahead and current lags. If voltage is at $$-90^\circ$$ while current is at $$0^\circ,$$ current is ahead and therefore leads.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

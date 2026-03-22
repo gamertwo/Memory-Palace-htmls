@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-4 | Phasors to Waveforms and Back to a Sum</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_4">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-6.html">Next: Exercise 8-6</a><a href="ch8-exercise-8-5.html">Prev: Exercise 8-5</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-4</div>
+    <h1>Convert Phasors to Waveforms and Add Them</h1>
+    <p class="hero-sub">This example mixes both directions. First coat each given phasor into a sinusoid, then use rectangular phasor addition to produce the combined output waveform.</p>
+    <div class="formula-block">$$V_1=20+j20\text{ V},\qquad V_2=10\sqrt{2}\,e^{-j45^\circ}\text{ V},\qquad \omega=500\text{ rad/s}$$ $$v_3(t)=v_1(t)+v_2(t)$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-4.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Polar View of $$V_1$$</div><div class="v">$$V_1=20\sqrt{2}\angle45^\circ$$</div></div>
+          <div class="fact"><div class="k">Rectangular View of $$V_2$$</div><div class="v">$$V_2=10-j10$$</div></div>
+          <div class="fact"><div class="k">Frequency</div><div class="v">Both waveforms use $$\omega=500.$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-4-room-1" data-room-id="ch8-example-8-4-room-1" data-room-title="Room 1: Coat $$V_1$$" data-source-page="ch8-example-8-4.html" data-tags="coat">
+            <h2>Room 1: Coat $$V_1$$</h2><ul><li>Start with the rectangular phasor $$V_1=20+j20.$$ To convert it to a waveform cleanly, first rewrite it in polar form.</li><li>The magnitude is $$|V_1|=\sqrt{20^2+20^2}=20\sqrt2,$$ and because the real and imaginary parts are equal and both positive, the angle is $$45^\circ.$$</li><li>So $$V_1=20\sqrt2\angle45^\circ.$$</li><li>Now coat it back into the time domain with the shared $$\omega=500:$$ $$\boxed{v_1(t)=20\sqrt{2}\cos(500t+45^\circ)\text{ V}}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-4-room-2" data-room-id="ch8-example-8-4-room-2" data-room-title="Room 2: Coat $$V_2$$" data-source-page="ch8-example-8-4.html" data-tags="coat">
+            <h2>Room 2: Coat $$V_2$$</h2><ul><li>The second phasor is already given in polar form: $$V_2=10\sqrt{2}\angle-45^\circ.$$</li><li>If you want its rectangular picture for later addition, use $$M(\cos\theta+j\sin\theta):$$ $$V_2=10\sqrt2(\cos-45^\circ+j\sin-45^\circ)=10-j10.$$</li><li>For the waveform, keep the same magnitude and phase and attach the common frequency $$\omega=500.$$</li><li>Thus $$\boxed{v_2(t)=10\sqrt{2}\cos(500t-45^\circ)\text{ V}}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-4-room-3" data-room-id="ch8-example-8-4-room-3" data-room-title="Room 3: Add in Rectangular Form" data-source-page="ch8-example-8-4.html" data-tags="rectangular,form">
+            <h2>Room 3: Add in Rectangular Form</h2><ul><li>Now switch back to rectangular form because addition is easiest there.</li><li>Use $$V_1=20+j20$$ and $$V_2=10-j10.$$</li><li>Add real parts and imaginary parts separately: $$V_3=V_1+V_2=(20+10)+j(20-10)=30+j10.$$</li><li>This tells you the combined phasor sits in quadrant I because both parts are positive.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-4-room-4" data-room-id="ch8-example-8-4-room-4" data-room-title="Room 4: Rebuild Polar Form" data-source-page="ch8-example-8-4.html" data-tags="rebuild,polar,form">
+            <h2>Room 4: Rebuild Polar Form</h2><ul><li>Now convert the sum $$30+j10$$ back to polar form.</li><li>Magnitude: $$|V_3|=\sqrt{30^2+10^2}=31.6.$$</li><li>Angle: $$\theta=\tan^{-1}\left(\frac{10}{30}\right)=18.4^\circ.$$</li><li>Because both rectangular parts are positive, quadrant I is correct, so no angle adjustment is needed.</li><li>So $$V_3=31.6\angle18.4^\circ\text{ V}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-4-room-5" data-room-id="ch8-example-8-4-room-5" data-room-title="Room 5: Coat the Output Wave" data-source-page="ch8-example-8-4.html" data-tags="coat,output,wave">
+            <h2>Room 5: Coat the Output Wave</h2><ul><li>Use the common angular frequency $$\omega=500.$$</li><li>Apply the coat rule $$M\angle\theta\rightarrow M\cos(\omega t+\theta).$$</li><li>That gives amplitude $$31.6,$$ frequency term $$500t,$$ and phase shift $$+18.4^\circ.$$</li><li>So $$\boxed{v_3(t)=31.6\cos(500t+18.4^\circ)\text{ V}}$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Coat the inputs from polar form, but add the actual phasors in rectangular form. That split of jobs keeps the work clean.</p></div>
+        <div class="mini"><h3>Why The Page Uses Both Directions</h3><p>This example makes you practice both conversions on purpose. First you read phasors back into waveforms so you can see what each input signal looks like in time. Then you return to phasor addition, because adding waveforms directly is messy while adding rectangular phasor components is clean and exact.</p></div>
+        <div class="mini"><h3>How To Decide Which Form To Use</h3><p>Use polar form when you want a clean amplitude-angle description or when you are about to coat a waveform. Use rectangular form when you need component arithmetic such as addition. This page is useful because it makes you switch forms for the right reason instead of using one form for everything.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

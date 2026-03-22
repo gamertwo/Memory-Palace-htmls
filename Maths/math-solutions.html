@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Solutions + Memory Cues</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="../linear-review.css" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#07101a;--panel:#121c2e;--panel2:#0e1726;--border:#243553;--text:#eaf1ff;--muted:#90a4ca;--cyan:#00d1ff;--violet:#7f5af0;--green:#2bff7f;--gold:#ffd166;--red:#ff5c7a}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;display:flex}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(55% 35% at 12% 15%,rgba(0,209,255,.13),transparent 70%),radial-gradient(45% 35% at 88% 80%,rgba(127,90,240,.14),transparent 70%)}
+.sidebar{width:250px;min-height:100vh;background:#0d1522;border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;padding:.9rem .65rem;overflow:auto;z-index:5}
+.logo{padding:.4rem .5rem .9rem;border-bottom:1px solid var(--border);margin-bottom:.7rem}.logo .t{font-size:.92rem;font-weight:700}.logo .s{font-size:.68rem;color:var(--muted)}
+.sec{font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700;padding:.7rem .45rem .35rem}
+.item{display:block;padding:.42rem .55rem;border-radius:7px;color:var(--muted);text-decoration:none;font-size:.8rem;margin:.15rem 0}.item:hover{background:#182334;color:#fff}.item.active{background:rgba(127,90,240,.16);color:#d3c8ff}
+.main{margin-left:250px;flex:1;position:relative;z-index:1}.inner{max-width:1020px;margin:0 auto;padding:2rem 1.6rem 3rem}
+h1{font-family:'Cinzel',serif;font-size:2rem;line-height:1.2;background:linear-gradient(130deg,#fff,var(--cyan),#d3c8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+p.lead{color:var(--muted);font-size:.9rem;line-height:1.7}
+.sol{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--qc);border-radius:12px;padding:1rem;margin:1rem 0}
+.sol h3{font-size:.98rem;margin-bottom:.45rem;color:#fff}
+.eq{background:#0a1321;border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;text-align:center;margin:.45rem 0}
+.small{font-size:.79rem;color:var(--muted)}
+.palace{margin-top:.7rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.55rem}
+.cue{background:var(--panel2);border:1px solid rgba(255,255,255,.08);border-left:3px solid var(--qc);border-radius:9px;padding:.6rem .7rem}
+.cue .t{font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;color:var(--qc);font-weight:700;margin-bottom:.25rem}
+.cue .b{font-size:.77rem;line-height:1.58;color:var(--muted)}
+.cue .b b{color:#fff}
+@media(max-width:760px){.sidebar{position:relative;width:100%;min-height:auto;border-right:none;border-bottom:1px solid var(--border)}.main{margin-left:0}}
+</style></head>
+<body>
+<aside class="sidebar"><div class="logo"><div class="t">Maths DE Notes</div><div class="s">Solutions + memory cues</div></div>
+<div class="sec">Core</div><a class="item" href="math-index.html">Hub</a><a class="item" href="math-concepts.html">Patterns + Exam Readiness</a><a class="item" href="math-questions.html">All Questions/Examples</a><a class="item active" href="math-solutions.html">Solutions Only</a><a class="item" href="math-neural.html">Neural Network View</a>
+<div class="sec">Question Pages</div><a class="item" href="math-q1-separable-tan.html">Q1 Separable (tan)</a><a class="item" href="math-q2-homogeneous-vx.html">Q2 Homogeneous</a><a class="item" href="math-q3-cot.html">Q3 Cot Variant</a><a class="item" href="math-q4-sectan.html">Q4 SecTan Variant</a><a class="item" href="math-q5-arcsin-symmetry.html">Q5 Arcsin Symmetry</a><a class="item" href="math-q6-root-coupled.html">Q6 Root Coupled</a><a class="item" href="math-q7-secsq-tan.html">Q7 SecSq-Tan</a><a class="item" href="math-q8-oneplusx2-xy.html">Q8 (1+x^2)dy-xy dx</a><a class="item" href="math-q9-expplusone-sinx.html">Q9 $(e^y+1)\sin x</a><a class="item" href="math-q10-exp-tan-cube.html">Q10 $(1-e^x)^3</a><a class="item" href="math-q11-expplus2-cosx.html">Q11 $(e^y+2)\cos x</a><a class="item" href="math-q12-exp-y-linearized.html">Q12 $e^y=$ form</a><a class="item" href="math-q13-tan-z-sub.html">Q13 $\sin(y-x)$</a>
+<div class="sec">Practice</div><a class="item" href="math-flashcards.html?set=all">Flashcards</a></aside>
+
+<main class="main"><div class="inner">
+<h1>Total Solutions + Palace Cues</h1><p class="lead">Compact answers with fast memory hooks, styled like your palace system.</p>
+
+<div class="sol" id="q1" style="--qc:#00d1ff"><h3>Q1. $\frac{dx}{x}=\tan y\,dy$</h3><div class="eq">$$\int\frac{dx}{x}=\int\tan y\,dy\Rightarrow \ln|x|=-\ln|\cos y|+C\Rightarrow x\cos y=C$$</div><div class="small">Final: $\boxed{x\cos y=C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Room Cue</div><div class="b"><b>Split Gate:</b> x and y already on separate sides.</div></div>
+  <div class="cue"><div class="t">Sign Cue</div><div class="b"><b>Tangent Lab:</b> minus sign in $\int\tan y\,dy$.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Constant Vault:</b> merge logs, exponentiate, rename constant.</div></div>
+</div></div>
+
+<div class="sol" id="q2" style="--qc:#ff5c7a"><h3>Q2. $(2xy+x^2)\dfrac{dy}{dx}=3y^2+2xy$</h3><div class="eq">$$\frac{dy}{dx}=\frac{3y^2+2xy}{2xy+x^2},\;y=vx,\;\frac{dy}{dx}=v+x\frac{dv}{dx}$$
+$$v+x\frac{dv}{dx}=\frac{3v^2+2v}{2v+1}\Rightarrow\frac{2v+1}{v^2+v}dv=\frac{dx}{x}$$
+$$\ln(v^2+v)=\ln x+\ln C\Rightarrow v^2+v=Cx\Rightarrow y^2+xy=Cx^3$$</div><div class="small">Final: $\boxed{y^2+xy=Cx^3}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Room Cue</div><div class="b"><b>Degree Scanner:</b> equal degree triggers homogeneous method.</div></div>
+  <div class="cue"><div class="t">Switch Cue</div><div class="b"><b>Substitution Switch:</b> instantly set $y=vx$.</div></div>
+  <div class="cue"><div class="t">Back-Sub Cue</div><div class="b"><b>Back-Sub Chamber:</b> restore $v=y/x$ at end.</div></div>
+</div></div>
+
+<div class="sol" id="q3" style="--qc:#2bff7f"><h3>Q3. $\frac{dx}{x}=\cot y\,dy$</h3><div class="eq">$$\ln|x|=\ln|\sin y|+C\Rightarrow \frac{x}{\sin y}=C$$</div><div class="small">Final: $\boxed{\frac{x}{\sin y}=C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Identity Cue</div><div class="b"><b>Sin Log Room:</b> cot maps to $\ln|\sin y|$.</div></div>
+  <div class="cue"><div class="t">Compression Cue</div><div class="b"><b>Ratio Finish:</b> log subtraction becomes quotient.</div></div>
+</div></div>
+
+<div class="sol" id="q4" style="--qc:#ffd166"><h3>Q4. $\frac{dx}{x}=\sec y\tan y\,dy$</h3><div class="eq">$$\ln|x|=\sec y + C\Rightarrow x=Ce^{\sec y}$$</div><div class="small">Final: $\boxed{x=Ce^{\sec y}}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Derivative Cue</div><div class="b"><b>Derivative Lock:</b> sec-tan is derivative fingerprint of sec.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Log-Exp Bridge:</b> from ln form to exponential final.</div></div>
+</div></div>
+
+<div class="sol" id="q5" style="--qc:#00d1ff"><h3>Q5. $\dfrac{dy}{dx}=\dfrac{\sqrt{1-y^2}}{\sqrt{1-x^2}}$</h3><div class="eq">$$\frac{dy}{\sqrt{1-y^2}}=\frac{dx}{\sqrt{1-x^2}}\Rightarrow \sin^{-1}y=\sin^{-1}x+C$$</div><div class="small">Final: $\boxed{\sin^{-1}y=\sin^{-1}x+C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Identity Cue</div><div class="b"><b>Arcsin Corridor:</b> $\dfrac{1}{\sqrt{1-u^2}}$ always maps to $\sin^{-1}u$.</div></div>
+  <div class="cue"><div class="t">Mirror Cue</div><div class="b"><b>Symmetry Hall:</b> both sides have same arcsin structure.</div></div>
+</div></div>
+
+<div class="sol" id="q6" style="--qc:#ff5c7a"><h3>Q6. $y\sqrt{1+x^2}\,dy+x\sqrt{1+y^2}\,dx=0$</h3><div class="eq">$$\frac{y}{\sqrt{1+y^2}}dy+\frac{x}{\sqrt{1+x^2}}dx=0$$
+$$\Rightarrow \sqrt{1+y^2}+\sqrt{1+x^2}=C$$</div><div class="small">Final: $\boxed{\sqrt{1+y^2}+\sqrt{1+x^2}=C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Prep Cue</div><div class="b"><b>Twin Root Walls:</b> divide by both radicals first.</div></div>
+  <div class="cue"><div class="t">Integral Cue</div><div class="b"><b>Root Lift:</b> $u/\sqrt{1+u^2}$ integrates to $\sqrt{1+u^2}$.</div></div>
+</div></div>
+
+<div class="sol" id="q7" style="--qc:#ffd166"><h3>Q7 (3.2 Q4). $\sec^2 x\tan y\,dx+\sec^2 y\tan x\,dy=0$</h3><div class="eq">$$\frac{\sec^2 x}{\tan x}dx+\frac{\sec^2 y}{\tan y}dy=0$$
+$$\Rightarrow \ln|\tan x|+\ln|\tan y|=C\Rightarrow \tan x\tan y=C$$</div><div class="small">Final: $\boxed{\tan x\tan y=C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Cancel Cue</div><div class="b"><b>Tan-Cancel Room:</b> divide by $\tan x\tan y$ first.</div></div>
+  <div class="cue"><div class="t">Derivative Cue</div><div class="b"><b>Log-Tan Signature:</b> $\sec^2u/\tan u=d(\ln|\tan u|)/du$.</div></div>
+</div></div>
+
+<div class="sol" id="q8" style="--qc:#7f5af0"><h3>Q8 (3.2 Q5). $(1+x^2)dy-xy\,dx=0$</h3><div class="eq">$$(1+x^2)dy=xy\,dx\Rightarrow \frac{dy}{dx}=\frac{x}{1+x^2}y$$
+$$\Rightarrow \frac{dy}{y}=\frac{x}{1+x^2}dx$$
+$$\Rightarrow \ln|y|=\frac12\ln(1+x^2)+C\Rightarrow y=C\sqrt{1+x^2}$$</div><div class="small">Final: $\boxed{y=C\sqrt{1+x^2}}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Separation Cue</div><div class="b"><b>Balance Board:</b> isolate dy and dx terms before integrating.</div></div>
+  <div class="cue"><div class="t">Integral Cue</div><div class="b"><b>Half-Log Chamber:</b> $\int x/(1+x^2)\,dx=\frac12\ln(1+x^2)$.</div></div>
+</div></div>
+
+<div class="sol" id="q9" style="--qc:#2bff7f"><h3>Q9. $\left(e^y+1\right)\cos x\,dx + e^y\sin x\,dy = 0$</h3><div class="eq">$$\cos x\,dx \Rightarrow \sin x,\qquad e^y\,dy \Rightarrow e^y+1$$
+$$\Rightarrow \text{candidate product } \left(e^y+1\right)\sin x$$
+$$d\!\left[\left(e^y+1\right)\sin x\right]=\left(e^y+1\right)\cos x\,dx+e^y\sin x\,dy$$
+$$\Rightarrow d\!\left[\left(e^y+1\right)\sin x\right]=0\Rightarrow \left(e^y+1\right)\sin x=C$$</div><div class="small">Final: $\boxed{\left(e^y+1\right)\sin x=C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Trigger Cue</div><div class="b"><b>Product Detector:</b> both terms fit one product-rule derivative.</div></div>
+  <div class="cue"><div class="t">Anchor Cue</div><div class="b"><b>Sine Anchor:</b> $\cos x\,dx$ points directly to $\sin x$.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Exact Collapse:</b> once the full differential is seen, set it to zero and seal with $C$.</div></div>
+</div></div>
+
+<div class="sol" id="q10" style="--qc:#ffd166"><h3>Q10. $3e^x\tan y\,dx + \left(1-e^x\right)\sec^2 y\,dy = 0$</h3><div class="eq">$$u=1-e^x,\;du=-e^x\,dx$$
+$$\Rightarrow -3\tan y\,du+u\sec^2 y\,dy=0$$
+$$\Rightarrow -3\frac{du}{u}+\frac{\sec^2 y}{\tan y}dy=0$$
+$$\Rightarrow -3\ln|u|+\ln|\tan y|=C$$
+$$\Rightarrow \left(1-e^x\right)^3=C\tan y$$</div><div class="small">Final: $\boxed{\left(1-e^x\right)^3=C\tan y}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Sub Cue</div><div class="b"><b>Bracket Switch:</b> set $u=1-e^x$ immediately.</div></div>
+  <div class="cue"><div class="t">Sign Cue</div><div class="b"><b>Minus Trap:</b> $du=-e^x dx$ gives the sign you must keep.</div></div>
+  <div class="cue"><div class="t">Trig Cue</div><div class="b"><b>Log-Tan Lock:</b> $\sec^2 y/\tan y$ integrates to $\ln|\tan y|$.</div></div>
+</div></div>
+
+<div class="sol" id="q11" style="--qc:#00d1ff"><h3>Q11. $\left(e^y+2\right)\sin x\,dx - e^y\cos x\,dy = 0$</h3><div class="eq">$$\sin x\,dx \Rightarrow -\cos x,\qquad e^y\,dy \Rightarrow e^y+2$$
+$$\Rightarrow \text{candidate } -\left(e^y+2\right)\cos x$$
+$$d\!\left[-\left(e^y+2\right)\cos x\right]=\left(e^y+2\right)\sin x\,dx-e^y\cos x\,dy$$
+$$\Rightarrow -\left(e^y+2\right)\cos x=C \Rightarrow \left(e^y+2\right)\cos x=C$$</div><div class="small">Final: $\boxed{\left(e^y+2\right)\cos x=C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Sign Cue</div><div class="b"><b>Cos Flip:</b> $\sin x\,dx$ points to $-\cos x$, not $\cos x$.</div></div>
+  <div class="cue"><div class="t">Bracket Cue</div><div class="b"><b>Exponential Shell:</b> $e^y\,dy$ still points to the full bracket $e^y+$ constant.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Constant Cleanup:</b> absorb the overall minus sign into $C$ at the end.</div></div>
+</div></div>
+
+<div class="sol" id="q12" style="--qc:#2bff7f"><h3>Q12. $\dfrac{dy}{dx}=e^{x-y}+x^2e^{-y}$</h3><div class="eq">$$\frac{dy}{dx}=e^{-y}(e^x+x^2)$$
+$$\Rightarrow e^y\frac{dy}{dx}=e^x+x^2$$
+$$\Rightarrow \frac{d}{dx}(e^y)=e^x+x^2$$
+$$\Rightarrow e^y=e^x+\frac{x^3}{3}+C$$</div><div class="small">Final: $\boxed{e^y=e^x+\frac{x^3}{3}+C}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Factor Cue</div><div class="b"><b>Common Exponential:</b> factor out $e^{-y}$ first.</div></div>
+  <div class="cue"><div class="t">Derivative Cue</div><div class="b"><b>Left-Side Upgrade:</b> $e^y y'$ is $\dfrac{d}{dx}(e^y)$.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Direct Integral:</b> once linearized, integrate term by term.</div></div>
+</div></div>
+
+<div class="sol" id="q13" style="--qc:#ffd166"><h3>Q13. $\dfrac{dy}{dx}=1+\tan(y-x)$</h3><div class="eq">$$z=y-x,\qquad \frac{dz}{dx}=\frac{dy}{dx}-1$$
+$$\Rightarrow \frac{dz}{dx}=\tan z$$
+$$\Rightarrow \cot z\,dz=dx$$
+$$\Rightarrow \ln|\sin z|=x+C$$
+$$\Rightarrow \sin(y-x)=Ce^x$$</div><div class="small">Final: $\boxed{\sin(y-x)=Ce^x}$</div>
+<div class="palace">
+  <div class="cue"><div class="t">Sub Cue</div><div class="b"><b>Given Substitution:</b> use $z=y-x$ immediately.</div></div>
+  <div class="cue"><div class="t">Trig Cue</div><div class="b"><b>Cot Route:</b> $1/\tan z=\cot z$ gives the standard integral.</div></div>
+  <div class="cue"><div class="t">Finish Cue</div><div class="b"><b>Exponentiate:</b> turn the log form into the sine form.</div></div>
+</div></div>
+</div></main>
+<script src="../linear-review.js" defer></script>
+</body></html>
+

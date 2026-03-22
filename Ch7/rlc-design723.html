@@ -136,7 +136,7 @@ a{color:inherit}
   border-style:dashed;
   background:rgba(255,255,255,.02);
 }
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-row{display:flex;gap:.65rem;justify-content:flex-end;margin-top:.85rem;flex-wrap:wrap}
 .tool-btn,.ghost-btn{
   border:1px solid var(--line);
   border-radius:999px;
@@ -148,6 +148,7 @@ a{color:inherit}
   background:rgba(255,255,255,.03);
 }
 .tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.tool-btn.is-active{background:rgba(255,208,138,.16);border-color:rgba(255,208,138,.35);box-shadow:0 0 0 1px rgba(255,208,138,.18) inset}
 .tool-btn:disabled,.ghost-btn:disabled{opacity:.45;cursor:not-allowed}
 @media (max-width:760px){
   .shell{padding:1rem .85rem 2rem}
@@ -175,7 +176,7 @@ $$\text{Target roots control the coefficients, and the coefficients control the 
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="content-grid" data-view-panel="default">
     <div class="main-stack">
       <section class="panel"><div class="section-title">Quick Data</div><div class="facts">          <div class="fact"><div class="k">Part (a) Data</div><div class="v">$$R_T=2\ \text{k}\Omega,\quad L=100\ \text{mH},\quad C=0.4\times 10^{-6}\ \text{F}$$</div></div>
           <div class="fact"><div class="k">Part (b) Target Roots</div><div class="v">$$s_{1,2}=-1000\pm j2000$$ with $$L=100\ \text{mH}$$</div></div>
@@ -314,6 +315,37 @@ $$\text{Target roots control the coefficients, and the coefficients control the 
           <p>Target roots determine coefficient constraints, and the number of constraints determines whether the design is unique.</p>
         </div></div>
     </aside>
+  </div>
+  <div class="content-grid" data-view-panel="memory" hidden>
+    <div class="main-stack">
+      <section
+        class="panel"
+        data-view-label="Memory"
+        data-view-button-label="Memory"
+        data-review-mode-title="Memory Palace Review"
+        data-review-mode-copy="This design palace trains both directions of travel. One side goes from components to roots. The other side goes from target roots back to coefficient constraints, and then checks whether the design is unique."
+        data-review-prompt="Walk the design route first: skeleton, direct solve, reverse solve, repeated-root constraint, uniqueness check."
+        data-review-reveal-copy="Reveal the current design locus when you want to connect the palace image to the worked design step below."
+        data-review-action-copy="Rate how well you remembered the design direction and constraint logic, then continue."
+        data-view-hero-title="Design Exercise 7-23 Memory Palace"
+        data-view-hero-copy="This palace is about design thinking. You keep one characteristic skeleton, walk one door forward from elements to roots, then reverse direction from target roots back to coefficient constraints. The last room teaches the most important design lesson: not every target root set gives a unique circuit."
+        data-view-hero-eq="Remember $$\text{roots} \leftrightarrow \text{polynomial} \leftrightarrow \text{coefficient constraints} \leftrightarrow \text{design freedom}.$$"
+      >
+        <div class="section-title">Memory Palace Route</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: The Skeleton Chamber</h2><ul><li>The normalized series RLC characteristic equation hangs permanently on the wall.</li><li>This chamber reminds you that every part of the exercise uses the same bridge.</li></ul></article>
+          <article class="room"><h2>Room 2: The Forward Door</h2><ul><li>Part (a) walks from known components to unknown roots.</li><li>This is the direct-analysis door.</li></ul></article>
+          <article class="room"><h2>Room 3: The Root Ledger</h2><ul><li>Here the direct-analysis door records the two roots after the polynomial is built.</li><li>The ledger means: once coefficients are known, roots are just calculation.</li></ul></article>
+          <article class="room"><h2>Room 4: The Reverse Door</h2><ul><li>Part (b) reverses the walk: target roots arrive first.</li><li>The door teaches that target roots become target coefficients before they become component values.</li></ul></article>
+          <article class="room"><h2>Room 5: The Matching Table</h2><ul><li>At this table, coefficient matching turns the target polynomial into $$R_T$$ and $$C$$ constraints.</li><li>This is the heart of design from desired roots.</li></ul></article>
+          <article class="room"><h2>Room 6: The Double-Root Seal</h2><ul><li>Part (c) stamps the repeated root $$-10^4$$ onto wax.</li><li>The seal produces two coefficient equations and no more.</li></ul></article>
+          <article class="room"><h2>Room 7: The Non-Unique Vault</h2><ul><li>Inside the vault, three unknowns stand beside only two independent equations.</li><li>The image teaches why repeated-root design here is not unique.</li></ul></article>
+          <article class="room"><h2>Room 8: The Designer's Oath</h2><ul><li>The final oath says: before hunting one answer, count the independent constraints.</li><li>If constraints are fewer than unknowns, the design family is infinite.</li></ul></article>
+        </div>
+      </section>
+      <section class="panel"><div class="section-title">Recall Tokens</div><div class="facts"><div class="fact"><div class="k">Forward Door</div><div class="v">Elements to roots.</div></div><div class="fact"><div class="k">Reverse Door</div><div class="v">Roots to component constraints.</div></div><div class="fact"><div class="k">Double-Root Seal</div><div class="v">Repeated root gives only limited equations.</div></div><div class="fact"><div class="k">Showcase</div><div class="v">Use the worked room beneath each locus.</div></div></div></section>
+    </div>
+    <aside class="palace-sidebar"><div class="section-title">Palace Path</div><p class="palace-intro">This route trains both design directions and ends with a uniqueness test.</p><div class="path"><div class="station"><h3>Station 1: Skeleton</h3><p>Keep one characteristic form for every part.</p></div><div class="transition"><h3>Transition 1 to 2</h3><p>One direction goes forward to roots.</p></div><div class="station"><h3>Station 2: Reverse Door</h3><p>The other direction goes back from roots to components.</p></div><div class="transition"><h3>Transition 2 to 3</h3><p>The last stop asks whether the constraints are enough.</p></div><div class="station"><h3>Station 3: Uniqueness Vault</h3><p>Count equations before committing to one answer.</p></div></div></aside>
   </div>
 </main>
 <div class="modal" id="prompt-modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div><p class="modal-copy">This prompt is prefilled with the full design flow for Exercise 7-23. Use it to test alternate one-paragraph memory palaces in another AI.</p><textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this series RLC design exercise. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.

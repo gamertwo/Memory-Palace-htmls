@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 23 Memory Palace | Cylinder Flux Core</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cinzel:wght@700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08111b;--bg2:#132536;--panel:#101a28;--panel2:#172536;--line:rgba(255,255,255,.08);--accent:#ffd166;--accent2:#7ce8ff;--text:#eef6ff;--muted:rgba(238,246,255,.76);--glow:0 0 0 1px rgba(124,232,255,.45),0 0 24px rgba(124,232,255,.08)}
+body{font-family:'Outfit',sans-serif;color:var(--text);min-height:100vh;background:radial-gradient(circle at top right,rgba(124,232,255,.14),transparent 34%),radial-gradient(circle at bottom left,rgba(255,209,102,.1),transparent 28%),linear-gradient(180deg,var(--bg),var(--bg2))}
+a{color:inherit}.shell{max-width:1120px;margin:0 auto;padding:2rem 1rem 3rem}.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .95rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel{background:rgba(16,26,40,.92);border:1px solid var(--line);border-radius:20px;padding:1.25rem}.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.9rem,4vw,3rem);margin-bottom:.55rem}.hero p,.answer-box p,.palace-copy,.thread-detail,.room li,.room p{color:var(--muted);line-height:1.75}
+.formula-band{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin-top:1rem}.formula-card,.room,.palace-paragraph{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:.95rem}.formula-label,.thread-label{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent2);font-weight:800;margin-bottom:.45rem}
+.eq{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:.85rem;overflow:auto}.layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.95fr);gap:1rem;margin-top:1rem;align-items:start}.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.rooms{display:grid;gap:.85rem}.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent2)}.room ul{padding-left:1.2rem}.room.active{border-color:rgba(124,232,255,.5);transform:translateY(-2px);box-shadow:var(--glow)}.palace{position:sticky;top:1rem}
+.palace-line{display:block;position:relative;padding:.7rem .8rem;border-radius:12px;color:var(--muted);cursor:pointer;transition:background .2s ease,color .2s ease,transform .2s ease}.palace-line+.palace-line{margin-top:.35rem}.palace-line::after{content:'';position:absolute;left:calc(100% + .45rem);top:50%;width:0;height:2px;background:linear-gradient(90deg,var(--accent2),rgba(124,232,255,0));transform:translateY(-50%);transition:width .22s ease}
+.palace-line::before{content:attr(data-thread);position:absolute;left:calc(100% + 7.2rem);top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--accent2);opacity:0;transition:opacity .2s ease;white-space:nowrap}.palace-line:hover,.palace-line.active{background:rgba(124,232,255,.08);color:var(--text);transform:translateX(3px)}.palace-line:hover::after,.palace-line.active::after{width:6.2rem}.palace-line:hover::before,.palace-line.active::before{opacity:1}
+.thread-panel,.answer-box{margin-top:1rem;background:linear-gradient(135deg,rgba(255,209,102,.08),rgba(124,232,255,.03));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:1rem}.thread-target{margin-top:.45rem;font-weight:700}
+@media (max-width:880px){.layout,.formula-band{grid-template-columns:1fr}.palace{position:static}.palace-line::before{left:calc(100% + 5.5rem)}}@media (max-width:640px){.shell{padding:1rem .85rem 2rem}.palace-line::after,.palace-line::before{display:none}}
+</style>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav"><a href="memory-palace-index.html">Memory Palace Index</a><a href="physics-flux-closed-cylinder-uniform-field.html">Physics Version</a></nav>
+  <section class="hero">
+    <h1>Closed Cylinder in Uniform Field</h1>
+    <p>This example is worth memorizing because it teaches cancellation clearly. The cylinder has three parts in the story: left cap, curved wall, right cap.</p>
+    <div class="formula-band">
+      <div class="formula-card"><div class="formula-label">Start Formula</div><div class="eq">$$\Phi=\int_a \vec E\cdot d\vec A+\int_b \vec E\cdot d\vec A+\int_c \vec E\cdot d\vec A$$</div></div>
+      <div class="formula-card"><div class="formula-label">End Formula</div><div class="eq">$$-EA+0+EA=0$$</div></div>
+    </div>
+  </section>
+  <div class="layout">
+    <section class="panel"><div class="section-title">Rooms</div><div class="rooms">
+      <article class="room" id="room-1"><h2>Room 1: Split the Surface</h2><ul><li>Break the cylinder into left cap, curved wall, and right cap.</li><li>That makes the flux easy to organize.</li></ul></article>
+      <article class="room" id="room-2"><h2>Room 2: Left Cap</h2><ul><li>The field points opposite the outward area vector there.</li><li>That contribution is negative.</li></ul></article>
+      <article class="room" id="room-3"><h2>Room 3: Curved Wall</h2><ul><li>The field runs parallel to the wall.</li><li>So the wall contribution is zero.</li></ul></article>
+      <article class="room" id="room-4"><h2>Room 4: Right Cap</h2><ul><li>The field and outward area vector point the same way.</li><li>That contribution is positive.</li></ul></article>
+      <article class="room" id="room-5"><h2>Room 5: Cancellation</h2><ul><li>Negative and positive cap flux cancel.</li><li>The total flux is zero.</li></ul></article>
+    </div><div class="answer-box"><div class="section-title" style="margin-bottom:.55rem">Simple Summary</div><p>Left cap gives negative flux, the curved wall gives zero, and the right cap gives positive flux, so the total is zero.</p></div></section>
+    <aside class="panel palace"><div class="section-title">Memory Palace Thread</div><p class="palace-copy">Hover any line and it highlights the exact room it belongs to.</p><p class="palace-paragraph">
+      <span class="palace-line active" tabindex="0" data-target="room-1" data-thread="-> Room 1" data-title="Room 1: Split the Surface" data-detail="Begin by cutting the cylinder into three parts.">At the entrance, a cylinder is cut into two caps and one wall so the whole surface becomes manageable.</span>
+      <span class="palace-line" tabindex="0" data-target="room-2" data-thread="-> Room 2" data-title="Room 2: Left Cap" data-detail="The left cap points against the field, so its flux is negative.">A red left cap faces the incoming field and stamps a minus sign on the floor.</span>
+      <span class="palace-line" tabindex="0" data-target="room-3" data-thread="-> Room 3" data-title="Room 3: Curved Wall" data-detail="The wall is parallel to the field, so it contributes zero.">Along the wall hallway, arrows slide around the cylinder without passing through it, so the room says zero.</span>
+      <span class="palace-line" tabindex="0" data-target="room-4" data-thread="-> Room 4" data-title="Room 4: Right Cap" data-detail="The right cap points with the field, so its flux is positive.">A gold right cap then catches the field and prints a plus sign.</span>
+      <span class="palace-line" tabindex="0" data-target="room-5" data-thread="-> Room 5" data-title="Room 5: Cancellation" data-detail="The negative and positive cap contributions cancel to zero total flux.">At the last gate, the minus and plus tokens snap together and vanish into zero.</span>
+    </p><div class="thread-panel"><div class="thread-label">Active Thread</div><div class="thread-target" id="thread-target">Room 1: Split the Surface</div><div class="thread-detail" id="thread-detail">Begin by cutting the cylinder into three parts.</div></div></aside>
+  </div>
+</main>
+<script>
+const lines=document.querySelectorAll('.palace-line'),rooms=document.querySelectorAll('.room'),targetLabel=document.getElementById('thread-target'),detailLabel=document.getElementById('thread-detail');
+function activateThread(line){const targetId=line.dataset.target;lines.forEach((item)=>item.classList.toggle('active',item===line));rooms.forEach((room)=>room.classList.toggle('active',room.id===targetId));targetLabel.textContent=line.dataset.title;detailLabel.textContent=line.dataset.detail;}
+lines.forEach((line)=>{line.addEventListener('mouseenter',()=>activateThread(line));line.addEventListener('focus',()=>activateThread(line));line.addEventListener('click',()=>activateThread(line));});activateThread(lines[0]);
+</script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

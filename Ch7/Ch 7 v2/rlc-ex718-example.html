@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>RLC Example 7-18 | Zero-Input Capacitor Voltage</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<script>
+MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090e;
+  --bg2:#0c0f17;
+  --surface:#111520;
+  --surface2:#161b26;
+  --border:rgba(255,255,255,.07);
+  --border2:rgba(255,255,255,.13);
+  --text:#eef0f5;
+  --muted:#8e96b0;
+  --dimmed:#4e566e;
+
+  --over:#ff6b6b;
+  --over-dim:rgba(255,107,107,.1);
+  --over-glow:rgba(255,107,107,.25);
+  --over-border:rgba(255,107,107,.22);
+
+  --crit:#ffd166;
+  --crit-dim:rgba(255,209,102,.1);
+  --crit-glow:rgba(255,209,102,.25);
+  --crit-border:rgba(255,209,102,.22);
+
+  --under:#06d6a0;
+  --under-dim:rgba(6,214,160,.1);
+  --under-glow:rgba(6,214,160,.25);
+  --under-border:rgba(6,214,160,.22);
+
+  --accent:#818cf8;
+  --accent-dim:rgba(129,140,248,.1);
+  --accent-border:rgba(129,140,248,.22);
+}
+
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+.bg-glow{position:fixed;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(129,140,248,.05) 0%,transparent 70%);top:-300px;right:-300px;pointer-events:none;z-index:0;}
+
+.shell{max-width:1120px;margin:0 auto;padding:2.5rem 1.2rem 5rem;position:relative;z-index:1;}
+
+/* NAV */
+.topnav{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:2rem;}
+.topnav a{text-decoration:none;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);border-radius:6px;padding:.38rem .75rem;background:var(--surface);transition:all .18s;}
+.topnav a:hover{color:var(--text);border-color:var(--accent);background:var(--accent-dim);}
+
+/* HERO */
+.hero{margin-bottom:2rem;padding:2rem;background:var(--surface);border:1px solid var(--border2);border-radius:20px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;top:0;right:0;width:320px;height:320px;background:radial-gradient(circle at top right,rgba(129,140,248,.07) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:4px;padding:.25rem .6rem;margin-bottom:1rem;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:.8rem;background:linear-gradient(135deg,#eef0f5 0%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--muted);line-height:1.8;font-size:.95rem;max-width:820px;margin-bottom:1.6rem;}
+.hero-btns{display:flex;gap:.6rem;flex-wrap:wrap;}
+.btn{font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.04em;border-radius:8px;padding:.5rem 1.1rem;cursor:pointer;transition:all .2s;border:1px solid;}
+.btn-primary{background:var(--accent-dim);border-color:var(--accent-border);color:var(--accent);}
+.btn-primary:hover{background:rgba(129,140,248,.18);}
+.btn-ghost{background:var(--surface2);border-color:var(--border2);color:var(--muted);}
+.btn-ghost:hover{color:var(--text);border-color:var(--border2);}
+
+/* MASTER LAW BANNER */
+.law-banner{margin-bottom:2rem;padding:1.3rem 1.6rem;border-radius:16px;background:linear-gradient(135deg,var(--accent-dim),rgba(129,140,248,.04));border:1px solid var(--accent-border);display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start;}
+.law-icon{font-size:2rem;padding-top:.1rem;}
+.law-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.35rem;}
+.law-body{color:var(--muted);font-size:.88rem;line-height:1.75;}
+.law-flow{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-top:.7rem;}
+.flow-step{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;padding:.28rem .65rem;border-radius:6px;background:var(--surface);border:1px solid var(--border2);color:var(--text);}
+.flow-arrow{color:var(--dimmed);font-size:.85rem;}
+
+/* SECTION TITLE */
+.sec-title{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmed);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* INITIAL CONDITIONS CARD */
+.ic-card{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:1.4rem 1.6rem;margin-bottom:2rem;}
+.ic-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--text);margin-bottom:.35rem;}
+.ic-sub{color:var(--muted);font-size:.82rem;line-height:1.6;margin-bottom:1.2rem;}
+.ic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;}
+.ic-item{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:.85rem 1rem;}
+.ic-label{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmed);margin-bottom:.4rem;}
+.ic-val{font-family:'JetBrains Mono',monospace;font-size:.92rem;color:var(--text);}
+.ic-note{font-size:.75rem;color:var(--muted);margin-top:.25rem;}
+
+/* TEMPLATE CARDS — THE CORE UX IMPROVEMENT */
+.templates-section{margin-bottom:2rem;}
+.templates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.1rem;}
+
+.tcard{border-radius:18px;border:1px solid var(--border);background:var(--surface);overflow:hidden;transition:transform .22s,box-shadow .22s;}
+.tcard:hover{transform:translateY(-3px);}
+.tcard.t-over{border-color:var(--over-border);}
+.tcard.t-over:hover{box-shadow:0 14px 44px var(--over-glow);}
+.tcard.t-crit{border-color:var(--crit-border);}
+.tcard.t-crit:hover{box-shadow:0 14px 44px var(--crit-glow);}
+.tcard.t-under{border-color:var(--under-border);}
+.tcard.t-under:hover{box-shadow:0 14px 44px var(--under-glow);}
+
+.tcard-head{padding:1.1rem 1.3rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.85rem;}
+.tcard-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.t-over .tcard-icon{background:var(--over-dim);}
+.t-crit .tcard-icon{background:var(--crit-dim);}
+.t-under .tcard-icon{background:var(--under-dim);}
+.tcard-meta{}
+.tcard-case{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.12rem;}
+.t-over .tcard-case{color:var(--over);}
+.t-crit .tcard-case{color:var(--crit);}
+.t-under .tcard-case{color:var(--under);}
+.tcard-name{font-family:'Syne',sans-serif;font-size:.98rem;font-weight:800;color:var(--text);}
+
+.tcard-body{padding:1.1rem 1.3rem;display:grid;gap:.85rem;}
+
+/* resistance tag */
+.res-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.55rem .85rem;}
+.res-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dimmed);}
+.res-val{font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:600;color:var(--text);}
+
+/* roots pill row */
+.roots-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.roots-pill{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;padding:.28rem .65rem;border-radius:5px;}
+.t-over .roots-pill{background:var(--over-dim);color:var(--over);}
+.t-crit .roots-pill{background:var(--crit-dim);color:var(--crit);}
+.t-under .roots-pill{background:var(--under-dim);color:var(--under);}
+.roots-type{font-size:.75rem;color:var(--muted);}
+
+/* template form box */
+.form-box{border-radius:10px;padding:.85rem 1rem;border:1px solid var(--border2);}
+.t-over .form-box{background:rgba(255,107,107,.04);}
+.t-crit .form-box{background:rgba(255,209,102,.04);}
+.t-under .form-box{background:rgba(6,214,160,.04);}
+.form-label{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dimmed);margin-bottom:.4rem;}
+.form-eq{font-size:.88rem;color:var(--text);line-height:1.65;}
+
+/* answer box */
+.ans-box{border-radius:10px;padding:.9rem 1rem;border:2px solid;}
+.t-over .ans-box{border-color:var(--over-border);background:var(--over-dim);}
+.t-crit .ans-box{border-color:var(--crit-border);background:var(--crit-dim);}
+.t-under .ans-box{border-color:var(--under-border);background:var(--under-dim);}
+.ans-label{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem;}
+.t-over .ans-label{color:var(--over);}
+.t-crit .ans-label{color:var(--crit);}
+.t-under .ans-label{color:var(--under);}
+.ans-eq{font-size:.88rem;color:var(--text);line-height:1.7;}
+
+/* constants row */
+.const-row{display:flex;gap:.5rem;flex-wrap:wrap;}
+.const-badge{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:600;padding:.3rem .65rem;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);}
+
+/* insight strip */
+.insight{font-size:.8rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);padding-top:.85rem;}
+
+/* STEP TABS */
+.steps-section{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;margin-bottom:2rem;}
+.steps-tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+.stab{font-family:'Space Grotesk',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.04em;border:1px solid var(--border);border-radius:7px;padding:.42rem .85rem;cursor:pointer;color:var(--muted);background:transparent;transition:all .18s;}
+.stab:hover{color:var(--text);border-color:var(--border2);}
+.stab.active{color:var(--text);background:var(--surface2);border-color:var(--border2);}
+.stab.active.so{color:var(--over);border-color:var(--over-border);background:var(--over-dim);}
+.stab.active.sc{color:var(--crit);border-color:var(--crit-border);background:var(--crit-dim);}
+.stab.active.su{color:var(--under);border-color:var(--under-border);background:var(--under-dim);}
+
+.spanel{display:none;}
+.spanel.active{display:grid;gap:.8rem;animation:fadeUp .28s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+.step{display:grid;grid-template-columns:34px 1fr;gap:.85rem;align-items:start;}
+.step-n{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;font-family:'Syne',sans-serif;flex-shrink:0;}
+.sg .step-n{background:var(--accent-dim);color:var(--accent);}
+.so .step-n{background:var(--over-dim);color:var(--over);}
+.sc .step-n{background:var(--crit-dim);color:var(--crit);}
+.su .step-n{background:var(--under-dim);color:var(--under);}
+.step-h{font-weight:700;color:var(--text);font-size:.9rem;margin-bottom:.28rem;}
+.step-b{color:var(--muted);font-size:.84rem;line-height:1.78;}
+
+/* MEMORY PALACE */
+.palace-section{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;margin-bottom:2rem;}
+.palace-intro{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
+
+/* two-col layout for palace */
+.palace-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;}
+@media(max-width:720px){.palace-layout{grid-template-columns:1fr}}
+
+.palace-column-title{font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmed);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
+
+/* path timeline */
+.palace-path{display:grid;gap:0;}
+.pstop{display:grid;grid-template-columns:44px 1fr;gap:0 1rem;}
+.pstop-left{display:flex;flex-direction:column;align-items:center;}
+.pnode{width:38px;height:38px;border-radius:50%;border:2px solid var(--border2);background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;font-family:'Syne',sans-serif;color:var(--text);flex-shrink:0;z-index:1;}
+.pnode.na{border-color:var(--accent);background:var(--accent-dim);color:var(--accent);}
+.pnode.no{border-color:var(--over);background:var(--over-dim);color:var(--over);}
+.pnode.nc{border-color:var(--crit);background:var(--crit-dim);color:var(--crit);}
+.pnode.nu{border-color:var(--under);background:var(--under-dim);color:var(--under);}
+.pline{flex:1;width:2px;background:var(--border);margin:.3rem 0;min-height:20px;}
+.pstop-r{padding-bottom:1.4rem;padding-top:.5rem;}
+.pstop-title{font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.28rem;line-height:1.4;}
+.pstop-body{font-size:.8rem;color:var(--muted);line-height:1.75;}
+
+/* visual legend — rooms descriptions */
+.room-cards{display:grid;gap:.65rem;}
+.rcard{border-radius:12px;border:1px solid var(--border);background:var(--surface2);overflow:hidden;cursor:pointer;transition:border-color .18s;}
+.rcard:hover{border-color:var(--border2);}
+.rcard.open{border-color:var(--border2);}
+.rcard-trigger{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:.7rem;padding:.75rem 1rem;background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:'Space Grotesk',sans-serif;}
+.rcard-num{width:28px;height:28px;border-radius:6px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--dimmed);flex-shrink:0;}
+.rcard.ro .rcard-num{background:var(--over-dim);border-color:var(--over-border);color:var(--over);}
+.rcard.rc .rcard-num{background:var(--crit-dim);border-color:var(--crit-border);color:var(--crit);}
+.rcard.ru .rcard-num{background:var(--under-dim);border-color:var(--under-border);color:var(--under);}
+.rcard-title{font-size:.85rem;font-weight:700;color:var(--text);}
+.rcard-chevron{font-size:.7rem;color:var(--dimmed);transition:transform .25s;}
+.rcard.open .rcard-chevron{transform:rotate(180deg);color:var(--accent);}
+.rcard-body{display:none;padding:.1rem 1rem .85rem 3.7rem;border-top:1px solid var(--border);}
+.rcard.open .rcard-body{display:block;}
+.rcard-body ul{padding-left:1.2rem;}
+.rcard-body li{font-size:.82rem;color:var(--muted);line-height:1.85;margin-bottom:.15rem;}
+
+/* FLIP CARDS */
+.recall-section{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;margin-bottom:2rem;}
+.recall-intro{color:var(--muted);font-size:.84rem;line-height:1.65;margin-bottom:1.2rem;}
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:.85rem;}
+.fc{height:148px;perspective:1000px;cursor:pointer;}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .52s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.fc.flipped .fc-inner{transform:rotateY(180deg);}
+.fcf,.fcb{position:absolute;inset:0;border-radius:12px;border:1px solid var(--border2);padding:.9rem;display:flex;flex-direction:column;justify-content:center;align-items:center;backface-visibility:hidden;text-align:center;}
+.fcf{background:var(--surface2);}
+.fcb{transform:rotateY(180deg);}
+.fc-tag{font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.45rem;}
+.fc-q{font-size:.86rem;font-weight:600;color:var(--text);line-height:1.45;}
+.fc-a{font-size:.8rem;color:var(--text);line-height:1.6;}
+.fc-hint{font-size:.62rem;color:var(--dimmed);margin-top:.45rem;}
+
+.fcf .fc-tag{color:var(--accent);}
+.fcf{border-color:rgba(129,140,248,.18);}
+
+.fc.fo .fcb{background:var(--over-dim);border-color:var(--over-border);}
+.fc.fo .fc-tag{color:var(--over);}
+.fc.fc2 .fcb{background:var(--crit-dim);border-color:var(--crit-border);}
+.fc.fc2 .fc-tag{color:var(--crit);}
+.fc.fu .fcb{background:var(--under-dim);border-color:var(--under-border);}
+.fc.fu .fc-tag{color:var(--under);}
+.fc.fb .fcb{background:var(--accent-dim);border-color:var(--accent-border);}
+.fc.fb .fc-tag{color:var(--accent);}
+
+/* QUICK DATA */
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.75rem;margin-bottom:2rem;}
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem;transition:border-color .18s;}
+.qcard:hover{border-color:var(--border2);}
+.qlabel{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmed);margin-bottom:.38rem;}
+.qval{color:var(--text);line-height:1.6;font-size:.88rem;}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px);z-index:100;align-items:center;justify-content:center;padding:1rem;}
+.modal.open{display:flex;}
+.modal-card{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:1.5rem;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.modal-head h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:var(--text);}
+.modal-copy{color:var(--muted);font-size:.83rem;line-height:1.75;margin-bottom:1rem;}
+.prompt-box{width:100%;min-height:200px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:.9rem;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.76rem;line-height:1.7;resize:vertical;margin-bottom:1rem;}
+.modal-actions{display:flex;gap:.6rem;justify-content:flex-end;}
+
+@media(max-width:640px){.templates-grid,.flip-grid{grid-template-columns:1fr}.palace-layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<main class="shell">
+
+  <!-- NAV -->
+  <nav class="topnav">
+    <a href="index.html">Pattern Palace</a>
+    <a href="hub.html">Hub</a>
+    <a href="rlc-ex717-example.html">← Ex 7-17</a>
+    <a href="rlc-ex719-example.html">Ex 7-19 →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="hero-tag">Series RLC · Zero-Input Response</div>
+    <h1>Example 7-18</h1>
+    <p class="hero-sub">
+      Same circuit as 7-17 ($L=1\ \text{H},\ C=0.25\times10^{-6}\ \text{F}$), but now find the zero-input capacitor voltage after the switch closes at $t=0.$
+      Initial conditions: $I_0=0$ and $V_0=15\ \text{V}.$ Reuse the roots from 7-17, pick the correct template for each case, and solve for the two unknown constants.
+    </p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" data-open-prompt>AI Prompt</button>
+      <button class="btn btn-ghost" id="go-recall">Test My Memory</button>
+    </div>
+  </section>
+
+  <!-- MASTER LAW -->
+  <div class="law-banner reveal">
+    <div class="law-icon">🔑</div>
+    <div>
+      <div class="law-title">The Master Law of This Example</div>
+      <div class="law-body">Roots decide the shape of the response. Initial conditions decide the exact waveform. This two-step law is repeated for all three damping cases.</div>
+      <div class="law-flow">
+        <span class="flow-step">Roots from 7-17</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">Choose Template</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">Apply ICs</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">Solve Constants</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">Write Waveform</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK DATA -->
+  <div class="sec-title reveal">Quick Data</div>
+  <div class="qgrid reveal">
+    <div class="qcard"><div class="qlabel">Capacitance</div><div class="qval">$C=0.25\times10^{-6}\ \text{F}$</div></div>
+    <div class="qcard"><div class="qlabel">Inductance</div><div class="qval">$L=1\ \text{H}$</div></div>
+    <div class="qcard"><div class="qlabel">Initial Voltage</div><div class="qval">$v_C(0)=V_0=15\ \text{V}$</div></div>
+    <div class="qcard"><div class="qlabel">Initial Current</div><div class="qval">$I_0=0\ \Rightarrow\ \dot v_C(0)=0$</div></div>
+    <div class="qcard"><div class="qlabel">Roots (from 7-17)</div><div class="qval">$-500,-8000$ · $-2000,-2000$ · $-500\pm j500\sqrt{15}$</div></div>
+    <div class="qcard"><div class="qlabel">Goal</div><div class="qval">$v_C(t)$ for all three damping cases</div></div>
+  </div>
+
+  <!-- INITIAL CONDITIONS CARD -->
+  <div class="sec-title reveal">The Two Keys — Initial Conditions</div>
+  <div class="ic-card reveal">
+    <div class="ic-title">Same starting data for every case</div>
+    <div class="ic-sub">These two equations are all you need to pin down the unknown constants $K_1$ and $K_2$ in any of the three response templates. They never change between cases — only the template changes.</div>
+    <div class="ic-grid">
+      <div class="ic-item">
+        <div class="ic-label">Condition 1 — Voltage</div>
+        <div class="ic-val">$v_C(0) = 15\ \text{V}$</div>
+        <div class="ic-note">Plug $t=0$ into the template → equation for $K_1, K_2$</div>
+      </div>
+      <div class="ic-item">
+        <div class="ic-label">Condition 2 — Derivative</div>
+        <div class="ic-val">$\dot v_C(0) = I_0/C = 0$</div>
+        <div class="ic-note">Differentiate the template, plug $t=0$ → second equation</div>
+      </div>
+      <div class="ic-item">
+        <div class="ic-label">Why $\dot v_C(0) = 0$</div>
+        <div class="ic-val">$i_C = C\,\dfrac{dv_C}{dt}$</div>
+        <div class="ic-note">Since $I_0=0,$ the capacitor current is zero at $t=0$, so the derivative is zero</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THREE TEMPLATE CARDS -->
+  <div class="sec-title reveal">The Three Response Templates & Final Answers</div>
+  <div class="templates-section">
+    <div class="templates-grid reveal">
+
+      <!-- OVERDAMPED -->
+      <div class="tcard t-over">
+        <div class="tcard-head">
+          <div class="tcard-icon">🔩</div>
+          <div class="tcard-meta">
+            <div class="tcard-case">Case A · Overdamped</div>
+            <div class="tcard-name">Two Real Exponentials</div>
+          </div>
+        </div>
+        <div class="tcard-body">
+          <div class="res-row"><span class="res-label">Resistance</span><span class="res-val">$R = 8.5\ \text{k}\Omega$</span></div>
+          <div class="roots-row">
+            <span class="roots-pill">$s_1 = -500$</span>
+            <span class="roots-pill">$s_2 = -8000$</span>
+            <span class="roots-type">two distinct real roots</span>
+          </div>
+          <div class="form-box">
+            <div class="form-label">Response Template</div>
+            <div class="form-eq">$v_C = K_1 e^{-500t} + K_2 e^{-8000t}$</div>
+          </div>
+          <div class="const-row">
+            <span class="const-badge">$K_1 = 16$</span>
+            <span class="const-badge">$K_2 = -1$</span>
+          </div>
+          <div class="ans-box">
+            <div class="ans-label">Final Answer</div>
+            <div class="ans-eq">$v_C(t) = 16e^{-500t} - e^{-8000t}\ \text{V},\quad t \ge 0$</div>
+          </div>
+          <div class="insight">The slow term $e^{-500t}$ dominates the long tail. The fast term $e^{-8000t}$ vanishes almost instantly. No oscillation — two real decays side by side.</div>
+        </div>
+      </div>
+
+      <!-- CRITICAL -->
+      <div class="tcard t-crit">
+        <div class="tcard-head">
+          <div class="tcard-icon">⚖️</div>
+          <div class="tcard-meta">
+            <div class="tcard-case">Case B · Critically Damped</div>
+            <div class="tcard-name">Repeated Root with $t$ Factor</div>
+          </div>
+        </div>
+        <div class="tcard-body">
+          <div class="res-row"><span class="res-label">Resistance</span><span class="res-val">$R = 4\ \text{k}\Omega$</span></div>
+          <div class="roots-row">
+            <span class="roots-pill">$s = -2000\ (\times 2)$</span>
+            <span class="roots-type">one repeated real root</span>
+          </div>
+          <div class="form-box">
+            <div class="form-label">Response Template</div>
+            <div class="form-eq">$v_C = (K_1 + K_2\,t)\,e^{-2000t}$</div>
+          </div>
+          <div class="const-row">
+            <span class="const-badge">$K_1 = 15$</span>
+            <span class="const-badge">$K_2 = 30000$</span>
+          </div>
+          <div class="ans-box">
+            <div class="ans-label">Final Answer</div>
+            <div class="ans-eq">$v_C(t) = 15(1+2000t)\,e^{-2000t}\ \text{V},\quad t \ge 0$</div>
+          </div>
+          <div class="insight">The extra $t$ factor in the template is forced by the repeated root — it distinguishes this from two separate exponentials. Fastest return to zero without ringing.</div>
+        </div>
+      </div>
+
+      <!-- UNDERDAMPED -->
+      <div class="tcard t-under">
+        <div class="tcard-head">
+          <div class="tcard-icon">🔔</div>
+          <div class="tcard-meta">
+            <div class="tcard-case">Case C · Underdamped</div>
+            <div class="tcard-name">Decaying Sinusoid</div>
+          </div>
+        </div>
+        <div class="tcard-body">
+          <div class="res-row"><span class="res-label">Resistance</span><span class="res-val">$R = 1\ \text{k}\Omega$</span></div>
+          <div class="roots-row">
+            <span class="roots-pill">$-500 \pm j500\sqrt{15}$</span>
+            <span class="roots-type">complex conjugates</span>
+          </div>
+          <div class="form-box">
+            <div class="form-label">Response Template ($\omega_d = 500\sqrt{15}$)</div>
+            <div class="form-eq">$v_C = e^{-500t}(K_1\cos\omega_d t + K_2\sin\omega_d t)$</div>
+          </div>
+          <div class="const-row">
+            <span class="const-badge">$K_1 = 15$</span>
+            <span class="const-badge">$K_2 = \sqrt{15}$</span>
+          </div>
+          <div class="ans-box">
+            <div class="ans-label">Final Answer</div>
+            <div class="ans-eq">$v_C(t) = e^{-500t}\!\left[15\cos(500\sqrt{15}\,t)+\sqrt{15}\sin(500\sqrt{15}\,t)\right]\text{V}$</div>
+          </div>
+          <div class="insight">$e^{-500t}$ is the decaying envelope. The cosine and sine inside create the oscillation. Real part of root → decay. Imaginary part → oscillation frequency $\omega_d$.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STEP-BY-STEP TABS -->
+  <div class="sec-title reveal">Step-by-Step Algebra</div>
+  <div class="steps-section reveal">
+    <div class="steps-tabs">
+      <button class="stab sg active" data-tab="setup">How to Apply ICs</button>
+      <button class="stab so" data-tab="over">Case A — Overdamped</button>
+      <button class="stab sc" data-tab="crit">Case B — Critical</button>
+      <button class="stab su" data-tab="under">Case C — Underdamped</button>
+    </div>
+
+    <!-- SETUP -->
+    <div class="spanel sg active" id="sp-setup">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <div class="step-h">Write the template for your case</div>
+          <div class="step-b">Choose the form that matches the root type from Example 7-17. Don't start computing yet — the template comes first.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <div class="step-h">Apply Condition 1: set $t = 0$, equate to 15 V</div>
+          <div class="step-b">Every exponential and every cosine/sine evaluates to a simple value at $t=0.$ This gives you one algebraic equation in $K_1$ and $K_2.$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <div class="step-h">Differentiate the template, then apply Condition 2: $\dot v_C(0) = 0$</div>
+          <div class="step-b">Differentiate term by term, substitute $t=0,$ and set the result equal to zero. This gives you the second algebraic equation.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div>
+          <div class="step-h">Solve the two equations for $K_1$ and $K_2$</div>
+          <div class="step-b">Simple linear algebra. Substitute back into the template to get the final waveform.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERDAMPED -->
+    <div class="spanel so" id="sp-over">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <div class="step-h">Write the template</div>
+          <div class="step-b">Roots are $s_1=-500$ and $s_2=-8000,$ so: $$v_C(t)=K_1e^{-500t}+K_2e^{-8000t}$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <div class="step-h">Condition 1 — plug $t=0$</div>
+          <div class="step-b">$$v_C(0)=K_1+K_2=15$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <div class="step-h">Differentiate, then Condition 2 — set $\dot v_C(0) = 0$</div>
+          <div class="step-b">$$\dot v_C = -500K_1e^{-500t} - 8000K_2e^{-8000t}$$ At $t=0:$ $$0 = -500K_1 - 8000K_2$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div>
+          <div class="step-h">Solve the system</div>
+          <div class="step-b">From the two equations: $K_1+K_2=15$ and $500K_1+8000K_2=0.$ Solving: $K_1=16,\ K_2=-1.$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">5</div>
+        <div>
+          <div class="step-h">Write the final answer</div>
+          <div class="step-b">$$v_C(t) = 16e^{-500t} - e^{-8000t}\ \text{V},\quad t\ge0$$</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRITICAL -->
+    <div class="spanel sc" id="sp-crit">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <div class="step-h">Write the repeated-root template</div>
+          <div class="step-b">Both roots equal $-2000,$ so the extra $t$ factor is mandatory: $$v_C(t)=(K_1+K_2\,t)\,e^{-2000t}$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <div class="step-h">Condition 1 — plug $t=0$</div>
+          <div class="step-b">$$v_C(0)=K_1 \cdot 1 = 15 \quad\Rightarrow\quad K_1=15$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <div class="step-h">Differentiate the template (product rule)</div>
+          <div class="step-b">$$\dot v_C = K_2\,e^{-2000t} + (K_1+K_2\,t)(-2000)\,e^{-2000t}$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div>
+          <div class="step-h">Condition 2 — set $\dot v_C(0) = 0$</div>
+          <div class="step-b">At $t=0:$ $$0 = K_2 - 2000K_1 = K_2 - 2000(15) \quad\Rightarrow\quad K_2=30000$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">5</div>
+        <div>
+          <div class="step-h">Write the final answer</div>
+          <div class="step-b">$$v_C(t)=15(1+2000t)\,e^{-2000t}\ \text{V},\quad t\ge 0$$ Note: $K_1+K_2\,t = 15+30000t = 15(1+2000t).$</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNDERDAMPED -->
+    <div class="spanel su" id="sp-under">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <div class="step-h">Identify $\alpha$ and $\omega_d$ from roots</div>
+          <div class="step-b">Roots are $-500\pm j500\sqrt{15},$ so $\alpha=500$ and $\omega_d=500\sqrt{15}.$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <div class="step-h">Write the underdamped template</div>
+          <div class="step-b">$$v_C(t)=e^{-500t}\!\left(K_1\cos(500\sqrt{15}\,t)+K_2\sin(500\sqrt{15}\,t)\right)$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <div class="step-h">Condition 1 — plug $t=0$</div>
+          <div class="step-b">At $t=0:\ \cos(0)=1,\ \sin(0)=0,\ e^0=1:$ $$v_C(0) = K_1 = 15$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div>
+          <div class="step-h">Differentiate, then Condition 2 — set $\dot v_C(0) = 0$</div>
+          <div class="step-b">Differentiate and evaluate at $t=0:$ $$0=-500K_1 + 500\sqrt{15}\,K_2$$ $$0=-500(15)+500\sqrt{15}\,K_2 \quad\Rightarrow\quad K_2=\sqrt{15}$$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">5</div>
+        <div>
+          <div class="step-h">Write the final answer</div>
+          <div class="step-b">$$v_C(t)=e^{-500t}\!\left[15\cos(500\sqrt{15}\,t)+\sqrt{15}\sin(500\sqrt{15}\,t)\right]\text{V},\quad t\ge0$$</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMORY PALACE -->
+  <div class="sec-title reveal">Memory Palace</div>
+  <div class="palace-section reveal">
+    <p class="palace-intro">
+      This palace has one law burned into every room: <strong style="color:var(--text)">roots pick the template — initial conditions pick the constants.</strong>
+      Walk through a Template Hall, an IC Lock, and three Damping Doors. Each door has a feel: stone (heavy, real, separate), mirror (balanced, repeated), silver-ringing (oscillating, decaying).
+      You never re-derive from scratch — you just choose the right door.
+    </p>
+
+    <div class="palace-layout">
+
+      <!-- LEFT: path timeline -->
+      <div>
+        <div class="palace-column-title">The Route</div>
+        <div class="palace-path">
+
+          <div class="pstop">
+            <div class="pstop-left"><div class="pnode na">1</div><div class="pline"></div></div>
+            <div class="pstop-r">
+              <div class="pstop-title">🏛️ Template Hall — Three Arches</div>
+              <div class="pstop-body">Three arches hang in one hall, each engraved with a waveform shape: two-real-exponential, repeated-root-with-t, decaying-sinusoid. The hall's single rule: <em>choose the arch before touching constants.</em></div>
+            </div>
+          </div>
+
+          <div class="pstop">
+            <div class="pstop-left"><div class="pnode na">2</div><div class="pline"></div></div>
+            <div class="pstop-r">
+              <div class="pstop-title">🔐 The Double IC Lock</div>
+              <div class="pstop-body">A lock with exactly two keys, the same every time: $v_C(0)=15\ \text{V}$ and $\dot v_C(0)=0.$ No matter which door opens next, these two keys solve the constants. <em>Same keys, different doors.</em></div>
+            </div>
+          </div>
+
+          <div class="pstop">
+            <div class="pstop-left"><div class="pnode no">A</div><div class="pline"></div></div>
+            <div class="pstop-r">
+              <div class="pstop-title" style="color:var(--over)">🪨 Stone Door — Overdamped ($R=8.5\ \text{k}\Omega$)</div>
+              <div class="pstop-body">A heavy stone door. Stone = two separate real decays. Behind it: $K_1=16$ (slow, dominant arm) and $K_2=-1$ (fast, almost-invisible arm). Stamp: $16e^{-500t}-e^{-8000t}.$</div>
+            </div>
+          </div>
+
+          <div class="pstop">
+            <div class="pstop-left"><div class="pnode no">↓</div><div class="pline"></div></div>
+            <div class="pstop-r">
+              <div class="pstop-title">🌅 The Long-Tail Balcony</div>
+              <div class="pstop-body">Step outside onto a balcony. The fast $e^{-8000t}$ disappears almost instantly, leaving only the slow tail $16e^{-500t}$ stretched across the horizon. <em>Two rates, one survivor.</em></div>
+            </div>
+          </div>
+
+          <div class="pstop">
+            <div class="pstop-left"><div class="pnode nc">B</div><div class="pline"></div></div>
+            <div class="pstop-r">
+              <div class="pstop-title" style="color:var(--crit)">🪞 Mirror Door — Critically Damped ($R=4\ \text{k}\Omega$)</div>
+              <div class="pstop-body">A mirror split perfectly down the center. Mirror = balance = repeated root. The extra $t$ multiplier in the template is the mirror's signature. Stamp: $15(1+2000t)e^{-2000t}.$</div>
+            </div>
+          </div>
+
+          <div class="pstop">
+            <div class="pstop-left"><div class="pnode nc">↓</div><div class="pline"></div></div>
+            <div class="pstop-r">
+              <div class="pstop-title">🏃 The Narrowing Corridor</div>
+              <div class="pstop-body">This corridor narrows sharply to zero as fast as physically possible, no ringing. Critical damping is the fastest return without oscillation. <em>Knife edge between split and ring.</em></div>
+            </div>
+          </div>
+
+          <div class="pstop">
+            <div class="pstop-left"><div class="pnode nu">C</div><div class="pline"></div></div>
+            <div class="pstop-r">
+              <div class="pstop-title" style="color:var(--under)">🔔 Silver Door — Underdamped ($R=1\ \text{k}\Omega$)</div>
+              <div class="pstop-body">A silver door vibrating with a soft ring. Silver = oscillation. Inside: $e^{-500t}$ is the shrinking envelope; the cosine and sine create the oscillation. Stamp: $e^{-500t}[15\cos\omega_d t + \sqrt{15}\sin\omega_d t].$</div>
+            </div>
+          </div>
+
+          <div class="pstop">
+            <div class="pstop-left"><div class="pnode na">∞</div></div>
+            <div class="pstop-r">
+              <div class="pstop-title">🏆 Solomon's Final Table</div>
+              <div class="pstop-body"><strong style="color:var(--text)">Inspect roots → choose template → plug in ICs → solve constants → write waveform.</strong> That is the whole law of this example, stated once and final.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT: room detail accordion -->
+      <div>
+        <div class="palace-column-title">Room Details — Expand to Read</div>
+        <div class="room-cards">
+
+          <div class="rcard">
+            <button class="rcard-trigger" onclick="toggleRCard(this)">
+              <span class="rcard-num">1</span>
+              <span class="rcard-title">Pick the Right Template</span>
+              <span class="rcard-chevron">▼</span>
+            </button>
+            <div class="rcard-body">
+              <ul>
+                <li>Example 7-17 already tells you which root pattern belongs to each resistance.</li>
+                <li>Case A uses $K_1e^{s_1 t}+K_2e^{s_2 t}.$</li>
+                <li>Case B uses $(K_1+K_2 t)e^{st}.$</li>
+                <li>Case C uses $e^{-\alpha t}(K_1\cos\omega_d t+K_2\sin\omega_d t).$</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rcard">
+            <button class="rcard-trigger" onclick="toggleRCard(this)">
+              <span class="rcard-num">2</span>
+              <span class="rcard-title">Lock the Initial Conditions</span>
+              <span class="rcard-chevron">▼</span>
+            </button>
+            <div class="rcard-body">
+              <ul>
+                <li>The capacitor voltage starts at $v_C(0)=15\ \text{V}.$</li>
+                <li>Because $I_0=0,$ the derivative at switching is $\dot v_C(0)=I_0/C=0.$</li>
+                <li>These two equations are enough to solve the constants in every form.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rcard ro">
+            <button class="rcard-trigger" onclick="toggleRCard(this)">
+              <span class="rcard-num">3</span>
+              <span class="rcard-title">Solve Case A — $R=8.5\ \text{k}\Omega$</span>
+              <span class="rcard-chevron">▼</span>
+            </button>
+            <div class="rcard-body">
+              <ul>
+                <li>Roots are $s_1=-500$ and $s_2=-8000.$</li>
+                <li>Use $v_C(t)=K_1e^{-500t}+K_2e^{-8000t}.$</li>
+                <li>ICs give $K_1+K_2=15$ and $-500K_1-8000K_2=0.$</li>
+                <li>Solving: $K_1=16$ and $K_2=-1.$</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rcard ro">
+            <button class="rcard-trigger" onclick="toggleRCard(this)">
+              <span class="rcard-num">4</span>
+              <span class="rcard-title">Case A Response — the Long-Tail Story</span>
+              <span class="rcard-chevron">▼</span>
+            </button>
+            <div class="rcard-body">
+              <ul>
+                <li>$v_C(t)=16e^{-500t}-e^{-8000t}\ \text{V},\ t\ge0.$</li>
+                <li>The slow $e^{-500t}$ dominates the long-time tail.</li>
+                <li>The fast $e^{-8000t}$ disappears almost immediately.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rcard rc">
+            <button class="rcard-trigger" onclick="toggleRCard(this)">
+              <span class="rcard-num">5</span>
+              <span class="rcard-title">Solve Case B — $R=4\ \text{k}\Omega$</span>
+              <span class="rcard-chevron">▼</span>
+            </button>
+            <div class="rcard-body">
+              <ul>
+                <li>Both roots are $-2000,$ so use $(K_1+K_2 t)e^{-2000t}.$</li>
+                <li>At $t=0:\ K_1=15.$</li>
+                <li>Differentiating and applying $\dot v_C(0)=0:\ K_2=2000\cdot15=30000.$</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rcard rc">
+            <button class="rcard-trigger" onclick="toggleRCard(this)">
+              <span class="rcard-num">6</span>
+              <span class="rcard-title">Case B Response — the Fastest Return</span>
+              <span class="rcard-chevron">▼</span>
+            </button>
+            <div class="rcard-body">
+              <ul>
+                <li>$v_C(t)=15(1+2000t)e^{-2000t}\ \text{V},\ t\ge0.$</li>
+                <li>The fastest nonoscillatory return to zero.</li>
+                <li>The extra $t$ factor is the hallmark of the repeated-root form.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rcard ru">
+            <button class="rcard-trigger" onclick="toggleRCard(this)">
+              <span class="rcard-num">7</span>
+              <span class="rcard-title">Solve Case C — $R=1\ \text{k}\Omega$</span>
+              <span class="rcard-chevron">▼</span>
+            </button>
+            <div class="rcard-body">
+              <ul>
+                <li>Roots $-500\pm j500\sqrt{15}$ give $\alpha=500,\ \omega_d=500\sqrt{15}.$</li>
+                <li>Template: $e^{-500t}(K_1\cos\omega_d t+K_2\sin\omega_d t).$</li>
+                <li>At $t=0:\ K_1=15.$ Differentiating: $K_2=\sqrt{15}.$</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rcard ru">
+            <button class="rcard-trigger" onclick="toggleRCard(this)">
+              <span class="rcard-num">8</span>
+              <span class="rcard-title">Case C Response — Decaying Oscillation</span>
+              <span class="rcard-chevron">▼</span>
+            </button>
+            <div class="rcard-body">
+              <ul>
+                <li>$v_C(t)=e^{-500t}[15\cos(500\sqrt{15}\,t)+\sqrt{15}\sin(500\sqrt{15}\,t)]\ \text{V}.$</li>
+                <li>Case A: two real decays. Case B: repeated-root factor. Case C: decaying oscillation.</li>
+                <li>Roots decide the shape; initial conditions decide the exact waveform.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLIP RECALL CARDS -->
+  <div class="sec-title reveal" id="recall-anchor">Recall Test — Flip Cards</div>
+  <div class="recall-section reveal">
+    <p class="recall-intro">Try to recall each answer before flipping. The color of the back matches the damping case color used throughout.</p>
+    <div class="flip-grid">
+
+      <div class="fc fb" onclick="flipAndTypeset(this)">
+        <div class="fc-inner">
+          <div class="fcf"><div class="fc-tag">Master Law</div><div class="fc-q">What is the two-step law of this example?</div><div class="fc-hint">tap to flip</div></div>
+          <div class="fcb"><div class="fc-tag">Master Law</div><div class="fc-a">Roots decide the shape · Initial conditions decide the constants</div></div>
+        </div>
+      </div>
+
+      <div class="fc fb" onclick="flipAndTypeset(this)">
+        <div class="fc-inner">
+          <div class="fcf"><div class="fc-tag">Setup</div><div class="fc-q">Why is $\dot v_C(0) = 0$?</div><div class="fc-hint">tap to flip</div></div>
+          <div class="fcb"><div class="fc-tag">Setup</div><div class="fc-a">$i_C = C\dot v_C$ and $I_0=0$, so $\dot v_C(0) = I_0/C = 0$</div></div>
+        </div>
+      </div>
+
+      <div class="fc fo" onclick="flipAndTypeset(this)">
+        <div class="fc-inner">
+          <div class="fcf"><div class="fc-tag">Case A</div><div class="fc-q">What template is used for two distinct real roots?</div><div class="fc-hint">tap to flip</div></div>
+          <div class="fcb"><div class="fc-tag">Overdamped</div><div class="fc-a">$K_1e^{s_1 t}+K_2e^{s_2 t}$</div></div>
+        </div>
+      </div>
+
+      <div class="fc fo" onclick="flipAndTypeset(this)">
+        <div class="fc-inner">
+          <div class="fcf"><div class="fc-tag">Case A</div><div class="fc-q">Final answer for $R=8.5\ \text{k}\Omega$?</div><div class="fc-hint">tap to flip</div></div>
+          <div class="fcb"><div class="fc-tag">Overdamped</div><div class="fc-a">$16e^{-500t} - e^{-8000t}\ \text{V}$<br>$K_1=16,\ K_2=-1$</div></div>
+        </div>
+      </div>
+
+      <div class="fc fc2" onclick="flipAndTypeset(this)">
+        <div class="fc-inner">
+          <div class="fcf"><div class="fc-tag">Case B</div><div class="fc-q">What template is used for a repeated root?</div><div class="fc-hint">tap to flip</div></div>
+          <div class="fcb"><div class="fc-tag">Critical</div><div class="fc-a">$(K_1+K_2\,t)\,e^{st}$</div></div>
+        </div>
+      </div>
+
+      <div class="fc fc2" onclick="flipAndTypeset(this)">
+        <div class="fc-inner">
+          <div class="fcf"><div class="fc-tag">Case B</div><div class="fc-q">Final answer for $R=4\ \text{k}\Omega$?</div><div class="fc-hint">tap to flip</div></div>
+          <div class="fcb"><div class="fc-tag">Critical</div><div class="fc-a">$15(1+2000t)\,e^{-2000t}\ \text{V}$<br>$K_1=15,\ K_2=30000$</div></div>
+        </div>
+      </div>
+
+      <div class="fc fu" onclick="flipAndTypeset(this)">
+        <div class="fc-inner">
+          <div class="fcf"><div class="fc-tag">Case C</div><div class="fc-q">What template is used for complex conjugate roots?</div><div class="fc-hint">tap to flip</div></div>
+          <div class="fcb"><div class="fc-tag">Underdamped</div><div class="fc-a">$e^{-\alpha t}(K_1\cos\omega_d t + K_2\sin\omega_d t)$</div></div>
+        </div>
+      </div>
+
+      <div class="fc fu" onclick="flipAndTypeset(this)">
+        <div class="fc-inner">
+          <div class="fcf"><div class="fc-tag">Case C</div><div class="fc-q">Final answer for $R=1\ \text{k}\Omega$?</div><div class="fc-hint">tap to flip</div></div>
+          <div class="fcb"><div class="fc-tag">Underdamped</div><div class="fc-a">$e^{-500t}[15\cos\omega_d t + \sqrt{15}\sin\omega_d t]$<br>$K_1=15,\ K_2=\sqrt{15}$</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="btn btn-ghost" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt is prefilled with the full zero-input response flow for Example 7-18. Use it to test alternate one-paragraph memory palaces in another AI.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this second-order series RLC zero-input response problem. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
+
+Source material:
+1. The circuit has L = 1 H and C = 0.25 x 10^-6 F.
+2. The initial conditions are v_C(0) = 15 V and dv_C/dt at t = 0 is zero because I_0 = 0 and i_C = C dv_C/dt.
+3. Reuse the roots from Example 7-17.
+4. For R = 8.5 kOhm, the roots are -500 and -8000, so use v_C = K1 e^-500t + K2 e^-8000t.
+5. The initial conditions give K1 + K2 = 15 and -500K1 - 8000K2 = 0.
+6. Solve to get K1 = 16 and K2 = -1, so v_C(t) = 16e^-500t - e^-8000t.
+7. For R = 4 kOhm, use the repeated-root form v_C = (K1 + K2 t)e^-2000t.
+8. The initial conditions give K1 = 15 and K2 = 2000 times 15, so v_C(t) = 15(1 + 2000t)e^-2000t.
+9. For R = 1 kOhm, use the underdamped form e^-500t[K1 cos(500 sqrt(15)t) + K2 sin(500 sqrt(15)t)].
+10. The initial conditions give K1 = 15 and K2 = sqrt(15).
+11. The final underdamped response is e^-500t[15 cos(500 sqrt(15)t) + sqrt(15) sin(500 sqrt(15)t)].
+12. Final concept: the root pattern chooses the form, and the initial conditions choose the constants.</textarea>
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="copy-prompt">Copy Prompt</button>
+      <button class="btn btn-ghost" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* REVEAL */
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* STEP TABS */
+document.querySelectorAll('.stab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const id = 'sp-'+this.dataset.tab;
+    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(id).classList.add('active');
+    if(window.MathJax)MathJax.typesetPromise();
+  });
+});
+
+/* PALACE ROOM ACCORDION */
+function toggleRCard(btn){
+  const card = btn.closest('.rcard');
+  card.classList.toggle('open');
+  if(card.classList.contains('open')&&window.MathJax)MathJax.typesetPromise([card]);
+}
+
+/* FLIP CARDS */
+function flipAndTypeset(card){
+  card.classList.toggle('flipped');
+  setTimeout(()=>{if(window.MathJax)MathJax.typesetPromise([card]);},80);
+}
+
+/* SCROLL TO RECALL */
+document.getElementById('go-recall').addEventListener('click',()=>{
+  document.getElementById('recall-anchor').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+/* MODAL */
+const modal=document.getElementById('prompt-modal');
+document.querySelector('[data-open-prompt]').addEventListener('click',()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');});
+document.querySelectorAll('[data-close-prompt]').forEach(b=>b.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}));
+modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}});
+document.getElementById('copy-prompt').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(document.getElementById('prompt-text').value);}
+  catch{const t=document.getElementById('prompt-text');t.focus();t.select();}
+});
+</script>
+</body>
+</html>

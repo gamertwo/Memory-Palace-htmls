@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-7 | Match Impedance Magnitudes</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_7">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-8.html">Next: Exercise 8-8</a><a href="ch8-example-8-5.html">Prev: Example 8-5</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-7</div>
+    <h1>Find Frequencies That Match Impedance Magnitudes</h1>
+    <p class="hero-sub">This page trains the impedance-comparison reflex. Instead of building full phasor sums, you write the magnitude formulas for the resistor, inductor, and capacitor, then solve the matching condition for $$\omega.$$ The last part reveals the resonance condition.</p>
+    <div class="formula-block">$$R=1\,\text{k}\Omega,\qquad C=1\,\mu\text{F},\qquad L=100\,\text{mH}$$ $$\text{Find the frequencies where }|Z_L|=|Z_R|,\; |Z_C|=|Z_R|,\; |Z_L|=|Z_C|.$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-7.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Magnitude Rules</div><div class="v">$$|Z_R|=R,\qquad |Z_L|=\omega L,\qquad |Z_C|=\frac{1}{\omega C}$$</div></div>
+          <div class="fact"><div class="k">Element Values</div><div class="v">$$R=1000\,\Omega,\qquad L=0.1\text{ H},\qquad C=10^{-6}\text{ F}$$</div></div>
+          <div class="fact"><div class="k">Big Idea</div><div class="v">Each part is just an equality of magnitudes. Solve that equality for $$\omega.$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-7-room-1" data-room-id="ch8-exercise-8-7-room-1" data-room-title="Room 1: Write the Impedance Magnitudes" data-source-page="ch8-exercise-8-7.html" data-tags="write,impedance,magnitudes">
+            <h2>Room 1: Write the Impedance Magnitudes</h2><ul><li>The resistor magnitude is constant: $$|Z_R|=R=1000\,\Omega.$$</li><li>The inductor magnitude grows with frequency: $$|Z_L|=\omega L=\omega(0.1).$$</li><li>The capacitor magnitude shrinks with frequency: $$|Z_C|=\dfrac{1}{\omega C}=\dfrac{1}{\omega(10^{-6})}.$$</li><li>These three formulas are the whole engine of the problem.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-7-room-2" data-room-id="ch8-exercise-8-7-room-2" data-room-title="Room 2: Part (a) Match Inductor to Resistor" data-source-page="ch8-exercise-8-7.html" data-tags="part,match,inductor,resistor">
+            <h2>Room 2: Part (a) Match Inductor to Resistor</h2><ul><li>Set the magnitudes equal: $$|Z_L|=|Z_R|.$$</li><li>So $$\omega L=R,$$ which becomes $$\omega(0.1)=1000.$$</li><li>Solve for $$\omega:$$ $$\omega=\frac{1000}{0.1}=10{,}000\text{ rad/s}=10\text{ krad/s}.$$</li><li>Therefore the answer to part (a) is $$\boxed{10\text{ krad/s}}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-7-room-3" data-room-id="ch8-exercise-8-7-room-3" data-room-title="Room 3: Part (b) Match Capacitor to Resistor" data-source-page="ch8-exercise-8-7.html" data-tags="part,match,capacitor,resistor">
+            <h2>Room 3: Part (b) Match Capacitor to Resistor</h2><ul><li>Now set $$|Z_C|=|Z_R|.$$</li><li>That gives $$\frac{1}{\omega C}=R,$$ or $$\frac{1}{\omega(10^{-6})}=1000.$$</li><li>Rearrange: $$1=1000\omega(10^{-6})=10^{-3}\omega,$$ so $$\omega=1000\text{ rad/s}=1\text{ krad/s}.$$</li><li>Therefore part (b) gives $$\boxed{1\text{ krad/s}}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-7-room-4" data-room-id="ch8-exercise-8-7-room-4" data-room-title="Room 4: Part (c) Match Inductor to Capacitor" data-source-page="ch8-exercise-8-7.html" data-tags="part,match,inductor,capacitor">
+            <h2>Room 4: Part (c) Match Inductor to Capacitor</h2><ul><li>Now set $$|Z_L|=|Z_C|.$$</li><li>That means $$\omega L=\frac{1}{\omega C}.$$ Multiply through by $$\omega C$$ to get $$\omega^2LC=1.$$</li><li>So $$\omega=\frac{1}{\sqrt{LC}}=\frac{1}{\sqrt{(0.1)(10^{-6})}}=3162\text{ rad/s}=3.162\text{ krad/s}.$$</li><li>Therefore the part (c) frequency is $$\boxed{3.162\text{ krad/s}}.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-7-room-5" data-room-id="ch8-exercise-8-7-room-5" data-room-title="Room 5: Name the Special Frequency" data-source-page="ch8-exercise-8-7.html" data-tags="name,special,frequency">
+            <h2>Room 5: Name the Special Frequency</h2><ul><li>The condition $$|Z_L|=|Z_C|$$ is the resonance condition for the series circuit.</li><li>So $$\boxed{\omega_0=3.162\text{ krad/s}}$$ is called the resonant frequency.</li><li>This is the frequency where the inductive and capacitive reactance magnitudes balance each other.</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Do not memorize three separate worked solutions. Memorize the three magnitude formulas first. Then each part becomes a one-line equality and solve step.</p></div>
+        <div class="mini"><h3>Why Resonance Comes From $$|Z_L|=|Z_C|$$</h3><p>The inductor reactance grows with $$\omega,$$ while the capacitor reactance falls with $$\omega.$$ The resonance frequency is exactly where those two magnitudes become equal. That crossing point is why the formula $$\omega_0=1/\sqrt{LC}$$ matters so much in circuits.</p></div>
+        <div class="mini"><h3>How The Frequency Trends Help</h3><p>If you increase frequency, $$|Z_L|$$ gets larger and $$|Z_C|$$ gets smaller. That is why the inductor matches the resistor at a high frequency here, while the capacitor matches the resistor at a lower one.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

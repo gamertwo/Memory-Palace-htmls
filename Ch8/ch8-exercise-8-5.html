@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-5 | Find the Derivative Phasor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_5">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-4.html">Next: Example 8-4</a><a href="ch8-example-8-3.html">Prev: Example 8-3</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-5</div>
+    <h1>Find the Phasor of the Time Derivative</h1>
+    <p class="hero-sub">This is the short version of the derivative workflow. The question asks for the derivative phasor only, so you stop at the case and do not coat it back into a waveform.</p>
+    <div class="formula-block">$$v(t)=100\cos(1000t)\text{ V}\qquad \text{Find the phasor corresponding to }\frac{dv(t)}{dt}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-5.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Original Phasor</div><div class="v">$$V=100\angle0^\circ$$</div></div>
+          <div class="fact"><div class="k">Derivative Rule</div><div class="v">$$V_{\text{derivative}}=j\omega V$$</div></div>
+          <div class="fact"><div class="k">Answer Type</div><div class="v">Phasor only, so no time-domain coat is needed.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-5-room-1" data-room-id="ch8-exercise-8-5-room-1" data-room-title="Room 1: Catch the Original Cosine" data-source-page="ch8-exercise-8-5.html" data-tags="catch,original,cosine">
+            <h2>Room 1: Catch the Original Cosine</h2><ul><li>$$v(t)=100\cos(1000t)\text{ V}$$ gives the phasor $$V=100\angle0^\circ.$$</li><li>The amplitude becomes the phasor magnitude, and because there is no explicit phase shift, the angle is $$0^\circ.$$</li><li>Here $$\omega=1000.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-5-room-2" data-room-id="ch8-exercise-8-5-room-2" data-room-title="Room 2: Write the Chalk Rule" data-source-page="ch8-exercise-8-5.html" data-tags="write,chalk,rule">
+            <h2>Room 2: Write the Chalk Rule</h2><ul><li>The phasor of the derivative is $$j\omega V.$$</li><li>So $$V_{\text{derivative}}=(j1000)(100\angle0^\circ).$$</li><li>This tells you immediately that the answer will be scaled by $$1000$$ and rotated by $$+90^\circ.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-5-room-3" data-room-id="ch8-exercise-8-5-room-3" data-room-title="Room 3: Convert the Chalk Factor" data-source-page="ch8-exercise-8-5.html" data-tags="convert,chalk,factor">
+            <h2>Room 3: Convert the Chalk Factor</h2><ul><li>Write the multiplier in polar form: $$j1000=1000\angle90^\circ.$$</li><li>The $$1000$$ is the new magnitude multiplier, while the $$90^\circ$$ comes from the quarter-turn created by $$j.$$</li><li>Therefore $$V_{\text{derivative}}=1000\angle90^\circ\cdot100\angle0^\circ.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-5-room-4" data-room-id="ch8-exercise-8-5-room-4" data-room-title="Room 4: Multiply Magnitude and Angle" data-source-page="ch8-exercise-8-5.html" data-tags="multiply,magnitude,angle">
+            <h2>Room 4: Multiply Magnitude and Angle</h2><ul><li>Now multiply magnitudes and add angles, just as with any polar multiplication.</li><li>Magnitude: $$1000\times100=10^5.$$</li><li>Angle: $$90^\circ+0^\circ=90^\circ.$$</li><li>So $$V_{\text{derivative}}=10^5\angle90^\circ\text{ V/s}.$$</li><li>The phasor points straight up because the original phasor started on the positive real axis and then rotated by $$90^\circ.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-5-room-5" data-room-id="ch8-exercise-8-5-room-5" data-room-title="Room 5: Stop at the Case" data-source-page="ch8-exercise-8-5.html" data-tags="stop,case">
+            <h2>Room 5: Stop at the Case</h2><ul><li>The problem asks only for the phasor corresponding to the derivative.</li><li>So you stop here and do not coat the answer back into a time-domain waveform.</li><li>The final answer is $$\boxed{10^5\angle90^\circ\text{ V/s}}.$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>If the original cosine has zero phase, the derivative phasor simply multiplies the magnitude by $$\omega$$ and lands at $$+90^\circ.$$</p></div>
+        <div class="mini"><h3>Why The Answer Is Straight Up</h3><p>The original phasor starts on the positive real axis because its phase is $$0^\circ.$$ Multiplying by $$j$$ rotates that arrow one quarter-turn counterclockwise, so the derivative phasor points straight up at $$90^\circ.$$ The factor $$1000$$ only stretches the arrow; it does not change that direction.</p></div>
+        <div class="mini"><h3>Why No Rectangular Form Is Needed</h3><p>This problem is pure polar multiplication, so rectangular form would only slow you down. The derivative rule already comes as a polar-style change: multiply the length by $$\omega$$ and add $$90^\circ$$ to the angle. That makes this page a good speed-drill for the derivative property.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

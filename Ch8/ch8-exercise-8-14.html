@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-14 | Parallel Circuit with Shifted Source Current</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_14">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-10.html">Next: Example 8-10</a><a href="ch8-example-8-9.html">Prev: Example 8-9</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-14</div>
+    <h1>Reuse the Parallel Admittance Route with a Shifted Source</h1>
+    <p class="hero-sub">This is the fast parallel movie after Example 8-9, but the memory still has to feel connected: catch the shifted source current, pull out the branch impedances with the omega wheel, flip them into admittances, notice the cancellation that makes the total admittance purely real, divide to get the common voltage, then stamp the branch currents and coat the waveforms.</p>
+    <div class="formula-block">$$i_s(t)=100\cos(1000t-45^\circ)\text{ mA}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-14.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source Phasor</div><div class="v">$$I_S=0.1\angle-45^\circ\text{ A}$$</div></div>
+          <div class="fact"><div class="k">Branch Language</div><div class="v">$$Z_C=-j1000,\qquad Z_{RL}=500+j500$$</div></div>
+          <div class="fact"><div class="k">Key Simplification</div><div class="v">$$Y_{EQ}=0.001\angle0^\circ\text{ S},\qquad V=100\angle-45^\circ\text{ V}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-14-room-1" data-room-id="ch8-exercise-8-14-room-1" data-room-title="Room 1: Confirm the Source and Pull Out the Branch Impedances" data-source-page="ch8-exercise-8-14.html" data-tags="confirm,source,pull,branch">
+            <h2>Room 1: Confirm the Source and Pull Out the Branch Impedances</h2>
+            <ul>
+              <li>The source is already in cosine form, so read it directly into phasor language: $$I_S=100\angle-45^\circ\text{ mA}=0.1\angle-45^\circ\text{ A}.$$</li>
+              <li>Now let $$\omega=1000$$ pull the branch impedances out of hiding.</li>
+              <li>For the capacitor branch, $$Z_C=\frac{1}{j\omega C}=\frac{1}{j(1000)(1\times10^{-6})}=-j1000\,\Omega.$$</li>
+              <li>For the series RL branch, the resistor stays real and the inductor becomes $$j\omega L=j(1000)(0.5)=j500,$$ so $$Z_{RL}=500+j500\,\Omega.$$</li>
+              <li>The memory trigger is: parallel current source first, branch impedances second, admittances third.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-14-room-2" data-room-id="ch8-exercise-8-14-room-2" data-room-title="Room 2: Flip the Two Branches into Admittance Form" data-source-page="ch8-exercise-8-14.html" data-tags="flip,branches,into,admittance">
+            <h2>Room 2: Flip the Two Branches into Admittance Form</h2>
+            <ul>
+              <li>Parallel branches do not add cleanly in impedance form, so flip each branch into admittance language.</li>
+              <li>The capacitor branch becomes $$Y_1=\frac{1}{Z_C}=\frac{1}{-j1000}=j0.001=0.001\angle90^\circ\text{ S}.$$</li>
+              <li>For the RL branch, first note that $$500+j500=707.1\angle45^\circ\,\Omega.$$ When you take the reciprocal, the magnitude becomes $$1/707.1=1.414\times10^{-3}$$ and the angle changes sign, so $$Y_2=1.414\times10^{-3}\angle-45^\circ\text{ S}.$$</li>
+              <li>Convert $$Y_2$$ to rectangular form because the next move is addition: $$Y_2=(1.414\times10^{-3})(\cos(-45^\circ)+j\sin(-45^\circ))=0.001-j0.001.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-14-room-3" data-room-id="ch8-exercise-8-14-room-3" data-room-title="Room 3: Add the Admittances and See Why the Angle Vanishes" data-source-page="ch8-exercise-8-14.html" data-tags="admittances,angle,vanishes">
+            <h2>Room 3: Add the Admittances and See Why the Angle Vanishes</h2>
+            <ul>
+              <li>Now add in rectangular form: $$Y_1=j0.001,\qquad Y_2=0.001-j0.001.$$</li>
+              <li>When you combine them, the imaginary parts cancel: $$Y_{EQ}=j0.001+(0.001-j0.001)=0.001+j0.$$</li>
+              <li>That is the key simplification of the whole problem. The total admittance is purely real, so $$Y_{EQ}=0.001\angle0^\circ\text{ S}.$$</li>
+              <li>Because the denominator angle is now zero, dividing by $$Y_{EQ}$$ will keep the same angle as the source current.</li>
+              <li>So the common voltage is $$V=\frac{I_S}{Y_{EQ}}=\frac{0.1\angle-45^\circ}{0.001\angle0^\circ}=100\angle-45^\circ\text{ V}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-14-room-4" data-room-id="ch8-exercise-8-14-room-4" data-room-title="Room 4: Stamp the Branch Currents from the Common Voltage" data-source-page="ch8-exercise-8-14.html" data-tags="stamp,branch,currents,from">
+            <h2>Room 4: Stamp the Branch Currents from the Common Voltage</h2>
+            <ul>
+              <li>In a parallel network, both branches share the same voltage, so each branch current comes from $$I=YV.$$</li>
+              <li>For the series RL branch, $$I_R=I_L=Y_2V=(1.414\times10^{-3}\angle-45^\circ)(100\angle-45^\circ)=0.1414\angle-90^\circ\text{ A}.$$</li>
+              <li>That is $$141.4\angle-90^\circ\text{ mA}.$$ The resistor and inductor are in series inside that branch, so they carry the same current.</li>
+              <li>For the capacitor branch, $$I_C=Y_1V=(0.001\angle90^\circ)(100\angle-45^\circ)=0.1\angle45^\circ\text{ A}=100\angle45^\circ\text{ mA}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-14-room-5" data-room-id="ch8-exercise-8-14-room-5" data-room-title="Room 5: Coat the Final Waveforms" data-source-page="ch8-exercise-8-14.html" data-tags="coat,final,waveforms">
+            <h2>Room 5: Coat the Final Waveforms</h2>
+            <ul>
+              <li>Keep the same angular frequency $$\omega=1000$$ when you return to the time domain.</li>
+              <li>$$v(t)=100\cos(1000t-45^\circ)\text{ V}$$</li>
+              <li>$$i_R(t)=141.4\cos(1000t-90^\circ)\text{ mA}$$</li>
+              <li>$$i_L(t)=141.4\cos(1000t-90^\circ)\text{ mA}$$</li>
+              <li>$$i_C(t)=100\cos(1000t+45^\circ)\text{ mA}$$</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>This page is really about one lucky cancellation. Once the admittance pieces become $$j0.001$$ and $$0.001-j0.001,$$ the imaginary parts wipe each other out and the total becomes purely real. That is why the common voltage comes out so cleanly.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Why The Common Voltage Keeps the Same Angle</h3>
+          <p>Division in polar form subtracts angles. Since $$Y_{EQ}=0.001\angle0^\circ,$$ the denominator contributes no angle shift. So $$V$$ keeps the source angle $$-45^\circ$$ while only the magnitude changes from $$0.1$$ to $$100.$$</p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Build this like a real journey-method movie: one path, one dominant action at each station, and every result physically shoving you toward the next station.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Net Gate: Catch the Shifted Source</h3><p>The net catches the glowing current arrow $$I_S=0.1\angle-45^\circ.$$ A loud voice says, “Parallel current source first.”</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Chalk Wall: Pull Out Both Branch Impedances</h3><p>The omega wheel spins and writes $$Z_C=-j1000$$ on one wall and $$Z_{RL}=500+j500$$ on the other.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Knife Bridge: Flip Impedance into Admittance</h3><p>The knife flips each branch over. One branch becomes $$j0.001,$$ the other becomes $$0.001-j0.001.$$ The flip is the main language switch of the movie.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Admittance Mat: Cancel the Imaginary Parts</h3><p>Both admittance arrows slam onto the mat. The $$+j0.001$$ and $$-j0.001$$ smash into each other and vanish, leaving only $$0.001\angle0^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Fire Hall: Divide to Pull Out the Common Voltage</h3><p>The source current is thrown through the real admittance door, and fire pulls out $$V=100\angle-45^\circ.$$ The angle survives because the denominator angle is zero.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Case Hall: Stamp the Branch Currents</h3><p>The common voltage runs through two $$I=YV$$ doors, stamping $$I_R=I_L=141.4\angle-90^\circ$$ and $$I_C=100\angle45^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Coat Exit: Wear the Voltage and Currents as Waves</h3><p>The coat wraps the common voltage and three branch currents back into cosine waveforms with the same $$\omega=1000.$$ </p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Catch $$I_S$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Pull Out $$Z$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Flip to $$Y$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Cancel to $$Y_{EQ}$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Solve $$V$$</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Stamp Branch Currents</span><span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Waveforms</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-14-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add more detail on why the imaginary parts cancel in Yeq."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 22 Physics Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0e13;
+  --bg2:#171d28;
+  --panel:#121823;
+  --panel2:#1a2230;
+  --line:rgba(255,255,255,.09);
+  --accent:#ffd08a;
+  --accent2:#8ad6ff;
+  --text:#f7f1e8;
+  --muted:rgba(247,241,232,.76);
+}
+body{
+  font-family:'Outfit',sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top right, rgba(138,214,255,.14), transparent 24%),
+    radial-gradient(circle at 15% 20%, rgba(255,208,138,.10), transparent 28%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.84rem;
+  color:var(--accent);
+  background:rgba(255,255,255,.03);
+}
+.hero{
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:1.5rem;
+  background:
+    linear-gradient(135deg, rgba(255,208,138,.08), rgba(138,214,255,.03)),
+    var(--panel);
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+}
+.kicker{
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent2);
+  margin-bottom:.5rem;
+}
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(2rem,5vw,3.6rem);
+  line-height:1.05;
+  margin-bottom:.75rem;
+}
+.hero p{
+  max-width:54rem;
+  color:var(--muted);
+  line-height:1.8;
+}
+.hero-meta{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin-top:1rem;
+}
+.pill{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.45rem .8rem;
+  background:rgba(255,255,255,.03);
+  color:var(--muted);
+  font-size:.78rem;
+}
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(280px,.72fr);
+  gap:1rem;
+  margin-top:1rem;
+  align-items:start;
+}
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:1.2rem;
+}
+.panel h2{
+  font-size:1.02rem;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:.85rem;
+}
+.card{
+  display:block;
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  transition:transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,208,138,.28);
+  background:linear-gradient(180deg, rgba(255,208,138,.06), rgba(255,255,255,.02));
+}
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  gap:.75rem;
+  align-items:flex-start;
+  margin-bottom:.65rem;
+}
+.card-index{
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent2);
+}
+.card-type{
+  font-size:.68rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+.card h3{
+  font-size:1rem;
+  line-height:1.35;
+  margin-bottom:.45rem;
+}
+.card p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:.9rem;
+}
+.card-footer{
+  display:flex;
+  justify-content:space-between;
+  gap:.75rem;
+  margin-top:.85rem;
+  color:var(--muted);
+  font-size:.76rem;
+}
+.stack{display:grid;gap:.85rem}
+.note{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:1rem;
+  background:var(--panel2);
+}
+.note h3{
+  font-size:.92rem;
+  color:var(--accent);
+  margin-bottom:.45rem;
+}
+.note p,.note li{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:.9rem;
+}
+.note ul{padding-left:1.1rem}
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr}
+}
+</style>
+<script src="../page-visit-tracker.js" defer></script>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="../Maths/math-index.html">Math Hub</a>
+  </nav>
+
+  <section class="hero">
+    <div class="kicker">Chapter 22</div>
+    <h1>Electric Field Physics Index</h1>
+    <p>Chapter 22 collects the electric-field memory-palace pages in one place. Each page includes the same linear review flow used in the RC set: reveal one room at a time, rate it, save confidence, and continue through the sequence.</p>
+    <div class="hero-meta">
+      <div class="pill">11 pages</div>
+      <div class="pill">Linear review enabled</div>
+      <div class="pill">Local progress saved per page</div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <section class="panel">
+      <h2>Pages</h2>
+      <div class="grid">
+        <a class="card" href="physics-electric-field-fundamentals.html">
+          <div class="card-top"><div class="card-index">01</div><div class="card-type">Foundation</div></div>
+          <h3>Electric Field Fundamentals</h3>
+          <p>Defines the electric field, test-charge method, field lines, and the force rule that powers the rest of the chapter.</p>
+          <div class="card-footer"><span>7 rooms</span><span>Core definitions</span></div>
+        </a>
+
+        <a class="card" href="physics-point-charge-superposition.html">
+          <div class="card-top"><div class="card-index">02</div><div class="card-type">Foundation</div></div>
+          <h3>Point Charge and Superposition</h3>
+          <p>Builds the point-charge field formula and the vector-addition method for multiple source charges.</p>
+          <div class="card-footer"><span>7 rooms</span><span>Vector sum</span></div>
+        </a>
+
+        <a class="card" href="physics-charge-density-continuous-distributions.html">
+          <div class="card-top"><div class="card-index">03</div><div class="card-type">Bridge</div></div>
+          <h3>Charge Density and Continuous Distributions</h3>
+          <p>Explains how to choose $$dq$$ correctly for line, surface, and volume charge distributions before integrating.</p>
+          <div class="card-footer"><span>7 rooms</span><span>Setup pattern</span></div>
+        </a>
+
+        <a class="card" href="physics-electric-dipole-field.html">
+          <div class="card-top"><div class="card-index">04</div><div class="card-type">Concept</div></div>
+          <h3>Electric Field Due to a Dipole</h3>
+          <p>Derives the dipole's axial field and the far-field $$1/r^3$$ behavior using dipole moment.</p>
+          <div class="card-footer"><span>7 rooms</span><span>Source dipole</span></div>
+        </a>
+
+        <a class="card" href="physics-ring-electric-field.html">
+          <div class="card-top"><div class="card-index">05</div><div class="card-type">Foundation</div></div>
+          <h3>Charged Ring Field</h3>
+          <p>Starts from Coulomb's law, keeps only the axial component, and integrates around the ring.</p>
+          <div class="card-footer"><span>6 rooms</span><span>Axis derivation</span></div>
+        </a>
+
+        <a class="card" href="physics-charged-disk-electric-field.html">
+          <div class="card-top"><div class="card-index">06</div><div class="card-type">Build-up</div></div>
+          <h3>Charged Disk Field</h3>
+          <p>Builds the disk out of concentric rings and integrates from the center to the radius.</p>
+          <div class="card-footer"><span>7 rooms</span><span>Ring to disk</span></div>
+        </a>
+
+        <a class="card" href="physics-charged-disk-textbook.html">
+          <div class="card-top"><div class="card-index">07</div><div class="card-type">Variation</div></div>
+          <h3>Charged Disk Textbook Version</h3>
+          <p>A textbook-style restatement of the disk derivation using the same memory-palace structure.</p>
+          <div class="card-footer"><span>7 rooms</span><span>Alternative presentation</span></div>
+        </a>
+
+        <a class="card" href="physics-charged-particle-electric-field-motion.html">
+          <div class="card-top"><div class="card-index">08</div><div class="card-type">Application</div></div>
+          <h3>Charged Particle Motion</h3>
+          <p>Connects electric field strength to force, acceleration, and particle motion along the field direction.</p>
+          <div class="card-footer"><span>7 rooms</span><span>Force to motion</span></div>
+        </a>
+
+        <a class="card" href="physics-dipole-electric-field.html">
+          <div class="card-top"><div class="card-index">09</div><div class="card-type">Concept</div></div>
+          <h3>Dipole in an Electric Field</h3>
+          <p>Covers torque, alignment, and potential energy for a dipole placed in a uniform field.</p>
+          <div class="card-footer"><span>Multi-section</span><span>Torque and energy</span></div>
+        </a>
+
+        <a class="card" href="physics-circular-rod-electric-field.html">
+          <div class="card-top"><div class="card-index">10</div><div class="card-type">Geometry</div></div>
+          <h3>Circular Rod Electric Field</h3>
+          <p>Uses symmetry and geometry to isolate the surviving field component from a bent charged rod.</p>
+          <div class="card-footer"><span>Room path</span><span>Arc geometry</span></div>
+        </a>
+
+        <a class="card" href="physics-uniform-rod-electric-field-problem31.html">
+          <div class="card-top"><div class="card-index">11</div><div class="card-type">Problem</div></div>
+          <h3>Uniform Rod Problem 31</h3>
+          <p>Walks through the finite-rod electric-field derivation with the same room-by-room recall structure.</p>
+          <div class="card-footer"><span>Worked problem</span><span>Finite rod</span></div>
+        </a>
+      </div>
+    </section>
+
+    <aside class="stack">
+      <section class="panel note">
+        <h3>How To Review</h3>
+        <ul>
+          <li>Open any page and use the <strong>Linear Review</strong> button in the hero area.</li>
+          <li>Reveal one room, score it as hard, medium, or easy, and save your confidence percentage.</li>
+          <li>Your progress is stored locally in this browser for each page.</li>
+        </ul>
+      </section>
+
+      <section class="panel note">
+        <h3>Suggested Order</h3>
+        <p>Start with fundamentals, then point-charge and superposition, then the charge-density setup page. After that move through dipole-source field, ring, disk, particle motion, dipole-in-field, and finally the rod-based derivations.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

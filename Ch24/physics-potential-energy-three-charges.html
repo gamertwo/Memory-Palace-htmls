@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Potential Energy of a System of Three Charged Particles | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<link rel="stylesheet" href="chapter24-problem.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<script src="chapter24-problem.js" defer></script>
+<style>
+.petc-wrap{position:absolute;inset:0}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 24</a>
+    <a href="physics-field-from-potential-disk-axis.html">Back: 24-5</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">24-6 | Sample Problem: System Potential Energy</div>
+    <h1>Potential Energy of a System of Three Charged Particles</h1>
+    <p>Three charges sit at the corners of an equilateral triangle. The clean solution is to forget any imagined order of assembly and just add the three pairwise interaction energies: $$U_{12}+U_{13}+U_{23}.$$</p>
+    <div class="hero-grid">
+      <div class="eq">$$U=\frac{1}{4\pi\varepsilon_0 d}(q_1q_2+q_1q_3+q_2q_3)=\frac{1}{4\pi\varepsilon_0 d}(-4q^2+2q^2-8q^2)=-\frac{10q^2}{4\pi\varepsilon_0 d}=-1.7\times10^{-2}\,\text{J}$$</div>
+      <div class="hero-side">
+        <h2>What To Notice</h2>
+        <ul>
+          <li>The triangle is equilateral, so each pair is separated by the same distance $$d=0.12\,\text{m}.$$</li>
+          <li>The charges are $$q_1=+q,$$ $$q_2=-4q,$$ and $$q_3=+2q$$ with $$q=150\,\text{nC}.$$</li>
+          <li>The system energy is negative because the attractive pairs dominate.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt="prompt-modal">AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Geometry</div><div class="v">Equilateral triangle side $$d=12\,\text{cm}=0.12\,\text{m}.$$</div></div>
+          <div class="fact"><div class="k">Pair Terms</div><div class="v">$$U_{12}=-4q^2/(4\pi\varepsilon_0 d),$$ $$U_{13}=2q^2/(4\pi\varepsilon_0 d),$$ $$U_{23}=-8q^2/(4\pi\varepsilon_0 d).$$</div></div>
+          <div class="fact"><div class="k">Sum</div><div class="v">The pair coefficients add to $$-10.$$</div></div>
+          <div class="fact"><div class="k">Sign</div><div class="v">Negative total energy means work would be required to fully separate the assembled system.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Think Pairwise, Not Particlewise</h2>
+            <ul>
+              <li>The energy of a system of point charges is the sum of the interaction energies of every pair.</li>
+              <li>For three charges, there are only three pairs.</li>
+              <li>That gives the roadmap immediately: $$U=U_{12}+U_{13}+U_{23}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Write the Pair Formula Once</h2>
+            <ul>
+              <li>Each pair contributes $$U_{ij}=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_iq_j}{r_{ij}}.$$</li>
+              <li>Here every separation is the same: $$r_{ij}=d.$$</li>
+              <li>So the common denominator can be factored.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Evaluate the Three Products</h2>
+            <ul>
+              <li>$$q_1q_2=(+q)(-4q)=-4q^2.$$</li>
+              <li>$$q_1q_3=(+q)(+2q)=+2q^2.$$</li>
+              <li>$$q_2q_3=(-4q)(+2q)=-8q^2.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Add the Coefficients Before Substituting</h2>
+            <ul>
+              <li>The coefficient sum is $$-4+2-8=-10.$$</li>
+              <li>So the whole energy becomes $$U=-10q^2/(4\pi\varepsilon_0 d).$$</li>
+              <li>This is the fastest simplification step on the page.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Insert the Data</h2>
+            <ul>
+              <li>Use $$q=150\times10^{-9}\,\text{C}$$ and $$d=0.12\,\text{m}.$$</li>
+              <li>The calculation gives $$U=-1.7\times10^{-2}\,\text{J}.$$</li>
+              <li>The magnitude is set by the square of the charge scale.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Interpret the Negative Result</h2>
+            <ul>
+              <li>A negative system energy means the assembled arrangement is bound relative to infinite separation.</li>
+              <li>You would need to do positive work to pull all three charges infinitely far apart.</li>
+              <li>The attractive pair terms dominate the single repulsive term.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Keep the Core Habit</h2>
+            <ul>
+              <li>For system energy problems, list the pairs first.</li>
+              <li>If distances are equal, factor that denominator immediately.</li>
+              <li>Then let the charge products decide the sign of the whole structure.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Problem Figures</div>
+        <div class="figure-grid">
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="petc-wrap">
+                <div class="triangle-line" style="left:90px;top:186px;width:134px"></div>
+                <div class="triangle-line" style="left:98px;top:186px;width:116px;transform:rotate(-60deg)"></div>
+                <div class="triangle-line" style="left:216px;top:186px;width:116px;transform:rotate(240deg)"></div>
+                <div class="charge positive" style="left:82px;top:178px"></div>
+                <div class="charge negative" style="left:208px;top:178px"></div>
+                <div class="charge positive" style="left:145px;top:66px"></div>
+                <div class="label" style="left:54px;top:198px">$$q_1=+q$$</div>
+                <div class="label" style="left:206px;top:198px">$$q_2=-4q$$</div>
+                <div class="label" style="left:126px;top:34px">$$q_3=+2q$$</div>
+                <div class="label" style="left:136px;top:132px">$$d$$</div>
+                <div class="label" style="left:108px;top:128px">$$d$$</div>
+                <div class="label" style="left:176px;top:128px">$$d$$</div>
+              </div>
+            </div>
+            <h3>Three Charges, Three Pairs</h3>
+            <p>The equilateral geometry makes all three separations identical, which is why the denominator is the same in every pair-energy term.</p>
+          </div>
+
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="energy-pill" style="left:26px;top:36px">$$U_{12}=-4q^2/(4\pi\varepsilon_0 d)$$</div>
+              <div class="energy-pill" style="left:26px;top:92px">$$U_{13}=+2q^2/(4\pi\varepsilon_0 d)$$</div>
+              <div class="energy-pill" style="left:26px;top:148px">$$U_{23}=-8q^2/(4\pi\varepsilon_0 d)$$</div>
+              <div class="arrow" style="left:94px;top:208px;width:118px;--c:var(--orange)"></div>
+              <div class="energy-pill" style="left:76px;top:214px">sum coefficients: $$-10$$</div>
+            </div>
+            <h3>Pairwise Accounting</h3>
+            <p>Once the three pair products are written, the rest is just coefficient bookkeeping followed by one numerical substitution.</p>
+          </div>
+        </div>
+        <div class="mini" style="margin-top:1rem">
+          <h3>Fast Check</h3>
+          <p>Count the attractive and repulsive pairs. If the stronger attractive products dominate, the total system energy should come out negative.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Walk around the triangle once, collecting one pair energy on each side until the total snaps together.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>An equilateral triangle room holds three glowing charges at its corners.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>Each side lights up as one pair: first $$U_{12},$$ then $$U_{13},$$ then $$U_{23}.$$</p></div>
+        <div class="station"><h3>Station 2</h3><p>The side labels show coefficients $$-4,$$ $$+2,$$ and $$-8$$ that fall into one basket.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The basket combines into a giant orange $$-10.$$</p></div>
+        <div class="station"><h3>Station 3</h3><p>The basket rolls through $$q=150\,\text{nC}$$ and $$d=0.12\,\text{m}$$ and lands at $$-1.7\times10^{-2}\,\text{J}.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A chain tightens around the triangle to explain the negative binding energy.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The exit reminder says system energy is always the sum over pairs.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt stores the pairwise-energy method for a three-charge system.</p>
+    <textarea class="prompt-box" readonly>Create a memory palace in exactly one connected paragraph for the sample problem on the potential energy of a system of three charged particles. Keep the logic in order, make each image force the next one, and do not use bullet points.
+
+1. Start with an equilateral triangle of side d = 12 cm.
+2. Put charges q1 = +q, q2 = -4q, and q3 = +2q at the corners with q = 150 nC.
+3. Build the total system energy as the sum U12 + U13 + U23.
+4. Turn the pair products into -4 q squared, +2 q squared, and -8 q squared, all over 4 pi epsilon_0 d.
+5. Combine the coefficients into -10.
+6. Insert the values and end at U = -1.7 x 10^-2 J.
+7. Finish with the lesson that the system is bound because the total potential energy is negative.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" data-copy-prompt>Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+</body>
+</html>

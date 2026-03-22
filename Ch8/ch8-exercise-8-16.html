@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-16 | Resonance in Figure 8-25</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_16">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-application-example-8-11.html">Prev: App Example 8-11</a><a href="ch8-example-8-12.html">Next: Example 8-12</a></nav>
+  <section class="hero"><div class="tag">Exercise 8-16</div><h1>Use the Resonance Formula on Figure 8-25</h1><p class="hero-sub">This page is the substitution version of Application Example 8-11. You carry in the resonance formula, plug in the given values, solve for the resonant frequency, and then evaluate the equivalent impedance at resonance. The memory emphasis is that resonance kills the imaginary lane but not necessarily the whole impedance.</p><div class="formula-block">$$\omega_0=2000\text{ rad/s},\qquad Z_{EQ}=200+j0\,\Omega$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-16.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">$R=1\text{ k}\Omega, L=200\text{ mH}, C=1\,\mu\text{F}.$</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the resonant frequency and then find $Z_{EQ}$ under resonance.</div></div>
+          <div class="fact"><div class="k">Target</div><div class="v">This question wants both $\omega_0$ and the equivalent impedance at that operating point.</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+          <div class="fact"><div class="k">Given Values</div><div class="v">$$R=1\text{ k}\Omega,\quad L=200\text{ mH},\quad C=1\,\mu\text{F}$$</div></div>
+          <div class="fact"><div class="k">Resonant Frequency</div><div class="v">$$\omega_0=2000\text{ rad/s}$$</div></div>
+          <div class="fact"><div class="k">Equivalent Impedance</div><div class="v">$$Z_{EQ}=200+j0\,\Omega$$</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-16-room-1" data-room-id="ch8-exercise-8-16-room-1" data-room-title="Room 1: Bring in the Parent Resonance Formula" data-source-page="ch8-exercise-8-16.html" data-tags="bring,parent,resonance,formula">
+            <h2>Room 1: Bring in the Parent Resonance Formula</h2>
+            <ul>
+              <li>From Application Example 8-11, the resonant frequency is $$\omega_0=\sqrt{\frac{1}{LC}-\frac{1}{(RC)^2}}.$$</li>
+              <li>This exercise is mainly about substituting carefully, not re-deriving the whole formula.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-16-room-2" data-room-id="ch8-exercise-8-16-room-2" data-room-title="Room 2: Substitute the Given Values" data-source-page="ch8-exercise-8-16.html" data-tags="substitute,given,values">
+            <h2>Room 2: Substitute the Given Values</h2>
+            <ul>
+              <li>Use $$L=0.2\text{ H},\ C=10^{-6}\text{ F},\ R=1000\,\Omega.$$</li>
+              <li>Then $$\frac{1}{LC}=\frac{1}{(0.2)(10^{-6})}=5\times10^6,$$ and $$\frac{1}{(RC)^2}=\frac{1}{(1000\times10^{-6})^2}=10^6.$$</li>
+              <li>So $$\omega_0=\sqrt{5\times10^6-10^6}=\sqrt{4\times10^6}=2000\text{ rad/s}. $$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-16-room-3" data-room-id="ch8-exercise-8-16-room-3" data-room-title="Room 3: Evaluate the Real Part of $$Z_{EQ}$$ at Resonance" data-source-page="ch8-exercise-8-16.html" data-tags="evaluate,real,part,resonance">
+            <h2>Room 3: Evaluate the Real Part of $$Z_{EQ}$$ at Resonance</h2>
+            <ul>
+              <li>Use the real-part formula $$R_{EQ}=\frac{R}{1+(\omega RC)^2}. $$</li>
+              <li>At resonance, $$\omega RC=(2000)(1000)(10^{-6})=2.$$</li>
+              <li>So $$R_{EQ}=\frac{1000}{1+2^2}=\frac{1000}{5}=200\,\Omega.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-16-room-4" data-room-id="ch8-exercise-8-16-room-4" data-room-title="Room 4: Show That the Imaginary Part Vanishes" data-source-page="ch8-exercise-8-16.html" data-tags="show,that,imaginary,part">
+            <h2>Room 4: Show That the Imaginary Part Vanishes</h2>
+            <ul>
+              <li>At resonance the whole point is that $$X_{EQ}(\omega_0)=0.$$</li>
+              <li>So the equivalent impedance is purely real, not because every element disappeared, but because the positive and negative reactance contributions balance exactly.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch8-exercise-8-16-room-5" data-room-id="ch8-exercise-8-16-room-5" data-room-title="Room 5: State the Final Resonance Answer" data-source-page="ch8-exercise-8-16.html" data-tags="state,final,resonance,answer">
+            <h2>Room 5: State the Final Resonance Answer</h2>
+            <ul>
+              <li>The resonant frequency is $$\omega_0=2\text{ krad/s}. $$</li>
+              <li>Under those conditions, $$Z_{EQ}=200+j0\,\Omega.$$</li>
+              <li>This is a good memory checkpoint: resonance here means a real input impedance of $$200\,\Omega$$, not $$1000\,\Omega$$.</li>
+            </ul>
+          </article>
+        </div><div class="mini"><h3>Key Shortcut</h3><p>Use the parent formula first, then compute $$\omega RC$$ before you touch the real part of the impedance.</p></div><div class="mini"><h3>Why This Flow Matters</h3><p>This page trains you not to confuse physical resistance $$R$$ with the equivalent input resistance at resonance. The network can resonate and still present a different real value at the input terminals.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Walk this as substitution, simplification, and resonance cleanup.</p><div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Formula</h3><p>The net brings in the resonance rule from the parent example.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write the Given Values</h3><p>Chalk stamps $$R=1000,$$ $$L=0.2,$$ and $$C=10^{-6}.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Solve $$\omega_0$$</h3><p>Fire locks $$\omega_0=2000\text{ rad/s}. $$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Compute the Real Input Resistance</h3><p>The mat gives $$R_{EQ}=200\,\Omega.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Purely Real Answer</h3><p>The coat writes $$Z_{EQ}=200+j0\,\Omega.$$</p></div>
+        </div><div class="flow-line"><span class="flow-pill">Catch formula</span><span class="flow-join">&rarr;</span><span class="flow-pill">Substitute values</span><span class="flow-join">&rarr;</span><span class="flow-pill">Solve $$\omega_0$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Compute $$R_{EQ}$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Box $$Z_{EQ}$$</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-16-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more reminder that resonance does not mean the whole impedance is zero."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+    </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

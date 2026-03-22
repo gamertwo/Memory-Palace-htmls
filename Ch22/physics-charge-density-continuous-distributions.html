@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Charge Density and Continuous Distributions | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.85rem,4vw,2.85rem);margin-bottom:.5rem}.hero p{color:var(--muted);line-height:1.75}.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}.main-stack{display:grid;gap:1rem}.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}.fact{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:.75rem}.fact .k{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem}.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}.rooms{display:grid;gap:.85rem}.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}.room ul{padding-left:1.2rem}.mini{margin-top:.75rem;padding:.8rem .9rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}.palace-sidebar{position:sticky;top:1rem}.path{display:grid;gap:.65rem}.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.transition{border-style:dashed;background:rgba(255,255,255,.02)}.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}.modal.open{display:flex}.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}.modal-head h3{font-size:1rem;color:var(--accent)}.prompt-box{width:100%;min-height:320px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 22</a>
+    <a href="physics-point-charge-superposition.html">Back: Point Charge</a>
+  </nav>
+  <section class="hero">
+    <h1>Charge Density and Continuous Distributions</h1>
+    <p>This page fills the bridge concept needed by the later ring, disk, and rod derivations: how to turn a spread-out charge into tiny pieces, write $$dq$$ correctly, build $$d\vec E,$$ and then integrate the surviving components.</p>
+    <div class="eq">$$\lambda=\frac{dq}{ds},\qquad \sigma=\frac{dq}{dA},\qquad \rho=\frac{dq}{dV}$$</div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Charge Measures</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Charge</div><div class="v">Total charge $$q$$ is measured in coulombs.</div></div>
+          <div class="fact"><div class="k">Linear Density</div><div class="v">$$\lambda$$ is charge per unit length for rods, arcs, and rings.</div></div>
+          <div class="fact"><div class="k">Surface Density</div><div class="v">$$\sigma$$ is charge per unit area for disks and sheets.</div></div>
+          <div class="fact"><div class="k">Volume Density</div><div class="v">$$\rho$$ is charge per unit volume for three-dimensional distributions.</div></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: A Spread-Out Object Is Not a Point Charge</h2><ul><li>A rod, ring, disk, or solid body cannot be handled as one point source immediately.</li><li>You first carve out one tiny element.</li><li>That element is small enough to behave like a point charge.</li></ul></article>
+          <article class="room"><h2>Room 2: Choose the Right Density</h2><ul><li>Use $$\lambda$$ for one-dimensional charge distributions.</li><li>Use $$\sigma$$ for surfaces.</li><li>Use $$\rho$$ for volumes.</li></ul></article>
+          <article class="room"><h2>Room 3: Convert the Element into Charge</h2><ul><li>Line element: $$dq=\lambda\,ds.$$</li><li>Area element: $$dq=\sigma\,dA.$$</li><li>Volume element: $$dq=\rho\,dV.$$</li></ul></article>
+          <article class="room"><h2>Room 4: Build the Differential Field</h2><ul><li>Treat that tiny charge element as a point source.</li><li>Then</li><li>$$d\vec E=\frac{1}{4\pi\varepsilon_0}\frac{dq}{r^2}\,\hat r.$$</li><li>Only after writing $$d\vec E$$ do you substitute the proper expression for $$dq.$$</li></ul></article>
+          <article class="room"><h2>Room 5: Use Geometry and Symmetry</h2><ul><li>Geometry supplies distances, angles, and component relations.</li><li>Symmetry often cancels pairs of sideways components.</li><li>The surviving components are the ones you actually integrate.</li></ul></article>
+          <article class="room"><h2>Room 6: Integrate Over the Whole Object</h2><ul><li>Add all differential contributions:</li><li>$$\vec E=\int d\vec E.$$</li><li>The integration variable depends on the shape: length, angle, area, radius, or volume.</li></ul></article>
+          <article class="room"><h2>Room 7: Link to the Rest of Chapter 22</h2><ul><li>Ring page uses $$dq=\lambda ds.$$</li><li>Disk page uses $$dq=\sigma(2\pi r\,dr)$$ by slicing into rings.</li><li>Finite rod page uses $$dq=\lambda dx.$$</li></ul></article>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Detailed Notes</div>
+        <div class="mini"><h3>The Real Setup Pattern</h3><p>Most continuous-charge problems are won before the integral starts. If you choose the correct tiny element and write the correct expression for $$dq,$$ the rest becomes geometry plus algebra rather than guesswork.</p></div>
+        <div class="mini"><h3>Fast Diagnostic</h3><p>If you are stuck, ask three questions in order: what tiny element am I using, what is $$dq$$ for that element, and which components survive by symmetry? That sequence fixes most setup errors immediately.</p></div>
+      </section>
+    </div>
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Every continuous-distribution problem runs through the same corridor: choose an element, write $$dq,$$ build $$d\vec E,$$ then integrate.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A large charged object blocks the doorway and refuses to be treated as one point particle.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>You cut off one tiny piece, so it needs a density label.</p></div>
+        <div class="station"><h3>Station 2</h3><p>Three badges appear: $$\lambda$$ for lines, $$\sigma$$ for surfaces, and $$\rho$$ for volumes.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The badge turns the tiny piece into a differential charge.</p></div>
+        <div class="station"><h3>Station 3</h3><p>The differential charge throws a tiny field arrow according to Coulomb's law.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>Geometry bends the arrow and symmetry removes the components that cancel.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The surviving arrows pour into an integral that rebuilds the full object's field.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The corridor branches into ring, disk, and rod problems.</p></div>
+        <div class="station"><h3>Station 5</h3><p>Three final doors glow with the labels $$dq=\lambda ds,$$ $$dq=\sigma dA,$$ and $$dq=\rho dV.$$</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">Use this to regenerate the continuous-distribution setup as one connected memory route.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for charge density and continuous electric-field setup. Keep the steps in order, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+
+1. A rod, ring, disk, or solid object cannot be treated as one point charge immediately.
+2. First isolate one tiny element of the object.
+3. Choose the correct density: lambda for a line, sigma for a surface, rho for a volume.
+4. Convert the element into charge using dq = lambda ds or dq = sigma dA or dq = rho dV.
+5. Treat that tiny dq as a point source to write dE = (1 / 4 pi eps0)(dq / r^2) r-hat.
+6. Use geometry to find distances, angles, and components.
+7. Use symmetry to cancel components that come in equal-and-opposite pairs.
+8. Integrate all surviving differential contributions to get the total field.
+9. Connect this setup to later pages: ring uses dq = lambda ds, disk uses dq = sigma(2 pi r dr), and a rod uses dq = lambda dx.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+<script>
+const densityModal = document.getElementById('prompt-modal');
+const densityTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => { densityModal.classList.add('open'); densityModal.setAttribute('aria-hidden', 'false'); });
+document.querySelectorAll('[data-close-prompt]').forEach((button) => { button.addEventListener('click', () => { densityModal.classList.remove('open'); densityModal.setAttribute('aria-hidden', 'true'); }); });
+densityModal.addEventListener('click', (event) => { if (event.target === densityModal) { densityModal.classList.remove('open'); densityModal.setAttribute('aria-hidden', 'true'); } });
+document.getElementById('copy-prompt').addEventListener('click', async () => { try { await navigator.clipboard.writeText(densityTextarea.value); } catch (error) { densityTextarea.focus(); densityTextarea.select(); } });
+</script>
+</body>
+</html>

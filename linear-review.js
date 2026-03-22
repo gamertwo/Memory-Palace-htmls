@@ -1,5 +1,12 @@
 (function () {
   var visitLogStorageKey = "page_visit_log_v1";
+  var reviewFallbacks = {
+    line: "rgba(255, 255, 255, 0.12)",
+    panel2: "rgba(255, 255, 255, 0.04)",
+    accent: "#ffd08a",
+    text: "#f7f1e8",
+    muted: "rgba(247, 241, 232, 0.78)"
+  };
 
   function slugFromPath() {
     var path = window.location.pathname || "";
@@ -107,24 +114,114 @@
     }
   }
 
+  function firstSelector(selectors) {
+    for (var index = 0; index < selectors.length; index += 1) {
+      var node = document.querySelector(selectors[index]);
+      if (node) return node;
+    }
+    return null;
+  }
+
+  function firstMatchingSelector(selectors) {
+    for (var index = 0; index < selectors.length; index += 1) {
+      if (document.querySelector(selectors[index])) return selectors[index];
+    }
+    return null;
+  }
+
+  function textFromNode(node, selectors, fallback) {
+    if (!node) return fallback;
+    for (var index = 0; index < selectors.length; index += 1) {
+      var target = node.querySelector(selectors[index]);
+      if (target && target.textContent && target.textContent.trim()) {
+        return target.textContent.trim().replace(/\s+/g, " ");
+      }
+    }
+    return fallback;
+  }
+
+  function hintsFromRoomHtml(html) {
+    var wrapper = document.createElement("div");
+    var hints = [];
+    wrapper.innerHTML = html || "";
+
+    Array.prototype.slice.call(wrapper.querySelectorAll("li, p")).forEach(function (node) {
+      var text = (node.textContent || "").trim().replace(/\s+/g, " ");
+      if (!text) return;
+      if (text.length > 90) {
+        text = text.slice(0, 87).trim() + "...";
+      }
+      if (hints.indexOf(text) === -1) {
+        hints.push(text);
+      }
+    });
+
+    return hints.slice(0, 3);
+  }
+
+  function ensureReviewThemeVariables() {
+    var root = document.documentElement;
+    var computed = window.getComputedStyle(root);
+
+    if (!computed.getPropertyValue("--line").trim()) {
+      root.style.setProperty("--line", computed.getPropertyValue("--border").trim() || reviewFallbacks.line);
+    }
+    if (!computed.getPropertyValue("--panel2").trim()) {
+      root.style.setProperty("--panel2", computed.getPropertyValue("--panel").trim() || reviewFallbacks.panel2);
+    }
+    if (!computed.getPropertyValue("--accent").trim()) {
+      root.style.setProperty(
+        "--accent",
+        computed.getPropertyValue("--cyan").trim() ||
+          computed.getPropertyValue("--gold").trim() ||
+          reviewFallbacks.accent
+      );
+    }
+    if (!computed.getPropertyValue("--text").trim()) {
+      root.style.setProperty("--text", reviewFallbacks.text);
+    }
+    if (!computed.getPropertyValue("--muted").trim()) {
+      root.style.setProperty("--muted", reviewFallbacks.muted);
+    }
+  }
+
   function initLinearReview() {
     if (document.getElementById("linear-review")) return;
 
-    var rooms = Array.prototype.slice.call(document.querySelectorAll(".room"));
-    var mainStack = document.querySelector(".main-stack");
-    var aside = document.querySelector(".palace-sidebar");
-    var toolRow = document.querySelector(".hero .tool-row");
+    ensureReviewThemeVariables();
 
-    if (!rooms.length || !mainStack || !aside || !toolRow) return;
+    var reviewSelector = firstMatchingSelector([
+      ".room",
+      ".sol",
+      ".q",
+      ".problem-card",
+      ".move-chip",
+      ".chip",
+      ".fact",
+      ".cue",
+      ".pill"
+    ]);
+    var rooms = reviewSelector ? Array.prototype.slice.call(document.querySelectorAll(reviewSelector)) : [];
+    var mainStack = firstSelector([".main-stack", ".inner", ".main-inner", ".stage", ".main"]);
+    var aside = document.querySelector(".palace-sidebar");
+    var hero = document.querySelector(".hero");
+    var toolRow = hero ? hero.querySelector(".tool-row") : null;
+
+    if (!rooms.length || !mainStack) return;
 
     var roomData = rooms.map(function (room, index) {
       var clone = room.cloneNode(true);
-      var heading = clone.querySelector("h2");
-      var title = heading ? heading.textContent.trim() : "Room " + (index + 1);
+      var title = textFromNode(
+        clone,
+        ["h2", "h3", ".rt", ".pc-title", ".move-name", ".k", ".tag", ".t"],
+        "Room " + (index + 1)
+      );
+      var heading = clone.querySelector("h2, h3, .rt, .pc-title, .move-name, .k, .tag, .t");
       if (heading) heading.remove();
       return {
         title: title,
-        html: clone.innerHTML.trim() || "<p>No saved content for this room.</p>"
+        html: clone.innerHTML.trim() || "<p>No saved content for this room.</p>",
+        hints: hintsFromRoomHtml(clone.innerHTML.trim())
       };
     });
 
@@ -192,7 +289,18 @@
       button.type = "button";
       button.id = "jump-review";
       button.textContent = "Linear Review";
-      toolRow.insertBefore(button, toolRow.firstChild || null);
+      if (toolRow) {
+        toolRow.insertBefore(button, toolRow.firstChild || null);
+      } else {
+        var launchRow = document.createElement("div");
+        launchRow.className = "tool-row review-launch-row";
+        launchRow.appendChild(button);
+        if (hero) {
+          hero.appendChild(launchRow);
+        } else {
+          mainStack.insertBefore(launchRow, mainStack.firstChild || null);
+        }
+      }
       return button;
     }
 
@@ -204,7 +312,7 @@
         '<div class="review-top">' +
           '<div>' +
             '<div class="section-title">Linear Review Mode</div>' +
-            '<p class="review-copy">This review is sequential, not random. It starts at Room 1 and moves to the last room in order. Reveal a room, score it from the right side as hard, medium, or easy, add your own confidence percentage, and the page remembers every attempt in this browser.</p>' +
+            '<p class="review-copy">This review is sequential, not random. It starts at Room 1 and moves to the last room in order. Reveal a room, score it as hard, medium, or easy, add your own confidence percentage, and the page remembers every attempt in this browser.</p>' +
           '</div>' +
           '<div class="review-actions">' +
             '<button class="tool-btn" type="button" id="review-restart">Restart From Room 1</button>' +
@@ -230,10 +338,36 @@
           "</div>" +
           '<div class="review-answer-wrap">' +
             '<div class="review-hidden-state" id="review-hidden">' +
-              '<p id="review-hidden-copy">Reveal the current room when you are ready. After that, use the right sidebar to save hard, medium, or easy with your percentage.</p>' +
+              '<p id="review-hidden-copy">Reveal the current room when you are ready. After that, save hard, medium, or easy with your percentage.</p>' +
+              '<div class="review-hint-title">Quick Hints</div>' +
+              '<div class="review-hints" id="review-hints"></div>' +
               '<button class="tool-btn" type="button" id="review-reveal">Reveal Room</button>' +
             "</div>" +
             '<div class="review-answer" id="review-answer" hidden></div>' +
+            '<div class="review-bottom-controls">' +
+              '<div class="review-bottom-head">' +
+                '<div class="review-hint-title">Bottom Controls</div>' +
+                '<p class="review-note review-bottom-copy">Rate from here after you check the answer. The confidence slider and easy, medium, hard buttons now stay directly under the current room.</p>' +
+              "</div>" +
+              '<div class="review-bottom-grid">' +
+                '<div class="review-bottom-block">' +
+                  "<h3>Confidence</h3>" +
+                  '<div class="slider-row review-slider-row">' +
+                    '<input class="confidence-slider" id="review-confidence" type="range" min="0" max="100" step="5" value="' + defaultConfidence + '" />' +
+                    '<div class="confidence-value" id="review-confidence-value">' + defaultConfidence + "%</div>" +
+                  "</div>" +
+                "</div>" +
+                '<div class="review-bottom-block">' +
+                  "<h3>Rate This Room</h3>" +
+                  '<div class="rating-buttons review-bottom-ratings">' +
+                    '<button class="rate-btn rate-hard" type="button" data-rating="hard" disabled><div><strong>Hard</strong><small>needs another pass</small></div><span>save + next</span></button>' +
+                    '<button class="rate-btn rate-medium" type="button" data-rating="medium" disabled><div><strong>Medium</strong><small>partly remembered</small></div><span>save + next</span></button>' +
+                    '<button class="rate-btn rate-easy" type="button" data-rating="easy" disabled><div><strong>Easy</strong><small>felt solid</small></div><span>save + next</span></button>' +
+                  "</div>" +
+                  '<p class="review-note" id="review-action-note">Reveal the room first. Rating is locked until the current room is open.</p>' +
+                "</div>" +
+              "</div>" +
+            "</div>" +
           "</div>" +
         "</div>";
       return panel;
@@ -244,24 +378,7 @@
       dock.className = "review-dock";
       dock.innerHTML =
         '<div class="section-title">Review Controls</div>' +
-        '<p class="palace-intro dock-copy">The buttons below stay linear: rate the current room and the review jumps to the next room. Your previous scores and confidence percentages stay visible on retries.</p>' +
-        '<div class="review-block">' +
-          "<h3>Confidence</h3>" +
-          '<div class="slider-row">' +
-            '<input class="confidence-slider" id="review-confidence" type="range" min="0" max="100" step="5" value="' + defaultConfidence + '" />' +
-            '<div class="confidence-value" id="review-confidence-value">' + defaultConfidence + "%</div>" +
-          "</div>" +
-          '<p class="review-note">Use this for how much of the room you know. The saved percentage stays visible in the tracker while you move forward.</p>' +
-        "</div>" +
-        '<div class="review-block">' +
-          "<h3>Rate This Room</h3>" +
-          '<div class="rating-buttons">' +
-            '<button class="rate-btn rate-hard" type="button" data-rating="hard" disabled><div><strong>Hard</strong><small>needs another pass</small></div><span>save + next</span></button>' +
-            '<button class="rate-btn rate-medium" type="button" data-rating="medium" disabled><div><strong>Medium</strong><small>partly remembered</small></div><span>save + next</span></button>' +
-            '<button class="rate-btn rate-easy" type="button" data-rating="easy" disabled><div><strong>Easy</strong><small>felt solid</small></div><span>save + next</span></button>' +
-          "</div>" +
-          '<p class="review-note" id="review-action-note">Reveal the room first. Rating is locked until the current room is open.</p>' +
-        "</div>" +
+        '<p class="palace-intro dock-copy">The rating controls now live at the bottom of the active review card, so this dock stays focused on your attempt history and room tracker while you move through the sequence.</p>' +
         '<div class="review-block"><h3>Previous Attempts</h3><div class="history-list" id="review-history"></div></div>' +
         '<div class="review-block"><h3>Room Tracker</h3><div class="tracker-list" id="review-room-tracker"></div></div>';
       return dock;
@@ -271,15 +388,20 @@
     var reviewPanel = createReviewPanel();
     var reviewDock = createReviewDock();
     var firstRoomsPanel = Array.prototype.slice.call(mainStack.children).find(function (node) {
-      return node.classList && node.classList.contains("panel") && node.querySelector(".room");
+      return node.contains && rooms[0] && node.contains(rooms[0]);
     });
 
     if (firstRoomsPanel) {
       mainStack.insertBefore(reviewPanel, firstRoomsPanel);
     } else {
-      mainStack.appendChild(reviewPanel);
+      mainStack.insertBefore(reviewPanel, mainStack.firstChild || null);
     }
-    aside.insertBefore(reviewDock, aside.firstChild || null);
+    if (aside) {
+      aside.insertBefore(reviewDock, aside.firstChild || null);
+    } else {
+      reviewDock.classList.add("review-dock-inline");
+      reviewPanel.insertAdjacentElement("afterend", reviewDock);
+    }
 
     var reviewState = loadState();
 
@@ -302,6 +424,7 @@
       statConfidence: document.getElementById("stat-confidence"),
       hiddenState: document.getElementById("review-hidden"),
       hiddenCopy: document.getElementById("review-hidden-copy"),
+      hints: document.getElementById("review-hints"),
       reveal: document.getElementById("review-reveal"),
       answer: document.getElementById("review-answer"),
       confidence: document.getElementById("review-confidence"),
@@ -383,6 +506,20 @@
       typesetNode(elements.answer);
     }
 
+    function renderHints(index) {
+      var hints = roomData[index].hints || [];
+      if (!hints.length) {
+        elements.hints.innerHTML = '<div class="review-hint-chip">Focus on the room title and the main idea first.</div>';
+        return;
+      }
+
+      elements.hints.innerHTML = hints
+        .map(function (hint) {
+          return '<div class="review-hint-chip">' + escapeHtml(hint) + "</div>";
+        })
+        .join("");
+    }
+
     function renderBanner(roomReview) {
       if (reviewState.completed) {
         elements.banner.textContent = "Review complete. Restart from Room 1 when you want another full pass.";
@@ -405,7 +542,7 @@
 
       elements.banner.textContent =
         "Now on Room " + (reviewState.currentIndex + 1) +
-        ". The tracker on the right keeps earlier room scores and percentages visible.";
+        ". The tracker keeps earlier room scores and percentages visible.";
     }
 
     function render() {
@@ -438,7 +575,8 @@
         elements.answer.innerHTML = "";
         elements.hiddenCopy.textContent = roomReview.attempts
           ? "This room already has saved attempts. Reveal it when you are ready, then rate it again to move forward."
-          : "Reveal the current room when you are ready. After that, use the right sidebar to save hard, medium, or easy with your percentage.";
+          : "Reveal the current room when you are ready. After that, save hard, medium, or easy with your percentage.";
+        renderHints(currentIndex);
       }
 
       if (reviewState.completed) {

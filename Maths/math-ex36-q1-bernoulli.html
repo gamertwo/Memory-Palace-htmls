@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.6 Q1 | Bernoulli Equation</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="../linear-review.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78);--hot:rgba(255,208,138,.13);--warn:rgba(255,120,120,.12)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}
+.shell{max-width:1160px;margin:0 auto;padding:2rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}
+.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.5rem}
+.hero p,.copy,.palace-intro,.modal-copy,.memory-status,.fact .v,.room li,.mini p,.movie-copy,.camera-line,.sensory-line,.trigger-line,.push-line,.result-line,.freeze-card p,.review-seq li{color:var(--muted);line-height:1.75}
+.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(300px,.95fr);gap:1rem;align-items:start;margin-top:1rem}
+.main-stack{display:grid;gap:1rem}
+.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.facts,.rooms,.freeze-grid,.review-seq{display:grid;gap:.75rem}
+.facts{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.fact,.room,.mini,.freeze-card,.movie-stop{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.fact .k,.eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.25rem}
+.room h2,.mini h3,.movie-stop h2,.freeze-card h3{font-size:.95rem;color:var(--accent);margin-bottom:.45rem}
+.room ul,.review-seq{padding-left:1.15rem}
+.tool-row,.mode-row,.station-toolbar,.modal-actions{display:flex;gap:.65rem;flex-wrap:wrap}
+.tool-row,.mode-row{margin-top:.85rem}
+.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}
+.tool-btn.is-active,.ghost-btn.is-active{background:rgba(255,208,138,.1);border-color:rgba(255,208,138,.28);color:var(--text)}
+.hero-controls{display:grid;gap:.85rem;margin-top:1rem}
+.control-block{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:.85rem}
+.control-block .eyebrow{margin-bottom:.5rem}
+.movie-stop{display:grid;gap:.7rem;position:relative;overflow:hidden}
+.movie-stop::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,208,138,.07),transparent 35%,rgba(255,255,255,.02));pointer-events:none}
+.movie-top{display:flex;justify-content:space-between;gap:.75rem;align-items:flex-start;position:relative}
+.peg-chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,208,138,.22);background:rgba(255,208,138,.08);border-radius:999px;padding:.28rem .62rem;font-size:.72rem;color:var(--accent)}
+.dominant-image{font-size:.85rem;font-weight:700;color:var(--text)}
+.camera-line{font-weight:600;color:var(--text)}
+.sensory-line{font-style:italic}
+.math-overlay,.result-line{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:.75rem;overflow:auto}
+.trigger-line{border-left:3px solid rgba(255,208,138,.32);padding-left:.75rem}
+.push-line{background:rgba(255,255,255,.02);border-radius:12px;padding:.7rem .8rem}
+.station-toolbar{justify-content:space-between;align-items:center}
+.memory-status{font-size:.8rem}
+.movie-track{display:grid;gap:.9rem}
+.trigger-card{background:linear-gradient(135deg,var(--warn),transparent 55%),var(--panel2)}
+.trigger-card strong{color:var(--text)}
+.exam-panel .copy{margin-bottom:.85rem}
+.palace-sidebar{position:sticky;top:1rem;display:grid;gap:1rem}
+.freeze-grid{padding-left:0}
+.freeze-card{padding:.9rem}
+.review-seq li{margin-left:1rem}
+.prompt-box{width:100%;min-height:260px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}
+.modal.open{display:flex}
+.modal-card{width:min(780px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+body[data-view="movie"] .exam-panel{display:none}
+body[data-view="exam"] .movie-only{display:none}
+body[data-view="exam"] .exam-panel{display:block}
+body[data-mode="recall"] .math-overlay,
+body[data-mode="recall"] .result-line{display:none}
+body[data-mode="speed"] .camera-line,
+body[data-mode="speed"] .sensory-line,
+body[data-mode="speed"] .math-overlay,
+body[data-mode="speed"] .push-line,
+body[data-mode="speed"] .result-line,
+body[data-mode="speed"] .memory-status,
+body[data-mode="speed"] .station-toolbar{display:none}
+body[data-mode="speed"] .movie-stop{padding:.85rem}
+body[data-mode="speed"] .trigger-line{border-left:none;padding-left:0;color:var(--text);font-weight:700}
+@media (max-width:760px){
+  .shell{padding:1rem .85rem 2rem}
+  .content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+  .movie-top,.station-toolbar{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body data-view="movie" data-mode="movie">
+<main class="shell">
+  <nav class="nav"><a href="math-index.html">Math Hub</a><a href="math-major-system-guide.html">Major Guide</a><a href="math-ex36-q2-bernoulli.html">Next: Ex 3.6 Q2</a><a href="math-solutions.html">More Solutions</a></nav>
+
+  <section class="hero">
+    <h1>Exercise 3.6 Question 1</h1>
+    <p>This page now runs in two modes. <strong>Movie View</strong> is the default memory route: you walk forward through fixed loci and the images perform the algebra. <strong>Exam View</strong> is the clean compact solution for retrieval under pressure.</p>
+    <div class="eq">$$\frac{1}{y^2}\frac{dy}{dx}-\frac{1}{y}=2xe^{-x}\qquad\Longrightarrow\qquad \boxed{e^x+x^2y+Cy=0}$$</div>
+
+    <div class="hero-controls">
+      <div class="control-block">
+        <div class="eyebrow">View Switch</div>
+        <div class="tool-row">
+          <button class="tool-btn is-active" type="button" data-view-btn="movie">Movie View</button>
+          <button class="ghost-btn" type="button" data-view-btn="exam">Exam View</button>
+          <button class="ghost-btn" type="button" id="jump-freeze">Freeze Frames</button>
+          <button class="ghost-btn" type="button" data-open-prompt>AI Prompt</button>
+        </div>
+      </div>
+      <div class="control-block movie-only">
+        <div class="eyebrow">Movie Modes</div>
+        <div class="mode-row">
+          <button class="tool-btn is-active" type="button" data-mode-btn="movie">Watch Forward</button>
+          <button class="ghost-btn" type="button" data-mode-btn="recall">Recall Mode</button>
+          <button class="ghost-btn" type="button" data-mode-btn="reverse">Reverse Recall</button>
+          <button class="ghost-btn" type="button" data-mode-btn="speed">Speed Run</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Reciprocal Swap</div><div class="v">$$z=\frac{1}{y},\qquad z'=-\frac{1}{y^2}\frac{dy}{dx}$$</div></div>
+          <div class="fact"><div class="k">Linear Form</div><div class="v">$$z'+z=-2xe^{-x}$$</div></div>
+          <div class="fact"><div class="k">Integrating Factor</div><div class="v">$$\mu(x)=e^{\int 1\,dx}=e^x$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel movie-only trigger-card">
+        <div class="section-title">Trigger Frame</div>
+        <p class="copy"><strong>Reciprocal alarm:</strong> the moment you see both $$\dfrac{1}{y}$$ and $$\dfrac{1}{y^2}y'$$ together, your brain should hear one command: <strong>reciprocal pair - use the net.</strong> That is the entrance door for this entire movie.</p>
+      </section>
+
+      <section class="panel movie-only" id="movie-anchor">
+        <div class="section-title">Movie Path</div>
+        <p class="movie-copy">Walk it as a single first-person corridor. Each station performs one algebraic decision, leaves one visible result, and physically pushes you into the next station.</p>
+
+        <div class="movie-track" id="movie-track">
+          <article class="movie-stop" data-station="s1" data-order="1">
+            <div class="movie-top">
+              <div>
+                <div class="peg-chip">Entrance Door</div>
+                <h2>Reciprocal Alarm</h2>
+              </div>
+              <div class="dominant-image">Glowing yoyo + spiked derivative machine</div>
+            </div>
+            <p class="camera-line">You step into the entrance and a blue yoyo labeled $$1/y$$ swings above a spiked machine spraying out $$\dfrac{1}{y^2}\dfrac{dy}{dx}.$$</p>
+            <p class="sensory-line">A red siren screams, “Reciprocal pair detected,” while the air smells like hot metal.</p>
+            <div class="math-overlay">$$\frac{1}{y^2}\frac{dy}{dx}-\frac{1}{y}=2xe^{-x}$$</div>
+            <p class="trigger-line">Trigger: reciprocal pair -> use the net.</p>
+            <p class="push-line">The siren blasts the yoyo off its hook and throws it toward the next desk.</p>
+            <div class="station-toolbar">
+              <button class="ghost-btn" type="button" data-station-mark="s1">Mark Locked</button>
+              <p class="memory-status" data-station-status="s1">Not marked yet.</p>
+            </div>
+          </article>
+
+          <article class="movie-stop" data-station="s2" data-order="2">
+            <div class="movie-top">
+              <div>
+                <div class="peg-chip">21 = Net</div>
+                <h2>Net Desk</h2>
+              </div>
+              <div class="dominant-image">21-net trapping the yoyo</div>
+            </div>
+            <p class="camera-line">You grab the flying yoyo as a huge $$21$$ net snaps shut around it and burns a new tag onto it: $$z=\dfrac{1}{y}.$$</p>
+            <p class="sensory-line">A steel dart slams into the net with a hard CLANG and paints a red minus sign over the derivative.</p>
+            <div class="math-overlay">$$z=\frac{1}{y}\qquad z'=-\frac{1}{y^2}\frac{dy}{dx}$$</div>
+            <p class="trigger-line">Trigger: the net does both jobs - capture the reciprocal and force the minus sign.</p>
+            <p class="push-line">The trapped yoyo gets hurled down a narrow bridge where every old symbol must change clothes.</p>
+            <div class="station-toolbar">
+              <button class="ghost-btn" type="button" data-station-mark="s2">Mark Locked</button>
+              <p class="memory-status" data-station-status="s2">Not marked yet.</p>
+            </div>
+          </article>
+
+          <article class="movie-stop" data-station="s3" data-order="3">
+            <div class="movie-top">
+              <div>
+                <div class="peg-chip">Rewrite Bridge</div>
+                <h2>Customs Checkpoint</h2>
+              </div>
+              <div class="dominant-image">Old symbols crossing and changing clothes</div>
+            </div>
+            <p class="camera-line">You cross the bridge while $$\dfrac{1}{y^2}\dfrac{dy}{dx}$$ steps through one gate and emerges as $$-z',$$ while $$\dfrac{1}{y}$$ steps through another and emerges as $$z.$$</p>
+            <p class="sensory-line">The floor shakes, both negatives skid across the bridge, and black smoke spits from the right-hand side as the sign flips over.</p>
+            <div class="math-overlay">$$-\frac{dz}{dx}-z=2xe^{-x}\qquad\Longrightarrow\qquad z'+z=-2xe^{-x}$$</div>
+            <p class="trigger-line">Trigger: bridge replacement -> old symbols out, linear symbols in.</p>
+            <p class="push-line">The smoke rolls forward and drags you into a dark hall where the integral has to be cut open.</p>
+            <div class="station-toolbar">
+              <button class="ghost-btn" type="button" data-station-mark="s3">Mark Locked</button>
+              <p class="memory-status" data-station-status="s3">Not marked yet.</p>
+            </div>
+          </article>
+
+          <article class="movie-stop" data-station="s4" data-order="4">
+            <div class="movie-top">
+              <div>
+                <div class="peg-chip">28 = Knife, 84 = Fire</div>
+                <h2>Knife-Fire Hall</h2>
+              </div>
+              <div class="dominant-image">Knife slicing the integral, fire igniting $$e^x$$</div>
+            </div>
+            <p class="camera-line">You enter a black hall where the $$28$$ knife slices open the banner $$\int 1\,dx,$$ spilling oil across the floor.</p>
+            <p class="sensory-line">The $$84$$ fire catches the oil and explodes upward into a bright flaming sign that reads $$\mu(x)=e^x.$$</p>
+            <div class="math-overlay">$$\mu(x)=e^{\int P(x)\,dx}=e^{\int 1\,dx}=e^x$$</div>
+            <p class="trigger-line">Trigger: knife cuts the integral, fire ignites the exponential.</p>
+            <p class="push-line">The burning $$e^x$$ sign tears off the wall and sails across the corridor toward the waiting mat.</p>
+            <div class="station-toolbar">
+              <button class="ghost-btn" type="button" data-station-mark="s4">Mark Locked</button>
+              <p class="memory-status" data-station-status="s4">Not marked yet.</p>
+            </div>
+          </article>
+
+          <article class="movie-stop" data-station="s5" data-order="5">
+            <div class="movie-top">
+              <div>
+                <div class="peg-chip">31 = Mat</div>
+                <h2>Product Mat</h2>
+              </div>
+              <div class="dominant-image">Flaming factor collapsing the left side</div>
+            </div>
+            <p class="camera-line">The burning $$e^x$$ crashes onto the thick $$31$$ mat and the whole left side compresses into one product-rule block.</p>
+            <p class="sensory-line">The mat rolls like a treadmill, thumps once, and writes the integrated result with a smoky chalk streak.</p>
+            <div class="math-overlay">$$\frac{d}{dx}(ze^x)=-2x$$</div>
+            <div class="result-line">$$ze^x=-x^2+C$$</div>
+            <p class="trigger-line">Trigger: after multiplying by $$\mu,$$ the left side collapses into one derivative.</p>
+            <p class="push-line">The treadmill mat spits the expression into an open case at the final exit.</p>
+            <div class="station-toolbar">
+              <button class="ghost-btn" type="button" data-station-mark="s5">Mark Locked</button>
+              <p class="memory-status" data-station-status="s5">Not marked yet.</p>
+            </div>
+          </article>
+
+          <article class="movie-stop" data-station="s6" data-order="6">
+            <div class="movie-top">
+              <div>
+                <div class="peg-chip">70 = Case, 71 = Coat</div>
+                <h2>Case-Coat Exit</h2>
+              </div>
+              <div class="dominant-image">Case dropping $$+C$$ and coat restoring $$y$$</div>
+            </div>
+            <p class="camera-line">At the exit, a glowing $$70$$ case pops open and drops $$+C$$ into the expression, then a $$71$$ coat wraps around $$z$$ and restores the original variable.</p>
+            <p class="sensory-line">The coat zipper snaps shut, the glass door frosts over, and the final answer freezes across it.</p>
+            <div class="math-overlay">$$\frac{e^x}{y}=-x^2+C$$</div>
+            <div class="result-line">$$\boxed{e^x+x^2y+Cy=0}$$</div>
+            <p class="trigger-line">Trigger: case drops the constant, coat restores the original variable.</p>
+            <p class="push-line">This is the exit image you should still see when you close your eyes and walk backward.</p>
+            <div class="station-toolbar">
+              <button class="ghost-btn" type="button" data-station-mark="s6">Mark Locked</button>
+              <p class="memory-status" data-station-status="s6">Not marked yet.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Best Review Sequence</h3>
+          <ol class="review-seq">
+            <li>Walk the movie forward with full scene detail.</li>
+            <li>Say only the station names.</li>
+            <li>Recover the formulas from the station names.</li>
+            <li>Walk backward from the final answer to the trigger frame.</li>
+            <li>Switch to Exam View and rewrite the clean solution without the pegs.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="panel exam-panel" id="exam-anchor">
+        <div class="section-title">Exam View: Compact Solution</div>
+        <p class="copy">This is the stripped-down retrieval version. No theater, just the algebra in the right order.</p>
+        <div class="rooms">
+          <article class="room"><h2>Step 1: Reciprocal Swap</h2><ul><li>Let $$z=\dfrac{1}{y}.$$ Then $$\dfrac{dz}{dx}=-\dfrac{1}{y^2}\dfrac{dy}{dx},$$ so $$\dfrac{1}{y^2}\dfrac{dy}{dx}=-\dfrac{dz}{dx}.$$</li></ul></article>
+          <article class="room"><h2>Step 2: Rewrite as Linear</h2><ul><li>Substitute $$\dfrac{1}{y}=z$$ and $$\dfrac{1}{y^2}\dfrac{dy}{dx}=-z'.$$</li><li>Then $$-z'-z=2xe^{-x},$$ hence $$z'+z=-2xe^{-x}.$$</li></ul></article>
+          <article class="room"><h2>Step 3: Integrating Factor</h2><ul><li>Here $$P(x)=1,$$ so $$\mu(x)=e^{\int 1\,dx}=e^x.$$</li></ul></article>
+          <article class="room"><h2>Step 4: Product-Rule Collapse</h2><ul><li>Multiply by $$e^x$$: $$\dfrac{d}{dx}(ze^x)=-2x.$$</li><li>Integrate: $$ze^x=-x^2+C.$$</li></ul></article>
+          <article class="room"><h2>Step 5: Back-Substitute</h2><ul><li>Replace $$z=\dfrac{1}{y}:$$ $$\dfrac{e^x}{y}=-x^2+C.$$</li><li>Rearrange to get $$\boxed{e^x+x^2y+Cy=0}.$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>One-Line Retrieval Rule</h3><p>Reciprocal pair -> use $$z=1/y$$ -> rewrite to linear -> fire the integrating factor $$e^x$$ -> collapse on the product mat -> case and coat for the final answer.</p></div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar" id="freeze-anchor">
+      <div>
+        <div class="section-title">Step Freeze-Frames</div>
+        <p class="palace-intro">These are the still images you should be able to recall even when the full movie is gone.</p>
+      </div>
+
+      <div class="freeze-grid">
+        <article class="freeze-card"><h3>Alarm Door</h3><p>See the yoyo $$1/y$$ and the spiked spray $$\dfrac{1}{y^2}y'.$$ That pair triggers the whole route.</p></article>
+        <article class="freeze-card"><h3>Net Desk</h3><p>The $$21$$ net catches the yoyo and brands it $$z=1/y,$$ while the dart forces the minus sign in $$z'.$$</p></article>
+        <article class="freeze-card"><h3>Rewrite Bridge</h3><p>Old terms cross and emerge as $$-z'$$ and $$-z,$$ then shake into $$z'+z=-2xe^{-x}.$$</p></article>
+        <article class="freeze-card"><h3>Knife-Fire Hall</h3><p>The $$28$$ knife cuts $$\int 1\,dx$$ and the $$84$$ fire lights $$\mu=e^x.$$</p></article>
+        <article class="freeze-card"><h3>Product Mat</h3><p>The flaming factor lands on the $$31$$ mat and collapses the left side into $$\dfrac{d}{dx}(ze^x).$$</p></article>
+        <article class="freeze-card"><h3>Case-Coat Exit</h3><p>The $$70$$ case drops $$+C$$ and the $$71$$ coat restores $$y,$$ freezing the final answer on the exit door.</p></article>
+      </div>
+
+      <div class="mini">
+        <h3>Peg Grammar</h3>
+        <p>Keep the same permanent meanings everywhere: $$21=\text{net}$$ for swap, $$28=\text{knife}$$ for integral cut, $$84=\text{fire}$$ for exponential ignition, $$31=\text{mat}$$ for product-rule collapse, $$70=\text{case}$$ for $$+C,$$ and $$71=\text{coat}$$ for back-substitution.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>AI Memory Palace Prompt</h3>
+      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
+    </div>
+    <p class="modal-copy">Use this prompt to generate alternate one-paragraph memory movies.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a first-person memory movie in exactly one connected paragraph for this Bernoulli-style reciprocal substitution problem. Use a fixed forward route with these stations only: Entrance Door, Net Desk, Rewrite Bridge, Knife-Fire Hall, Product Mat, and Case-Coat Exit. Keep the permanent peg meanings fixed: 21 = net for substitution and capture, 28 = knife for the integral cut, 84 = fire for the exponential integrating factor, 31 = mat for the product-rule collapse, 70 = case for +C, and 71 = coat for back-substitution. Make the images perform the algebra, not just decorate it. Use motion, collision, sound, and physical handoff between stations. Do not use bullet points.
+
+Source material:
+1. Start from (1/y^2) dy/dx - 1/y = 2x e^{-x}.
+2. Trigger on the reciprocal pair 1/y and (1/y^2) dy/dx.
+3. Use z = 1/y and z' = -(1/y^2) dy/dx.
+4. Rewrite the equation as z' + z = -2x e^{-x}.
+5. Use the integrating factor mu(x) = e^(integral 1 dx) = e^x.
+6. Multiply through to collapse the left side into d(ze^x)/dx = -2x.
+7. Integrate to get ze^x = -x^2 + C.
+8. Replace z with 1/y and finish with e^x + x^2 y + Cy = 0.</textarea>
+    <div class="modal-actions">
+      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
+      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ex36q1Modal=document.getElementById('prompt-modal');
+const ex36q1Textarea=document.getElementById('prompt-text');
+const ex36q1StationKey='ex36q1_movie_station_marks_v2';
+const ex36q1Body=document.body;
+const ex36q1MovieTrack=document.getElementById('movie-track');
+const ex36q1OriginalStations=Array.from(ex36q1MovieTrack.children).sort((a,b)=>Number(a.dataset.order)-Number(b.dataset.order));
+let ex36q1StationState={};
+
+function ex36q1LoadStations(){
+  try{return JSON.parse(localStorage.getItem(ex36q1StationKey)||'{}')||{};}catch(error){return {};}
+}
+function ex36q1SaveStations(){
+  try{localStorage.setItem(ex36q1StationKey,JSON.stringify(ex36q1StationState));}catch(error){}
+}
+function ex36q1RenderStation(id){
+  const button=document.querySelector(`[data-station-mark="${id}"]`);
+  const status=document.querySelector(`[data-station-status="${id}"]`);
+  const locked=Boolean(ex36q1StationState[id]);
+  if(button){
+    button.textContent=locked?'Locked In':'Mark Locked';
+    button.classList.toggle('is-active',locked);
+  }
+  if(status){
+    status.textContent=locked?'Saved as locked on this device.':'Not marked yet.';
+  }
+}
+function ex36q1SetView(view){
+  ex36q1Body.dataset.view=view;
+  document.querySelectorAll('[data-view-btn]').forEach((button)=>{
+    const active=button.dataset.viewBtn===view;
+    button.classList.toggle('is-active',active);
+    button.classList.toggle('tool-btn',active);
+    button.classList.toggle('ghost-btn',!active);
+  });
+}
+function ex36q1SetMode(mode){
+  const nextMode=mode==='reverse'?'movie':mode;
+  ex36q1Body.dataset.mode=nextMode;
+  document.querySelectorAll('[data-mode-btn]').forEach((button)=>{
+    const active=button.dataset.modeBtn===mode;
+    button.classList.toggle('is-active',active);
+    button.classList.toggle('tool-btn',active);
+    button.classList.toggle('ghost-btn',!active);
+  });
+  const order=mode==='reverse'?[...ex36q1OriginalStations].reverse():ex36q1OriginalStations;
+  order.forEach((node)=>ex36q1MovieTrack.appendChild(node));
+  ex36q1SetView('movie');
+}
+
+ex36q1StationState=ex36q1LoadStations();
+document.querySelectorAll('[data-station-mark]').forEach((button)=>{
+  const id=button.dataset.stationMark;
+  ex36q1RenderStation(id);
+  button.addEventListener('click',()=>{
+    ex36q1StationState[id]=!ex36q1StationState[id];
+    ex36q1SaveStations();
+    ex36q1RenderStation(id);
+  });
+});
+
+document.querySelectorAll('[data-view-btn]').forEach((button)=>{
+  button.addEventListener('click',()=>ex36q1SetView(button.dataset.viewBtn));
+});
+document.querySelectorAll('[data-mode-btn]').forEach((button)=>{
+  button.addEventListener('click',()=>ex36q1SetMode(button.dataset.modeBtn));
+});
+
+document.querySelector('[data-open-prompt]').addEventListener('click',()=>{
+  ex36q1Modal.classList.add('open');
+  ex36q1Modal.setAttribute('aria-hidden','false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button)=>button.addEventListener('click',()=>{
+  ex36q1Modal.classList.remove('open');
+  ex36q1Modal.setAttribute('aria-hidden','true');
+}));
+ex36q1Modal.addEventListener('click',(event)=>{
+  if(event.target===ex36q1Modal){
+    ex36q1Modal.classList.remove('open');
+    ex36q1Modal.setAttribute('aria-hidden','true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(ex36q1Textarea.value);}catch(error){ex36q1Textarea.focus();ex36q1Textarea.select();}
+});
+
+document.getElementById('jump-freeze').addEventListener('click',()=>{
+  document.getElementById('freeze-anchor').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+ex36q1SetView('movie');
+ex36q1SetMode('movie');
+</script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

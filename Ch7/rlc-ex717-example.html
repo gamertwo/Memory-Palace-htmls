@@ -136,7 +136,7 @@ a{color:inherit}
   border-style:dashed;
   background:rgba(255,255,255,.02);
 }
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-row{display:flex;gap:.65rem;justify-content:flex-end;margin-top:.85rem;flex-wrap:wrap}
 .tool-btn,.ghost-btn{
   border:1px solid var(--line);
   border-radius:999px;
@@ -148,6 +148,11 @@ a{color:inherit}
   background:rgba(255,255,255,.03);
 }
 .tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.tool-btn.is-active{
+  background:rgba(255,208,138,.16);
+  border-color:rgba(255,208,138,.35);
+  box-shadow:0 0 0 1px rgba(255,208,138,.18) inset;
+}
 .tool-btn:disabled,.ghost-btn:disabled{opacity:.45;cursor:not-allowed}
 @media (max-width:760px){
   .shell{padding:1rem .85rem 2rem}
@@ -177,7 +182,7 @@ $$\omega_0=\frac{1}{\sqrt{LC}}=2000\ \text{rad/s},\qquad \alpha=\frac{R_T}{2L}$$
 
   <div class="content-grid">
     <div class="main-stack">
-      <section class="panel">
+      <section class="panel" data-view-panel="default">
         <div class="section-title">Quick Data</div>
         <div class="facts">
           <div class="fact"><div class="k">Capacitance</div><div class="v">$$C=0.25\times 10^{-6}\ \text{F}$$</div></div>
@@ -189,7 +194,7 @@ $$\omega_0=\frac{1}{\sqrt{LC}}=2000\ \text{rad/s},\qquad \alpha=\frac{R_T}{2L}$$
         </div>
       </section>
 
-      <section class="panel">
+      <section class="panel" data-view-panel="default">
         <div class="section-title">Answer Board</div>
         <div class="facts">
           <div class="fact"><div class="k">For $$R_T=8.5\ \text{k}\Omega$$</div><div class="v">$$s_{1,2}=-4250\pm 3750=-500,-8000$$<br />Case A: two real unequal roots</div></div>
@@ -197,7 +202,7 @@ $$\omega_0=\frac{1}{\sqrt{LC}}=2000\ \text{rad/s},\qquad \alpha=\frac{R_T}{2L}$$
           <div class="fact"><div class="k">For $$R_T=1\ \text{k}\Omega$$</div><div class="v">$$s_{1,2}=-500\pm j500\sqrt{15}$$<br />Case C: complex conjugates</div></div>
         </div>
       </section>
-<section class="panel">
+<section class="panel" data-view-panel="default">
         <div class="section-title">Rooms</div>
         <div class="rooms">
           <article class="room">
@@ -271,13 +276,124 @@ $$\omega_0=\frac{1}{\sqrt{LC}}=2000\ \text{rad/s},\qquad \alpha=\frac{R_T}{2L}$$
         <div class="mini"><h3>Case Shortcut</h3><p>For this problem the fastest route is not the quadratic formula from scratch each time. Compute $$\omega_0=2000\ \text{rad/s}$$ once, then compare each $$\alpha=R_T/(2L)$$ with $$\omega_0.$$ That immediately tells you whether the roots must be distinct real, repeated real, or complex conjugates.</p></div>
       </section>
 
-      <section class="panel">
+      <section class="panel" data-view-panel="default">
         <div class="section-title">Key Shortcut</div>
         <div class="mini"><h3>One Comparison Rule</h3><p>In a second-order series RLC circuit, the root type is controlled by one comparison: $$\alpha\overset{?}{=}\omega_0.$$ If $$\alpha>\omega_0,$$ the response is overdamped. If $$\alpha=\omega_0,$$ it is critically damped. If $$\alpha<\omega_0,$$ it is underdamped.</p></div>
       </section>
+
+      <section
+        class="panel"
+        data-view-panel="memory"
+        data-view-label="Memory"
+        data-view-button-label="Memory"
+        data-review-mode-title="Memory Palace Review"
+        data-review-mode-copy="This mode turns the example into a real memory-palace route. Instead of replaying arithmetic, you walk through vivid loci that store the classification method: write the skeleton once, compare damping against natural frequency, recognize the root type, and then stamp the proper root form."
+        data-review-prompt="Walk the palace route first. Try to recall the image and the classification move attached to it before you reveal the locus."
+        data-review-reveal-copy="Reveal the current palace room when you want to check the image. Rate how well you remembered the scene and the solving rule tied to it."
+        data-review-action-copy="Rate how strong the palace image felt, then move to the next room in order."
+        data-view-hero-title="Example 7-17 Memory Palace"
+        data-view-hero-copy="This memory view stores the RLC damping logic in a palace route. You enter a bronze equation gate, pass a balance hall where $$\alpha$$ is weighed against $$\omega_0,$$ then move through three doors: overdamped, critical, and underdamped. The goal is to remember the classification pattern before the arithmetic."
+        data-view-hero-eq="Walk $$\text{Equation Gate} \rightarrow \text{Balance Hall} \rightarrow \text{Three Doors} \rightarrow \text{Root Scrolls}.$$"
+        hidden
+      >
+        <div class="section-title">Memory Palace Route</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: The Bronze Equation Gate</h2>
+            <ul>
+              <li>Picture a huge bronze gate engraved with the fixed series skeleton $$LCs^2+R_TC s+1=0.$$</li>
+              <li>The gate teaches the first rule: write the characteristic equation once before touching the cases.</li>
+              <li>Nothing about the method changes until the resistance changes, so the gate is the permanent frame.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: The Benchmark Courtyard</h2>
+            <ul>
+              <li>In the next courtyard, a tower marked $$\omega_0$$ stands unmoving at $$2000\ \text{rad/s}.$$</li>
+              <li>A second figure, $$\alpha=\dfrac{R_T}{2L},$$ changes clothes every time a new resistance enters.</li>
+              <li>The courtyard rule is the heart of the example: compute $$\omega_0$$ once, then compare each new $$\alpha$$ with it.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Bruno's Balance Hall</h2>
+            <ul>
+              <li>Imagine a giant balance with $$\alpha$$ on one side and $$\omega_0$$ on the other.</li>
+              <li>If $$\alpha$$ sinks lower because it is larger, the roots become two real unequal values.</li>
+              <li>If the scale balances exactly, the roots collapse into one repeated value.</li>
+              <li>If $$\alpha$$ rises because it is smaller, the roots turn into a complex pair.</li>
+              <li>This is the whole shortcut stored as one image: compare first, classify second, compute third.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: The Overdamped Iron Door</h2>
+            <ul>
+              <li>The first door is heavy iron and opens slowly. It is labeled $$R_T=8.5\ \text{k}\Omega.$$</li>
+              <li>Behind it stands $$\alpha=4250,$$ clearly larger than $$\omega_0=2000.$$</li>
+              <li>The iron door therefore stores the overdamped lesson: positive radical, two real unequal roots, no oscillation.</li>
+              <li>The memory stamp is $$-4250\pm 3750 \Rightarrow -500,\,-8000.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: The Critical Mirror Door</h2>
+            <ul>
+              <li>The second door is a mirror split exactly down the center and labeled $$R_T=4\ \text{k}\Omega.$$</li>
+              <li>Here $$\alpha=2000$$ meets $$\omega_0=2000$$ exactly, so the radical vanishes.</li>
+              <li>The mirror stores the critically damped image: one repeated real root, perfect balance, no extra split.</li>
+              <li>The memory stamp is $$s_1=s_2=-2000.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: The Underdamped Silver Door</h2>
+            <ul>
+              <li>The third door is silver and vibrating with a soft ringing tone. It is labeled $$R_T=1\ \text{k}\Omega.$$</li>
+              <li>Here $$\alpha=500$$ is smaller than $$\omega_0=2000,$$ so the radical goes negative.</li>
+              <li>The ringing silver door stores the underdamped lesson: complex conjugates, oscillation with decay.</li>
+              <li>The memory stamp is $$-500\pm j500\sqrt{15}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: The Alphabet Gallery of Symbols</h2>
+            <ul>
+              <li>Walk past a gallery where each symbol becomes a character.</li>
+              <li>Let $$\omega_0$$ be a bell because it rings naturally.</li>
+              <li>Let $$\alpha$$ be a damp robe because it smothers motion.</li>
+              <li>Let the radical be a trapdoor: positive means real split, zero means collapse, negative means complex descent.</li>
+              <li>This room helps you remember why the cases differ, not just what the answers were.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Solomon's Root Table</h2>
+            <ul>
+              <li>At the end of the palace, a gold table summarizes the judgment.</li>
+              <li>First write the equation. Then compute $$\omega_0.$$ Then compare $$\alpha$$ with $$\omega_0.$$ Then choose the root pattern.</li>
+              <li>Only after the classification do you finish the exact roots.</li>
+              <li>The final wisdom of this example is: classification comes before calculation.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini"><h3>Palace Shortcut</h3><p>When you revisit this example, do not start with the quadratic formula from scratch. Enter the Equation Gate, look at the Balance Hall, and ask one question: is $$\alpha$$ greater than, equal to, or less than $$\omega_0$$? That one comparison tells you the shape of the roots before you calculate them.</p></div>
+      </section>
+
+      <section class="panel" data-view-panel="memory" hidden>
+        <div class="section-title">Recall Tokens</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Equation Gate</div><div class="v">Write the series characteristic equation once and keep it fixed.</div></div>
+          <div class="fact"><div class="k">Benchmark Tower</div><div class="v">Compute $$\omega_0$$ once. It is the shared comparison point.</div></div>
+          <div class="fact"><div class="k">Balance Hall</div><div class="v">Compare $$\alpha$$ and $$\omega_0$$ before solving the roots.</div></div>
+          <div class="fact"><div class="k">Three Doors</div><div class="v">Overdamped, critical, underdamped: three root patterns from one test.</div></div>
+        </div>
+      </section>
     </div>
 
-    <aside class="palace-sidebar">
+    <aside class="palace-sidebar" data-view-panel="default">
 
         <div class="section-title">Memory Palace Path</div>
         <p class="palace-intro">This path starts from one shared characteristic skeleton, then walks through three resistance doors: overdamped, critical, and underdamped.</p>
@@ -344,6 +460,45 @@ $$\omega_0=\frac{1}{\sqrt{LC}}=2000\ \text{rad/s},\qquad \alpha=\frac{R_T}{2L}$$
         </div>
         </div>
       
+    </aside>
+
+    <aside class="palace-sidebar" data-view-panel="memory" hidden>
+      <div class="section-title">Palace Path</div>
+      <p class="palace-intro">This memory route uses one fixed equation hall, one comparison chamber, and three damping doors. The route is designed to make the root pattern feel inevitable before any arithmetic starts.</p>
+      <div class="path">
+        <div class="station">
+          <h3>Station 1: Equation Gate</h3>
+          <p>The series RLC characteristic equation is the permanent entrance.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 1 to 2</h3>
+          <p>After the equation is fixed, only the benchmark and the damping comparison matter.</p>
+        </div>
+        <div class="station">
+          <h3>Station 2: Benchmark Courtyard</h3>
+          <p>Keep $$\omega_0=2000$$ as the unmoving reference point.</p>
+        </div>
+        <div class="transition">
+          <h3>Transition 2 to 3</h3>
+          <p>Every resistance now changes $$\alpha,$$ and the balance tells the root type.</p>
+        </div>
+        <div class="station">
+          <h3>Station 3: Iron Door</h3>
+          <p>Large resistance means $$\alpha>\omega_0,$$ so the roots split into two distinct real values.</p>
+        </div>
+        <div class="station">
+          <h3>Station 4: Mirror Door</h3>
+          <p>Equal damping means $$\alpha=\omega_0,$$ so the roots collapse into one repeated value.</p>
+        </div>
+        <div class="station">
+          <h3>Station 5: Silver Door</h3>
+          <p>Small resistance means $$\alpha<\omega_0,$$ so the roots become complex conjugates.</p>
+        </div>
+        <div class="transition">
+          <h3>Final Seal</h3>
+          <p>Compare first, classify next, compute last. That is the whole palace law for this example.</p>
+        </div>
+      </div>
     </aside>
   </div>
 </main>

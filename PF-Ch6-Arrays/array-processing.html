@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Chapter 6 Arrays | Array Processing</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="pf_ch6_array_processing">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Arrays Index</a><a href="guide.html">Guide</a><a href="arrays-basics.html">Prev: Basics</a><a href="strings-functions.html">Next: Strings + Functions</a></nav>
+
+  <section class="hero">
+    <div class="tag">Logic Patterns</div>
+    <h1>Array Processing</h1>
+    <p class="hero-sub">This page is about how array questions think. Once you know the processing pattern, the code block almost writes itself: set starter values, sweep with the loop, test with a condition, update the answer variable, then print.</p>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Guideline Page</a><button class="tool-btn" type="button" data-jump="memory-anchor">Memory Focus</button><button class="tool-btn" type="button" data-jump="path-anchor">Palace Path</button><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="study-grid two-col">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Sum Pattern</div><div class="v"><span class="inline-code">total = 0;</span> then <span class="inline-code">total += a[i];</span></div></div>
+          <div class="fact"><div class="k">Max Pattern</div><div class="v"><span class="inline-code">max = a[0];</span> then compare from <span class="inline-code">i = 1</span></div></div>
+          <div class="fact"><div class="k">Count Pattern</div><div class="v">Use <span class="inline-code">if</span> inside the loop, then increment the counter.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Flow</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: Sum Means Accumulate</h2><ul><li>For totals, start with <span class="inline-code">int total = 0;</span></li><li>Traverse the array.</li><li>Each pass adds the current value with <span class="inline-code">total += a[i];</span></li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int total = 0;
+for (int i = 0; i &lt; SIZE; ++i) {
+    total += a[i];
+}</code></pre></article>
+          <article class="room"><h2>Room 2: Maximum Means Compare</h2><ul><li>For maximum, start with the first element: <span class="inline-code">int max = numbers[0];</span></li><li>Begin the loop at <span class="inline-code">i = 1</span> because index <span class="inline-code">0</span> is already stored.</li><li>Use <span class="inline-code">if (numbers[i] &gt; max)</span> before updating.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int max = numbers[0];
+for (int i = 1; i &lt; SIZE; ++i) {
+    if (numbers[i] &gt; max) {
+        max = numbers[i];
+    }
+}</code></pre></article>
+          <article class="room"><h2>Room 3: Count Means Test Then Increment</h2><ul><li>When the question says count positives, evens, or matches, keep a counter variable.</li><li>Write the decision inside the loop body.</li><li>Example: <span class="inline-code">if (a[i] % 2 == 0) ++count;</span></li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int count = 0;
+for (int i = 0; i &lt; SIZE; ++i) {
+    if (a[i] % 2 == 0) {
+        ++count;
+    }
+}</code></pre></article>
+          <article class="room"><h2>Room 4: Translate Question Words</h2><ul><li>Look for verbs: sum, find maximum, count, search, print.</li><li>The verb tells you the update line you need.</li><li>The rest of the loop skeleton is usually the same.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>/* sum   -&gt; total += a[i]; */
+/* max   -&gt; if (a[i] &gt; max) max = a[i]; */
+/* count -&gt; if (...) ++count; */</code></pre></article>
+          <article class="room"><h2>Room 5: Writing Flow</h2><ul><li>Starter variable first.</li><li>Loop second.</li><li>Condition third if needed.</li><li>Update line last.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>int answer = 0;
+for (int i = 0; i &lt; SIZE; ++i) {
+    if (a[i] &gt; 0) {
+        answer += a[i];
+    }
+}
+printf("%d\n", answer);</code></pre></article>
+        </div>
+        <div class="drill-card"><h3>Code Block To Rehearse</h3><pre class="code-block"><code>int numbers[SIZE] = {45, 23, 89, 12, 67};
+int max = numbers[0];
+
+for (int i = 1; i &lt; SIZE; ++i) {
+    if (numbers[i] &gt; max) {
+        max = numbers[i];
+    }
+}</code></pre></div>
+      </section>
+
+      <section class="panel" id="memory-anchor">
+        <div class="section-title">Mnemonic Focus</div>
+        <div class="rooms">
+          <article class="memory-card"><h2>Peg 34: Mower</h2><p class="memory-copy">Use <span class="inline-code">34 = mower</span> for the traversal. What must happen before any logic can work?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="p1">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="p1">Mark Remembered</button></div><p class="memory-status" data-memory-status="p1">Not marked yet.</p><div class="memory-answer" id="p1" hidden><ul><li>You need a loop that touches each element.</li><li>The standard sweep is <span class="inline-code">for (int i = 0; i &lt; SIZE; ++i)</span>, or <span class="inline-code">i = 1</span> for a maximum that already stored <span class="inline-code">a[0]</span>.</li></ul></div></article>
+          <article class="memory-card"><h2>Peg 47: Rock</h2><p class="memory-copy">Use <span class="inline-code">47 = rock</span> for the decision. What does the rock do in max and count questions?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="p2">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="p2">Mark Remembered</button></div><p class="memory-status" data-memory-status="p2">Not marked yet.</p><div class="memory-answer" id="p2" hidden><ul><li>It compares with <span class="inline-code">if (...)</span></li><li>Examples: <span class="inline-code">if (numbers[i] &gt; max)</span> or <span class="inline-code">if (a[i] % 2 == 0)</span></li></ul></div></article>
+          <article class="memory-card"><h2>Peg 35: Mail</h2><p class="memory-copy">Use <span class="inline-code">35 = mail</span> for the starter value. What do you load before the loop begins?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="p3">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="p3">Mark Remembered</button></div><p class="memory-status" data-memory-status="p3">Not marked yet.</p><div class="memory-answer" id="p3" hidden><ul><li>For a sum, load <span class="inline-code">total = 0;</span></li><li>For a maximum, load <span class="inline-code">max = a[0];</span></li><li>For a count, load <span class="inline-code">count = 0;</span></li></ul></div></article>
+          <article class="memory-card"><h2>Question To Code</h2><p class="memory-copy">What quick translation should happen when you read a question?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="p4">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="p4">Mark Remembered</button></div><p class="memory-status" data-memory-status="p4">Not marked yet.</p><div class="memory-answer" id="p4" hidden><ul><li>Find the verb.</li><li>Pick the update line.</li><li>Wrap that update inside the standard traversal skeleton.</li></ul></div></article>
+          <article class="memory-card"><h2>Flow Rehearsal</h2><p class="memory-copy">What is the processing order you should say before writing?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="p5">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="p5">Mark Remembered</button></div><p class="memory-status" data-memory-status="p5">Not marked yet.</p><div class="memory-answer" id="p5" hidden><ul><li>Starter variable.</li><li>Loop.</li><li>Condition if needed.</li><li>Update line.</li><li>Output.</li></ul></div></article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar" id="path-anchor">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">The array-processing route is all about movement and decisions: 35 mail loads the starter variable, 34 mower sweeps through the elements, and 47 rock decides whether the answer changes.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Mail Counter</h3><p>Mail drops a starter value on the desk: <span class="inline-code">0</span> for sum or count, <span class="inline-code">a[0]</span> for maximum.</p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>A mower starts its pass across the list.</p></div>
+        <div class="station"><h3>Station 2: Sweep Lane</h3><p>The mower moves index by index through the array.</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>Each element reaches a rock that forces a decision.</p></div>
+        <div class="station"><h3>Station 3: Rock Checkpoint</h3><p>If the condition is true, the answer changes. If not, the loop keeps moving.</p></div>
+        <div class="transition"><h3>Transition 3 to 4</h3><p>The same route repeats until the last valid index.</p></div>
+        <div class="station"><h3>Station 4: Update Desk</h3><p>See the update line clearly: add, replace max, or increment count.</p></div>
+        <div class="transition"><h3>Transition 4 to 5</h3><p>The loop stops and the answer gets displayed.</p></div>
+        <div class="station"><h3>Station 5: Output Board</h3><p>The finished variable is ready for <span class="inline-code">printf</span>.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="copy">Use this prompt to get an alternate palace for processing logic.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for C array-processing logic. Use 35 = mail for the starter value, 34 = mower for the traversal loop, and 47 = rock for the if decision. Teach the patterns total = 0 then total += a[i], max = a[0] then compare from i = 1, and count questions that test then increment. Keep the story focused on helping me write the code flow in order.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

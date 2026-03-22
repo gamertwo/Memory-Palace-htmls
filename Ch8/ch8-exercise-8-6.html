@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-6 | Mixed Cosine-Sine to One Phasor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_6">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-5.html">Next: Example 8-5</a><a href="ch8-example-8-4.html">Prev: Example 8-4</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-6</div>
+    <h1>Convert a Mixed Cosine-Sine Waveform to One Phasor</h1>
+    <p class="hero-sub">This exercise trains the last Chapter 8 bridge: standardize the sine term into cosine-reference form, read each piece as a phasor, add in rectangular form, and box the one clean result.</p>
+    <div class="formula-block">$$v(t)=V_A\cos(\omega t)+2V_A\sin(\omega t)$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-6.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Sine Bridge</div><div class="v">$$\sin(\omega t)=\cos(\omega t-90^\circ)$$</div></div>
+          <div class="fact"><div class="k">Rectangular Sum</div><div class="v">$$V=V_A-j2V_A$$</div></div>
+          <div class="fact"><div class="k">Answer</div><div class="v">$$V=\sqrt{5}\,V_A\angle-63.4^\circ$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-6-room-1" data-room-id="ch8-exercise-8-6-room-1" data-room-title="Room 1: Standardize the Sine Term" data-source-page="ch8-exercise-8-6.html" data-tags="standardize,sine,term">
+            <h2>Room 1: Standardize the Sine Term</h2><ul><li>Phasor reading is easiest from cosine-reference form, so first rewrite the sine term as a cosine with a phase shift.</li><li>Use $$\sin(\omega t)=\cos(\omega t-90^\circ).$$</li><li>That turns the second term into $$2V_A\sin(\omega t)=2V_A\cos(\omega t-90^\circ).$$</li><li>Now both pieces are written in the same cosine language, which means they can be read as phasors consistently.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-6-room-2" data-room-id="ch8-exercise-8-6-room-2" data-room-title="Room 2: Read Both Phasors" data-source-page="ch8-exercise-8-6.html" data-tags="read,both,phasors">
+            <h2>Room 2: Read Both Phasors</h2><ul><li>The first term reads directly as $$V_A\cos(\omega t)\rightarrow V_A\angle0^\circ=V_A+j0.$$</li><li>The rewritten sine term reads as $$2V_A\cos(\omega t-90^\circ)\rightarrow2V_A\angle-90^\circ.$$</li><li>To understand its rectangular form, note that an angle of $$-90^\circ$$ points straight down the imaginary axis, so it has no real part.</li><li>That is why $$2V_A\angle-90^\circ=-j2V_A.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-6-room-3" data-room-id="ch8-exercise-8-6-room-3" data-room-title="Room 3: Add on the Mat" data-source-page="ch8-exercise-8-6.html" data-tags="">
+            <h2>Room 3: Add on the Mat</h2><ul><li>Now add the two rectangular pieces component by component:</li><li>$$V=V_A+j0-j2V_A=V_A-j2V_A.$$</li><li>The real part stays $$V_A,$$ while the imaginary part is $$-2V_A.$$</li><li>This places the phasor in quadrant IV, since the real part is positive and the imaginary part is negative.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-6-room-4" data-room-id="ch8-exercise-8-6-room-4" data-room-title="Room 4: Rebuild Polar Form" data-source-page="ch8-exercise-8-6.html" data-tags="rebuild,polar,form">
+            <h2>Room 4: Rebuild Polar Form</h2><ul><li>Use the rectangular coordinates to find the magnitude: $$|V|=\sqrt{V_A^2+(2V_A)^2}=\sqrt{5}\,V_A.$$</li><li>Now find the angle: $$\theta=\tan^{-1}\left(\frac{-2V_A}{V_A}\right)=\tan^{-1}(-2)=-63.4^\circ.$$</li><li>The negative angle matches the quadrant-IV picture, so no further angle correction is needed.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-6-room-5" data-room-id="ch8-exercise-8-6-room-5" data-room-title="Room 5: Box the One Clean Phasor" data-source-page="ch8-exercise-8-6.html" data-tags="clean,phasor">
+            <h2>Room 5: Box the One Clean Phasor</h2><ul><li>Therefore $$\boxed{V=V_A-j2V_A=\sqrt{5}\,V_A\angle-63.4^\circ\text{ V}}.$$</li><li>This page ends in phasor form, so the coat is not needed.</li><li>The whole trick on this page was converting the sine term into cosine-reference form before reading phasors.</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>The sine term is the whole trick. Once you rewrite it as a cosine with a $$-90^\circ$$ phase, the rest is ordinary phasor addition.</p></div>
+        <div class="mini"><h3>Why The Sine Becomes Negative Imaginary</h3><p>After rewriting $$\sin(\omega t)$$ as $$\cos(\omega t-90^\circ),$$ the phase is $$-90^\circ.$$ In phasor language that points straight down the imaginary axis, so the term contributes no real part and only a negative imaginary part. That is why the second piece becomes $$-j2V_A$$ instead of something with both real and imaginary parts.</p></div>
+        <div class="mini"><h3>Why The Amplitude Becomes $$\sqrt5\,V_A$$</h3><p>Once the rectangular form is $$V_A-j2V_A,$$ the phasor is just the point $$(V_A,-2V_A).$$ The magnitude is the distance from the origin to that point, so the Pythagorean theorem gives $$\sqrt{V_A^2+(2V_A)^2}=\sqrt5\,V_A.$$</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

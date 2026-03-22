@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Finding the Field from the Potential | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<link rel="stylesheet" href="chapter24-problem.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<script src="chapter24-problem.js" defer></script>
+<style>
+.ffp-axis{position:absolute;left:50%;top:26px;bottom:42px;width:2px;background:rgba(255,255,255,.2)}
+.ffp-step{position:absolute;left:50%;transform:translateX(-50%);width:220px;padding:.42rem .58rem;border-radius:14px;border:1px solid var(--line);background:rgba(18,26,36,.88);color:var(--muted);text-align:center;font-size:.82rem}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 24</a>
+    <a href="physics-potential-scalar-orientation-irrelevant.html">Back: 24-4</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">24-5 | Derivation: Field from Potential</div>
+    <h1>Finding the Field from the Potential</h1>
+    <p>This is the derivative page of the chapter. Start from the known axis potential of a uniformly charged disk, then use $$E_z=-dV/dz$$ to recover the electric field along the symmetry axis.</p>
+    <div class="hero-grid">
+      <div class="eq">$$V(z)=\frac{\sigma}{2\varepsilon_0}\left(\sqrt{z^2+R^2}-z\right),\qquad E_z=-\frac{dV}{dz}=\frac{\sigma}{2\varepsilon_0}\left(1-\frac{z}{\sqrt{z^2+R^2}}\right)$$</div>
+      <div class="hero-side">
+        <h2>What To Notice</h2>
+        <ul>
+          <li>The disk’s symmetry means the axis field has only a $$z$$ component.</li>
+          <li>The minus sign in $$E_z=-dV/dz$$ is the whole move.</li>
+          <li>The result matches the axial field obtained earlier by direct integration.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt="prompt-modal">AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Start</div><div class="v">Known potential: $$V(z)=\dfrac{\sigma}{2\varepsilon_0}\left(\sqrt{z^2+R^2}-z\right).$$</div></div>
+          <div class="fact"><div class="k">Operator</div><div class="v">On the axis, use $$E_z=-dV/dz.$$</div></div>
+          <div class="fact"><div class="k">Derivative</div><div class="v">$$d(\sqrt{z^2+R^2})/dz=z/\sqrt{z^2+R^2}.$$</div></div>
+          <div class="fact"><div class="k">Result</div><div class="v">$$E_z=\dfrac{\sigma}{2\varepsilon_0}\left(1-\dfrac{z}{\sqrt{z^2+R^2}}\right).$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Pick the Correct Direction</h2>
+            <ul>
+              <li>By symmetry, the disk’s field on its centerline points only along the axis.</li>
+              <li>So we only need the $$z$$ component.</li>
+              <li>That reduces the vector problem to a one-variable derivative.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Start from the Potential Expression</h2>
+            <ul>
+              <li>The chapter gives $$V(z)=\dfrac{\sigma}{2\varepsilon_0}\left(\sqrt{z^2+R^2}-z\right).$$</li>
+              <li>This already contains all the field information.</li>
+              <li>We just need to differentiate it.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Apply $$E_z=-dV/dz$$</h2>
+            <ul>
+              <li>The negative derivative converts potential slope into field.</li>
+              <li>Carry the constant factor $$\sigma/(2\varepsilon_0)$$ outside the derivative.</li>
+              <li>Then differentiate only the bracket.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Differentiate the Square Root Carefully</h2>
+            <ul>
+              <li>Use the chain rule on $$\sqrt{z^2+R^2}.$$</li>
+              <li>Its derivative is $$z/\sqrt{z^2+R^2}.$$</li>
+              <li>The derivative of $$-z$$ is just $$-1.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Clean the Signs</h2>
+            <ul>
+              <li>Inside the brackets, differentiation gives $$z/\sqrt{z^2+R^2}-1.$$</li>
+              <li>The overall minus sign flips that to $$1-z/\sqrt{z^2+R^2}.$$</li>
+              <li>That sign cleanup is the only delicate step.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Keep the Interpretation</h2>
+            <ul>
+              <li>The field points away from the positively charged disk along the axis.</li>
+              <li>The factor in parentheses shrinks with increasing $$z,$$ so the field weakens farther away.</li>
+              <li>The answer agrees with the direct-integration result from the earlier disk-field chapter.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Problem Figures</div>
+        <div class="figure-grid">
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="ffp-axis"></div>
+              <div class="beam"></div>
+              <div class="disk"></div>
+              <div class="arrow" style="left:50%;top:74px;width:2px;height:76px;transform:translateX(-50%);--c:var(--blue)"></div>
+              <div class="label" style="left:55%;top:72px">$$z$$</div>
+              <div class="label" style="left:55%;top:124px">$$E_z$$</div>
+              <div class="label" style="left:26px;bottom:28px">uniformly charged disk</div>
+              <div class="label" style="right:20px;top:20px">axis of symmetry</div>
+            </div>
+            <h3>Axis Geometry</h3>
+            <p>The disk symmetry removes every sideways component, leaving only the field along the centerline.</p>
+          </div>
+
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="ffp-step" style="top:20px">$$V(z)=\frac{\sigma}{2\varepsilon_0}\left(\sqrt{z^2+R^2}-z\right)$$</div>
+              <div class="ffp-step" style="top:78px">$$E_z=-\frac{dV}{dz}$$</div>
+              <div class="ffp-step" style="top:136px">$$\frac{d}{dz}\sqrt{z^2+R^2}=\frac{z}{\sqrt{z^2+R^2}}$$</div>
+              <div class="ffp-step" style="top:194px">$$E_z=\frac{\sigma}{2\varepsilon_0}\left(1-\frac{z}{\sqrt{z^2+R^2}}\right)$$</div>
+            </div>
+            <h3>Derivative Ladder</h3>
+            <p>The derivation is short once you keep the constant outside, differentiate the bracket, and let the outer minus sign clean up the final form.</p>
+          </div>
+        </div>
+        <div class="mini" style="margin-top:1rem">
+          <h3>Fast Check</h3>
+          <p>If the potential decreases as you move in the positive $$z$$ direction, the field must point in the positive $$z$$ direction because $$E_z=-dV/dz.$$</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Climb the disk axis, take a derivative, and let the minus sign flip the bracket into the field formula.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A wide green disk sits on the floor with a glowing axis rising from its center.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The axis wall displays the known potential $$V(z)=\sigma( \sqrt{z^2+R^2}-z ) /(2\varepsilon_0).$$</p></div>
+        <div class="station"><h3>Station 2</h3><p>An orange lever marked $$-d/dz$$ pulls down over the formula.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The square root opens up into $$z/\sqrt{z^2+R^2}$$ while the linear term becomes $$-1.$$</p></div>
+        <div class="station"><h3>Station 3</h3><p>The minus-sign lever flips the bracket and the final field formula appears in blue.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A label from Chapter 22 arrives and says “same field as before.”</p></div>
+        <div class="station"><h3>Station 4</h3><p>The exit lesson says potential slope and electric field are the same story told in different languages.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt is designed to store the derivative link from disk potential to disk field.</p>
+    <textarea class="prompt-box" readonly>Create a memory palace in exactly one connected paragraph for the derivation that finds the electric field from the potential of a uniformly charged disk. Keep the logic in order, make each image force the next one, and do not use bullet points.
+
+1. Start with a uniformly charged disk and its symmetry axis.
+2. Write the given potential V of z equals sigma over 2 epsilon_0 times the quantity square root of z squared plus R squared minus z.
+3. Use the relation E_z equals negative dV over dz.
+4. Differentiate the square root term into z over square root of z squared plus R squared.
+5. Differentiate minus z into minus 1.
+6. Apply the overall minus sign to get E_z equals sigma over 2 epsilon_0 times the quantity 1 minus z over square root of z squared plus R squared.
+7. End with the lesson that the field can be recovered from the slope of the potential.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" data-copy-prompt>Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+</body>
+</html>

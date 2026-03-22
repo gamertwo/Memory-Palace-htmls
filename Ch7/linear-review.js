@@ -110,15 +110,22 @@
   function initLinearReview() {
     if (document.getElementById("linear-review")) return;
 
-    var rooms = Array.prototype.slice.call(document.querySelectorAll(".room"));
-    if (!rooms.length) return;
-
     var hero = document.querySelector(".hero");
     var shell = document.querySelector(".shell") || document.querySelector("main");
     var contentGrid = document.querySelector(".content-grid");
     var mainStack = document.querySelector(".main-stack");
     var aside = document.querySelector(".palace-sidebar");
     var toolRow = hero ? hero.querySelector(".tool-row") : null;
+    var viewSections = Array.prototype.slice.call(document.querySelectorAll("[data-view-panel]"));
+    var defaultConfidence = 50;
+    var heroTitle = hero ? hero.querySelector("h1") : null;
+    var heroCopy = hero ? hero.querySelector("p") : null;
+    var heroEquation = hero ? hero.querySelector(".eq") : null;
+    var defaultHeroState = {
+      title: heroTitle ? heroTitle.innerHTML : "",
+      copy: heroCopy ? heroCopy.innerHTML : "",
+      equation: heroEquation ? heroEquation.innerHTML : ""
+    };
 
     if (hero && !toolRow) {
       toolRow = document.createElement("div");
@@ -166,21 +173,120 @@
 
     if (!mainStack || !aside || !toolRow) return;
 
-    var roomData = rooms.map(function (room, index) {
-      var clone = room.cloneNode(true);
-      var heading = clone.querySelector("h2");
-      var title = heading ? heading.textContent.trim() : "Room " + (index + 1);
-      if (heading) heading.remove();
-      return {
-        title: title,
-        html: clone.innerHTML.trim() || "<p>No saved content for this room.</p>"
-      };
-    });
+    function titleCaseKey(value) {
+      return String(value || "default")
+        .replace(/[-_]+/g, " ")
+        .replace(/\b\w/g, function (match) {
+          return match.toUpperCase();
+        });
+    }
 
-    var totalRooms = roomData.length;
-    var storageKey = "linear_review_" + slugFromPath() + "_v1";
-    var defaultConfidence = 50;
-    var revealed = false;
+    function buildViews() {
+      if (!viewSections.length) {
+        return [{
+          key: "default",
+          label: "Default",
+          buttonLabel: "Memory",
+          reviewTitle: "Linear Review Mode",
+          reviewCopy: "This review is sequential, not random. It starts at Room 1 and moves to the last room in order. Reveal a room, score it from the right side as hard, medium, or easy, add your own confidence percentage, and the page remembers every attempt in this browser.",
+          reviewPrompt: "Try to recall this room from memory first. Reveal it only when you want to check yourself.",
+          revealCopy: "Reveal the current room when you are ready. After that, use the right sidebar to save hard, medium, or easy with your percentage.",
+          actionCopy: "Choose hard, medium, or easy. The page saves your rating and confidence, then advances to the next room.",
+          heroTitle: "",
+          heroCopy: "",
+          heroEquation: "",
+          sections: []
+        }];
+      }
+
+      var map = {};
+      var order = [];
+
+      viewSections.forEach(function (section) {
+        var key = section.getAttribute("data-view-panel") || "default";
+
+        if (!map[key]) {
+          map[key] = {
+            key: key,
+            label: titleCaseKey(key),
+            buttonLabel: "Memory",
+            reviewTitle: "Linear Review Mode",
+            reviewCopy: "This review is sequential, not random. It starts at Room 1 and moves to the last room in order. Reveal a room, score it from the right side as hard, medium, or easy, add your own confidence percentage, and the page remembers every attempt in this browser.",
+            reviewPrompt: "Try to recall this room from memory first. Reveal it only when you want to check yourself.",
+            revealCopy: "Reveal the current room when you are ready. After that, use the right sidebar to save hard, medium, or easy with your percentage.",
+            actionCopy: "Choose hard, medium, or easy. The page saves your rating and confidence, then advances to the next room.",
+            heroTitle: "",
+            heroCopy: "",
+            heroEquation: "",
+            sections: []
+          };
+          order.push(key);
+        }
+
+        map[key].sections.push(section);
+
+        if (section.hasAttribute("data-view-label")) {
+          map[key].label = section.getAttribute("data-view-label") || map[key].label;
+        }
+        if (section.hasAttribute("data-view-button-label")) {
+          map[key].buttonLabel = section.getAttribute("data-view-button-label") || map[key].buttonLabel;
+        }
+        if (section.hasAttribute("data-review-mode-title")) {
+          map[key].reviewTitle = section.getAttribute("data-review-mode-title") || map[key].reviewTitle;
+        }
+        if (section.hasAttribute("data-review-mode-copy")) {
+          map[key].reviewCopy = section.getAttribute("data-review-mode-copy") || map[key].reviewCopy;
+        }
+        if (section.hasAttribute("data-review-prompt")) {
+          map[key].reviewPrompt = section.getAttribute("data-review-prompt") || map[key].reviewPrompt;
+        }
+        if (section.hasAttribute("data-review-reveal-copy")) {
+          map[key].revealCopy = section.getAttribute("data-review-reveal-copy") || map[key].revealCopy;
+        }
+        if (section.hasAttribute("data-review-action-copy")) {
+          map[key].actionCopy = section.getAttribute("data-review-action-copy") || map[key].actionCopy;
+        }
+        if (section.hasAttribute("data-view-hero-title")) {
+          map[key].heroTitle = section.getAttribute("data-view-hero-title") || map[key].heroTitle;
+        }
+        if (section.hasAttribute("data-view-hero-copy")) {
+          map[key].heroCopy = section.getAttribute("data-view-hero-copy") || map[key].heroCopy;
+        }
+        if (section.hasAttribute("data-view-hero-eq")) {
+          map[key].heroEquation = section.getAttribute("data-view-hero-eq") || map[key].heroEquation;
+        }
+      });
+
+      return order.map(function (key) {
+        return map[key];
+      });
+    }
+
+    function collectRooms(view) {
+      var roomNodes = [];
+
+      if (view.sections.length) {
+        view.sections.forEach(function (section) {
+          roomNodes = roomNodes.concat(Array.prototype.slice.call(section.querySelectorAll(".room")));
+        });
+      } else {
+        roomNodes = Array.prototype.slice.call(document.querySelectorAll(".room"));
+      }
+
+      return roomNodes.map(function (room, index) {
+        var clone = room.cloneNode(true);
+        var heading = clone.querySelector("h2");
+        var title = heading ? heading.textContent.trim() : "Room " + (index + 1);
+        if (heading) heading.remove();
+        return {
+          title: title,
+          html: clone.innerHTML.trim() || "<p>No saved content for this room.</p>"
+        };
+      });
+    }
+
+    var views = buildViews();
+    if (!views.length || !collectRooms(views[0]).length) return;
 
     function normalizeRoom(rawRoom) {
       var state = blankRoomState();
@@ -210,30 +316,7 @@
       return state;
     }
 
-    function loadState() {
-      var raw = {};
-      try {
-        raw = JSON.parse(localStorage.getItem(storageKey) || "{}") || {};
-      } catch (error) {
-        raw = {};
-      }
-
-      return {
-        currentIndex: clamp(toSafeNumber(raw.currentIndex), 0, Math.max(totalRooms - 1, 0)),
-        completed: Boolean(raw.completed && totalRooms),
-        rooms: roomData.map(function (_, index) {
-          return normalizeRoom(raw.rooms && raw.rooms[index]);
-        })
-      };
-    }
-
-    function saveState() {
-      try {
-        localStorage.setItem(storageKey, JSON.stringify(reviewState));
-      } catch (error) {}
-    }
-
-    function createButtonIfNeeded() {
+    function createReviewButton() {
       var existingButton = document.getElementById("jump-review");
       if (existingButton) return existingButton;
       var button = document.createElement("button");
@@ -245,6 +328,32 @@
       return button;
     }
 
+    function createMemoryButton() {
+      if (views.length < 2) return null;
+      var existingButton = document.getElementById("toggle-memory-view");
+      if (existingButton) return existingButton;
+      var button = document.createElement("button");
+      button.className = "tool-btn";
+      button.type = "button";
+      button.id = "toggle-memory-view";
+      button.textContent = "Memory";
+      toolRow.insertBefore(button, toolRow.firstChild || null);
+      return button;
+    }
+
+    function createMemoryReviewButton() {
+      if (views.length < 2) return null;
+      var existingButton = document.getElementById("jump-memory-review");
+      if (existingButton) return existingButton;
+      var button = document.createElement("button");
+      button.className = "tool-btn";
+      button.type = "button";
+      button.id = "jump-memory-review";
+      button.textContent = "Memory Review";
+      toolRow.insertBefore(button, toolRow.firstChild || null);
+      return button;
+    }
+
     function createReviewPanel() {
       var panel = document.createElement("section");
       panel.className = "panel review-panel";
@@ -252,17 +361,17 @@
       panel.innerHTML =
         '<div class="review-top">' +
           '<div>' +
-            '<div class="section-title">Linear Review Mode</div>' +
-            '<p class="review-copy">This review is sequential, not random. It starts at Room 1 and moves to the last room in order. Reveal a room, score it from the right side as hard, medium, or easy, add your own confidence percentage, and the page remembers every attempt in this browser.</p>' +
-          '</div>' +
+            '<div class="section-title" id="review-mode-title">Linear Review Mode</div>' +
+            '<p class="review-copy" id="review-mode-copy">This review is sequential, not random. It starts at Room 1 and moves to the last room in order. Reveal a room, score it from the right side as hard, medium, or easy, add your own confidence percentage, and the page remembers every attempt in this browser.</p>' +
+          "</div>" +
           '<div class="review-actions">' +
             '<button class="tool-btn" type="button" id="review-restart">Restart From Room 1</button>' +
             '<button class="ghost-btn" type="button" id="review-continue">Continue Saved Position</button>' +
-          '</div>' +
-        '</div>' +
+          "</div>" +
+        "</div>" +
         '<div class="review-progress">' +
           '<div class="review-track"><div class="review-fill" id="review-fill"></div></div>' +
-          '<div class="review-step" id="review-step">Room 1 of ' + totalRooms + "</div>" +
+          '<div class="review-step" id="review-step">Room 1 of 1</div>' +
         "</div>" +
         '<div class="review-banner" id="review-banner"></div>' +
         '<div class="review-card">' +
@@ -283,6 +392,11 @@
               '<button class="tool-btn" type="button" id="review-reveal">Reveal Room</button>' +
             "</div>" +
             '<div class="review-answer" id="review-answer" hidden></div>' +
+            '<div class="review-showcase" id="review-showcase" hidden>' +
+              '<div class="review-showcase-kicker">Showcase</div>' +
+              '<h3 class="review-showcase-title">What This Memory Room Points To</h3>' +
+              '<div class="review-showcase-copy" id="review-showcase-copy"></div>' +
+            "</div>" +
           "</div>" +
         "</div>";
       return panel;
@@ -316,7 +430,9 @@
       return dock;
     }
 
-    var jumpButton = createButtonIfNeeded();
+    var jumpButton = createReviewButton();
+    var memoryButton = createMemoryButton();
+    var memoryReviewButton = createMemoryReviewButton();
     var reviewPanel = createReviewPanel();
     var reviewDock = createReviewDock();
     var firstRoomsPanel = Array.prototype.slice.call(mainStack.children).find(function (node) {
@@ -330,16 +446,30 @@
     }
     aside.insertBefore(reviewDock, aside.firstChild || null);
 
-    var reviewState = loadState();
+    var defaultView = views[0];
+    var memoryView = views.filter(function (view) {
+      return view.key !== defaultView.key;
+    })[0] || null;
+    var defaultRoomData = collectRooms(defaultView);
+    var activeView = defaultView;
+    var roomData = [];
+    var totalRooms = 0;
+    var storageKey = "";
+    var reviewState = null;
+    var revealed = false;
 
     var elements = {
       jump: jumpButton,
+      memoryToggle: memoryButton,
+      memoryReview: memoryReviewButton,
       panel: reviewPanel,
       restart: document.getElementById("review-restart"),
       continueReview: document.getElementById("review-continue"),
       fill: document.getElementById("review-fill"),
       step: document.getElementById("review-step"),
       banner: document.getElementById("review-banner"),
+      modeTitle: document.getElementById("review-mode-title"),
+      modeCopy: document.getElementById("review-mode-copy"),
       kicker: document.getElementById("review-kicker"),
       title: document.getElementById("review-room-title"),
       prompt: document.getElementById("review-room-prompt"),
@@ -353,6 +483,8 @@
       hiddenCopy: document.getElementById("review-hidden-copy"),
       reveal: document.getElementById("review-reveal"),
       answer: document.getElementById("review-answer"),
+      showcase: document.getElementById("review-showcase"),
+      showcaseCopy: document.getElementById("review-showcase-copy"),
       confidence: document.getElementById("review-confidence"),
       confidenceValue: document.getElementById("review-confidence-value"),
       actionNote: document.getElementById("review-action-note"),
@@ -361,8 +493,46 @@
       ratingButtons: Array.prototype.slice.call(document.querySelectorAll("[data-rating]"))
     };
 
+    function currentStorageKey() {
+      return "linear_review_" + slugFromPath() + "_" + activeView.key + "_v1";
+    }
+
+    function loadState() {
+      var raw = {};
+      try {
+        raw = JSON.parse(localStorage.getItem(storageKey) || "{}") || {};
+      } catch (error) {
+        raw = {};
+      }
+
+      return {
+        currentIndex: clamp(toSafeNumber(raw.currentIndex), 0, Math.max(totalRooms - 1, 0)),
+        completed: Boolean(raw.completed && totalRooms),
+        rooms: roomData.map(function (_, index) {
+          return normalizeRoom(raw.rooms && raw.rooms[index]);
+        })
+      };
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(reviewState));
+      } catch (error) {}
+    }
+
     function scrollToReview() {
       elements.panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function scrollToActiveView() {
+      if (activeView.sections.length) {
+        activeView.sections[0].scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      if (hero) {
+        hero.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
     function syncConfidenceDisplay() {
@@ -432,6 +602,20 @@
       typesetNode(elements.answer);
     }
 
+    function renderShowcase(index) {
+      if (!elements.showcase || !elements.showcaseCopy) return;
+
+      if (activeView.key === defaultView.key || !defaultRoomData[index]) {
+        elements.showcase.hidden = true;
+        elements.showcaseCopy.innerHTML = "";
+        return;
+      }
+
+      elements.showcase.hidden = false;
+      elements.showcaseCopy.innerHTML = defaultRoomData[index].html;
+      typesetNode(elements.showcase);
+    }
+
     function renderBanner(roomReview) {
       if (reviewState.completed) {
         elements.banner.textContent = "Review complete. Restart from Room 1 when you want another full pass.";
@@ -457,22 +641,74 @@
         ". The tracker on the right keeps earlier room scores and percentages visible.";
     }
 
+    function renderHero() {
+      if (!hero) return;
+
+      if (heroTitle) {
+        heroTitle.innerHTML = activeView.heroTitle || defaultHeroState.title;
+      }
+      if (heroCopy) {
+        heroCopy.innerHTML = activeView.heroCopy || defaultHeroState.copy;
+      }
+      if (heroEquation) {
+        heroEquation.innerHTML = activeView.heroEquation || defaultHeroState.equation;
+      }
+
+      typesetNode(hero);
+    }
+
+    function renderVisibleSections() {
+      if (!viewSections.length) return;
+
+      views.forEach(function (view) {
+        var isActive = view.key === activeView.key;
+        view.sections.forEach(function (section) {
+          section.hidden = !isActive;
+          if (isActive) {
+            typesetNode(section);
+          }
+        });
+      });
+    }
+
+    function renderModeButtons() {
+      if (!memoryView) return;
+      var isMemoryActive = activeView.key === memoryView.key;
+      if (elements.memoryToggle) {
+        elements.memoryToggle.classList.toggle("is-active", isMemoryActive);
+        elements.memoryToggle.setAttribute("aria-pressed", isMemoryActive ? "true" : "false");
+      }
+      if (elements.jump) {
+        elements.jump.classList.toggle("is-active", !isMemoryActive);
+      }
+      if (elements.memoryReview) {
+        elements.memoryReview.classList.toggle("is-active", isMemoryActive);
+      }
+    }
+
     function render() {
+      if (!roomData.length) return;
+
       var currentIndex = reviewState.currentIndex;
       var roomReview = reviewState.rooms[currentIndex];
 
+      elements.modeTitle.textContent = activeView.reviewTitle;
+      elements.modeCopy.textContent = activeView.reviewCopy;
       elements.fill.style.width = (reviewState.completed ? 100 : ((currentIndex + 1) / totalRooms) * 100) + "%";
       elements.step.textContent = "Room " + (currentIndex + 1) + " of " + totalRooms;
       elements.kicker.textContent = reviewState.completed ? "Review Complete" : "Current Room";
       elements.title.textContent = roomData[currentIndex].title;
       elements.prompt.textContent = reviewState.completed
         ? "You are at the final saved room. Review the stats here or restart from Room 1."
-        : "Try to recall this room from memory first. Reveal it only when you want to check yourself.";
+        : activeView.reviewPrompt;
 
       renderStats(roomReview);
       renderHistory(roomReview);
       renderTracker();
       renderBanner(roomReview);
+      renderHero();
+      renderVisibleSections();
+      renderModeButtons();
 
       elements.confidence.value = roomReview.lastPercentage === null ? String(defaultConfidence) : String(roomReview.lastPercentage);
       syncConfidenceDisplay();
@@ -481,13 +717,20 @@
         elements.hiddenState.hidden = true;
         elements.answer.hidden = false;
         renderAnswer(currentIndex);
+        renderShowcase(currentIndex);
       } else {
         elements.hiddenState.hidden = false;
         elements.answer.hidden = true;
         elements.answer.innerHTML = "";
+        if (elements.showcase) {
+          elements.showcase.hidden = true;
+        }
+        if (elements.showcaseCopy) {
+          elements.showcaseCopy.innerHTML = "";
+        }
         elements.hiddenCopy.textContent = roomReview.attempts
           ? "This room already has saved attempts. Reveal it when you are ready, then rate it again to move forward."
-          : "Reveal the current room when you are ready. After that, use the right sidebar to save hard, medium, or easy with your percentage.";
+          : activeView.revealCopy;
       }
 
       if (reviewState.completed) {
@@ -495,11 +738,21 @@
         elements.actionNote.textContent = "Review complete. Restart from Room 1 to begin another full linear pass.";
       } else if (revealed) {
         setRatingButtonsEnabled(true);
-        elements.actionNote.textContent = "Choose hard, medium, or easy. The page saves your rating and confidence, then advances to the next room.";
+        elements.actionNote.textContent = activeView.actionCopy;
       } else {
         setRatingButtonsEnabled(false);
         elements.actionNote.textContent = "Reveal the room first. Rating is locked until the current room is open.";
       }
+    }
+
+    function syncModeState(nextView) {
+      activeView = nextView;
+      roomData = collectRooms(activeView);
+      totalRooms = roomData.length;
+      storageKey = currentStorageKey();
+      reviewState = loadState();
+      revealed = reviewState.completed;
+      render();
     }
 
     function revealCurrentRoom() {
@@ -541,9 +794,23 @@
     }
 
     elements.jump.addEventListener("click", function () {
-      render();
+      syncModeState(defaultView);
       scrollToReview();
     });
+
+    if (elements.memoryToggle && memoryView) {
+      elements.memoryToggle.addEventListener("click", function () {
+        syncModeState(activeView.key === memoryView.key ? defaultView : memoryView);
+        scrollToActiveView();
+      });
+    }
+
+    if (elements.memoryReview && memoryView) {
+      elements.memoryReview.addEventListener("click", function () {
+        syncModeState(memoryView);
+        scrollToReview();
+      });
+    }
 
     elements.restart.addEventListener("click", function () {
       reviewState.currentIndex = 0;
@@ -569,7 +836,7 @@
       });
     });
 
-    render();
+    syncModeState(defaultView);
   }
 
   trackPageVisit();

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-4 | Rotation Preserves the Zero Sum</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_4">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-3.html">Next: Example 8-3</a><a href="ch8-example-8-2.html">Prev: Example 8-2</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-4</div>
+    <h1>Rotate the Balanced Phasors by $$90^\circ$$</h1>
+    <p class="hero-sub">This exercise adds one more reflex: a common rotation does not destroy a zero sum. If every phasor rotates by the same angle, the entire triangle rotates together and still closes.</p>
+    <div class="formula-block">$$I_A=3.21+j3.83,\qquad I_B=-4.92+j0.87,\qquad I_C=1.71-j4.70$$ $$\text{Rotate each phasor }90^\circ\text{ counterclockwise and test the sum.}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-4.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Rotation Rule</div><div class="v">A $$90^\circ$$ counterclockwise rotation multiplies a phasor by $$j.$$</div></div>
+          <div class="fact"><div class="k">Coordinate Rule</div><div class="v">$$(a+jb)\xrightarrow{\times j}-b+ja$$</div></div>
+          <div class="fact"><div class="k">Big Idea</div><div class="v">A common rotation preserves a zero vector sum.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-4-room-1" data-room-id="ch8-exercise-8-4-room-1" data-room-title="Room 1: Recall the Original Zero Sum" data-source-page="ch8-exercise-8-4.html" data-tags="recall,original,zero">
+            <h2>Room 1: Recall the Original Zero Sum</h2><ul><li>From Example 8-2, the balanced set already satisfies $$I_A+I_B+I_C=0+j0.$$</li><li>Now the problem asks what happens if every phasor is rotated by the same $$90^\circ$$ counterclockwise.</li><li>In phasor language, a $$90^\circ$$ counterclockwise rotation means multiplication by $$j.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-4-room-2" data-room-id="ch8-exercise-8-4-room-2" data-room-title="Room 2: Rotate $$I_A$$" data-source-page="ch8-exercise-8-4.html" data-tags="rotate">
+            <h2>Room 2: Rotate $$I_A$$</h2><ul><li>Use the coordinate rule that comes from multiplying by $$j:$$ if $$a+jb$$ is multiplied by $$j,$$ the result is $$ja+j^2b=-b+ja.$$</li><li>That is why the shortcut is $$(a+jb)\mapsto-b+ja.$$</li><li>Apply it to $$I_A=3.21+j3.83.$$ The old imaginary part $$3.83$$ becomes the new negative real part, and the old real part $$3.21$$ becomes the new positive imaginary part.</li><li>So $$I_A'=j(3.21+j3.83)=-3.83+j3.21.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-4-room-3" data-room-id="ch8-exercise-8-4-room-3" data-room-title="Room 3: Rotate $$I_B$$ and $$I_C$$" data-source-page="ch8-exercise-8-4.html" data-tags="rotate">
+            <h2>Room 3: Rotate $$I_B$$ and $$I_C$$</h2><ul><li>Use the same swap rule on the other two phasors.</li><li>For $$I_B=-4.92+j0.87,$$ the old imaginary part $$0.87$$ becomes the new negative real part, and the old real part $$-4.92$$ becomes the new negative imaginary part. So $$I_B'=-0.87-j4.92.$$</li><li>For $$I_C=1.71-j4.70,$$ the old imaginary part $$-4.70$$ becomes the new positive real part, and the old real part $$1.71$$ becomes the new positive imaginary part. So $$I_C'=4.70+j1.71.$$</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-4-room-4" data-room-id="ch8-exercise-8-4-room-4" data-room-title="Room 4: Add the Rotated Phasors" data-source-page="ch8-exercise-8-4.html" data-tags="rotated,phasors">
+            <h2>Room 4: Add the Rotated Phasors</h2><ul><li>Now add the rotated rectangular coordinates:</li><li>$$I_A'+I_B'+I_C'=(-3.83-0.87+4.70)+j(3.21-4.92+1.71).$$</li><li>The real part again cancels to $$0,$$ and the imaginary part also cancels to $$0.$$</li><li>So $$\boxed{I_A'+I_B'+I_C'=0+j0.}$$</li><li>The numbers changed position, but the overall balance did not disappear.</li></ul></article>
+          <article class="room" id="room-ch8-exercise-8-4-room-5" data-room-id="ch8-exercise-8-4-room-5" data-room-title="Room 5: State the Principle" data-source-page="ch8-exercise-8-4.html" data-tags="state,principle">
+            <h2>Room 5: State the Principle</h2><ul><li>A common rotation multiplies the whole sum by the same phasor factor: $$I_A'+I_B'+I_C'=j(I_A+I_B+I_C).$$</li><li>Since the original sum is zero, the rotated sum is $$j(0)=0.$$</li><li>So a balanced zero-sum set stays balanced after a common rotation.</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>Remember the coordinate swap: multiply by $$j$$ means real becomes negative imaginary-source value and imaginary becomes new positive real-source value.</p></div>
+        <div class="mini"><h3>Why The Zero Sum Survives</h3><p>All three phasors are rotated by the same operator, so the whole vector picture turns together. Nothing about the balance is broken. In coordinate form that shows up as the same swap rule applied to each phasor, and after the swap the real parts still cancel and the imaginary parts still cancel.</p></div>
+        <div class="mini"><h3>How To Remember The $$j$$ Rotation</h3><p>Multiplying by $$j$$ does two things at once: it rotates the arrow by $$90^\circ$$ and it swaps the rectangular coordinates with a sign change. The old vertical part becomes the new horizontal part with a minus sign, and the old horizontal part becomes the new vertical part. That is the whole reason the shortcut $$(a+jb)\mapsto-b+ja$$ works.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

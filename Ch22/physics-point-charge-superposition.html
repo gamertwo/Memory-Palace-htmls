@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Point Charge Field and Superposition | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
+a{color:inherit}.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.85rem,4vw,2.85rem);margin-bottom:.5rem}.hero p{color:var(--muted);line-height:1.75}.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}.main-stack{display:grid;gap:1rem}.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}.fact{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:.75rem}.fact .k{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem}.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}.rooms{display:grid;gap:.85rem}.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}.room ul{padding-left:1.2rem}.mini{margin-top:.75rem;padding:.8rem .9rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}.palace-sidebar{position:sticky;top:1rem}.path{display:grid;gap:.65rem}.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.transition{border-style:dashed;background:rgba(255,255,255,.02)}.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}.modal.open{display:flex}.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}.modal-head h3{font-size:1rem;color:var(--accent)}.prompt-box{width:100%;min-height:320px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 22</a>
+    <a href="physics-electric-field-fundamentals.html">Back: Fundamentals</a>
+  </nav>
+  <section class="hero">
+    <h1>Point Charge Field and Superposition</h1>
+    <p>This page adds the chapter's first explicit field formula and the next key move after it: if several charges are present, the total field is the vector sum of the individual fields.</p>
+    <div class="eq">$$\vec E=\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}\,\hat r,\qquad \vec E_{\text{net}}=\vec E_1+\vec E_2+\cdots+\vec E_n$$</div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Facts</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source Law</div><div class="v">Point-charge field falls off as $$1/r^2.$$</div></div>
+          <div class="fact"><div class="k">Direction</div><div class="v">Away from positive charges and toward negative charges.</div></div>
+          <div class="fact"><div class="k">Constant</div><div class="v">Use $$k=1/(4\pi\varepsilon_0).$$</div></div>
+          <div class="fact"><div class="k">Net Field</div><div class="v">Add fields as vectors, not just magnitudes.</div></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: Begin with Coulomb's Force</h2><ul><li>A source charge $$q$$ exerts force on a test charge $$q_0$$ at distance $$r.$$</li><li>The force points along the line connecting the two charges.</li><li>That is the starting point for the field formula.</li></ul></article>
+          <article class="room"><h2>Room 2: Convert Force to Field</h2><ul><li>Divide by the test charge using $$\vec E=\vec F/q_0.$$</li><li>The point-charge field becomes</li><li>$$\boxed{\vec E=\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}\,\hat r}.$$</li></ul></article>
+          <article class="room"><h2>Room 3: Let the Sign Decide the Arrow</h2><ul><li>If $$q>0$$, the field arrow points outward from the source.</li><li>If $$q<0$$, the field arrow points inward toward the source.</li><li>The magnitude remains $$k|q|/r^2.$$</li></ul></article>
+          <article class="room"><h2>Room 4: Multiple Charges Mean Multiple Fields</h2><ul><li>At any observation point, each source charge contributes its own field vector.</li><li>The point does not choose one source. It feels all contributions.</li><li>So the total field must combine every vector.</li></ul></article>
+          <article class="room"><h2>Room 5: State Superposition Explicitly</h2><ul><li>$$\boxed{\vec E_{\text{net}}=\vec E_1+\vec E_2+\cdots+\vec E_n}.$$</li><li>This is vector addition, not scalar addition.</li><li>Draw arrows first, then resolve into components if needed.</li></ul></article>
+          <article class="room"><h2>Room 6: Use the Sample-Problem Strategy</h2><ul><li>Find each field magnitude from $$k|q|/d^2.$$</li><li>Use geometry to assign directions at the observation point.</li><li>Then add x-components with x-components and y-components with y-components.</li></ul></article>
+          <article class="room"><h2>Room 7: Symmetry Can Do Half the Work</h2><ul><li>Equal-angle components often cancel automatically.</li><li>The remaining components add to produce the net field.</li><li>Always check symmetry before long algebra.</li></ul></article>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-title">Detailed Notes</div>
+        <div class="mini"><h3>Direction Before Components</h3><p>Do not attach signs to magnitudes too early. First decide the physical direction of each field at the observation point. After that, project those arrows onto axes and add signed components.</p></div>
+        <div class="mini"><h3>Distance Scaling</h3><p>The inverse-square law is the main pattern here. If distance doubles, the field falls by a factor of four. That fact alone solves many comparison questions quickly.</p></div>
+      </section>
+    </div>
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Force first, divide to get the field of one point charge, then stack many such fields by superposition.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A point charge throws a radial force arrow toward a test charge across distance $$r.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The test charge is only a probe, so divide it away.</p></div>
+        <div class="station"><h3>Station 2</h3><p>The force arrow collapses into a clean $$1/r^2$$ field arrow.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The sign of the source flips the arrow outward or inward.</p></div>
+        <div class="station"><h3>Station 3</h3><p>Positive charges spray arrows outward while negative charges pull them inward.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>Then more charges enter the room, so one arrow is no longer enough.</p></div>
+        <div class="station"><h3>Station 4</h3><p>Many field arrows meet at one point and stack head-to-tail as vectors.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>You split them into components and let symmetry erase the pairs that cancel.</p></div>
+        <div class="station"><h3>Station 5</h3><p>The surviving components join into one final net field arrow.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">Use this to regenerate the point-charge and superposition logic as one connected memory route.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for the electric field due to a point charge and the superposition principle. Keep ideas in order, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+
+1. Start with Coulomb's force between source charge q and test charge q0.
+2. Divide by q0 to define the electric field.
+3. Get E = (1 / 4 pi eps0)(q / r^2) r-hat.
+4. Positive source charges make the field point away, and negative source charges make it point toward them.
+5. If several charges are present, each creates its own field at the same observation point.
+6. Add the fields by superposition: Enet = E1 + E2 + ... + En.
+7. Use geometry and components to combine the arrows.
+8. Let symmetry cancel matching components and keep the survivors.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+<script>
+const pointModal = document.getElementById('prompt-modal');
+const pointTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => { pointModal.classList.add('open'); pointModal.setAttribute('aria-hidden', 'false'); });
+document.querySelectorAll('[data-close-prompt]').forEach((button) => { button.addEventListener('click', () => { pointModal.classList.remove('open'); pointModal.setAttribute('aria-hidden', 'true'); }); });
+pointModal.addEventListener('click', (event) => { if (event.target === pointModal) { pointModal.classList.remove('open'); pointModal.setAttribute('aria-hidden', 'true'); } });
+document.getElementById('copy-prompt').addEventListener('click', async () => { try { await navigator.clipboard.writeText(pointTextarea.value); } catch (error) { pointTextarea.focus(); pointTextarea.select(); } });
+</script>
+</body>
+</html>

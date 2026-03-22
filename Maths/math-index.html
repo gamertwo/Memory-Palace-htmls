@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Math DE Palace</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="../linear-review.css" />
+    <style>
+        *,
+        *::before,
+        *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #111111;
+            --sidebar: #161616;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #888;
+            --cyan: #00e5ff;
+            --gold: #ffc947;
+            --violet: #b06aff;
+            --green: #2bff7f;
+            --red: #ff5c7a;
+            --hover: #1e1e1e;
+            --card: #181818;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            font-size: 15px;
+        }
+        .sidebar {
+            width: 240px;
+            min-height: 100vh;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            inset: 0 auto 0 0;
+            overflow-y: auto;
+            z-index: 20;
+        }
+        .sb-logo {
+            padding: 1.1rem 1rem .8rem;
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: .4rem;
+        }
+        .sb-logo-icon { font-size: 1.2rem; }
+        .sb-logo-text { font-size: .88rem; font-weight: 600; color: var(--text); }
+        .sb-logo-sub { font-size: .65rem; color: var(--muted); letter-spacing: .05em; }
+        .sb-section {
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: .9rem 1rem .3rem;
+        }
+        .sb-item {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            padding: .38rem 1rem;
+            font-size: .82rem;
+            color: var(--muted);
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 0 .4rem;
+        }
+        .sb-item:hover { background: var(--hover); color: var(--text); }
+        .sb-item.active { background: rgba(176, 106, 255, .12); color: var(--violet); }
+        .sb-item .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: currentColor; opacity: .5; flex-shrink: 0;
+        }
+        .sb-divider { height: 1px; background: var(--border); margin: .5rem .8rem; }
+        .main { margin-left: 240px; flex: 1; min-height: 100vh; padding-bottom: 5rem; }
+        .main-inner { max-width: 980px; margin: 0 auto; padding: 3rem 3rem 4rem; }
+        .breadcrumb {
+            font-size: .75rem; color: var(--muted); margin-bottom: 2rem;
+            display: flex; align-items: center; gap: .4rem;
+        }
+        .breadcrumb .sep { opacity: .35; }
+        .page-header { margin-bottom: 2.5rem; }
+        .page-emoji { font-size: 2.8rem; margin-bottom: .6rem; line-height: 1; }
+        .page-header h1 {
+            font-size: 2rem; font-weight: 700; color: #fff;
+            margin-bottom: .5rem; letter-spacing: -.02em;
+        }
+        .page-header p {
+            font-size: .9rem; color: var(--muted); line-height: 1.6; max-width: 660px;
+        }
+        .callout {
+            background: rgba(176, 106, 255, .06);
+            border: 1px solid rgba(176, 106, 255, .2);
+            border-left: 3px solid var(--violet);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .callout-title {
+            font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+            text-transform: uppercase; color: var(--violet); margin-bottom: .5rem;
+        }
+        .callout-body { font-size: .88rem; color: rgba(230, 230, 230, .8); line-height: 1.7; }
+        .callout.cyan {
+            border-left-color: var(--cyan);
+            background: rgba(0, 229, 255, .05);
+            border-color: rgba(0, 229, 255, .2);
+        }
+        .callout.cyan .callout-title { color: var(--cyan); }
+        .section-head {
+            font-size: 1rem; font-weight: 600; color: #fff;
+            margin: 2.5rem 0 1rem;
+            display: flex; align-items: center; gap: .6rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: .6rem;
+        }
+        .moves-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: .9rem;
+        }
+        .move-chip {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        .move-num {
+            font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+            text-transform: uppercase; margin-bottom: .4rem;
+        }
+        .move-name { font-size: .92rem; font-weight: 600; color: #fff; margin-bottom: .35rem; }
+        .move-desc { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+        .problems-grid { display: grid; gap: 1rem; }
+        .problem-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 4px 1fr;
+        }
+        .pc-stripe { background: var(--pc); }
+        .pc-body { padding: 1rem 1rem 1.1rem; }
+        .pc-header {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            gap: 1rem; margin-bottom: .6rem;
+        }
+        .pc-label {
+            font-size: .68rem; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .08em; margin-bottom: .2rem;
+        }
+        .pc-title { font-size: .98rem; font-weight: 600; color: #fff; line-height: 1.35; }
+        .pc-icon { font-size: 1.1rem; line-height: 1; }
+        .pc-eq { font-size: .88rem; color: rgba(220, 230, 255, .82); margin-bottom: .8rem; overflow-x: auto; }
+        .pc-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: .5rem;
+            margin-bottom: .9rem;
+        }
+        .pc-fact {
+            background: rgba(255,255,255,.02);
+            border: 1px solid rgba(255,255,255,.04);
+            border-radius: 8px;
+            padding: .55rem .65rem;
+            font-size: .78rem;
+            color: var(--muted);
+        }
+        .pc-fact span {
+            display: block;
+            font-size: .65rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: .15rem;
+        }
+        .pc-fact b { color: #fff; font-weight: 600; }
+        .pc-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+        .btn-outline {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: .52rem .8rem;
+            border: 1px solid color-mix(in srgb, var(--pc) 50%, #ffffff 10%);
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-size: .8rem;
+            font-weight: 500;
+            background: rgba(255,255,255,.02);
+        }
+        .btn-outline:hover { background: rgba(255,255,255,.05); }
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; }
+            .main-inner { padding: 1.5rem 1rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sb-logo">
+            <div class="sb-logo-icon">∫</div>
+            <div>
+                <div class="sb-logo-text">Math DE Palace</div>
+                <div class="sb-logo-sub">One clean math hub</div>
+            </div>
+        </div>
+
+        <div class="sb-section">Library</div>
+        <a class="sb-item active" href="math-index.html"><span>∫</span> Math Hub</a>
+        <a class="sb-item" href="math-concepts.html"><span>🧠</span> Concepts</a>
+        <a class="sb-item" href="math-questions.html"><span>📚</span> Questions</a>
+        <a class="sb-item" href="math-solutions.html"><span>✅</span> Solutions</a>
+        <a class="sb-item" href="math-neural.html"><span>🕸</span> Neural View</a>
+
+        <div class="sb-section">Question Pages</div>
+        <a class="sb-item" href="math-q1-separable-tan.html"><span><div class="dot" style="color:#00e5ff"></div></span> Q1 Separable</a>
+        <a class="sb-item" href="math-q2-homogeneous-vx.html"><span><div class="dot" style="color:#ff5c7a"></div></span> Q2 Homogeneous</a>
+        <a class="sb-item" href="math-q3-cot.html"><span><div class="dot" style="color:#2bff7f"></div></span> Q3 Cot</a>
+        <a class="sb-item" href="math-q4-sectan.html"><span><div class="dot" style="color:#ffd166"></div></span> Q4 SecTan</a>
+        <a class="sb-item" href="math-q5-arcsin-symmetry.html"><span><div class="dot" style="color:#00d1ff"></div></span> Q5 Arcsin</a>
+        <a class="sb-item" href="math-q6-root-coupled.html"><span><div class="dot" style="color:#ff5c7a"></div></span> Q6 Root</a>
+        <a class="sb-item" href="math-q7-secsq-tan.html"><span><div class="dot" style="color:#ffd166"></div></span> Q7 SecSq</a>
+        <a class="sb-item" href="math-q8-oneplusx2-xy.html"><span><div class="dot" style="color:#b06aff"></div></span> Q8 Linear</a>
+        <a class="sb-item" href="math-q9-expplusone-sinx.html"><span><div class="dot" style="color:#2bff7f"></div></span> Q9 Product Rule</a>
+        <a class="sb-item" href="math-q10-exp-tan-cube.html"><span><div class="dot" style="color:#ffd166"></div></span> Q10 Log-Tan</a>
+        <a class="sb-item" href="math-q11-expplus2-cosx.html"><span><div class="dot" style="color:#00d1ff"></div></span> Q11 Exact-Cos</a>
+        <a class="sb-item" href="math-q12-exp-y-linearized.html"><span><div class="dot" style="color:#2bff7f"></div></span> Q12 e^y Form</a>
+        <a class="sb-item" href="math-q13-tan-z-sub.html"><span><div class="dot" style="color:#ffd166"></div></span> Q13 z-Sub Tan</a>
+        <a class="sb-item" href="math-ex33-q1-homogeneous.html"><span><div class="dot" style="color:#00d1ff"></div></span> Ex 3.3 Q1</a>
+        <a class="sb-item" href="math-ex33-q2-homogeneous.html"><span><div class="dot" style="color:#ff5c7a"></div></span> Ex 3.3 Q2</a>
+        <a class="sb-item" href="math-ex33-q3-homogeneous.html"><span><div class="dot" style="color:#2bff7f"></div></span> Ex 3.3 Q3</a>
+        <a class="sb-item" href="math-ex33-q4-homogeneous.html"><span><div class="dot" style="color:#ffd166"></div></span> Ex 3.3 Q4</a>
+        <a class="sb-item" href="math-ex33-q5-homogeneous.html"><span><div class="dot" style="color:#b06aff"></div></span> Ex 3.3 Q5</a>
+        <a class="sb-item" href="math-ex33-q6-homogeneous.html"><span><div class="dot" style="color:#00e5ff"></div></span> Ex 3.3 Q6</a>
+        <a class="sb-item" href="math-ex33-q7-homogeneous.html"><span><div class="dot" style="color:#ffd166"></div></span> Ex 3.3 Q7</a>
+        <a class="sb-item" href="math-ex33-q8-homogeneous.html"><span><div class="dot" style="color:#00d1ff"></div></span> Ex 3.3 Q8</a>
+        <a class="sb-item" href="math-ex33-q9-homogeneous.html"><span><div class="dot" style="color:#2bff7f"></div></span> Ex 3.3 Q9</a>
+        <a class="sb-item" href="math-ex33-q10-homogeneous.html"><span><div class="dot" style="color:#ff5c7a"></div></span> Ex 3.3 Q10</a>
+        <a class="sb-item" href="math-reducible-homogeneous-q1.html"><span><div class="dot" style="color:#ffc947"></div></span> Red-H Q1</a>
+        <a class="sb-item" href="math-reducible-homogeneous-q2.html"><span><div class="dot" style="color:#00e5ff"></div></span> Red-H Q2</a>
+        <a class="sb-item" href="math-ex35-q1-linear.html"><span><div class="dot" style="color:#ffd166"></div></span> Ex 3.5 Q1</a>
+        <a class="sb-item" href="math-ex35-q2-linear.html"><span><div class="dot" style="color:#b06aff"></div></span> Ex 3.5 Q2</a>
+        <a class="sb-item" href="math-ex35-q3-linear.html"><span><div class="dot" style="color:#00e5ff"></div></span> Ex 3.5 Q3</a>
+        <a class="sb-item" href="math-ex35-q4-linear.html"><span><div class="dot" style="color:#2bff7f"></div></span> Ex 3.5 Q4</a>
+        <a class="sb-item" href="math-ex35-q5-linear.html"><span><div class="dot" style="color:#ff5c7a"></div></span> Ex 3.5 Q5</a>
+        <a class="sb-item" href="math-ex35-q6-linear.html"><span><div class="dot" style="color:#ffd166"></div></span> Ex 3.5 Q6</a>
+        <a class="sb-item" href="math-ex35-q7-linear.html"><span><div class="dot" style="color:#00d1ff"></div></span> Ex 3.5 Q7</a>
+        <a class="sb-item" href="math-ex35-q8-linear.html"><span><div class="dot" style="color:#b06aff"></div></span> Ex 3.5 Q8</a>
+        <a class="sb-item" href="math-ex35-q9-linear.html"><span><div class="dot" style="color:#2bff7f"></div></span> Ex 3.5 Q9</a>
+        <a class="sb-item" href="math-ex35-q10-linear.html"><span><div class="dot" style="color:#ff8c42"></div></span> Ex 3.5 Q10</a>
+        <a class="sb-item" href="math-ex36-q1-bernoulli.html"><span><div class="dot" style="color:#ffd166"></div></span> Ex 3.6 Q1</a>
+        <a class="sb-item" href="math-ex36-q2-bernoulli.html"><span><div class="dot" style="color:#b06aff"></div></span> Ex 3.6 Q2</a>
+        <a class="sb-item" href="math-ex36-q3-bernoulli.html"><span><div class="dot" style="color:#00e5ff"></div></span> Ex 3.6 Q3</a>
+        <a class="sb-item" href="math-ex36-q4-bernoulli.html"><span><div class="dot" style="color:#2bff7f"></div></span> Ex 3.6 Q4</a>
+        <a class="sb-item" href="math-ex36-q5-bernoulli.html"><span><div class="dot" style="color:#ff8c42"></div></span> Ex 3.6 Q5</a>
+        <a class="sb-item" href="math-ex36-q6-bernoulli.html"><span><div class="dot" style="color:#ffd166"></div></span> Ex 3.6 Q6</a>
+        <a class="sb-item" href="math-ex36-q7-bernoulli.html"><span><div class="dot" style="color:#b06aff"></div></span> Ex 3.6 Q7</a>
+        <a class="sb-item" href="math-ex36-q8-bernoulli.html"><span><div class="dot" style="color:#00e5ff"></div></span> Ex 3.6 Q8</a>
+        <a class="sb-item" href="math-ex36-q9-bernoulli.html"><span><div class="dot" style="color:#2bff7f"></div></span> Ex 3.6 Q9</a>
+        <a class="sb-item" href="math-ex36-q10-bernoulli.html"><span><div class="dot" style="color:#ff8c42"></div></span> Ex 3.6 Q10</a>
+
+        <div class="sb-divider"></div>
+        <div class="sb-section">Practice</div>
+        <a class="sb-item" href="math-flashcards.html?set=all"><span>🃏</span> Flashcards</a>
+        <a class="sb-item" href="../hub.html"><span>🏠</span> RC Section</a>
+    </aside>
+
+    <main class="main">
+        <div class="main-inner">
+            <div class="breadcrumb">
+                <span>Maths DE Notes</span><span class="sep">/</span><span style="color:var(--text)">Math Hub</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-emoji">∫</div>
+                <h1>Math Differential Equations Palace</h1>
+                <p>The math section now uses one clean hub instead of split duplicate landing pages. Open the core method pages, or jump straight into any dedicated question page with its own worked solution and memory cues.</p>
+            </div>
+
+            <div class="callout cyan">
+                <div class="callout-title">Core Math Pattern</div>
+                <div class="callout-body">
+                    Most of these problems reduce to one of a few moves: separate variables, detect homogeneity, simplify a derivative fingerprint, or normalize into a linear/separable form. The goal is the same each time: identify the trigger, choose the method, and preserve the final constant cleanly.
+                </div>
+            </div>
+
+            <div class="section-head">🧭 Method Flow</div>
+            <div class="moves-strip">
+                <div class="move-chip">
+                    <div class="move-num" style="color:#00e5ff">I · Scan</div>
+                    <div class="move-name">What trigger appears?</div>
+                    <div class="move-desc">Look for already-separable form, equal degree terms, or derivative fingerprints like $\sec y\tan y$.</div>
+                </div>
+                <div class="move-chip">
+                    <div class="move-num" style="color:#ffc947">II · Choose</div>
+                    <div class="move-name">Pick the method</div>
+                    <div class="move-desc">Use separation, the homogeneous substitution $y=vx$, or a direct integration pattern.</div>
+                </div>
+                <div class="move-chip">
+                    <div class="move-num" style="color:#2bff7f">III · Integrate</div>
+                    <div class="move-name">Work both sides cleanly</div>
+                    <div class="move-desc">Keep signs straight and use the correct antiderivative identity.</div>
+                </div>
+                <div class="move-chip">
+                    <div class="move-num" style="color:#ff5c7a">IV · Back-Sub</div>
+                    <div class="move-name">Restore original variables</div>
+                    <div class="move-desc">If you used a substitution, return to $x$ and $y$ before finishing.</div>
+                </div>
+                <div class="move-chip">
+                    <div class="move-num" style="color:#b06aff">V · Seal</div>
+                    <div class="move-name">Clean the constant</div>
+                    <div class="move-desc">Compress logs, exponentiate when needed, and rewrite the final relation in its neatest form.</div>
+                </div>
+            </div>
+
+            <div class="section-head">📚 Core Pages</div>
+            <div class="problems-grid">
+                <div class="problem-card" style="--pc:#00e5ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Method Page</div>
+                                <div class="pc-title">Patterns + Exam Readiness</div>
+                            </div>
+                            <div class="pc-icon">🧠</div>
+                        </div>
+                        <div class="pc-eq">Triggers, anti-mistake checks, and method selection in one page.</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-concepts.html" style="--pc:#00e5ff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Question Bank</div>
+                                <div class="pc-title">All Questions / Examples</div>
+                            </div>
+                            <div class="pc-icon">📚</div>
+                        </div>
+                        <div class="pc-eq">Question-first view with links to each dedicated page.</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-questions.html" style="--pc:#2bff7f">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffc947">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Compact Answers</div>
+                                <div class="pc-title">Solutions Only</div>
+                            </div>
+                            <div class="pc-icon">✅</div>
+                        </div>
+                        <div class="pc-eq">Direct final solutions with memory cues and less clutter.</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-solutions.html" style="--pc:#ffc947">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ff5c7a">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header">
+                            <div>
+                                <div class="pc-label">Dependency Map</div>
+                                <div class="pc-title">Neural View</div>
+                            </div>
+                            <div class="pc-icon">🕸</div>
+                        </div>
+                        <div class="pc-eq">Visual concept map of the method dependencies.</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-neural.html" style="--pc:#ff5c7a">Open Page →</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-head">📝 Dedicated Question Pages</div>
+            <div class="problems-grid">
+                <div class="problem-card" style="--pc:#00d1ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q1</div><div class="pc-title">Separable Trig-Log</div></div><div class="pc-icon">1</div></div>
+                        <div class="pc-eq">$$\frac{dx}{x}=\tan y\,dy$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q1-separable-tan.html" style="--pc:#00d1ff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ff5c7a">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q2</div><div class="pc-title">Homogeneous Substitution</div></div><div class="pc-icon">2</div></div>
+                        <div class="pc-eq">$$(2xy+x^2)\frac{dy}{dx}=3y^2+2xy$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q2-homogeneous-vx.html" style="--pc:#ff5c7a">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q3</div><div class="pc-title">Cot Variant</div></div><div class="pc-icon">3</div></div>
+                        <div class="pc-eq">$$\frac{dx}{x}=\cot y\,dy$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q3-cot.html" style="--pc:#2bff7f">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q4</div><div class="pc-title">SecTan Variant</div></div><div class="pc-icon">4</div></div>
+                        <div class="pc-eq">$$\frac{dx}{x}=\sec y\tan y\,dy$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q4-sectan.html" style="--pc:#ffd166">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#00d1ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q5</div><div class="pc-title">Arcsin Symmetry</div></div><div class="pc-icon">5</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=\frac{\sqrt{1-y^2}}{\sqrt{1-x^2}}$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q5-arcsin-symmetry.html" style="--pc:#00d1ff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ff5c7a">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q6</div><div class="pc-title">Root Coupled</div></div><div class="pc-icon">6</div></div>
+                        <div class="pc-eq">$$y\sqrt{1+x^2}\,dy+x\sqrt{1+y^2}\,dx=0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q6-root-coupled.html" style="--pc:#ff5c7a">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q7</div><div class="pc-title">SecSq-Tan</div></div><div class="pc-icon">7</div></div>
+                        <div class="pc-eq">$$\sec^2 x\tan y\,dx+\sec^2 y\tan x\,dy=0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q7-secsq-tan.html" style="--pc:#ffd166">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#b06aff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q8</div><div class="pc-title">First-Order Linear / Separable</div></div><div class="pc-icon">8</div></div>
+                        <div class="pc-eq">$$(1+x^2)dy-xy\,dx=0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q8-oneplusx2-xy.html" style="--pc:#b06aff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q9</div><div class="pc-title">Exact / Product-Rule Trigger</div></div><div class="pc-icon">9</div></div>
+                        <div class="pc-eq">$$\left(e^y+1\right)\cos x\,dx + e^y\sin x\,dy = 0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q9-expplusone-sinx.html" style="--pc:#2bff7f">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q10</div><div class="pc-title">Substitution + Log-Tan Compression</div></div><div class="pc-icon">10</div></div>
+                        <div class="pc-eq">$$3e^x\tan y\,dx + \left(1-e^x\right)\sec^2 y\,dy = 0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q10-exp-tan-cube.html" style="--pc:#ffd166">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#00d1ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q11</div><div class="pc-title">Exact Product With Cosine Finish</div></div><div class="pc-icon">11</div></div>
+                        <div class="pc-eq">$$\left(e^y+2\right)\sin x\,dx - e^y\cos x\,dy = 0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q11-expplus2-cosx.html" style="--pc:#00d1ff">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q12</div><div class="pc-title">Convert Left Side Into $d(e^y)/dx$</div></div><div class="pc-icon">12</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=e^{x-y}+x^2e^{-y}$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q12-exp-y-linearized.html" style="--pc:#2bff7f">Open Page →</a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Q13</div><div class="pc-title">Use $z=y-x$ Then Separate</div></div><div class="pc-icon">13</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=1+\tan(y-x)$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-q13-tan-z-sub.html" style="--pc:#ffd166">Open Page →</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-head">Exercise 3.3 Homogeneous Set</div>
+            <div class="problems-grid">
+                <div class="problem-card" style="--pc:#00d1ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q1</div><div class="pc-title">Homogeneous Log Form</div></div><div class="pc-icon">1</div></div>
+                        <div class="pc-eq">$$(y^2-xy)\,dx+x^2\,dy=0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q1-homogeneous.html" style="--pc:#00d1ff">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#ff5c7a">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q2</div><div class="pc-title">Circle-Type Result</div></div><div class="pc-icon">2</div></div>
+                        <div class="pc-eq">$$(x^2-y^2)\,dx+2xy\,dy=0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q2-homogeneous.html" style="--pc:#ff5c7a">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q3</div><div class="pc-title">Ratio Minus Log Product</div></div><div class="pc-icon">3</div></div>
+                        <div class="pc-eq">$$x(y-x)\frac{dy}{dx}=y(y+x)$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q3-homogeneous.html" style="--pc:#2bff7f">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q4</div><div class="pc-title">Textbook $y=x\log(Cy)$ Form</div></div><div class="pc-icon">4</div></div>
+                        <div class="pc-eq">$$x(x-y)\,dy+y^2\,dx=0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q4-homogeneous.html" style="--pc:#ffd166">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#b06aff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q5</div><div class="pc-title">Partial Fractions Homogeneous</div></div><div class="pc-icon">5</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}+\frac{x-2y}{2x-y}=0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q5-homogeneous.html" style="--pc:#b06aff">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#00e5ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q6</div><div class="pc-title">Direct Homogeneous Trig</div></div><div class="pc-icon">6</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=\tan\left(\frac{y}{x}\right)+\frac{y}{x}$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q6-homogeneous.html" style="--pc:#00e5ff">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q7</div><div class="pc-title">Linear Times Log Finish</div></div><div class="pc-icon">7</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=\frac{3xy+y^2}{3x^2}$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q7-homogeneous.html" style="--pc:#ffd166">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#00d1ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q8</div><div class="pc-title">Quadratic Log Compression</div></div><div class="pc-icon">8</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=\frac{x^2-2y^2}{2xy}$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q8-homogeneous.html" style="--pc:#00d1ff">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q9</div><div class="pc-title">Inverse-Square Plus Log</div></div><div class="pc-icon">9</div></div>
+                        <div class="pc-eq">$$(x^2+y^2)\,dy=xy\,dx$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q9-homogeneous.html" style="--pc:#2bff7f">Open Page -></a></div>
+                    </div>
+                </div>
+                <div class="problem-card" style="--pc:#ff5c7a">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.3 Q10</div><div class="pc-title">Cubic Inverse Plus Log</div></div><div class="pc-icon">10</div></div>
+                        <div class="pc-eq">$$x^2y\,dx-(x^3+y^3)\,dy=0$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex33-q10-homogeneous.html" style="--pc:#ff5c7a">Open Page -></a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-head">Reducible to Homogeneous Set</div>
+            <div class="problems-grid">
+                <div class="problem-card" style="--pc:#ffc947">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Red-H Q1</div><div class="pc-title">Shift Origin + Homogeneous</div></div><div class="pc-icon">R1</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=\frac{2x+9y-20}{6x+2y-10}$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-reducible-homogeneous-q1.html" style="--pc:#ffc947">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#00e5ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Red-H Q2</div><div class="pc-title">Translation + Log-Arctan Form</div></div><div class="pc-icon">R2</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=\frac{y-x+1}{y+x+5}$$</div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-reducible-homogeneous-q2.html" style="--pc:#00e5ff">Open Page -></a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-head">Exercise 3.5 Linear Set</div>
+            <div class="problems-grid">
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q1</div><div class="pc-title">Integrating Factor Warmup</div></div><div class="pc-icon">1</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}+\frac{1}{x}y=x^3-3$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Linear ODE</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q1-linear.html" style="--pc:#ffd166">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#b06aff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q2</div><div class="pc-title">Differential Form to Linear</div></div><div class="pc-icon">2</div></div>
+                        <div class="pc-eq">$$(2y-3x)\,dx+x\,dy=0$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Rearrange to linear</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$x^2$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q2-linear.html" style="--pc:#b06aff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#00e5ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q3</div><div class="pc-title">Cot to Sine Product Rule</div></div><div class="pc-icon">3</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}+y\cot x=\cos x$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Trig linear ODE</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$\sin x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q3-linear.html" style="--pc:#00e5ff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q4</div><div class="pc-title">Sec IF with Identity Step</div></div><div class="pc-icon">4</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}+y\sec x=\tan x$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Linear + trig identity</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$\sec x+\tan x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q4-linear.html" style="--pc:#2bff7f">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ff5c7a">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q5</div><div class="pc-title">Exponential IF + $$u=\tan x$$</div></div><div class="pc-icon">5</div></div>
+                        <div class="pc-eq">$$\cos^2 x\frac{dy}{dx}+y=\tan x$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Normalize then linear</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$e^{\tan x}$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q5-linear.html" style="--pc:#ff5c7a">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q6</div><div class="pc-title">Shifted Power with Negative IF</div></div><div class="pc-icon">6</div></div>
+                        <div class="pc-eq">$$(x+a)\frac{dy}{dx}-3y=(x+a)^5$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Normalize then linear</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$(x+a)^{-3}$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q6-linear.html" style="--pc:#ffd166">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#00d1ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q7</div><div class="pc-title">Mixed Trig + Algebraic IF</div></div><div class="pc-icon">7</div></div>
+                        <div class="pc-eq">$$x\cos x\frac{dy}{dx}+y(x\sin x+\cos x)=1$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Divide then linear</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$x\sec x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q7-linear.html" style="--pc:#00d1ff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#b06aff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q8</div><div class="pc-title">Logarithmic Integrating Factor</div></div><div class="pc-icon">8</div></div>
+                        <div class="pc-eq">$$x\log x\frac{dy}{dx}+y=2\log x$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Linear ODE</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$\log x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q8-linear.html" style="--pc:#b06aff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q9</div><div class="pc-title">Power IF + Parts</div></div><div class="pc-icon">9</div></div>
+                        <div class="pc-eq">$$x\frac{dy}{dx}+2y=x^2\log x$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Linear ODE</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$x^2$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q9-linear.html" style="--pc:#2bff7f">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ff8c42">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.5 Q10</div><div class="pc-title">Polar Linear Form</div></div><div class="pc-icon">10</div></div>
+                        <div class="pc-eq">$$dr+\left(2r\cot\theta+\sin2\theta\right)d\theta=0$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Linear in $$r(\theta)$$</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$\sin^2\theta$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex35-q10-linear.html" style="--pc:#ff8c42">Open Page -></a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-head">Exercise 3.6 Bernoulli Set</div>
+            <div class="problems-grid">
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q1</div><div class="pc-title">Reciprocal Switch to Linear</div></div><div class="pc-icon">1</div></div>
+                        <div class="pc-eq">$$\frac{1}{y^2}\frac{dy}{dx}-\frac{1}{y}=2xe^{-x}$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Use $$z=1/y$$</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$e^x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q1-bernoulli.html" style="--pc:#ffd166">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#b06aff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q2</div><div class="pc-title">Bernoulli With $$y^4$$</div></div><div class="pc-icon">2</div></div>
+                        <div class="pc-eq">$$3\frac{dy}{dx}+\frac{3}{x}y=2x^4y^4$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Bernoulli</b></div>
+                            <div class="pc-fact"><span>Sub</span><b>$$z=y^{-3}$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q2-bernoulli.html" style="--pc:#b06aff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#00e5ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q3</div><div class="pc-title">Trig Bernoulli With Reciprocal</div></div><div class="pc-icon">3</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=y\tan x-y^2\sec x$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Bernoulli</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$\sec x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q3-bernoulli.html" style="--pc:#00e5ff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q4</div><div class="pc-title">Bernoulli Initial-Value Trig</div></div><div class="pc-icon">4</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}=2y\tan x+y^2\tan^2x,\quad y(0)=1$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Bernoulli IVP</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$\sec^2x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q4-bernoulli.html" style="--pc:#2bff7f">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ff8c42">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q5</div><div class="pc-title">Turn $$\sin y$$ Into the Variable</div></div><div class="pc-icon">5</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}+\tan x\tan y=\cos x\sec y$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Transform to linear</b></div>
+                            <div class="pc-fact"><span>Sub</span><b>$$u=\sin y$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q5-bernoulli.html" style="--pc:#ff8c42">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ffd166">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q6</div><div class="pc-title">Trig Bernoulli With Cosine Finish</div></div><div class="pc-icon">6</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}+y\tan x=y^2\sec x$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Bernoulli</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$\cos x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q6-bernoulli.html" style="--pc:#ffd166">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#b06aff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q7</div><div class="pc-title">Bernoulli In $$x(y)$$</div></div><div class="pc-icon">7</div></div>
+                        <div class="pc-eq">$$y\,dx+(x+x^2y)\,dy=0$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Solve for $$x(y)$$</b></div>
+                            <div class="pc-fact"><span>Sub</span><b>$$z=1/x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q7-bernoulli.html" style="--pc:#b06aff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#00e5ff">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q8</div><div class="pc-title">Square Swap With $$y^2$$</div></div><div class="pc-icon">8</div></div>
+                        <div class="pc-eq">$$(x^2+y^2+x)\,dx+xy\,dy=0$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Linear after $$z=y^2$$</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$x^2$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q8-bernoulli.html" style="--pc:#00e5ff">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#2bff7f">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q9</div><div class="pc-title">Bernoulli With $$y^3$$</div></div><div class="pc-icon">9</div></div>
+                        <div class="pc-eq">$$\frac{dy}{dx}+y=3e^xy^3$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Bernoulli</b></div>
+                            <div class="pc-fact"><span>Sub</span><b>$$z=y^{-2}$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q9-bernoulli.html" style="--pc:#2bff7f">Open Page -></a></div>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="--pc:#ff8c42">
+                    <div class="pc-stripe"></div>
+                    <div class="pc-body">
+                        <div class="pc-header"><div><div class="pc-label">Ex 3.6 Q10</div><div class="pc-title">Square Swap With Log Finish</div></div><div class="pc-icon">10</div></div>
+                        <div class="pc-eq">$$(x-y^2)\,dx+2xy\,dy=0$$</div>
+                        <div class="pc-facts">
+                            <div class="pc-fact"><span>Method</span><b>Linear after $$z=y^2$$</b></div>
+                            <div class="pc-fact"><span>IF</span><b>$$1/x$$</b></div>
+                        </div>
+                        <div class="pc-actions"><a class="btn-outline" href="math-ex36-q10-bernoulli.html" style="--pc:#ff8c42">Open Page -></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>
+

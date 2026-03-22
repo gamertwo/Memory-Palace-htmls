@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Flux and Flux of an Electric Field | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --page:#e8e0cd;
+  --page-2:#f5eedf;
+  --paper:#faf6ea;
+  --ink:#302a22;
+  --muted:#675f51;
+  --line:rgba(48,42,34,.14);
+  --olive:#9aa54f;
+  --orange:#d5782a;
+  --gold:#caa11f;
+  --pink:#d63c8b;
+  --blue:#3799dc;
+  --charcoal:#3d3d40;
+  --shadow:0 24px 56px rgba(55,43,29,.14);
+}
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:'Manrope',sans-serif;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(154,165,79,.15), transparent 20%),
+    radial-gradient(circle at 90% 18%, rgba(213,120,42,.12), transparent 18%),
+    linear-gradient(180deg, #d7ceb9, var(--page) 14%, var(--page-2));
+}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.84rem;
+  color:var(--muted);
+  background:rgba(255,255,255,.45);
+}
+.hero,.panel,.palace-sidebar{
+  border:1px solid rgba(48,42,34,.12);
+  border-radius:26px;
+  padding:1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.5)),
+    repeating-linear-gradient(0deg, rgba(48,42,34,.015) 0, rgba(48,42,34,.015) 1px, transparent 1px, transparent 7px),
+    var(--paper);
+  box-shadow:var(--shadow);
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-4rem;
+  top:-4rem;
+  width:16rem;
+  height:16rem;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(213,120,42,.22), rgba(213,120,42,0));
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--orange);
+  font-weight:800;
+  margin-bottom:.6rem;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4.5vw,3.6rem);
+  line-height:1;
+  max-width:13ch;
+  margin-bottom:.75rem;
+}
+.hero p{
+  max-width:58rem;
+  color:var(--muted);
+  line-height:1.8;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(240px,.72fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.eq{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.55);
+  text-align:center;
+  overflow:auto;
+}
+.hero-side{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(250,241,227,.76));
+}
+.hero-side h2,.room h2,.mini h3,.diagram-card h3,.station h3,.transition h3{
+  font-family:'Fraunces',serif;
+}
+.hero-side h2{font-size:1rem;margin-bottom:.45rem}
+.hero-side p,.hero-side li,.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.diagram-card p{
+  color:var(--muted);
+  line-height:1.75;
+}
+.hero-side ul{padding-left:1.15rem}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.9rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.58rem .95rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--ink);
+  background:rgba(255,255,255,.5);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.72)}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.58fr) minmax(300px,.92fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--gold);
+  letter-spacing:.03em;
+  margin-bottom:.85rem;
+}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.75rem}
+.fact{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:.85rem;
+  background:rgba(255,255,255,.46);
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--olive);
+  margin-bottom:.3rem;
+  font-weight:800;
+}
+.rooms{display:grid;gap:.9rem}
+.room{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.28));
+}
+.room h2{
+  font-size:1rem;
+  color:var(--ink);
+  margin-bottom:.45rem;
+}
+.room ul{padding-left:1.2rem}
+.mini{
+  margin-top:.8rem;
+  padding:.9rem 1rem;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.42);
+}
+.diagram-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.85rem;
+}
+.diagram-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:.95rem;
+  background:rgba(255,255,255,.45);
+}
+.diagram{
+  height:180px;
+  border:1px dashed rgba(61,61,64,.18);
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(245,238,223,.9));
+  position:relative;
+  overflow:hidden;
+  margin-bottom:.75rem;
+}
+.loop{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:76px;
+  height:76px;
+  border:2px solid rgba(61,61,64,.45);
+  transform:translate(-50%,-50%) skewY(-18deg);
+  background:rgba(255,255,255,.2);
+}
+.stream{
+  position:absolute;
+  left:14px;
+  right:14px;
+  height:2px;
+  background:var(--charcoal);
+}
+.stream::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-3px;
+  width:8px;
+  height:8px;
+  border-top:2px solid var(--charcoal);
+  border-right:2px solid var(--charcoal);
+  transform:rotate(45deg);
+}
+.s1{top:40px}
+.s2{top:70px}
+.s3{top:100px}
+.s4{top:130px}
+.normal{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:46px;
+  height:3px;
+  background:var(--pink);
+  transform:translate(0,-50%);
+}
+.normal::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-4px;
+  width:9px;
+  height:9px;
+  border-top:2px solid var(--pink);
+  border-right:2px solid var(--pink);
+  transform:rotate(45deg);
+}
+.diag-stream{
+  position:absolute;
+  width:150px;
+  height:2px;
+  background:var(--charcoal);
+  transform:rotate(-48deg);
+}
+.diag-stream::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-3px;
+  width:8px;
+  height:8px;
+  border-top:2px solid var(--charcoal);
+  border-right:2px solid var(--charcoal);
+  transform:rotate(45deg);
+}
+.d1{left:10px;top:30px}
+.d2{left:28px;top:70px}
+.d3{left:46px;top:110px}
+.blue-normal{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:48px;
+  height:3px;
+  background:var(--blue);
+  transform:translate(0,-50%);
+}
+.blue-normal::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-4px;
+  width:9px;
+  height:9px;
+  border-top:2px solid var(--blue);
+  border-right:2px solid var(--blue);
+  transform:rotate(45deg);
+}
+.pink-flow{
+  position:absolute;
+  width:120px;
+  height:3px;
+  background:var(--pink);
+  transform:rotate(38deg);
+}
+.pink-flow::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-4px;
+  width:9px;
+  height:9px;
+  border-top:2px solid var(--pink);
+  border-right:2px solid var(--pink);
+  transform:rotate(45deg);
+}
+.p1{left:10px;top:42px}
+.p2{left:24px;top:74px}
+.p3{left:38px;top:106px}
+.closed-surface{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:120px;
+  height:92px;
+  border:2px dashed rgba(202,161,31,.65);
+  border-radius:48% 52% 50% 50%;
+  transform:translate(-50%,-50%) rotate(-8deg);
+  background:rgba(202,161,31,.14);
+}
+.line{
+  position:absolute;
+  width:180px;
+  height:2px;
+  background:#8593bf;
+  transform:rotate(-14deg);
+}
+.line::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-3px;
+  width:8px;
+  height:8px;
+  border-top:2px solid #8593bf;
+  border-right:2px solid #8593bf;
+  transform:rotate(45deg);
+}
+.l1{left:-5px;top:42px}
+.l2{left:-2px;top:62px}
+.l3{left:2px;top:82px}
+.l4{left:8px;top:102px}
+.l5{left:15px;top:122px}
+.sample{
+  position:absolute;
+  width:30px;
+  height:30px;
+  border-radius:6px;
+  background:linear-gradient(135deg, #ef8d53, #cd6a21);
+  border:1px solid rgba(61,61,64,.18);
+}
+.sa{left:20px;top:118px;transform:rotate(-18deg)}
+.sb{left:78px;top:92px;transform:rotate(8deg)}
+.sc{right:18px;top:122px;transform:rotate(-10deg)}
+.tiny-normal,.tiny-field{
+  position:absolute;
+  width:24px;
+  height:2px;
+}
+.tiny-normal{background:var(--blue)}
+.tiny-field{background:var(--pink)}
+.tiny-normal::after,.tiny-field::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-3px;
+  width:7px;
+  height:7px;
+  border-top:2px solid currentColor;
+  border-right:2px solid currentColor;
+  transform:rotate(45deg);
+}
+.tiny-normal{color:var(--blue)}
+.tiny-field{color:var(--pink)}
+.tn1{left:18px;top:109px;transform:rotate(-120deg)}
+.tf1{left:38px;top:109px;transform:rotate(-14deg)}
+.tn2{left:88px;top:88px;transform:rotate(-85deg)}
+.tf2{left:104px;top:96px;transform:rotate(-14deg)}
+.tn3{right:26px;top:116px;transform:rotate(-55deg)}
+.tf3{right:10px;top:112px;transform:rotate(-14deg)}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.68rem}
+.station,.transition{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.44);
+}
+.transition{
+  border-style:dashed;
+  background:rgba(214,60,139,.05);
+}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(31,27,19,.56);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:1rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,238,223,.94)),
+    var(--paper);
+  box-shadow:0 28px 90px rgba(31,27,19,.34);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{
+  font-family:'Fraunces',serif;
+  font-size:1rem;
+}
+.prompt-box{
+  width:100%;
+  min-height:320px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.72);
+  color:var(--ink);
+  padding:.95rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+:root{
+  --page:#0d131a;
+  --page-2:#18212c;
+  --paper:#141c25;
+  --ink:#eef3f8;
+  --muted:#9fb0c2;
+  --line:rgba(255,255,255,.12);
+  --olive:#b4cf62;
+  --orange:#ef9b45;
+  --gold:#f1c453;
+  --pink:#ff5fb0;
+  --blue:#55b5ff;
+  --charcoal:#bdd0df;
+  --shadow:0 24px 56px rgba(0,0,0,.34);
+}
+body{
+  background:
+    radial-gradient(circle at 10% 8%, rgba(180,207,98,.14), transparent 20%),
+    radial-gradient(circle at 90% 18%, rgba(239,155,69,.12), transparent 18%),
+    linear-gradient(180deg, #081018, var(--page) 14%, var(--page-2));
+}
+.nav a,.eq,.hero-side,.tool-btn,.ghost-btn,.fact,.mini,.diagram-card,.station,.transition,.prompt-box{background:rgba(255,255,255,.05)}
+.hero,.panel,.palace-sidebar{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 7px),
+    var(--paper);
+}
+.room{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025))}
+.diagram{background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03))}
+.modal-card{background:linear-gradient(180deg, rgba(20,28,37,.96), rgba(20,28,37,.96)), var(--paper)}
+@media (max-width:860px){
+  .hero-grid,.content-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 23</a>
+    <a href="physics-gauss-law-gaussian-surface.html">Back: 23-1</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">23-2 | Flux</div>
+    <h1>Flux and Flux of an Electric Field</h1>
+    <p>Flux begins as a simple flow idea: how much of a velocity field passes through a loop or surface. In electrostatics, the same geometry becomes electric flux, where the field, the area vector, and the angle between them decide whether the crossing is strong, weak, positive, negative, or zero.</p>
+    <div class="hero-grid">
+      <div class="eq">$$\Phi=\vec v\cdot \vec A=vA\cos\theta \qquad \Longrightarrow \qquad \Phi_E=\int \vec E\cdot d\vec A$$</div>
+      <div class="hero-side">
+        <h2>Main Idea</h2>
+        <ul>
+          <li>Flux is a scalar, not a vector.</li>
+          <li>Only the component normal to the surface counts.</li>
+          <li>Closed-surface electric flux tracks net field lines through the surface.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Area Vector</div><div class="v">The area vector is perpendicular to the surface and sets the reference direction.</div></div>
+          <div class="fact"><div class="k">Angle Rule</div><div class="v">Flux depends on the cosine of the angle between the field and the area vector.</div></div>
+          <div class="fact"><div class="k">Closed Surface</div><div class="v">For a Gaussian surface, outward area vectors are used by convention.</div></div>
+          <div class="fact"><div class="k">Sign</div><div class="v">Outward crossing is positive, inward crossing is negative, and tangential flow gives zero.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Start with Flow Through a Loop</h2>
+            <ul>
+              <li>Imagine air or water moving through a flat loop of area $$A.$$</li>
+              <li>If the flow is straight through the loop, the intercepted flow is large.</li>
+              <li>If the flow grazes the loop, much less passes through it.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Introduce the Area Vector</h2>
+            <ul>
+              <li>Every surface gets an area vector perpendicular to it.</li>
+              <li>Its magnitude equals the area.</li>
+              <li>For a flat surface, $$\vec A$$ packages both size and orientation at once.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Dot Product Defines Flux</h2>
+            <ul>
+              <li>For uniform flow and a flat area, $$\Phi=\vec v\cdot \vec A.$$</li>
+              <li>That becomes $$\Phi=vA\cos\theta.$$</li>
+              <li>Only the component of velocity parallel to the area vector contributes.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Interpret the Angle Cases</h2>
+            <ul>
+              <li>If $$\theta=0^\circ,$$ the flow is aligned with the area vector and flux is maximum positive.</li>
+              <li>If $$\theta=90^\circ,$$ the flow is parallel to the surface and flux is zero.</li>
+              <li>If $$\theta>90^\circ,$$ the flow enters opposite the area vector direction and the flux is negative.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Upgrade from Velocity Flux to Electric Flux</h2>
+            <ul>
+              <li>Replace the velocity field with the electric field.</li>
+              <li>Then the same geometry gives electric flux through a surface.</li>
+              <li>For a small patch, $$d\Phi_E=\vec E\cdot d\vec A.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Add Up the Whole Closed Surface</h2>
+            <ul>
+              <li>A curved or closed surface is broken into tiny area patches.</li>
+              <li>Add all patch contributions to get</li>
+              <li>$$\Phi_E=\oint \vec E\cdot d\vec A.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Read the Sign of the Flux</h2>
+            <ul>
+              <li>Field lines leaving a closed surface give positive flux.</li>
+              <li>Field lines entering the surface give negative flux.</li>
+              <li>If as many lines enter as leave, the net flux can be zero even when the field is not zero everywhere.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Link Flux to Gauss's Law</h2>
+            <ul>
+              <li>Flux by itself is geometric bookkeeping.</li>
+              <li>Gauss's law turns that bookkeeping into physics by connecting net electric flux to enclosed charge.</li>
+              <li>That is why flux is the language we need before solving Gaussian-surface problems.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Visual Intuition</div>
+        <div class="diagram-grid">
+          <div class="diagram-card">
+            <div class="diagram">
+              <div class="stream s1"></div><div class="stream s2"></div><div class="stream s3"></div><div class="stream s4"></div>
+              <div class="loop"></div>
+              <div class="normal"></div>
+            </div>
+            <h3>Maximum Through-Flow</h3>
+            <p>When the field points along the area vector, the surface catches the full crossing effect and the flux is largest.</p>
+          </div>
+
+          <div class="diagram-card">
+            <div class="diagram">
+              <div class="diag-stream d1"></div><div class="diag-stream d2"></div><div class="diag-stream d3"></div>
+              <div class="loop"></div>
+              <div class="normal"></div>
+            </div>
+            <h3>Angle Reduces Flux</h3>
+            <p>Tilting the field away from the normal shrinks the effective crossing by the cosine factor.</p>
+          </div>
+
+          <div class="diagram-card">
+            <div class="diagram">
+              <div class="loop"></div>
+              <div class="blue-normal"></div>
+              <div class="pink-flow p1"></div><div class="pink-flow p2"></div><div class="pink-flow p3"></div>
+            </div>
+            <h3>Parallel Means Zero</h3>
+            <p>If the field slides along the surface instead of piercing it, the dot product vanishes and flux is zero.</p>
+          </div>
+
+          <div class="diagram-card">
+            <div class="diagram">
+              <div class="line l1"></div><div class="line l2"></div><div class="line l3"></div><div class="line l4"></div><div class="line l5"></div>
+              <div class="closed-surface"></div>
+              <div class="sample sa"></div><div class="sample sb"></div><div class="sample sc"></div>
+              <div class="tiny-normal tn1"></div><div class="tiny-field tf1"></div>
+              <div class="tiny-normal tn2"></div><div class="tiny-field tf2"></div>
+              <div class="tiny-normal tn3"></div><div class="tiny-field tf3"></div>
+            </div>
+            <h3>Closed-Surface Accounting</h3>
+            <p>A Gaussian surface adds the electric flux from every tiny patch, with outward contributions positive and inward ones negative.</p>
+          </div>
+        </div>
+        <div class="mini">
+          <h3>Important Reminder</h3>
+          <p>Electric flux is a scalar. It does not point anywhere. What carries direction is the field and the area vector inside the dot product.</p>
+        </div>
+        <div class="mini">
+          <h3>Where This Goes Next</h3>
+          <p>Once flux feels natural, Gauss's law becomes easier to read: net outward electric flux through a closed surface is proportional to the net enclosed charge, not to every external field line in the universe.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Use this path to remember that flux is about crossing a surface, not merely being near it.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A stream tunnel rushes toward a square loop and asks how much flow actually gets through.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A glowing arrow rises perpendicular to the loop and labels the surface orientation.</p></div>
+        <div class="station"><h3>Station 2</h3><p>The arrow becomes the area vector, carrying both area and direction.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The incoming flow collides with the arrow and turns into a dot product.</p></div>
+        <div class="station"><h3>Station 3</h3><p>A formula gate opens: $$\Phi=\vec v\cdot \vec A=vA\cos\theta.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The loop rotates, showing maximum, reduced, and zero crossing as the angle changes.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The flow field transforms into electric field lines, but the geometry stays exactly the same.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The flat loop fractures into many tiny tiles, each carrying its own $$d\vec A.$$</p></div>
+        <div class="station"><h3>Station 5</h3><p>The tiles seal into a closed Gaussian shell and sum to $$\Phi_E=\oint \vec E\cdot d\vec A.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>Pink arrows leaving the shell glow positive while inward arrows darken negative.</p></div>
+        <div class="station"><h3>Station 6</h3><p>The final chamber connects net flux to Gauss's law and points back to enclosed charge.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt keeps the textbook flow-to-electric-flux progression in one connected route.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for the idea of flux and electric flux. Keep the sequence faithful to the concept buildup, make each image force the next one, and use vivid spatial imagery. Do not use bullet points.
+
+1. Start with a uniform stream moving toward a flat loop of area A.
+2. Show that the loop needs a perpendicular area vector to define orientation.
+3. Build flux as the dot product Phi = v dot A = vA cos theta.
+4. Emphasize that only the component normal to the surface counts.
+5. Contrast the three angle cases: maximum positive, zero when parallel to the surface, and negative when entering opposite the area vector.
+6. Replace the velocity field with the electric field to create electric flux.
+7. Move from one flat patch to many tiny patches and write dPhi_E = E dot dA.
+8. Add all patches over a closed surface to get the closed integral of E dot dA.
+9. Explain the sign convention: outward field gives positive flux and inward field gives negative flux.
+10. End by linking net electric flux through a closed surface to the next idea, Gauss's law.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script>
+const fluxModal = document.getElementById('prompt-modal');
+const fluxTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  fluxModal.classList.add('open');
+  fluxModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    fluxModal.classList.remove('open');
+    fluxModal.setAttribute('aria-hidden', 'true');
+  });
+});
+fluxModal.addEventListener('click', (event) => {
+  if (event.target === fluxModal) {
+    fluxModal.classList.remove('open');
+    fluxModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(fluxTextarea.value);
+  } catch (error) {
+    fluxTextarea.focus();
+    fluxTextarea.select();
+  }
+});
+</script>
+</body>
+</html>

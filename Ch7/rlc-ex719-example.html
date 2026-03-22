@@ -136,7 +136,7 @@ a{color:inherit}
   border-style:dashed;
   background:rgba(255,255,255,.02);
 }
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
+.tool-row{display:flex;gap:.65rem;justify-content:flex-end;margin-top:.85rem;flex-wrap:wrap}
 .tool-btn,.ghost-btn{
   border:1px solid var(--line);
   border-radius:999px;
@@ -148,6 +148,7 @@ a{color:inherit}
   background:rgba(255,255,255,.03);
 }
 .tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
+.tool-btn.is-active{background:rgba(255,208,138,.16);border-color:rgba(255,208,138,.35);box-shadow:0 0 0 1px rgba(255,208,138,.18) inset}
 .tool-btn:disabled,.ghost-btn:disabled{opacity:.45;cursor:not-allowed}
 @media (max-width:760px){
   .shell{padding:1rem .85rem 2rem}
@@ -176,7 +177,7 @@ $$s_{1,2}=-1000\pm j2000,\qquad s^2+\frac{R}{L}s+\frac{1}{LC}=0$$</div>
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="content-grid" data-view-panel="default">
     <div class="main-stack">
       <section class="panel"><div class="section-title">Quick Data</div><div class="facts">          <div class="fact"><div class="k">Given Voltage</div><div class="v">$$v_C(t)=10e^{-1000t}\sin(2000t)\ \text{V}$$</div></div>
           <div class="fact"><div class="k">Capacitance</div><div class="v">$$C=1\times 10^{-6}\ \text{F}$$</div></div>
@@ -316,6 +317,37 @@ $$s_{1,2}=-1000\pm j2000,\qquad s^2+\frac{R}{L}s+\frac{1}{LC}=0$$</div>
           <p>Everything closes consistently: roots, circuit values, current, and initial states all match.</p>
         </div></div>
     </aside>
+  </div>
+  <div class="content-grid" data-view-panel="memory" hidden>
+    <div class="main-stack">
+      <section
+        class="panel"
+        data-view-label="Memory"
+        data-view-button-label="Memory"
+        data-review-mode-title="Memory Palace Review"
+        data-review-mode-copy="This route memorizes the reverse-engineering flow. Instead of starting from circuit values, you begin from one waveform and walk backward to the roots, the polynomial, the element values, the current, and the initial state."
+        data-review-prompt="Walk backward through the palace first: waveform, roots, polynomial, coefficients, elements, current, state."
+        data-review-reveal-copy="Reveal the current memory locus when you want to check the image, then use the showcase underneath to connect it back to the worked derivation."
+        data-review-action-copy="Rate how well you remembered the reverse-engineering route, then move on."
+        data-view-hero-title="Example 7-19 Memory Palace"
+        data-view-hero-copy="This palace is built for solving in reverse. A damped waveform is treated like a clue scroll: first read the roots hidden inside it, then rebuild the polynomial, then extract the circuit, then recover current and initial conditions."
+        data-view-hero-eq="Remember $$\text{waveform} \rightarrow \text{roots} \rightarrow \text{polynomial} \rightarrow \text{elements} \rightarrow \text{state}.$$"
+      >
+        <div class="section-title">Memory Palace Route</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: The Waveform Scroll</h2><ul><li>A hanging scroll shows the damped sine and dares you to read the system directly from it.</li><li>The palace law is that a damped waveform already contains the root pattern.</li></ul></article>
+          <article class="room"><h2>Room 2: The Root Lanterns</h2><ul><li>Two lanterns reveal the hidden pair $$-1000\pm j2000.$$</li><li>They remind you to read decay and oscillation separately.</li></ul></article>
+          <article class="room"><h2>Room 3: The Polynomial Forge</h2><ul><li>The conjugate roots are forged back into a quadratic.</li><li>This forge stores the idea that roots and characteristic equation are two forms of the same object.</li></ul></article>
+          <article class="room"><h2>Room 4: The Coefficient Bridge</h2><ul><li>A bridge matches the rebuilt polynomial with the standard series RLC form.</li><li>This is the bridge from math back to circuit meaning.</li></ul></article>
+          <article class="room"><h2>Room 5: The Element Vault</h2><ul><li>Inside the vault, coefficient matching unlocks $$L$$ first and then $$R.$$</li><li>The image teaches that the waveform can reveal hidden hardware.</li></ul></article>
+          <article class="room"><h2>Room 6: The Current Workshop</h2><ul><li>Once the voltage clue is understood, the current is manufactured by differentiating and multiplying by $$C.$$</li><li>This room stores the rule $$i_L=i_C=C\,dv_C/dt$$ for series reconstruction.</li></ul></article>
+          <article class="room"><h2>Room 7: The Initial-State Window</h2><ul><li>A window freezes the motion at $$t=0.$$</li><li>That single instant reveals the state values once the formulas are known.</li></ul></article>
+          <article class="room"><h2>Room 8: The Reverse-Engineering Seal</h2><ul><li>The final seal states the whole lesson: the waveform already contains the roots, and the roots already contain the circuit.</li><li>Memory goal: read first, rebuild second, verify third.</li></ul></article>
+        </div>
+      </section>
+      <section class="panel"><div class="section-title">Recall Tokens</div><div class="facts"><div class="fact"><div class="k">Scroll</div><div class="v">Waveform first.</div></div><div class="fact"><div class="k">Lanterns</div><div class="v">Roots are hidden in the decay and oscillation.</div></div><div class="fact"><div class="k">Bridge</div><div class="v">Polynomial meets circuit standard form.</div></div><div class="fact"><div class="k">Showcase</div><div class="v">Use the worked room below each memory room.</div></div></div></section>
+    </div>
+    <aside class="palace-sidebar"><div class="section-title">Palace Path</div><p class="palace-intro">This route walks backward from the given waveform to the actual circuit.</p><div class="path"><div class="station"><h3>Station 1: Scroll</h3><p>Read the waveform instead of redrawing the circuit.</p></div><div class="transition"><h3>Transition 1 to 2</h3><p>The waveform reveals the roots.</p></div><div class="station"><h3>Station 2: Forge</h3><p>Roots rebuild the polynomial.</p></div><div class="transition"><h3>Transition 2 to 3</h3><p>The polynomial matches the circuit form.</p></div><div class="station"><h3>Station 3: Vault</h3><p>Coefficient matching reveals $$L$$ and $$R.$$</p></div><div class="transition"><h3>Final Seal</h3><p>Then current and initial state fall out of the recovered model.</p></div></div></aside>
   </div>
 </main>
 <div class="modal" id="prompt-modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div><p class="modal-copy">This prompt is prefilled with the reverse-engineering flow for Example 7-19. Use it to test alternate one-paragraph memory palaces in another AI.</p><textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this second-order series RLC reverse-engineering problem. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.

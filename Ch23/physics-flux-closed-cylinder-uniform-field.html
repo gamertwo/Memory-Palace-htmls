@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Flux Through a Closed Cylinder, Uniform Field | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --page:#e8e1cf;
+  --page-2:#f6f0e0;
+  --paper:#faf6ea;
+  --ink:#312b23;
+  --muted:#675f52;
+  --line:rgba(49,43,35,.14);
+  --olive:#97a44a;
+  --green:#8fa948;
+  --orange:#d18233;
+  --gold:#caa11f;
+  --blue:#5a85d6;
+  --pink:#d96a8f;
+  --shadow:0 24px 56px rgba(55,43,29,.14);
+}
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:'Manrope',sans-serif;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(143,169,72,.16), transparent 20%),
+    radial-gradient(circle at 88% 18%, rgba(209,130,51,.12), transparent 18%),
+    linear-gradient(180deg, #d7ceb9, var(--page) 14%, var(--page-2));
+}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.84rem;
+  color:var(--muted);
+  background:rgba(255,255,255,.45);
+}
+.hero,.panel,.palace-sidebar{
+  border:1px solid rgba(49,43,35,.12);
+  border-radius:26px;
+  padding:1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.5)),
+    repeating-linear-gradient(0deg, rgba(49,43,35,.015) 0, rgba(49,43,35,.015) 1px, transparent 1px, transparent 7px),
+    var(--paper);
+  box-shadow:var(--shadow);
+}
+.hero{position:relative;overflow:hidden}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-4rem;
+  top:-4rem;
+  width:16rem;
+  height:16rem;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(143,169,72,.22), rgba(143,169,72,0));
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--green);
+  font-weight:800;
+  margin-bottom:.6rem;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4.5vw,3.55rem);
+  line-height:1;
+  max-width:14ch;
+  margin-bottom:.75rem;
+}
+.hero p{max-width:58rem;color:var(--muted);line-height:1.8}
+.sample-tag{
+  display:inline-block;
+  margin-bottom:.75rem;
+  padding:.38rem .7rem;
+  border-radius:999px;
+  background:rgba(143,169,72,.18);
+  color:#5d6f1f;
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(240px,.75fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.eq{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.55);
+  text-align:center;
+  overflow:auto;
+}
+.hero-side{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(250,241,227,.76));
+}
+.hero-side h2,.room h2,.mini h3,.sketch-card h3,.station h3,.transition h3{
+  font-family:'Fraunces',serif;
+}
+.hero-side h2{font-size:1rem;margin-bottom:.45rem}
+.hero-side p,.hero-side li,.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.sketch-card p{
+  color:var(--muted);
+  line-height:1.75;
+}
+.hero-side ul{padding-left:1.15rem}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.9rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.58rem .95rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--ink);
+  background:rgba(255,255,255,.5);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.72)}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.58fr) minmax(300px,.92fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--gold);
+  letter-spacing:.03em;
+  margin-bottom:.85rem;
+}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.75rem}
+.fact{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:.85rem;
+  background:rgba(255,255,255,.46);
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--olive);
+  margin-bottom:.3rem;
+  font-weight:800;
+}
+.rooms{display:grid;gap:.9rem}
+.room{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.28));
+}
+.room h2{font-size:1rem;color:var(--ink);margin-bottom:.45rem}
+.room ul{padding-left:1.2rem}
+.sketch-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(220px,.82fr);
+  gap:1rem;
+}
+.sketch-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.44);
+}
+.sketch{
+  position:relative;
+  height:220px;
+  border:1px dashed rgba(90,133,214,.38);
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.84), rgba(246,240,224,.92));
+  overflow:hidden;
+  margin-bottom:.75rem;
+}
+.field{
+  position:absolute;
+  left:8px;
+  width:100px;
+  height:2px;
+  background:var(--blue);
+}
+.field::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-3px;
+  width:8px;
+  height:8px;
+  border-top:2px solid var(--blue);
+  border-right:2px solid var(--blue);
+  transform:rotate(45deg);
+}
+.f1{top:50px}
+.f2{top:88px}
+.f3{top:126px}
+.f4{top:164px}
+.tube{
+  position:absolute;
+  left:84px;
+  top:63px;
+  width:180px;
+  height:96px;
+  background:linear-gradient(180deg, #ffcd9f, #e6a56e);
+  border-top:2px solid #c6783a;
+  border-bottom:2px solid #c6783a;
+}
+.cap-left,.cap-right{
+  position:absolute;
+  top:63px;
+  width:42px;
+  height:96px;
+  border:2px solid #c6783a;
+  border-radius:50%;
+  background:linear-gradient(180deg, rgba(255,225,196,.9), rgba(230,165,110,.82));
+}
+.cap-left{left:62px}
+.cap-right{left:242px}
+.rim-left,.rim-right{
+  position:absolute;
+  top:63px;
+  width:42px;
+  height:96px;
+  border:2px solid rgba(198,120,58,.6);
+  border-radius:50%;
+  background:transparent;
+}
+.rim-left{left:78px}
+.rim-right{left:258px}
+.n-left,.n-right,.n-wall{
+  position:absolute;
+  height:3px;
+  background:var(--pink);
+}
+.n-left,.n-right{width:42px;top:110px}
+.n-left{left:22px}
+.n-right{left:286px}
+.n-wall{
+  width:36px;
+  top:56px;
+  left:170px;
+  transform:rotate(-90deg);
+}
+.n-left::after,.n-right::after,.n-wall::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-4px;
+  width:9px;
+  height:9px;
+  border-top:2px solid var(--pink);
+  border-right:2px solid var(--pink);
+  transform:rotate(45deg);
+}
+.label{
+  position:absolute;
+  font-size:.74rem;
+  color:var(--muted);
+  background:rgba(255,255,255,.72);
+  padding:.15rem .35rem;
+  border-radius:999px;
+}
+.lb1{left:12px;top:80px}
+.lb2{left:295px;top:82px}
+.lb3{left:194px;top:26px}
+.split{
+  display:grid;
+  gap:.75rem;
+}
+.mini{
+  padding:.9rem 1rem;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.42);
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.68rem}
+.station,.transition{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.44);
+}
+.transition{
+  border-style:dashed;
+  background:rgba(217,106,143,.05);
+}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(31,27,19,.56);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:1rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,238,223,.94)),
+    var(--paper);
+  box-shadow:0 28px 90px rgba(31,27,19,.34);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{
+  font-family:'Fraunces',serif;
+  font-size:1rem;
+}
+.prompt-box{
+  width:100%;
+  min-height:320px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.72);
+  color:var(--ink);
+  padding:.95rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+:root{
+  --page:#0d131a;
+  --page-2:#18212c;
+  --paper:#141c25;
+  --ink:#eef3f8;
+  --muted:#9fb0c2;
+  --line:rgba(255,255,255,.12);
+  --olive:#b4cf62;
+  --green:#b4cf62;
+  --orange:#ef9b45;
+  --gold:#f1c453;
+  --blue:#7ea6e8;
+  --pink:#ff7cab;
+  --shadow:0 24px 56px rgba(0,0,0,.34);
+}
+body{
+  background:
+    radial-gradient(circle at 10% 8%, rgba(180,207,98,.16), transparent 20%),
+    radial-gradient(circle at 88% 18%, rgba(239,155,69,.12), transparent 18%),
+    linear-gradient(180deg, #081018, var(--page) 14%, var(--page-2));
+}
+.nav a,.sample-tag,.eq,.hero-side,.tool-btn,.ghost-btn,.fact,.sketch-card,.mini,.station,.transition,.prompt-box{background:rgba(255,255,255,.05)}
+.hero,.panel,.palace-sidebar{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 7px),
+    var(--paper);
+}
+.room{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025))}
+.sketch{background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03))}
+.modal-card{background:linear-gradient(180deg, rgba(20,28,37,.96), rgba(20,28,37,.96)), var(--paper)}
+@media (max-width:860px){
+  .hero-grid,.content-grid,.sketch-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+  .sketch{height:240px}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 23</a>
+    <a href="physics-flux-and-electric-flux.html">Back: 23-2</a>
+  </nav>
+
+  <section class="hero">
+    <div class="sample-tag">Sample Problem</div>
+    <div class="eyebrow">23-3 | Closed Cylinder in Uniform Field</div>
+    <h1>Flux Through a Closed Cylinder</h1>
+    <p>Here the electric field is uniform and parallel to the cylinder axis. That makes the problem a clean test of flux signs: one cap contributes negative flux, the curved wall contributes zero, and the other cap contributes equal positive flux, so the total through the closed surface vanishes.</p>
+    <div class="hero-grid">
+      <div class="eq">$$\Phi=\oint \vec E\cdot d\vec A=\int_a \vec E\cdot d\vec A+\int_b \vec E\cdot d\vec A+\int_c \vec E\cdot d\vec A=-EA+0+EA=0$$</div>
+      <div class="hero-side">
+        <h2>What To Watch</h2>
+        <ul>
+          <li>Left cap: outward area vector points opposite the field.</li>
+          <li>Curved wall: field is parallel to the surface, so normal component is zero.</li>
+          <li>Right cap: outward area vector points with the field.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Uniform Field</div><div class="v">The field has the same magnitude and direction everywhere in the problem.</div></div>
+          <div class="fact"><div class="k">Left Cap</div><div class="v">The angle is $$180^\circ$$, so the cap contributes negative flux.</div></div>
+          <div class="fact"><div class="k">Curved Surface</div><div class="v">The angle is $$90^\circ$$ everywhere, so the cylindrical wall contributes zero.</div></div>
+          <div class="fact"><div class="k">Right Cap</div><div class="v">The angle is $$0^\circ$$, so the cap contributes positive flux.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Split the Surface into Three Parts</h2>
+            <ul>
+              <li>The closed cylinder is made of a left cap, a curved wall, and a right cap.</li>
+              <li>Flux through the whole surface is the sum of flux through these three pieces.</li>
+              <li>That turns one closed-surface problem into three smaller ones.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Left Cap Gives Negative Flux</h2>
+            <ul>
+              <li>The outward area vector on the left cap points left, opposite the field.</li>
+              <li>So $$\theta=180^\circ$$ and $$\cos 180^\circ=-1.$$</li>
+              <li>Therefore $$\int_a \vec E\cdot d\vec A = -E\int dA=-EA.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Curved Wall Gives Zero Flux</h2>
+            <ul>
+              <li>On the cylindrical wall, each outward area vector points sideways.</li>
+              <li>The uniform field runs along the axis, so it is perpendicular to every wall normal.</li>
+              <li>Thus $$\theta=90^\circ$$ and $$\int_b \vec E\cdot d\vec A=E\cos 90^\circ \int dA=0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Right Cap Gives Positive Flux</h2>
+            <ul>
+              <li>The outward area vector on the right cap points right, the same way as the field.</li>
+              <li>So $$\theta=0^\circ$$ and $$\cos 0^\circ=1.$$</li>
+              <li>That gives $$\int_c \vec E\cdot d\vec A=E\int dA=EA.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Add the Three Contributions</h2>
+            <ul>
+              <li>Combine the pieces:</li>
+              <li>$$\Phi=-EA+0+EA.$$</li>
+              <li>The negative and positive cap contributions cancel exactly.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Total Flux Is Zero</h2>
+            <ul>
+              <li>The final answer is $$\Phi=0.$$</li>
+              <li>This does not mean the field is zero; it means the net crossing through the closed surface is zero.</li>
+              <li>As much field leaves through one cap as enters through the other.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Why This Matters for Gauss's Law</h2>
+            <ul>
+              <li>A zero net flux here matches the fact that no charge is enclosed by the cylinder.</li>
+              <li>The field can pass through a Gaussian surface without creating net flux if entry and exit balance.</li>
+              <li>That is a key intuition for later enclosed-charge problems.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Worked Geometry</div>
+        <div class="sketch-grid">
+          <div class="sketch-card">
+            <div class="sketch">
+              <div class="field f1"></div><div class="field f2"></div><div class="field f3"></div><div class="field f4"></div>
+              <div class="cap-left"></div><div class="tube"></div><div class="cap-right"></div>
+              <div class="rim-left"></div><div class="rim-right"></div>
+              <div class="n-left"></div><div class="n-right"></div><div class="n-wall"></div>
+              <div class="label lb1">left cap</div><div class="label lb2">right cap</div><div class="label lb3">wall</div>
+            </div>
+            <h3>Cylinder Breakdown</h3>
+            <p>Separating the closed surface into two end caps and one curved wall makes the flux signs almost automatic.</p>
+          </div>
+
+          <div class="split">
+            <div class="mini">
+              <h3>Sign Memory</h3>
+              <p>Outward area vectors always define the sign. If the field points against the outward normal, the flux is negative. If it points with the outward normal, the flux is positive.</p>
+            </div>
+            <div class="mini">
+              <h3>Common Mistake</h3>
+              <p>Do not say the wall has zero flux because it has zero area. The wall area is not zero. Its flux is zero because the field has no normal component there.</p>
+            </div>
+            <div class="mini">
+              <h3>Concept Check</h3>
+              <p>A uniform field threading an empty closed surface can still give zero net flux because every entering line is balanced by a leaving line.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Walk this one as a three-door accounting problem: left cap, wall, right cap.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A glowing cylinder appears in a steady electric wind blowing from left to right.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The cylinder splits into three doors, forcing you to compute the flux piece by piece.</p></div>
+        <div class="station"><h3>Station 2</h3><p>At the left door, the outward normal points into the wind, stamping the contribution with a negative sign.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The side wall rotates and reveals that every normal is sideways while the field stays axial.</p></div>
+        <div class="station"><h3>Station 3</h3><p>The wall chamber displays $$90^\circ$$ everywhere, so its flux collapses to zero.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>You move to the right door where the outward normal now rides with the wind.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The right cap glows positive with a matching $$EA$$ contribution.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The two cap terms slide onto a balance beam.</p></div>
+        <div class="station"><h3>Station 5</h3><p>The beam settles at zero, reminding you that entry and exit cancel when no charge is enclosed.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt preserves the sample-problem structure and the three-part surface split.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for the sample problem of electric flux through a closed cylinder in a uniform electric field. Keep the logic in order, make each image force the next one, and use vivid spatial imagery. Do not use bullet points.
+
+1. Start with a closed cylinder placed in a uniform electric field parallel to the cylinder axis.
+2. Split the closed surface into three parts: left cap, curved wall, and right cap.
+3. On the left cap, make the outward area vector point opposite the field so theta is 180 degrees and the flux is negative.
+4. On the curved wall, make the outward normals perpendicular to the field so theta is 90 degrees everywhere and the flux is zero.
+5. On the right cap, make the outward area vector point with the field so theta is 0 degrees and the flux is positive.
+6. Add the three contributions as negative EA plus 0 plus positive EA.
+7. End with the result that the total flux is zero even though the field itself is not zero, because as much field enters as leaves.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script>
+const cylinderModal = document.getElementById('prompt-modal');
+const cylinderTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  cylinderModal.classList.add('open');
+  cylinderModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    cylinderModal.classList.remove('open');
+    cylinderModal.setAttribute('aria-hidden', 'true');
+  });
+});
+cylinderModal.addEventListener('click', (event) => {
+  if (event.target === cylinderModal) {
+    cylinderModal.classList.remove('open');
+    cylinderModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(cylinderTextarea.value);
+  } catch (error) {
+    cylinderTextarea.focus();
+    cylinderTextarea.select();
+  }
+});
+</script>
+</body>
+</html>

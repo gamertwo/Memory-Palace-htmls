@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-5 | Series RC Circuit Voltage</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_5">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-7.html">Next: Exercise 8-7</a><a href="ch8-exercise-8-6.html">Prev: Exercise 8-6</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-5</div>
+    <h1>Find the Steady-State Voltage in a Series RC Circuit</h1>
+    <p class="hero-sub">This example extends Chapter 8 from pure phasor conversion into circuit analysis. Catch the source current, convert the resistor and capacitor into impedances, compute the element voltages with $$V=ZI,$$ add them with KVL, and then coat the total phasor back into the time-domain voltage waveform.</p>
+    <div class="formula-block">$$i(t)=4\cos(5000t)\text{ A},\qquad R=10\,\Omega,\qquad C=10\,\mu\text{F}$$ $$\text{Find the steady-state voltage }v(t).$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-5.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source Phasor</div><div class="v">$$I=4\angle0^\circ=4+j0\text{ A}$$</div></div>
+          <div class="fact"><div class="k">Element Impedances</div><div class="v">$$Z_R=10+j0,\qquad Z_C=\frac{1}{j\omega C}=-j20$$</div></div>
+          <div class="fact"><div class="k">Big Move</div><div class="v">Find $$V_R$$ and $$V_C$$ first, then add them with KVL to get the total phasor voltage.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-5-room-1" data-room-id="ch8-example-8-5-room-1" data-room-title="Room 1: Catch the Current and Convert the Elements" data-source-page="ch8-example-8-5.html" data-tags="catch,current,convert,elements">
+            <h2>Room 1: Catch the Current and Convert the Elements</h2><ul><li>The source current is already in cosine-reference form, so its phasor is $$I=4\angle0^\circ=4+j0\text{ A}.$$</li><li>The resistor impedance is purely real: $$Z_R=R=10+j0.$$</li><li>For the capacitor, use $$Z_C=\dfrac{1}{j\omega C}.$$ Here $$\omega=5000$$ and $$C=10\,\mu\text{F}=10\times10^{-6}=10^{-5}\text{ F}.$$</li><li>So $$Z_C=\frac{1}{j(5000)(10^{-5})}=\frac{1}{j(0.05)}=-j20\,\Omega.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-5-room-2" data-room-id="ch8-example-8-5-room-2" data-room-title="Room 2: Find the Resistor Voltage" data-source-page="ch8-example-8-5.html" data-tags="find,resistor,voltage">
+            <h2>Room 2: Find the Resistor Voltage</h2><ul><li>Use the impedance form of Ohm's law: $$V_R=Z_RI.$$</li><li>So $$V_R=(10+j0)(4+j0).$$</li><li>Because both factors lie on the real axis, the result is purely real: $$V_R=40+j0\text{ V}.$$</li><li>This makes sense physically because the resistor voltage stays in phase with the current.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-5-room-3" data-room-id="ch8-example-8-5-room-3" data-room-title="Room 3: Find the Capacitor Voltage" data-source-page="ch8-example-8-5.html" data-tags="find,capacitor,voltage">
+            <h2>Room 3: Find the Capacitor Voltage</h2><ul><li>Now compute the capacitor voltage with the same rule: $$V_C=Z_CI.$$</li><li>So $$V_C=(-j20)(4+j0)=-j80\text{ V}.$$</li><li>The result is purely negative imaginary, which matches the capacitor idea that voltage lags current by $$90^\circ.$$</li><li>So the resistor contributes the horizontal part, while the capacitor contributes the downward vertical part.</li></ul></article>
+          <article class="room" id="room-ch8-example-8-5-room-4" data-room-id="ch8-example-8-5-room-4" data-room-title="Room 4: Add the Element Voltages" data-source-page="ch8-example-8-5.html" data-tags="element,voltages">
+            <h2>Room 4: Add the Element Voltages</h2><ul><li>Apply KVL around the loop: the total steady-state voltage is the sum of the element voltages.</li><li>$$V=V_R+V_C=(40+j0)+(0-j80)=40-j80.$$</li><li>Now rebuild polar form. The magnitude is $$|V|=\sqrt{40^2+80^2}=89.4\text{ V}.$$</li><li>The angle is $$\theta=\tan^{-1}\left(\frac{-80}{40}\right)=-63.4^\circ.$$ Because the real part is positive and the imaginary part is negative, quadrant IV is correct.</li><li>So $$V=89.4\angle-63.4^\circ\text{ V}.$$</li></ul></article>
+          <article class="room" id="room-ch8-example-8-5-room-5" data-room-id="ch8-example-8-5-room-5" data-room-title="Room 5: Coat the Steady-State Waveform" data-source-page="ch8-example-8-5.html" data-tags="coat,steady,state,waveform">
+            <h2>Room 5: Coat the Steady-State Waveform</h2><ul><li>Return to the time domain with the same angular frequency $$\omega=5000.$$</li><li>Use the coat rule $$M\angle\theta\rightarrow M\cos(\omega t+\theta).$$</li><li>That gives amplitude $$89.4,$$ frequency term $$5000t,$$ and phase shift $$-63.4^\circ.$$</li><li>So the steady-state voltage waveform is $$\boxed{v(t)=89.4\cos(5000t-63.4^\circ)\text{ V}}.$$</li></ul></article>
+        </div>
+        <div class="mini"><h3>Key Shortcut</h3><p>In series phasor circuits, convert each element to its impedance first, use $$V=ZI$$ on each element, and then add the element voltages. That is cleaner than trying to jump straight from the source current to the final waveform.</p></div>
+        <div class="mini"><h3>Why The Capacitor Voltage Points Down</h3><p>The capacitor impedance is $$-j20,$$ which lies on the negative imaginary axis. Multiplying the current phasor by that impedance rotates the resulting voltage downward by $$90^\circ.$$ That is why $$V_C$$ becomes $$-j80$$ and not a positive imaginary quantity.</p></div>
+        <div class="mini"><h3>How KVL Looks In Phasor Form</h3><p>Kirchhoff's voltage law still works in sinusoidal steady state. The only difference is that you add phasor voltages instead of time-domain expressions. So $$V=V_R+V_C$$ is the phasor version of the same loop rule you already know from circuits.</p></div>
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

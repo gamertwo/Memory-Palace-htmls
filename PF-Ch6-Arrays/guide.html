@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Chapter 6 Arrays | Guideline Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+</head>
+<body data-page-key="pf_ch6_arrays_guide">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Arrays Index</a><a href="arrays-basics.html">Arrays Basics</a><a href="array-processing.html">Array Processing</a><a href="strings-functions.html">Strings + Functions</a><a href="search-sort-2d.html">Search, Sort + 2D</a></nav>
+
+  <section class="hero">
+    <div class="tag">Major System + Code Writing Flow</div>
+    <h1>Arrays Guideline Page</h1>
+    <p class="hero-sub">Use one fixed peg system for the whole chapter. The goal is not to memorize random code lines. The goal is to memorize the repeated syntax families and the logic flow that makes code blocks easy to write under pressure.</p>
+    <div class="tool-row"><a class="tool-btn" href="#pegs">Peg Table</a><a class="tool-btn" href="#bank">Syntax Bank</a><a class="tool-btn" href="#rules">Do and Do Not</a></div>
+  </section>
+
+  <div class="study-grid two-col">
+    <section class="panel">
+      <div class="section-title">Major System Digit Sounds</div>
+      <p class="copy">Keep the sound rules stable so the peg words stay stable.</p>
+      <div class="facts" style="margin-top:.9rem">
+        <div class="fact"><div class="k">0</div><div class="v">s, z</div></div>
+        <div class="fact"><div class="k">1</div><div class="v">t, d</div></div>
+        <div class="fact"><div class="k">2</div><div class="v">n</div></div>
+        <div class="fact"><div class="k">3</div><div class="v">m</div></div>
+        <div class="fact"><div class="k">4</div><div class="v">r</div></div>
+        <div class="fact"><div class="k">5</div><div class="v">l</div></div>
+        <div class="fact"><div class="k">6</div><div class="v">sh, ch, j</div></div>
+        <div class="fact"><div class="k">7</div><div class="v">k, g</div></div>
+        <div class="fact"><div class="k">8</div><div class="v">f, v</div></div>
+        <div class="fact"><div class="k">9</div><div class="v">p, b</div></div>
+      </div>
+      <div class="mini" style="margin-top:1rem"><h3>Important Rule</h3><p>Memorize the code skeleton attached to the peg, not a totally different image every time. Reuse the same pegs on every arrays question so the chapter feels like one system.</p></div>
+    </section>
+
+    <section class="panel" id="rules">
+      <div class="section-title">Do and Do Not</div>
+      <div class="study-grid">
+        <div class="mini do-card"><h3>Do</h3><ul class="list"><li>Memorize full syntax skeletons such as <span class="inline-code">type name[SIZE];</span> and <span class="inline-code">for (int i = 0; i &lt; SIZE; ++i)</span>.</li><li>Say the peg word before writing the code shape.</li><li>Dry-run every loop with 3 to 5 values.</li><li>Use one page for one chunk of logic during revision.</li><li>Keep safe input habits like width-limited <span class="inline-code">scanf</span>.</li></ul></div>
+        <div class="mini dont-card"><h3>Do Not</h3><ul class="list"><li>Do not memorize only the final output and skip the loop body.</li><li>Do not change peg words every day.</li><li>Do not write <span class="inline-code">&lt;= SIZE</span> when you mean <span class="inline-code">&lt; SIZE</span>.</li><li>Do not start array indexing from 1.</li><li>Do not forget that strings in C must end with <span class="inline-code">'\\0'</span>.</li></ul></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel" id="pegs" style="margin-top:1rem">
+    <div class="section-title">Universal Peg Table</div>
+    <div class="peg-grid">
+      <article class="peg-card"><div class="peg-num">10</div><h3>Toes</h3><div class="peg-word">Bounds Peg</div><p>Count from zero up to <span class="inline-code">size - 1</span>. This peg guards array bounds and field width limits.</p></article>
+      <article class="peg-card"><div class="peg-num">21</div><h3>Net</h3><div class="peg-word">Container Peg</div><p>The net catches many same-type values in one container: <span class="inline-code">int a[5];</span></p></article>
+      <article class="peg-card"><div class="peg-num">35</div><h3>Mail</h3><div class="peg-word">Fill Peg</div><p>Mail gets delivered into boxes. Use it for initializer lists and assignments like <span class="inline-code">a[i] = value;</span></p></article>
+      <article class="peg-card"><div class="peg-num">34</div><h3>Mower</h3><div class="peg-word">Loop Peg</div><p>The mower sweeps across the array with <span class="inline-code">for (int i = 0; i &lt; size; ++i)</span>.</p></article>
+      <article class="peg-card"><div class="peg-num">47</div><h3>Rock</h3><div class="peg-word">Decision Peg</div><p>The rock is your <span class="inline-code">if</span> test: compare, decide, then update.</p></article>
+      <article class="peg-card"><div class="peg-num">15</div><h3>Towel</h3><div class="peg-word">Swap Peg</div><p>The towel temporarily holds one value during a swap: <span class="inline-code">int temp = a[i];</span></p></article>
+      <article class="peg-card"><div class="peg-num">70</div><h3>Case</h3><div class="peg-word">Function Peg</div><p>The case carries arrays into functions and carries results back with parameters and <span class="inline-code">return</span>.</p></article>
+      <article class="peg-card"><div class="peg-num">05</div><h3>Seal</h3><div class="peg-word">String-End Peg</div><p>The seal closes the string with <span class="inline-code">'\\0'</span>.</p></article>
+      <article class="peg-card"><div class="peg-num">29</div><h3>Knob</h3><div class="peg-word">2D Peg</div><p>Two knobs control row and column: <span class="inline-code">matrix[r][c]</span>.</p></article>
+    </div>
+  </section>
+
+  <section class="panel" id="bank" style="margin-top:1rem">
+    <div class="section-title">Syntax Bank</div>
+    <table class="guide-table">
+      <thead>
+        <tr><th>Skill</th><th>Code Skeleton</th><th>Peg</th><th>What To Remember</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Declaration</td><td><span class="inline-code">int numbers[5];</span></td><td>21 net</td><td>Same type, fixed size, contiguous memory.</td></tr>
+        <tr><td>Access</td><td><span class="inline-code">numbers[i]</span></td><td>10 toes + 21 net</td><td>Index starts at 0 and must stay inside bounds.</td></tr>
+        <tr><td>Loop</td><td><span class="inline-code">for (int i = 0; i &lt; SIZE; ++i)</span></td><td>34 mower</td><td>Start at 0, stop before size, then move ahead.</td></tr>
+        <tr><td>Initialize</td><td><span class="inline-code">int a[5] = {1, 2, 3, 4, 5};</span></td><td>35 mail</td><td>Mail fills each slot. Partial lists leave the rest as 0.</td></tr>
+        <tr><td>Sum</td><td><span class="inline-code">total += a[i];</span></td><td>34 mower</td><td>Traverse then accumulate.</td></tr>
+        <tr><td>Maximum</td><td><span class="inline-code">if (a[i] &gt; max) max = a[i];</span></td><td>47 rock</td><td>Compare first, update second.</td></tr>
+        <tr><td>String Input</td><td><span class="inline-code">scanf("%19s", name);</span></td><td>10 toes + 05 seal</td><td>Width is one less than array size so the null terminator fits.</td></tr>
+        <tr><td>Function Header</td><td><span class="inline-code">void printArray(const int arr[], int size);</span></td><td>70 case</td><td>Array travels with its size. Use <span class="inline-code">const</span> when only reading.</td></tr>
+        <tr><td>Linear Search</td><td><span class="inline-code">if (arr[i] == key) return i;</span></td><td>47 rock + 70 case</td><td>Decision first, then return the found index.</td></tr>
+        <tr><td>Bubble Sort Swap</td><td><span class="inline-code">temp = a[i]; a[i] = a[i+1]; a[i+1] = temp;</span></td><td>15 towel</td><td>The towel holds one value while the pair switches places.</td></tr>
+        <tr><td>2D Access</td><td><span class="inline-code">matrix[r][c]</span></td><td>29 knob</td><td>First knob is row, second knob is column.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Flow For Writing Code</div>
+    <div class="flow-grid">
+      <div class="flow-step"><h3>1. Read The Job</h3><p>Ask whether the question wants storage, traversal, comparison, counting, swapping, or printing.</p></div>
+      <div class="flow-step"><h3>2. Pick The Pattern</h3><p>Choose the skeleton: declaration, loop, if-check, function, or nested loop.</p></div>
+      <div class="flow-step"><h3>3. Write The Frame</h3><p>Write the loop header and starter variables before the body details.</p></div>
+      <div class="flow-step"><h3>4. Fill The Update</h3><p>Inside the loop, update total, max, count, temp, or found index.</p></div>
+      <div class="flow-step"><h3>5. Dry Run</h3><p>Run the code mentally on three values and check the first and last index.</p></div>
+    </div>
+    <p class="source-note">Source basis: the local lecture file <span class="inline-code">PF_Deitel_Deitel_Chapter6.pdf</span>, especially the arrays overview, strings, functions, search, sort, and two-dimensional arrays sections.</p>
+  </section>
+</main>
+</body>
+</html>

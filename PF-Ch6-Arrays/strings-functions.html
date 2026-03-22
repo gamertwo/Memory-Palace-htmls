@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Chapter 6 Arrays | Strings and Functions</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="pf_ch6_strings_functions">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Arrays Index</a><a href="guide.html">Guide</a><a href="array-processing.html">Prev: Processing</a><a href="search-sort-2d.html">Next: Search, Sort + 2D</a></nav>
+
+  <section class="hero">
+    <div class="tag">Strings + Handoff</div>
+    <h1>Character Arrays And Functions</h1>
+    <p class="hero-sub">This page trains the memory that usually breaks under pressure: strings are arrays of characters ending with a null terminator, array names travel to functions without brackets in the call, and read-only arrays should use const.</p>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Guideline Page</a><button class="tool-btn" type="button" data-jump="memory-anchor">Memory Focus</button><button class="tool-btn" type="button" data-jump="path-anchor">Palace Path</button><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="study-grid two-col">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">String Rule</div><div class="v"><span class="inline-code">char name[20];</span> ends with <span class="inline-code">'\\0'</span></div></div>
+          <div class="fact"><div class="k">Safe Input</div><div class="v"><span class="inline-code">scanf("%19s", name);</span></div></div>
+          <div class="fact"><div class="k">Function Style</div><div class="v"><span class="inline-code">void printArray(const int arr[], int size)</span></div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Flow</div>
+        <div class="rooms">
+          <article class="room"><h2>Room 1: A String Is A Char Array</h2><ul><li>In C, a string is just a character array.</li><li>The last character must be the null terminator <span class="inline-code">'\\0'</span>.</li><li>That is why a 5-letter word needs 6 slots.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>char string1[] = "first";
+char string2[] = {'f', 'i', 'r', 's', 't', '\0'};</code></pre></article>
+          <article class="room"><h2>Room 2: Safe scanf Syntax</h2><ul><li>If the array has 20 slots, read at most 19 visible characters.</li><li>Use <span class="inline-code">scanf("%19s", name);</span></li><li>The last slot is reserved for the null terminator.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>char name[20];
+scanf("%19s", name);</code></pre></article>
+          <article class="room"><h2>Room 3: Characters Behave Like Array Elements</h2><ul><li>You can access individual characters with <span class="inline-code">word[i]</span>.</li><li>You can modify a character with an assignment such as <span class="inline-code">word[0] = 'J';</span></li><li>Strings still obey indexing rules.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>char word[] = "HELLO";
+printf("%c\n", word[0]);
+word[0] = 'J';</code></pre></article>
+          <article class="room"><h2>Room 4: Passing Arrays To Functions</h2><ul><li>Write the parameter like <span class="inline-code">int arr[]</span> or <span class="inline-code">const int arr[]</span>.</li><li>Pass the array in the call as <span class="inline-code">printArray(numbers, SIZE);</span></li><li>The array is handed over with its size.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>void printArray(const int arr[], int size);
+
+printArray(numbers, SIZE);</code></pre></article>
+          <article class="room"><h2>Room 5: Protect What Should Not Change</h2><ul><li>Use <span class="inline-code">const</span> in the function parameter when the function should only read the array.</li><li>Passing the whole array can affect the original data.</li><li>Passing a single element sends only a value copy.</li></ul><div class="room-code-label">Room Code</div><pre class="code-block room-code"><code>void modifyArray(int a[], int size) { a[0] = 100; }
+void modifyElement(int x) { x = 100; }</code></pre></article>
+        </div>
+        <div class="drill-card"><h3>Code Block To Rehearse</h3><pre class="code-block"><code>#include &lt;stdio.h&gt;
+
+void printArray(const int arr[], int size) {
+    for (int i = 0; i &lt; size; ++i) {
+        printf("%d ", arr[i]);
+    }
+}
+
+int main(void) {
+    char name[20];
+    scanf("%19s", name);
+    return 0;
+}</code></pre></div>
+      </section>
+
+      <section class="panel" id="memory-anchor">
+        <div class="section-title">Mnemonic Focus</div>
+        <div class="rooms">
+          <article class="memory-card"><h2>Peg 05: Seal</h2><p class="memory-copy">Use <span class="inline-code">05 = seal</span> for the end of the string. What exactly must the seal protect?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="s1">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="s1">Mark Remembered</button></div><p class="memory-status" data-memory-status="s1">Not marked yet.</p><div class="memory-answer" id="s1" hidden><ul><li>The seal protects the null terminator <span class="inline-code">'\\0'</span>.</li><li>A C string is not complete without it.</li></ul></div></article>
+          <article class="memory-card"><h2>Peg 10: Toes</h2><p class="memory-copy">Use <span class="inline-code">10 = toes</span> for safety limits. What should the toes count in string input?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="s2">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="s2">Mark Remembered</button></div><p class="memory-status" data-memory-status="s2">Not marked yet.</p><div class="memory-answer" id="s2" hidden><ul><li>If the array size is 20, read at most 19 visible characters.</li><li>That leaves one slot for <span class="inline-code">'\\0'</span>.</li></ul></div></article>
+          <article class="memory-card"><h2>Peg 70: Case</h2><p class="memory-copy">Use <span class="inline-code">70 = case</span> for function handoff. What must travel together?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="s3">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="s3">Mark Remembered</button></div><p class="memory-status" data-memory-status="s3">Not marked yet.</p><div class="memory-answer" id="s3" hidden><ul><li>The array travels with its size.</li><li>Example call: <span class="inline-code">printArray(numbers, SIZE);</span></li><li>Example parameter: <span class="inline-code">const int arr[]</span></li></ul></div></article>
+          <article class="memory-card"><h2>Peg 21: Net</h2><p class="memory-copy">How does the net idea still help on a string page?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="s4">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="s4">Mark Remembered</button></div><p class="memory-status" data-memory-status="s4">Not marked yet.</p><div class="memory-answer" id="s4" hidden><ul><li>The string is still a container of slots: <span class="inline-code">char name[20];</span></li><li>Characters are accessed one slot at a time with <span class="inline-code">name[i]</span>.</li></ul></div></article>
+          <article class="memory-card"><h2>Flow Rehearsal</h2><p class="memory-copy">What short writing order should you remember for strings and function questions?</p><div class="tool-row memory-actions"><button class="tool-btn" type="button" data-memory-toggle="s5">Reveal Answer</button><button class="ghost-btn" type="button" data-memory-mark="s5">Mark Remembered</button></div><p class="memory-status" data-memory-status="s5">Not marked yet.</p><div class="memory-answer" id="s5" hidden><ul><li>Declare the char array.</li><li>Leave space for the seal <span class="inline-code">'\\0'</span>.</li><li>Use safe input width.</li><li>Pass the array and size together.</li><li>Add <span class="inline-code">const</span> if the function only reads.</li></ul></div></article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar" id="path-anchor">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Think of strings and functions as a transport route: 21 net holds the characters, 05 seal closes the word, 10 toes checks the safe limit, and 70 case carries the array into a function.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1: Net Shelf</h3><p>A row of character slots appears as <span class="inline-code">char name[20];</span></p></div>
+        <div class="transition"><h3>Transition 1 to 2</h3><p>At the end of the shelf, a seal sits on the final slot.</p></div>
+        <div class="station"><h3>Station 2: Seal Dock</h3><p>The seal reminds you that every C string ends with <span class="inline-code">'\\0'</span>.</p></div>
+        <div class="transition"><h3>Transition 2 to 3</h3><p>Toes walk up to the input desk and stop one space early.</p></div>
+        <div class="station"><h3>Station 3: Safe Input Desk</h3><p>For size 20, the desk stamps <span class="inline-code">%19s</span> on the form.</p></div>
+        <div class="transition"><h3>Transition 3 to 4</h3><p>A locked case arrives to carry the array away.</p></div>
+        <div class="station"><h3>Station 4: Function Hall</h3><p>The case carries <span class="inline-code">arr</span> and <span class="inline-code">size</span> together into the function.</p></div>
+        <div class="transition"><h3>Transition 4 to 5</h3><p>A guard checks whether the function is allowed to modify the cargo.</p></div>
+        <div class="station"><h3>Station 5: Const Guard</h3><p>If the function only reads, the guard writes <span class="inline-code">const</span> on the parameter list.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="copy">Use this prompt to generate a one-paragraph string and function palace.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for C strings and array functions. Use 21 = net for the char-array container, 05 = seal for the null terminator, 10 = toes for safe input width, and 70 = case for passing arrays to functions with their size. Include scanf("%19s", name);, name[i], a function header like void printArray(const int arr[], int size), and the idea that a whole array can be changed but a single passed element is only a value copy.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

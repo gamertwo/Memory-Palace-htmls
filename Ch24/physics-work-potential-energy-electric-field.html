@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Work and Potential Energy in an Electric Field | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<link rel="stylesheet" href="chapter24-problem.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<script src="chapter24-problem.js" defer></script>
+<style>
+.wpe-axis{position:absolute;left:50%;top:24px;bottom:24px;width:2px;background:rgba(255,255,255,.2)}
+.wpe-ground{position:absolute;left:28px;right:28px;bottom:30px;height:10px;border-radius:999px;background:linear-gradient(90deg, rgba(125,96,57,.7), rgba(180,134,76,.95), rgba(125,96,57,.7))}
+.wpe-arrow{width:2px;height:48px;background:var(--olive)}
+.wpe-arrow::after{right:-4px;top:auto;bottom:-1px;transform:rotate(135deg)}
+.wpe-up{width:2px;height:62px;background:var(--blue)}
+.wpe-up::after{right:-4px;top:-1px;transform:rotate(-45deg)}
+.wpe-sign{position:absolute;left:28px;right:28px;top:34px;bottom:34px}
+.wpe-step{position:absolute;left:50%;transform:translateX(-50%);width:170px;text-align:center;padding:.42rem .6rem;border-radius:14px;border:1px solid var(--line);background:rgba(18,26,36,.88);color:var(--muted);font-size:.84rem}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 24</a>
+    <a href="physics-work-potential-energy-electric-field.html">Current: 24-1</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">24-1 | Sample Problem: Work to Potential Energy</div>
+    <h1>Work and Potential Energy in an Electric Field</h1>
+    <p>An electron near Earth moves upward through a downward electric field. The page is really a sign-check exercise: compute the work done by the electric force, then flip it to electric potential-energy change with $$\Delta U=-W.$$</p>
+    <div class="hero-grid">
+      <div class="eq">$$W=\vec F\cdot\vec d=q\vec E\cdot\vec d=qEd\cos180^\circ=1.2\times10^{-14}\,\text{J},\qquad \Delta U=-W=-1.2\times10^{-14}\,\text{J}$$</div>
+      <div class="hero-side">
+        <h2>What To Notice</h2>
+        <ul>
+          <li>The field points downward, but the electron moves upward.</li>
+          <li>Because the charge is negative, $$\vec F=q\vec E$$ points opposite the field.</li>
+          <li>The electric force does positive work, so the electric potential energy decreases.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt="prompt-modal">AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">Uniform atmospheric field $$E=150\,\text{N/C}$$ downward and displacement $$d=520\,\text{m}$$ upward.</div></div>
+          <div class="fact"><div class="k">Charge</div><div class="v">For an electron, $$q=-1.60\times10^{-19}\,\text{C}.$$</div></div>
+          <div class="fact"><div class="k">Work Link</div><div class="v">Use $$W=qEd\cos\theta$$ with $$\theta=180^\circ$$ between $$\vec E$$ and $$\vec d.$$</div></div>
+          <div class="fact"><div class="k">Energy Link</div><div class="v">Once the work is known, convert with $$\Delta U=-W.$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Separate Field Direction from Force Direction</h2>
+            <ul>
+              <li>The electric field near Earth points downward.</li>
+              <li>The electron has negative charge, so the electric force on it points upward.</li>
+              <li>That already hints that the force helps the upward motion.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Write the Constant-Force Work Formula</h2>
+            <ul>
+              <li>For a constant force, $$W=\vec F\cdot\vec d.$$</li>
+              <li>In electrostatics, replace the force by $$\vec F=q\vec E.$$</li>
+              <li>That turns the work into $$W=q\vec E\cdot\vec d=qEd\cos\theta.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Choose the Correct Angle</h2>
+            <ul>
+              <li>The field is downward and the displacement is upward.</li>
+              <li>Those directions are opposite, so $$\theta=180^\circ.$$</li>
+              <li>Therefore $$\cos\theta=-1.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Substitute the Charge Sign Carefully</h2>
+            <ul>
+              <li>The electron charge is negative: $$q=-1.60\times10^{-19}\,\text{C}.$$</li>
+              <li>Multiplying a negative charge by $$\cos180^\circ=-1$$ produces a positive work result.</li>
+              <li>That is the sign checkpoint most people need here.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Compute the Work</h2>
+            <ul>
+              <li>Insert the values into $$W=qEd\cos180^\circ.$$</li>
+              <li>The product gives $$W=1.2\times10^{-14}\,\text{J}.$$</li>
+              <li>Positive work means the field transfers energy into kinetic form during the upward motion.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Convert Work into Potential-Energy Change</h2>
+            <ul>
+              <li>Use the chapter relation $$\Delta U=-W.$$</li>
+              <li>So the potential-energy change is $$-1.2\times10^{-14}\,\text{J}.$$</li>
+              <li>The minus sign means the electric potential energy becomes smaller.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Interpret the Physics</h2>
+            <ul>
+              <li>The electron moves in the same direction as the electric force acting on it.</li>
+              <li>When a conservative force does positive work, the corresponding potential energy drops.</li>
+              <li>So the answer is not just a number; it matches the motion logic.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Keep the One-Line Memory</h2>
+            <ul>
+              <li>Negative charge plus opposite field/displacement directions can still yield positive work.</li>
+              <li>The chapter shortcut is: find work first, then flip the sign for $$\Delta U.$$</li>
+              <li>That one habit avoids most sign mistakes in early potential problems.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Problem Figures</div>
+        <div class="figure-grid">
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="wpe-axis"></div>
+              <div class="wpe-ground"></div>
+              <div class="charge negative" style="left:calc(50% - 8px);top:174px"></div>
+              <div class="arrow wpe-up" style="left:50%;top:104px;transform:translateX(-50%)"></div>
+              <div class="arrow wpe-arrow" style="left:36%;top:48px"></div>
+              <div class="arrow wpe-arrow" style="left:36%;top:104px"></div>
+              <div class="arrow wpe-arrow" style="left:36%;top:160px"></div>
+              <div class="label" style="left:24px;top:34px">$$\vec E$$ downward</div>
+              <div class="label" style="left:55%;top:112px">$$d=520\,\text{m}$$ upward</div>
+              <div class="label" style="left:54%;top:176px">electron</div>
+              <div class="label" style="left:22px;bottom:44px">near Earth</div>
+            </div>
+            <h3>Geometry of the Sign</h3>
+            <p>The field points downward, but the electron is pushed upward because its charge is negative. That is why the work comes out positive.</p>
+          </div>
+
+          <div class="figure-card">
+            <div class="sketch">
+              <div class="wpe-sign">
+                <div class="wpe-step" style="top:8px">$$\vec F=q\vec E$$</div>
+                <div class="wpe-step" style="top:72px">$$W=qEd\cos180^\circ$$</div>
+                <div class="wpe-step" style="top:136px">$$W=+1.2\times10^{-14}\,\text{J}$$</div>
+                <div class="wpe-step" style="top:200px">$$\Delta U=-1.2\times10^{-14}\,\text{J}$$</div>
+              </div>
+            </div>
+            <h3>Calculation Ladder</h3>
+            <p>The whole sample compresses into a four-step ladder: force, work, numerical sign, then potential-energy change.</p>
+          </div>
+        </div>
+        <div class="mini" style="margin-top:1rem">
+          <h3>Fast Check</h3>
+          <p>If the electric force helps the motion, its work should be positive. Once you see that, you already know $$\Delta U$$ must be negative before touching the calculator.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Walk from a downward field into an upward electron launch, then flip from work to potential energy at the end.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>Stand on the ground while giant green arrows rain downward to show Earth’s electric field.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A small red electron suddenly fires upward against the visual field lines.</p></div>
+        <div class="station"><h3>Station 2</h3><p>A glowing sign reads $$\vec F=q\vec E$$ and the minus sign on the electron flips the force upward.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The elevator wall stamps $$180^\circ$$ between field and displacement.</p></div>
+        <div class="station"><h3>Station 3</h3><p>A calculator prints $$W=+1.2\times10^{-14}\,\text{J}$$ in bright blue because two negatives multiplied.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The blue work ticket flips over and turns orange.</p></div>
+        <div class="station"><h3>Station 4</h3><p>The back of the ticket says $$\Delta U=-W$$ and lands on $$-1.2\times10^{-14}\,\text{J}.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The exit door only opens if you say “positive work means lower potential energy.”</p></div>
+        <div class="station"><h3>Station 5</h3><p>The final room stores the rule: do work first, then reverse the sign for electric potential energy.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt turns the atmospheric electron sample into a tight sign-logic memory route.</p>
+    <textarea class="prompt-box" readonly>Create a memory palace in exactly one connected paragraph for the sample problem on work and potential energy in an electric field. Keep the logic in order, make each image force the next one, and do not use bullet points.
+
+1. Start near Earth with an electric field of 150 N/C pointing downward.
+2. Release an electron and make the negative charge flip the electric force upward.
+3. Move the electron upward through 520 m.
+4. Use W = q E d cos theta with theta = 180 degrees between field and displacement.
+5. Show why two negatives make the work positive.
+6. Store the numerical result W = 1.2 x 10^-14 J.
+7. Flip the sign using delta U = -W.
+8. End with delta U = -1.2 x 10^-14 J and the lesson that positive work by the electric force means a decrease in electric potential energy.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" data-copy-prompt>Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+</body>
+</html>

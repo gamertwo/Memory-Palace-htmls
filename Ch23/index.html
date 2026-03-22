@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 23 Physics Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#f3efe2;
+  --paper-2:#e7dfca;
+  --ink:#2d2a24;
+  --muted:#645d4f;
+  --line:rgba(45,42,36,.14);
+  --olive:#8f9a4a;
+  --gold:#d8a81f;
+  --slate:#5d717c;
+  --card:#fbf8ef;
+  --shadow:0 24px 60px rgba(42,36,24,.14);
+}
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:'Manrope',sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(143,154,74,.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(93,113,124,.14), transparent 24%),
+    linear-gradient(180deg, #d9d1be, #efe9d9 18%, #ede5d3 100%);
+}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .92rem;
+  font-size:.84rem;
+  background:rgba(255,255,255,.45);
+  color:var(--muted);
+  backdrop-filter:blur(10px);
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(45,42,36,.12);
+  border-radius:28px;
+  padding:1.6rem;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,255,255,.34)),
+    repeating-linear-gradient(0deg, rgba(45,42,36,.018) 0, rgba(45,42,36,.018) 1px, transparent 1px, transparent 6px),
+    var(--paper);
+  box-shadow:var(--shadow);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:auto -90px -110px auto;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(216,168,31,.2), rgba(216,168,31,0));
+}
+.kicker{
+  font-size:.76rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--olive);
+  margin-bottom:.55rem;
+  font-weight:800;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.2rem,5vw,4rem);
+  line-height:1;
+  max-width:14ch;
+  margin-bottom:.8rem;
+}
+.hero p{
+  max-width:56rem;
+  color:var(--muted);
+  line-height:1.8;
+}
+.hero-meta{
+  display:flex;
+  gap:.8rem;
+  flex-wrap:wrap;
+  margin-top:1rem;
+}
+.pill{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.48rem .82rem;
+  background:rgba(255,255,255,.5);
+  color:var(--muted);
+  font-size:.79rem;
+}
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(280px,.78fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.panel{
+  border:1px solid rgba(45,42,36,.12);
+  border-radius:24px;
+  padding:1.2rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.45)),
+    var(--card);
+  box-shadow:var(--shadow);
+}
+.panel h2,.note h3{
+  font-family:'Fraunces',serif;
+  color:var(--ink);
+}
+.panel h2{
+  font-size:1.1rem;
+  margin-bottom:.9rem;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.9rem}
+.card{
+  display:block;
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:1rem;
+  background:rgba(255,255,255,.48);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 20px 40px rgba(42,36,24,.1);
+  border-color:rgba(143,154,74,.45);
+}
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:.75rem;
+  margin-bottom:.7rem;
+}
+.card-index{
+  font-size:.73rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--olive);
+  font-weight:800;
+}
+.card-type{
+  font-size:.68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:800;
+}
+.card h3{
+  font-size:1rem;
+  margin-bottom:.45rem;
+}
+.card p,.note p,.note li{
+  color:var(--muted);
+  line-height:1.75;
+  font-size:.92rem;
+}
+.card-footer{
+  display:flex;
+  justify-content:space-between;
+  gap:.75rem;
+  margin-top:.9rem;
+  color:var(--muted);
+  font-size:.76rem;
+}
+.card-hints{
+  display:grid;
+  gap:.45rem;
+  margin-top:.8rem;
+}
+.card-hints div{
+  border-left:2px solid rgba(180,207,98,.55);
+  padding-left:.65rem;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.65;
+}
+.card-footer span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.36rem .58rem;
+  background:rgba(255,255,255,.04);
+}
+.stack{display:grid;gap:.9rem}
+.note{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.46);
+}
+.note h3{
+  font-size:.98rem;
+  margin-bottom:.45rem;
+}
+.note ul{padding-left:1.1rem}
+:root{
+  --paper:#11161d;
+  --paper-2:#19212c;
+  --ink:#eef3f8;
+  --muted:#9fb0c2;
+  --line:rgba(255,255,255,.12);
+  --olive:#b4cf62;
+  --gold:#f1c453;
+  --slate:#79a8c5;
+  --card:#151c25;
+  --shadow:0 24px 60px rgba(0,0,0,.34);
+}
+body{
+  background:
+    radial-gradient(circle at top left, rgba(180,207,98,.14), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(121,168,197,.12), transparent 24%),
+    linear-gradient(180deg, #091018, #0e141c 24%, #151c25 100%);
+}
+.nav a,
+.pill,
+.note,
+.card{
+  background:rgba(255,255,255,.05);
+}
+.hero{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 6px),
+    var(--paper);
+}
+.panel{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+    var(--card);
+}
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+}
+.card:hover{
+  box-shadow:0 20px 40px rgba(0,0,0,.24);
+  border-color:rgba(180,207,98,.45);
+}
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr}
+}
+</style>
+<script src="../page-visit-tracker.js" defer></script>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="../Ch22/index.html">Chapter 22</a>
+    <a href="memory-palace-index.html">Memory Palace Track</a>
+  </nav>
+
+  <section class="hero">
+    <div class="kicker">Chapter 23</div>
+    <h1>Gauss's Law and Symmetry</h1>
+    <p>Chapter 23 starts where the direct-integration pages begin to feel heavy. Instead of summing charge elements one by one, this set focuses on symmetry, Gaussian surfaces, electric flux, and the fast logic that turns field questions into shape questions.</p>
+    <div class="hero-meta">
+      <div class="pill">10 pages so far</div>
+      <div class="pill">Paper-style layout</div>
+      <div class="pill">Linear review enabled</div>
+      <div class="pill">10 memory-palace pages</div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <section class="panel">
+      <h2>Pages</h2>
+      <div class="grid">
+        <a class="card" href="memory-palace-index.html">
+          <div class="card-top"><div class="card-index">MP</div><div class="card-type">Parallel Track</div></div>
+          <h3>Chapter 23 Memory Palace Index</h3>
+          <p>A separate concept-first route for Chapter 23 that focuses on the big ideas, start formulas, end formulas, and interactive memory-palace stories instead of small numerical details.</p>
+          <div class="card-hints">
+            <div>Includes a Major-system foundation page plus one simple memory page for each core Chapter 23 concept.</div>
+            <div>Best entry if you want to memorize what to start with, what the idea means, and where the derivation finishes.</div>
+          </div>
+          <div class="card-footer"><span>10 pages</span><span>Concept memory</span></div>
+        </a>
+
+        <a class="card" href="physics-gauss-law-gaussian-surface.html">
+          <div class="card-top"><div class="card-index">01</div><div class="card-type">Launch Page</div></div>
+          <h3>What Is Gauss's Law?</h3>
+          <p>Introduces electric flux, Gaussian surfaces, why symmetry matters, and the classic spherical-surface argument that reveals enclosed charge without brute-force integration.</p>
+          <div class="card-hints">
+            <div>Law statement, Gaussian surface logic, and the symmetry shortcut in one page.</div>
+            <div>Best entry point if you want the chapter overview before examples.</div>
+          </div>
+          <div class="card-footer"><span>8 rooms</span><span>Symmetry first</span></div>
+        </a>
+
+        <a class="card" href="physics-flux-and-electric-flux.html">
+          <div class="card-top"><div class="card-index">02</div><div class="card-type">Core Concept</div></div>
+          <h3>Flux and Flux of an Electric Field</h3>
+          <p>Builds the idea of flux from a flow-through-a-loop picture, then upgrades it into electric flux through a closed surface and the sign logic behind inward and outward field lines.</p>
+          <div class="card-hints">
+            <div>Includes area vectors, angle cases, and sign conventions.</div>
+            <div>Good refresher when the dot-product interpretation feels fuzzy.</div>
+          </div>
+          <div class="card-footer"><span>8 rooms</span><span>Scalar through area</span></div>
+        </a>
+
+        <a class="card" href="physics-flux-closed-cylinder-uniform-field.html">
+          <div class="card-top"><div class="card-index">03</div><div class="card-type">Sample Problem</div></div>
+          <h3>Flux Through a Closed Cylinder</h3>
+          <p>Works a classic Gaussian-surface problem in a uniform field, separating left cap, curved wall, and right cap to show why the total electric flux is zero.</p>
+          <div class="card-hints">
+            <div>Clean cap-by-cap example with one negative face, one zero wall, and one positive face.</div>
+            <div>Useful first worked problem after learning flux signs.</div>
+          </div>
+          <div class="card-footer"><span>7 rooms</span><span>Cap-by-cap logic</span></div>
+        </a>
+
+        <a class="card" href="physics-flux-closed-cube-nonuniform-field.html">
+          <div class="card-top"><div class="card-index">04</div><div class="card-type">Sample Problem</div></div>
+          <h3>Flux Through a Closed Cube</h3>
+          <p>Analyzes a nonuniform field across a cube, separating x-face and y-face contributions to show how changing field components alter the net electric flux.</p>
+          <div class="card-hints">
+            <div>Tracks which field component matches which face normal.</div>
+            <div>Shows why unequal x-face contributions leave a nonzero net flux.</div>
+          </div>
+          <div class="card-footer"><span>8 rooms</span><span>Face-by-face flux</span></div>
+        </a>
+
+        <a class="card" href="physics-enclosed-charge-closed-cube.html">
+          <div class="card-top"><div class="card-index">05</div><div class="card-type">Sample Problem</div></div>
+          <h3>Enclosed Charge in a Nonuniform Field</h3>
+          <p>Takes the cube's net flux and completes the Gauss's-law step, converting the face-by-face flux result into the net enclosed charge.</p>
+          <div class="card-hints">
+            <div>Short finish page: known flux in, enclosed charge out.</div>
+            <div>Good checkpoint for the main promise of Gauss's law.</div>
+          </div>
+          <div class="card-footer"><span>7 rooms</span><span>Flux to charge</span></div>
+        </a>
+
+        <a class="card" href="physics-gauss-law-net-flux-and-enclosed-charge.html">
+          <div class="card-top"><div class="card-index">06</div><div class="card-type">Law + Problem</div></div>
+          <h3>Gauss's Law and Net Flux</h3>
+          <p>States Gauss's law in compact form, then uses a Gaussian surface around selected charges to compute the net electric flux directly from the enclosed charge.</p>
+          <div class="card-hints">
+            <div>Combines the formal law statement with a sample problem that sums only enclosed charges.</div>
+            <div>Useful when you want the clearest link between charge inside and flux outside.</div>
+          </div>
+          <div class="card-footer"><span>8 rooms</span><span>Charge to flux</span></div>
+        </a>
+
+        <a class="card" href="physics-gauss-law-coulomb-law-planar-symmetry.html">
+          <div class="card-top"><div class="card-index">07</div><div class="card-type">Derivation + Symmetry</div></div>
+          <h3>Gauss's Law and Coulomb's Law</h3>
+          <p>Uses a spherical Gaussian surface to recover Coulomb's law for a point charge, then extends the same symmetry logic to a nonconducting sheet with planar symmetry.</p>
+          <div class="card-hints">
+            <div>Bridges from point-charge spherical symmetry to the infinite-sheet field result.</div>
+            <div>Good page when you want to see Gauss's law produce familiar formulas, not just flux totals.</div>
+          </div>
+          <div class="card-footer"><span>9 rooms</span><span>Sphere to sheet</span></div>
+        </a>
+
+        <a class="card" href="physics-planar-symmetry-two-plates-example.html">
+          <div class="card-top"><div class="card-index">08</div><div class="card-type">Application</div></div>
+          <h3>Planar Symmetry and Two Plates</h3>
+          <p>Revisits the sheet-of-charge result, extends it to two conducting or nonconducting plates, and works the left-between-right field example by superposition.</p>
+          <div class="card-hints">
+            <div>Covers the pillbox result, two-plate field logic, and the standard three-region sheet example.</div>
+            <div>Best next page when you want to see planar symmetry turn into field-region bookkeeping.</div>
+          </div>
+          <div class="card-footer"><span>10 rooms</span><span>Sheet superposition</span></div>
+        </a>
+
+        <a class="card" href="physics-spherical-symmetry-shell-and-solid-sphere.html">
+          <div class="card-top"><div class="card-index">09</div><div class="card-type">Application</div></div>
+          <h3>Applying Gauss's Law: Spherical Symmetry</h3>
+          <p>Works the classic spherical cases: outside and inside a spherical shell, then outside and inside a uniformly charged solid sphere using enclosed-charge scaling.</p>
+          <div class="card-hints">
+            <div>Includes the shell result $$E=0$$ inside and the solid-sphere inside result that grows linearly with $$r$$.</div>
+            <div>Best page for locking in how enclosed charge changes with radius in spherical symmetry.</div>
+          </div>
+          <div class="card-footer"><span>10 rooms</span><span>Shell and sphere</span></div>
+        </a>
+
+        <a class="card" href="physics-electric-dipole-atmospheric-sprites.html">
+          <div class="card-top"><div class="card-index">10</div><div class="card-type">Sample Problem</div></div>
+          <h3>Electric Dipole and Atmospheric Sprites</h3>
+          <p>Models a thunderstorm as a vertical electric dipole, then uses the dipole-axis field to estimate the electric field high above the cloud where sprites appear.</p>
+          <div class="card-hints">
+            <div>Turns a real atmospheric picture into a clean electrostatics model with charges separated by $$2h$$.</div>
+            <div>Best page for seeing how the $$1/z^3$$ dipole falloff controls the change from 30 km to 60 km altitude.</div>
+          </div>
+          <div class="card-footer"><span>9 rooms</span><span>Dipole scaling</span></div>
+        </a>
+      </div>
+    </section>
+
+    <aside class="stack">
+      <section class="panel note">
+        <h3>Why This Chapter Feels Different</h3>
+        <p>Chapter 22 taught us how to build fields from tiny charge pieces. Chapter 23 pivots to the inverse mindset: choose a surface that matches the symmetry, then let flux expose the enclosed charge.</p>
+      </section>
+
+      <section class="panel note">
+        <h3>Suggested Continuity</h3>
+        <ul>
+          <li>Review the ring and disk pages in Chapter 22 if you want a quick symmetry refresher.</li>
+          <li>Start with Gauss's law, then flux, then the cylinder problem, the cube flux problem, convert flux into enclosed charge, use the direct enclosed-charge-to-flux example, move into symmetry-based field derivations, then do planar superposition and spherical symmetry.</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

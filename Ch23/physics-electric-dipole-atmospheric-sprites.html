@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Electric Dipole and Atmospheric Sprites | Rooms + Memory Palace Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="../linear-review.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --page:#0d131a;
+  --page-2:#18212c;
+  --paper:#141c25;
+  --ink:#eef3f8;
+  --muted:#9fb0c2;
+  --line:rgba(255,255,255,.12);
+  --olive:#b4cf62;
+  --gold:#f1c453;
+  --orange:#ef9b45;
+  --blue:#7ea6e8;
+  --pink:#ff6db4;
+  --red:#ff6477;
+  --cloud:#b8c6d8;
+  --ground:#88633e;
+  --shadow:0 24px 56px rgba(0,0,0,.34);
+}
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:'Manrope',sans-serif;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(180,207,98,.15), transparent 20%),
+    radial-gradient(circle at 88% 18%, rgba(126,166,232,.12), transparent 18%),
+    linear-gradient(180deg, #081018, var(--page) 14%, var(--page-2));
+}
+a{color:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:1.25rem 1rem 3rem}
+.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.55rem .9rem;
+  font-size:.84rem;
+  color:var(--muted);
+  background:rgba(255,255,255,.05);
+}
+.hero,.panel,.palace-sidebar{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:26px;
+  padding:1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 7px),
+    var(--paper);
+  box-shadow:var(--shadow);
+}
+.hero{position:relative;overflow:hidden}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-4rem;
+  top:-4rem;
+  width:16rem;
+  height:16rem;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,109,180,.2), rgba(255,109,180,0));
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--orange);
+  font-weight:800;
+  margin-bottom:.6rem;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4.5vw,3.55rem);
+  line-height:1;
+  max-width:16ch;
+  margin-bottom:.75rem;
+}
+.hero p{max-width:60rem;color:var(--muted);line-height:1.8}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(240px,.72fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.eq{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.05);
+  text-align:center;
+  overflow:auto;
+}
+.hero-side{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:1rem;
+  background:rgba(255,255,255,.05);
+}
+.hero-side h2,.room h2,.mini h3,.figure-card h3,.station h3,.transition h3{
+  font-family:'Fraunces',serif;
+}
+.hero-side h2{font-size:1rem;margin-bottom:.45rem}
+.hero-side p,.hero-side li,.fact .v,.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.figure-card p{
+  color:var(--muted);
+  line-height:1.75;
+}
+.hero-side ul{padding-left:1.15rem}
+.tool-row{display:flex;justify-content:flex-end;margin-top:.9rem}
+.tool-btn,.ghost-btn{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:.58rem .95rem;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:var(--ink);
+  background:rgba(255,255,255,.05);
+}
+.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.09)}
+.content-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.58fr) minmax(300px,.92fr);
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+.main-stack{display:grid;gap:1rem}
+.section-title{
+  font-size:1rem;
+  font-weight:800;
+  color:var(--gold);
+  letter-spacing:.03em;
+  margin-bottom:.85rem;
+}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.75rem}
+.fact{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:.85rem;
+  background:rgba(255,255,255,.04);
+}
+.fact .k{
+  font-size:.7rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--olive);
+  margin-bottom:.3rem;
+  font-weight:800;
+}
+.rooms{display:grid;gap:.9rem}
+.room{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+}
+.room h2{font-size:1rem;color:var(--ink);margin-bottom:.45rem}
+.room ul{padding-left:1.2rem}
+.figure-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:1rem;
+}
+.figure-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.04);
+}
+.sprite-figure,.dipole-figure{
+  position:relative;
+  height:245px;
+  border:1px dashed rgba(255,255,255,.16);
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  overflow:hidden;
+  margin-bottom:.75rem;
+}
+.sprite-sky{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 58% 26%, rgba(255,109,180,.55), rgba(255,109,180,0) 18%),
+    radial-gradient(circle at 56% 34%, rgba(126,166,232,.45), rgba(126,166,232,0) 22%),
+    linear-gradient(180deg, #101927, #13253a 52%, #0f1621);
+}
+.sprite-column{
+  position:absolute;
+  left:54%;
+  top:30px;
+  width:16px;
+  height:126px;
+  background:linear-gradient(180deg, rgba(255,109,180,0), rgba(255,109,180,.95) 32%, rgba(126,166,232,.15));
+  filter:blur(2px);
+}
+.sprite-branch{
+  position:absolute;
+  width:74px;
+  height:3px;
+  background:linear-gradient(90deg, rgba(255,109,180,.85), rgba(255,109,180,0));
+  transform-origin:left center;
+  filter:blur(1px);
+}
+.sb1{left:54%;top:58px;transform:rotate(-28deg)}
+.sb2{left:54%;top:74px;transform:rotate(24deg)}
+.sb3{left:46%;top:88px;transform:rotate(-18deg)}
+.sb4{left:54%;top:102px;transform:rotate(34deg)}
+.storm-cloud{
+  position:absolute;
+  left:28px;
+  right:28px;
+  bottom:44px;
+  height:56px;
+  border-radius:40px;
+  background:
+    radial-gradient(circle at 24% 55%, rgba(184,198,216,.95) 0 22px, transparent 23px),
+    radial-gradient(circle at 44% 40%, rgba(184,198,216,.92) 0 26px, transparent 27px),
+    radial-gradient(circle at 62% 52%, rgba(184,198,216,.9) 0 24px, transparent 25px),
+    radial-gradient(circle at 78% 46%, rgba(184,198,216,.82) 0 20px, transparent 21px),
+    linear-gradient(180deg, rgba(184,198,216,.92), rgba(139,155,175,.82));
+}
+.storm-glow{
+  position:absolute;
+  left:50%;
+  bottom:30px;
+  width:172px;
+  height:42px;
+  transform:translateX(-50%);
+  background:radial-gradient(circle, rgba(126,166,232,.8), rgba(126,166,232,0) 68%);
+}
+.ground{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:34px;
+  background:linear-gradient(180deg, #4d3b2c, var(--ground));
+}
+.label{
+  position:absolute;
+  color:var(--muted);
+  font-size:.74rem;
+  background:rgba(20,28,37,.7);
+  padding:.16rem .38rem;
+  border-radius:999px;
+}
+.sl1{left:18px;top:18px}
+.sl2{right:18px;top:18px}
+.axis{
+  position:absolute;
+  left:50%;
+  top:20px;
+  bottom:20px;
+  width:2px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.1));
+}
+.ground-line{
+  position:absolute;
+  left:28px;
+  right:28px;
+  top:122px;
+  height:6px;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(142,109,72,.75), rgba(224,176,103,.95), rgba(142,109,72,.75));
+}
+.charge{
+  position:absolute;
+  left:50%;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  transform:translateX(-50%);
+  box-shadow:0 0 0 5px rgba(255,255,255,.05);
+}
+.neg{top:58px;background:var(--red)}
+.pos{top:186px;background:var(--blue)}
+.height-arrow{
+  position:absolute;
+  left:57%;
+  width:2px;
+  height:56px;
+  background:var(--gold);
+}
+.height-arrow::before,.height-arrow::after{
+  content:"";
+  position:absolute;
+  left:-4px;
+  width:10px;
+  height:10px;
+  border-left:2px solid var(--gold);
+  border-bottom:2px solid var(--gold);
+}
+.height-arrow::before{top:-1px;transform:rotate(135deg)}
+.height-arrow::after{bottom:-1px;transform:rotate(-45deg)}
+.ha1{top:66px}
+.ha2{top:130px}
+.field-arrow{
+  position:absolute;
+  width:56px;
+  height:2px;
+  background:var(--pink);
+}
+.field-arrow::after{
+  content:"";
+  position:absolute;
+  right:-1px;
+  top:-3px;
+  width:8px;
+  height:8px;
+  border-top:2px solid var(--pink);
+  border-right:2px solid var(--pink);
+  transform:rotate(45deg);
+}
+.fa1{left:58%;top:44px;transform:rotate(-18deg)}
+.fa2{left:58%;top:88px;transform:rotate(-6deg)}
+.fa3{left:58%;top:152px;transform:rotate(10deg)}
+.mini{
+  padding:.9rem 1rem;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+}
+.palace-sidebar{position:sticky;top:1rem}
+.path{display:grid;gap:.68rem}
+.station,.transition{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(255,255,255,.04);
+}
+.transition{
+  border-style:dashed;
+  background:rgba(239,155,69,.05);
+}
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(10,12,16,.64);
+  z-index:50;
+}
+.modal.open{display:flex}
+.modal-card{
+  width:min(760px,100%);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:1rem;
+  background:linear-gradient(180deg, rgba(20,28,37,.96), rgba(20,28,37,.96)), var(--paper);
+  box-shadow:0 28px 90px rgba(0,0,0,.42);
+}
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+}
+.modal-head h3{
+  font-family:'Fraunces',serif;
+  font-size:1rem;
+}
+.prompt-box{
+  width:100%;
+  min-height:320px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  color:var(--ink);
+  padding:.95rem;
+  font:inherit;
+  line-height:1.65;
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
+@media (max-width:860px){
+  .hero-grid,.content-grid,.figure-grid{grid-template-columns:1fr}
+  .palace-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <nav class="nav">
+    <a href="../index.html">Pattern Palace</a>
+    <a href="../hub.html">Hub</a>
+    <a href="index.html">Chapter 23</a>
+    <a href="physics-spherical-symmetry-shell-and-solid-sphere.html">Back: 23-9</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">23-10 | Sample Problem: Dipole Approximation</div>
+    <h1>Electric Dipole and Atmospheric Sprites</h1>
+    <p>This page turns a lightning-cloud system into a vertical electric dipole. Once the thunderstorm is modeled as charges separated by a distance $$2h$$, the field high above the cloud becomes a standard axial-dipole problem, and the main lesson is how quickly that field drops with altitude.</p>
+    <div class="hero-grid">
+      <div class="eq">$$E(z)=\frac{1}{2\pi\varepsilon_0}\frac{q(2h)}{z^3}=\frac{1}{\pi\varepsilon_0}\frac{qh}{z^3},\qquad E(30\,\text{km})=1.6\times10^3\,\text{N/C},\qquad E(60\,\text{km})=2.0\times10^2\,\text{N/C}$$</div>
+      <div class="hero-side">
+        <h2>What To Notice</h2>
+        <ul>
+          <li>The thunderstorm is replaced by a dipole with charges $$-q$$ and $$+q$$ separated by $$2h.$$</li>
+          <li>Far above the cloud, the dipole-axis approximation is the clean shortcut.</li>
+          <li>The field scales like $$1/z^3,$$ so doubling altitude cuts the field by a factor of eight.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div>
+  </section>
+
+  <div class="content-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Anchors</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Model</div><div class="v">Treat the cloud-ground charge separation as a vertical dipole with charges $$-q$$ and $$+q.$$</div></div>
+          <div class="fact"><div class="k">Dipole Moment</div><div class="v">The separation is $$2h,$$ so the dipole strength is tied to $$q(2h).$$</div></div>
+          <div class="fact"><div class="k">Axis Field</div><div class="v">At altitude $$z$$ far above the cloud, the field uses the axial dipole form shown in the textbook sample.</div></div>
+          <div class="fact"><div class="k">Altitude Effect</div><div class="v">Because $$E\propto z^{-3},$$ a modest increase in altitude causes a sharp field drop.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Start with the Physical Story</h2>
+            <ul>
+              <li>Sprites are luminous flashes seen high above major thunderstorms.</li>
+              <li>The sample problem asks whether a storm can produce a strong enough field far above the cloud.</li>
+              <li>So we need a field model for the whole storm, not the microscopic details of each charge pocket.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Replace the Storm by a Vertical Dipole</h2>
+            <ul>
+              <li>The textbook idealization places $$-q$$ at cloud height $$h$$ and $$+q$$ the same distance below ground.</li>
+              <li>That makes the total separation between the charges equal to $$2h.$$</li>
+              <li>This is the dipole picture that captures the large-scale field outside the storm region.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Choose the Observation Point</h2>
+            <ul>
+              <li>The field is requested at altitudes $$z_1=30\,\text{km}$$ and $$z_2=60\,\text{km}.$$</li>
+              <li>Both locations lie on the dipole axis above the storm.</li>
+              <li>That is why the axial dipole formula is the natural shortcut.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Write the Far-Axis Dipole Field</h2>
+            <ul>
+              <li>For this sample, the field high above the dipole is written as $$E=\dfrac{1}{2\pi\varepsilon_0}\dfrac{q(2h)}{z^3}.$$</li>
+              <li>You can also see the same relation as $$E=\dfrac{1}{\pi\varepsilon_0}\dfrac{qh}{z^3}.$$</li>
+              <li>The key structural idea is not the constant in front, but the dipole signature: strength over $$z^3.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Insert the Data Once</h2>
+            <ul>
+              <li>Use $$q=200\,\text{C}$$ and $$h=3.0\,\text{km},$$ so $$2h=6.0\times10^3\,\text{m}.$$</li>
+              <li>Keep all distances in meters before substitution.</li>
+              <li>That gives one reusable numerator and two different altitude denominators.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Evaluate the 30 km Field</h2>
+            <ul>
+              <li>Set $$z_1=30\times10^3\,\text{m}.$$</li>
+              <li>Substituting into the sample's dipole formula gives $$E_1=1.6\times10^3\,\text{N/C}.$$</li>
+              <li>That is the stronger of the two answers because the point is closer to the storm.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Evaluate the 60 km Field</h2>
+            <ul>
+              <li>Now set $$z_2=60\times10^3\,\text{m}.$$</li>
+              <li>The same formula gives $$E_2=2.0\times10^2\,\text{N/C}.$$</li>
+              <li>The structure is identical; only the cubic distance term changes.</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Use the Ratio Instead of Recomputing</h2>
+            <ul>
+              <li>Since $$E\propto 1/z^3,$$ doubling the altitude multiplies the denominator by $$2^3=8.$$</li>
+              <li>So the second field must be one-eighth of the first.</li>
+              <li>That ratio check confirms that $$1.6\times10^3\,\text{N/C}$$ drops to $$2.0\times10^2\,\text{N/C}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room">
+            <h2>Room 9: Main Concept</h2>
+            <ul>
+              <li>Gauss's-law symmetry pages taught us to compress charge distributions into simple geometric models when symmetry allows it.</li>
+              <li>This sample does the same thing with a thunderstorm by upgrading it into an effective dipole.</li>
+              <li>The lasting memory is that dipole fields fade much faster with distance than point-charge fields.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Dipole Problem Figures</div>
+        <div class="figure-grid">
+          <div class="figure-card">
+            <div class="sprite-figure">
+              <div class="sprite-sky"></div>
+              <div class="sprite-column"></div>
+              <div class="sprite-branch sb1"></div><div class="sprite-branch sb2"></div><div class="sprite-branch sb3"></div><div class="sprite-branch sb4"></div>
+              <div class="storm-cloud"></div>
+              <div class="storm-glow"></div>
+              <div class="ground"></div>
+              <div class="label sl1">Sprite region</div>
+              <div class="label sl2">Thunderstorm below</div>
+            </div>
+            <h3>Physical Picture</h3>
+            <p>High-altitude sprites are the motivation. The electrostatics move begins when we replace the storm by a cleaner dipole model.</p>
+          </div>
+
+          <div class="figure-card">
+            <div class="dipole-figure">
+              <div class="axis"></div>
+              <div class="ground-line"></div>
+              <div class="charge neg"></div>
+              <div class="charge pos"></div>
+              <div class="height-arrow ha1"></div>
+              <div class="height-arrow ha2"></div>
+              <div class="field-arrow fa1"></div><div class="field-arrow fa2"></div><div class="field-arrow fa3"></div>
+              <div class="label" style="left:54%;top:78px">$$h$$</div>
+              <div class="label" style="left:54%;top:144px">$$h$$</div>
+              <div class="label" style="left:24px;top:110px">Ground</div>
+              <div class="label" style="right:18px;top:22px">Observation axis</div>
+              <div class="label" style="left:46%;top:36px">$$-q$$</div>
+              <div class="label" style="left:46%;top:202px">$$+q$$</div>
+            </div>
+            <h3>Dipole Approximation</h3>
+            <p>The charge pair is separated by $$2h$$ and the field is sampled on the same vertical axis high above the cloud.</p>
+          </div>
+        </div>
+        <div class="mini" style="margin-top:1rem">
+          <h3>Fast Calculation Habit</h3>
+          <p>After the first substitution, stop and check the scaling. If the second altitude is doubled, the dipole field must shrink by eight. That quick ratio catches most arithmetic mistakes before they spread.</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Memory Palace Path</div>
+      <p class="palace-intro">Walk this page as a storm-to-dipole transformation, then climb upward until the cubic distance law dims the field.</p>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p>A giant thundercloud crackles while a pink sprite blooms high above it.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The whole storm collapses into just two glowing charges on one vertical pole.</p></div>
+        <div class="station"><h3>Station 2</h3><p>The upper charge becomes $$-q,$$ the buried lower charge becomes $$+q,$$ and the pole is marked with two equal lengths $$h.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>An elevator rises straight up the dipole axis toward the sprite region.</p></div>
+        <div class="station"><h3>Station 3</h3><p>The elevator wall displays $$E=\dfrac{1}{2\pi\varepsilon_0}\dfrac{q(2h)}{z^3}$$ so the cubic distance rule is impossible to miss.</p></div>
+        <div class="transition"><h3>Trigger</h3><p>The elevator stops first at 30 km, where the display flashes $$1.6\times10^3\,\text{N/C}.$$</p></div>
+        <div class="station"><h3>Station 4</h3><p>Then it climbs to 60 km and the display dims to exactly one-eighth: $$2.0\times10^2\,\text{N/C}.$$</p></div>
+        <div class="transition"><h3>Trigger</h3><p>A giant cube marked 8 falls out of the ceiling to explain the altitude doubling.</p></div>
+        <div class="station"><h3>Station 5</h3><p>The exit sign reads: dipole fields drop as $$1/z^3,$$ so height matters dramatically.</p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal" id="prompt-modal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div>
+    <p class="modal-copy">This prompt focuses on turning the storm-sprite sample into a clean dipole-memory route.</p>
+    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for the sample problem on electric dipoles and atmospheric sprites. Keep the logic in order, make each image force the next one, and use vivid spatial imagery. Do not use bullet points.
+
+1. Start with a thunderstorm below and a sprite high above it.
+2. Replace the storm by a vertical electric dipole with charge -q at height h and charge +q at depth h below the ground.
+3. Emphasize that the separation is 2h.
+4. Move to a point on the dipole axis at altitude z above the cloud.
+5. Use the field formula E = (1 / (2 pi epsilon_0)) q(2h) / z^3.
+6. Insert q = 200 C and h = 3.0 km.
+7. Evaluate the field at 30 km and store the result 1.6 x 10^3 N/C.
+8. Then double the altitude to 60 km and show that the field drops by a factor of 8 to 2.0 x 10^2 N/C.
+9. End with the main lesson that dipole fields fall as 1 over z cubed, so increasing altitude weakens the field very quickly.</textarea>
+    <div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div>
+  </div>
+</div>
+
+<script>
+const dipoleModal = document.getElementById('prompt-modal');
+const dipoleTextarea = document.getElementById('prompt-text');
+document.querySelector('[data-open-prompt]').addEventListener('click', () => {
+  dipoleModal.classList.add('open');
+  dipoleModal.setAttribute('aria-hidden', 'false');
+});
+document.querySelectorAll('[data-close-prompt]').forEach((button) => {
+  button.addEventListener('click', () => {
+    dipoleModal.classList.remove('open');
+    dipoleModal.setAttribute('aria-hidden', 'true');
+  });
+});
+dipoleModal.addEventListener('click', (event) => {
+  if (event.target === dipoleModal) {
+    dipoleModal.classList.remove('open');
+    dipoleModal.setAttribute('aria-hidden', 'true');
+  }
+});
+document.getElementById('copy-prompt').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(dipoleTextarea.value);
+  } catch (error) {
+    dipoleTextarea.focus();
+    dipoleTextarea.select();
+  }
+});
+</script>
+</body>
+</html>
