@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 28 Guide | Magnetic Fields</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+</head>
+<body>
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch28 Index</a><a href="memory-palace-builder.html">Memory Builder</a></nav>
+  <section class="hero">
+    <div class="tag">Guide</div>
+    <h1>How To Study These Magnetic-Field Pages</h1>
+    <p class="hero-sub">Keep the emphasis narrow. For this section, memorize the force law, the magnitude law, the right-hand rule, the perpendicular property, the tesla unit, the crossed-fields cancellation rule, the Hall-effect balance rule, the circular-motion force balance, the helical-motion velocity split, and the wire-force formula. Everything else supports those anchors.</p>
+    <div class="formula-block">$$\vec F_B=q\vec v\times\vec B,\qquad F_B=|q|vB\sin\phi,\qquad 1\,\mathrm{T}=\frac{1\,\mathrm{N}}{1\,\mathrm{A\cdot m}}$$</div>
+  </section>
+
+  <div class="study-grid two-col">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Core Route</div>
+        <div class="flow-grid">
+          <div class="flow-step"><h3>1. Define</h3><p>Start with how <span class="inline-code">\(\vec B\)</span> is defined from magnetic force on a moving charge, not from a stationary test charge.</p></div>
+          <div class="flow-step"><h3>2. Measure</h3><p>Lock the special perpendicular case first: when <span class="inline-code">\(\vec v\perp\vec B\)</span>, the magnitude reduces to <span class="inline-code">\(B=F_B/(|q|v)\)</span>.</p></div>
+          <div class="flow-step"><h3>3. Generalize</h3><p>Then upgrade to the general vector form and the angle form with <span class="inline-code">\(\sin\phi\)</span>.</p></div>
+          <div class="flow-step"><h3>4. Direct</h3><p>Use the right-hand rule for <span class="inline-code">\(\vec v\times\vec B\)</span>, then flip the answer if the charge is negative.</p></div>
+          <div class="flow-step"><h3>5. Interpret</h3><p>Remember the force is perpendicular to both <span class="inline-code">\(\vec v\)</span> and <span class="inline-code">\(\vec B\)</span>, so it changes direction of motion more naturally than speed.</p></div>
+          <div class="flow-step"><h3>6. Apply</h3><p>Practice one moving-charge problem where you compute speed, then force, then direction.</p></div>
+          <div class="flow-step"><h3>7. Cancel</h3><p>For crossed fields, remember that zero deflection means $$|q|E=|q|vB$$ so the beam speed is $$v=E/B.$$</p></div>
+          <div class="flow-step"><h3>8. Balance</h3><p>For the Hall effect, remember that charge separation keeps growing until $$eE=ev_dB,$$ which leads to the Hall voltage.</p></div>
+          <div class="flow-step"><h3>9. Circle</h3><p>For perpendicular motion in a uniform field, start with $$|q|vB=mv^2/r$$ and derive everything else from that one line.</p></div>
+          <div class="flow-step"><h3>10. Split</h3><p>For helical motion, resolve velocity into $$v_\perp$$ and $$v_\parallel,$$ then use $$p=v_\parallel T.$$</p></div>
+          <div class="flow-step"><h3>11. Wire</h3><p>For current-carrying wires, remember $$F_B=iLB\sin\phi$$ and $$\vec F_B=i\vec L\times\vec B.$$</p></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Keep These Tidbits</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Zero Force</div><div class="v">$$F_B=0$$ when $$\phi=0^\circ,180^\circ$$ or when $$v=0.$$</div></div>
+          <div class="fact"><div class="k">Maximum Force</div><div class="v">$$F_B$$ is largest when $$\phi=90^\circ.$$</div></div>
+          <div class="fact"><div class="k">Field-Line Rule</div><div class="v">Outside a magnet, field lines run from north pole to south pole.</div></div>
+          <div class="fact"><div class="k">Unit</div><div class="v">$$1\,\mathrm{T}=1\,\mathrm{N}/(\mathrm{A\cdot m})$$</div></div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="palace-sidebar">
+      <div class="section-title">Study Order</div>
+      <div class="path">
+        <div class="station"><h3>Station 1</h3><p><a href="ch28-definition-of-b.html">Definition of <span class="inline-code">\(\vec B\)</span></a></p></div>
+        <div class="transition"><h3>Then</h3><p>Move to the direction rule and force behavior.</p></div>
+        <div class="station"><h3>Station 2</h3><p><a href="ch28-force-direction-and-properties.html">Right-hand rule and properties</a></p></div>
+        <div class="transition"><h3>Then</h3><p>Visualize the field itself around magnets.</p></div>
+        <div class="station"><h3>Station 3</h3><p><a href="ch28-magnetic-field-lines.html">Field lines and poles</a></p></div>
+        <div class="transition"><h3>Finish</h3><p>Run one full numerical example.</p></div>
+        <div class="station"><h3>Station 4</h3><p><a href="ch28-moving-charge-sample-problem.html">Moving proton sample problem</a></p></div>
+        <div class="transition"><h3>Then</h3><p>Use two perpendicular fields to stop beam deflection and measure speed.</p></div>
+        <div class="station"><h3>Station 5</h3><p><a href="ch28-crossed-fields-discovery.html">Crossed fields and electron discovery</a></p></div>
+        <div class="transition"><h3>Then</h3><p>Move the crossed-fields idea into a conductor and let charge separation build an internal electric field.</p></div>
+        <div class="station"><h3>Station 6</h3><p><a href="ch28-hall-effect.html">Hall-effect derivation</a></p></div>
+        <div class="transition"><h3>Then</h3><p>Close the Hall idea with the moving-conductor example.</p></div>
+        <div class="station"><h3>Station 7</h3><p><a href="ch28-hall-effect-sample-problem.html">Hall-effect sample problem</a></p></div>
+        <div class="transition"><h3>Then</h3><p>Turn the magnetic-force law into circular motion, then let a parallel velocity component stretch that circle into a helix.</p></div>
+        <div class="station"><h3>Station 8</h3><p><a href="ch28-circulating-charged-particle.html">Circulating charged particle</a></p></div>
+        <div class="transition"><h3>Then</h3><p>Use the velocity split to get helical motion and the pitch formula.</p></div>
+        <div class="station"><h3>Station 9</h3><p><a href="ch28-helical-motion.html">Helical motion</a></p></div>
+        <div class="transition"><h3>Then</h3><p>Apply circular-motion plus energy ideas in the mass spectrometer.</p></div>
+        <div class="station"><h3>Station 10</h3><p><a href="ch28-mass-spectrometer-sample-problem.html">Mass spectrometer sample</a></p></div>
+        <div class="transition"><h3>Then</h3><p>Shift from single particles to current-carrying wires.</p></div>
+        <div class="station"><h3>Station 11</h3><p><a href="ch28-magnetic-force-on-current-carrying-wire.html">Force on a wire</a></p></div>
+        <div class="transition"><h3>Finish</h3><p>Close with the wire-suspension sample problem.</p></div>
+        <div class="station"><h3>Station 12</h3><p><a href="ch28-wire-force-sample-problem.html">Wire-force sample problem</a></p></div>
+      </div>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

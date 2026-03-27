@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.10 Question 4 | Special Integrating Factor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="math_ex310_q4">
+<main class="shell">
+  <nav class="nav"><a href="math-ex310-index.html">Ex 3.10 Index</a><a href="math-ex310-guide.html">Guide</a><a href="math-ex310-q3-special-if.html">Prev: Ex 3.10 Q3</a><a href="math-ex310-index.html">Next: Ex 3.10 Index</a></nav>
+  <section class="hero"><div class="tag">Exercise 3.10</div><h1>Exercise 3.10 Question 4</h1><p class="hero-sub">This last question is the trig version. The integrating factor is still simple, but the fastest finish is to spot a direct total derivative after multiplying by $$1/x^2.$$</p><div class="formula-block">$$(xy\sin xy+\cos xy)y\,dx+(xy\sin xy-\cos xy)x\,dy=0$$<br/><br/>$$y\cos(xy)=Cx$$</div><div class="tool-row"><a class="tool-btn" href="math-ex310-guide.html">Ex 3.10 Guide</a><a class="tool-btn" href="math-exact-memory-builder.html?pages=math-ex310-q4-special-if.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+      <div class="fact"><div class="k">M(x,y)</div><div class="v">$$M=y(xy\sin xy+\cos xy)$$</div></div>
+      <div class="fact"><div class="k">N(x,y)</div><div class="v">$$N=x(xy\sin xy-\cos xy)$$</div></div>
+      <div class="fact"><div class="k">Formula Used</div><div class="v">Recognize $$d\!\left(\dfrac{y\cos(xy)}{x}\right)$$ after multiplying by $$1/x^2.$$</div></div>
+      <div class="fact"><div class="k">Integrating Factor</div><div class="v">$$\mu=\frac1{x^2}$$</div></div>
+    </div></section>
+    <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+      <article class="room"><h2>Room 1: Multiply by the I.F.</h2><ul><li>Use $$\mu=1/x^2.$$</li><li>The new equation becomes</li><li>$$\left(\frac{y^2\sin(xy)}{x}+\frac{y\cos(xy)}{x^2}\right)dx+\left(y\sin(xy)-\frac{\cos(xy)}{x}\right)dy=0.$$</li></ul></article>
+      <article class="room"><h2>Room 2: Spot the Differential Formula</h2><ul><li>Differentiate $$F=-\dfrac{y\cos(xy)}{x}.$$</li><li>Then</li><li>$$dF=\left(\frac{y^2\sin(xy)}{x}+\frac{y\cos(xy)}{x^2}\right)dx+\left(y\sin(xy)-\frac{\cos(xy)}{x}\right)dy.$$</li></ul></article>
+      <article class="room"><h2>Room 3: Collapse to Exact Form</h2><ul><li>So the multiplied equation is simply $$dF=0.$$</li><li>Hence $$-\dfrac{y\cos(xy)}{x}=C.$$</li></ul></article>
+      <article class="room"><h2>Room 4: Final Answer</h2><ul><li>Absorb the minus sign into the constant.</li><li>The final answer is $$\dfrac{y\cos(xy)}{x}=C,$$ or equivalently $$y\cos(xy)=Cx.$$</li></ul></article>
+    </div></section>
+  </div></div>
+</main>
+<script src="exact-study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Task 8 | Smallest of Several Integers</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /><link rel="stylesheet" href="../linear-review.css" /></head>
+<body data-page-key="pf-lab4-task8-smallest-number"><main class="shell"><nav class="nav"><a href="index.html">Lab 4 Index</a><a href="guide.html">Guide</a><a href="lab4-task7-debug-loop.html">Prev: Task 7</a><a href="memory-palace-builder.html">Builder</a></nav><section class="hero"><div class="tag">Task 8</div><h1>Find the Smallest of Several Integers</h1><p class="hero-sub">This task mixes count-controlled input with decision logic. The first value tells you how many numbers remain, and each later input must be compared against the current smallest value.</p><div class="formula-block">$$\text{smallest} \leftarrow \min(\text{current smallest},\text{new input})$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Loop Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab4-task8-smallest-number.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Loop type</div><div class="v"><span class="inline-code">while</span></div></div><div class="fact"><div class="k">First input</div><div class="v">how many values follow</div></div><div class="fact"><div class="k">Core decision</div><div class="v"><span class="inline-code">if (num &lt; smallest)</span></div></div><div class="fact"><div class="k">Update</div><div class="v">decrease remaining count</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int count, num, smallest, i = 1;
+
+    printf("How many numbers? ");
+    scanf("%d", &count);
+
+    if (count &gt; 0) {
+        printf("Enter number 1: ");
+        scanf("%d", &smallest);
+
+        while (i &lt; count) {
+            printf("Enter number %d: ", i + 1);
+            scanf("%d", &num);
+
+            if (num &lt; smallest) {
+                smallest = num;
+            }
+            i++;
+        }
+
+        printf("Smallest = %d\n", smallest);
+    }
+
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: First Input Is Special</h2><ul><li>The first value is not part of the comparison set.</li><li>It tells you how many actual numbers are still coming.</li><li>This separates control information from data.</li></ul></article><article class="room"><h2>Room 2: Initialize Smallest Correctly</h2><ul><li>After reading the count, read the first actual number and store it as <span class="inline-code">smallest</span>.</li><li>This gives the comparison logic a real starting point.</li><li>Then process the remaining values in the loop.</li></ul></article><article class="room"><h2>Room 3: Compare Every New Number</h2><ul><li>Each loop cycle reads one value.</li><li>If the new value is smaller, replace <span class="inline-code">smallest</span>.</li><li>Otherwise keep the old smallest.</li></ul></article><article class="room"><h2>Room 4: Control the Remaining Count</h2><ul><li>The while loop should run until all remaining values are processed.</li><li>That means the loop-control counter must change each iteration.</li><li>No update means an infinite loop or repeated reads without progress.</li></ul></article><article class="room"><h2>Room 5: Iteration Story</h2><ul><li>Read the total count.</li><li>Use the first real number as the starting smallest.</li><li>Then compare every later number against it until none remain.</li></ul></article></div></section><section class="panel"><div class="section-title">Save Change Request</div><p class="copy">Type a change you want on this lab page and save it as a text note.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="lab4-task8-smallest-number-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add the exact input flow for Task 8."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section></div></div></main><script src="study.js"></script><script src="../linear-review.js" defer></script></body></html>

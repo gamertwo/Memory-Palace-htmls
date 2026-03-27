@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>28-3 | Sample Problem: Magnetic Force on a Moving Proton</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch28_moving_charge_sample_problem">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch28 Index</a><a href="guide.html">Guide</a><a href="ch28-magnetic-field-lines.html">Prev: Field Lines</a><a href="ch28-crossed-fields-discovery.html">Next: Crossed Fields</a></nav>
+  <section class="hero"><div class="tag">28-3 Sample Problem</div><h1>Magnetic Force on a Moving Charged Particle</h1><p class="hero-sub">This page mirrors the sample problem in your screenshot, but trims it to the usable route. First get the speed from kinetic energy, then use the magnetic-force magnitude formula, then determine the deflection direction with the right-hand rule. The memory emphasis is that the small force still gives a big acceleration because the proton mass is tiny.</p><div class="formula-block">$$v=\sqrt{\frac{2K}{m}},\qquad F_B=|q|vB\sin\phi,\qquad a=\frac{F_B}{m}$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Chapter Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch28-moving-charge-sample-problem.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">A proton with kinetic energy $$5.3\,\text{MeV}$$ moves north in a chamber where $$B=1.2\,\text{mT}$$ points upward.</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the magnetic-force magnitude and its direction.</div></div>
+          <div class="fact"><div class="k">Extra</div><div class="v">Then note the acceleration using $$a=F_B/m.$$</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+          <div class="fact"><div class="k">Charge</div><div class="v">$$q=1.60\times10^{-19}\,\text{C}$$</div></div>
+          <div class="fact"><div class="k">Mass</div><div class="v">$$m=1.67\times10^{-27}\,\text{kg}$$</div></div>
+          <div class="fact"><div class="k">Perpendicular Setup</div><div class="v">North and up are perpendicular, so $$\phi=90^\circ$$</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+          <article class="room" id="room-ch28-sample-problem-room-1" data-room-id="ch28-sample-problem-room-1" data-room-title="Room 1: Start with the Kinetic-Energy Speed Formula" data-source-page="ch28-moving-charge-sample-problem.html" data-tags="kinetic,energy,speed,formula">
+            <h2>Room 1: Start with the Kinetic-Energy Speed Formula</h2>
+            <ul>
+              <li>The magnetic-force formula needs the speed, so start from $$K=\tfrac12 mv^2.$$</li>
+              <li>Solving for speed gives $$v=\sqrt{\dfrac{2K}{m}}.$$</li>
+              <li>Convert $$5.3\,\text{MeV}$$ into joules and substitute the proton mass.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch28-sample-problem-room-2" data-room-id="ch28-sample-problem-room-2" data-room-title="Room 2: Compute the Proton Speed" data-source-page="ch28-moving-charge-sample-problem.html" data-tags="compute,proton,speed,substitute">
+            <h2>Room 2: Compute the Proton Speed</h2>
+            <ul>
+              <li>Use $$K=(5.3\times10^6\,\text{eV})(1.60\times10^{-19}\,\text{J/eV})=8.48\times10^{-13}\,\text{J}.$$</li>
+              <li>Then $$v=\sqrt{\dfrac{2(8.48\times10^{-13})}{1.67\times10^{-27}}}\approx3.2\times10^7\,\text{m/s}.$$</li>
+              <li>This is the same speed scale shown in the sample solution.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch28-sample-problem-room-3" data-room-id="ch28-sample-problem-room-3" data-room-title="Room 3: Use the Magnetic-Force Magnitude Formula" data-source-page="ch28-moving-charge-sample-problem.html" data-tags="magnetic,force,magnitude,formula">
+            <h2>Room 3: Use the Magnetic-Force Magnitude Formula</h2>
+            <ul>
+              <li>Now apply $$F_B=|q|vB\sin\phi.$$</li>
+              <li>Here the proton moves north while the field points upward, so $$\phi=90^\circ$$ and $$\sin\phi=1.$$</li>
+              <li>Therefore $$F_B=(1.60\times10^{-19})(3.2\times10^7)(1.2\times10^{-3})\approx6.1\times10^{-15}\,\text{N}.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch28-sample-problem-room-4" data-room-id="ch28-sample-problem-room-4" data-room-title="Room 4: Determine the Direction from v Cross B" data-source-page="ch28-moving-charge-sample-problem.html" data-tags="direction,cross,positive,east">
+            <h2>Room 4: Determine the Direction from $\vec v\times\vec B$</h2>
+            <ul>
+              <li>Use the right-hand rule with $$\vec v$$ toward north and $$\vec B$$ upward.</li>
+              <li>The cross product points toward the east.</li>
+              <li>Because the proton is positively charged, the magnetic force points east as well.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch28-sample-problem-room-5" data-room-id="ch28-sample-problem-room-5" data-room-title="Room 5: Convert the Small Force into a Large Acceleration" data-source-page="ch28-moving-charge-sample-problem.html" data-tags="small,force,large,acceleration">
+            <h2>Room 5: Convert the Small Force into a Large Acceleration</h2>
+            <ul>
+              <li>Even though the force is small, the proton mass is extremely small too.</li>
+              <li>So $$a=\dfrac{F_B}{m}=\dfrac{6.1\times10^{-15}}{1.67\times10^{-27}}\approx3.7\times10^{12}\,\text{m/s}^2.$$</li>
+              <li>The useful interpretation is that magnetic forces can bend charged-particle paths dramatically.</li>
+            </ul>
+          </article>
+        </div><div class="mini"><h3>Key Shortcut</h3><p>In moving-charge sample problems, solve speed first if kinetic energy is given, then force, then direction.</p></div><div class="mini"><h3>Main Tidbit</h3><p>Small force does not mean small effect when the particle mass is microscopic.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Extract speed from energy, use the perpendicular force formula, then finish with direction and acceleration.</p><div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Cut K into v</h3><p>The knife cuts $$K=\tfrac12 mv^2$$ into $$v=\sqrt{2K/m}.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Numeric Speed</h3><p>Fire reveals $$v\approx3.2\times10^7\,\text{m/s}.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Lay the Perpendicular Force</h3><p>The mat stamps $$F_B\approx6.1\times10^{-15}\,\text{N}.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Mark the Eastward Deflection</h3><p>Chalk draws the proton curving east.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Big Acceleration</h3><p>The coat finishes with $$a\approx3.7\times10^{12}\,\text{m/s}^2.$$</p></div>
+        </div><div class="flow-line"><span class="flow-pill">Energy to speed</span><span class="flow-join">&rarr;</span><span class="flow-pill">Force magnitude</span><span class="flow-join">&rarr;</span><span class="flow-pill">Direction</span><span class="flow-join">&rarr;</span><span class="flow-pill">Acceleration</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch28-sample-problem-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more line showing the MeV to joule conversion."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

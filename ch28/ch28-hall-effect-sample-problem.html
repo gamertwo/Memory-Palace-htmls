@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>28-5 | Sample Problem: Potential Difference Across a Moving Conductor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch28_hall_effect_sample_problem">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch28 Index</a><a href="guide.html">Guide</a><a href="ch28-hall-effect.html">Prev: Hall Effect</a><a href="ch28-circulating-charged-particle.html">Next: Circular Motion</a></nav>
+  <section class="hero"><div class="tag">28-5 Sample Problem</div><h1>Potential Difference Setup Across a Moving Conductor</h1><p class="hero-sub">This page trims the sample problem to the working route. First get the magnetic force direction on the conduction electrons, then infer which face becomes positive or negative, and finally compute the potential difference by setting magnetic and electric forces equal at equilibrium.</p><div class="formula-block">$$|q|vB=|q|E,\qquad E=vB,\qquad V=Ed=vBd$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Chapter Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch28-hall-effect-sample-problem.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts">
+        <div class="fact"><div class="k">Given</div><div class="v">A conducting cube moves through a magnetic field with known speed, field magnitude, and face separation $$d.$$</div></div>
+        <div class="fact"><div class="k">Find</div><div class="v">Which face is at lower potential, and what is the potential difference between the faces.</div></div>
+        <div class="fact"><div class="k">Core Trick</div><div class="v">Electrons move opposite the magnetic-force direction on positive test charge.</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+        <div class="fact"><div class="k">Magnetic Force</div><div class="v">$$\vec F_B=q\vec v\times\vec B$$</div></div>
+        <div class="fact"><div class="k">Equilibrium</div><div class="v">$$F_E=F_B$$ so $$E=vB$$</div></div>
+        <div class="fact"><div class="k">Voltage</div><div class="v">$$V=Ed=vBd$$</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+        <article class="room" id="room-ch28-hall-sample-room-1" data-room-id="ch28-hall-sample-room-1" data-room-title="Room 1: Find the Magnetic Force Direction First" data-source-page="ch28-hall-effect-sample-problem.html" data-tags="magnetic,force,direction,first">
+          <h2>Room 1: Find the Magnetic Force Direction First</h2>
+          <ul>
+            <li>Use the right-hand rule on $$\vec v\times\vec B$$ to find the direction for a positive charge.</li>
+            <li>Because the mobile carriers are electrons, their magnetic force is opposite that direction.</li>
+            <li>This tells you which face the electrons begin piling up on.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-hall-sample-room-2" data-room-id="ch28-hall-sample-room-2" data-room-title="Room 2: Infer Which Face Becomes Negative and Which Becomes Positive" data-source-page="ch28-hall-effect-sample-problem.html" data-tags="infer,negative,positive,faces">
+          <h2>Room 2: Infer Which Face Becomes Negative and Which Becomes Positive</h2>
+          <ul>
+            <li>The face where electrons gather becomes negative.</li>
+            <li>The opposite face, left with electron deficit, becomes positive.</li>
+            <li>Therefore the positive face is at higher electric potential and the electron-rich face is at lower potential.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-hall-sample-room-3" data-room-id="ch28-hall-sample-room-3" data-room-title="Room 3: Let the Charge Separation Create an Electric Field" data-source-page="ch28-hall-effect-sample-problem.html" data-tags="charge,separation,electric,field">
+          <h2>Room 3: Let the Charge Separation Create an Electric Field</h2>
+          <ul>
+            <li>As charge separation increases, an internal electric field grows between the faces.</li>
+            <li>This field exerts an electric force on the electrons opposite the magnetic drift effect.</li>
+            <li>The buildup continues until the two forces balance.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-hall-sample-room-4" data-room-id="ch28-hall-sample-room-4" data-room-title="Room 4: Use Force Balance to Solve for the Electric Field" data-source-page="ch28-hall-effect-sample-problem.html" data-tags="force,balance,electric,solve">
+          <h2>Room 4: Use Force Balance to Solve for the Electric Field</h2>
+          <ul>
+            <li>At equilibrium, $$|q|E=|q|vB$$ when $$\vec v\perp\vec B.$$</li>
+            <li>So $$E=vB.$$</li>
+            <li>This is the same crossed-fields balance idea from the previous section, now inside a conductor.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-hall-sample-room-5" data-room-id="ch28-hall-sample-room-5" data-room-title="Room 5: Convert the Electric Field into a Potential Difference" data-source-page="ch28-hall-effect-sample-problem.html" data-tags="convert,electric,field,potential">
+          <h2>Room 5: Convert the Electric Field into a Potential Difference</h2>
+          <ul>
+            <li>Use $$V=Ed$$ across the face separation $$d.$$</li>
+            <li>Substituting $$E=vB$$ gives $$V=vBd.$$</li>
+            <li>With the sample numbers $$v=4.0\,\text{m/s},$$ $$B=0.050\,\text{T},$$ and $$d=0.030\,\text{m},$$ the result is $$V=(4.0)(0.050)(0.030)=0.0060\,\text{V}=6.0\,\text{mV}. $$</li>
+          </ul>
+        </article>
+      </div><div class="mini"><h3>Key Shortcut</h3><p>For moving-conductor Hall-style problems: direction of electron push, sign of faces, force balance, then $$V=vBd.$$</p></div><div class="mini"><h3>Main Tidbit</h3><p>The concept page and the sample problem are really the same movie: charge separation grows until the electric field cancels the magnetic effect.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Direction first, polarity second, equilibrium third, voltage last.</p><div class="movie-flow">
+        <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Cut the Cross Product Direction</h3><p>The knife finds the magnetic-force direction from $$\vec v\times\vec B.$$</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Electrons on One Face</h3><p>The net drags electrons onto one side, making that side lower potential.</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Flatten the Force Balance</h3><p>The mat writes $$E=vB.$$</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Voltage Rule</h3><p>Fire turns the field into $$V=vBd.$$</p></div>
+      </div><div class="flow-line"><span class="flow-pill">Direction</span><span class="flow-join">&rarr;</span><span class="flow-pill">Face polarity</span><span class="flow-join">&rarr;</span><span class="flow-pill">Balance</span><span class="flow-join">&rarr;</span><span class="flow-pill">Voltage</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch28-hall-sample-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more reminder about why the electron-rich face is the lower-potential face."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

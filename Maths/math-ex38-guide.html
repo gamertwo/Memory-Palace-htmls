@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.8 Guide | Reducible to Exact Equations</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+</head>
+<body>
+<main class="shell">
+  <section class="hero">
+    <div class="tag">Exercise 3.8 Guide</div>
+    <h1>Reducible to Exact Equations</h1>
+    <p class="hero-sub">These questions are not exact at first. The move is to test the integrating-factor rule, multiply the whole equation by that factor, and then finish with the usual exact-equation method.</p>
+    <div class="tool-row">
+      <a class="tool-btn" href="math-ex38-index.html">Exercise 3.8 Index</a>
+      <a class="tool-btn" href="math-exact-index.html">Exercise 3.7 Exact Set</a>
+      <a class="tool-btn" href="math-index.html">Back to Math Hub</a>
+    </div>
+  </section>
+  <div class="study-grid">
+    <section class="panel">
+      <div class="section-title">Rule Test</div>
+      <div class="rooms">
+        <article class="room">
+          <h2>Rule I</h2>
+          <ul>
+            <li>If $$\dfrac{M_y-N_x}{N}$$ is a function of $$x$$ alone, say $$f(x),$$ then $$\text{I.F.}=e^{\int f(x)\,dx}.$$</li>
+            <li>This is the rule used in Exercise 3.8 Questions 2, 3, 4, and 5 in this set.</li>
+          </ul>
+        </article>
+        <article class="room">
+          <h2>Rule II</h2>
+          <ul>
+            <li>If $$\dfrac{N_x-M_y}{M}$$ is a function of $$y$$ alone, say $$f(y),$$ then $$\text{I.F.}=e^{\int f(y)\,dy}.$$</li>
+            <li>This is the rule used in Exercise 3.8 Question 1 in this set.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-title">Stable Route</div>
+      <div class="flow-line">
+        <span class="flow-pill">Write $$Mdx+Ndy=0$$</span>
+        <span class="flow-join">&rarr;</span>
+        <span class="flow-pill">Show it is not exact</span>
+        <span class="flow-join">&rarr;</span>
+        <span class="flow-pill">Test Rule I / Rule II</span>
+        <span class="flow-join">&rarr;</span>
+        <span class="flow-pill">Multiply by integrating factor</span>
+        <span class="flow-join">&rarr;</span>
+        <span class="flow-pill">Solve as exact</span>
+      </div>
+      <p class="copy" style="margin-top:1rem">The memory trick is simple: the integrating factor is not the final answer. It is only the door that turns the equation into an exact one.</p>
+    </section>
+  </div>
+</main>
+<script src="exact-study.js"></script>
+</body>
+</html>

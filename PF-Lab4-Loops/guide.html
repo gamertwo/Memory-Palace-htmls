@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Lab 4 Loops | Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+</head>
+<body>
+<main class="shell">
+  <nav class="nav"><a href="index.html">Lab 4 Index</a><a href="memory-palace-builder.html">Memory Builder</a><a href="lab4-task1-pattern.html">Task 1</a><a href="lab4-task6-do-while-average.html">Task 6</a></nav>
+
+  <section class="hero">
+    <div class="tag">Loop Choice + Iteration Method</div>
+    <h1>Why, How, and Which Loop Syntax</h1>
+    <p class="hero-sub">The fastest way to solve these lab tasks is to classify the repetition first. If you know whether the loop is count-controlled, sentinel-controlled, or nested pattern logic, the code almost writes itself.</p>
+    <div class="formula-block">$$\text{Known count} \Rightarrow \texttt{for},\qquad \text{unknown count} \Rightarrow \texttt{while},\qquad \text{must run once} \Rightarrow \texttt{do-while}$$</div>
+  </section>
+
+  <div class="study-grid two-col">
+    <section class="panel">
+      <div class="section-title">Loop Selection Table</div>
+      <table class="guide-table">
+        <thead><tr><th>Need</th><th>Best Syntax</th><th>Why</th><th>Lab Use</th></tr></thead>
+        <tbody>
+          <tr><td>Known number of repeats</td><td><span class="inline-code">for</span></td><td>Initialization, test, and update live together.</td><td>Tasks 1, 2, 3, 4</td></tr>
+          <tr><td>Unknown amount of input</td><td><span class="inline-code">while</span></td><td>Keep reading while a condition stays true.</td><td>Tasks 5, 7, 8</td></tr>
+          <tr><td>Read first, test after</td><td><span class="inline-code">do-while</span></td><td>The body executes at least once before the condition check.</td><td>Task 6</td></tr>
+          <tr><td>Rows and columns or repeated inner work</td><td>nested loops</td><td>One loop controls structure, the other fills each structure piece.</td><td>Tasks 1 and 4</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Core Syntax Memory</div>
+      <div class="facts">
+        <div class="fact"><div class="k">for</div><div class="v"><span class="inline-code">for (init; test; update)</span></div></div>
+        <div class="fact"><div class="k">while</div><div class="v"><span class="inline-code">while (condition)</span></div></div>
+        <div class="fact"><div class="k">do-while</div><div class="v"><span class="inline-code">do { ... } while (condition);</span></div></div>
+        <div class="fact"><div class="k">continue</div><div class="v">skip the rest of this iteration</div></div>
+        <div class="fact"><div class="k">break</div><div class="v">leave the loop immediately</div></div>
+        <div class="fact"><div class="k">sentinel</div><div class="v">special value that means stop</div></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Iteration Checklist</div>
+    <div class="flow-grid">
+      <div class="flow-step"><h3>1. Setup</h3><p>Initialize counters, totals, products, or the first input before the loop begins.</p></div>
+      <div class="flow-step"><h3>2. Test</h3><p>State clearly what keeps the loop alive and what makes it stop.</p></div>
+      <div class="flow-step"><h3>3. Body</h3><p>Do the real work: print, multiply, add, compare, or update.</p></div>
+      <div class="flow-step"><h3>4. Update</h3><p>Move the state forward with <span class="inline-code">i++</span>, new input, or changed control variables.</p></div>
+      <div class="flow-step"><h3>5. Verify</h3><p>Trace the first iteration, a middle one, and the stop condition.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Why Students Lose Marks</div>
+    <div class="study-grid">
+      <div class="mini do-card"><h3>Do</h3><ul class="list"><li>Put the update inside the correct place for while and do-while loops.</li><li>Check break and continue conditions in the order the question needs.</li><li>Use nested loops only when one repetition lives inside another.</li><li>Keep sentinel values out of totals and counts when the question says so.</li></ul></div>
+      <div class="mini dont-card"><h3>Do Not</h3><ul class="list"><li>Do not put a semicolon right after <span class="inline-code">while (...)</span> unless you truly want an empty loop.</li><li>Do not forget braces when the logic spans more than one statement.</li><li>Do not update the wrong variable or forget the update entirely.</li><li>Do not divide by count if no valid inputs were entered.</li></ul></div>
+    </div>
+  </section>
+</main>
+<script src="study.js"></script>
+</body>
+</html>

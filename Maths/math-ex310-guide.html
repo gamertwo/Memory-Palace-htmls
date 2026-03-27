@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.10 Guide | Special Integrating Factors</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+</head>
+<body>
+<main class="shell">
+  <section class="hero">
+    <div class="tag">Exercise 3.10 Guide</div>
+    <h1>Special Integrating Factors</h1>
+    <p class="hero-sub">These questions are built around a guessed integrating factor of the form $$\mu=x^h y^k.$$ The job is to choose $$h$$ and $$k$$ so that the multiplied equation becomes exact.</p>
+    <div class="tool-row">
+      <a class="tool-btn" href="math-ex310-index.html">Exercise 3.10 Index</a>
+      <a class="tool-btn" href="math-index.html">Math Hub</a>
+    </div>
+  </section>
+  <div class="study-grid">
+    <section class="panel">
+      <div class="section-title">Core Formula</div>
+      <div class="rooms">
+        <article class="room">
+          <h2>Assume the I.F.</h2>
+          <ul>
+            <li>Try $$\mu=x^h y^k.$$</li>
+            <li>Then force exactness by using $$\frac{\partial(\mu M)}{\partial y}=\frac{\partial(\mu N)}{\partial x}.$$</li>
+          </ul>
+        </article>
+        <article class="room">
+          <h2>Rule IV Shortcut</h2>
+          <ul>
+            <li>If the equation looks like $$x^m y^n(ay\,dx+bx\,dy)+x^{m'}y^{n'}(a'y\,dx+b'x\,dy)=0,$$ then the integrating factor is still taken as $$x^h y^k.$$</li>
+            <li>Use coefficient matching, or the textbook shortcut relations, to solve for $$h$$ and $$k.$$</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-title">Stable Route</div>
+      <div class="flow-line">
+        <span class="flow-pill">Write $$Mdx+Ndy=0$$</span>
+        <span class="flow-join">&rarr;</span>
+        <span class="flow-pill">Guess $$x^h y^k$$</span>
+        <span class="flow-join">&rarr;</span>
+        <span class="flow-pill">Solve for $$h,k$$</span>
+        <span class="flow-join">&rarr;</span>
+        <span class="flow-pill">Multiply through</span>
+        <span class="flow-join">&rarr;</span>
+        <span class="flow-pill">Finish as exact</span>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="exact-study.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>28-8 | Sample Problem: Magnetic Force on a Wire Carrying Current</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch28_wire_force_sample">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch28 Index</a><a href="guide.html">Guide</a><a href="ch28-magnetic-force-on-current-carrying-wire.html">Prev: Wire Force</a><a href="index.html">Next: Index</a></nav>
+  <section class="hero"><div class="tag">28-8 Sample Problem</div><h1>Magnetic Force on a Wire Carrying Current</h1><p class="hero-sub">This page keeps the sample problem route short. Use the wire-force formula, set the magnetic force equal to the wire&rsquo;s weight, and solve for the magnetic field needed to suspend the wire. The main idea is simple equilibrium: upward magnetic force balances downward gravity.</p><div class="formula-block">$$F_B=iLB\sin\phi,\qquad F_B=mg,\qquad B=\frac{mg}{iL}$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Chapter Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch28-wire-force-sample-problem.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts">
+        <div class="fact"><div class="k">Given</div><div class="v">A horizontal wire carries current $$i=28\,\text{A}$$ and has linear mass density $$46.6\,\text{g/m}. $$</div></div>
+        <div class="fact"><div class="k">Find</div><div class="v">Find the magnetic field needed to suspend the wire.</div></div>
+        <div class="fact"><div class="k">Core Trick</div><div class="v">Suspended means magnetic force balances weight.</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+        <div class="fact"><div class="k">Force Formula</div><div class="v">$$F_B=iLB\sin\phi$$</div></div>
+        <div class="fact"><div class="k">Weight</div><div class="v">$$F_g=mg$$</div></div>
+        <div class="fact"><div class="k">Linear Density</div><div class="v">Use $$m/L$$ so the length cancels cleanly</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+        <article class="room" id="room-ch28-wire-sample-room-1" data-room-id="ch28-wire-sample-room-1" data-room-title="Room 1: Choose the Field Direction for Maximum Force" data-source-page="ch28-wire-force-sample-problem.html" data-tags="choose,direction,maximum,force">
+          <h2>Room 1: Choose the Field Direction for Maximum Force</h2>
+          <ul>
+            <li>To minimize the required field magnitude, make the force as large as possible for a given $$B.$$</li>
+            <li>That means choose $$\phi=90^\circ,$$ so the field is perpendicular to the wire.</li>
+            <li>Then $$F_B=iLB.$$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-wire-sample-room-2" data-room-id="ch28-wire-sample-room-2" data-room-title="Room 2: Set Magnetic Force Equal to Weight" data-source-page="ch28-wire-force-sample-problem.html" data-tags="set,magnetic,force,weight">
+          <h2>Room 2: Set Magnetic Force Equal to Weight</h2>
+          <ul>
+            <li>For suspension, the upward magnetic force must match the downward weight.</li>
+            <li>So $$iLB=mg. $$</li>
+            <li>Solving for the field gives $$B=\dfrac{mg}{iL}. $$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-wire-sample-room-3" data-room-id="ch28-wire-sample-room-3" data-room-title="Room 3: Replace Mass with Linear Density" data-source-page="ch28-wire-force-sample-problem.html" data-tags="replace,mass,linear,density">
+          <h2>Room 3: Replace Mass with Linear Density</h2>
+          <ul>
+            <li>Write the wire mass as $$m=(m/L)L. $$</li>
+            <li>Then $$B=\dfrac{(m/L)Lg}{iL}=\dfrac{(m/L)g}{i}. $$</li>
+            <li>This is the cleanest form for substitution because the wire length cancels.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-wire-sample-room-4" data-room-id="ch28-wire-sample-room-4" data-room-title="Room 4: Substitute the Sample Values" data-source-page="ch28-wire-force-sample-problem.html" data-tags="substitute,values,tesla,answer">
+          <h2>Room 4: Substitute the Sample Values</h2>
+          <ul>
+            <li>Convert $$46.6\,\text{g/m}$$ to SI units: $$46.6\times10^{-3}\,\text{kg/m}. $$</li>
+            <li>Then $$B=\dfrac{(46.6\times10^{-3})(9.8)}{28}\,\text{T}. $$</li>
+            <li>This gives $$B\approx1.6\times10^{-2}\,\text{T}. $$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-wire-sample-room-5" data-room-id="ch28-wire-sample-room-5" data-room-title="Room 5: State the Physical Meaning of the Result" data-source-page="ch28-wire-force-sample-problem.html" data-tags="state,physical,meaning,result">
+          <h2>Room 5: State the Physical Meaning of the Result</h2>
+          <ul>
+            <li>The needed field is about $$1.6\times10^{-2}\,\text{T}. $$</li>
+            <li>That is much stronger than Earth&rsquo;s magnetic field.</li>
+            <li>The real memory point is the equilibrium pattern: magnetic force can support a current-carrying wire against gravity.</li>
+          </ul>
+        </article>
+      </div><div class="mini"><h3>Key Shortcut</h3><p>Wire suspension problems collapse to one line: choose $$\phi=90^\circ$$ and set $$iLB=mg.$$</p></div><div class="mini"><h3>Main Tidbit</h3><p>If the problem gives linear density instead of total mass, it is hinting that the wire length should cancel.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Pick the force-maximizing angle, balance forces, cancel the length, then substitute.</p><div class="movie-flow">
+        <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Mark the Right Angle</h3><p>Chalk sets $$\phi=90^\circ$$ so the magnetic force is maximal.</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Flatten the Force Balance</h3><p>The mat writes $$iLB=mg.$$</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Cut Out the Length</h3><p>The knife cancels $$L$$ using the linear density form.</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Field Value</h3><p>Fire reveals $$B\approx1.6\times10^{-2}\,\text{T}.$$</p></div>
+      </div><div class="flow-line"><span class="flow-pill">Choose $$90^\circ$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Balance forces</span><span class="flow-join">&rarr;</span><span class="flow-pill">Cancel length</span><span class="flow-join">&rarr;</span><span class="flow-pill">Find $$B$$</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch28-wire-sample-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more reminder about why choosing the field perpendicular to the wire minimizes the required field magnitude."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>28-6 | A Circulating Charged Particle</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch28_circulating_charged_particle">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch28 Index</a><a href="guide.html">Guide</a><a href="ch28-hall-effect-sample-problem.html">Prev: Hall Sample</a><a href="ch28-helical-motion.html">Next: Helical Motion</a></nav>
+  <section class="hero"><div class="tag">28-6 Circular Motion</div><h1>A Circulating Charged Particle</h1><p class="hero-sub">This page keeps the circular-motion section formula-first. When a charged particle enters a uniform magnetic field with velocity perpendicular to the field, the magnetic force is always perpendicular to the motion and acts as the centripetal force. That gives radius, period, frequency, and angular frequency in one short derivation chain.</p><div class="formula-block">$$|q|vB=\frac{mv^2}{r},\qquad r=\frac{mv}{|q|B},\qquad T=\frac{2\pi m}{|q|B},\qquad f=\frac{|q|B}{2\pi m},\qquad \omega=\frac{|q|B}{m}$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Chapter Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch28-circulating-charged-particle.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+        <div class="fact"><div class="k">Perpendicular Setup</div><div class="v">Use this page when $$\vec v\perp\vec B$$</div></div>
+        <div class="fact"><div class="k">Radius</div><div class="v">$$r=mv/(|q|B)$$</div></div>
+        <div class="fact"><div class="k">Timing</div><div class="v">$$T, f, \omega$$ do not depend on the speed</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+        <article class="room" id="room-ch28-circular-room-1" data-room-id="ch28-circular-room-1" data-room-title="Room 1: Identify the Magnetic Force as the Centripetal Force" data-source-page="ch28-circulating-charged-particle.html" data-tags="magnetic,centripetal,force,circle">
+          <h2>Room 1: Identify the Magnetic Force as the Centripetal Force</h2>
+          <ul>
+            <li>For motion with $$\vec v\perp\vec B,$$ the magnetic force magnitude is $$F_B=|q|vB.$$</li>
+            <li>That force always points perpendicular to the velocity, so it bends the path instead of changing the speed.</li>
+            <li>In uniform circular motion, the needed inward force is $$F=mv^2/r.$$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-circular-room-2" data-room-id="ch28-circular-room-2" data-room-title="Room 2: Set Magnetic Force Equal to Centripetal Force" data-source-page="ch28-circulating-charged-particle.html" data-tags="set,equal,centripetal,derive">
+          <h2>Room 2: Set Magnetic Force Equal to Centripetal Force</h2>
+          <ul>
+            <li>Set $$|q|vB=mv^2/r.$$</li>
+            <li>This is the whole derivation hinge of the section.</li>
+            <li>Once this balance is written, every motion formula follows from algebra.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-circular-room-3" data-room-id="ch28-circular-room-3" data-room-title="Room 3: Solve for the Radius" data-source-page="ch28-circulating-charged-particle.html" data-tags="solve,radius,mass,field">
+          <h2>Room 3: Solve for the Radius</h2>
+          <ul>
+            <li>Cancel one factor of $$v$$ from $$|q|vB=mv^2/r.$$</li>
+            <li>Then solve for radius: $$r=\dfrac{mv}{|q|B}. $$</li>
+            <li>So faster particles make larger circles, and stronger fields make smaller circles.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-circular-room-4" data-room-id="ch28-circular-room-4" data-room-title="Room 4: Derive the Period and Frequency" data-source-page="ch28-circulating-charged-particle.html" data-tags="period,frequency,derive,timing">
+          <h2>Room 4: Derive the Period and Frequency</h2>
+          <ul>
+            <li>Use $$T=\dfrac{2\pi r}{v}. $$</li>
+            <li>Substitute $$r=mv/(|q|B)$$ to get $$T=\dfrac{2\pi m}{|q|B}. $$</li>
+            <li>Then $$f=1/T=\dfrac{|q|B}{2\pi m}. $$</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-circular-room-5" data-room-id="ch28-circular-room-5" data-room-title="Room 5: Finish with Angular Frequency and the Key Insight" data-source-page="ch28-circulating-charged-particle.html" data-tags="angular,frequency,insight,speed">
+          <h2>Room 5: Finish with Angular Frequency and the Key Insight</h2>
+          <ul>
+            <li>Use $$\omega=2\pi f$$ to get $$\omega=\dfrac{|q|B}{m}. $$</li>
+            <li>The radius depends on speed, but $$T,$$ $$f,$$ and $$\omega$$ do not.</li>
+            <li>So particles with the same charge-to-mass ratio cycle with the same timing in the same field.</li>
+          </ul>
+        </article>
+      </div><div class="mini"><h3>Key Shortcut</h3><p>Write the force balance first. Once $$|q|vB=mv^2/r$$ is on the page, everything else is algebra.</p></div><div class="mini"><h3>Main Tidbit</h3><p>The magnetic field controls the timing through $$|q|/m$$ and $$B,$$ while the speed only stretches the circle size.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Magnetic force becomes centripetal force, then radius comes out, then all timing quantities follow.</p><div class="movie-flow">
+        <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Lay the Two Forces Together</h3><p>The mat places $$|q|vB$$ beside $$mv^2/r.$$</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Cut to the Radius</h3><p>The knife cancels a speed and leaves $$r=mv/(|q|B).$$</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Period</h3><p>Fire carries $$T=2\pi r/v$$ into $$T=2\pi m/(|q|B).$$</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear f and omega</h3><p>The coat finishes with $$f=|q|B/(2\pi m)$$ and $$\omega=|q|B/m.$$</p></div>
+      </div><div class="flow-line"><span class="flow-pill">Force balance</span><span class="flow-join">&rarr;</span><span class="flow-pill">Radius</span><span class="flow-join">&rarr;</span><span class="flow-pill">Period</span><span class="flow-join">&rarr;</span><span class="flow-pill">Frequency</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch28-circular-motion-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one extra contrast line between what depends on speed and what does not."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

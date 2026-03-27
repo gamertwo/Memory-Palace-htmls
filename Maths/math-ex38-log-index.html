@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.8 Log Formula Index | Reducible to Exact</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+<style>
+  .table-wrap{overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(7,16,29,.75)}
+  table{width:100%;border-collapse:collapse;min-width:980px}
+  th,td{padding:.9rem .85rem;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;vertical-align:top}
+  th{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#8cc7ff;background:rgba(255,255,255,.04)}
+  td{font-size:.92rem;line-height:1.55;color:#eaf4ff}
+  tr:last-child td{border-bottom:none}
+  .idx-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}
+  .idx-link{display:block;padding:.9rem 1rem;border:1px solid rgba(255,255,255,.08);border-radius:14px;text-decoration:none;color:#eaf4ff;background:rgba(255,255,255,.03)}
+  .idx-link small{display:block;color:#8fb6d9;margin-bottom:.2rem}
+</style>
+</head>
+<body>
+<main class="shell">
+  <section class="hero">
+    <div class="tag">Exercise 3.8 Reference</div>
+    <h1>Log Differentiation and Integration Index</h1>
+    <p class="hero-sub">This page extracts the exact places in Exercise 3.8 where logarithm formulas, related derivatives, or $$\int \frac{1}{x}\,dx$$-type steps are used. It is built as a quick lookup table with direct links back to the source questions.</p>
+    <div class="tool-row">
+      <a class="tool-btn" href="math-ex38-index.html">Back to Ex 3.8 Index</a>
+      <a class="tool-btn" href="math-ex38-guide.html">Method Guide</a>
+      <a class="tool-btn" href="math-index.html">Math Hub</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <section class="panel">
+      <div class="section-title">Quick Jump</div>
+      <div class="idx-list">
+        <a class="idx-link" href="#q1"><small>Question 1</small>Log derivative and log-square integral</a>
+        <a class="idx-link" href="#q2"><small>Question 2</small>Integrating factor from $$\int 3/x\,dx$$</a>
+        <a class="idx-link" href="#q3"><small>Question 3</small>Integrating factor from $$\int -2/x\,dx$$</a>
+        <a class="idx-link" href="#q4"><small>Question 4</small>Same $$-2/x$$ log pattern</a>
+        <a class="idx-link" href="#q5"><small>Question 5</small>Log integrating factor and final $$\log x$$ integral</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Indexed Table</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Question</th>
+              <th>Key Moment</th>
+              <th>Formula Used</th>
+              <th>Application</th>
+              <th>Result</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="q1-r1">
+              <td>1</td>
+              <td id="q1">Ex 3.8 Q1</td>
+              <td>Differentiate the log product inside $$M=y\log y$$.</td>
+              <td>$$\frac{d}{dy}\log y=\frac1y,\qquad \frac{d}{dy}[uv]=u'v+uv'$$</td>
+              <td>$$\frac{d}{dy}(y\log y)=1\cdot \log y+y\cdot \frac1y$$</td>
+              <td>$$M_y=1+\log y$$</td>
+              <td><a href="math-ex38-q1-reducible-exact.html">Open Q1</a></td>
+            </tr>
+            <tr id="q1-r2">
+              <td>2</td>
+              <td>Ex 3.8 Q1</td>
+              <td>Build the integrating factor from a reciprocal integral.</td>
+              <td>$$\int \frac1y\,dy=\log y,\qquad e^{-\log y}=\frac1y$$</td>
+              <td>$$\text{I.F.}=e^{\int -1/y\,dy}$$</td>
+              <td>$$\text{I.F.}=\frac1y$$</td>
+              <td><a href="math-ex38-q1-reducible-exact.html">Open Q1</a></td>
+            </tr>
+            <tr id="q1-r3">
+              <td>3</td>
+              <td>Ex 3.8 Q1</td>
+              <td>Integrate the log-over-variable correction term.</td>
+              <td>$$\int \frac{\log y}{y}\,dy=\frac{(\log y)^2}{2}$$</td>
+              <td>$$g'(y)=-\frac{\log y}{y}$$</td>
+              <td>$$g(y)=-\frac{(\log y)^2}{2}$$</td>
+              <td><a href="math-ex38-q1-reducible-exact.html">Open Q1</a></td>
+            </tr>
+            <tr id="q2-r1">
+              <td>4</td>
+              <td id="q2">Ex 3.8 Q2</td>
+              <td>Convert the Rule I ratio into a power-type integrating factor.</td>
+              <td>$$\int \frac{3}{x}\,dx=3\log x,\qquad e^{3\log x}=x^3$$</td>
+              <td>$$\text{I.F.}=e^{\int 3/x\,dx}$$</td>
+              <td>$$\text{I.F.}=x^3$$</td>
+              <td><a href="math-ex38-q2-reducible-exact.html">Open Q2</a></td>
+            </tr>
+            <tr id="q3-r1">
+              <td>5</td>
+              <td id="q3">Ex 3.8 Q3</td>
+              <td>Use the same reciprocal-log integral with a negative coefficient.</td>
+              <td>$$\int \frac{-2}{x}\,dx=-2\log x,\qquad e^{-2\log x}=x^{-2}$$</td>
+              <td>$$\text{I.F.}=e^{\int -2/x\,dx}$$</td>
+              <td>$$\text{I.F.}=x^{-2}$$</td>
+              <td><a href="math-ex38-q3-reducible-exact.html">Open Q3</a></td>
+            </tr>
+            <tr id="q4-r1">
+              <td>6</td>
+              <td id="q4">Ex 3.8 Q4</td>
+              <td>Repeat the same integrating-factor log step after the trig simplification.</td>
+              <td>$$\int \frac{-2}{x}\,dx=-2\log x,\qquad e^{-2\log x}=x^{-2}$$</td>
+              <td>$$\text{I.F.}=e^{\int -2/x\,dx}$$</td>
+              <td>$$\text{I.F.}=x^{-2}$$</td>
+              <td><a href="math-ex38-q4-reducible-exact.html">Open Q4</a></td>
+            </tr>
+            <tr id="q5-r1">
+              <td>7</td>
+              <td id="q5">Ex 3.8 Q5</td>
+              <td>Generate the integrating factor from the same Rule I ratio.</td>
+              <td>$$\int \frac{-2}{x}\,dx=-2\log x,\qquad e^{-2\log x}=x^{-2}$$</td>
+              <td>$$\text{I.F.}=e^{\int -2/x\,dx}$$</td>
+              <td>$$\text{I.F.}=x^{-2}$$</td>
+              <td><a href="math-ex38-q5-reducible-exact.html">Open Q5</a></td>
+            </tr>
+            <tr id="q5-r2">
+              <td>8</td>
+              <td>Ex 3.8 Q5</td>
+              <td>Integrate the pure reciprocal term in the exact equation.</td>
+              <td>$$\int \frac1x\,dx=\log x$$</td>
+              <td>$$F=\int \left(\frac1x-\frac{y^2}{x^2}\right)dx$$</td>
+              <td>First term becomes $$\log x$$</td>
+              <td><a href="math-ex38-q5-reducible-exact.html">Open Q5</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="copy" style="margin-top:1rem">This set uses textbook-style $$\log x$$ and $$\log y$$ notation. If you want a strict calculus version, these can be written as $$\ln|x|$$ and $$\ln|y|$$ where appropriate.</p>
+    </section>
+  </div>
+</main>
+<script src="exact-study.js"></script>
+</body>
+</html>

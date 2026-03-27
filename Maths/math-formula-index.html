@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Maths Universal Formula Sheet | Indexed by Rooms</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+<style>
+  .table-wrap{overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(7,16,29,.75)}
+  table{width:100%;border-collapse:collapse;min-width:1080px}
+  th,td{padding:.85rem .8rem;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;vertical-align:top}
+  th{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#8cc7ff;background:rgba(255,255,255,.04)}
+  td{font-size:.9rem;line-height:1.6;color:#eaf4ff}
+  tr:last-child td{border-bottom:none}
+  .page-jumps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.7rem}
+  .page-link{display:block;padding:.85rem .95rem;border:1px solid rgba(255,255,255,.08);border-radius:14px;text-decoration:none;color:#eaf4ff;background:rgba(255,255,255,.03)}
+  .page-link small{display:block;color:#8fb6d9;margin-bottom:.2rem}
+  .muted{color:#8fb6d9}
+</style>
+</head>
+<body>
+<main class="shell">
+  <section class="hero">
+    <div class="tag">Maths Reference</div>
+    <h1>Universal Formula Sheet</h1>
+    <p class="hero-sub">This page walks top to bottom through the Maths question pages and extracts formulas from the solution rooms. Every row links back to the exact room it came from so you can revise formulas and then jump straight into the matching memory room.</p>
+    <div class="tool-row">
+      <a class="tool-btn" href="math-index.html">Math Hub</a>
+      <a class="tool-btn" href="math-questions.html">Question Bank</a>
+      <a class="tool-btn" href="math-exact-memory-builder.html">Memory Builder</a>
+    </div>
+  </section>
+  <div class="study-grid">
+    <section class="panel">
+      <div class="section-title">Page Index</div>
+      <div class="page-jumps" id="page-jumps">
+        <div class="copy">Loading page index...</div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-title">Indexed Formula Table</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Page</th>
+              <th>Room</th>
+              <th>Formula</th>
+              <th>Reference</th>
+            </tr>
+          </thead>
+          <tbody id="formula-table-body">
+            <tr><td colspan="5" class="muted">Scanning maths pages...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="math-exact-room-extractor.js"></script>
+<script>
+(function () {
+  var pages = []
+    .concat(Array.from({ length: 13 }, function (_, i) { return 'math-q' + (i + 1) + ([
+      '-separable-tan.html',
+      '-homogeneous-vx.html',
+      '-cot.html',
+      '-sectan.html',
+      '-arcsin-symmetry.html',
+      '-root-coupled.html',
+      '-secsq-tan.html',
+      '-oneplusx2-xy.html',
+      '-expplusone-sinx.html',
+      '-exp-tan-cube.html',
+      '-expplus2-cosx.html',
+      '-exp-y-linearized.html',
+      '-tan-z-sub.html'
+    ][i]); }))
+    .concat(['math-reducible-homogeneous-q1.html', 'math-reducible-homogeneous-q2.html'])
+    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-ex33-q' + (i + 1) + '-homogeneous.html'; }))
+    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-ex35-q' + (i + 1) + '-linear.html'; }))
+    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-ex36-q' + (i + 1) + '-bernoulli.html'; }))
+    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-ex37-q' + (i + 1) + '-exact.html'; }))
+    .concat(Array.from({ length: 5 }, function (_, i) { return 'math-ex38-q' + (i + 1) + '-reducible-exact.html'; }))
+    .concat(Array.from({ length: 4 }, function (_, i) { return 'math-ex39-q' + (i + 1) + '-rule2.html'; }))
+    .concat(Array.from({ length: 4 }, function (_, i) { return 'math-ex310-q' + (i + 1) + '-special-if.html'; }))
+    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-exact-q' + (i + 1) + '.html'; }));
+
+  var body = document.getElementById('formula-table-body');
+  var pageJumps = document.getElementById('page-jumps');
+
+  function escHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function slugify(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'page';
+  }
+
+  function extractMath(html) {
+    var formulas = [];
+    var seen = Object.create(null);
+    String(html || '').replace(/\$\$([\s\S]+?)\$\$/g, function (_, formula) {
+      var clean = String(formula || '').replace(/\s+/g, ' ').trim();
+      if (!clean || seen[clean]) return _;
+      seen[clean] = true;
+      formulas.push(clean);
+      return _;
+    });
+    return formulas;
+  }
+
+  function renderRows(entries) {
+    if (!entries.length) {
+      body.innerHTML = '<tr><td colspan="5" class="muted">No room formulas found.</td></tr>';
+      return;
+    }
+
+    body.innerHTML = entries.map(function (entry, index) {
+      var pageCell = entry.firstForPage
+        ? '<td id="page-' + escHtml(entry.pageSlug) + '"><div><b>' + escHtml(entry.pageTitle) + '</b></div><div class="muted">' + escHtml(entry.pageFile) + '</div></td>'
+        : '<td></td>';
+
+      return '<tr>' +
+        '<td>' + (index + 1) + '</td>' +
+        pageCell +
+        '<td><div><b>' + escHtml(entry.roomTitle) + '</b></div><div class="muted">' + escHtml(entry.roomId) + '</div></td>' +
+        '<td>$$' + escHtml(entry.formula) + '$$</td>' +
+        '<td><a href="' + escHtml(entry.roomUrl) + '">Open Room</a></td>' +
+      '</tr>';
+    }).join('');
+
+    if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+      window.MathJax.typesetPromise([body]).catch(function () {});
+    }
+  }
+
+  function renderPageJumps(pageEntries) {
+    pageJumps.innerHTML = pageEntries.map(function (page) {
+      return '<a class="page-link" href="#page-' + escHtml(page.pageSlug) + '"><small>' + escHtml(page.pageFile) + '</small>' + escHtml(page.pageTitle) + '</a>';
+    }).join('');
+  }
+
+  Promise.all(pages.map(function (pageFile) {
+    return window.RoomExtractor.fetchRoomsFromPage(pageFile)
+      .then(function (payload) {
+        var pageTitle = payload.sourcePageTitle || pageFile;
+        var pageSlug = slugify(pageFile.replace(/\.html?$/i, ''));
+        var entries = [];
+
+        payload.rooms.forEach(function (room) {
+          extractMath(room.contentHtml).forEach(function (formula) {
+            entries.push({
+              pageFile: pageFile,
+              pageTitle: pageTitle,
+              pageSlug: pageSlug,
+              roomTitle: room.title,
+              roomId: room.id,
+              roomUrl: room.sourceUrl,
+              formula: formula
+            });
+          });
+        });
+
+        return { pageFile: pageFile, pageTitle: pageTitle, pageSlug: pageSlug, entries: entries };
+      })
+      .catch(function () {
+        return { pageFile: pageFile, pageTitle: pageFile, pageSlug: slugify(pageFile.replace(/\.html?$/i, '')), entries: [] };
+      });
+  })).then(function (pagesData) {
+    var pageEntries = pagesData.filter(function (page) { return page.entries.length; });
+    var allEntries = [];
+
+    pageEntries.forEach(function (page) {
+      page.entries.forEach(function (entry, index) {
+        entry.firstForPage = index === 0;
+        allEntries.push(entry);
+      });
+    });
+
+    renderPageJumps(pageEntries);
+    renderRows(allEntries);
+  });
+})();
+</script>
+</body>
+</html>

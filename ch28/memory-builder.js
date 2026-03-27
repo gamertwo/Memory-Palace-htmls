@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'memory-palace-builder-v1';
+  var STORAGE_KEY = 'memory-palace-builder-ch28-v1';
   var STORAGE_VERSION = 2;
   var BLOCK_BASE_HEIGHT = 165;
   var BLOCK_ROOM_LINE_HEIGHT = 20;
@@ -18,6 +18,15 @@
   function escSel(v) {
     if (window.CSS && CSS.escape) return CSS.escape(v);
     return String(v || '').replace(/["\\]/g, '\\$&');
+  }
+  function resolveChapterPath(ref) {
+    if (!ref) return '#';
+    var value = String(ref);
+    if (/^(?:[a-z]+:)?\/\//i.test(value) || /^[a-z]+:/i.test(value) || value[0] === '#' || value[0] === '/') {
+      return value;
+    }
+    if (value.indexOf('../') === 0 || value.indexOf('./') === 0) return value;
+    return '../' + value.replace(/^\/+/, '');
   }
   function isFullPalacePayload(raw) {
     return !!(raw && (Array.isArray(raw.importedRooms) || Array.isArray(raw.blocks) || Array.isArray(raw.edges) || Array.isArray(raw.sketches)));
@@ -483,7 +492,7 @@
         '<h4 class="rc-title">' + escHtml(r.title) + '</h4>',
         '<p class="rc-summary">' + escHtml(r.summary || r.sourcePageTitle) + '</p>',
         '<div class="rc-foot"><div class="rc-tags">' + tags + '</div>',
-        '<a class="rc-src-link" href="' + escHtml(r.sourceUrl) + '">↗</a>',
+        '<a class="rc-src-link" href="' + escHtml(resolveChapterPath(r.sourceUrl)) + '">↗</a>',
         '</div></article>',
       ].join('');
     }).join('');
@@ -626,7 +635,7 @@
         '<p class="src-title">' + escHtml(r.title) + '</p>',
         '</div><span class="src-idx">' + (i + 1) + '</span></div>',
         '<div class="src-btns">',
-        '<a class="src-btn open" href="' + escHtml(r.sourceUrl) + '">Open ↗</a>',
+        '<a class="src-btn open" href="' + escHtml(resolveChapterPath(r.sourceUrl)) + '">Open ↗</a>',
         '<button type="button" class="src-btn" data-preview-room="' + escHtml(r.id) + '">Preview</button>',
         '<button type="button" class="src-btn" data-room-up="' + escHtml(r.id) + '"' + (i === 0 ? ' disabled' : '') + '>↑</button>',
         '<button type="button" class="src-btn" data-room-down="' + escHtml(r.id) + '"' + (i === b.sourceRoomIds.length - 1 ? ' disabled' : '') + '>↓</button>',
@@ -713,7 +722,7 @@
 
     els.reviewRoomSource.textContent = room.sourcePageTitle || room.sourcePage;
     els.reviewRoomTitle.textContent = room.title;
-    els.reviewRoomLink.href = room.sourceUrl || '#';
+    els.reviewRoomLink.href = resolveChapterPath(room.sourceUrl);
     els.reviewRoomSummary.textContent = room.summary || 'No summary available.';
 
     var clean = cleanHtml(room.contentHtml);
@@ -815,7 +824,7 @@
     state.pendingConnectFrom = null;
     state.review.blockId = null; state.review.roomIndex = 0;
     sketchUndoStack = []; sketchRedoStack = [];
-    render(true); setStatus('Loaded Chapter 8 preset.');
+    render(true); setStatus('Loaded the Chapter 28 blank palace.');
   }
 
   function newPalace() {
@@ -929,7 +938,7 @@
     setStatus('Importing from ' + pages.join(', ') + '…');
     for (var i = 0; i < pages.length; i++) {
       try {
-        var payload = await window.RoomExtractor.fetchRoomsFromPage(pages[i]);
+        var payload = await window.RoomExtractor.fetchRoomsFromPage(resolveChapterPath(pages[i]));
         payload.rooms.forEach(function (r) {
           if (!p.importedRooms.some(function (e) { return e.id === r.id; })) {
             p.importedRooms.push(safeRoom(r, p.importedRooms.length));
@@ -1210,7 +1219,7 @@
     if (srcBtn) {
       e.stopPropagation();
       var b = findBlock(srcBtn.getAttribute('data-open-src'));
-      if (b && b.sourceRoomIds.length) { var r = findRoom(b.sourceRoomIds[0]); if (r) window.location.href = r.sourceUrl; }
+      if (b && b.sourceRoomIds.length) { var r = findRoom(b.sourceRoomIds[0]); if (r) window.location.href = resolveChapterPath(r.sourceUrl); }
       return;
     }
     var blockEl = e.target.closest('[data-block-id]');
@@ -1444,7 +1453,7 @@
   });
 
   byId('reset-all-data-button').addEventListener('click', function () {
-    showConfirm('Reset all data?', 'Erase every palace from localStorage and reload the Chapter 8 preset?', function () {
+    showConfirm('Reset all data?', 'Erase every palace from localStorage and reload the Chapter 28 blank palace?', function () {
       try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
       state.data = normalizeState(null);
       state.selectedBlockId = null; state.selectedEdgeId = null;

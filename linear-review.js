@@ -185,6 +185,345 @@
     }
   }
 
+  function ensureBuilderUpgradeStyles() {
+    if (document.getElementById("memory-builder-compat-styles")) return;
+
+    var style = document.createElement("style");
+    style.id = "memory-builder-compat-styles";
+    style.textContent =
+      ".memory-upgrade-tool-row,.tool-row{" +
+        "display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.9rem;" +
+      "}" +
+      ".memory-upgrade-btn,.tool-btn{" +
+        "display:inline-flex;align-items:center;justify-content:center;" +
+        "text-decoration:none;border-radius:999px;padding:.58rem .95rem;" +
+        "font-size:.82rem;font-weight:700;" +
+        "border:1px solid var(--line,rgba(255,255,255,.12));" +
+        "background:rgba(255,255,255,.04);color:var(--text,#eef6ff);" +
+      "}" +
+      ".memory-upgrade-btn:hover,.tool-btn:hover{" +
+        "background:rgba(255,255,255,.08);" +
+      "}" +
+      ".room-source-link{" +
+        "display:inline-flex;margin:.3rem 0 .55rem;font-size:.72rem;font-weight:700;" +
+        "text-decoration:none;color:var(--accent,#ffd08a);" +
+      "}" +
+      ".memory-request-panel{" +
+        "margin-top:1rem;" +
+      "}" +
+      ".request-form{" +
+        "display:grid;gap:.8rem;" +
+      "}" +
+      ".field-stack{" +
+        "display:grid;gap:.35rem;" +
+      "}" +
+      ".field-stack span{" +
+        "font-size:.78rem;font-weight:700;color:var(--muted,rgba(247,241,232,.78));" +
+      "}" +
+      ".request-input,.request-textarea{" +
+        "width:100%;border-radius:12px;border:1px solid var(--line,rgba(255,255,255,.12));" +
+        "background:var(--panel2,rgba(255,255,255,.04));color:var(--text,#eef6ff);" +
+        "padding:.75rem .85rem;font:inherit;" +
+      "}" +
+      ".request-textarea{min-height:140px;resize:vertical;}" +
+      ".request-note,.memory-status{" +
+        "font-size:.8rem;color:var(--muted,rgba(247,241,232,.78));line-height:1.6;" +
+      "}";
+    document.head.appendChild(style);
+  }
+
+  function pageFileName() {
+    return fileNameFromPath();
+  }
+
+  function builderSlug(value) {
+    return String(value || "page")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "page";
+  }
+
+  function roomHeadingNode(room) {
+    return firstSelector(["h2", "h3", ".rt", ".pc-title", ".move-name", ".k", ".tag", ".t"], room);
+  }
+
+  function roomTitleText(room, index) {
+    if (!room) return "Room " + (index + 1);
+    var title = room.getAttribute("data-room-title");
+    if (title && title.trim()) return title.trim();
+    var heading = roomHeadingNode(room);
+    return heading && heading.textContent ? heading.textContent.trim() : "Room " + (index + 1);
+  }
+
+  function ensureBuilderRoomMetadata() {
+    var pageFilename = pageFileName();
+    Array.prototype.slice.call(document.querySelectorAll(".room")).forEach(function (room, index) {
+      var title = roomTitleText(room, index);
+      var roomId = room.getAttribute("data-room-id") || (builderSlug(pageFilename.replace(/\.html?$/i, "")) + "-room-" + (index + 1));
+      room.setAttribute("data-room-id", roomId);
+      room.setAttribute("data-room-title", title);
+      room.setAttribute("data-source-page", room.getAttribute("data-source-page") || pageFilename);
+      if (!room.id) room.id = "room-" + roomId;
+    });
+  }
+
+  function extractBuilderSummary(room) {
+    var firstParagraph = room.querySelector("p");
+    if (firstParagraph && firstParagraph.textContent) return firstParagraph.textContent.trim().replace(/\s+/g, " ");
+    var firstListItem = room.querySelector("li");
+    if (firstListItem && firstListItem.textContent) return firstListItem.textContent.trim().replace(/\s+/g, " ");
+    return "";
+  }
+
+  function extractBuilderTags(room, title) {
+    var explicit = room.getAttribute("data-tags");
+    if (explicit) {
+      return explicit.split(",").map(function (tag) { return tag.trim().toLowerCase(); }).filter(Boolean);
+    }
+    return String(title || "")
+      .replace(/^room\s+\d+\s*:\s*/i, "")
+      .split(/[^a-z0-9]+/i)
+      .map(function (tag) { return String(tag || "").trim().toLowerCase(); })
+      .filter(function (tag) { return tag.length > 3; })
+      .slice(0, 4);
+  }
+
+  function buildBuilderPayload() {
+    ensureBuilderRoomMetadata();
+    var pageFilename = pageFileName();
+    var pageTitle = (document.title || "").trim() ||
+      textFromNode(document, [".hero h1", "h1"], pageFilename) ||
+      pageFilename;
+
+    var rooms = Array.prototype.slice.call(document.querySelectorAll(".room")).map(function (room, index) {
+      var title = roomTitleText(room, index);
+      var roomId = room.getAttribute("data-room-id");
+      var anchorId = room.id;
+      return {
+        id: roomId,
+        anchorId: anchorId,
+        title: title,
+        summary: extractBuilderSummary(room),
+        contentHtml: room.innerHTML.trim(),
+        sourcePage: pageFilename,
+        sourcePageTitle: pageTitle,
+        sourceUrl: pageFilename + "#" + anchorId,
+        tags: extractBuilderTags(room, title),
+        order: index
+      };
+    });
+
+    return {
+      sourcePage: pageFilename,
+      sourcePageTitle: pageTitle,
+      rooms: rooms
+    };
+  }
+
+  function storeBuilderHandoffCompat() {
+    try {
+      var payload = buildBuilderPayload();
+      sessionStorage.setItem("memory-builder-handoff:" + payload.sourcePage, JSON.stringify(payload));
+    } catch (error) {}
+  }
+
+  function ensureBuilderToolbar() {
+    if (!document.querySelector(".room")) return;
+
+    ensureBuilderUpgradeStyles();
+    ensureBuilderRoomMetadata();
+
+    var pageFilename = pageFileName();
+    var row = document.querySelector(".hero .tool-row, .memory-upgrade-tool-row");
+    if (!row) {
+      row = document.createElement("div");
+      row.className = "tool-row memory-upgrade-tool-row";
+
+      var hero = document.querySelector(".hero");
+      if (hero) {
+        hero.appendChild(row);
+      } else {
+        var inner = firstSelector([".inner", ".main-stack", ".shell", ".main"]);
+        var anchor = firstSelector([".lead", "h1", ".block", ".panel"], inner || document.body);
+        if (anchor && anchor.parentNode) {
+          if (anchor.matches(".lead")) {
+            anchor.insertAdjacentElement("afterend", row);
+          } else {
+            anchor.parentNode.insertBefore(row, anchor.nextSibling);
+          }
+        } else if (inner) {
+          inner.insertBefore(row, inner.firstChild);
+        }
+      }
+    }
+
+    if (!row.querySelector("[data-builder-link]")) {
+      var builderLink = document.createElement("a");
+      builderLink.className = "tool-btn memory-upgrade-btn";
+      builderLink.href = "math-exact-memory-builder.html?pages=" + encodeURIComponent(pageFilename);
+      builderLink.textContent = "Open in Memory Builder";
+      builderLink.setAttribute("data-builder-link", "true");
+      row.appendChild(builderLink);
+    }
+
+    if (!row.querySelector("[data-formula-index-link]")) {
+      var formulaLink = document.createElement("a");
+      formulaLink.className = "tool-btn memory-upgrade-btn";
+      formulaLink.href = "math-formula-index.html#page-" + builderSlug(pageFilename.replace(/\.html?$/i, ""));
+      formulaLink.textContent = "Formula Sheet";
+      formulaLink.setAttribute("data-formula-index-link", "true");
+      row.appendChild(formulaLink);
+    }
+  }
+
+  function ensureRoomSendLinks() {
+    if (!document.querySelector(".room")) return;
+    var pageFilename = pageFileName();
+
+    Array.prototype.slice.call(document.querySelectorAll(".room")).forEach(function (room) {
+      var heading = roomHeadingNode(room);
+      if (!heading || room.querySelector(".room-source-link")) return;
+      var roomId = room.id;
+      if (!roomId) return;
+
+      var link = document.createElement("a");
+      link.className = "room-source-link";
+      link.href = "math-exact-memory-builder.html?pages=" + encodeURIComponent(pageFilename) + "&focus=" + encodeURIComponent(roomId);
+      link.textContent = "Send to Builder";
+      heading.insertAdjacentElement("afterend", link);
+    });
+  }
+
+  function ensureRequestPanel() {
+    if (!document.querySelector(".room") || document.querySelector("[data-txt-save]")) return;
+
+    ensureBuilderUpgradeStyles();
+
+    var pageKey = builderSlug((document.body.getAttribute("data-page-key") || pageFileName()).replace(/\.html?$/i, ""));
+    var host = firstSelector([".main-stack", ".inner", ".shell", ".main"]);
+    if (!host) return;
+
+    var panel = document.createElement("section");
+    panel.className = "block panel section memory-request-panel";
+    panel.id = "request-anchor";
+    panel.innerHTML =
+      '<div class="section-title">Save Change Request</div>' +
+      '<p class="palace-copy">Type what you want changed on this page, press Enter, and save the note.</p>' +
+      '<form class="request-form" data-txt-save>' +
+        '<label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="' + pageKey + '-request.txt" /></label>' +
+        '<label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more memory cue or formula reminder on this page."></textarea></label>' +
+        '<div class="tool-row"><button class="tool-btn memory-upgrade-btn" type="submit">Save .txt</button></div>' +
+        '<p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>' +
+        '<p class="memory-status" data-note-status>Nothing saved yet.</p>' +
+      '</form>';
+    host.appendChild(panel);
+
+    var row = document.querySelector(".memory-upgrade-tool-row, .hero .tool-row");
+    if (row && !row.querySelector("[data-request-jump]")) {
+      var requestLink = document.createElement("a");
+      requestLink.className = "tool-btn memory-upgrade-btn";
+      requestLink.href = "#request-anchor";
+      requestLink.textContent = "Save Notes";
+      requestLink.setAttribute("data-request-jump", "true");
+      row.appendChild(requestLink);
+    }
+
+    typesetNode(panel);
+  }
+
+  function initTxtSaveCompat() {
+    Array.prototype.slice.call(document.querySelectorAll("[data-txt-save]")).forEach(function (form) {
+      if (form.getAttribute("data-save-wired") === "true") return;
+      form.setAttribute("data-save-wired", "true");
+
+      var pageKey = builderSlug(document.body.getAttribute("data-page-key") || pageFileName());
+      var filenameInput = form.querySelector("[data-note-filename]");
+      var bodyInput = form.querySelector("[data-note-body]");
+      var status = form.querySelector("[data-note-status]");
+      if (!bodyInput) return;
+
+      function setStatus(message) {
+        if (status) status.textContent = message;
+      }
+
+      function ensureFilename(value) {
+        var clean = String(value || "").trim() || (pageKey + "_request");
+        clean = clean.replace(/[<>:"/\\|?*]+/g, "_");
+        return /\.txt$/i.test(clean) ? clean : clean + ".txt";
+      }
+
+      function saveTextFile(filename, text) {
+        if (window.showSaveFilePicker) {
+          return window.showSaveFilePicker({
+            suggestedName: filename,
+            types: [{ description: "Text Files", accept: { "text/plain": [".txt"] } }]
+          }).then(function (handle) {
+            return handle.createWritable().then(function (writable) {
+              return writable.write(text).then(function () {
+                return writable.close();
+              });
+            });
+          });
+        }
+
+        return new Promise(function (resolve) {
+          var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+          var link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.setTimeout(function () { URL.revokeObjectURL(link.href); }, 1000);
+          resolve();
+        });
+      }
+
+      function handleSave() {
+        var text = String(bodyInput.value || "").trim();
+        if (!text) {
+          setStatus("Type some text first.");
+          bodyInput.focus();
+          return;
+        }
+
+        var filename = ensureFilename(filenameInput && filenameInput.value);
+        saveTextFile(filename, text)
+          .then(function () { setStatus("Saved " + filename + "."); })
+          .catch(function () { setStatus("Save cancelled or blocked."); });
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        handleSave();
+      });
+
+      bodyInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          handleSave();
+        }
+      });
+    });
+  }
+
+  function initMemoryBuilderCompat() {
+    if (!document.querySelector(".room")) return;
+    ensureBuilderToolbar();
+    ensureRoomSendLinks();
+    ensureRequestPanel();
+    initTxtSaveCompat();
+
+    if (document.body.getAttribute("data-builder-compat-bound") === "true") return;
+    document.body.setAttribute("data-builder-compat-bound", "true");
+
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest('a[href*="math-exact-memory-builder.html"]');
+      if (!link) return;
+      storeBuilderHandoffCompat();
+    });
+  }
+
   function initLinearReview() {
     if (document.getElementById("linear-review")) return;
 
@@ -664,8 +1003,12 @@
   trackPageVisit();
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initLinearReview);
+    document.addEventListener("DOMContentLoaded", function () {
+      initMemoryBuilderCompat();
+      initLinearReview();
+    });
   } else {
+    initMemoryBuilderCompat();
     initLinearReview();
   }
 })();

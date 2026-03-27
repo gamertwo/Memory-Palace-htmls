@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.9 Question 4 | Rule II Integrating Factor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="math_ex39_q4">
+<main class="shell">
+  <nav class="nav"><a href="math-ex39-index.html">Ex 3.9 Index</a><a href="math-ex39-guide.html">Guide</a><a href="math-ex39-q3-rule2.html">Prev: Ex 3.9 Q3</a><a href="math-ex39-index.html">Next: Ex 3.9 Index</a></nav>
+  <section class="hero"><div class="tag">Exercise 3.9</div><h1>Exercise 3.9 Question 4</h1><p class="hero-sub">This larger expression still fits Rule II. The ratio becomes $$-4/y,$$ so the integrating factor is $$1/y^4.$$ After that, the exact finish gives a clean compact answer.</p><div class="formula-block">$$(2xy^4e^y+2xy^3+y)\,dx+(x^2y^4e^y-x^2y^2-3x)\,dy=0$$<br/><br/>$$x^2e^y+\frac{x^2}{y}+\frac{x}{y^3}=C$$</div><div class="tool-row"><a class="tool-btn" href="math-ex39-guide.html">Ex 3.9 Guide</a><a class="tool-btn" href="math-exact-memory-builder.html?pages=math-ex39-q4-rule2.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+      <div class="fact"><div class="k">Rule II Ratio</div><div class="v">$$\frac{N_x-M_y}{M}=-\frac4y$$</div></div>
+      <div class="fact"><div class="k">Integrating Factor</div><div class="v">$$e^{\int -4/y\,dy}=\frac1{y^4}$$</div></div>
+      <div class="fact"><div class="k">Formula Used</div><div class="v">$$\text{I.F.}=e^{\int f(y)\,dy}$$</div></div>
+    </div></section>
+    <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+      <article class="room"><h2>Room 1: Check Rule II</h2><ul><li>Here $$M=2xy^4e^y+2xy^3+y$$ and $$N=x^2y^4e^y-x^2y^2-3x.$$</li><li>Compute $$M_y=2xe^y(y^4+4y^3)+6xy^2+1$$ and $$N_x=2xy^4e^y-2xy^2-3.$$</li><li>This gives $$\dfrac{N_x-M_y}{M}=-\dfrac4y.$$</li></ul></article>
+      <article class="room"><h2>Room 2: Build the I.F.</h2><ul><li>Rule II gives $$\text{I.F.}=e^{\int -4/y\,dy}=y^{-4}.$$</li></ul></article>
+      <article class="room"><h2>Room 3: Multiply Through</h2><ul><li>The exact equation becomes</li><li>$$\left(2xe^y+\frac{2x}{y}+\frac1{y^3}\right)dx+\left(x^2e^y-\frac{x^2}{y^2}-\frac{3x}{y^4}\right)dy=0.$$</li></ul></article>
+      <article class="room"><h2>Room 4: Solve the Exact Equation</h2><ul><li>Integrate the new $$M$$ with respect to $$x$$:</li><li>$$F=x^2e^y+\frac{x^2}{y}+\frac{x}{y^3}+g(y).$$</li><li>Matching $$F_y$$ with the new $$N$$ gives $$g'(y)=0.$$</li></ul></article>
+      <article class="room"><h2>Room 5: Final Answer</h2><ul><li>Hence $$x^2e^y+\dfrac{x^2}{y}+\dfrac{x}{y^3}=C.$$</li></ul></article>
+    </div></section>
+  </div></div>
+</main>
+<script src="exact-study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

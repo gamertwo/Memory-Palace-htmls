@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.8 Question 4 | Reducible to Exact Equations</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="math_ex38_q4">
+<main class="shell">
+  <nav class="nav"><a href="math-ex38-index.html">Ex 3.8 Index</a><a href="math-ex38-guide.html">Guide</a><a href="math-ex38-q3-reducible-exact.html">Prev: Ex 3.8 Q3</a><a href="math-ex38-q5-reducible-exact.html">Next: Ex 3.8 Q5</a></nav>
+  <section class="hero"><div class="tag">Exercise 3.8</div><h1>Exercise 3.8 Question 4</h1><p class="hero-sub">This trig-polynomial mix still follows the same Rule I pattern. The ratio again becomes $$-2/x,$$ so multiplying by $$x^{-2}$$ reveals an exact equation.</p><div class="formula-block">$$(x\sec^2 y-x^2\cos y)\,dy=(\tan y-3x^4)\,dx$$<br/><br/>$$x^3+\frac{\tan y}{x}-\sin y=C$$</div><div class="tool-row"><a class="tool-btn" href="math-ex38-guide.html">Ex 3.8 Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="math-exact-memory-builder.html?pages=math-ex38-q4-reducible-exact.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+        <div class="fact"><div class="k">M(x,y)</div><div class="v">$$M=3x^4-\tan y$$</div></div>
+        <div class="fact"><div class="k">N(x,y)</div><div class="v">$$N=x\sec^2 y-x^2\cos y$$</div></div>
+        <div class="fact"><div class="k">Rule Test</div><div class="v">$$\frac{M_y-N_x}{N}=\frac{-\sec^2 y-(\sec^2 y-2x\cos y)}{x\sec^2 y-x^2\cos y}=-\frac2x$$</div></div>
+        <div class="fact"><div class="k">Integrating Factor</div><div class="v">$$\text{I.F.}=e^{\int -2/x\,dx}=\frac1{x^2}$$</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+        <article class="room"><h2>Room 1: Standard Form</h2><ul><li>Move everything to one side first:</li><li>$$\left(3x^4-\tan y\right)dx+\left(x\sec^2 y-x^2\cos y\right)dy=0.$$</li></ul></article>
+        <article class="room"><h2>Room 2: Show It Is Not Exact</h2><ul><li>Compute $$M_y=-\sec^2 y$$ and $$N_x=\sec^2 y-2x\cos y.$$</li><li>These are not equal, so the equation is not exact yet.</li></ul></article>
+        <article class="room"><h2>Room 3: Apply Rule I</h2><ul><li>Use $$\dfrac{M_y-N_x}{N}.$$</li><li>After simplification, it becomes $$-\dfrac2x.$$</li><li>Hence $$\text{I.F.}=e^{\int -2/x\,dx}=\dfrac1{x^2}.$$</li></ul></article>
+        <article class="room"><h2>Room 4: Multiply Through</h2><ul><li>After multiplying by $$x^{-2},$$ the exact equation is</li><li>$$\left(3x^2-\frac{\tan y}{x^2}\right)dx+\left(\frac{\sec^2 y}{x}-\cos y\right)dy=0.$$</li></ul></article>
+        <article class="room"><h2>Room 5: Solve the Exact Equation</h2><ul><li>Integrate the new $$M$$ with respect to $$x$$:</li><li>$$F=x^3+\frac{\tan y}{x}+g(y).$$</li><li>Then $$F_y=\dfrac{\sec^2 y}{x}+g'(y).$$ Matching with $$N=\dfrac{\sec^2 y}{x}-\cos y$$ gives $$g'(y)=-\cos y,$$ so $$g(y)=-\sin y.$$</li></ul></article>
+        <article class="room"><h2>Room 6: Final Answer</h2><ul><li>The potential function is $$F=x^3+\dfrac{\tan y}{x}-\sin y.$$</li><li>So $$x^3+\dfrac{\tan y}{x}-\sin y=C.$$</li></ul></article>
+      </div><div class="mini"><h3>Key Shortcut</h3><p>Always rewrite the equation into $Mdx+Ndy=0$ before testing the integrating-factor rule.</p></div><div class="mini"><h3>Why This Flow Matters</h3><p>This problem proves the rule still works even when trig pieces and polynomial pieces are mixed together.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">The important shift is not the trig. It is seeing that the Rule I ratio still collapses to an x-only function.</p><div class="flow-line"><span class="flow-pill">Rearrange</span><span class="flow-join">&rarr;</span><span class="flow-pill">Not exact</span><span class="flow-join">&rarr;</span><span class="flow-pill">Rule I gives $$-2/x$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Multiply by $$x^{-2}$$</span><span class="flow-join">&rarr;</span><span class="flow-pill">Solve exact form</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="math-ex38-q4-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note about converting the equation to standard form in Exercise 3.8 Question 4."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+  </div>
+</main>
+<script src="exact-study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

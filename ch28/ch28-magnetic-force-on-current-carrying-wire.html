@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>28-8 | Magnetic Force on a Current-Carrying Wire</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch28_wire_force">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch28 Index</a><a href="guide.html">Guide</a><a href="ch28-mass-spectrometer-sample-problem.html">Prev: Mass Spectrometer</a><a href="ch28-wire-force-sample-problem.html">Next: Wire Sample</a></nav>
+  <section class="hero"><div class="tag">28-8 Wire Force</div><h1>Magnetic Force on a Current-Carrying Wire</h1><p class="hero-sub">This page turns the single-charge force law into a wire formula. Start with the magnetic force on one moving conduction electron, count how much charge passes through a wire segment in a time interval, and then package the result into the length-vector form for an entire wire segment.</p><div class="formula-block">$$F_B=iLB\sin\phi,\qquad \vec F_B=i\,\vec L\times\vec B,\qquad d\vec F_B=i\,d\vec l\times\vec B$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Chapter Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch28-magnetic-force-on-current-carrying-wire.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
+        <div class="fact"><div class="k">Straight Segment</div><div class="v">$$F_B=iLB\sin\phi$$</div></div>
+        <div class="fact"><div class="k">Vector Form</div><div class="v">$$\vec F_B=i\vec L\times\vec B$$</div></div>
+        <div class="fact"><div class="k">General Form</div><div class="v">$$d\vec F_B=i\,d\vec l\times\vec B$$</div></div>
+      </div></section>
+      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+        <article class="room" id="room-ch28-wire-room-1" data-room-id="ch28-wire-room-1" data-room-title="Room 1: Start from the Force on One Conduction Electron" data-source-page="ch28-magnetic-force-on-current-carrying-wire.html" data-tags="electron,force,start,wire">
+          <h2>Room 1: Start from the Force on One Conduction Electron</h2>
+          <ul>
+            <li>Each moving charge in the wire feels the magnetic force $$F_B=qv_dB\sin\phi$$ in magnitude.</li>
+            <li>The wire as a whole feels a force because the conduction electrons collectively transmit that effect to the lattice.</li>
+            <li>So the wire formula is built from many identical charge-carrier pushes.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-wire-room-2" data-room-id="ch28-wire-room-2" data-room-title="Room 2: Count the Charge Crossing a Wire Segment" data-source-page="ch28-magnetic-force-on-current-carrying-wire.html" data-tags="count,charge,segment,current">
+          <h2>Room 2: Count the Charge Crossing a Wire Segment</h2>
+          <ul>
+            <li>For a wire segment of length $$L,$$ the time to cross the segment at drift speed is $$t=L/v_d.$$</li>
+            <li>The charge passing through in that time is $$q=it=iL/v_d. $$</li>
+            <li>This swaps microscopic charge counting for measurable current.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-wire-room-3" data-room-id="ch28-wire-room-3" data-room-title="Room 3: Substitute into the Magnetic Force Formula" data-source-page="ch28-magnetic-force-on-current-carrying-wire.html" data-tags="substitute,current,force,formula">
+          <h2>Room 3: Substitute into the Magnetic Force Formula</h2>
+          <ul>
+            <li>Substitute $$q=iL/v_d$$ into $$F_B=qv_dB\sin\phi.$$</li>
+            <li>The drift speed cancels, leaving $$F_B=iLB\sin\phi. $$</li>
+            <li>This is the straight-wire magnitude formula.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-wire-room-4" data-room-id="ch28-wire-room-4" data-room-title="Room 4: Package the Result into Vector Form" data-source-page="ch28-magnetic-force-on-current-carrying-wire.html" data-tags="vector,form,length,current">
+          <h2>Room 4: Package the Result into Vector Form</h2>
+          <ul>
+            <li>Introduce the length vector $$\vec L$$ in the direction of the conventional current.</li>
+            <li>Then the full vector result is $$\vec F_B=i\vec L\times\vec B.$$</li>
+            <li>The right-hand rule now uses current direction rather than electron drift direction.</li>
+          </ul>
+        </article>
+        <article class="room" id="room-ch28-wire-room-5" data-room-id="ch28-wire-room-5" data-room-title="Room 5: Generalize to Curved Wires or Nonuniform Fields" data-source-page="ch28-magnetic-force-on-current-carrying-wire.html" data-tags="generalize,curved,fields,differential">
+          <h2>Room 5: Generalize to Curved Wires or Nonuniform Fields</h2>
+          <ul>
+            <li>Break the wire into small segments $$d\vec l.$$</li>
+            <li>Each small segment feels $$d\vec F_B=i\,d\vec l\times\vec B.$$</li>
+            <li>Integrating over the wire gives the net force for any shape or field arrangement.</li>
+          </ul>
+        </article>
+      </div><div class="mini"><h3>Key Shortcut</h3><p>Wire-force derivation is just single-charge force plus the current relation $$q=it.$$</p></div><div class="mini"><h3>Main Tidbit</h3><p>In the vector formula, the length vector points with conventional current, not with electron drift.</p></div></section>
+      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Single carrier first, current substitution second, wire formula third, differential form last.</p><div class="movie-flow">
+        <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch One Moving Charge</h3><p>The net catches the force on a single conduction electron.</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Lay Down $$q=it$$</h3><p>The mat turns microscopic charge into measurable current.</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Wire Formula</h3><p>Fire writes $$F_B=iLB\sin\phi$$ and $$\vec F_B=i\vec L\times\vec B.$$</p></div>
+        <div class="movie-arrow">&rarr;</div>
+        <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Differential Form</h3><p>The coat extends the result to $$d\vec F_B=i\,d\vec l\times\vec B.$$</p></div>
+      </div><div class="flow-line"><span class="flow-pill">Single charge</span><span class="flow-join">&rarr;</span><span class="flow-pill">Use current</span><span class="flow-join">&rarr;</span><span class="flow-pill">Wire force</span><span class="flow-join">&rarr;</span><span class="flow-pill">Generalize</span></div></section>
+      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch28-wire-force-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one extra reminder that the current direction in the vector formula is the conventional-current direction."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>
