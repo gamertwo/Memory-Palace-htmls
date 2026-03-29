@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-15 | Unit Output Method in Figure 8-30</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_15">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-application-example-8-14.html">Prev: App Example 8-14</a><a href="ch8-design-exercise-8-20.html">Next: Design Exercise 8-20</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-15</div>
+    <h1>Use the Unit Output Method to Solve the Figure 8-30 Phasor Circuit</h1>
+    <p class="hero-sub">
+      This page is a backward-solving movie. Instead of starting from the source, you assume the output node is one clean unit phasor, use that assumption to walk backward through the network, recover the source phasor and input current for that unit case, and then scale everything to the real source. The memory emphasis is that the unit output method turns a multi-step circuit into one reusable proportionality run.
+    </p>
+    <div class="formula-block">
+      $$V_C=1+j0,\qquad Z_{IN}=75+j25\,\Omega,\qquad K=\frac{V_C}{V_S}=-0.4-j0.2$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-15.html">Open in Memory Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact">
+            <div class="k">Given</div>
+            <div class="v">
+              Use the unit output method for the circuit in Figure 8-30 with $$V_S=10\angle0^\circ\text{ V}.$$
+            </div>
+          </div>
+          <div class="fact">
+            <div class="k">Find</div>
+            <div class="v">
+              Find the input impedance $$Z_{IN},$$ the input current $$I_1,$$ the output voltage $$V_C,$$ and the current $$I_3.$$
+            </div>
+          </div>
+          <div class="fact">
+            <div class="k">Method</div>
+            <div class="v">
+              Assume a unit output first, solve the whole network once, then use proportionality to scale to the real source.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact">
+            <div class="k">Unit Output Assumption</div>
+            <div class="v">$$V_C=1+j0\text{ V}$$</div>
+          </div>
+          <div class="fact">
+            <div class="k">Recovered Input Pair</div>
+            <div class="v">$$V_S=-2+j1\text{ V},\qquad I_1=-0.02+j0.02\text{ A}$$</div>
+          </div>
+          <div class="fact">
+            <div class="k">Key Results</div>
+            <div class="v">$$Z_{IN}=75+j25\,\Omega,\qquad K=\frac{V_C}{V_S}=-0.4-j0.2$$</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+
+          <article class="room" id="room-ch8-example-8-15-room-1" data-room-id="ch8-example-8-15-room-1" data-room-title="Room 1: Assume a Unit Output at the Target Node" data-source-page="ch8-example-8-15.html" data-tags="assume,unit,output,node">
+            <h2>Room 1: Assume a Unit Output at the Target Node</h2>
+            <ul>
+              <li>The unit output method starts by forcing the desired output to a simple trial value: $$V_C=1+j0\text{ V}.$$</li>
+              <li>This is not the final answer. It is a temporary probe value that lets the whole network reveal its ratios.</li>
+              <li>Once the circuit is solved for this unit case, the real source can scale every result cleanly.</li>
+            </ul>
+            <div class="mini" style="margin-top:.9rem">
+              <h3>Simple Meaning</h3>
+              <p>
+                We are starting with a fake output on purpose. The question here is: if the output were exactly 1 V, what would the rest of the circuit have to do?
+              </p>
+            </div>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-15-room-2" data-room-id="ch8-example-8-15-room-2" data-room-title="Room 2: Use the Output Node to Recover $$I_3$$ and $$V_B$$" data-source-page="ch8-example-8-15.html" data-tags="output,recover,current,node">
+            <h2>Room 2: Use the Output Node to Recover $$I_3$$ and $$V_B$$</h2>
+            <ul>
+              <li>At the right resistor, Ohm's law gives $$I_3=\frac{V_C}{50}=\frac{1+j0}{50}=0.02+j0\text{ A}.$$</li>
+              <li>Now walk backward through the branch from node $$C$$ to node $$B.$$ The book's KVL step gives $$V_B=V_C+(j100)I_3.$$</li>
+              <li>So $$V_B=1+j0+(j100)(0.02)=1+j2\text{ V}.$$</li>
+              <li>The output side has now given you both the branch current $$I_3$$ and the inner node voltage $$V_B.$$</li>
+            </ul>
+            <div class="mini" style="margin-top:.9rem">
+              <h3>Simple Meaning</h3>
+              <p>
+                Since we know the output voltage and the resistor value, we can get the output current immediately. Then we step one component backward to find the voltage at the previous node.
+              </p>
+            </div>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-15-room-3" data-room-id="ch8-example-8-15-room-3" data-room-title="Room 3: Use $$V_B$$ to Recover $$I_2$$ and Then $$I_1$$" data-source-page="ch8-example-8-15.html" data-tags="recover,current,kcl">
+            <h2>Room 3: Use $$V_B$$ to Recover $$I_2$$ and Then $$I_1$$</h2>
+            <ul>
+              <li>At the shunt branch, use Ohm's law again: $$I_2=\frac{V_B}{-j50}=\frac{1+j2}{-j50}=-0.04+j0.02\text{ A}.$$</li>
+              <li>Now apply KCL at node $$B.$$ The input current must split into the two outgoing currents.</li>
+              <li>So $$I_1=I_2+I_3=(-0.04+j0.02)+(0.02+j0)= -0.02+j0.02\text{ A}.$$</li>
+              <li>This is the input current produced by the unit-output assumption.</li>
+            </ul>
+            <div class="mini" style="margin-top:.9rem">
+              <h3>Simple Meaning</h3>
+              <p>
+                Node B is a split point. One current goes down, one goes right, so the current coming in from the left must be enough to feed both branches.
+              </p>
+            </div>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-15-room-4" data-room-id="ch8-example-8-15-room-4" data-room-title="Room 4: Build the Source Phasor and the Input Impedance" data-source-page="ch8-example-8-15.html" data-tags="build,source,input,impedance">
+            <h2>Room 4: Build the Source Phasor and the Input Impedance</h2>
+            <ul>
+              <li>Walk backward through the left series branch using KVL: $$V_S=(50+j100)I_1+V_B.$$</li>
+              <li>Substitute the unit-case values: $$V_S=(50+j100)(-0.02+j0.02)+(1+j2)=-2+j1\text{ V}.$$</li>
+              <li>Now divide the unit-case source by the unit-case input current to get the input impedance.</li>
+              <li>$$Z_{IN}=\frac{V_S}{I_1}=\frac{-2+j1}{-0.02+j0.02}=75+j25\,\Omega$$</li>
+            </ul>
+            <div class="mini" style="margin-top:.9rem">
+              <h3>Simple Meaning</h3>
+              <p>
+                Now we know what source voltage would be needed to create that trial output. Once we have both source voltage and input current, we can see what impedance the whole circuit presents at the input.
+              </p>
+            </div>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-15-room-5" data-room-id="ch8-example-8-15-room-5" data-room-title="Room 5: Turn the Unit Run into a Scaling Factor" data-source-page="ch8-example-8-15.html" data-tags="turn,unit,scaling,factor">
+            <h2>Room 5: Turn the Unit Run into a Scaling Factor</h2>
+            <ul>
+              <li>Because the trial run used $$V_C=1,$$ the output-to-input proportionality factor is $$K=\frac{V_C}{V_S}=\frac{1}{-2+j1}.$$</li>
+              <li>Rationalizing the denominator gives $$K=\frac{-2-j1}{5}=-0.4-j0.2.$$</li>
+              <li>This is the shortcut prize of the method: once $$K$$ and $$Z_{IN}$$ are known, every real-source answer becomes a one-step scaling problem.</li>
+            </ul>
+            <div class="mini" style="margin-top:.9rem">
+              <h3>Simple Meaning</h3>
+              <p>
+                This is the payoff. We solved the circuit once in a fake 1 V output case, and that gives us a reusable ratio that connects source voltage to output voltage.
+              </p>
+            </div>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-15-room-6" data-room-id="ch8-example-8-15-room-6" data-room-title="Room 6: Scale Everything to the Real Source $$10\angle0^\circ$$" data-source-page="ch8-example-8-15.html" data-tags="scale,real,source,answers">
+            <h2>Room 6: Scale Everything to the Real Source $$10\angle0^\circ$$</h2>
+            <ul>
+              <li>Use the actual source $$V_S=10\angle0^\circ\text{ V}.$$ Then $$V_C=KV_S=(-0.4-j0.2)(10)=-4-j2\text{ V}=4.47\angle-153^\circ\text{ V}.$$</li>
+              <li>The input current comes from the input impedance: $$I_1=\frac{V_S}{Z_{IN}}=\frac{10}{75+j25}=0.12-j0.04\text{ A}=0.126\angle-18.4^\circ\text{ A}.$$</li>
+              <li>The output-branch current is $$I_3=\frac{V_C}{50}=\frac{-4-j2}{50}=-0.08-j0.04\text{ A}=0.0894\angle-153^\circ\text{ A}.$$</li>
+              <li>So the required answers are $$Z_{IN}=75+j25\,\Omega,$$ $$I_1=0.126\angle-18.4^\circ\text{ A},$$ $$V_C=4.47\angle-153^\circ\text{ V},$$ and $$I_3=0.0894\angle-153^\circ\text{ A}.$$</li>
+            </ul>
+            <div class="mini" style="margin-top:.9rem">
+              <h3>Simple Meaning</h3>
+              <p>
+                The fake run is over here. We now plug in the real source and scale the answers, because in a linear circuit everything grows or shrinks together.
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>
+            Assume unit output, walk backward to recover the source and input current, form $$Z_{IN}$$ and $$K,$$ then scale to the real source.
+          </p>
+        </div>
+
+        <div class="mini">
+          <h3>Why This Flow Matters</h3>
+          <p>
+            The unit output method is powerful because it turns one trial solve into a reusable map. Instead of solving the whole circuit again for every new source, you solve the structure once and then scale the answers.
+          </p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">
+          Walk this backward movie as unit output, right branch, middle node, left branch, scaling factor, real-source answers.
+        </p>
+        <div class="movie-flow">
+          <div class="movie-step">
+            <div class="movie-peg">21 Net</div>
+            <h3>Catch the Unit Output</h3>
+            <p>The net catches the trial value $$V_C=1+j0.$$</p>
+          </div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step">
+            <div class="movie-peg">31 Mat</div>
+            <h3>Pull Out the Right-Branch Current</h3>
+            <p>The mat stamps $$I_3=0.02+j0$$ and then walks back to $$V_B=1+j2.$$</p>
+          </div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step">
+            <div class="movie-peg">28 Knife</div>
+            <h3>Split the Middle Node Currents</h3>
+            <p>The knife cuts out $$I_2=-0.04+j0.02$$ and recombines to $$I_1=-0.02+j0.02.$$</p>
+          </div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step">
+            <div class="movie-peg">84 Fire</div>
+            <h3>Light the Source and $$Z_{IN}$$</h3>
+            <p>Fire reveals $$V_S=-2+j1$$ and then $$Z_{IN}=75+j25.$$</p>
+          </div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step">
+            <div class="movie-peg">70 Case</div>
+            <h3>Lock the Scaling Factor</h3>
+            <p>The case carries $$K=1/V_S=-0.4-j0.2.$$</p>
+          </div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step">
+            <div class="movie-peg">71 Coat</div>
+            <h3>Dress the Real Answers</h3>
+            <p>The coat scales everything to $$10\angle0^\circ$$ and leaves $$V_C,$$ $$I_1,$$ and $$I_3.$$</p>
+          </div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Assume $$V_C=1$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find $$I_3,V_B$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find $$I_2,I_1$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Build $$V_S,Z_{IN}$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Get $$K$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Scale to the real source</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack">
+            <span>File Name</span>
+            <input class="request-input" data-note-filename type="text" value="ch8-example-8-15-request.txt" />
+          </label>
+          <label class="field-stack">
+            <span>Text</span>
+            <textarea class="request-textarea" data-note-body placeholder="Example: Add one more visual reminder that the unit output method solves the structure once and then scales."></textarea>
+          </label>
+          <div class="tool-row">
+            <button class="tool-btn" type="submit">Save .txt</button>
+          </div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

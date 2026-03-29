@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-23 | Superposition for the Current Ix</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_23">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-16.html">Prev: Example 8-16</a><a href="ch8-example-8-17.html">Next: Example 8-17</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-23</div>
+    <h1>Use Superposition to Find the Phasor Current $$I_x$$</h1>
+    <p class="hero-sub">
+      This exercise is the current-output companion to Example 8-16. The method is unchanged: turn off one source at a time, solve the current contribution produced by each reduced circuit, and then add the contributions because the sources share the same frequency. The memory emphasis is that superposition cares about the output type only at the last step; the isolate, solve, add rhythm stays the same.
+    </p>
+    <div class="formula-block">
+      $$I_x=0.206\angle-158^\circ\text{ A}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-23.html">Open in Memory Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">Use superposition on Figure 8-34, where the two sources operate at the same frequency.</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the phasor current $$I_x.$$</div></div>
+          <div class="fact"><div class="k">Target</div><div class="v">This is a current-output superposition problem, so the end product stays as a phasor current.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Method Rule</div><div class="v">Same frequency means the partial current responses can be added as phasors.</div></div>
+          <div class="fact"><div class="k">Output Type</div><div class="v">The desired answer is $$I_x,$$ not a voltage waveform.</div></div>
+          <div class="fact"><div class="k">Final Answer</div><div class="v">$$I_x=0.206\angle-158^\circ\text{ A}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-23-room-1" data-room-id="ch8-exercise-8-23-room-1" data-room-title="Room 1: Recognize the Same-Frequency Superposition Pattern" data-source-page="ch8-exercise-8-23.html" data-tags="recognize,same,frequency,pattern">
+            <h2>Room 1: Recognize the Same-Frequency Superposition Pattern</h2>
+            <ul>
+              <li>This exercise belongs to the same superposition family as Example 8-16.</li>
+              <li>The sources share one operating frequency, so each contribution to $$I_x$$ can remain a phasor until the final addition.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-23-room-2" data-room-id="ch8-exercise-8-23-room-2" data-room-title="Room 2: Solve the Contribution from Source 1 Alone" data-source-page="ch8-exercise-8-23.html" data-tags="solve,contribution,source,alone">
+            <h2>Room 2: Solve the Contribution from Source 1 Alone</h2>
+            <ul>
+              <li>Turn off source 2 and keep source 1 active.</li>
+              <li>Reduce the resulting network and find the phasor current contribution through the branch labeled $$I_x.$$</li>
+              <li>This produces the first partial response for the output current.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-23-room-3" data-room-id="ch8-exercise-8-23-room-3" data-room-title="Room 3: Solve the Contribution from Source 2 Alone" data-source-page="ch8-exercise-8-23.html" data-tags="solve,contribution,second,alone">
+            <h2>Room 3: Solve the Contribution from Source 2 Alone</h2>
+            <ul>
+              <li>Now turn off source 1 and let source 2 act by itself.</li>
+              <li>Again reduce the circuit and recover the second phasor contribution to $$I_x.$$</li>
+              <li>The output current now has two phasor pieces at the same frequency.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-23-room-4" data-room-id="ch8-exercise-8-23-room-4" data-room-title="Room 4: Add the Two Partial Current Responses" data-source-page="ch8-exercise-8-23.html" data-tags="add,two,partial,current">
+            <h2>Room 4: Add the Two Partial Current Responses</h2>
+            <ul>
+              <li>Because the partial responses live at the same frequency, add them as phasors.</li>
+              <li>This is the same final move used for the voltage output in Example 8-16, but now the object being added is a current.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-23-room-5" data-room-id="ch8-exercise-8-23-room-5" data-room-title="Room 5: State the Textbook Answer Cleanly" data-source-page="ch8-exercise-8-23.html" data-tags="state,textbook,answer,cleanly">
+            <h2>Room 5: State the Textbook Answer Cleanly</h2>
+            <ul>
+              <li>The final phasor current is $$I_x=0.206\angle-158^\circ\text{ A}.$$</li>
+              <li>The memory sentence is: isolate one source, solve one current piece, repeat, then phasor-add the pieces.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>If the frequencies match, current responses combine just as cleanly as voltage responses do. Only the output label changes.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Why This Flow Matters</h3>
+          <p>This exercise helps separate the superposition method from the output quantity. The same source-isolation logic works whether the final answer is a voltage or a current.</p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Reuse the same-frequency superposition movie, but let the output be the branch current $$I_x.$$</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">10 Toes</div><h3>Check the Shared Frequency</h3><p>Toes confirm both source contributions live on one phasor floor.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch Source 1 Alone</h3><p>The net isolates the first current contribution to $$I_x.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch Source 2 Alone</h3><p>The net isolates the second current contribution.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Add the Current Phasors</h3><p>The mat combines the two current pieces.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Carry the Final Current</h3><p>The case locks $$I_x=0.206\angle-158^\circ\text{ A}.$$</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Check same $$\omega$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find first current piece</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find second current piece</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Add phasors</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Box $$I_x$$</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-23-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a stronger cue that the current contributions can be added directly because the frequencies match."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

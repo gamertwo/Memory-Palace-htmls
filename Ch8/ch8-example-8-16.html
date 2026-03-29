@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-16 | Superposition with Same-Frequency Sources</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_16">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-22.html">Prev: Exercise 8-22</a><a href="ch8-exercise-8-23.html">Next: Exercise 8-23</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-16</div>
+    <h1>Use Superposition When Both Sources Have the Same Frequency</h1>
+    <p class="hero-sub">
+      This page is the first full superposition movie in the chapter. You turn off one source at a time, reduce the remaining network seen by the output node, compute the individual phasor responses, and then add those phasors directly because both sources operate at the same frequency. The memory emphasis is simple: same frequency means same phasor floor, so the responses can combine as phasors.
+    </p>
+    <div class="formula-block">
+      $$V_R=227\angle-47.9^\circ\text{ V},\qquad v_R(t)=227\cos(5000t-47.9^\circ)\text{ V}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-16.html">Open in Memory Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">Use superposition on Figure 8-32 for $$R=20\,\Omega,\ L_1=2\text{ mH},\ L_2=6\text{ mH},\ C=20\,\mu\text{F}.$$</div></div>
+          <div class="fact"><div class="k">Sources</div><div class="v">$$v_{s1}=100\cos(5000t)\text{ V},\qquad v_{s2}=120\cos(5000t+30^\circ)\text{ V}$$</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the steady-state resistor voltage $$v_R(t)$$ and validate it with Multisim.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Impedances at $$\omega=5000$$</div><div class="v">$$Z_{L1}=j10,\qquad Z_{L2}=j30,\qquad Z_C=-j10$$</div></div>
+          <div class="fact"><div class="k">Partial Responses</div><div class="v">$$V_{R1}=166\angle-56.3^\circ\text{ V},\qquad V_{R2}=66.6\angle-26.3^\circ\text{ V}$$</div></div>
+          <div class="fact"><div class="k">Final Sum</div><div class="v">$$V_R=227\angle-47.9^\circ\text{ V}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-16-room-1" data-room-id="ch8-example-8-16-room-1" data-room-title="Room 1: Confirm That Both Sources Share One Phasor Frequency" data-source-page="ch8-example-8-16.html" data-tags="confirm,both,sources,frequency">
+            <h2>Room 1: Confirm That Both Sources Share One Phasor Frequency</h2>
+            <ul>
+              <li>Both sources oscillate at $$\omega=5000\text{ rad/s}.$$ That is the key superposition checkpoint.</li>
+              <li>At this frequency, the impedances are $$Z_{L1}=j10\,\Omega,$$ $$Z_{L2}=j30\,\Omega,$$ and $$Z_C=-j10\,\Omega.$$</li>
+              <li>Because the sources live on the same frequency floor, the final responses can be added as phasors.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-16-room-2" data-room-id="ch8-example-8-16-room-2" data-room-title="Room 2: Turn Off Source 2 and Reduce the Right-Side Parallel Block" data-source-page="ch8-example-8-16.html" data-tags="turn,off,source,parallel">
+            <h2>Room 2: Turn Off Source 2 and Reduce the Right-Side Parallel Block</h2>
+            <ul>
+              <li>With source 2 turned off, the right voltage source becomes a short circuit.</li>
+              <li>The three elements attached to the output node are then in parallel, so their equivalent impedance is</li>
+              <li>$$Z_{EQ1}=\frac{1}{\frac{1}{20}+\frac{1}{-j10}+\frac{1}{j30}}=7.20-j9.60\,\Omega.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-16-room-3" data-room-id="ch8-example-8-16-room-3" data-room-title="Room 3: Use Voltage Division to Find $$V_{R1}$$" data-source-page="ch8-example-8-16.html" data-tags="voltage,division,find,response">
+            <h2>Room 3: Use Voltage Division to Find $$V_{R1}$$</h2>
+            <ul>
+              <li>The left inductor $$j10\,\Omega$$ is now in series with $$Z_{EQ1},$$ so use voltage division.</li>
+              <li>$$V_{R1}=\frac{Z_{EQ1}}{j10+Z_{EQ1}}100\angle0^\circ$$</li>
+              <li>This gives $$V_{R1}=92.3-j138=166\angle-56.3^\circ\text{ V}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-16-room-4" data-room-id="ch8-example-8-16-room-4" data-room-title="Room 4: Turn Off Source 1 and Reduce the Left-Side Parallel Block" data-source-page="ch8-example-8-16.html" data-tags="turn,off,left,block">
+            <h2>Room 4: Turn Off Source 1 and Reduce the Left-Side Parallel Block</h2>
+            <ul>
+              <li>Now short source 1 and let source 2 act alone.</li>
+              <li>The three elements connected to the output node again form a parallel block:</li>
+              <li>$$Z_{EQ2}=\frac{1}{\frac{1}{20}+\frac{1}{-j10}+\frac{1}{j10}}=20-j0\,\Omega.$$</li>
+              <li>The inductive and capacitive admittances cancel here, so the reduced block becomes purely resistive.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-16-room-5" data-room-id="ch8-example-8-16-room-5" data-room-title="Room 5: Use Voltage Division to Find $$V_{R2}$$" data-source-page="ch8-example-8-16.html" data-tags="voltage,division,second,response">
+            <h2>Room 5: Use Voltage Division to Find $$V_{R2}$$</h2>
+            <ul>
+              <li>The right inductor $$j30\,\Omega$$ is now the series element, so apply voltage division again.</li>
+              <li>$$V_{R2}=\frac{Z_{EQ2}}{j30+Z_{EQ2}}120\angle30^\circ$$</li>
+              <li>This gives $$V_{R2}=59.7-j29.5=66.6\angle-26.3^\circ\text{ V}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-16-room-6" data-room-id="ch8-example-8-16-room-6" data-room-title="Room 6: Add the Same-Frequency Phasor Responses and Validate" data-source-page="ch8-example-8-16.html" data-tags="add,same,frequency,validate">
+            <h2>Room 6: Add the Same-Frequency Phasor Responses and Validate</h2>
+            <ul>
+              <li>Because both responses are at the same frequency, add them directly as phasors:</li>
+              <li>$$V_R=V_{R1}+V_{R2}=(92.3-j138)+(59.7-j29.5)=152-j168=227\angle-47.9^\circ\text{ V}.$$</li>
+              <li>So the time-domain answer is $$v_R(t)=227\cos(5000t-47.9^\circ)\text{ V}.$$</li>
+              <li>For Multisim validation, convert $$5000\text{ rad/s}$$ to $$795.77\text{ Hz}$$ and the simulated magnitude-phase result matches the hand calculation.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>Same frequency means the two partial responses can live as phasors all the way to the end. Solve each source alone, then add the phasors directly.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Why This Flow Matters</h3>
+          <p>This page sets the rule that the next example will contrast. Same-frequency superposition ends with phasor addition; different-frequency superposition ends with time-domain addition.</p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Use one fixed superposition corridor: same frequency, source 2 off, source 1 off, then add the phasor outputs.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">10 Toes</div><h3>Check the Frequency Floor</h3><p>Toes confirm both sources sit at $$\omega=5000.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch Source 1 Alone</h3><p>The net shorts source 2 and grabs the first reduced circuit.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Stamp $$V_{R1}$$</h3><p>The mat leaves $$166\angle-56.3^\circ\text{ V}.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch Source 2 Alone</h3><p>The net now shorts source 1 and builds the second reduced circuit.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light $$V_{R2}$$</h3><p>Fire reveals $$66.6\angle-26.3^\circ\text{ V}.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Dress the Final Sum</h3><p>The coat adds the phasors and writes $$227\cos(5000t-47.9^\circ).$$</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Check same $$\omega$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find $$V_{R1}$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find $$V_{R2}$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Add phasors</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Write $$v_R(t)$$</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-example-8-16-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more visual reminder showing why same-frequency responses can be added as phasors."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

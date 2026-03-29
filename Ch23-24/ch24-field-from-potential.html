@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 24 | Field from Potential</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch24_field_from_potential">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch23-24 Index</a><a href="guide.html">Guide</a><a href="ch24-dipole-and-continuous-potential.html">Prev: Dipole + Continuous</a><a href="ch24-system-potential-energy.html">Next: System Energy</a></nav>
+
+  <section class="hero">
+    <div class="tag">Reverse Direction</div>
+    <h1>Calculating the Electric Field from the Potential</h1>
+    <p class="hero-sub">This page closes the loop of Chapter 24. Earlier pages turned field into potential; now we go backward. The key idea is that the electric field points in the direction of greatest potential decrease, and its magnitude is the rate at which potential drops with distance.</p>
+    <div class="formula-block">$$E=-\frac{dV}{ds},\qquad E_x=-\frac{dV}{dx}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch24-field-from-potential.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Core Idea</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Start from the Potential-Difference Formula</h2>
+            <ul>
+              <li>For a tiny displacement $$d\vec s,$$ the potential change is $$dV=-\vec E\cdot d\vec s.$$</li>
+              <li>If the displacement is along the field direction, this becomes $$dV=-E\,ds.$$</li>
+              <li>So $$E=-dV/ds.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is just the infinitesimal version of the earlier line-integral formula. Shrinking the move down to a tiny step reveals the local field-potential relationship.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Read the Minus Sign Correctly</h2>
+            <ul>
+              <li>The field points toward decreasing potential.</li>
+              <li>Where potential drops faster, the field is stronger.</li>
+              <li>So the minus sign carries the physical direction information.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Students often treat the minus sign as formal algebra only. Here it has a direct physical meaning: fields push positive test charges downhill in potential.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Connect with Equipotential Surfaces</h2>
+            <ul>
+              <li>Equipotential surfaces are surfaces of constant $$V.$$</li>
+              <li>Moving along one of them gives no change in potential and no work by the field.</li>
+              <li>The field must therefore be perpendicular to equipotential surfaces.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This turns the derivative formula into geometry. The field is not just related to numbers in a formula; it is visually encoded by how tightly packed the equipotential surfaces are.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Use the One-Dimensional Shortcut</h2>
+            <ul>
+              <li>When the potential varies only with x, use $$E_x=-dV/dx.$$</li>
+              <li>This is often how textbook examples report the field from a known potential graph or formula.</li>
+              <li>The steeper the graph, the larger the field magnitude.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This shortcut makes Chapter 24 practical. It lets you recover the field from scalar potential data without redoing force calculations.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$dV=-\vec E\cdot d\vec s$$</h3><p>Chalk starts from the tiny-step potential relation.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">48 Roof</div><h3>Read the Downhill Direction</h3><p>The roof points from high potential toward low potential.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Turn Slope into Field</h3><p>The mat translates a potential slope into field magnitude.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch24-field-from-potential-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note about why electric field lines are perpendicular to equipotential surfaces."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

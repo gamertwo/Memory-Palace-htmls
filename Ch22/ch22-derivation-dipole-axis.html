@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 22 | Derivation: Dipole Axis Field</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch22_derivation_dipole_axis">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch22 Index</a><a href="guide.html">Guide</a><a href="ch22-charge-density-toolkit.html">Prev: Density Toolkit</a><a href="ch22-derivation-ring-axis.html">Next: Ring Field</a></nav>
+
+  <section class="hero">
+    <div class="tag">Derivation</div>
+    <h1>Electric Field on the Axis of a Dipole</h1>
+    <p class="hero-sub">This page is about the field produced by the dipole itself, not a dipole placed in an external field. The whole derivation is a subtraction movie: place the observation point on the axis, write the two point-charge fields, subtract them carefully, then use the far-field idea to reveal the dipole-moment form.</p>
+    <div class="formula-block">$$E_{\text{axis, far}}\approx \frac{1}{4\pi\epsilon_0}\frac{2p}{z^3},\qquad p=qd$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch22-derivation-dipole-axis.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Geometry</div><div class="v">Charges $$+q$$ and $$-q$$ are separated by distance $$d.$$</div></div>
+          <div class="fact"><div class="k">Observation Point</div><div class="v">Point lies on the axis a distance $$z$$ from the dipole center.</div></div>
+          <div class="fact"><div class="k">Exact Theme</div><div class="v">Two unequal distances create a field difference, not a cancellation.</div></div>
+          <div class="fact"><div class="k">Far Limit</div><div class="v">When $$z\gg d,$$ the field becomes a pure dipole field.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Derivation</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Place the Point on the Dipole Axis</h2>
+            <ul>
+              <li>The observation point is not equally far from the two charges.</li>
+              <li>The distance to $$+q$$ is $$z-d/2,$$ while the distance to $$-q$$ is $$z+d/2.$$</li>
+              <li>That difference is why the two field magnitudes do not cancel.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The whole derivation depends on getting the geometry right first. If the distances are wrong, every later subtraction is wrong even if the algebra is neat.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Write the Two Point-Charge Fields</h2>
+            <ul>
+              <li>The field from $$+q$$ points away from $$+q.$$</li>
+              <li>The field from $$-q$$ points toward $$-q.$$</li>
+              <li>Along the axis these contributions oppose, so the net field is a difference of magnitudes.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>A dipole is still just two point charges. We write the simple point-charge fields first because the dipole formula is not something to memorize blindly; it is something we build from the basic law.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Form the Exact Axis Expression</h2>
+            <ul>
+              <li>$$E=\frac{1}{4\pi\epsilon_0}\left[\frac{q}{(z-d/2)^2}-\frac{q}{(z+d/2)^2}\right].$$</li>
+              <li>Both terms are along the axis, so no component split is needed.</li>
+              <li>What remains is pure algebra.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Once the directions are settled, the derivation becomes a one-dimensional subtraction. This is why axis problems are the easiest place to meet dipole fields for the first time.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Combine the Fractions</h2>
+            <ul>
+              <li>Combining the two terms gives</li>
+              <li>$$E=\frac{1}{4\pi\epsilon_0}\frac{2qzd}{(z^2-d^2/4)^2}.$$</li>
+              <li>This is the exact axis field before any approximation.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This step exposes the exact structure of the dipole field. We do the full algebra first so the far-field limit later feels like a justified simplification, not a guess.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Use the Far-Field Limit</h2>
+            <ul>
+              <li>When $$z\gg d,$$ the term $$d^2/4$$ is tiny compared with $$z^2.$$</li>
+              <li>So $$\left(z^2-d^2/4\right)^2\approx z^4.$$</li>
+              <li>This gives $$E\approx \dfrac{1}{4\pi\epsilon_0}\dfrac{2qd}{z^3}.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Far away, the two charges look like one compact dipole rather than two separate particles. The approximation tells us what feature survives at large distance.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Replace $$qd$$ by Dipole Moment</h2>
+            <ul>
+              <li>Define the dipole moment magnitude as $$p=qd.$$</li>
+              <li>Then the far-axis field becomes $$E\approx \dfrac{1}{4\pi\epsilon_0}\dfrac{2p}{z^3}.$$</li>
+              <li>The key memory result is that dipole fields fall as $$1/z^3,$$ faster than point-charge fields.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The symbol $$p$$ compresses the source structure into one physical quantity. That makes the final formula cleaner and reveals the signature dipole scaling law immediately.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">22 Nun</div><h3>Stand on the Axis</h3><p>The nun marks distances $$z-d/2$$ and $$z+d/2.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write the Two Fields</h3><p>Chalk writes the point-charge terms.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Subtract Cleanly</h3><p>The mat combines the fractions into one exact expression.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">90 Bus</div><h3>Drive to the Far Field</h3><p>The bus leaves behind the small $$d$$ terms and reveals the $$1/z^3$$ form.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch22-derivation-dipole-axis-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a clearer sketch reminder showing why the two dipole distances are different."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

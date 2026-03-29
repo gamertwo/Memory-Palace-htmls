@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 22 | Derivation: Disk Axis Field</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch22_derivation_disk_axis">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch22 Index</a><a href="guide.html">Guide</a><a href="ch22-derivation-ring-axis.html">Prev: Ring Field</a><a href="ch22-dipole-in-uniform-field.html">Next: Dipole in Field</a></nav>
+
+  <section class="hero">
+    <div class="tag">Derivation</div>
+    <h1>Electric Field on the Axis of a Charged Disk</h1>
+    <p class="hero-sub">This page is the natural sequel to the ring derivation. A disk is treated as many thin concentric rings, so the ring formula becomes a building block inside a new radial integral. The physical payoff is large: the final expression also contains the infinite-sheet limit as a built-in check.</p>
+    <div class="formula-block">$$E_z=\frac{\sigma}{2\epsilon_0}\left(1-\frac{z}{\sqrt{z^2+R^2}}\right),\qquad R\to\infty\Rightarrow E=\frac{\sigma}{2\epsilon_0}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch22-derivation-disk-axis.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source</div><div class="v">Uniform disk of radius $$R$$ and surface density $$\sigma.$$</div></div>
+          <div class="fact"><div class="k">Slice Choice</div><div class="v">Use one thin ring of radius $$r$$ and thickness $$dr.$$ </div></div>
+          <div class="fact"><div class="k">Ring Charge</div><div class="v">$$dq=\sigma(2\pi r\,dr).$$</div></div>
+          <div class="fact"><div class="k">Limit Check</div><div class="v">A very large disk behaves like an infinite sheet.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Derivation</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Build the Disk from Thin Rings</h2>
+            <ul>
+              <li>Do not attack the entire disk at once.</li>
+              <li>Instead cut it into concentric rings of radius $$r$$ and thickness $$dr.$$</li>
+              <li>Each thin ring already has a known axis field formula from the previous page.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>We reuse a result we already earned. This is a standard physics move: solve a simpler source first, then stack many copies of it to build a harder source.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Write the Charge of One Thin Ring</h2>
+            <ul>
+              <li>A ring of radius $$r$$ and thickness $$dr$$ has area $$dA=2\pi r\,dr.$$</li>
+              <li>So the ring charge is $$dq=\sigma\,dA=\sigma(2\pi r\,dr).$$</li>
+              <li>This is the disk version of writing the correct $$dq.$$ </li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The disk is a surface object, so the charge on a slice must come from surface density times slice area. This is where the disk's geometry truly enters the derivation.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Import the Ring Axis Formula</h2>
+            <ul>
+              <li>The field on the axis due to one ring is</li>
+              <li>$$dE_z=\frac{1}{4\pi\epsilon_0}\frac{z\,dq}{(z^2+r^2)^{3/2}}.$$</li>
+              <li>Substitute the ring charge $$dq=\sigma(2\pi r\,dr).$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the payoff for learning the ring first. The disk derivation is really a ring derivation inside a radial integral.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Set Up the Radial Integral</h2>
+            <ul>
+              <li>After substitution,</li>
+              <li>$$E_z=\frac{\sigma z}{2\epsilon_0}\int_0^R \frac{r\,dr}{(z^2+r^2)^{3/2}}.$$</li>
+              <li>The only remaining variable is the ring radius $$r.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Once the geometry and slice choice are correct, the disk problem becomes a pure accumulation over radius. The math now matches the physical idea of adding rings from center to edge.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Evaluate the Integral and Clean the Result</h2>
+            <ul>
+              <li>The integral gives $$-1/\sqrt{z^2+r^2}.$$</li>
+              <li>Evaluating from $$0$$ to $$R$$ yields</li>
+              <li>$$E_z=\frac{\sigma}{2\epsilon_0}\left(1-\frac{z}{\sqrt{z^2+R^2}}\right).$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The final form separates into a simple constant term and a geometric correction term. That structure is exactly what makes the infinite-sheet limit easy to read.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Check the Infinite-Sheet Limit</h2>
+            <ul>
+              <li>If $$R\to\infty,$$ then $$z/\sqrt{z^2+R^2}\to 0.$$</li>
+              <li>So the field becomes $$E=\sigma/(2\epsilon_0).$$</li>
+              <li>This is the known field of an infinite charged sheet.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>A limit check is physical proofreading. It confirms that the disk formula smoothly becomes a simpler, famous case when the geometry is pushed to an extreme.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">52 Lion</div><h3>Pick a Ring Slice</h3><p>The lion chooses a thin concentric ring.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$dq$$ and Import Ring Field</h3><p>Chalk writes $$dq=\sigma(2\pi r\,dr).$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Integrate from Center to Edge</h3><p>The mat collects rings from $$r=0$$ to $$r=R.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">90 Bus</div><h3>Drive to the Sheet Limit</h3><p>The bus pushes $$R$$ to infinity and reveals $$\sigma/(2\epsilon_0).$$</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch22-derivation-disk-axis-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note showing why the ring result can be reused without re-deriving symmetry."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

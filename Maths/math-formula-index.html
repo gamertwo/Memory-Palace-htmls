@@ -1,200 +1,1139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Maths Universal Formula Sheet | Indexed by Rooms</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
-<link rel="stylesheet" href="exact-study.css" />
-<style>
-  .table-wrap{overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(7,16,29,.75)}
-  table{width:100%;border-collapse:collapse;min-width:1080px}
-  th,td{padding:.85rem .8rem;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;vertical-align:top}
-  th{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#8cc7ff;background:rgba(255,255,255,.04)}
-  td{font-size:.9rem;line-height:1.6;color:#eaf4ff}
-  tr:last-child td{border-bottom:none}
-  .page-jumps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.7rem}
-  .page-link{display:block;padding:.85rem .95rem;border:1px solid rgba(255,255,255,.08);border-radius:14px;text-decoration:none;color:#eaf4ff;background:rgba(255,255,255,.03)}
-  .page-link small{display:block;color:#8fb6d9;margin-bottom:.2rem}
-  .muted{color:#8fb6d9}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merged Memory Palace | Differentiation, Integration, Exact Equations</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#121a31;
+      --panel-2:#18233f;
+      --soft:#1e2b4d;
+      --line:rgba(255,255,255,.08);
+      --text:#edf4ff;
+      --muted:#a9bddb;
+      --blue:#7cc4ff;
+      --cyan:#74f0e6;
+      --gold:#ffd980;
+      --green:#8df0a8;
+      --pink:#f3a8ff;
+      --danger:#ff9a9a;
+      --shadow:0 18px 50px rgba(0,0,0,.28);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,196,255,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(116,240,230,.12), transparent 25%),
+        linear-gradient(180deg, #09101d 0%, #0d1427 100%);
+      color:var(--text);
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .shell{
+      width:min(1240px, calc(100% - 28px));
+      margin:0 auto;
+      padding:28px 0 72px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(135deg, rgba(124,196,255,.12), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      margin-bottom:22px;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:auto -80px -80px auto;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(124,196,255,.25), transparent 70%);
+      pointer-events:none;
+    }
+
+    .tag-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--blue);
+      font-size:.86rem;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(1.8rem, 3vw, 3rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    .hero-sub{
+      margin:0;
+      color:var(--muted);
+      max-width:900px;
+      line-height:1.7;
+      font-size:1rem;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.3fr .9fr;
+      gap:18px;
+      margin-top:22px;
+    }
+
+    .hero-box{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+    }
+
+    .hero-box h3{
+      margin:0 0 10px;
+      font-size:1rem;
+      color:#fff;
+    }
+
+    .hero-box p,
+    .hero-box li{
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.95rem;
+    }
+
+    .hero-box ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .top-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .btn{
+      padding:11px 14px;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid var(--line);
+      font-weight:700;
+      color:#fff;
+      font-size:.92rem;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      transition:.18s ease;
+    }
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:14px;
+      margin:22px 0;
+    }
+
+    .quick-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+
+    .quick-card .mini{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--blue);
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .quick-card h4{
+      margin:0 0 7px;
+      font-size:1rem;
+    }
+
+    .quick-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:.92rem;
+    }
+
+    .main{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .sidebar{
+      position:sticky;
+      top:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+
+    .sidebar h3{
+      margin:0 0 10px;
+      font-size:1rem;
+    }
+
+    .nav-group{
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+    }
+
+    .nav-group:first-of-type{
+      margin-top:0;
+      padding-top:0;
+      border-top:none;
+    }
+
+    .nav-label{
+      font-size:.76rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--blue);
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .nav-links{
+      display:grid;
+      gap:8px;
+    }
+
+    .nav-links a{
+      display:block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.03);
+      border:1px solid transparent;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .nav-links a:hover{
+      border-color:rgba(124,196,255,.25);
+      color:#fff;
+      background:rgba(124,196,255,.08);
+    }
+
+    .content{
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .section-head{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .section-title{
+      margin:0;
+      font-size:1.2rem;
+      letter-spacing:-.02em;
+    }
+
+    .section-sub{
+      margin:6px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+      max-width:880px;
+      font-size:.95rem;
+    }
+
+    .badge{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--blue);
+      font-size:.82rem;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .room-grid{
+      display:grid;
+      gap:14px;
+    }
+
+    .room{
+      display:grid;
+      grid-template-columns:88px 1fr;
+      gap:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px;
+    }
+
+    .room-num{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(124,196,255,.16), rgba(124,196,255,.06));
+      border:1px solid rgba(124,196,255,.18);
+      min-height:92px;
+      text-align:center;
+    }
+
+    .room-num .small{
+      font-size:.74rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--blue);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    .room-num .big{
+      font-size:1.4rem;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .room-body h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+    }
+
+    .cue{
+      display:inline-block;
+      margin-bottom:10px;
+      padding:7px 10px;
+      border-radius:10px;
+      background:rgba(255,255,255,.05);
+      color:var(--gold);
+      border:1px solid rgba(255,255,255,.06);
+      font-size:.84rem;
+      font-weight:700;
+    }
+
+    .room-body p{
+      margin:0 0 10px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.95rem;
+    }
+
+    .formula{
+      padding:12px 14px;
+      border-radius:14px;
+      background:var(--panel-2);
+      border:1px solid rgba(124,196,255,.14);
+      overflow:auto;
+      margin:10px 0;
+      color:#fff;
+    }
+
+    .memory-line{
+      display:grid;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .memory-item{
+      padding:11px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      line-height:1.65;
+      font-size:.92rem;
+    }
+
+    .memory-item strong{
+      color:#fff;
+    }
+
+    .bridge{
+      padding:16px;
+      border-radius:18px;
+      background:linear-gradient(135deg, rgba(116,240,230,.12), rgba(255,255,255,.02));
+      border:1px solid rgba(116,240,230,.14);
+    }
+
+    .bridge h4{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+    }
+
+    .bridge p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(8,15,30,.6);
+      margin-top:14px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:780px;
+    }
+
+    th, td{
+      padding:13px 14px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      text-align:left;
+      vertical-align:top;
+    }
+
+    th{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--blue);
+      background:rgba(255,255,255,.04);
+    }
+
+    td{
+      font-size:.93rem;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    td strong{color:#fff}
+    tr:last-child td{border-bottom:none}
+
+    .footer-note{
+      margin-top:20px;
+      padding:16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--muted);
+      line-height:1.75;
+      font-size:.94rem;
+    }
+
+    .formula-inline{
+      color:#fff;
+      font-weight:700;
+    }
+
+    @media (max-width: 1080px){
+      .hero-grid,
+      .main,
+      .quick-grid{
+        grid-template-columns:1fr;
+      }
+
+      .sidebar{
+        position:relative;
+        top:0;
+      }
+    }
+
+    @media (max-width: 720px){
+      .room{
+        grid-template-columns:1fr;
+      }
+      .room-num{
+        min-height:auto;
+        padding:14px;
+      }
+      .hero,
+      .section{
+        padding:16px;
+      }
+      .shell{
+        width:min(100% - 16px, 1240px);
+      }
+    }
+  </style>
 </head>
 <body>
-<main class="shell">
-  <section class="hero">
-    <div class="tag">Maths Reference</div>
-    <h1>Universal Formula Sheet</h1>
-    <p class="hero-sub">This page walks top to bottom through the Maths question pages and extracts formulas from the solution rooms. Every row links back to the exact room it came from so you can revise formulas and then jump straight into the matching memory room.</p>
-    <div class="tool-row">
-      <a class="tool-btn" href="math-index.html">Math Hub</a>
-      <a class="tool-btn" href="math-questions.html">Question Bank</a>
-      <a class="tool-btn" href="math-exact-memory-builder.html">Memory Builder</a>
+  <main class="shell">
+
+    <section class="hero" id="top">
+      <div class="tag-row">
+        <div class="tag">Merged Memory Palace</div>
+        <div class="tag">Simple + Direct</div>
+        <div class="tag">Calculus + Exact Equation Flow</div>
+      </div>
+
+      <h1>Differentiation, Integration, and Exact Equation Memory Palace</h1>
+      <p class="hero-sub">
+        This palace is built to stay simple: each room has one clear visual cue, one formula pattern, and one memory line.
+        The anime setting is only there to connect the rooms. The actual recall stays short, direct, and exam-friendly.
+      </p>
+
+      <div class="top-actions">
+        <a class="btn" href="#fmab">Go to Palace 1</a>
+        <a class="btn" href="#sg">Go to Palace 2</a>
+        <a class="btn" href="#formula-map">Go to Formula Map</a>
+        <a class="btn" href="#exact-bridge">Go to Exact Equation Bridge</a>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-box">
+          <h3>Main Differentiation / Integration Formula Rule</h3>
+          <ul>
+            <li><strong>Differentiate</strong> = break, reduce, extract change.</li>
+            <li><strong>Integrate</strong> = rebuild, recover, reverse.</li>
+            <li><strong>Exact equation step</strong> = check, fix, then solve.</li>
+          </ul>
+        </div>
+
+        <div class="hero-box">
+          <h3>Fast Recall Formula</h3>
+          <p>
+            <strong>Derivative:</strong> “power down, coefficient comes out.”<br>
+            <strong>Integral:</strong> “power up, divide, add $C$.”<br>
+            <strong>Exact:</strong> “first compare, then integrating factor, then solve.”
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-grid">
+      <article class="quick-card">
+        <div class="mini">Core Trigger</div>
+        <h4>$\frac{1}{x}$</h4>
+        <p>Think <strong>log</strong>. This is the strongest quick-match pattern.</p>
+      </article>
+      <article class="quick-card">
+        <div class="mini">Core Trigger</div>
+        <h4>$x^n$</h4>
+        <p>Derivative: <strong>down</strong>. Integral: <strong>up then divide</strong>.</p>
+      </article>
+      <article class="quick-card">
+        <div class="mini">Core Trigger</div>
+        <h4>$e^x$</h4>
+        <p>Stays the <strong>same</strong> in both differentiation and integration.</p>
+      </article>
+      <article class="quick-card">
+        <div class="mini">Core Trigger</div>
+        <h4>$M_y$ vs $N_x$</h4>
+        <p>If same: <strong>exact</strong>. If not: look for integrating factor.</p>
+      </article>
+    </section>
+
+    <div class="main">
+      <aside class="sidebar">
+        <h3>Room Navigation</h3>
+
+        <div class="nav-group">
+          <div class="nav-label">Palace 1 — FMAB</div>
+          <div class="nav-links">
+            <a href="#fmab-r1">Room 1 — Broken Circle</a>
+            <a href="#fmab-r2">Room 2 — Truth Gate</a>
+            <a href="#fmab-r3">Room 3 — Cost / Loss</a>
+            <a href="#fmab-r4">Room 4 — Reconstruction</a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-label">Palace 2 — Steins;Gate</div>
+          <div class="nav-links">
+            <a href="#sg-r1">Room 1 — Phone Microwave</a>
+            <a href="#sg-r2">Room 2 — Timeline Shift</a>
+            <a href="#sg-r3">Room 3 — Pattern Loop</a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-label">Merged Formula Rooms</div>
+          <div class="nav-links">
+            <a href="#formula-map">Formula Map</a>
+            <a href="#exact-bridge">Exact Equation Bridge</a>
+            <a href="#summary-table">Quick Match Table</a>
+          </div>
+        </div>
+      </aside>
+
+      <section class="content">
+
+        <!-- PALACE 1 -->
+        <section class="section" id="fmab">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Palace 1 — FMAB Memory Line</h2>
+              <p class="section-sub">
+                Connected rooms: <strong>Broken Circle → Truth Gate → Cost → Reconstruction</strong>.
+                This palace carries the main difference between differentiation and integration.
+              </p>
+            </div>
+            <div class="badge">Linear Connected Palace</div>
+          </div>
+
+          <div class="room-grid">
+            <article class="room" id="fmab-r1">
+              <div class="room-num">
+                <div class="small">Room</div>
+                <div class="big">1</div>
+              </div>
+              <div class="room-body">
+                <h3>Broken Circle</h3>
+                <div class="cue">Cue: half-drawn transmutation circle</div>
+                <p>
+                  The circle is incomplete. Something is missing. That missing piece is your signal that the function
+                  is about to be broken into change.
+                </p>
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> Differentiate = take apart the function.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Incomplete shape means extract change.”</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room" id="fmab-r2">
+              <div class="room-num">
+                <div class="small">Room</div>
+                <div class="big">2</div>
+              </div>
+              <div class="room-body">
+                <h3>Truth Gate</h3>
+                <div class="cue">Cue: gate opens instantly and reveals knowledge</div>
+                <p>
+                  The gate gives an answer immediately. This is how you remember differentiation:
+                  it gives the direct rate or direct output pattern fast.
+                </p>
+
+                <div class="formula">$$\frac{d}{dx}(x^n)=nx^{n-1}$$</div>
+
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> Power goes down. Coefficient comes out.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Gate opens fast → answer comes out fast.”</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room" id="fmab-r3">
+              <div class="room-num">
+                <div class="small">Room</div>
+                <div class="big">3</div>
+              </div>
+              <div class="room-body">
+                <h3>Cost / Loss</h3>
+                <div class="cue">Cue: something is lost in exchange</div>
+                <p>
+                  Differentiation often feels like loss: one power is removed, one degree is reduced,
+                  something becomes smaller or simpler.
+                </p>
+
+                <div class="formula">$$\frac{d}{dx}(\log x)=\frac{1}{x} \qquad \frac{d}{dx}(e^x)=e^x$$</div>
+
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> $\log x$ opens into $\frac{1}{x}$.</div>
+                  <div class="memory-item"><strong>Memory:</strong> $e^x$ does not change.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Loss room: log becomes fraction, exponential stays itself.”</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room" id="fmab-r4">
+              <div class="room-num">
+                <div class="small">Room</div>
+                <div class="big">4</div>
+              </div>
+              <div class="room-body">
+                <h3>Reconstruction</h3>
+                <div class="cue">Cue: the circle is used again to rebuild</div>
+                <p>
+                  This room is integration. The idea is recovery. You reverse the breaking process and rebuild the original form.
+                </p>
+
+                <div class="formula">
+                  $$\int x^n\,dx=\frac{x^{n+1}}{n+1}+C$$
+                  $$\int \frac{1}{x}\,dx=\log|x|+C \qquad \int e^x\,dx=e^x+C$$
+                </div>
+
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> Power goes up, then divide, then add $C$.</div>
+                  <div class="memory-item"><strong>Memory:</strong> $\frac{1}{x}$ rebuilds log.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Rebuild room: add one, divide, add constant.”</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- PALACE 2 -->
+        <section class="section" id="sg">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Palace 2 — Steins;Gate Memory Line</h2>
+              <p class="section-sub">
+                Connected rooms: <strong>Phone Microwave → Timeline Shift → Pattern Loop</strong>.
+                This palace supports reverse-thinking, chain patterns, and exact-equation checking.
+              </p>
+            </div>
+            <div class="badge">Loop Connected Palace</div>
+          </div>
+
+          <div class="room-grid">
+            <article class="room" id="sg-r1">
+              <div class="room-num">
+                <div class="small">Room</div>
+                <div class="big">1</div>
+              </div>
+              <div class="room-body">
+                <h3>Phone Microwave</h3>
+                <div class="cue">Cue: message sent backward</div>
+                <p>
+                  Sending something backward is your clean cue for integration:
+                  you are going back toward the original source.
+                </p>
+
+                <div class="formula">
+                  $$\int \cos x\,dx=\sin x + C \qquad \int \sin x\,dx=-\cos x + C$$
+                </div>
+
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> Integration goes backward to restore the source.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Backward message = reverse process.”</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room" id="sg-r2">
+              <div class="room-num">
+                <div class="small">Room</div>
+                <div class="big">2</div>
+              </div>
+              <div class="room-body">
+                <h3>Timeline Shift</h3>
+                <div class="cue">Cue: one small change changes the whole line</div>
+                <p>
+                  This is the derivative idea: a small change carries important meaning.
+                  It also helps you remember inverse-trig trigger forms.
+                </p>
+
+                <div class="formula">
+                  $$\frac{d}{dx}(\tan x)=\sec^2 x \qquad \frac{d}{dx}(\sec x)=\sec x\tan x$$
+                  $$\frac{d}{dx}(\tan^{-1}x)=\frac{1}{1+x^2} \qquad \frac{d}{dx}(\sin^{-1}x)=\frac{1}{\sqrt{1-x^2}}$$
+                </div>
+
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> $\sec^2 x$ points to $\tan x$.</div>
+                  <div class="memory-item"><strong>Memory:</strong> $\sec x\tan x$ points to $\sec x$.</div>
+                  <div class="memory-item"><strong>Memory:</strong> $\frac{1}{1+x^2}$ points to $\tan^{-1}x$.</div>
+                  <div class="memory-item"><strong>Memory:</strong> $\frac{1}{\sqrt{1-x^2}}$ points to $\sin^{-1}x$.</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room" id="sg-r3">
+              <div class="room-num">
+                <div class="small">Room</div>
+                <div class="big">3</div>
+              </div>
+              <div class="room-body">
+                <h3>Pattern Loop</h3>
+                <div class="cue">Cue: repeated events show a hidden structure</div>
+                <p>
+                  This room is for recognition. When the same pattern keeps appearing,
+                  stop doing random work and match the structure directly.
+                </p>
+
+                <div class="formula">
+                  $$\int \sec^2 x\,dx=\tan x + C \qquad \int \sec x\tan x\,dx=\sec x + C$$
+                  $$\int \frac{1}{1+x^2}\,dx=\tan^{-1}x + C \qquad \int \frac{1}{\sqrt{1-x^2}}\,dx=\sin^{-1}x + C$$
+                </div>
+
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> repeated trigger = direct formula match.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “If the form is familiar, do not overthink it.”</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- FORMULA MAP -->
+        <section class="section" id="formula-map">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Merged Formula Map</h2>
+              <p class="section-sub">
+                This is the compressed version. Use it after the rooms are learned once. Each line keeps one formula and one cue only.
+              </p>
+            </div>
+            <div class="badge">Fast Revision Layer</div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Formula</th>
+                  <th>Type</th>
+                  <th>Memory Cue</th>
+                  <th>Fast Line</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>$\frac{d}{dx}(x^n)=nx^{n-1}$</strong></td>
+                  <td>Differentiation</td>
+                  <td>Truth Gate extracts answer instantly</td>
+                  <td>Power down, coefficient out</td>
+                </tr>
+                <tr>
+                  <td><strong>$\int x^n\,dx=\frac{x^{n+1}}{n+1}+C$</strong></td>
+                  <td>Integration</td>
+                  <td>Reconstruction room rebuilds form</td>
+                  <td>Power up, divide, add $C$</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{d}{dx}(\log x)=\frac{1}{x}$</strong></td>
+                  <td>Differentiation</td>
+                  <td>Loss room: log opens into fraction</td>
+                  <td>Log gives $1/x$</td>
+                </tr>
+                <tr>
+                  <td><strong>$\int \frac{1}{x}\,dx=\log|x|+C$</strong></td>
+                  <td>Integration</td>
+                  <td>Rebuild room restores the log</td>
+                  <td>$1/x$ gives log</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{d}{dx}(e^x)=e^x$</strong></td>
+                  <td>Differentiation</td>
+                  <td>No form change</td>
+                  <td>Exponential stays same</td>
+                </tr>
+                <tr>
+                  <td><strong>$\int e^x\,dx=e^x+C$</strong></td>
+                  <td>Integration</td>
+                  <td>No form change</td>
+                  <td>Still the same</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{d}{dx}(\tan x)=\sec^2 x$</strong></td>
+                  <td>Differentiation</td>
+                  <td>Timeline shift trigger</td>
+                  <td>$\sec^2 x$ means tan</td>
+                </tr>
+                <tr>
+                  <td><strong>$\int \sec^2 x\,dx=\tan x + C$</strong></td>
+                  <td>Integration</td>
+                  <td>Pattern loop trigger</td>
+                  <td>$\sec^2 x$ returns tan</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{d}{dx}(\sec x)=\sec x\tan x$</strong></td>
+                  <td>Differentiation</td>
+                  <td>Timeline shift trigger</td>
+                  <td>$\sec x\tan x$ means sec</td>
+                </tr>
+                <tr>
+                  <td><strong>$\int \sec x\tan x\,dx=\sec x + C$</strong></td>
+                  <td>Integration</td>
+                  <td>Pattern loop trigger</td>
+                  <td>Product returns sec</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{d}{dx}(\tan^{-1}x)=\frac{1}{1+x^2}$</strong></td>
+                  <td>Differentiation</td>
+                  <td>Small-change line</td>
+                  <td>$1+x^2$ below means inverse tan</td>
+                </tr>
+                <tr>
+                  <td><strong>$\int \frac{1}{1+x^2}\,dx=\tan^{-1}x + C$</strong></td>
+                  <td>Integration</td>
+                  <td>Pattern loop line</td>
+                  <td>Inverse tan trigger</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{d}{dx}(\sin^{-1}x)=\frac{1}{\sqrt{1-x^2}}$</strong></td>
+                  <td>Differentiation</td>
+                  <td>Root trigger</td>
+                  <td>Root with $1-x^2$ means inverse sine</td>
+                </tr>
+                <tr>
+                  <td><strong>$\int \frac{1}{\sqrt{1-x^2}}\,dx=\sin^{-1}x + C$</strong></td>
+                  <td>Integration</td>
+                  <td>Pattern loop line</td>
+                  <td>Inverse sine trigger</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- EXACT EQUATION BRIDGE -->
+        <section class="section" id="exact-bridge">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Exact Equation Bridge Palace</h2>
+              <p class="section-sub">
+                This part merges your room-based exact-equation structure into the same palace logic:
+                first identify, then compare, then fix, then solve.
+              </p>
+            </div>
+            <div class="badge">Bridge from Calculus to DE</div>
+          </div>
+
+          <div class="bridge">
+            <h4>Main Flow</h4>
+            <p>
+              <span class="formula-inline">Identify $M$ and $N$</span> →
+              <span class="formula-inline">Check $M_y$ and $N_x$</span> →
+              <span class="formula-inline">If not exact, find integrating factor</span> →
+              <span class="formula-inline">Multiply through</span> →
+              <span class="formula-inline">Solve as exact</span>
+            </p>
+          </div>
+
+          <div class="room-grid" style="margin-top:14px;">
+            <article class="room">
+              <div class="room-num">
+                <div class="small">Bridge</div>
+                <div class="big">1</div>
+              </div>
+              <div class="room-body">
+                <h3>Identify the Pieces</h3>
+                <div class="cue">Cue: split the equation into two parts</div>
+                <div class="formula">$$M\,dx + N\,dy = 0$$</div>
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> Before solving, first label the equation correctly.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Name both sides first.”</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room">
+              <div class="room-num">
+                <div class="small">Bridge</div>
+                <div class="big">2</div>
+              </div>
+              <div class="room-body">
+                <h3>Check Exactness</h3>
+                <div class="cue">Cue: compare the two cross-derivatives</div>
+                <div class="formula">$$M_y \stackrel{?}{=} N_x$$</div>
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> If equal, it is exact. If not equal, do not force it.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Compare first, conclude second.”</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room">
+              <div class="room-num">
+                <div class="small">Bridge</div>
+                <div class="big">3</div>
+              </div>
+              <div class="room-body">
+                <h3>Find Integrating Factor</h3>
+                <div class="cue">Cue: one clean ratio collapses to one variable</div>
+                <div class="formula">
+                  $$\frac{N_x - M_y}{M} \quad \text{or} \quad \frac{M_y - N_x}{N}$$
+                </div>
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> If the ratio becomes only $x$ or only $y$, that gives the integrating factor path.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “One-variable collapse means integrating factor.”</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room">
+              <div class="room-num">
+                <div class="small">Bridge</div>
+                <div class="big">4</div>
+              </div>
+              <div class="room-body">
+                <h3>Multiply Through</h3>
+                <div class="cue">Cue: equation changes form and becomes exact</div>
+                <p>
+                  After multiplying by the integrating factor, the equation becomes a new exact equation.
+                </p>
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> integrating factor is not the final answer, it is the fixer.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Fix first, solve after.”</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="room">
+              <div class="room-num">
+                <div class="small">Bridge</div>
+                <div class="big">5</div>
+              </div>
+              <div class="room-body">
+                <h3>Solve the Exact Equation</h3>
+                <div class="cue">Cue: rebuild one combined potential function</div>
+                <div class="formula">
+                  $$F_x = M,\qquad F_y = N \qquad \Rightarrow \qquad F(x,y)=C$$
+                </div>
+                <div class="memory-line">
+                  <div class="memory-item"><strong>Memory:</strong> integrate one side, then use the other side to complete the missing part.</div>
+                  <div class="memory-item"><strong>Fast line:</strong> “Build $F$, then write $F=C$.”</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- SUMMARY TABLE -->
+        <section class="section" id="summary-table">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Quick Match Table</h2>
+              <p class="section-sub">
+                Use this when you want pure trigger-based revision with no story.
+              </p>
+            </div>
+            <div class="badge">One-Look Revision</div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>What You See</th>
+                  <th>Think Of</th>
+                  <th>Reason</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>$x^n$ in derivative</strong></td>
+                  <td>Power down</td>
+                  <td>Differentiate reduces degree</td>
+                </tr>
+                <tr>
+                  <td><strong>$x^n$ in integral</strong></td>
+                  <td>Power up then divide</td>
+                  <td>Integration rebuilds the form</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{1}{x}$</strong></td>
+                  <td>$\log x$</td>
+                  <td>Main log pattern</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{f'(x)}{f(x)}$</strong></td>
+                  <td>$\log|f(x)|$</td>
+                  <td>Standard log-chain pattern</td>
+                </tr>
+                <tr>
+                  <td><strong>$e^x$</strong></td>
+                  <td>Same function</td>
+                  <td>Derivative and integral both keep it</td>
+                </tr>
+                <tr>
+                  <td><strong>$\sec^2 x$</strong></td>
+                  <td>$\tan x$</td>
+                  <td>Derivative/integral pair</td>
+                </tr>
+                <tr>
+                  <td><strong>$\sec x\tan x$</strong></td>
+                  <td>$\sec x$</td>
+                  <td>Derivative/integral pair</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{1}{1+x^2}$</strong></td>
+                  <td>$\tan^{-1}x$</td>
+                  <td>Inverse-tangent trigger</td>
+                </tr>
+                <tr>
+                  <td><strong>$\frac{1}{\sqrt{1-x^2}}$</strong></td>
+                  <td>$\sin^{-1}x$</td>
+                  <td>Inverse-sine trigger</td>
+                </tr>
+                <tr>
+                  <td><strong>$M_y = N_x$</strong></td>
+                  <td>Exact equation</td>
+                  <td>No integrating factor needed</td>
+                </tr>
+                <tr>
+                  <td><strong>$M_y \ne N_x$</strong></td>
+                  <td>Need integrating factor check</td>
+                  <td>Not exact yet</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="footer-note">
+            Final memory line:
+            <strong>Differentiate = break / reduce / extract.</strong>
+            <strong>Integrate = rebuild / restore / reverse.</strong>
+            <strong>Exact equation = identify / compare / fix / solve.</strong>
+          </div>
+        </section>
+
+      </section>
     </div>
-  </section>
-  <div class="study-grid">
-    <section class="panel">
-      <div class="section-title">Page Index</div>
-      <div class="page-jumps" id="page-jumps">
-        <div class="copy">Loading page index...</div>
-      </div>
-    </section>
-    <section class="panel">
-      <div class="section-title">Indexed Formula Table</div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Page</th>
-              <th>Room</th>
-              <th>Formula</th>
-              <th>Reference</th>
-            </tr>
-          </thead>
-          <tbody id="formula-table-body">
-            <tr><td colspan="5" class="muted">Scanning maths pages...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
-</main>
-
-<script src="math-exact-room-extractor.js"></script>
-<script>
-(function () {
-  var pages = []
-    .concat(Array.from({ length: 13 }, function (_, i) { return 'math-q' + (i + 1) + ([
-      '-separable-tan.html',
-      '-homogeneous-vx.html',
-      '-cot.html',
-      '-sectan.html',
-      '-arcsin-symmetry.html',
-      '-root-coupled.html',
-      '-secsq-tan.html',
-      '-oneplusx2-xy.html',
-      '-expplusone-sinx.html',
-      '-exp-tan-cube.html',
-      '-expplus2-cosx.html',
-      '-exp-y-linearized.html',
-      '-tan-z-sub.html'
-    ][i]); }))
-    .concat(['math-reducible-homogeneous-q1.html', 'math-reducible-homogeneous-q2.html'])
-    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-ex33-q' + (i + 1) + '-homogeneous.html'; }))
-    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-ex35-q' + (i + 1) + '-linear.html'; }))
-    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-ex36-q' + (i + 1) + '-bernoulli.html'; }))
-    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-ex37-q' + (i + 1) + '-exact.html'; }))
-    .concat(Array.from({ length: 5 }, function (_, i) { return 'math-ex38-q' + (i + 1) + '-reducible-exact.html'; }))
-    .concat(Array.from({ length: 4 }, function (_, i) { return 'math-ex39-q' + (i + 1) + '-rule2.html'; }))
-    .concat(Array.from({ length: 4 }, function (_, i) { return 'math-ex310-q' + (i + 1) + '-special-if.html'; }))
-    .concat(Array.from({ length: 10 }, function (_, i) { return 'math-exact-q' + (i + 1) + '.html'; }));
-
-  var body = document.getElementById('formula-table-body');
-  var pageJumps = document.getElementById('page-jumps');
-
-  function escHtml(value) {
-    return String(value || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
-
-  function slugify(value) {
-    return String(value || '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '') || 'page';
-  }
-
-  function extractMath(html) {
-    var formulas = [];
-    var seen = Object.create(null);
-    String(html || '').replace(/\$\$([\s\S]+?)\$\$/g, function (_, formula) {
-      var clean = String(formula || '').replace(/\s+/g, ' ').trim();
-      if (!clean || seen[clean]) return _;
-      seen[clean] = true;
-      formulas.push(clean);
-      return _;
-    });
-    return formulas;
-  }
-
-  function renderRows(entries) {
-    if (!entries.length) {
-      body.innerHTML = '<tr><td colspan="5" class="muted">No room formulas found.</td></tr>';
-      return;
-    }
-
-    body.innerHTML = entries.map(function (entry, index) {
-      var pageCell = entry.firstForPage
-        ? '<td id="page-' + escHtml(entry.pageSlug) + '"><div><b>' + escHtml(entry.pageTitle) + '</b></div><div class="muted">' + escHtml(entry.pageFile) + '</div></td>'
-        : '<td></td>';
-
-      return '<tr>' +
-        '<td>' + (index + 1) + '</td>' +
-        pageCell +
-        '<td><div><b>' + escHtml(entry.roomTitle) + '</b></div><div class="muted">' + escHtml(entry.roomId) + '</div></td>' +
-        '<td>$$' + escHtml(entry.formula) + '$$</td>' +
-        '<td><a href="' + escHtml(entry.roomUrl) + '">Open Room</a></td>' +
-      '</tr>';
-    }).join('');
-
-    if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
-      window.MathJax.typesetPromise([body]).catch(function () {});
-    }
-  }
-
-  function renderPageJumps(pageEntries) {
-    pageJumps.innerHTML = pageEntries.map(function (page) {
-      return '<a class="page-link" href="#page-' + escHtml(page.pageSlug) + '"><small>' + escHtml(page.pageFile) + '</small>' + escHtml(page.pageTitle) + '</a>';
-    }).join('');
-  }
-
-  Promise.all(pages.map(function (pageFile) {
-    return window.RoomExtractor.fetchRoomsFromPage(pageFile)
-      .then(function (payload) {
-        var pageTitle = payload.sourcePageTitle || pageFile;
-        var pageSlug = slugify(pageFile.replace(/\.html?$/i, ''));
-        var entries = [];
-
-        payload.rooms.forEach(function (room) {
-          extractMath(room.contentHtml).forEach(function (formula) {
-            entries.push({
-              pageFile: pageFile,
-              pageTitle: pageTitle,
-              pageSlug: pageSlug,
-              roomTitle: room.title,
-              roomId: room.id,
-              roomUrl: room.sourceUrl,
-              formula: formula
-            });
-          });
-        });
-
-        return { pageFile: pageFile, pageTitle: pageTitle, pageSlug: pageSlug, entries: entries };
-      })
-      .catch(function () {
-        return { pageFile: pageFile, pageTitle: pageFile, pageSlug: slugify(pageFile.replace(/\.html?$/i, '')), entries: [] };
-      });
-  })).then(function (pagesData) {
-    var pageEntries = pagesData.filter(function (page) { return page.entries.length; });
-    var allEntries = [];
-
-    pageEntries.forEach(function (page) {
-      page.entries.forEach(function (entry, index) {
-        entry.firstForPage = index === 0;
-        allEntries.push(entry);
-      });
-    });
-
-    renderPageJumps(pageEntries);
-    renderRows(allEntries);
-  });
-})();
-</script>
+  </main>
 </body>
 </html>

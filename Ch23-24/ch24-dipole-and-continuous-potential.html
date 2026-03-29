@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 24 | Dipole and Continuous-Charge Potential</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch24_dipole_and_continuous_potential">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch23-24 Index</a><a href="guide.html">Guide</a><a href="ch24-point-charge-and-groups.html">Prev: Point Charges</a><a href="ch24-field-from-potential.html">Next: Field from Potential</a></nav>
+
+  <section class="hero">
+    <div class="tag">Derivation Bridge</div>
+    <h1>Potential of a Dipole and a Continuous Charge Distribution</h1>
+    <p class="hero-sub">This page shows the next level of scalar advantage. First, use two point-charge potentials to build the far-field dipole potential. Then replace the discrete sum by an integral for a continuous charge distribution, where the basic differential piece is $$dV=k\,dq/r.$$</p>
+    <div class="formula-block">$$V_{\text{dipole}}\approx \frac{1}{4\pi\epsilon_0}\frac{p\cos\theta}{r^2},\qquad V=\frac{1}{4\pi\epsilon_0}\int \frac{dq}{r}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch24-dipole-and-continuous-potential.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Core Idea</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Build Dipole Potential from Two Point Charges</h2>
+            <ul>
+              <li>A dipole is still just $$+q$$ and $$-q$$ separated by distance $$d.$$</li>
+              <li>So the exact potential comes from adding the two point-charge potentials algebraically.</li>
+              <li>The starting move is still scalar superposition.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This prevents the dipole formula from becoming something mysterious. It is simply the next layer built from point-charge potential.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Use the Far-Field Dipole Form</h2>
+            <ul>
+              <li>Far from the dipole, the exact sum simplifies.</li>
+              <li>The result becomes $$V\approx \dfrac{1}{4\pi\epsilon_0}\dfrac{p\cos\theta}{r^2}.$$</li>
+              <li>This depends on orientation through $$\cos\theta,$$ unlike the field magnitude for a single point charge.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The far-field limit isolates the signature dipole behavior and shows how angular dependence enters the scalar potential in a clean way.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Replace Sums by Integrals for Continuous Charge</h2>
+            <ul>
+              <li>When the source charge is spread continuously, we no longer sum over discrete charges.</li>
+              <li>Instead, we write one differential piece: $$dV=\dfrac{1}{4\pi\epsilon_0}\dfrac{dq}{r}.$$</li>
+              <li>Then we integrate over the entire source.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the continuous-charge version of scalar potential thinking. Because potential is scalar, there are no vector components to track inside the integral.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: See Why Potential Integrals Are Often Easier Than Field Integrals</h2>
+            <ul>
+              <li>The potential integral uses $$1/r,$$ not a vector component structure.</li>
+              <li>There is no cancellation bookkeeping inside the integrand.</li>
+              <li>This is why line and disk potentials can be easier than their field counterparts.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is one of the biggest practical takeaways of the chapter. Potential can be the easier route even when the final goal is the electric field.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Add Two Point Potentials</h3><p>Chalk builds the dipole from two scalar pieces.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">90 Bus</div><h3>Take the Far Limit</h3><p>The bus drives to the simpler dipole form.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Switch Sum to Integral</h3><p>The mat turns many scalar contributions into $$\int dq/r.$$</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch24-dipole-and-continuous-potential-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more reminder about why no vector components appear in the potential integral."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

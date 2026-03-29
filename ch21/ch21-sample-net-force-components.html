@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 21 | Sample Problem: Force Components</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch21_sample_net_force_components">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch21 Index</a><a href="guide.html">Guide</a><a href="ch21-sample-net-force.html">Prev: Net Force</a><a href="ch21-sample-equilibrium.html">Next: Equilibrium</a></nav>
+
+  <section class="hero">
+    <div class="tag">Sample Problem</div>
+    <h1>Net Force with an Angled Charge</h1>
+    <p class="hero-sub">This is the component version of the previous problem. Particle 4 is now placed at angle $$\theta=60^\circ$$ and distance $$3R/4$$ from particle 1. The new move is to split the force from particle 4 into x and y components before adding it to the old x-direction force.</p>
+    <div class="formula-block">$$\vec F_{14}=(1.025\times10^{-24})\hat i+(1.775\times10^{-24})\hat j,\qquad |\vec F_{1,net}|=1.78\times10^{-24}\text{ N}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch21-sample-net-force-components.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch21-net-components-1" data-room-id="room-ch21-net-components-1" data-room-title="Room 1: Keep the Old Force from Particle 2" data-source-page="ch21-sample-net-force-components.html" data-tags="old,force,x">
+            <h2>Room 1: Keep the Old Force from Particle 2</h2>
+            <ul>
+              <li>From the earlier arrangement, the force from particle 2 on particle 1 is still $$\vec F_{12}=-(1.15\times10^{-24}\text{ N})\hat i.$$</li>
+              <li>This gives the leftward x-part of the final vector.</li>
+              <li>Now the new work is entirely about the angled force from particle 4.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-net-components-2" data-room-id="room-ch21-net-components-2" data-room-title="Room 2: Compute the Magnitude of the Angled Force" data-source-page="ch21-sample-net-force-components.html" data-tags="angled,force,magnitude">
+            <h2>Room 2: Compute the Magnitude of the Angled Force</h2>
+            <ul>
+              <li>Particle 4 has charge $$q_4=-3.20\times10^{-19}\text{ C}$$ and lies at distance $$3R/4$$ from particle 1.</li>
+              <li>Using Coulomb's law gives $$F_{14}=2.05\times10^{-24}\text{ N}.$$</li>
+              <li>Because the charges are unlike, particle 4 attracts particle 1 toward the angled line.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-net-components-3" data-room-id="room-ch21-net-components-3" data-room-title="Room 3: Split the Angled Force into Components" data-source-page="ch21-sample-net-force-components.html" data-tags="components,split,theta">
+            <h2>Room 3: Split the Angled Force into Components</h2>
+            <ul>
+              <li>Resolve $$\vec F_{14}$$ as $$\vec F_{14}=(F_{14}\cos\theta)\hat i+(F_{14}\sin\theta)\hat j.$$</li>
+              <li>With $$F_{14}=2.05\times10^{-24}\text{ N}$$ and $$\theta=60^\circ,$$ this becomes $$\vec F_{14}=(1.025\times10^{-24})\hat i+(1.775\times10^{-24})\hat j.$$</li>
+              <li>Now the force is ready for vector addition.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-net-components-4" data-room-id="room-ch21-net-components-4" data-room-title="Room 4: Add x and y Separately" data-source-page="ch21-sample-net-force-components.html" data-tags="add,x,y">
+            <h2>Room 4: Add x and y Separately</h2>
+            <ul>
+              <li>Combine the x-parts: $$F_{1,net,x}=-1.15\times10^{-24}+1.025\times10^{-24}=-1.25\times10^{-25}\text{ N}.$$</li>
+              <li>The y-part comes only from particle 4: $$F_{1,net,y}=1.775\times10^{-24}\text{ N}.$$</li>
+              <li>So $$\vec F_{1,net}\approx(-1.25\times10^{-25})\hat i+(1.78\times10^{-24})\hat j.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-net-components-5" data-room-id="room-ch21-net-components-5" data-room-title="Room 5: Recover Magnitude and Direction" data-source-page="ch21-sample-net-force-components.html" data-tags="magnitude,direction,final">
+            <h2>Room 5: Recover Magnitude and Direction</h2>
+            <ul>
+              <li>The magnitude is $$|\vec F_{1,net}|=\sqrt{F_{1,net,x}^2+F_{1,net,y}^2}=1.78\times10^{-24}\text{ N}.$$</li>
+              <li>The direction comes from $$\theta=\tan^{-1}\left(\dfrac{F_{1,net,y}}{F_{1,net,x}}\right).$$</li>
+              <li>The force points almost straight upward, slightly to the left because the x-part is negative and small.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch Particle 1</h3><p>The net keeps the same particle of interest.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Compute $$F_{14}$$</h3><p>Chalk writes the new angled-force magnitude.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Split into x and y</h3><p>The knife cuts $$\vec F_{14}$$ into components.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Add the Components</h3><p>The mat combines the x and y lanes separately.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch21-sample-net-force-components-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one extra note showing why the x-part becomes slightly negative."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

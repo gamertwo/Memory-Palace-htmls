@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-28 | Same Circuit at a New Frequency</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_28">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-21.html">Prev: Example 8-21</a><a href="ch8-example-8-22.html">Next: Example 8-22</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-28</div>
+    <h1>Repeat the Source-Transformation Movie at a New Frequency</h1>
+    <p class="hero-sub">This exercise keeps the same network idea as Example 8-21 but changes the operating frequency to $$\omega=20\text{ krad/s}.$$ The memory emphasis is that all reactive values must be recomputed at the new frequency before you try to combine anything.</p>
+    <div class="formula-block">$$v_R(t)=9.196\cos(20{,}000t-163.8^\circ)\text{ V}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-28.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Recompute the Reactive Elements at the New Frequency</h2>
+            <ul>
+              <li>The component values are the same as in Example 8-21, but $$\omega$$ is now different.</li>
+              <li>That means $$j\omega L$$ and $$1/(j\omega C)$$ must be recalculated before any transformation or reduction.</li>
+              <li>The frequency change is the first thing to respect.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Reactive circuits are frequency-sensitive. If you reuse the old impedances, the whole rest of the solution becomes meaningless.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Repeat the Same Structural Movie</h2>
+            <ul>
+              <li>Transform the series sources into current sources.</li>
+              <li>Combine the parallel source currents and reduce the passive parallel network.</li>
+              <li>The circuit logic is unchanged even though the numbers change.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the important memory point: a new frequency changes the values, not the method. The structural movie stays the same.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: State the New Output Waveform</h2>
+            <ul>
+              <li>The resulting resistor voltage phasor corresponds to the waveform</li>
+              <li>$$v_R(t)=9.196\cos(20{,}000t-163.8^\circ)\text{ V}.$$</li>
+              <li>This is the final same-frequency output at the new operating point.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The final waveform is smaller and shifted because the reactive network responds differently at the new frequency. That is the physical effect of recomputing the impedances correctly.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">10 Toes</div><h3>Stamp the New Frequency</h3><p>Toes force a full impedance refresh at $$20\text{ krad/s}.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Same Source-Transformation Route</h3><p>The net repeats the Example 8-21 structure.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the New Output Waveform</h3><p>The coat leaves the updated resistor-voltage cosine.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-28-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add the updated jωL and 1/jωC values explicitly to this page."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

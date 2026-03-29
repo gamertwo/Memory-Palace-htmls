@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 22 | Sample Problem: Uniform Rod</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch22_sample_uniform_rod">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch22 Index</a><a href="guide.html">Guide</a><a href="ch22-dipole-in-uniform-field.html">Prev: Dipole in Field</a><a href="ch22-sample-particle-motion.html">Next: Particle Motion</a></nav>
+
+  <section class="hero">
+    <div class="tag">Worked Example</div>
+    <h1>Field of a Uniformly Charged Rod at an Off-End Point</h1>
+    <p class="hero-sub">This sample problem carries the full Chapter 22 method on one finite rod. A rod of length $$L=8.15\text{ cm}$$ carries total charge $$Q_{\text{rod}}=-4.23\text{ fC}$$ uniformly. Find the field at a point located $$a=12.0\text{ cm}$$ from the rod end, then compare the exact result with the far-field point-charge form.</p>
+    <div class="formula-block">$$E_x=\frac{1}{4\pi\epsilon_0}\lambda\left(\frac{1}{a}-\frac{1}{a+L}\right)=-1.57\times10^{-3}\text{ N/C}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch22-sample-uniform-rod.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Given Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Rod Length</div><div class="v">$$L=8.15\text{ cm}=0.0815\text{ m}$$</div></div>
+          <div class="fact"><div class="k">Total Charge</div><div class="v">$$Q_{\text{rod}}=-4.23\times10^{-15}\text{ C}$$</div></div>
+          <div class="fact"><div class="k">Point Distance</div><div class="v">$$a=0.120\text{ m}$$ from the rod end</div></div>
+          <div class="fact"><div class="k">Density</div><div class="v">$$\lambda=Q_{\text{rod}}/L=-5.19\times10^{-14}\text{ C/m}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Convert Total Charge into Linear Density</h2>
+            <ul>
+              <li>The rod is uniform, so its charge density is constant.</li>
+              <li>$$\lambda=\frac{Q_{\text{rod}}}{L}=\frac{-4.23\times10^{-15}}{0.0815}=-5.19\times10^{-14}\text{ C/m}.$$</li>
+              <li>This density is negative, so the field will point toward the rod.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The rod is a continuous source, so we need a charge-per-length description before writing any differential element. This is the bridge from given data to a usable integral.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Set Coordinates and Write One Differential Charge</h2>
+            <ul>
+              <li>Let the rod run from $$x=0$$ to $$x=L,$$ and place the observation point at $$x=L+a.$$</li>
+              <li>One small rod piece has charge $$dq=\lambda\,dx.$$</li>
+              <li>Its distance to the observation point is $$L+a-x.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Coordinates turn the picture into algebra. Once the distance from one source piece to the field point is known, the rest is standard Coulomb-law setup.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Write the Differential Field</h2>
+            <ul>
+              <li>All contributions lie along the x-axis, so no component split is needed.</li>
+              <li>$$dE_x=\frac{1}{4\pi\epsilon_0}\frac{\lambda\,dx}{(L+a-x)^2}.$$</li>
+              <li>The negative sign of $$\lambda$$ will automatically make the final direction point toward the rod.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This rod geometry is simpler than a ring or disk because every tiny field already points along the same axis. That means the vector problem collapses immediately into one scalar integral.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Integrate Over the Whole Rod</h2>
+            <ul>
+              <li>$$E_x=\frac{1}{4\pi\epsilon_0}\lambda\int_0^L \frac{dx}{(L+a-x)^2}.$$</li>
+              <li>Evaluating gives $$E_x=\dfrac{1}{4\pi\epsilon_0}\lambda\left(\dfrac{1}{a}-\dfrac{1}{a+L}\right).$$</li>
+              <li>This is the exact finite-rod field at the off-end point.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The integral adds the effect of every rod piece. Because the geometry is one-dimensional, the integration is straightforward once the setup is correct.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Insert the Numbers and Interpret the Sign</h2>
+            <ul>
+              <li>Substituting the data gives $$E_x=-1.57\times10^{-3}\text{ N/C}.$$</li>
+              <li>The magnitude is $$1.57\times10^{-3}\text{ N/C}.$$</li>
+              <li>The negative sign means the field points toward the negatively charged rod.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The sign is not just algebra clutter. It gives the actual field direction along the x-axis, which is part of the physics answer.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Check the Far-Field Limit</h2>
+            <ul>
+              <li>When $$a\gg L,$$ the factor $$a+L$$ is approximately $$a.$$</li>
+              <li>The exact result then reduces to $$E\approx \dfrac{1}{4\pi\epsilon_0}\dfrac{Q_{\text{rod}}}{a^2}.$$</li>
+              <li>So a distant finite rod behaves like a point charge carrying the same total charge.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This limit check connects the exact rod result to a simpler physical picture. Far away, the observation point can no longer resolve the rod's length, only its total charge.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">52 Lion</div><h3>Convert to $$\lambda$$</h3><p>The lion turns total charge into line density.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$dq$$ and Distance</h3><p>Chalk writes $$dq=\lambda dx$$ and the source-to-point separation.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Integrate the Rod</h3><p>The mat collects every rod piece into one exact field.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">90 Bus</div><h3>Check the Far Limit</h3><p>The bus turns the rod into a point charge when the point is very far away.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch22-sample-uniform-rod-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more reminder showing why every rod contribution points along the same axis here."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

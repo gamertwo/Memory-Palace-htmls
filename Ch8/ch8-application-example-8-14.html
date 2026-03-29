@@ -12,78 +12,222 @@
 </head>
 <body data-page-key="ch8_application_example_8_14">
 <main class="shell">
-  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-19.html">Prev: Exercise 8-19</a><a href="ch8-design-exercise-8-20.html">Next: Design Exercise 8-20</a></nav>
-  <section class="hero"><div class="tag">Application Example 8-14</div><h1>Build the RC Low-Pass Filter Ratio as a Memory Movie</h1><p class="hero-sub">This page is a divider-ratio filter movie. You write the output-to-input phasor ratio, simplify it into a clean transfer function, take its magnitude, inspect the key frequency landmarks, and then interpret why low frequencies pass while high frequencies shrink. The memory emphasis is on the cutoff idea: the filter bends around one special frequency.</p><div class="formula-block">$$left|\frac{V_C}{V_S}\right|=\frac{1}{\sqrt{1+(\omega RC)^2}},\qquad \omega_c=\frac{1}{RC}$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-application-example-8-14.html">Open in Memory Builder</a></div></section>
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-19.html">Prev: Exercise 8-19</a><a href="ch8-example-8-15.html">Next: Example 8-15</a></nav>
+
+  <section class="hero">
+    <div class="tag">Application Example 8-14</div>
+    <h1>Build the RC Low-Pass Filter Ratio as a Memory Movie</h1>
+    <p class="hero-sub">
+      This question starts by asking for the capacitor output-to-source ratio in an RC series circuit, then asks for its magnitude as frequency changes. The real point is not just algebra. The point is to prove, from the ratio itself, why the circuit behaves as a low-pass filter and where the important turning point occurs.
+    </p>
+    <div class="formula-block">
+      $$\left|\frac{V_C}{V_S}\right|=\frac{1}{\sqrt{1+(\omega RC)^2}},\qquad \omega_c=\frac{1}{RC}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-application-example-8-14.html">Open in Memory Builder</a>
+    </div>
+  </section>
+
   <div class="study-grid">
     <div class="main-stack">
-      <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts">
-          <div class="fact"><div class="k">Given</div><div class="v">Use the RC divider of Figure 8-29 with the output taken across the capacitor.</div></div>
-          <div class="fact"><div class="k">Find</div><div class="v">Find the ratio $V_C/V_S$ and then find its magnitude as a function of frequency.</div></div>
-          <div class="fact"><div class="k">Target</div><div class="v">You are also asked to explain the filter behavior and the cutoff idea.</div></div>
-      </div></section>
-      <section class="panel"><div class="section-title">Quick Data</div><div class="facts">
-          <div class="fact"><div class="k">Divider Ratio</div><div class="v">$$\frac{V_C}{V_S}=\frac{1}{1+j\omega RC}$$</div></div>
-          <div class="fact"><div class="k">Magnitude</div><div class="v">$$\left|\frac{V_C}{V_S}\right|=\frac{1}{\sqrt{1+(\omega RC)^2}}$$</div></div>
-          <div class="fact"><div class="k">Cutoff</div><div class="v">$$\omega_c=1/RC$$ where the magnitude is $$1/\sqrt2$$</div></div>
-      </div></section>
-      <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
-          <article class="room" id="room-ch8-application-example-8-14-room-1" data-room-id="ch8-application-example-8-14-room-1" data-room-title="Room 1: Write the Voltage Divider for the Capacitor Output" data-source-page="ch8-application-example-8-14.html" data-tags="write,voltage,divider,capacitor">
-            <h2>Room 1: Write the Voltage Divider for the Capacitor Output</h2>
+
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact">
+            <div class="k">Given</div>
+            <div class="v">
+              An RC series circuit from Figure 8-29, with the output taken across the capacitor.
+            </div>
+          </div>
+          <div class="fact">
+            <div class="k">Find</div>
+            <div class="v">
+              First find the phasor ratio $$V_C/V_S.$$ Then find its magnitude as a function of frequency.
+            </div>
+          </div>
+          <div class="fact">
+            <div class="k">Meaning</div>
+            <div class="v">
+              After getting the formula, explain what it says physically: which frequencies appear strongly at the output, which ones shrink, and why.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact">
+            <div class="k">Transfer Ratio</div>
+            <div class="v">$$\frac{V_C}{V_S}=\frac{1}{1+j\omega RC}$$</div>
+          </div>
+          <div class="fact">
+            <div class="k">Magnitude</div>
+            <div class="v">$$\left|\frac{V_C}{V_S}\right|=\frac{1}{\sqrt{1+(\omega RC)^2}}$$</div>
+          </div>
+          <div class="fact">
+            <div class="k">Cutoff Point</div>
+            <div class="v">$$\omega_c=\frac{1}{RC}$$ and at that point $$\left|\frac{V_C}{V_S}\right|=\frac{1}{\sqrt2}\approx0.707$$</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+
+          <article class="room" id="room-ch8-application-example-8-14-room-1" data-room-id="ch8-application-example-8-14-room-1" data-room-title="Room 1: Understand What the Question Wants" data-source-page="ch8-application-example-8-14.html" data-tags="understand,question,wants">
+            <h2>Room 1: Understand What the Question Wants</h2>
             <ul>
-              <li>The output is taken across the capacitor, so use the divider relation $$V_C=\frac{1/j\omega C}{R+1/j\omega C}V_S.$$</li>
-              <li>Multiplying numerator and denominator by $$j\omega C$$ simplifies the ratio to $$\frac{V_C}{V_S}=\frac{1}{1+j\omega RC}. $$</li>
-              <li>This compact ratio is the main formula to memorize.</li>
+              <li>The circuit output is measured across the capacitor, so the quantity of interest is not the resistor voltage, but $$V_C.$$</li>
+              <li>The first task is mathematical: write the ratio $$V_C/V_S.$$</li>
+              <li>The second task is interpretive: use that ratio to explain how the output changes with frequency.</li>
+              <li>So the whole question is really asking: <strong>how much of the source reaches the capacitor at low, middle, and high frequency?</strong></li>
             </ul>
           </article>
-          <article class="room" id="room-ch8-application-example-8-14-room-2" data-room-id="ch8-application-example-8-14-room-2" data-room-title="Room 2: Take the Magnitude of the Ratio" data-source-page="ch8-application-example-8-14.html" data-tags="take,magnitude,ratio">
-            <h2>Room 2: Take the Magnitude of the Ratio</h2>
+
+          <article class="room" id="room-ch8-application-example-8-14-room-2" data-room-id="ch8-application-example-8-14-room-2" data-room-title="Room 2: Write the Voltage Divider Ratio" data-source-page="ch8-application-example-8-14.html" data-tags="write,divider,ratio">
+            <h2>Room 2: Write the Voltage Divider Ratio</h2>
             <ul>
-              <li>To study filtering, take the magnitude of the transfer ratio.</li>
-              <li>That gives $$\left|\frac{V_C}{V_S}\right|=\frac{1}{\sqrt{1+(\omega RC)^2}}.$$</li>
-              <li>This formula is the passband picture in one line.</li>
+              <li>Because this is a series RC circuit, use the impedance divider rule with the capacitor impedance $$Z_C=\frac{1}{j\omega C}.$$</li>
+              <li>That gives $$V_C=\frac{Z_C}{R+Z_C}V_S=\frac{1/j\omega C}{R+1/j\omega C}V_S.$$</li>
+              <li>Now multiply numerator and denominator by $$j\omega C$$ so the complex fraction becomes simpler.</li>
+              <li>The clean ratio is $$\frac{V_C}{V_S}=\frac{1}{1+j\omega RC}.$$ This is the main transfer function of the circuit.</li>
             </ul>
           </article>
-          <article class="room" id="room-ch8-application-example-8-14-room-3" data-room-id="ch8-application-example-8-14-room-3" data-room-title="Room 3: Check the Landmark Frequencies" data-source-page="ch8-application-example-8-14.html" data-tags="check,landmark,frequencies">
-            <h2>Room 3: Check the Landmark Frequencies</h2>
+
+          <article class="room" id="room-ch8-application-example-8-14-room-3" data-room-id="ch8-application-example-8-14-room-3" data-room-title="Room 3: Take the Magnitude to Study Output Size" data-source-page="ch8-application-example-8-14.html" data-tags="take,magnitude,output,size">
+            <h2>Room 3: Take the Magnitude to Study Output Size</h2>
             <ul>
-              <li>At $$\omega=0,$$ the magnitude is $$1,$$ so low-frequency signals pass almost unchanged.</li>
-              <li>At $$\omega=1/RC,$$ the magnitude is $$1/\sqrt2approx0.707.$$</li>
-              <li>At very high frequency, the magnitude approaches $$0.$$</li>
-              <li>These three landmarks tell the whole story of the curve.</li>
+              <li>The transfer ratio contains $$j,$$ which tells you phase information, but filter behavior is usually discussed using magnitude.</li>
+              <li>Take the magnitude of $$\frac{1}{1+j\omega RC}.$$ The denominator magnitude is $$\sqrt{1+(\omega RC)^2}.$$</li>
+              <li>So the output magnitude ratio becomes $$\left|\frac{V_C}{V_S}\right|=\frac{1}{\sqrt{1+(\omega RC)^2}}.$$</li>
+              <li>This single expression now tells the full output trend as frequency changes.</li>
             </ul>
           </article>
-          <article class="room" id="room-ch8-application-example-8-14-room-4" data-room-id="ch8-application-example-8-14-room-4" data-room-title="Room 4: Interpret the Filter Behavior" data-source-page="ch8-application-example-8-14.html" data-tags="interpret,filter,behavior">
-            <h2>Room 4: Interpret the Filter Behavior</h2>
+
+          <article class="room" id="room-ch8-application-example-8-14-room-4" data-room-id="ch8-application-example-8-14-room-4" data-room-title="Room 4: Read the Formula at the Key Frequencies" data-source-page="ch8-application-example-8-14.html" data-tags="read,formula,key,frequencies">
+            <h2>Room 4: Read the Formula at the Key Frequencies</h2>
             <ul>
-              <li>As frequency rises, the capacitor impedance drops.</li>
-              <li>That means less of the source voltage appears across the capacitor itself.</li>
-              <li>So low frequencies pass, but high frequencies are attenuated.</li>
-              <li>This is why the circuit is called a low-pass filter.</li>
+              <li>At very low frequency, $$\omega\approx0,$$ so $$\omega RC\approx0.$$ Then the magnitude becomes $$1.$$ This means the output is almost the same as the source.</li>
+              <li>At $$\omega=\frac{1}{RC},$$ the magnitude becomes $$\frac{1}{\sqrt2}\approx0.707.$$ This is the important boundary point.</li>
+              <li>At very high frequency, $$\omega RC$$ becomes very large, so the denominator grows large and the magnitude approaches $$0.$$</li>
+              <li>These three checkpoints summarize the entire curve: start near 1, drop to 0.707 at cutoff, then continue falling toward 0.</li>
             </ul>
           </article>
-          <article class="room" id="room-ch8-application-example-8-14-room-5" data-room-id="ch8-application-example-8-14-room-5" data-room-title="Room 5: Lock the Cutoff Memory" data-source-page="ch8-application-example-8-14.html" data-tags="lock,cutoff,memory">
-            <h2>Room 5: Lock the Cutoff Memory</h2>
+
+          <article class="room" id="room-ch8-application-example-8-14-room-5" data-room-id="ch8-application-example-8-14-room-5" data-room-title="Room 5: Explain Why the Circuit is Low-Pass" data-source-page="ch8-application-example-8-14.html" data-tags="explain,low-pass,behavior">
+            <h2>Room 5: Explain Why the Circuit is Low-Pass</h2>
             <ul>
-              <li>The boundary between the easy-pass and strong-attenuation regions is the cutoff frequency.</li>
-              <li>For this RC low-pass filter, $$\omega_c=1/RC.$$</li>
-              <li>At cutoff, the output magnitude is down to about $$70.7%$$ of the input magnitude.</li>
+              <li>As frequency increases, capacitor impedance decreases because $$|Z_C|=\frac{1}{\omega C}.$$</li>
+              <li>When the capacitor impedance is large, a large portion of the source voltage appears across the capacitor, so low-frequency output is strong.</li>
+              <li>When the capacitor impedance becomes small, less voltage appears across the capacitor, so high-frequency output becomes small.</li>
+              <li>That is why the circuit passes low frequencies well and attenuates high frequencies: it is a <strong>low-pass filter</strong>.</li>
             </ul>
           </article>
-        </div><div class="mini"><h3>Key Shortcut</h3><p>For the RC low-pass filter, memorize the clean chain: divider ratio, magnitude, landmarks, interpretation, cutoff.</p></div><div class="mini"><h3>Why This Flow Matters</h3><p>This page gives you a reusable transfer-function movie that later design questions can plug into. Once the ratio and cutoff are fixed in memory, the design exercise becomes one algebra step.</p></div></section>
-      <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><p class="copy">Walk the filter route as ratio, magnitude, landmarks, behavior, cutoff.</p><div class="movie-flow">
-          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Divider Ratio</h3><p>The net grabs $$V_C/V_S=1/(1+j\omega RC).$$</p></div>
+
+          <article class="room" id="room-ch8-application-example-8-14-room-6" data-room-id="ch8-application-example-8-14-room-6" data-room-title="Room 6: State the Final Result Clearly" data-source-page="ch8-application-example-8-14.html" data-tags="state,final,result">
+            <h2>Room 6: State the Final Result Clearly</h2>
+            <ul>
+              <li>The required ratio is $$\frac{V_C}{V_S}=\frac{1}{1+j\omega RC}.$$</li>
+              <li>Its magnitude is $$\left|\frac{V_C}{V_S}\right|=\frac{1}{\sqrt{1+(\omega RC)^2}}.$$</li>
+              <li>The cutoff angular frequency is $$\omega_c=\frac{1}{RC}.$$</li>
+              <li>Therefore, the circuit is a low-pass filter: low frequencies appear strongly at the capacitor output, while high frequencies are reduced.</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>
+            Understand the ask, write the divider ratio, take magnitude, test the key frequencies, then state why that proves low-pass behavior.
+          </p>
+        </div>
+
+        <div class="mini">
+          <h3>Why This Flow Matters</h3>
+          <p>
+            If you remember only isolated formulas, the question is easy to forget. If you remember the flow from what is being asked to what the final result means, the whole problem becomes reconstructable even after many days.
+          </p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">
+          Start from the question, build the ratio, reduce it to magnitude, inspect the important frequencies, and finish with the filter meaning.
+        </p>
+        <div class="movie-flow">
+          <div class="movie-step">
+            <div class="movie-peg">11 Gate</div>
+            <h3>Ask What the Output Is</h3>
+            <p>The gate opens to the real target: the capacitor output ratio $$V_C/V_S.$$</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Magnitude Formula</h3><p>Fire reveals $$1/\sqrt{1+(\omega RC)^2}. $$</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">21 Net</div>
+            <h3>Catch the Divider Formula</h3>
+            <p>The net grabs $$\frac{V_C}{V_S}=\frac{1}{1+j\omega RC}.$$</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Mark the Landmark Frequencies</h3><p>Chalk writes $$0,$$ $$1/RC,$$ and $$\infty.$$</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">84 Fire</div>
+            <h3>Burn Away the Complex Part</h3>
+            <p>Fire leaves the magnitude $$\frac{1}{\sqrt{1+(\omega RC)^2}}.$$</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Flatten the Filter Behavior</h3><p>The mat shows low frequencies passing and high frequencies shrinking.</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">67 Chalk</div>
+            <h3>Mark the Three Frequency Points</h3>
+            <p>Chalk writes low: $$1,$$ cutoff: $$0.707,$$ high: $$0.$$</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Cutoff Rule</h3><p>The coat leaves $$\omega_c=1/RC.$$</p></div>
-        </div><div class="flow-line"><span class="flow-pill">Write ratio</span><span class="flow-join">&rarr;</span><span class="flow-pill">Take magnitude</span><span class="flow-join">&rarr;</span><span class="flow-pill">Mark landmarks</span><span class="flow-join">&rarr;</span><span class="flow-pill">Interpret behavior</span><span class="flow-join">&rarr;</span><span class="flow-pill">Lock cutoff</span></div></section>
-      <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-application-example-8-14-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more visual cue for why the capacitor output drops at high frequency."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+          <div class="movie-step">
+            <div class="movie-peg">71 Coat</div>
+            <h3>Wear the Final Rule</h3>
+            <p>The coat locks in $$\omega_c=1/RC$$ and the meaning: low-pass filter.</p>
+          </div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">What is asked</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Write ratio</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Take magnitude</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Check key points</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">State final meaning</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack">
+            <span>File Name</span>
+            <input class="request-input" data-note-filename type="text" value="ch8-application-example-8-14-request.txt" />
+          </label>
+          <label class="field-stack">
+            <span>Text</span>
+            <textarea class="request-textarea" data-note-body placeholder="Example: Add one more visual cue for why the capacitor output drops at high frequency."></textarea>
+          </label>
+          <div class="tool-row">
+            <button class="tool-btn" type="submit">Save .txt</button>
+          </div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+
     </div>
-    </div>
+  </div>
 </main>
 <script src="study.js"></script>
 <script src="../linear-review.js" defer></script>

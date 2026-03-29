@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 23 | Gauss's Law Core</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch23_gauss_law_core">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch23-24 Index</a><a href="guide.html">Guide</a><a href="ch23-electric-flux-basics.html">Prev: Flux Basics</a><a href="ch23-flux-cube-sample.html">Next: Cube Sample</a></nav>
+
+  <section class="hero">
+    <div class="tag">Chapter 23 Core Law</div>
+    <h1>Gauss's Law</h1>
+    <p class="hero-sub">Gauss's law links two different-looking things: the net electric flux through a closed surface and the net charge enclosed by that surface. The law is always true, but it becomes especially powerful when symmetry lets us read the electric field from the flux integral easily.</p>
+    <div class="formula-block">$$\oint \vec E\cdot d\vec A=\frac{q_{\text{enc}}}{\epsilon_0}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch23-gauss-law-core.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Closed Surface</div><div class="v">Gauss's law applies to a closed Gaussian surface.</div></div>
+          <div class="fact"><div class="k">Only Enclosed Charge</div><div class="v">Charges outside the surface can affect the field but contribute zero net flux.</div></div>
+          <div class="fact"><div class="k">Net Flux Sign</div><div class="v">Positive enclosed charge gives positive outward net flux.</div></div>
+          <div class="fact"><div class="k">Main Use</div><div class="v">Choose surfaces that match cylindrical, planar, or spherical symmetry.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Core Idea</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Enclose the Charge with an Imaginary Surface</h2>
+            <ul>
+              <li>Gauss's law does not care about a physical shell or box being present.</li>
+              <li>We choose an imaginary closed surface called a Gaussian surface.</li>
+              <li>The surface is a bookkeeping device for flux.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This makes the law flexible. We are free to invent whatever closed surface best matches the symmetry of the charge distribution.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Sum the Net Flux Through the Entire Surface</h2>
+            <ul>
+              <li>Add the outward and inward piercing of the field across every patch.</li>
+              <li>The result is the net flux $$\oint \vec E\cdot d\vec A.$$</li>
+              <li>This is a single scalar number for the whole surface.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Gauss's law talks about total surface behavior, not about one point alone. We need the full closed-surface flux before comparing with charge.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Compare Net Flux with Enclosed Charge</h2>
+            <ul>
+              <li>Gauss's law says $$\oint \vec E\cdot d\vec A=q_{\text{enc}}/\epsilon_0.$$</li>
+              <li>The right side uses the net charge inside the surface only.</li>
+              <li>If the net enclosed charge is zero, the net flux is zero.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the heart of the chapter. The law converts a potentially messy field problem into a charge-counting statement.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Understand Why Outside Charges Drop Out</h2>
+            <ul>
+              <li>A charge outside the Gaussian surface sends field lines in and out of the surface.</li>
+              <li>As many lines enter as leave, so the net contribution is zero.</li>
+              <li>Thus outside charges can distort the field shape but not the net flux balance.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the subtle part students often miss. “Only enclosed charge matters” refers to net flux, not to whether outside charges influence the field everywhere on the surface.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Know When the Law Is Powerful</h2>
+            <ul>
+              <li>Gauss's law is always true.</li>
+              <li>It becomes computationally powerful only when symmetry makes $$\vec E$$ constant or easy to handle on the chosen surface.</li>
+              <li>That is why Chapter 23 focuses on cylinders, planes, and spheres.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Students sometimes try Gauss's law on every problem. The law never fails, but your chosen surface may fail to simplify the integral if the symmetry is weak.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">23 Name</div><h3>Choose the Gaussian Surface</h3><p>The name tag labels the imaginary closed surface.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">36 Mesh</div><h3>Lay Outward Area Vectors</h3><p>The mesh assigns outward normals to every patch.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write Gauss's Law</h3><p>Chalk connects net flux to enclosed charge.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">48 Roof</div><h3>Use Symmetry or Stop</h3><p>The roof decides whether the chosen surface actually simplifies the field.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch23-gauss-law-core-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note explaining why outside charges can give zero net flux."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 22 | Derivation: Circular Arc Field</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch22_derivation_circular_arc">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch22 Index</a><a href="guide.html">Guide</a><a href="ch22-sample-particle-motion.html">Prev: Particle Motion</a><a href="index.html">Next: Index</a></nav>
+
+  <section class="hero">
+    <div class="tag">Derivation</div>
+    <h1>Electric Field at the Center of a 120 Degree Charged Arc</h1>
+    <p class="hero-sub">This derivation feels different from the ring and disk because the source is only part of a circle, not the whole thing. That means cancellation is partial, not complete. The good news is that opposite angular elements still cancel their vertical pieces, so one horizontal component survives and integrates cleanly across the visible arc.</p>
+    <div class="formula-block">$$\vec E=\frac{0.83Q}{4\pi\epsilon_0 r^2}\,\hat{\imath}\quad\text{(toward the arc)}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch22-derivation-circular-arc.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source</div><div class="v">Uniform 120 degree arc of radius $$r$$ and total charge $$Q.$$</div></div>
+          <div class="fact"><div class="k">Slice</div><div class="v">Use angular element $$dq=\lambda r\,d\theta.$$</div></div>
+          <div class="fact"><div class="k">Symmetry</div><div class="v">Vertical components cancel pairwise; horizontal parts add.</div></div>
+          <div class="fact"><div class="k">Direction</div><div class="v">The field points toward the arc along the symmetry axis.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Derivation</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Model the Arc with Tiny Angular Pieces</h2>
+            <ul>
+              <li>Take one tiny source element on the arc.</li>
+              <li>Because the source lies on a circle of radius $$r,$$ its arc length is $$ds=r\,d\theta.$$</li>
+              <li>So $$dq=\lambda ds=\lambda r\,d\theta.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The arc is a one-dimensional curved source, so the natural variable is angle, not x-position. Writing $$dq$$ in angular form matches the object's geometry perfectly.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Write the Differential Field Magnitude</h2>
+            <ul>
+              <li>Every element sits the same distance $$r$$ from the center.</li>
+              <li>So $$dE=\dfrac{1}{4\pi\epsilon_0}\dfrac{dq}{r^2}=\dfrac{1}{4\pi\epsilon_0}\dfrac{\lambda\,d\theta}{r}.$$</li>
+              <li>The distance simplicity is what makes the arc integral manageable.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This mirrors the ring derivation: constant radius means constant distance to the center. That lets the field magnitude simplify before we even touch symmetry.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Keep Only the Surviving Component</h2>
+            <ul>
+              <li>Pair elements at angles $$+\theta$$ and $$-\theta.$$ </li>
+              <li>Their vertical components cancel, while their horizontal components point in the same direction.</li>
+              <li>So $$dE_x=dE\cos\theta.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The arc is not a full circle, so cancellation is incomplete. Symmetry still helps, but now it removes only one component rather than the whole field.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Integrate Across the 120 Degree Span</h2>
+            <ul>
+              <li>The arc runs from $$-60^\circ$$ to $$+60^\circ.$$</li>
+              <li>So $$E_x=\dfrac{\lambda}{4\pi\epsilon_0 r}\int_{-\pi/3}^{\pi/3}\cos\theta\,d\theta.$$</li>
+              <li>This becomes $$E_x=\dfrac{\lambda}{4\pi\epsilon_0 r}\left[\sin\theta\right]_{-\pi/3}^{\pi/3}= \dfrac{1.73\lambda}{4\pi\epsilon_0 r}.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Once the correct component is chosen, the angular integral is short and direct. The hard thinking was really in the geometry and symmetry, not the calculus.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Replace $$\lambda$$ with Total Charge</h2>
+            <ul>
+              <li>The arc length is one-third of a full circumference: $$L=2\pi r/3.$$</li>
+              <li>So $$\lambda=Q/L=3Q/(2\pi r).$$</li>
+              <li>Substituting gives $$E\approx \dfrac{0.83Q}{4\pi\epsilon_0 r^2}.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Rewriting in terms of total charge makes the answer easier to interpret and compare with other Chapter 22 results. It also removes the extra density symbol from the final memory target.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">52 Lion</div><h3>Write $$dq=\lambda r\,d\theta$$</h3><p>The lion converts the curved source into angular charge pieces.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$dE$$</h3><p>Chalk writes the constant-radius differential field.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">48 Roof</div><h3>Cancel Vertical Parts</h3><p>The roof covers the pairwise vertical cancellation.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Integrate the Horizontal Part</h3><p>The mat collects the surviving component toward the arc.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch22-derivation-circular-arc-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note explaining why the field points toward the arc."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 22 Electric Field | Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+</head>
+<body data-page-key="ch22_guide">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch22 Index</a><a href="ch22-electric-field-basics.html">Field Basics</a><a href="ch22-derivation-ring-axis.html">Ring</a><a href="ch22-sample-uniform-rod.html">Rod Sample</a><a href="memory-palace-builder.html">Builder</a></nav>
+
+  <section class="hero">
+    <div class="tag">Major System + Electric Field Writing Flow</div>
+    <h1>Electric Field Guideline Page</h1>
+    <p class="hero-sub">Use one stable writing flow across the whole chapter. First identify the observation point, then decide whether the source is discrete or continuous, write the correct $$dq$$ if needed, use geometry to write $$d\vec E$$, remove cancelling components by symmetry, and integrate only the part that survives. In worked problems, finish by turning field into force, acceleration, or potential behavior.</p>
+    <div class="tool-row"><a class="tool-btn" href="#pegs">Peg Table</a><a class="tool-btn" href="#rules">Do and Do Not</a><a class="tool-btn" href="#table">Question Table</a><a class="tool-btn" href="#request-anchor">Save Notes</a></div>
+  </section>
+
+  <div class="study-grid two-col">
+    <section class="panel">
+      <div class="section-title">Major System Digit Sounds</div>
+      <p class="copy">Keep the peg words stable so the electric-field movie stays stable.</p>
+      <div class="facts" style="margin-top:.9rem">
+        <div class="fact"><div class="k">0</div><div class="v">s, z</div></div>
+        <div class="fact"><div class="k">1</div><div class="v">t, d</div></div>
+        <div class="fact"><div class="k">2</div><div class="v">n</div></div>
+        <div class="fact"><div class="k">3</div><div class="v">m</div></div>
+        <div class="fact"><div class="k">4</div><div class="v">r</div></div>
+        <div class="fact"><div class="k">5</div><div class="v">l</div></div>
+        <div class="fact"><div class="k">6</div><div class="v">sh, ch, j</div></div>
+        <div class="fact"><div class="k">7</div><div class="v">k, g</div></div>
+        <div class="fact"><div class="k">8</div><div class="v">f, v</div></div>
+        <div class="fact"><div class="k">9</div><div class="v">p, b</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="rules">
+      <div class="section-title">Do and Do Not</div>
+      <div class="study-grid">
+        <div class="mini do-card"><h3>Do</h3><ul class="list"><li>Mark the observation point before writing any field expression.</li><li>Choose $$\lambda,$$ $$\sigma,$$ or $$\rho$$ before writing $$dq.$$</li><li>Use geometry to write distance and angle before integrating.</li><li>Let symmetry kill components before long algebra.</li><li>In applications, convert field into force with $$\vec F=q\vec E$$ only after the field is known.</li></ul></div>
+        <div class="mini dont-card"><h3>Do Not</h3><ul class="list"><li>Do not integrate a whole vector if symmetry already removes half of it.</li><li>Do not use the wrong density symbol for the object you are slicing.</li><li>Do not treat a continuous object like one point charge unless a far-field limit justifies it.</li><li>Do not forget negative charges reverse the force direction relative to the field.</li><li>Do not jump into numbers before the geometry and limits are clean.</li></ul></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel" id="pegs" style="margin-top:1rem">
+    <div class="section-title">Universal Peg Table</div>
+    <div class="peg-grid">
+      <article class="peg-card"><div class="peg-num">22</div><h3>Nun</h3><div class="peg-word">Stand at the Observation Point</div><p>The nun stands where the field is being measured, so every geometry statement points back to that location.</p></article>
+      <article class="peg-card"><div class="peg-num">52</div><h3>Lion</h3><div class="peg-word">Choose the Charge Density</div><p>The lion guards the correct choice of $$\lambda,$$ $$\sigma,$$ or $$\rho.$$</p></article>
+      <article class="peg-card"><div class="peg-num">67</div><h3>Chalk</h3><div class="peg-word">Write $$d\vec E$$</div><p>Chalk writes the differential Coulomb-law contribution from one tiny source element.</p></article>
+      <article class="peg-card"><div class="peg-num">48</div><h3>Roof</h3><div class="peg-word">Use Symmetry</div><p>The roof covers the components that cancel and leaves only the surviving direction.</p></article>
+      <article class="peg-card"><div class="peg-num">28</div><h3>Knife</h3><div class="peg-word">Split Components</div><p>The knife cuts the tiny field into axial and transverse parts.</p></article>
+      <article class="peg-card"><div class="peg-num">31</div><h3>Mat</h3><div class="peg-word">Integrate the Survivor</div><p>The mat collects only the component that survives symmetry and sums it over the whole source.</p></article>
+      <article class="peg-card"><div class="peg-num">90</div><h3>Bus</h3><div class="peg-word">Check the Limit</div><p>The bus drives to the far field or infinite-sheet limit to confirm the result makes physical sense.</p></article>
+      <article class="peg-card"><div class="peg-num">71</div><h3>Coat</h3><div class="peg-word">Wrap the Final Meaning</div><p>The coat wraps the final formula together with direction and interpretation.</p></article>
+    </div>
+  </section>
+
+  <section class="panel" id="table" style="margin-top:1rem">
+    <div class="section-title">Question Map</div>
+    <table class="guide-table">
+      <thead>
+        <tr><th>Page</th><th>Main Move</th><th>Hook</th><th>Finish</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="ch22-electric-field-basics.html">Electric Field Basics</a></td><td>Define the field and the test-charge rule</td><td>Space stores force information</td><td>Use $$\vec E=\vec F/q_0.$$ </td></tr>
+        <tr><td><a href="ch22-superposition-and-symmetry.html">Superposition and Symmetry</a></td><td>Add vector contributions from multiple charges</td><td>Symmetry removes useless work</td><td>One net field vector.</td></tr>
+        <tr><td><a href="ch22-charge-density-toolkit.html">Charge Density Toolkit</a></td><td>Write the correct $$dq$$</td><td>Object type decides the slice</td><td>Ready-to-integrate field setup.</td></tr>
+        <tr><td><a href="ch22-derivation-dipole-axis.html">Dipole Axis Derivation</a></td><td>Subtract two point-charge fields</td><td>Exact result then far-field limit</td><td>$$E \propto p/z^3.$$ </td></tr>
+        <tr><td><a href="ch22-derivation-ring-axis.html">Ring Axis Derivation</a></td><td>Kill transverse parts by symmetry</td><td>Only the axis survives</td><td>$$E_z=\dfrac{1}{4\pi\epsilon_0}\dfrac{Qz}{(z^2+R^2)^{3/2}}.$$ </td></tr>
+        <tr><td><a href="ch22-derivation-disk-axis.html">Disk Axis Derivation</a></td><td>Build a disk from rings</td><td>Reuse a result you already earned</td><td>Finite disk and sheet limit.</td></tr>
+        <tr><td><a href="ch22-dipole-in-uniform-field.html">Dipole in a Uniform Field</a></td><td>Separate net force from torque</td><td>Equal forces can still rotate</td><td>$$\tau=pE\sin\theta,\ U=-pE\cos\theta.$$ </td></tr>
+        <tr><td><a href="ch22-sample-uniform-rod.html">Sample: Uniform Rod</a></td><td>Carry a full line-charge example</td><td>Density to integral to limit</td><td>Exact rod field and point-charge check.</td></tr>
+        <tr><td><a href="ch22-sample-particle-motion.html">Sample: Particle Motion</a></td><td>Convert field into acceleration</td><td>Split motion into horizontal and vertical parts</td><td>Vertical deflection.</td></tr>
+        <tr><td><a href="ch22-derivation-circular-arc.html">Circular Arc Derivation</a></td><td>Use angular symmetry on a bent rod</td><td>Opposite components cancel</td><td>Center field toward the arc.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel" id="request-anchor" style="margin-top:1rem">
+    <div class="section-title">Save Guide Notes</div>
+    <form class="request-form" data-txt-save>
+      <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch22-guide-request.txt" /></label>
+      <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more reminder that symmetry should be checked before integrating."></textarea></label>
+      <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+      <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+      <p class="memory-status" data-note-status>Nothing saved yet.</p>
+    </form>
+  </section>
+</main>
+<script src="study.js"></script>
+</body>
+</html>

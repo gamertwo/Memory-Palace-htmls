@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 23 | Derivation: Sheet and Parallel Plates</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch23_planar_symmetry_derivation">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch23-24 Index</a><a href="guide.html">Guide</a><a href="ch23-cylindrical-symmetry-derivation.html">Prev: Line Charge</a><a href="ch23-spherical-symmetry-derivation.html">Next: Spherical Symmetry</a></nav>
+
+  <section class="hero">
+    <div class="tag">Derivation</div>
+    <h1>Field of a Sheet of Charge and Two Parallel Plates</h1>
+    <p class="hero-sub">Planar symmetry is the second major Gauss's-law pattern. A single infinite sheet needs a pillbox Gaussian surface, and two large oppositely charged plates are then handled by superposition of the individual sheet fields.</p>
+    <div class="formula-block">$$E_{\text{sheet}}=\frac{\sigma}{2\epsilon_0},\qquad E_{\text{between plates}}=\frac{\sigma}{\epsilon_0}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch23-planar-symmetry-derivation.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Full Derivation</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Use a Pillbox Gaussian Surface for One Sheet</h2>
+            <ul>
+              <li>Choose a short cylinder whose flat end caps lie on opposite sides of the sheet.</li>
+              <li>The sheet cuts through the middle of the pillbox.</li>
+              <li>This matches planar symmetry and isolates the charge enclosed.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The pillbox is the planar version of the cylinder for line charge. It places the relevant flux on the end caps while making the curved wall irrelevant.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Identify Where the Flux Lives</h2>
+            <ul>
+              <li>The field is perpendicular to the sheet, so it pierces the two end caps.</li>
+              <li>The field is parallel to the curved side of the pillbox, so there is no flux there.</li>
+              <li>The total flux is therefore $$EA+EA=2EA.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the key simplification. The curved wall exists only to close the surface, not to contribute to the flux.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Solve for the Single-Sheet Field</h2>
+            <ul>
+              <li>The enclosed charge is $$q_{\text{enc}}=\sigma A.$$</li>
+              <li>Gauss's law gives $$2EA=\sigma A/\epsilon_0.$$</li>
+              <li>So $$E=\sigma/(2\epsilon_0).$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The factor of 2 comes from the sheet sending field equally out on both sides. That is why the field of one sheet is half the plate-field result.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Superpose Two Oppositely Charged Plates</h2>
+            <ul>
+              <li>Each plate produces a field of magnitude $$\sigma/(2\epsilon_0).$$</li>
+              <li>Between the plates, the two fields point in the same direction and add.</li>
+              <li>Outside the plates, they point oppositely and cancel.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The two-plate result is not a new Gauss's-law derivation from scratch. It is the physical superposition of two already-known sheet fields.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: Write the Final Plate Result</h2>
+            <ul>
+              <li>Inside the plates, $$E=\sigma/\epsilon_0.$$</li>
+              <li>Outside the plates, $$E=0.$$</li>
+              <li>This is the ideal parallel-plate capacitor field pattern.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This page matters because it gives a nearly uniform field model used throughout later electrostatics and circuit analogies.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">23 Name</div><h3>Choose the Pillbox</h3><p>The name tag places a Gaussian cylinder through the sheet.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">36 Mesh</div><h3>Use Only the End Caps</h3><p>The mesh shows that flux lives on the flat faces, not the curved wall.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Solve for One Sheet</h3><p>Chalk gives $$E=\sigma/(2\epsilon_0).$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Add Two Sheet Fields</h3><p>The mat combines them into the plate result.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch23-planar-symmetry-derivation-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note explaining why the outside fields cancel for two opposite plates."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

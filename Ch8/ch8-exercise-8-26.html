@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-26 | Norton to Thevenin Conversion</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_26">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-19.html">Prev: Example 8-19</a><a href="ch8-design-example-8-20.html">Next: Design Example 8-20</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-26</div>
+    <h1>Convert a Norton Circuit into an Equivalent Thevenin Circuit</h1>
+    <p class="hero-sub">This page is the mirror of Example 8-19. The current source and parallel impedance are given, and you reverse the move by multiplying the Norton current by the Norton impedance. The impedance itself stays unchanged.</p>
+    <div class="formula-block">$$V_T=70.71\angle-8.13^\circ\text{ V},\qquad Z_T=141.4\angle45^\circ~\Omega$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-26.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">A Norton circuit with $$I_N=300-j400\text{ mA}$$ and $$Z_N=100+j100~\Omega.$$</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the equivalent Thevenin circuit.</div></div>
+          <div class="fact"><div class="k">Key Rule</div><div class="v">Use $$V_T=I_N Z_N$$ and keep the same impedance.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Reverse the Source-Transformation Rule</h2>
+            <ul>
+              <li>A Norton source becomes a Thevenin source through multiplication.</li>
+              <li>The new voltage is $$V_T=I_N Z_N.$$</li>
+              <li>The impedance stays the same during the conversion.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This keeps the two source-transformation directions paired in memory: divide to go Thevenin to Norton, multiply to go Norton to Thevenin.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Put the Given Quantities into Convenient Form</h2>
+            <ul>
+              <li>The impedance $$100+j100$$ becomes $$141.4\angle45^\circ~\Omega.$$</li>
+              <li>The current $$300-j400\text{ mA}$$ has magnitude-angle form $$0.5\angle-53.1^\circ\text{ A}.$$</li>
+              <li>Now the multiplication becomes clean.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Complex multiplication is fastest in polar form. This is the exact companion move to the polar division used on the previous page.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Multiply to Get the Thevenin Voltage</h2>
+            <ul>
+              <li>$$V_T=(0.5\angle-53.1^\circ)(141.4\angle45^\circ).$$</li>
+              <li>This gives $$V_T=70.71\angle-8.13^\circ\text{ V}.$$</li>
+              <li>That is the equivalent source voltage.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Once current and impedance are in polar form, the source voltage falls out directly from magnitude multiplication and angle addition.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Keep the Same Impedance</h2>
+            <ul>
+              <li>The equivalent Thevenin impedance equals the Norton impedance.</li>
+              <li>So $$Z_T=Z_N=100+j100=141.4\angle45^\circ~\Omega.$$</li>
+              <li>The final Thevenin circuit is a voltage source in series with this impedance.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The source representation changes, but the port seen by the load must not change. That is why the impedance is preserved.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch $$I_N$$ and $$Z_N$$</h3><p>The net grabs the Norton pair.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Polar Forms</h3><p>Fire converts the current and impedance into magnitude-angle form.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$V_T=I_NZ_N$$</h3><p>Chalk computes the Thevenin voltage.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Final Thevenin Pair</h3><p>The coat leaves the voltage source in series with the same impedance.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-26-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more line comparing this multiplication move with Example 8-19's division move."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

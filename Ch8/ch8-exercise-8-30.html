@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-30 | Determine Thevenin by Inspection</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_30">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-29.html">Prev: Exercise 8-29</a><a href="index.html">Next: Back to Index</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-30</div>
+    <h1>Determine the Thevenin Equivalent by Inspection</h1>
+    <p class="hero-sub">This last page is a fast-pattern exercise. Instead of doing a long derivation, you are meant to recognize the terminal open-circuit voltage and the look-back impedance almost immediately from the circuit structure of Fig. 8-30.</p>
+    <div class="formula-block">$$V_T=5\angle0^\circ\text{ V},\qquad Z_T=25+j50~\Omega$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-30.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Inspection Route</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Remove the Capacitor and Read the Terminal Voltage</h2>
+            <ul>
+              <li>The capacitor is the load whose Thevenin source is required.</li>
+              <li>With it removed, the terminal open-circuit voltage is read as $$V_T=5\angle0^\circ\text{ V}.$$</li>
+              <li>This is the Thevenin source voltage.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Thevenin voltage always comes from the open-circuit condition at the load terminals, even when the circuit is simple enough to read quickly by inspection.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Turn Off the Source and Read the Look-Back Impedance</h2>
+            <ul>
+              <li>Deactivate the independent source and inspect the impedance seen from the capacitor terminals.</li>
+              <li>The resulting Thevenin impedance is $$Z_T=25+j50~\Omega.$$</li>
+              <li>This is the fixed impedance of the rest of the network as seen by the capacitor.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The inspection shortcut still follows the same logic as every other Thevenin page. It is just faster because the circuit reduction is visually obvious.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Lock the Final Pair</h2>
+            <ul>
+              <li>The Thevenin equivalent seen by the capacitor is therefore</li>
+              <li>$$V_T=5\angle0^\circ\text{ V},\qquad Z_T=25+j50~\Omega.$$</li>
+              <li>This is the final pattern the exercise wants you to recognize quickly.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This page exists to build speed. Once the Thevenin route becomes familiar, some circuits should feel almost immediate instead of algebra-heavy.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Capacitor Terminals</h3><p>The net removes the capacitor and locks the correct port.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Open-Circuit Voltage</h3><p>Fire reveals $$V_T=5\angle0^\circ\text{ V}.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write the Look-Back Impedance</h3><p>Chalk writes $$Z_T=25+j50~\Omega.$$ </p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-30-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more inspection note showing which impedances combine into 25 + j50 ohms."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

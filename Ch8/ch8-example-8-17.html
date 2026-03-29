@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-17 | Superposition with Different Frequencies</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_17">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-23.html">Prev: Exercise 8-23</a><a href="ch8-exercise-8-24.html">Next: Exercise 8-24</a></nav>
+
+  <section class="hero">
+    <div class="tag">Example 8-17</div>
+    <h1>Use Superposition When the Sources Operate at Different Frequencies</h1>
+    <p class="hero-sub">
+      This page is the contrast partner to Example 8-16. You still turn off one source at a time and solve two reduced circuits, but now the two sources operate at different frequencies, so the responses cannot be added as phasors. The memory emphasis is the stopping rule: different frequencies break the common phasor floor, so the final answer must be written as a sum of time-domain sinusoids.
+    </p>
+    <div class="formula-block">
+      $$i(t)=2.23\cos(20{,}000t-21.8^\circ)+0.512\cos(60{,}000t-20.2^\circ)\text{ mA}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-17.html">Open in Memory Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">Use superposition on Figure 8-35 for $$R=10\text{ k}\Omega,\ L=200\text{ mH}.$$</div></div>
+          <div class="fact"><div class="k">Sources</div><div class="v">$$v_{s1}=24\cos(20{,}000t)\text{ V},\qquad v_{s2}=8\cos(60{,}000t+30^\circ)\text{ V}$$</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the steady-state current $$i(t)$$ and validate with Multisim.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">First Frequency</div><div class="v">$$\omega_1=20{,}000,\qquad Z_{EQ1}=R+j\omega_1L=(10+j4)\text{ k}\Omega$$</div></div>
+          <div class="fact"><div class="k">Second Frequency</div><div class="v">$$\omega_2=60{,}000,\qquad Z_{EQ2}=R+j\omega_2L=(10+j12)\text{ k}\Omega$$</div></div>
+          <div class="fact"><div class="k">Partial Currents</div><div class="v">$$I_1=2.23\angle-21.8^\circ\text{ mA},\qquad I_2=0.512\angle-20.2^\circ\text{ mA}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-example-8-17-room-1" data-room-id="ch8-example-8-17-room-1" data-room-title="Room 1: Notice That the Two Sources Do Not Share a Frequency" data-source-page="ch8-example-8-17.html" data-tags="notice,two,sources,frequency">
+            <h2>Room 1: Notice That the Two Sources Do Not Share a Frequency</h2>
+            <ul>
+              <li>The first source operates at $$\omega_1=20{,}000\text{ rad/s},$$ while the second operates at $$\omega_2=60{,}000\text{ rad/s}.$$</li>
+              <li>This destroys the common phasor floor, so the final answer cannot be one single phasor current.</li>
+              <li>Superposition still works, but the last step must happen in the time domain.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-17-room-2" data-room-id="ch8-example-8-17-room-2" data-room-title="Room 2: Solve the Response to Source 1 Alone" data-source-page="ch8-example-8-17.html" data-tags="solve,response,source,alone">
+            <h2>Room 2: Solve the Response to Source 1 Alone</h2>
+            <ul>
+              <li>Turn off source 2 and analyze the circuit at $$\omega_1=20{,}000.$$</li>
+              <li>The equivalent impedance is $$Z_{EQ1}=R+j\omega_1L=(10+j4)\text{ k}\Omega.$$</li>
+              <li>So the phasor current due to source 1 is $$I_1=\frac{V_{s1}}{Z_{EQ1}}=\frac{24\angle0^\circ}{10{,}000+j4000}=2.23\angle-21.8^\circ\text{ mA}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-17-room-3" data-room-id="ch8-example-8-17-room-3" data-room-title="Room 3: Solve the Response to Source 2 Alone" data-source-page="ch8-example-8-17.html" data-tags="solve,response,second,alone">
+            <h2>Room 3: Solve the Response to Source 2 Alone</h2>
+            <ul>
+              <li>Turn off source 1 and analyze the same physical circuit at $$\omega_2=60{,}000.$$</li>
+              <li>The equivalent impedance is now $$Z_{EQ2}=R+j\omega_2L=(10+j12)\text{ k}\Omega.$$</li>
+              <li>So the phasor current due to source 2 is $$I_2=\frac{V_{s2}}{Z_{EQ2}}=\frac{8\angle30^\circ}{10{,}000+j12{,}000}=0.512\angle-20.2^\circ\text{ mA}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-17-room-4" data-room-id="ch8-example-8-17-room-4" data-room-title="Room 4: Refuse to Add the Phasors and Move Back to Time Domain" data-source-page="ch8-example-8-17.html" data-tags="refuse,add,phasors,time">
+            <h2>Room 4: Refuse to Add the Phasors and Move Back to Time Domain</h2>
+            <ul>
+              <li>Do not add $$I_1$$ and $$I_2$$ as phasors. They belong to different frequencies, so that sum would be meaningless.</li>
+              <li>Instead write each phasor response back as its own sinusoid.</li>
+              <li>That gives $$i(t)=2.23\cos(20{,}000t-21.8^\circ)+0.512\cos(60{,}000t-20.2^\circ)\text{ mA}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-example-8-17-room-5" data-room-id="ch8-example-8-17-room-5" data-room-title="Room 5: Validate with Two Single-Frequency Multisim Runs" data-source-page="ch8-example-8-17.html" data-tags="validate,two,single,frequency">
+            <h2>Room 5: Validate with Two Single-Frequency Multisim Runs</h2>
+            <ul>
+              <li>Multisim can still validate the answer, but it must be used in two separate single-frequency analyses.</li>
+              <li>Convert the angular frequencies to hertz: $$20{,}000\text{ rad/s}\to3183\text{ Hz},\qquad 60{,}000\text{ rad/s}\to9549\text{ Hz}.$$</li>
+              <li>The simulated magnitude-phase results match the hand values closely, which confirms the final time-domain sum.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>Superposition still means one source at a time, but the final combination rule changes: same frequency means phasor addition, different frequencies mean time-domain addition.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Why This Flow Matters</h3>
+          <p>This page protects you from one of the easiest Chapter 8 mistakes: adding phasors that should never be added. The stopping rule is just as important as the solving rule.</p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">This is the contrast movie: solve each source alone exactly as before, but stop the phasor addition and return to time-domain waves instead.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">10 Toes</div><h3>Check the Two Different Floors</h3><p>Toes see $$20{,}000$$ on one floor and $$60{,}000$$ on the other.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch Source 1 Alone</h3><p>The net isolates the first reduced circuit and yields $$I_1.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch Source 2 Alone</h3><p>The net isolates the second reduced circuit and yields $$I_2.$$ </p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write "Do Not Add as Phasors"</h3><p>Chalk blocks the illegal phasor sum.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Dress Two Separate Sinusoids</h3><p>The coat writes the two cosine terms and leaves them added in time.</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Check frequencies</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find $$I_1$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find $$I_2$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Do not phasor-add</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Write $$i(t)$$</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-example-8-17-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more warning line about why different-frequency phasors cannot be added."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

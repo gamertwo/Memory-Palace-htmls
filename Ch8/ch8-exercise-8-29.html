@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-29 | Thevenin Seen by an Inductor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_29">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-22.html">Prev: Example 8-22</a><a href="ch8-exercise-8-30.html">Next: Exercise 8-30</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-29</div>
+    <h1>Find the Thevenin Circuit Seen by the Inductor and Then Find $$I_x$$</h1>
+    <p class="hero-sub">This exercise repeats the Thevenin movie on a different topology. You remove the inductor, find the terminal Thevenin pair seen by that branch, and then restore the inductor as the load to get the current through it.</p>
+    <div class="formula-block">$$V_T=0.08925+j1.3839\text{ V},\quad Z_T=230.8-j153.8~\Omega,\quad I_x=5.852\angle99.44^\circ\text{ mA}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-29.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Remove the Inductor and Look into Its Terminals</h2>
+            <ul>
+              <li>The branch of interest is the inductor branch.</li>
+              <li>To find the Thevenin equivalent seen by it, remove the inductor first.</li>
+              <li>This exposes the terminal voltage and look-back impedance of the rest of the circuit.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Thevenin is always taken from the load's point of view. If the inductor stays connected, it contaminates the very network you are trying to reduce.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: State the Thevenin Pair</h2>
+            <ul>
+              <li>The terminal Thevenin voltage is $$V_T=0.08925+j1.3839\text{ V}.$$</li>
+              <li>The look-back impedance is $$Z_T=230.8-j153.8~\Omega.$$</li>
+              <li>These two quantities replace the entire rest of the circuit.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the compression step. Once the fixed network is replaced by a Thevenin pair, the remaining current calculation is short and direct.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Put the Inductor Back as the Load</h2>
+            <ul>
+              <li>Restore the inductor branch to the Thevenin terminals.</li>
+              <li>The current $$I_x$$ is now the load current of a reduced one-source circuit.</li>
+              <li>Use the Thevenin source and impedance together with the inductor impedance.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Thevenin does not solve the load current by itself; it makes the load current easy to solve after the network has been reduced.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: State the Final Inductor Current</h2>
+            <ul>
+              <li>The resulting current is $$I_x=5.852\angle99.44^\circ\text{ mA}.$$</li>
+              <li>This is the current through the reconnected inductor branch.</li>
+              <li>The whole route was: remove, reduce, restore, solve.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This final step is small only because the circuit was compressed first. Without Thevenin, the original branch network would be much less transparent.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Load Terminals</h3><p>The net removes the inductor and catches the correct port.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light $$V_T$$ and $$Z_T$$</h3><p>Fire reveals the Thevenin pair seen by the inductor.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Final Inductor Current</h3><p>The coat restores the inductor and leaves $$I_x.$$</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-29-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add the explicit inductor-load division step after the Thevenin reduction."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

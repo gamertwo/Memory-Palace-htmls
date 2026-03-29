@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'memory-palace-builder-v1';
-  var UI_STORAGE_KEY = 'memory-palace-builder-ui-v1';
+  var STORAGE_KEY = 'memory-palace-builder-ch21-v1';
+  var UI_STORAGE_KEY = 'memory-palace-builder-ch21-ui-v1';
   var STORAGE_VERSION = 2;
   var BLOCK_BASE_HEIGHT = 165;
   var BLOCK_ROOM_LINE_HEIGHT = 20;
@@ -1004,7 +1004,7 @@
     state.pendingConnectFrom = null;
     state.review.blockId = null; state.review.roomIndex = 0;
     sketchUndoStack = []; sketchRedoStack = [];
-    render(true); setStatus('Loaded Chapter 8 preset.');
+    render(true); setStatus('Loaded Chapter 21 starter palace.');
   }
 
   function newPalace() {
@@ -1723,7 +1723,7 @@
   });
 
   byId('reset-all-data-button').addEventListener('click', function () {
-    showConfirm('Reset all data?', 'Erase every palace from localStorage and reload the Chapter 8 preset?', function () {
+    showConfirm('Reset all data?', 'Erase every palace from localStorage and reload the Chapter 21 starter palace?', function () {
       try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
       state.data = normalizeState(null);
       state.selectedBlockId = null; state.selectedEdgeId = null;

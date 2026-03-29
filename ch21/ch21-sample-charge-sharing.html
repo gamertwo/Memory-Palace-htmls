@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 21 | Sample Problem: Charge Sharing</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch21_sample_charge_sharing">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch21 Index</a><a href="guide.html">Guide</a><a href="ch21-coulombs-law.html">Prev: Coulomb's Law</a><a href="ch21-sample-net-force.html">Next: Net Force</a></nav>
+
+  <section class="hero">
+    <div class="tag">Sample Problem</div>
+    <h1>Charge Sharing by Two Identical Conducting Spheres</h1>
+    <p class="hero-sub">One identical conducting sphere starts with charge $$+Q$$ and the other starts neutral. After they touch, the total charge is shared equally, and only then do we compute the repulsive force between the final charges.</p>
+    <div class="formula-block">$$q_1=q_2=\frac{Q}{2},\qquad F=\frac{1}{16\pi\epsilon_0}\left(\frac{Q}{a}\right)^2$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch21-sample-charge-sharing.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch21-charge-share-1" data-room-id="room-ch21-charge-share-1" data-room-title="Room 1: Carry the Total Charge First" data-source-page="ch21-sample-charge-sharing.html" data-tags="conservation,total,charge">
+            <h2>Room 1: Carry the Total Charge First</h2>
+            <ul>
+              <li>Before contact, the total charge is $$Q+0=Q.$$</li>
+              <li>Charge is conserved during the sharing process.</li>
+              <li>So the final charges must still add up to $$Q.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-charge-share-2" data-room-id="room-ch21-charge-share-2" data-room-title="Room 2: Use Identical Conductors to Split the Charge Evenly" data-source-page="ch21-sample-charge-sharing.html" data-tags="identical,conductors,split">
+            <h2>Room 2: Use Identical Conductors to Split the Charge Evenly</h2>
+            <ul>
+              <li>Because the spheres are identical conductors, the shared charge divides equally after contact.</li>
+              <li>That gives $$q_1=q_2=\dfrac{Q}{2}.$$</li>
+              <li>This is the key physical shortcut in the problem.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-charge-share-3" data-room-id="room-ch21-charge-share-3" data-room-title="Room 3: Rebuild the Final Two-Charge Picture" data-source-page="ch21-sample-charge-sharing.html" data-tags="final,picture,repel">
+            <h2>Room 3: Rebuild the Final Two-Charge Picture</h2>
+            <ul>
+              <li>After separation, the charges are $$Q/2$$ and $$Q/2$$ at distance $$a.$$</li>
+              <li>Both are positive, so the force is repulsive.</li>
+              <li>Now the problem is just a standard two-charge Coulomb calculation.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-charge-share-4" data-room-id="room-ch21-charge-share-4" data-room-title="Room 4: Apply Coulomb's Law to the Shared Charges" data-source-page="ch21-sample-charge-sharing.html" data-tags="coulomb,shared,final">
+            <h2>Room 4: Apply Coulomb's Law to the Shared Charges</h2>
+            <ul>
+              <li>Use $$F=\dfrac{1}{4\pi\epsilon_0}\dfrac{|q_1||q_2|}{a^2}.$$</li>
+              <li>Substitute $$q_1=q_2=Q/2.$$</li>
+              <li>Then $$F=\dfrac{1}{16\pi\epsilon_0}\left(\dfrac{Q}{a}\right)^2.$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">70 Case</div><h3>Carry Total Charge</h3><p>The case protects the total charge $$Q.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Split It Evenly</h3><p>The mat divides the charge into two equal halves.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write Coulomb's Law</h3><p>Chalk computes the repulsive force between the shared charges.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch21-sample-charge-sharing-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more reminder that the force is computed after the spheres separate."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

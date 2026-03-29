@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 24 | System Potential Energy of Point Charges</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch24_system_potential_energy">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch23-24 Index</a><a href="guide.html">Guide</a><a href="ch24-field-from-potential.html">Prev: Field from Potential</a><a href="index.html">Next: Index</a></nav>
+
+  <section class="hero">
+    <div class="tag">Worked Formula</div>
+    <h1>Electric Potential Energy of a System of Point Charges</h1>
+    <p class="hero-sub">This page closes the chapter with the assembly view of electric potential energy. Imagine bringing charges in from infinity one by one and storing the work required to build the final configuration. That accumulated assembly work is the system's electric potential energy.</p>
+    <div class="formula-block">$$U=\frac{1}{4\pi\epsilon_0}\sum_{i<j}\frac{q_iq_j}{r_{ij}}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch24-system-potential-energy.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Core Idea</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Assemble Two Charges from Infinity</h2>
+            <ul>
+              <li>Bring the first charge in from infinity: no work is needed because no other charge is present yet.</li>
+              <li>Bring the second charge into the potential created by the first.</li>
+              <li>The work required becomes the two-charge system energy.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The assembly picture gives a physical meaning to potential energy. It tells us where the stored energy comes from: the work needed to build the configuration.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Write the Two-Charge Formula</h2>
+            <ul>
+              <li>The potential due to the first charge at the second charge is $$V=\dfrac{1}{4\pi\epsilon_0}\dfrac{q_1}{r}.$$</li>
+              <li>Multiplying by $$q_2$$ gives $$U=\dfrac{1}{4\pi\epsilon_0}\dfrac{q_1q_2}{r}.$$</li>
+              <li>The sign depends on the signs of the two charges.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This shows how system energy is built from potential. It also explains why like charges give positive energy and opposite charges give negative energy.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Extend to Many Charges</h2>
+            <ul>
+              <li>Bring each new charge into the potential created by all the previous ones.</li>
+              <li>Add the pairwise contributions once each.</li>
+              <li>This gives $$U=\dfrac{1}{4\pi\epsilon_0}\sum_{i<j}\dfrac{q_iq_j}{r_{ij}}.$$</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>The pairwise sum is the clean way to avoid double counting. Each interacting pair should contribute exactly one time to the system energy.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Interpret the Sign Physically</h2>
+            <ul>
+              <li>Positive system energy means work had to be done against repulsion to assemble the charges.</li>
+              <li>Negative system energy means the assembly is energetically favorable because attraction helps pull charges together.</li>
+              <li>The sign therefore tells a story about the configuration's stability and assembly cost.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This stops the formula from becoming pure algebra. The sign of the energy has direct physical meaning about whether the arrangement had to be forced together or naturally wanted to form.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">24 Nero</div><h3>Bring Charges from Infinity</h3><p>Nero marks the assembly process one charge at a time.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write the Pair Energy</h3><p>Chalk writes $$kq_1q_2/r.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Add All Pairs Once</h3><p>The mat collects the system energy without double counting.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch24-system-potential-energy-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note explaining why the first charge contributes no assembly work."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

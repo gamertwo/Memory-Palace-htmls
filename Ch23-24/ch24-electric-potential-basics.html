@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 24 | Electric Potential Basics</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch24_electric_potential_basics">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch23-24 Index</a><a href="guide.html">Guide</a><a href="ch23-spherical-symmetry-derivation.html">Prev: Spherical Symmetry</a><a href="ch24-potential-from-field.html">Next: Potential from Field</a></nav>
+
+  <section class="hero">
+    <div class="tag">Chapter 24 Foundation</div>
+    <h1>Electric Potential and Potential Difference</h1>
+    <p class="hero-sub">Chapter 24 changes the language of the story. Instead of tracking vector force directly, we package electric effects into potential energy and potential. The biggest advantage is that potential is scalar, so many hard vector-sum problems become easier energy or scalar-addition problems.</p>
+    <div class="formula-block">$$V=\frac{U}{q},\qquad \Delta V=\frac{\Delta U}{q}=-\frac{W}{q}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch24-electric-potential-basics.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Potential Energy</div><div class="v">Electric forces can store energy in a configuration of charges.</div></div>
+          <div class="fact"><div class="k">Potential</div><div class="v">Potential is potential energy per unit charge.</div></div>
+          <div class="fact"><div class="k">Potential Difference</div><div class="v">Equal to the negative work done by the field per unit charge.</div></div>
+          <div class="fact"><div class="k">Unit</div><div class="v">$$1\text{ volt}=1\text{ joule/coulomb}.$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Core Idea</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Start with Electric Potential Energy</h2>
+            <ul>
+              <li>When the electric force changes a charge configuration, it does work.</li>
+              <li>That work changes the system's electric potential energy.</li>
+              <li>So Chapter 24 begins as an energy chapter, not just a field chapter.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Potential is not invented from nowhere. It is built on the fact that the electric force is conservative and therefore can be described with stored energy.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Define Electric Potential</h2>
+            <ul>
+              <li>Potential is defined as $$V=U/q.$$</li>
+              <li>This means it is energy per unit charge.</li>
+              <li>Potential is scalar, so it has no direction.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Dividing by charge strips away the test-particle size and leaves a property of location in the electric environment itself.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Define Potential Difference</h2>
+            <ul>
+              <li>The potential difference between two points is $$\Delta V=\Delta U/q.$$</li>
+              <li>Using the work-energy relation gives $$\Delta V=-W/q.$$</li>
+              <li>So potential difference tracks the field's work per unit charge.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the main operational formula. It lets us connect motion and work to voltage-like thinking without always solving for force directly.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Keep the Scalar Advantage in Mind</h2>
+            <ul>
+              <li>Electric field is a vector, but electric potential is a scalar.</li>
+              <li>That means contributions from many charges add algebraically.</li>
+              <li>This is why potential often simplifies multi-charge problems dramatically.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the payoff of the chapter. Potential is not just a new variable; it is a more convenient language for many electrostatics calculations.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">24 Nero</div><h3>Switch to Energy Language</h3><p>Nero burns away the force-only viewpoint.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$V=U/q$$</h3><p>Chalk defines potential as energy per unit charge.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Use Scalar Thinking</h3><p>The mat collects potential contributions without vector components.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch24-electric-potential-basics-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more quick comparison between electric field and electric potential."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

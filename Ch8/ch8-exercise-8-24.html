@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-24 | Output Voltage with Different-Frequency Sources</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_24">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-17.html">Prev: Example 8-17</a><a href="ch8-example-8-19.html">Next: Example 8-19</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-24</div>
+    <h1>Use Superposition When the Output Terms Live at Different Frequencies</h1>
+    <p class="hero-sub">
+      This exercise is the voltage-output version of Example 8-17. The sources drive the circuit at different angular frequencies, so the two output responses must be found separately and written back as separate time-domain sinusoids. The memory emphasis is that different frequencies do not collapse into one phasor output, even when the circuit itself stays the same.
+    </p>
+    <div class="formula-block">
+      $$v_o(t)=-7.07\cos(10{,}000t-45^\circ)+8.94\cos(20{,}000t-18.4^\circ)\text{ V}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-24.html">Open in Memory Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">Use superposition for Figure 8-36 when $$i_s(t)=100\cos(10{,}000t)\text{ mA}$$ and $$v_s(t)=20\cos(20{,}000t-45^\circ)\text{ V}.$$</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the output voltage $$v_o(t).$$</div></div>
+          <div class="fact"><div class="k">Rule</div><div class="v">Different frequencies mean separate partial waveforms, not one final phasor.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Source 1 Response</div><div class="v">$$v_{o1}(t)=-7.07\cos(10{,}000t-45^\circ)\text{ V}$$</div></div>
+          <div class="fact"><div class="k">Source 2 Response</div><div class="v">$$v_{o2}(t)=8.94\cos(20{,}000t-18.4^\circ)\text{ V}$$</div></div>
+          <div class="fact"><div class="k">Final Output</div><div class="v">$$v_o(t)=v_{o1}(t)+v_{o2}(t)$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-24-room-1" data-room-id="ch8-exercise-8-24-room-1" data-room-title="Room 1: Recognize the Different-Frequency Superposition Rule" data-source-page="ch8-exercise-8-24.html" data-tags="recognize,different,frequency,rule">
+            <h2>Room 1: Recognize the Different-Frequency Superposition Rule</h2>
+            <ul>
+              <li>The current source and the voltage source do not share one common angular frequency.</li>
+              <li>So the output must be built from two separate steady-state responses.</li>
+              <li>The final answer will be a time-domain sum of two cosine terms.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-24-room-2" data-room-id="ch8-exercise-8-24-room-2" data-room-title="Room 2: Find the Output Due to the Current Source Alone" data-source-page="ch8-exercise-8-24.html" data-tags="find,output,current,alone">
+            <h2>Room 2: Find the Output Due to the Current Source Alone</h2>
+            <ul>
+              <li>Turn off the voltage source and analyze the circuit at $$\omega_1=10{,}000\text{ rad/s}.$$</li>
+              <li>The resulting output term given by the textbook is $$v_{o1}(t)=-7.07\cos(10{,}000t-45^\circ)\text{ V}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-24-room-3" data-room-id="ch8-exercise-8-24-room-3" data-room-title="Room 3: Find the Output Due to the Voltage Source Alone" data-source-page="ch8-exercise-8-24.html" data-tags="find,output,voltage,alone">
+            <h2>Room 3: Find the Output Due to the Voltage Source Alone</h2>
+            <ul>
+              <li>Now turn off the current source and analyze the circuit at $$\omega_2=20{,}000\text{ rad/s}.$$</li>
+              <li>The second output term is $$v_{o2}(t)=8.94\cos(20{,}000t-18.4^\circ)\text{ V}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-24-room-4" data-room-id="ch8-exercise-8-24-room-4" data-room-title="Room 4: Add the Outputs in the Time Domain" data-source-page="ch8-exercise-8-24.html" data-tags="add,outputs,time,domain">
+            <h2>Room 4: Add the Outputs in the Time Domain</h2>
+            <ul>
+              <li>Do not try to combine the two responses into one phasor. Their frequencies are different.</li>
+              <li>Simply add the two time-domain pieces:</li>
+              <li>$$v_o(t)=v_{o1}(t)+v_{o2}(t).$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-24-room-5" data-room-id="ch8-exercise-8-24-room-5" data-room-title="Room 5: State the Final Textbook Answer" data-source-page="ch8-exercise-8-24.html" data-tags="state,final,textbook,answer">
+            <h2>Room 5: State the Final Textbook Answer</h2>
+            <ul>
+              <li>The final answer is</li>
+              <li>$$v_o(t)=-7.07\cos(10{,}000t-45^\circ)+8.94\cos(20{,}000t-18.4^\circ)\text{ V}.$$</li>
+              <li>The memory hook is: one source, one frequency, one waveform term.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>Different-frequency superposition never ends with one phasor. It ends with one cosine term per source.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Why This Flow Matters</h3>
+          <p>This page closes the superposition sequence by making the output type irrelevant and the frequency rule central. Once the frequency test is clear, the finishing rule becomes automatic.</p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Use the two-frequency superposition route: isolate one source, write one waveform, repeat, then add the time-domain pieces.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">10 Toes</div><h3>Check the Two Frequency Floors</h3><p>Toes see that the two sources do not share one phasor floor.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the First Source Alone</h3><p>The net isolates the current-source response $$v_{o1}(t).$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Second Source Alone</h3><p>The net isolates the voltage-source response $$v_{o2}(t).$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write “Add in Time, Not as Phasors”</h3><p>Chalk blocks the wrong combination rule.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Dress the Two-Term Output</h3><p>The coat writes the final two-term waveform for $$v_o(t).$$</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Check frequencies</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find $$v_{o1}(t)$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Find $$v_{o2}(t)$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Add in time</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">State $$v_o(t)$$</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-24-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add a stronger reminder that each different-frequency source creates its own waveform term."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

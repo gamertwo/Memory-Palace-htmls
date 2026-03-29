@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-27 | Convert Example 8-20 to Norton Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_27">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-design-example-8-20.html">Prev: Design Example 8-20</a><a href="ch8-example-8-21.html">Next: Example 8-21</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-27</div>
+    <h1>Convert the Thevenin Circuit in Example 8-20 into Norton Form</h1>
+    <p class="hero-sub">This exercise is the immediate after-movie for the design example. You take the Thevenin pair just found, transform it into a Norton pair, and notice that the same designed load must still work because equivalent circuits present the same terminal behavior.</p>
+    <div class="formula-block">$$I_N=\frac{V_T}{Z_T}=50\text{ mA},\qquad Z_N=500-j500~\Omega,\qquad Z_L=235.3-j58.8~\Omega$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-27.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room">
+            <h2>Room 1: Reuse the Thevenin Pair from Example 8-20</h2>
+            <ul>
+              <li>From Example 8-20, $$V_T=35.35\angle-45^\circ\text{ V}$$ and $$Z_T=500-j500~\Omega.$$</li>
+              <li>These are the only starting values you need.</li>
+              <li>The source transformation is now mechanical.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This page is meant to feel short on purpose. The analysis work was already done in the design example, so now you are just changing the source representation.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 2: Divide to Get the Norton Current</h2>
+            <ul>
+              <li>Use $$I_N=V_T/Z_T.$$</li>
+              <li>With the Example 8-20 values, this gives $$I_N=50\text{ mA}.$$</li>
+              <li>This is the Norton current source.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the same transformation rule from Example 8-19, now applied to the values produced inside a bigger design problem.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 3: Keep the Same Impedance</h2>
+            <ul>
+              <li>The Norton impedance equals the Thevenin impedance.</li>
+              <li>So $$Z_N=500-j500~\Omega.$$</li>
+              <li>The final source model is a current source in parallel with this impedance.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>Equivalent circuits must present the same load behavior at the port, so the impedance seen by the load cannot change.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 4: Keep the Same Designed Load</h2>
+            <ul>
+              <li>Because the Thevenin and Norton versions are equivalent, the load requirement does not change.</li>
+              <li>So the same load $$Z_L=235.3-j58.8~\Omega$$ still produces the required output.</li>
+              <li>The whole point is that source transformation does not alter external behavior.</li>
+            </ul>
+            <div class="mini"><h3>Why This Step</h3><p>This is the physical meaning of equivalence. Different internal pictures are allowed as long as the load sees the same terminal voltage-current behavior.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Example 8-20 Values</h3><p>The net grabs the known Thevenin pair.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$I_N=V_T/Z_T$$</h3><p>Chalk converts the source.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Equivalent Norton Form</h3><p>The coat keeps the same impedance and the same designed load.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-27-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more sentence explaining why the same load still works after transformation."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

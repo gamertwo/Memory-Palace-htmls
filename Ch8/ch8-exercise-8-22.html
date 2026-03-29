@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-22 | Unit Output Method for Current Output</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_22">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-21.html">Prev: Exercise 8-21</a><a href="ch8-example-8-16.html">Next: Example 8-16</a></nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 8-22</div>
+    <h1>Use the Unit Output Method When the Desired Output Is a Current</h1>
+    <p class="hero-sub">
+      This page is the current-output twin of Example 8-15. Instead of assuming a unit voltage at the output node, you assume a unit output current, solve the network once for that trial case, and then scale by the source current. The memory emphasis is that the unit output method works for current outputs just as cleanly as it does for voltage outputs.
+    </p>
+    <div class="formula-block">
+      $$K=\frac{I_o}{I_s}=0.204\angle-24.3^\circ,\qquad I_o=10.22\angle-9.28^\circ\text{ mA}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-22.html">Open in Memory Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">Use the unit output method on Figure 8-31, where the source current is $$I_s=50\angle15^\circ\text{ mA}.$$</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the output current $$I_o.$$</div></div>
+          <div class="fact"><div class="k">Idea</div><div class="v">Build one proportionality factor first, then use it to scale the actual source.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Trial Output</div><div class="v">Assume a unit output current, typically $$I_o=1\angle0^\circ.$$</div></div>
+          <div class="fact"><div class="k">Proportionality</div><div class="v">$$K=\frac{I_o}{I_s}=0.204\angle-24.3^\circ$$</div></div>
+          <div class="fact"><div class="k">Final Output</div><div class="v">$$I_o=K I_s=10.22\angle-9.28^\circ\text{ mA}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch8-exercise-8-22-room-1" data-room-id="ch8-exercise-8-22-room-1" data-room-title="Room 1: Recognize the Current-Output Version of the Method" data-source-page="ch8-exercise-8-22.html" data-tags="recognize,current,output,method">
+            <h2>Room 1: Recognize the Current-Output Version of the Method</h2>
+            <ul>
+              <li>This exercise uses the same unit output method as Example 8-15, but now the desired output is a current instead of a voltage.</li>
+              <li>So the thing you temporarily force to a unit value is the output current $$I_o,$$ not the output voltage.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-22-room-2" data-room-id="ch8-exercise-8-22-room-2" data-room-title="Room 2: Solve the Circuit Once for a Unit Output Current" data-source-page="ch8-exercise-8-22.html" data-tags="solve,once,unit,current">
+            <h2>Room 2: Solve the Circuit Once for a Unit Output Current</h2>
+            <ul>
+              <li>Assume a clean trial value such as $$I_o=1\angle0^\circ.$$</li>
+              <li>Then walk backward through the circuit to determine what source current would be required to produce that unit output.</li>
+              <li>The algebra details depend on the network, but the memory move stays the same: unit output first, recovered input second.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-22-room-3" data-room-id="ch8-exercise-8-22-room-3" data-room-title="Room 3: Turn the Trial Run into a Transfer Ratio" data-source-page="ch8-exercise-8-22.html" data-tags="turn,trial,ratio">
+            <h2>Room 3: Turn the Trial Run into a Transfer Ratio</h2>
+            <ul>
+              <li>Once the unit run is finished, convert it into a proportionality factor between the output current and the source current.</li>
+              <li>The textbook gives that factor directly as $$K=\frac{I_o}{I_s}=0.204\angle-24.3^\circ.$$</li>
+              <li>This ratio is the reusable prize of the whole method.</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-22-room-4" data-room-id="ch8-exercise-8-22-room-4" data-room-title="Room 4: Scale the Real Source Current" data-source-page="ch8-exercise-8-22.html" data-tags="scale,real,source,current">
+            <h2>Room 4: Scale the Real Source Current</h2>
+            <ul>
+              <li>Now use the actual source current from the figure: $$I_s=50\angle15^\circ\text{ mA}.$$</li>
+              <li>Multiply by the transfer ratio: $$I_o=K I_s=(0.204\angle-24.3^\circ)(50\angle15^\circ\text{ mA}).$$</li>
+              <li>Add angles and multiply magnitudes to get $$I_o=10.22\angle-9.28^\circ\text{ mA}.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" id="room-ch8-exercise-8-22-room-5" data-room-id="ch8-exercise-8-22-room-5" data-room-title="Room 5: State the Final Memory Hook" data-source-page="ch8-exercise-8-22.html" data-tags="state,final,memory,hook">
+            <h2>Room 5: State the Final Memory Hook</h2>
+            <ul>
+              <li>The final answer is $$I_o=10.22\angle-9.28^\circ\text{ mA}.$$</li>
+              <li>The memory sentence is: assume unit output current, recover the source current, store the ratio, then scale the real source.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mini">
+          <h3>Key Shortcut</h3>
+          <p>For a current-output unit method problem, remember the chain: unit $$I_o,$$ recover $$I_s,$$ form $$K=I_o/I_s,$$ then scale the real source.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Why This Flow Matters</h3>
+          <p>The method stays stable even when the output type changes. That makes the circuit feel less like a new problem and more like a reused movie with one label swapped.</p>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <p class="copy">Run the same unit-output route as Example 8-15, but let the desired output be a current this time.</p>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Desired Output Current</h3><p>The net catches $$I_o$$ as the real target.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Stamp a Unit Trial Current</h3><p>The mat lays down a clean unit output current.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">28 Knife</div><h3>Walk Back to the Source Current</h3><p>The knife traces the circuit backward and exposes the needed input.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Ratio $$K=I_o/I_s$$</h3><p>Fire locks the proportionality factor $$0.204\angle-24.3^\circ.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Dress the Final Output</h3><p>The coat scales $$50\angle15^\circ\text{ mA}$$ into $$10.22\angle-9.28^\circ\text{ mA}.$$</p></div>
+        </div>
+        <div class="flow-line">
+          <span class="flow-pill">Catch $$I_o$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Assume unit output</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Recover $$I_s$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Store $$K$$</span>
+          <span class="flow-join">&rarr;</span>
+          <span class="flow-pill">Scale the real source</span>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-22-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more cue showing how the unit current is turned into the transfer ratio K."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

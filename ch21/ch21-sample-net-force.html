@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chapter 21 | Sample Problem: Net Force</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch21_sample_net_force">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch21 Index</a><a href="guide.html">Guide</a><a href="ch21-sample-charge-sharing.html">Prev: Charge Sharing</a><a href="ch21-sample-net-force-components.html">Next: Components</a></nav>
+
+  <section class="hero">
+    <div class="tag">Sample Problem</div>
+    <h1>Finding the Net Force Due to Two Other Particles</h1>
+    <p class="hero-sub">This sample problem trains the one-dimensional force movie. First find the force on particle 1 from particle 2. Then add a third charge, compute that extra force on particle 1, and combine the signed x-direction forces carefully.</p>
+    <div class="formula-block">$$\vec F_{12}=-(1.15\times10^{-24}\text{ N})\hat i,\qquad \vec F_{1,net}=(9.00\times10^{-25}\text{ N})\hat i$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch21-sample-net-force.html">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms">
+          <article class="room" id="room-ch21-net-force-1" data-room-id="room-ch21-net-force-1" data-room-title="Room 1: Lock the Particle of Interest" data-source-page="ch21-sample-net-force.html" data-tags="particle,interest,lock">
+            <h2>Room 1: Lock the Particle of Interest</h2>
+            <ul>
+              <li>The particle of interest is particle 1.</li>
+              <li>Every force vector must be drawn on particle 1.</li>
+              <li>This keeps the directions consistent through both parts.</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-net-force-2" data-room-id="room-ch21-net-force-2" data-room-title="Room 2: Compute the Force from Particle 2" data-source-page="ch21-sample-net-force.html" data-tags="force,particle2,left">
+            <h2>Room 2: Compute the Force from Particle 2</h2>
+            <ul>
+              <li>Because $$q_1$$ and $$q_2$$ are both positive, particle 2 repels particle 1.</li>
+              <li>The force on particle 1 points left, so it is negative x.</li>
+              <li>Coulomb's law gives $$\vec F_{12}=-(1.15\times10^{-24}\text{ N})\hat i.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-net-force-3" data-room-id="room-ch21-net-force-3" data-room-title="Room 3: Add the Third Charge and Recompute" data-source-page="ch21-sample-net-force.html" data-tags="third,charge,right">
+            <h2>Room 3: Add the Third Charge and Recompute</h2>
+            <ul>
+              <li>Now $$q_3$$ is negative and sits at $$3R/4$$ from particle 1.</li>
+              <li>Unlike charges attract, so particle 3 pulls particle 1 to the right.</li>
+              <li>The added force is $$\vec F_{13}=(2.05\times10^{-24}\text{ N})\hat i.$$</li>
+            </ul>
+          </article>
+          <article class="room" id="room-ch21-net-force-4" data-room-id="room-ch21-net-force-4" data-room-title="Room 4: Add the Signed x-Forces" data-source-page="ch21-sample-net-force.html" data-tags="signed,x,add">
+            <h2>Room 4: Add the Signed x-Forces</h2>
+            <ul>
+              <li>Both forces lie on the x-axis, so no component split is needed.</li>
+              <li>Add them algebraically: $$\vec F_{1,net}=\vec F_{12}+\vec F_{13}.$$</li>
+              <li>This gives $$\vec F_{1,net}=-(1.15\times10^{-24})\hat i+(2.05\times10^{-24})\hat i=(9.00\times10^{-25}\text{ N})\hat i.$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="movie-anchor">
+        <div class="section-title">Solution Flow</div>
+        <div class="movie-flow">
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch Particle 1</h3><p>The net locks the particle that feels every force.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Read Left or Right</h3><p>Fire points one force left and one force right.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Compute the Magnitudes</h3><p>Chalk writes $$F_{12}$$ and $$F_{13}.$$</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Add the Signed Forces</h3><p>The mat combines the two x-forces into one answer.</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="request-anchor">
+        <div class="section-title">Save Change Request</div>
+        <form class="request-form" data-txt-save>
+          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch21-sample-net-force-request.txt" /></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note showing why particle 3 pulls particle 1 to the right."></textarea></label>
+          <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
+          <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
+          <p class="memory-status" data-note-status>Nothing saved yet.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>
