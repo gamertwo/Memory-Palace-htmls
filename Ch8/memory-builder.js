@@ -1007,14 +1007,20 @@
     render(true); setStatus('Loaded Chapter 8 preset.');
   }
 
-  function newPalace() {
+  function createEmptyPalace(name) {
     var id = makeId('palace');
-    state.data.palaces.unshift(safePalace({ id: id, name: 'New Palace' }, state.data.palaces.length));
-    state.data.selectedPalaceId = id;
+    var palace = safePalace({ id: id, name: name || 'New Palace' }, state.data.palaces.length);
+    state.data.palaces.unshift(palace);
+    state.data.selectedPalaceId = palace.id;
     state.selectedBlockId = null; state.selectedEdgeId = null; state.selectedImageId = null;
     state.pendingConnectFrom = null;
     state.review.blockId = null; state.review.roomIndex = 0;
     sketchUndoStack = []; sketchRedoStack = [];
+    return palace;
+  }
+
+  function newPalace() {
+    createEmptyPalace('New Palace');
     render(true); setStatus('Created a new palace.');
   }
 
@@ -1107,8 +1113,10 @@
   }
 
   /* ── Import ─────────────────────────────────────────────────────── */
-  async function importPages(pageList) {
-    var p = getPalace();
+  async function importPages(pageList, options) {
+    var opts = options || {};
+    var targetPalaceId = opts.targetPalaceId || state.data.selectedPalaceId;
+    var p = state.data.palaces.find(function (palace) { return palace.id === targetPalaceId; }) || getPalace();
     var pages = Array.from(new Set(pageList.map(function (pg) { return pg.trim(); }).filter(Boolean)));
     if (!pages.length) { setStatus('Enter at least one study page filename.'); return; }
     if (!window.RoomExtractor || typeof window.RoomExtractor.fetchRoomsFromPage !== 'function') {
@@ -1129,9 +1137,20 @@
       } catch (e) { failed.push(pages[i]); }
     }
     render(true);
+    if (opts.afterImport && typeof opts.afterImport === 'function') {
+      try { opts.afterImport(p); } catch (e) {}
+    }
     if (failed.length && !imported) { setStatus('Import failed: ' + failed.join(', ')); return; }
     if (failed.length) { setStatus('Imported ' + imported + ' room(s). Failed: ' + failed.join(', ')); return; }
     setStatus('Imported ' + imported + ' room(s) from ' + pages.join(', '));
+  }
+
+  function palaceNameFromImport(palace, pages) {
+    if (palace && palace.importedRooms && palace.importedRooms.length) {
+      return palace.importedRooms[0].sourcePageTitle || palace.importedRooms[0].sourcePage || 'New Palace';
+    }
+    if (pages && pages.length === 1) return pages[0].replace(/\.html$/i, '');
+    return 'New Palace';
   }
 
   /* ── Drag / pointer ─────────────────────────────────────────────── */
@@ -1757,7 +1776,25 @@
   /* Query-string auto-import */
   var qp = new URLSearchParams(window.location.search);
   var qPages = (qp.get('pages') || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-  if (qPages.length) { els.importInput.value = qPages.join(','); importPages(qPages); }
+  var qHandoff = qp.get('handoff') === '1';
+  if (qPages.length) {
+    els.importInput.value = qPages.join(','); 
+    if (qHandoff) {
+      var handoffPalace = createEmptyPalace('New Palace');
+      importPages(qPages, {
+        targetPalaceId: handoffPalace.id,
+        afterImport: function (palace) {
+          palace.name = palaceNameFromImport(palace, qPages);
+          render(true);
+        }
+      });
+      if (window.history && typeof window.history.replaceState === 'function') {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    } else {
+      importPages(qPages);
+    }
+  }
 
   /* Edge card click — delegate */
   document.addEventListener('click', function (e) {

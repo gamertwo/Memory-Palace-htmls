@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 6 Task 2 | Sum of First n Natural Numbers</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab6-task2-sum-natural"><main class="shell"><nav class="nav"><a href="lab6-index.html">Lab 6 Index</a><a href="lab6-guide.html">Guide</a><a href="lab6-task3-gcd.html">Next: Task 3</a></nav><section class="hero"><div class="tag">Lab 6 Task 2</div><h1>Recursive Sum of First n Natural Numbers</h1><p class="hero-sub">This task turns a familiar arithmetic sum into a recursion pattern that keeps peeling off the largest number.</p><div class="formula-block">$$sum(n)=n+sum(n-1),\qquad sum(0)=0$$</div><div class="tool-row"><a class="tool-btn" href="lab6-guide.html">Recursion Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab6-task2-sum-natural.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Function</div><div class="v"><span class="inline-code">int sum(int n)</span></div></div><div class="fact"><div class="k">Base case</div><div class="v"><span class="inline-code">n == 0</span></div></div><div class="fact"><div class="k">Recursive case</div><div class="v"><span class="inline-code">n + sum(n - 1)</span></div></div><div class="fact"><div class="k">Idea</div><div class="v">reduce by one until zero</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int sum(int n)
+{
+    if (n == 0) {
+        return 0;
+    }
+
+    return n + sum(n - 1);
+}
+
+int main(void)
+{
+    int n;
+
+    printf("Enter n: ");
+    scanf("%d", &amp;n);
+
+    printf("Sum = %d\n", sum(n));
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Smallest Solvable Input</h2><ul><li>The sum of the first 0 natural numbers is 0.</li><li>That is the cleanest stopping point.</li><li>So the base case returns 0.</li></ul></article><article class="room"><h2>Room 2: Peel Off the Largest Term</h2><ul><li>To find the sum up to <span class="inline-code">n</span>, keep <span class="inline-code">n</span> and delegate the rest.</li><li>The smaller problem is the sum up to <span class="inline-code">n - 1</span>.</li><li>This creates the recursive case.</li></ul></article><article class="room"><h2>Room 3: Return Expression Structure</h2><ul><li>The recursive statement is not just a call.</li><li>It must add the current value to the returned smaller sum.</li><li>That gives <span class="inline-code">n + sum(n - 1)</span>.</li></ul></article><article class="room"><h2>Room 4: Trace Example</h2><ul><li><span class="inline-code">sum(3)</span> becomes <span class="inline-code">3 + sum(2)</span>.</li><li>Then <span class="inline-code">2 + sum(1)</span>, then <span class="inline-code">1 + sum(0)</span>.</li><li>The base case returns 0 and the stack rebuilds 1, 3, 6.</li></ul></article><article class="room"><h2>Room 5: Memory Sentence</h2><ul><li>Stop at zero.</li><li>Add current n.</li><li>Ask the smaller version for the rest.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.13 Question 5 | Clairaut Zone</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="math_ex313_q5">
+<main class="shell">
+  <nav class="nav"><a href="math-ex313-index.html">Ex 3.13 Index</a><a href="math-ex313-guide.html">Guide</a><a href="math-ex313-q3-solvable-p.html">Prev: Ex 3.13 Q3</a><a href="math-ex313-index.html">Next: Ex 3.13 Index</a></nav>
+  <section class="hero">
+    <div class="tag">Exercise 3.13 Odd Route</div>
+    <h1>Question 5</h1>
+    <p class="hero-sub">This is the clean Clairaut room of the route. The recognition step does most of the work, but the page still explains why the constant replacement is valid and how the singular envelope is produced if you want the full picture.</p>
+    <div class="formula-block">$$y=px+p^3 \qquad \text{where } p=\frac{dy}{dx}$$<br/><br/>$$y=ax+a^3$$</div>
+    <div class="tool-row"><a class="tool-btn" href="math-ex313-guide.html">Ex 3.13 Guide</a><button class="tool-btn" type="button" data-jump="linear-review-anchor">Linear Review</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="math-exact-memory-builder.html?pages=math-ex313-q1-solvable-p.html,math-ex313-q3-solvable-p.html,math-ex313-q5-clairaut.html">Open Odd Route in Memory Builder</a></div>
+  </section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel">
+      <div class="section-title">Quick Map</div>
+      <div class="facts">
+        <div class="fact"><div class="k">Problem</div><div class="v">$$y=px+p^3$$</div></div>
+        <div class="fact"><div class="k">Type / Recognition</div><div class="v">True Clairaut equation $$y=px+f(p)$$ with $$f(p)=p^3.$$</div></div>
+        <div class="fact"><div class="k">Main Idea</div><div class="v">For the general solution, replace $$p$$ by an arbitrary constant.</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="linear-review-anchor">
+      <div class="section-title">Linear Review</div>
+      <p class="copy">This page is short mathematically, but the reason it is short matters. We are not skipping work. We are using the special Clairaut structure directly and then showing the optional singular envelope afterward.</p>
+      <div class="review-card">
+        <h3>Room 1 Actual Explanation: Identify The Exact Equation Type</h3>
+        <p><strong>Problem:</strong> Solve $$y=px+p^3$$ where $$p=\dfrac{dy}{dx}.$$</p>
+        <p><strong>Type / Recognition:</strong> This is exactly of the form</p>
+        <div class="formula-block">$$y=px+f(p)$$</div>
+        <p>with</p>
+        <div class="formula-block">$$f(p)=p^3$$</div>
+        <p>This matters because Clairaut equations have a standard general solution family. Once the structure is recognized, we do not need to solve a new separable equation from scratch.</p>
+      </div>
+      <div class="review-card">
+        <h3>Room 2 Actual Explanation: Why Replacing $$p$$ By A Constant Works</h3>
+        <p>For Clairaut's equation, the general solution is the family of straight lines obtained by setting</p>
+        <div class="formula-block">$$p=c$$</div>
+        <p>where $$c$$ is an arbitrary constant. The reason is that each member of the family has constant slope, and for a constant slope line, $$p=\dfrac{dy}{dx}$$ stays constant.</p>
+        <p>Substitute $$p=c$$ into the equation:</p>
+        <div class="formula-block">$$y=cx+c^3$$</div>
+        <p>This is already the complete general solution family.</p>
+      </div>
+      <div class="review-card">
+        <h3>Room 3 Actual Explanation: Match The Book Constant Style</h3>
+        <p>The textbook answer writes the arbitrary constant as $$a$$ instead of $$c.$$ That is just a rename of the constant, so the answer becomes</p>
+        <div class="formula-block">$$y=ax+a^3$$</div>
+        <p>Changing the symbol for the constant does not change the family of solutions.</p>
+      </div>
+      <div class="review-card">
+        <h3>Room 4 Actual Explanation: Optional Singular Solution</h3>
+        <p>If you also want the envelope of the family, differentiate the Clairaut expression with respect to $$p$$ while treating $$x$$ as the line parameter relation:</p>
+        <div class="formula-block">$$x+3p^2=0$$</div>
+        <p>So</p>
+        <div class="formula-block">$$x=-3p^2$$</div>
+        <p>Substitute into $$y=px+p^3$$:</p>
+        <div class="formula-block">$$y=p(-3p^2)+p^3=-2p^3$$</div>
+        <p>Now eliminate $$p.$$ From $$x=-3p^2,$$ we get $$p^2=-x/3.$$ Squaring $$y=-2p^3$$ gives</p>
+        <div class="formula-block">$$y^2=4p^6=4(p^2)^3=4\left(-\frac{x}{3}\right)^3=-\frac{4x^3}{27}$$</div>
+        <p>Therefore the singular curve is</p>
+        <div class="formula-block">$$27y^2+4x^3=0$$</div>
+        <p>But if the exercise asks only for the ordinary solution family, the expected answer is still just $$y=ax+a^3.$$</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Memory Palace Rooms</div>
+      <div class="rooms">
+        <article class="room" id="room-math-ex313-q5-room-1" data-room-id="math-ex313-q5-room-1" data-room-title="Room 1: Enter The Clairaut Terrace" data-source-page="math-ex313-q5-clairaut.html" data-tags="clairaut,recognition">
+          <h2>Room 1: Enter The Clairaut Terrace</h2>
+          <p>After the branch forge, the route opens onto a calm terrace. A polished stone reads $$y=px+p^3.$$ Unlike the earlier rooms, nothing is tangled here. Ichigo immediately recognizes the terrace emblem $$y=px+f(p).$$ The side sculpture $$p^3$$ confirms that $$f(p)=p^3.$$</p>
+        </article>
+        <article class="room" id="room-math-ex313-q5-room-2" data-room-id="math-ex313-q5-room-2" data-room-title="Room 2: Constant Seal" data-source-page="math-ex313-q5-clairaut.html" data-tags="constant,general-solution">
+          <h2>Room 2: Constant Seal</h2>
+          <p>A glowing seal drops onto the slope spear $$p$$ and freezes it into a constant crystal $$a.$$ The whole terrace line immediately becomes the final family image:</p>
+          <div class="formula-block">$$y=ax+a^3$$</div>
+          <p>This room memorizes the central Clairaut idea: once the slope is frozen, the line family appears at once.</p>
+        </article>
+        <article class="room" id="room-math-ex313-q5-room-3" data-room-id="math-ex313-q5-room-3" data-room-title="Room 3: Optional Envelope Chamber" data-source-page="math-ex313-q5-clairaut.html" data-tags="singular,envelope">
+          <h2>Room 3: Optional Envelope Chamber</h2>
+          <p>Behind the terrace, a hidden chamber shows the envelope. A derivative blade scratches $$x+3p^2=0$$ into the wall. The line family folds inward until the envelope freezes as</p>
+          <div class="formula-block">$$27y^2+4x^3=0$$</div>
+          <p>The chamber is optional, but it helps connect this page to the broader Clairaut system.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Shape System</div>
+      <div class="facts">
+        <div class="fact"><div class="k">$$x$$</div><div class="v">A straight ground rail for the line family.</div></div>
+        <div class="fact"><div class="k">$$y$$</div><div class="v">A height banner measured above the rail.</div></div>
+        <div class="fact"><div class="k">$$p$$</div><div class="v">A slope spear that can be frozen into a constant seal in Clairaut problems.</div></div>
+        <div class="fact"><div class="k">$$p^3$$</div><div class="v">A triple-stacked slope crystal attached to the line.</div></div>
+        <div class="fact"><div class="k">Addition</div><div class="v">Objects joined side by side on one stone terrace.</div></div>
+        <div class="fact"><div class="k">Substitution $$p=a$$</div><div class="v">A glowing seal that locks a moving symbol into a constant crystal.</div></div>
+        <div class="fact"><div class="k">Differentiation</div><div class="v">A sharp scratch mark used in the envelope chamber.</div></div>
+        <div class="fact"><div class="k">Constants</div><div class="v">Named crystals, such as $$a,$$ that can replace the slope spear for the general family.</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="movie-anchor">
+      <div class="section-title">Recall Finish</div>
+      <p class="copy"><strong>Final answer:</strong> $$y=ax+a^3.$$</p>
+      <p class="copy"><strong>One-line recall:</strong> Spot the Clairaut terrace, freeze $$p$$ into a constant, and the full line family appears immediately.</p>
+      <p class="copy"><strong>Quick recall checks:</strong></p>
+      <ul>
+        <li>What exact pattern tells you that this is a Clairaut equation?</li>
+        <li>Why is it valid to replace $$p$$ by an arbitrary constant in the general solution?</li>
+        <li>What equation appears if you also compute the singular envelope?</li>
+      </ul>
+    </section>
+
+    <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="math-ex313-q5-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more line showing why the general solution family consists of straight lines."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+  </div></div>
+</main>
+<script src="exact-study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

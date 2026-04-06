@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 5 Debug 2 | Fix Cube Function Errors</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab5-debug2-cube-function"><main class="shell"><nav class="nav"><a href="lab5-index.html">Lab 5 Index</a><a href="lab5-guide.html">Guide</a><a href="lab6-index.html">Next: Lab 6</a></nav><section class="hero"><div class="tag">Lab 5 Debugging Task 2</div><h1>Fix the Broken Cube Function Program</h1><p class="hero-sub">This debugging task tests whether you can spot mismatched return types, bad input syntax, and missing statement endings inside a function-based program.</p><div class="formula-block">$$\text{value-returning function} \Rightarrow \text{typed parameter} \Rightarrow \text{correct scanf} \Rightarrow \text{clean return}$$</div><div class="tool-row"><a class="tool-btn" href="lab5-guide.html">Functions Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab5-debug2-cube-function.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Broken Code Shape</div><div class="formula-block"><pre><code>void cube(num) {
+    return num * num * num;
+}
+
+int main(void) {
+    int n;
+    printf("Enter number: ")
+    scanf("%d", n);
+    printf("Cube is: %d", cube(n));
+    return 0
+}</code></pre></div></section><section class="panel"><div class="section-title">Corrected Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int cube(int num)
+{
+    return num * num * num;
+}
+
+int main(void)
+{
+    int n;
+
+    printf("Enter number: ");
+    scanf("%d", &amp;n);
+    printf("Cube is: %d\n", cube(n));
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: void Cannot Return a Cube Value</h2><ul><li>The function computes a number and sends it back.</li><li>So the return type cannot be <span class="inline-code">void</span>.</li><li>It should be <span class="inline-code">int cube(int num)</span>.</li></ul></article><article class="room"><h2>Room 2: Parameter Needs a Type</h2><ul><li><span class="inline-code">num</span> must be declared as an integer parameter.</li><li>Untyped parameters break modern C code.</li><li>The corrected header fixes both issues together.</li></ul></article><article class="room"><h2>Room 3: scanf Needs Address of n</h2><ul><li>Input should be stored into <span class="inline-code">n</span>.</li><li>So use <span class="inline-code">&amp;n</span> in <span class="inline-code">scanf</span>.</li><li>Without the address operator, the read is wrong.</li></ul></article><article class="room"><h2>Room 4: Missing Semicolons Matter</h2><ul><li>The broken code misses semicolons after <span class="inline-code">printf</span> and <span class="inline-code">return 0</span>.</li><li>Add them to complete the statements.</li><li>Debugging often starts with punctuation.</li></ul></article><article class="room"><h2>Room 5: Final Flow</h2><ul><li>Read number into <span class="inline-code">n</span>.</li><li>Call <span class="inline-code">cube(n)</span>.</li><li>Print the returned cube value.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 6 Task 4 | Print Digits in Reverse</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab6-task4-print-reverse"><main class="shell"><nav class="nav"><a href="lab6-index.html">Lab 6 Index</a><a href="lab6-guide.html">Guide</a><a href="lab6-debug1-sum-digits.html">Next: Debug 1</a></nav><section class="hero"><div class="tag">Lab 6 Task 4</div><h1>Print Digits of a Number in Reverse Order</h1><p class="hero-sub">This recursion problem is about processing the last digit first, then removing that digit and repeating on the shorter number.</p><div class="formula-block">$$\text{print } n \bmod 10,\qquad \text{then recurse on } \left\lfloor \frac{n}{10} \right\rfloor$$</div><div class="tool-row"><a class="tool-btn" href="lab6-guide.html">Recursion Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab6-task4-print-reverse.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Function</div><div class="v"><span class="inline-code">void printReverse(int n)</span></div></div><div class="fact"><div class="k">Base case</div><div class="v">single digit number</div></div><div class="fact"><div class="k">Recursive step</div><div class="v">print last digit, recurse on <span class="inline-code">n / 10</span></div></div><div class="fact"><div class="k">Return type</div><div class="v"><span class="inline-code">void</span> because the function prints directly</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+void printReverse(int n)
+{
+    if (n < 10) {
+        printf("%d", n);
+        return;
+    }
+
+    printf("%d", n % 10);
+    printReverse(n / 10);
+}
+
+int main(void)
+{
+    int num;
+
+    printf("Enter a number: ");
+    scanf("%d", &amp;num);
+
+    printf("Reverse order: ");
+    printReverse(num);
+    printf("\n");
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: This Function Prints, Not Returns</h2><ul><li>The question asks to print digits in reverse order.</li><li>So the function can be <span class="inline-code">void</span>.</li><li>Its job is output, not value return.</li></ul></article><article class="room"><h2>Room 2: Single Digit Is the Base Case</h2><ul><li>If the number has only one digit left, just print it.</li><li>No more recursion is needed after that.</li><li>This stops the process cleanly.</li></ul></article><article class="room"><h2>Room 3: Last Digit Comes First</h2><ul><li>The reverse order starts from <span class="inline-code">n % 10</span>.</li><li>That extracts the current last digit.</li><li>Print it before the recursive call.</li></ul></article><article class="room"><h2>Room 4: Remove the Printed Digit</h2><ul><li>After printing the last digit, shrink the number with <span class="inline-code">n / 10</span>.</li><li>This removes the digit already handled.</li><li>Then recurse on the shorter number.</li></ul></article><article class="room"><h2>Room 5: Order Memory</h2><ul><li>Extract last digit.</li><li>Print it immediately.</li><li>Recurse on the remaining front part.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

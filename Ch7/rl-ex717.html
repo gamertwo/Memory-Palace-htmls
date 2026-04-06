@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rl-ex717.html" />
 <title>Exercise 7-17 | Rooms + Memory Cues</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
 <script>
@@ -12,103 +13,12 @@ MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="study-bridge.css" />
 <link rel="stylesheet" href="linear-review.css" />
 <script src="linear-review.js" defer></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d0f14;
-  --bg2:#1a1e27;
-  --panel:#131821;
-  --panel2:#191f2a;
-  --line:rgba(255,255,255,.08);
-  --accent:#ffd08a;
-  --text:#f7f1e8;
-  --muted:rgba(247,241,232,.78);
-}
-body{
-  font-family:'Outfit',sans-serif;
-  background:linear-gradient(180deg,var(--bg),var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-}
-a{color:inherit}
-.shell{max-width:980px;margin:0 auto;padding:2rem 1rem 3rem}
-.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
-.nav a{
-  text-decoration:none;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.85rem;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.hero,.panel{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1.2rem;
-}
-.hero h1{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.9rem,4vw,3rem);
-  margin-bottom:.5rem;
-}
-.hero p{color:var(--muted);line-height:1.7}
-.eq{
-  margin-top:.9rem;
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.9rem;
-  text-align:center;
-  overflow:auto;
-}
-.section{margin-top:1rem}
-.section-title{
-  font-size:1rem;
-  font-weight:800;
-  color:var(--accent);
-  margin-bottom:.8rem;
-}
-.rooms{display:grid;gap:.85rem}
-.room{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.room h2{
-  font-size:1rem;
-  margin-bottom:.55rem;
-  color:var(--accent);
-}
-.room ul{padding-left:1.2rem}
-.room li,.room p{line-height:1.75;color:var(--muted)}
-.memory{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:.85rem;
-}
-.cue{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.cue h3{
-  font-size:.9rem;
-  color:var(--accent);
-  margin-bottom:.45rem;
-}
-.cue p{color:var(--muted);line-height:1.7}
-@media (max-width:700px){
-  .shell{padding:1rem .85rem 2rem}
-}
-</style>
 </head>
-<body>
+<body data-page-key="rl_ex717">
 <main class="shell">
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
@@ -117,7 +27,8 @@ a{color:inherit}
   </nav>
 
   <section class="hero">
-    <h1>Exercise 7-17</h1>
+    <div class="tag">Exercise 7-17</div>
+<h1>Exercise 7-17</h1>
     <p>This switching problem asks you to find the output voltage <code>v_O(t)</code> after the source moves from position A to B. Do not start from the final expression; build it from the switching logic, the initial value, and the time constant.</p>
     <div class="eq">Find $$v_O(t),\quad t\ge 0$$</div>
   </section>
@@ -370,5 +281,7 @@ a{color:inherit}
     </div>
   </section>
 </main>
+<script src="study.js"></script>
 </body>
 </html>
+

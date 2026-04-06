@@ -1,0 +1,68 @@
+/* Bridge layer for migrating older Ch7 pages onto the shared Ch9 study shell. */
+
+:root {
+  --accent2: #94ddff;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(290px, .95fr);
+  gap: 1.15rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.eq {
+  background: #0a111a;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  padding: 1rem;
+  overflow: auto;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  border: 1px solid rgba(255,208,138,.22);
+  background: rgba(255,208,138,.08);
+  border-radius: 999px;
+  padding: .35rem .7rem;
+  font-size: .72rem;
+  color: var(--accent);
+  margin-bottom: .9rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.lede {
+  max-width: 940px;
+}
+
+.jump {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .55rem .9rem;
+  font-size: .8rem;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--accent);
+  background: rgba(255,255,255,.03);
+  text-decoration: none;
+}
+
+.jump:hover {
+  background: rgba(255,255,255,.06);
+}
+
+@media (max-width: 1380px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .palace-sidebar {
+    position: static;
+  }
+}

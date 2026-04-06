@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 6 Debug 2 | Fix Recursive Count Digits</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab6-debug2-count-digits"><main class="shell"><nav class="nav"><a href="lab6-index.html">Lab 6 Index</a><a href="lab6-guide.html">Guide</a><a href="index.html">Back to All Labs</a></nav><section class="hero"><div class="tag">Lab 6 Debugging Task 2</div><h1>Fix the Broken Recursive Count Digits Program</h1><p class="hero-sub">This problem tests whether you really understand how a digit-count recursion should shrink. The bugged version shrinks the number the wrong way and also breaks several core C rules.</p><div class="formula-block">$$\text{if } n&lt;10 \text{ return } 1,\qquad \text{else return } 1 + countDigits(n/10)$$</div><div class="tool-row"><a class="tool-btn" href="lab6-guide.html">Recursion Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab6-debug2-count-digits.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Broken Code Shape</div><div class="formula-block"><pre><code>int countDigits(n)
+{
+    if(n == 1)
+        return 1;
+    else
+        return 1 + countDigits(n - 10);
+}
+
+int main()
+{
+    int num;
+    printf("Enter a number: ")
+    scanf("%d", num);
+    digits = countDigits();
+    printf("Total digits are: %d", digits)
+}</code></pre></div></section><section class="panel"><div class="section-title">Corrected Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int countDigits(int n)
+{
+    if (n < 10) {
+        return 1;
+    }
+
+    return 1 + countDigits(n / 10);
+}
+
+int main(void)
+{
+    int num;
+    int digits;
+
+    printf("Enter a number: ");
+    scanf("%d", &amp;num);
+    digits = countDigits(num);
+    printf("Total digits are: %d\n", digits);
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Parameter Type Must Be Declared</h2><ul><li>The function needs <span class="inline-code">int n</span> in the parameter list.</li><li>This is the first syntax repair.</li><li>The corrected header becomes <span class="inline-code">int countDigits(int n)</span>.</li></ul></article><article class="room"><h2>Room 2: Base Case Should Catch Any Single Digit</h2><ul><li>The broken code stops only at exactly 1.</li><li>But 0 through 9 are all single-digit numbers.</li><li>So the better base case is <span class="inline-code">n &lt; 10</span>.</li></ul></article><article class="room"><h2>Room 3: Shrink by Division, Not Subtraction</h2><ul><li>Digit count is reduced by removing one decimal place.</li><li>That means <span class="inline-code">n / 10</span>, not <span class="inline-code">n - 10</span>.</li><li>This is the main logical fix.</li></ul></article><article class="room"><h2>Room 4: main Must Pass the Number In</h2><ul><li><span class="inline-code">countDigits()</span> without arguments is wrong.</li><li>The function needs the number, so call <span class="inline-code">countDigits(num)</span>.</li><li>Also declare the variable <span class="inline-code">digits</span> before using it.</li></ul></article><article class="room"><h2>Room 5: Input and Output Repairs</h2><ul><li>Use <span class="inline-code">&amp;num</span> in <span class="inline-code">scanf</span>.</li><li>Add the missing semicolons after <span class="inline-code">printf</span> and the final print.</li><li>The fixed program now reads input, counts digits correctly, and prints the answer.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

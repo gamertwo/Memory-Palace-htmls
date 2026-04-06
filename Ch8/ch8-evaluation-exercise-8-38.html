@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Evaluation Exercise 8-38 | Node-Voltage Method for Figure 8-58</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_evaluation_exercise_8_38">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-33.html">Prev: Example 8-33</a><a href="ch8-exercise-8-39.html">Next: Exercise 8-39</a></nav>
+  <section class="hero"><div class="tag">Evaluation Exercise 8-38</div><h1>Repeat Example 8-32 Using Node-Voltage Analysis</h1><p class="hero-sub">This is a method-comparison page. The point is to notice that node analysis is lighter here because the source voltages pin down most node values, leaving only one unknown node-voltage equation.</p><div class="formula-block">$$I_1=12.4\angle-15.0^\circ\text{ A},\qquad I_2=3.61\angle-16.1^\circ\text{ A},\qquad I_3=1.30\angle166.5^\circ\text{ A}$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-evaluation-exercise-8-38.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel"><div class="section-title">What This Page Is Testing</div><div class="facts"><div class="fact"><div class="k">Same Circuit</div><div class="v">Use the exact Figure 8-58 network from Example 8-32.</div></div><div class="fact"><div class="k">New Method</div><div class="v">Do not use mesh currents this time. Use node-voltage thinking instead.</div></div><div class="fact"><div class="k">Main Lesson</div><div class="v">A circuit can be mathematically correct under more than one method, but one method may be much shorter.</div></div></div></section>
+    <section class="panel"><div class="section-title">Rooms: Method Comparison</div><div class="rooms">
+      <article class="room"><h2>Room 1: Ask Which Variables the Sources Already Fix</h2><ul><li>In Figure 8-58, the independent sources determine several node voltages directly.</li><li>That means node analysis does not have to solve for every node from scratch.</li><li>After the obvious source-defined nodes are recognized, only one true unknown node voltage remains.</li></ul></article>
+      <article class="room"><h2>Room 2: Write One Unknown-Node KCL Equation</h2><ul><li>Because only one node voltage is unknown, KCL produces only one unknown-node equation.</li><li>Once that one node voltage is found, each branch current follows from a direct impedance division.</li><li>The point of the exercise is not that node analysis gives different physics. It gives the same answer with less algebra.</li></ul></article>
+      <article class="room"><h2>Room 3: Final Branch Currents</h2><ul><li>The branch currents are the same as in Example 8-32:</li><li>$$I_1=12.4\angle-15.0^\circ\text{ A}$$ $$I_2=3.61\angle-16.1^\circ\text{ A}$$ $$I_3=1.30\angle166.5^\circ\text{ A}$$</li></ul></article>
+      <article class="room"><h2>Room 4: Which Method Is Easier Here?</h2><ul><li>For this specific circuit, node-voltage analysis is easier.</li><li>The reason is structural: this four-node circuit reduces to only one unknown node-voltage equation.</li><li>That is lighter than solving the three mesh-current equations used in Example 8-32.</li></ul></article>
+    </div></section>
+    <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><div class="movie-flow"><div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Source-Fixed Nodes</h3><p>Fire reveals which node voltages are already known.</p></div><div class="movie-arrow">&rarr;</div><div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write One KCL Equation</h3><p>Chalk leaves only one unknown node voltage to solve.</p></div><div class="movie-arrow">&rarr;</div><div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Same Three Currents</h3><p>The coat confirms the same physical answers as the mesh solution.</p></div></div></section>
+    <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-evaluation-exercise-8-38-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add the explicit one-equation node-analysis setup for Figure 8-58."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+  </div></div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

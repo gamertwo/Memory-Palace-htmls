@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-exercise-9-15.html" />
+<title>Exercise 9-15 | Pole-Zero Plot Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_exercise_9_15">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="ch9-example-9-9.html">Prev: Example 9-9</a>
+    <a href="ch9-example-9-10.html">Next: Example 9-10</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 9-15</div>
+    <h1>Rukia Freezes The Numerator And Denominator</h1>
+    <p class="hero-sub">Rukia handles a cleaner transform so the zero and pole roles cannot be mixed up. Her whole scene is one frozen gallery where every formula shape is placed on purpose.</p>
+    <div class="formula-block">
+      $$f(t)=\left(2e^{-t}-1\right)u(t)$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Room Route</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-exercise-9-15.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Result</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Zeros</div><div class="v">Zeros at $$s=1$$ and at $$s=\infty$$ in the book note.</div></div>
+          <div class="fact"><div class="k">Poles</div><div class="v">Two poles at $$s=0$$ and $$s=-1.$$</div></div>
+          <div class="fact"><div class="k">Key lesson</div><div class="v">A simple numerator still deserves a circle gate. Do not let the scale hide the zero.</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Convert Each Time-Domain Piece</h3>
+            <div class="review-room-prompt">
+              <p>Do not jump straight to the answer. Convert the two visible parts one by one.</p>
+              <p>First part:</p>
+              <p>$$\mathcal{L}\{2e^{-t}u(t)\}=2\cdot\frac{1}{s+1}=\frac{2}{s+1}$$</p>
+              <p>Second part:</p>
+              <p>$$\mathcal{L}\{-u(t)\}=-\frac{1}{s}$$</p>
+              <p>So before any simplification, the transform is</p>
+              <p>$$F(s)=\frac{2}{s+1}-\frac{1}{s}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Combine The Two Fractions Carefully</h3>
+            <div class="review-room-prompt">
+              <p>The common denominator of $$\frac{2}{s+1}$$ and $$\frac{1}{s}$$ is $$s(s+1).$$</p>
+              <p>Rewrite both terms over that denominator:</p>
+              <p>$$\frac{2}{s+1}=\frac{2s}{s(s+1)},\qquad \frac{1}{s}=\frac{s+1}{s(s+1)}$$</p>
+              <p>Now subtract:</p>
+              <p>$$F(s)=\frac{2s}{s(s+1)}-\frac{s+1}{s(s+1)}=\frac{2s-(s+1)}{s(s+1)}$$</p>
+              <p>Then simplify the numerator:</p>
+              <p>$$2s-(s+1)=s-1$$</p>
+              <p>So the final rational form is</p>
+              <p>$$F(s)=\frac{s-1}{s(s+1)}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Find The Zero From The Numerator</h3>
+            <div class="review-room-prompt">
+              <p>The zero comes only from the numerator, so set the numerator equal to zero:</p>
+              <p>$$s-1=0$$</p>
+              <p>That gives</p>
+              <p>$$s=1$$</p>
+              <p>This is why the page has one real-axis zero at $$+1.$$ It does not matter that the denominator also contains $$s$$ and $$s+1$$. Those belong to the pole hunt, not the zero hunt.</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 4</div>
+            <h3 class="review-room-title">Find The Poles From The Denominator</h3>
+            <div class="review-room-prompt">
+              <p>The poles come only from the denominator:</p>
+              <p>$$s(s+1)=0$$</p>
+              <p>That product is zero when either factor is zero.</p>
+              <p>From $$s=0,$$ we get a pole at the origin.</p>
+              <p>From $$s+1=0,$$ we get</p>
+              <p>$$s=-1$$</p>
+              <p>So the final plot has one circle at $$+1$$ and two poles at $$0$$ and $$-1.$$ That is the exact reason the picture looks like right-circle, center-pole, left-pole.</p>
+            </div>
+          </article>
+        </div>
+        <div class="mini"><h3>Concept Summary</h3><p>Exercise 9-15 is the cleanest possible numerator-versus-denominator exercise. The algebra reduces to $$F(s)=\frac{s-1}{s(s+1)},$$ so the zero is read from $$s-1$$ and the poles are read from $$s(s+1).$$</p></div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: Rukia's Frozen Gallery</div>
+        <div class="rooms">
+          <article class="room" data-tags="rukia,transform,cleanup,freeze">
+            <h2>Room 1: Rukia Freezes The Transform Into One Fraction</h2>
+            <p>Rukia freezes the moving terms into a single glass fraction. She refuses to plot until the numerator and denominator are visible as separate shapes.</p>
+            <ul>
+              <li>First clean the transform.</li>
+              <li>Separate square seal from circle and spear shapes.</li>
+              <li>Readable algebra makes plotting faster than guessing.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="rukia,zero,circle,real-axis">
+            <h2>Room 2: A Circle Gate Forms At $$s=1$$</h2>
+            <p>The numerator crystallizes into a circle gate on the positive real side. Rukia reminds you that a zero can sit to the right or left depending on the factor; the page is about reading the algebra, not assuming stability from the word zero.</p>
+            <ul>
+              <li>Zero comes only from the numerator.</li>
+              <li>Here the real-axis circle sits at $$s=1.$$</li>
+              <li>The scale factor is still not plotted.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="rukia,poles,origin,negative-real">
+            <h2>Room 3: Two Spears Lock The Denominator</h2>
+            <p>Rukia plants one spear at the origin and another at $$s=-1.$$ The frozen symmetry is gone here, so the memory image is simple: one spear at center, one spear one step left.</p>
+            <ul>
+              <li>$$s=0$$ gives an origin pole.</li>
+              <li>$$s=-1$$ gives a negative real pole.</li>
+              <li>The denominator decides both spear positions.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="rukia,plot,contrast,final">
+            <h2>Room 4: Rukia Shows The Clean Contrast</h2>
+            <p>At the final ice wall, Rukia draws one circle at $$+1$$ and two spears at $$0$$ and $$-1.$$ This page exists to burn in the difference between numerator circles and denominator spears with no extra clutter.</p>
+            <ul>
+              <li>One circle, two spears.</li>
+              <li>Positive real zero is allowed.</li>
+              <li>Next, Renji adds imaginary-axis poles to the palace.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Memory Hook</div>
+        <p class="copy">Ice circle on the right, central spear, left spear. That three-point picture is the whole exercise.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

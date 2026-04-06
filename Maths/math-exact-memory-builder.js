@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'memory-palace-builder-math-exact-v1';
+  var STORAGE_KEY = 'memory-palace-builder-math-v2';
+  var UI_STORAGE_KEY = 'memory-palace-builder-math-ui-v2';
   var STORAGE_VERSION = 2;
   var BLOCK_BASE_HEIGHT = 165;
   var BLOCK_ROOM_LINE_HEIGHT = 20;
@@ -19,15 +20,7 @@
     if (window.CSS && CSS.escape) return CSS.escape(v);
     return String(v || '').replace(/["\\]/g, '\\$&');
   }
-  function resolveChapterPath(ref) {
-    if (!ref) return '#';
-    var value = String(ref);
-    if (/^(?:[a-z]+:)?\/\//i.test(value) || /^[a-z]+:/i.test(value) || value[0] === '#' || value[0] === '/') {
-      return value;
-    }
-    if (value.indexOf('../') === 0 || value.indexOf('./') === 0) return value;
-    return value.replace(/^\/+/, '');
-  }
+  function cloneJson(v) { return JSON.parse(JSON.stringify(v)); }
   function isFullPalacePayload(raw) {
     return !!(raw && (Array.isArray(raw.importedRooms) || Array.isArray(raw.blocks) || Array.isArray(raw.edges) || Array.isArray(raw.sketches)));
   }
@@ -54,6 +47,20 @@
       sourceUrl: r && r.sourceUrl ? r.sourceUrl : sp + '#' + anc,
       tags: Array.isArray(r && r.tags) ? r.tags.filter(Boolean) : [],
       order: typeof (r && r.order) === 'number' ? r.order : i,
+    };
+  }
+
+  function safeImage(img, i) {
+    var width = typeof (img && img.width) === 'number' ? img.width : 320;
+    var height = typeof (img && img.height) === 'number' ? img.height : 220;
+    return {
+      id: img && img.id ? img.id : makeId('img'),
+      x: typeof (img && img.x) === 'number' ? img.x : 140 + i * 24,
+      y: typeof (img && img.y) === 'number' ? img.y : 140 + i * 24,
+      width: clamp(width, 80, 1400),
+      height: clamp(height, 80, 1400),
+      src: img && img.src ? img.src : '',
+      name: img && img.name ? img.name : 'Pasted image',
     };
   }
 
@@ -107,11 +114,14 @@
             };
           })
       : [];
+    var images = Array.isArray(p && p.images)
+      ? p.images.filter(function (img) { return img && img.src; }).map(function (img, ii) { return safeImage(img, ii); })
+      : [];
     return {
       id: p && p.id ? p.id : 'palace-' + i,
       name: p && p.name ? p.name : 'Memory Palace ' + (i + 1),
       importedPages: Array.isArray(p && p.importedPages) ? p.importedPages.filter(Boolean) : [],
-      importedRooms: rooms, blocks: blocks, edges: edges, sketches: sketches,
+      importedRooms: rooms, blocks: blocks, edges: edges, sketches: sketches, images: images,
       viewport: { zoom: typeof (p && p.viewport && p.viewport.zoom) === 'number' ? clamp(p.viewport.zoom, 0.4, 2) : 1 },
     };
   }
@@ -140,6 +150,21 @@
     return normalizeState(null);
   }
   function saveState(data) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (e) {} }
+  function loadUiState() {
+    try {
+      var parsed = JSON.parse(localStorage.getItem(UI_STORAGE_KEY) || 'null');
+      if (parsed && typeof parsed === 'object') {
+        return {
+          leftSidebarOpen: parsed.leftSidebarOpen !== false,
+          rightSidebarOpen: parsed.rightSidebarOpen !== false,
+        };
+      }
+    } catch (e) {}
+    return { leftSidebarOpen: true, rightSidebarOpen: true };
+  }
+  function saveUiState(ui) {
+    try { localStorage.setItem(UI_STORAGE_KEY, JSON.stringify(ui)); } catch (e) {}
+  }
 
   /* ── DOM elements ───────────────────────────────────────────────── */
   var els = {
@@ -151,6 +176,7 @@
     importedCount: byId('imported-room-count'),
     importedPages: byId('imported-pages'), importedPageCount: byId('imported-page-count'),
     canvasViewport: byId('canvas-viewport'), canvasStage: byId('canvas-stage'),
+    imageLayer: byId('canvas-image-layer'),
     blockLayer: byId('canvas-block-layer'),
     edgeLayer: byId('edge-layer'), sketchLayer: byId('sketch-layer'),
     blockEditor: byId('block-editor'), emptyEditor: byId('empty-editor'),
@@ -169,6 +195,7 @@
     edgeListArea: byId('edge-list-area'),
     builderStatus: byId('builder-status'),
     zoomVal: byId('zoom-val'),
+    zoomSlider: byId('zoom-slider'),
     reviewPanel: byId('block-review-panel'),
     reviewPanelTitle: byId('review-panel-title'),
     reviewRoomList: byId('review-room-list'),
@@ -184,8 +211,12 @@
     confirmCancel: byId('confirm-cancel'), confirmAccept: byId('confirm-accept'),
     modeButtons: queryAll('[data-mode-button]'),
     tabButtons: queryAll('.ed-tab'),
+    selectionModeButtons: queryAll('[data-selection-mode]'),
     tabPanels: { overview: byId('tab-overview'), details: byId('tab-details'), rooms: byId('tab-rooms'), connect: byId('tab-connect') },
     penToolbar: byId('pen-toolbar'),
+    penHint: document.querySelector('#pen-toolbar .pt-hint'),
+    toggleLeftSidebar: byId('toggle-left-sidebar'),
+    toggleRightSidebar: byId('toggle-right-sidebar'),
   };
 
   /* ── App state ──────────────────────────────────────────────────── */
@@ -193,8 +224,10 @@
     data: loadState(),
     selectedBlockId: null,
     selectedEdgeId: null,
+    selectedImageId: null,
     pendingConnectFrom: null,
     mode: 'selection',
+    selectionMode: 'all',
     search: '',
     activeTab: 'overview',
     drag: null,
@@ -205,6 +238,7 @@
     penTool: 'pen',       // 'pen' | 'eraser'
     penColor: '#f5c245',  // active stroke color
     penWidth: 3,          // active stroke width
+    ui: loadUiState(),
   };
 
   /* ── Sketch undo / redo stacks ──────────────────────────────────── */
@@ -243,8 +277,10 @@
   function getPalace() { return state.data.palaces.find(function (p) { return p.id === state.data.selectedPalaceId; }) || state.data.palaces[0]; }
   function findRoom(id) { return getPalace().importedRooms.find(function (r) { return r.id === id; }) || null; }
   function findBlock(id) { return getPalace().blocks.find(function (b) { return b.id === id; }) || null; }
+  function findImage(id) { return getPalace().images.find(function (img) { return img.id === id; }) || null; }
   function selBlock() { return findBlock(state.selectedBlockId); }
   function selEdge() { return getPalace().edges.find(function (e) { return e.id === state.selectedEdgeId; }) || null; }
+  function selImage() { return findImage(state.selectedImageId); }
   function getRooms(block) { return block ? block.sourceRoomIds.map(findRoom).filter(Boolean) : []; }
   function roomUsage(id) { return getPalace().blocks.reduce(function (n, b) { return n + (b.sourceRoomIds.indexOf(id) >= 0 ? 1 : 0); }, 0); }
   function setStatus(msg) { els.builderStatus.textContent = msg; }
@@ -261,6 +297,15 @@
   function dropPos(cx, cy) {
     var p = canvasPt(cx, cy);
     return { x: clamp(p.x - 135, 24, 2900), y: clamp(p.y - 90, 24, 1900) };
+  }
+  function viewportCenterPos() {
+    var z = getPalace().viewport.zoom || 1;
+    var x = (els.canvasViewport.scrollLeft + (els.canvasViewport.clientWidth / 2)) / z;
+    var y = (els.canvasViewport.scrollTop + (els.canvasViewport.clientHeight / 2)) / z;
+    return { x: clamp(x, 80, 3000), y: clamp(y, 80, 2100) };
+  }
+  function selectionAllows(kind) {
+    return state.selectionMode === 'all' || state.selectionMode === kind;
   }
 
   function roomMatches(r) {
@@ -315,6 +360,67 @@
       });
     });
     return p.sketches.length !== before;
+  }
+
+  function fileToImageData(file) {
+    return new Promise(function (resolve, reject) {
+      if (!file) { reject(new Error('No image file.')); return; }
+      var reader = new FileReader();
+      reader.onerror = function () { reject(reader.error || new Error('Failed to read image.')); };
+      reader.onload = function () {
+        var src = String(reader.result || '');
+        var img = new Image();
+        img.onload = function () {
+          var maxSide = 1400;
+          var scale = Math.min(1, maxSide / Math.max(img.naturalWidth || 1, img.naturalHeight || 1));
+          var outW = Math.max(1, Math.round((img.naturalWidth || 1) * scale));
+          var outH = Math.max(1, Math.round((img.naturalHeight || 1) * scale));
+          var canvas = document.createElement('canvas');
+          canvas.width = outW;
+          canvas.height = outH;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, outW, outH);
+          var optimizedSrc = canvas.toDataURL('image/webp', 0.9);
+          resolve({
+            src: optimizedSrc || src,
+            width: outW,
+            height: outH,
+            name: file.name || 'Pasted image',
+          });
+        };
+        img.onerror = function () { reject(new Error('Invalid image data.')); };
+        img.src = src;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function addCanvasImage(imageData) {
+    var p = getPalace();
+    var center = viewportCenterPos();
+    var width = clamp(imageData.width || 320, 80, 1400);
+    var height = clamp(imageData.height || 220, 80, 1400);
+    var img = safeImage({
+      id: makeId('img'),
+      x: clamp(center.x - width / 2, 24, 3100 - width),
+      y: clamp(center.y - height / 2, 24, 2100 - height),
+      width: width,
+      height: height,
+      src: imageData.src,
+      name: imageData.name || 'Pasted image',
+    }, p.images.length);
+    p.images.push(img);
+    state.selectedBlockId = null;
+    state.selectedEdgeId = null;
+    state.selectedImageId = img.id;
+    render(true);
+    setStatus('Pasted image onto the canvas.');
+  }
+
+  function removeImage(imageId) {
+    var p = getPalace();
+    p.images = p.images.filter(function (img) { return img.id !== imageId; });
+    if (state.selectedImageId === imageId) state.selectedImageId = null;
   }
 
   /* ── Mutations ──────────────────────────────────────────────────── */
@@ -394,9 +500,9 @@
   function resetPalace() {
     var p = getPalace();
     p.importedPages = []; p.importedRooms = [];
-    p.blocks = []; p.edges = []; p.sketches = [];
+    p.blocks = []; p.edges = []; p.sketches = []; p.images = [];
     p.viewport.zoom = 1;
-    state.selectedBlockId = null; state.selectedEdgeId = null;
+    state.selectedBlockId = null; state.selectedEdgeId = null; state.selectedImageId = null;
     state.pendingConnectFrom = null;
     state.review.blockId = null; state.review.roomIndex = 0;
     sketchUndoStack = []; sketchRedoStack = [];
@@ -410,6 +516,7 @@
       if (!rb || !getRooms(rb).length) { state.review.blockId = null; state.review.roomIndex = 0; }
       else state.review.roomIndex = clamp(state.review.roomIndex, 0, getRooms(rb).length - 1);
     }
+    if (state.selectedImageId && !findImage(state.selectedImageId)) state.selectedImageId = null;
   }
 
   /* ── Modal ──────────────────────────────────────────────────────── */
@@ -420,6 +527,23 @@
     els.confirmModal.classList.remove('hidden');
   }
   function closeConfirm() { state.confirmFn = null; els.confirmModal.classList.add('hidden'); }
+
+  function syncSidebarChrome() {
+    document.body.classList.toggle('left-sidebar-hidden', !state.ui.leftSidebarOpen);
+    document.body.classList.toggle('right-sidebar-hidden', !state.ui.rightSidebarOpen);
+    if (els.toggleLeftSidebar) {
+      els.toggleLeftSidebar.classList.toggle('is-active', state.ui.leftSidebarOpen);
+      els.toggleLeftSidebar.setAttribute('aria-pressed', state.ui.leftSidebarOpen ? 'true' : 'false');
+      els.toggleLeftSidebar.title = state.ui.leftSidebarOpen ? 'Hide room library' : 'Show room library';
+      els.toggleLeftSidebar.querySelector('.icon').textContent = state.ui.leftSidebarOpen ? 'left_panel_open' : 'left_panel_close';
+    }
+    if (els.toggleRightSidebar) {
+      els.toggleRightSidebar.classList.toggle('is-active', state.ui.rightSidebarOpen);
+      els.toggleRightSidebar.setAttribute('aria-pressed', state.ui.rightSidebarOpen ? 'true' : 'false');
+      els.toggleRightSidebar.title = state.ui.rightSidebarOpen ? 'Hide editor' : 'Show editor';
+      els.toggleRightSidebar.querySelector('.icon').textContent = state.ui.rightSidebarOpen ? 'right_panel_open' : 'right_panel_close';
+    }
+  }
 
   /* ── Tab system ─────────────────────────────────────────────────── */
   function setTab(tab) {
@@ -445,8 +569,12 @@
       btn.classList.toggle('active', parseFloat(btn.getAttribute('data-width')) === state.penWidth);
     });
     // Body cursor class
+    document.body.classList.toggle('draw-active', state.mode === 'draw');
     document.body.classList.toggle('pen-active', state.mode === 'draw' && state.penTool === 'pen');
     document.body.classList.toggle('eraser-active', state.mode === 'draw' && state.penTool === 'eraser');
+    if (els.penHint) {
+      els.penHint.textContent = 'Ctrl+scroll zoom | Ctrl+V image | Ctrl+Z undo | X redo';
+    }
   }
 
   /* ── Renderers ──────────────────────────────────────────────────── */
@@ -492,7 +620,7 @@
         '<h4 class="rc-title">' + escHtml(r.title) + '</h4>',
         '<p class="rc-summary">' + escHtml(r.summary || r.sourcePageTitle) + '</p>',
         '<div class="rc-foot"><div class="rc-tags">' + tags + '</div>',
-        '<a class="rc-src-link" href="' + escHtml(resolveChapterPath(r.sourceUrl)) + '">↗</a>',
+        '<a class="rc-src-link" href="' + escHtml(r.sourceUrl) + '">-></a>',
         '</div></article>',
       ].join('');
     }).join('');
@@ -544,6 +672,23 @@
         '<span class="cb-count">' + b.sourceRoomIds.length + ' room' + (b.sourceRoomIds.length === 1 ? '' : 's') + '</span>',
         tagsHtml ? '<div class="cb-tags">' + tagsHtml + '</div>' : '',
         '</div></div></div>',
+      ].join('');
+    }).join('');
+  }
+
+  function renderImages() {
+    var p = getPalace();
+    els.imageLayer.innerHTML = p.images.map(function (img) {
+      var sel = img.id === state.selectedImageId;
+      return [
+        '<div class="canvas-image' + (sel ? ' is-selected' : '') + '"',
+        ' data-image-id="' + escHtml(img.id) + '"',
+        ' style="left:' + img.x + 'px;top:' + img.y + 'px;width:' + img.width + 'px;height:' + img.height + 'px;">',
+        '<img src="' + escHtml(img.src) + '" alt="' + escHtml(img.name || 'Pasted image') + '"/>',
+        '<button type="button" class="ci-delete" data-delete-image="' + escHtml(img.id) + '" title="Delete image">',
+        '<span class="icon icon-sm">close</span></button>',
+        '<span class="ci-badge">' + escHtml(img.name || 'Image') + '</span>',
+        '</div>',
       ].join('');
     }).join('');
   }
@@ -635,7 +780,7 @@
         '<p class="src-title">' + escHtml(r.title) + '</p>',
         '</div><span class="src-idx">' + (i + 1) + '</span></div>',
         '<div class="src-btns">',
-        '<a class="src-btn open" href="' + escHtml(resolveChapterPath(r.sourceUrl)) + '">Open ↗</a>',
+        '<a class="src-btn open" href="' + escHtml(r.sourceUrl) + '">Open -></a>',
         '<button type="button" class="src-btn" data-preview-room="' + escHtml(r.id) + '">Preview</button>',
         '<button type="button" class="src-btn" data-room-up="' + escHtml(r.id) + '"' + (i === 0 ? ' disabled' : '') + '>↑</button>',
         '<button type="button" class="src-btn" data-room-down="' + escHtml(r.id) + '"' + (i === b.sourceRoomIds.length - 1 ? ' disabled' : '') + '>↓</button>',
@@ -722,13 +867,13 @@
 
     els.reviewRoomSource.textContent = room.sourcePageTitle || room.sourcePage;
     els.reviewRoomTitle.textContent = room.title;
-    els.reviewRoomLink.href = resolveChapterPath(room.sourceUrl);
+    els.reviewRoomLink.href = room.sourceUrl || '#';
     els.reviewRoomSummary.textContent = room.summary || 'No summary available.';
 
     var clean = cleanHtml(room.contentHtml);
     els.reviewRoomContent.innerHTML = clean ||
       '<div style="padding:14px;background:var(--card);border-radius:var(--r-lg);color:var(--t3);font-size:13px;">' +
-      'Full room content was not captured during import. Click "Open Source ↗" to view it on the study page.</div>';
+      'Full room content was not captured during import. Click "Open Source ->" to view it on the study page.</div>';
     typesetMath(els.reviewRoomContent);
 
     els.reviewPrev.disabled = state.review.roomIndex <= 0;
@@ -738,20 +883,26 @@
   function renderViewport() {
     var z = getPalace().viewport.zoom || 1;
     els.zoomVal.textContent = Math.round(z * 100) + '%';
+    if (els.zoomSlider) els.zoomSlider.value = String(Math.round(z * 100));
     els.canvasStage.style.transform = 'scale(' + z + ')';
   }
 
   function render(persist) {
     ensureValid();
+    syncSidebarChrome();
     renderPalacePicker();
     renderImportedPages();
     renderRooms();
+    renderImages();
     renderBlocks();
     renderEdges();
     renderSketches();
     renderEditor();
     renderReview();
     renderViewport();
+    els.selectionModeButtons.forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-selection-mode') === state.selectionMode);
+    });
     syncPenToolbar();
     if (persist) saveState(state.data);
   }
@@ -773,7 +924,7 @@
       btn.classList.toggle('active', btn.getAttribute('data-mode-button') === mode);
     });
     if (mode === 'draw') {
-      setStatus('Draw mode — P pen · E erase · Ctrl+Z undo · X redo.');
+      setStatus('Draw mode - P pen | E erase | Ctrl+Z undo | X redo.');
     } else {
       setStatus('Selection mode active.');
       // Cancel any in-progress draw
@@ -788,6 +939,35 @@
     syncPenToolbar();
   }
 
+  function setSelectionMode(mode) {
+    state.selectionMode = mode || 'all';
+    els.selectionModeButtons.forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-selection-mode') === state.selectionMode);
+    });
+    if (state.mode === 'selection') {
+      setStatus('Selection filter: ' + state.selectionMode + '.');
+    }
+  }
+
+  function setZoom(nextZoom, anchorClientX, anchorClientY) {
+    var palace = getPalace();
+    var currentZoom = palace.viewport.zoom || 1;
+    var newZoom = clamp(nextZoom, 0.4, 2);
+    if (Math.abs(newZoom - currentZoom) < 0.0001) return;
+
+    var rect = els.canvasViewport.getBoundingClientRect();
+    var anchorX = typeof anchorClientX === 'number' ? anchorClientX : rect.left + rect.width / 2;
+    var anchorY = typeof anchorClientY === 'number' ? anchorClientY : rect.top + rect.height / 2;
+    var stageX = ((anchorX - rect.left) + els.canvasViewport.scrollLeft) / currentZoom;
+    var stageY = ((anchorY - rect.top) + els.canvasViewport.scrollTop) / currentZoom;
+
+    palace.viewport.zoom = newZoom;
+    render(true);
+
+    els.canvasViewport.scrollLeft = stageX * newZoom - (anchorX - rect.left);
+    els.canvasViewport.scrollTop = stageY * newZoom - (anchorY - rect.top);
+  }
+
   /* ── Pen toolbar activation ─────────────────────────────────────── */
   function setPenTool(tool) {
     state.penTool = tool;
@@ -795,8 +975,8 @@
     if (state.mode !== 'draw') setMode('draw');
     syncPenToolbar();
     setStatus(tool === 'eraser'
-      ? 'Eraser active — drag over strokes to erase · Ctrl+Z undo · X redo.'
-      : 'Pen active — draw on the canvas · Ctrl+Z undo · X redo.');
+      ? 'Eraser active - drag over strokes to erase | Ctrl+Z undo | X redo.'
+      : 'Pen active - draw on the canvas | Ctrl+Z undo | X redo.');
   }
 
   function setPenColor(color) {
@@ -820,18 +1000,18 @@
       setStatus('Preset data unavailable.'); return;
     }
     state.data = normalizeState(window.MemoryBuilderSeed.buildDefaultState());
-    state.selectedBlockId = null; state.selectedEdgeId = null;
+    state.selectedBlockId = null; state.selectedEdgeId = null; state.selectedImageId = null;
     state.pendingConnectFrom = null;
     state.review.blockId = null; state.review.roomIndex = 0;
     sketchUndoStack = []; sketchRedoStack = [];
-    render(true); setStatus('Loaded the Chapter 28 blank palace.');
+    render(true); setStatus('Loaded Chapter 8 preset.');
   }
 
   function newPalace() {
     var id = makeId('palace');
     state.data.palaces.unshift(safePalace({ id: id, name: 'New Palace' }, state.data.palaces.length));
     state.data.selectedPalaceId = id;
-    state.selectedBlockId = null; state.selectedEdgeId = null;
+    state.selectedBlockId = null; state.selectedEdgeId = null; state.selectedImageId = null;
     state.pendingConnectFrom = null;
     state.review.blockId = null; state.review.roomIndex = 0;
     sketchUndoStack = []; sketchRedoStack = [];
@@ -887,7 +1067,7 @@
     }
 
     state.data.selectedPalaceId = importedPalaces[0].id;
-    state.selectedBlockId = null; state.selectedEdgeId = null;
+    state.selectedBlockId = null; state.selectedEdgeId = null; state.selectedImageId = null;
     state.pendingConnectFrom = null;
     state.review.blockId = null; state.review.roomIndex = 0;
     sketchUndoStack = []; sketchRedoStack = [];
@@ -938,7 +1118,7 @@
     setStatus('Importing from ' + pages.join(', ') + '…');
     for (var i = 0; i < pages.length; i++) {
       try {
-        var payload = await window.RoomExtractor.fetchRoomsFromPage(resolveChapterPath(pages[i]));
+        var payload = await window.RoomExtractor.fetchRoomsFromPage(pages[i]);
         payload.rooms.forEach(function (r) {
           if (!p.importedRooms.some(function (e) { return e.id === r.id; })) {
             p.importedRooms.push(safeRoom(r, p.importedRooms.length));
@@ -956,24 +1136,45 @@
 
   /* ── Drag / pointer ─────────────────────────────────────────────── */
   function startBlockDrag(e, blockId) {
-    if (state.mode !== 'selection') return;
+    if (state.mode !== 'selection' || !selectionAllows('blocks')) return;
     var b = findBlock(blockId);
     if (!b) return;
     var pt = canvasPt(e.clientX, e.clientY);
-    state.drag = { blockId: blockId, ox: pt.x - b.x, oy: pt.y - b.y };
+    state.drag = { type: 'block', blockId: blockId, ox: pt.x - b.x, oy: pt.y - b.y };
     state.selectedBlockId = blockId;
+    state.selectedEdgeId = null;
+    state.selectedImageId = null;
+    render(false);
+  }
+
+  function startImageDrag(e, imageId) {
+    if (state.mode !== 'selection' || !selectionAllows('images')) return;
+    var img = findImage(imageId);
+    if (!img) return;
+    var pt = canvasPt(e.clientX, e.clientY);
+    state.drag = { type: 'image', imageId: imageId, ox: pt.x - img.x, oy: pt.y - img.y };
+    state.selectedImageId = imageId;
+    state.selectedBlockId = null;
     state.selectedEdgeId = null;
     render(false);
   }
 
   function handleMove(e) {
     if (state.drag) {
-      var b = findBlock(state.drag.blockId);
-      if (!b) return;
       var pt = canvasPt(e.clientX, e.clientY);
-      b.x = clamp(pt.x - state.drag.ox, 24, 2900);
-      b.y = clamp(pt.y - state.drag.oy, 24, 1900);
-      renderBlocks(); renderEdges();
+      if (state.drag.type === 'image') {
+        var img = findImage(state.drag.imageId);
+        if (!img) return;
+        img.x = clamp(pt.x - state.drag.ox, 24, 3100 - img.width);
+        img.y = clamp(pt.y - state.drag.oy, 24, 2100 - img.height);
+        renderImages();
+      } else {
+        var b = findBlock(state.drag.blockId);
+        if (!b) return;
+        b.x = clamp(pt.x - state.drag.ox, 24, 2900);
+        b.y = clamp(pt.y - state.drag.oy, 24, 1900);
+        renderBlocks(); renderEdges();
+      }
     }
     if (state.draw) {
       var pt2 = canvasPt(e.clientX, e.clientY);
@@ -1058,7 +1259,7 @@
 
   els.palaceSelect.addEventListener('change', function (e) {
     state.data.selectedPalaceId = e.target.value;
-    state.selectedBlockId = null; state.selectedEdgeId = null;
+    state.selectedBlockId = null; state.selectedEdgeId = null; state.selectedImageId = null;
     state.pendingConnectFrom = null;
     state.review.blockId = null; state.review.roomIndex = 0;
     sketchUndoStack = []; sketchRedoStack = [];
@@ -1068,6 +1269,27 @@
   els.modeButtons.forEach(function (btn) {
     btn.addEventListener('click', function () { setMode(btn.getAttribute('data-mode-button')); });
   });
+  els.selectionModeButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (state.mode !== 'selection') setMode('selection');
+      setSelectionMode(btn.getAttribute('data-selection-mode'));
+      render(false);
+    });
+  });
+  if (els.toggleLeftSidebar) {
+    els.toggleLeftSidebar.addEventListener('click', function () {
+      state.ui.leftSidebarOpen = !state.ui.leftSidebarOpen;
+      saveUiState(state.ui);
+      syncSidebarChrome();
+    });
+  }
+  if (els.toggleRightSidebar) {
+    els.toggleRightSidebar.addEventListener('click', function () {
+      state.ui.rightSidebarOpen = !state.ui.rightSidebarOpen;
+      saveUiState(state.ui);
+      syncSidebarChrome();
+    });
+  }
 
   /* Tab switching */
   els.tabButtons.forEach(function (btn) {
@@ -1075,9 +1297,21 @@
   });
 
   /* Zoom */
-  byId('zoom-in').addEventListener('click', function () { getPalace().viewport.zoom = clamp((getPalace().viewport.zoom || 1) + 0.1, 0.4, 2); render(true); });
-  byId('zoom-out').addEventListener('click', function () { getPalace().viewport.zoom = clamp((getPalace().viewport.zoom || 1) - 0.1, 0.4, 2); render(true); });
-  byId('zoom-reset').addEventListener('click', function () { getPalace().viewport.zoom = 1; render(true); });
+  byId('zoom-in').addEventListener('click', function () { setZoom((getPalace().viewport.zoom || 1) + 0.1); });
+  byId('zoom-out').addEventListener('click', function () { setZoom((getPalace().viewport.zoom || 1) - 0.1); });
+  byId('zoom-reset').addEventListener('click', function () { setZoom(1); });
+  if (els.zoomSlider) {
+    els.zoomSlider.addEventListener('input', function (e) {
+      setZoom(Number(e.target.value || 100) / 100);
+    });
+  }
+  els.canvasViewport.addEventListener('wheel', function (e) {
+    if (!e.ctrlKey) return;
+    e.preventDefault();
+    var currentZoom = getPalace().viewport.zoom || 1;
+    var delta = e.deltaY < 0 ? 0.1 : -0.1;
+    setZoom(currentZoom + delta, e.clientX, e.clientY);
+  }, { passive: false });
 
   /* ── Pen Toolbar events ─────────────────────────────────────────── */
   els.penToolbar.addEventListener('click', function (e) {
@@ -1148,6 +1382,19 @@
     }
   });
 
+  document.addEventListener('paste', function (e) {
+    var items = Array.from((e.clipboardData && e.clipboardData.items) || []);
+    var imageItem = items.find(function (item) {
+      return item && item.kind === 'file' && /^image\//i.test(item.type || '');
+    });
+    if (!imageItem) return;
+    e.preventDefault();
+    var file = imageItem.getAsFile();
+    fileToImageData(file).then(addCanvasImage).catch(function () {
+      setStatus('Could not paste that image.');
+    });
+  });
+
   /* Left sidebar — remove page chips */
   els.importedPages.addEventListener('click', function (e) {
     var btn = e.target.closest('[data-rm-page]');
@@ -1202,28 +1449,46 @@
     var block = createBlock([roomId], dropPos(e.clientX, e.clientY));
     p.blocks.push(block);
     state.selectedBlockId = block.id;
+    state.selectedImageId = null;
     render(true); setStatus('Created block.');
   });
 
   /* Canvas stage — pointer events */
   els.canvasStage.addEventListener('pointerdown', function (e) {
+    var delImageBtn = e.target.closest('[data-delete-image]');
+    if (delImageBtn) {
+      e.stopPropagation();
+      var imageId = delImageBtn.getAttribute('data-delete-image');
+      removeImage(imageId);
+      render(true);
+      setStatus('Deleted image.');
+      return;
+    }
     var reviewBtn = e.target.closest('[data-open-review]');
     if (reviewBtn) {
       e.stopPropagation();
       state.review.blockId = reviewBtn.getAttribute('data-open-review');
       state.review.roomIndex = 0;
       state.selectedBlockId = state.review.blockId;
+      state.selectedImageId = null;
       render(false); return;
     }
     var srcBtn = e.target.closest('[data-open-src]');
     if (srcBtn) {
       e.stopPropagation();
       var b = findBlock(srcBtn.getAttribute('data-open-src'));
-      if (b && b.sourceRoomIds.length) { var r = findRoom(b.sourceRoomIds[0]); if (r) window.location.href = resolveChapterPath(r.sourceUrl); }
+      if (b && b.sourceRoomIds.length) { var r = findRoom(b.sourceRoomIds[0]); if (r) window.location.href = r.sourceUrl; }
+      return;
+    }
+    var imageEl = e.target.closest('[data-image-id]');
+    if (imageEl && state.mode !== 'draw') {
+      if (!selectionAllows('images')) return;
+      startImageDrag(e, imageEl.getAttribute('data-image-id'));
       return;
     }
     var blockEl = e.target.closest('[data-block-id]');
     if (blockEl && state.mode !== 'draw') {
+      if (!selectionAllows('blocks')) return;
       var bid = blockEl.getAttribute('data-block-id');
       if (finishConnect(bid)) return;
       startBlockDrag(e, bid);
@@ -1237,8 +1502,10 @@
     if (e.target.closest('#pen-toolbar')) return;
 
     if (e.target.closest('[data-block-id]')) return;
+    if (state.mode !== 'draw' && e.target.closest('[data-image-id]')) return;
 
     if (state.mode === 'draw') {
+      e.preventDefault();
       var p = getPalace();
       var pt = canvasPt(e.clientX, e.clientY);
 
@@ -1262,6 +1529,7 @@
     // Selection mode: click empty area deselects
     state.selectedBlockId = null;
     state.selectedEdgeId = null;
+    state.selectedImageId = null;
     render(false);
   });
 
@@ -1270,10 +1538,12 @@
 
   /* Edge clicks */
   els.edgeLayer.addEventListener('click', function (e) {
+    if (state.mode !== 'selection' || !selectionAllows('edges')) return;
     var g = e.target.closest('[data-edge-id]');
     if (!g) return;
     e.stopPropagation();
     state.selectedEdgeId = g.getAttribute('data-edge-id');
+    state.selectedImageId = null;
     render(false);
   });
 
@@ -1348,7 +1618,7 @@
 
   /* Footer buttons */
   byId('open-full-review-button').addEventListener('click', function () {
-    if (state.selectedBlockId) { state.review.blockId = state.selectedBlockId; state.review.roomIndex = 0; render(false); }
+    if (state.selectedBlockId) { state.review.blockId = state.selectedBlockId; state.review.roomIndex = 0; state.selectedImageId = null; render(false); }
   });
   byId('connect-block-button').addEventListener('click', function () {
     if (!state.selectedBlockId) { setStatus('Select a block first.'); return; }
@@ -1453,7 +1723,7 @@
   });
 
   byId('reset-all-data-button').addEventListener('click', function () {
-    showConfirm('Reset all data?', 'Erase every palace from localStorage and reload the Chapter 28 blank palace?', function () {
+    showConfirm('Reset all data?', 'Erase every palace from localStorage and reload the Chapter 8 preset?', function () {
       try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
       state.data = normalizeState(null);
       state.selectedBlockId = null; state.selectedEdgeId = null;

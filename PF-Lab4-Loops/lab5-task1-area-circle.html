@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 5 Task 1 | Area of a Circle Function</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab5-task1-area-circle"><main class="shell"><nav class="nav"><a href="lab5-index.html">Lab 5 Index</a><a href="lab5-guide.html">Guide</a><a href="lab5-task2-factorial-iteration.html">Next: Task 2</a></nav><section class="hero"><div class="tag">Lab 5 Task 1</div><h1>Function to Calculate Area of a Circle</h1><p class="hero-sub">This is the cleanest possible function problem: one float goes in, one float comes back out.</p><div class="formula-block">$$\text{areaCircle}(r)=\pi r^2$$</div><div class="tool-row"><a class="tool-btn" href="lab5-guide.html">Functions Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab5-task1-area-circle.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Function type</div><div class="v">returns <span class="inline-code">float</span></div></div><div class="fact"><div class="k">Input</div><div class="v">radius <span class="inline-code">r</span></div></div><div class="fact"><div class="k">Output</div><div class="v">area of circle</div></div><div class="fact"><div class="k">Caller</div><div class="v"><span class="inline-code">main</span> reads radius and prints result</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+float areaCircle(float r)
+{
+    const float pi = 3.14159f;
+    return pi * r * r;
+}
+
+int main(void)
+{
+    float radius;
+
+    printf("Enter radius: ");
+    scanf("%f", &amp;radius);
+
+    printf("Area = %.2f\n", areaCircle(radius));
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Return Type Comes First</h2><ul><li>The answer can contain decimals, so <span class="inline-code">float</span> fits the job.</li><li>The function is not just printing, it is returning a computed value.</li><li>That is why the heading starts with <span class="inline-code">float areaCircle</span>.</li></ul></article><article class="room"><h2>Room 2: Radius Is the Parameter</h2><ul><li>The function only needs one input: the radius.</li><li>Put it inside parentheses as <span class="inline-code">float r</span>.</li><li>This keeps the function reusable for any radius value.</li></ul></article><article class="room"><h2>Room 3: Formula Lives Inside the Function</h2><ul><li>Use the area formula inside the body.</li><li>Return <span class="inline-code">pi * r * r</span>.</li><li>The caller does not need to know the internal calculation steps.</li></ul></article><article class="room"><h2>Room 4: main Reads Then Calls</h2><ul><li><span class="inline-code">main</span> handles user interaction.</li><li>It reads radius with <span class="inline-code">scanf</span> and passes the value to the function.</li><li>The returned area is printed with formatting.</li></ul></article><article class="room"><h2>Room 5: Value Flow Story</h2><ul><li>User enters radius.</li><li>The value moves into <span class="inline-code">areaCircle(radius)</span>.</li><li>The function returns the area back to <span class="inline-code">printf</span>.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

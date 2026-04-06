@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-example-9-6.html" />
+<title>Example 9-6 to Exercise 9-8 | Ramp And Integration</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_example_9_6">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="ch9-example-9-5.html">Prev: Example 9-5</a>
+    <a href="ch9-example-9-7.html">Next: Example 9-7</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Example 9-6 through Exercise 9-8</div>
+    <h1>Ramp And Integration Corridor</h1>
+    <p class="hero-sub">This range teaches the integration property as a visual rule. A known transform drops onto one extra vortex layer every time you integrate over time.</p>
+    <div class="formula-block">$$\mathcal{L}\left\{\int_0^t f(\tau)\,d\tau\right\}=\frac{F(s)}{s}$$</div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Memory Rooms</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-example-9-6.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Results</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Example 9-6</div><div class="v">$$\mathcal{L}\{tu(t)\}=\dfrac{1}{s^2}$$</div></div>
+          <div class="fact"><div class="k">Exercise 9-7</div><div class="v">$$\mathcal{L}\{v_2(t)\}=\dfrac{V_A}{s(s+\alpha)}=\dfrac{V_1(s)}{s}$$</div></div>
+          <div class="fact"><div class="k">Exercise 9-8</div><div class="v">$$V(s)=\dfrac{6000}{s(s+1000)}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Example 9-6: Build The Ramp By Integrating The Step</h3>
+            <div class="review-room-prompt">
+              <p>The ramp can be produced from the unit step by integration:</p>
+              <p>$$r(t)=tu(t)=\int_0^t u(\tau)\,d\tau$$</p>
+              <p>You already know</p>
+              <p>$$\mathcal{L}\{u(t)\}=\frac{1}{s}$$</p>
+              <p>Use the integration property:</p>
+              <p>$$\mathcal{L}\left\{\int_0^t f(\tau)\,d\tau\right\}=\frac{F(s)}{s}$$</p>
+              <p>Here $$f(\tau)=u(\tau),$$ so</p>
+              <p>$$\mathcal{L}\{r(t)\}=\frac{1}{s}\mathcal{L}\{u(t)\}=\frac{1}{s}\cdot\frac{1}{s}=\frac{1}{s^2}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Exercise 9-7: Integrate The Exponential Signal First, Then Transform</h3>
+            <div class="review-room-prompt">
+              <p>Start from</p>
+              <p>$$v_1(t)=V_Ae^{-\alpha t}u(t),\qquad v_2(t)=\int_0^t V_Ae^{-\alpha x}\,dx$$</p>
+              <p>Evaluate the integral in time:</p>
+              <p>$$v_2(t)=V_A\int_0^t e^{-\alpha x}\,dx=V_A\left[\frac{-1}{\alpha}e^{-\alpha x}\right]_0^t=\frac{V_A}{\alpha}(1-e^{-\alpha t})$$</p>
+              <p>Now transform:</p>
+              <p>$$\mathcal{L}\{v_2(t)\}=\frac{V_A}{\alpha}\left[\frac{1}{s}-\frac{1}{s+\alpha}\right]$$</p>
+              <p>Use a common denominator:</p>
+              <p>$$\frac{1}{s}-\frac{1}{s+\alpha}=\frac{(s+\alpha)-s}{s(s+\alpha)}=\frac{\alpha}{s(s+\alpha)}$$</p>
+              <p>So</p>
+              <p>$$\mathcal{L}\{v_2(t)\}=\frac{V_A}{\alpha}\cdot\frac{\alpha}{s(s+\alpha)}=\frac{V_A}{s(s+\alpha)}$$</p>
+              <p>Since $$V_1(s)=\frac{V_A}{s+\alpha},$$ it follows that</p>
+              <p>$$\frac{V_1(s)}{s}=\frac{V_A}{s(s+\alpha)}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Exercise 9-8: Integrate Then Apply The Scale Factor Carefully</h3>
+            <div class="review-room-prompt">
+              <p>Given</p>
+              <p>$$i(t)=6e^{-1000t}u(t),\qquad v(t)=\frac{1}{10^{-6}}\int_0^t i(x)\,dx$$</p>
+              <p>First transform the current:</p>
+              <p>$$I(s)=\frac{6}{s+1000}$$</p>
+              <p>Integrating once divides by $$s$$:</p>
+              <p>$$\mathcal{L}\left\{\int_0^t i(x)\,dx\right\}=\frac{I(s)}{s}=\frac{6}{s(s+1000)}$$</p>
+              <p>Now include the scale factor. In the book's unit handling, the final result is written as</p>
+              <p>$$V(s)=\frac{I(s)}{10^{-6}s}=\frac{6}{s+1000}\cdot\frac{1}{10^{-6}s}=\frac{6000}{s(s+1000)}$$</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: Memory System First</div>
+        <div class="rooms">
+          <article class="room" data-tags="ramp,step,integration,double-vortex">
+            <h2>Example 9-6: Integrate The Step Once To Get The Ramp</h2>
+            <p>Begin on the flat white ground of $$u(t).$$ Sweep forward with the curved integration blade. The flat ground accumulates height as you walk and turns into a rising ramp road. In transform space the old $$1/s$$ image drops onto one extra vortex layer and becomes $$1/s^2.$$</p>
+            <ul>
+              <li>Integration adds one more vortex layer.</li>
+              <li>The ramp is a raised version of the step ground.</li>
+              <li>The final image is a white pillar on a double-vortex base.</li>
+            </ul>
+          </article>
+          <article class="room" data-tags="integrated-exponential,dual-base,va">
+            <h2>Exercise 9-7: Drop The Exponential Structure Onto One More Layer</h2>
+            <p>Start from the old exponential form $$V_A/(s+\alpha).$$ Use the integration sweep once more and the whole structure drops onto a plain vortex layer under the collared vortex. The top VA core stays the same, but the base becomes $$s(s+\alpha).$$</p>
+            <ul>
+              <li>Integrating an exponential adds one plain $$s$$ layer below the old base.</li>
+              <li>The top VA core does not change.</li>
+              <li>The final image is $$V_A$$ over $$s(s+\alpha).$$</li>
+            </ul>
+          </article>
+          <article class="room" data-tags="amplified-integration,6000,1000">
+            <h2>Exercise 9-8: The Integrated Exponential Passes Through An Amplifier</h2>
+            <p>Begin with a six-strength exponential orb on a thousand-grade collared vortex base. Integrate once so a plain vortex appears underneath. Then pass the whole structure through a huge amplification chamber. The top compresses into a bright 6000 crystal while the base remains $$s(s+1000).$$</p>
+            <ul>
+              <li>Same integration move as before.</li>
+              <li>The large scale factor changes only the top.</li>
+              <li>The final image is $$6000$$ over $$s(s+1000).$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Shape Hooks</div>
+        <div class="facts">
+          <div class="fact"><div class="k">$$\int$$</div><div class="v">Curved ODM blade</div></div>
+          <div class="fact"><div class="k">$$tu(t)$$</div><div class="v">Rising ramp road</div></div>
+          <div class="fact"><div class="k">$$s+\alpha$$</div><div class="v">Collared vortex</div></div>
+          <div class="fact"><div class="k">Integration</div><div class="v">Add one $$s$$ layer below</div></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

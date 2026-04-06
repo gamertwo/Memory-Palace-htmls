@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 5 Debug 1 | Fix Sum Function Errors</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab5-debug1-sum-function"><main class="shell"><nav class="nav"><a href="lab5-index.html">Lab 5 Index</a><a href="lab5-guide.html">Guide</a><a href="lab5-debug2-cube-function.html">Next: Debug 2</a></nav><section class="hero"><div class="tag">Lab 5 Debugging Task 1</div><h1>Fix the Broken Sum Function Program</h1><p class="hero-sub">The lab gives a short function program with multiple syntax mistakes. This page helps you remember the repair order instead of guessing randomly.</p><div class="formula-block">$$\text{fix types} \rightarrow \text{fix call syntax} \rightarrow \text{declare result} \rightarrow \text{print output}$$</div><div class="tool-row"><a class="tool-btn" href="lab5-guide.html">Functions Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab5-debug1-sum-function.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Broken Code Shape</div><div class="formula-block"><pre><code>int sum(a, b) {
+    return a + b
+}
+
+int main() {
+    int num1 = 5, num2 = 10;
+    result = sum(num1 num2);
+    printf("Sum = %d", result);
+}</code></pre></div></section><section class="panel"><div class="section-title">Corrected Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int sum(int a, int b)
+{
+    return a + b;
+}
+
+int main(void)
+{
+    int num1 = 5, num2 = 10;
+    int result;
+
+    result = sum(num1, num2);
+    printf("Sum = %d\n", result);
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Parameters Need Types</h2><ul><li>In modern C, the function parameters must have declared types.</li><li>So <span class="inline-code">sum(a, b)</span> becomes <span class="inline-code">sum(int a, int b)</span>.</li><li>This is the first syntax repair.</li></ul></article><article class="room"><h2>Room 2: return Needs a Semicolon</h2><ul><li>The statement <span class="inline-code">return a + b</span> is incomplete without <span class="inline-code">;</span>.</li><li>A missing semicolon is a classic lab bug.</li><li>Repair it before moving on.</li></ul></article><article class="room"><h2>Room 3: result Must Be Declared</h2><ul><li>The variable <span class="inline-code">result</span> is used before declaration.</li><li>Add <span class="inline-code">int result;</span> inside <span class="inline-code">main</span>.</li><li>Undeclared variables always break compilation.</li></ul></article><article class="room"><h2>Room 4: Function Call Needs a Comma</h2><ul><li>The call <span class="inline-code">sum(num1 num2)</span> is missing a comma.</li><li>Correct it to <span class="inline-code">sum(num1, num2)</span>.</li><li>Each argument must be separated clearly.</li></ul></article><article class="room"><h2>Room 5: main Should Finish Properly</h2><ul><li>Use <span class="inline-code">int main(void)</span> and return 0.</li><li>This makes the program complete and standard.</li><li>The fixed version now compiles and prints the sum.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rlc-ex727.html" />
 <title>RLC Exercise 7-27 | Parallel Zero-Input Currents and KCL</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="linear-review.css" />
 <script>
 MathJax = {
   tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
@@ -13,280 +13,39 @@ MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
-<script src="linear-review.js" defer></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d0f14;
-  --bg2:#1a1e27;
-  --panel:#131821;
-  --panel2:#191f2a;
-  --line:rgba(255,255,255,.08);
-  --accent:#ffd08a;
-  --text:#f7f1e8;
-  --muted:rgba(247,241,232,.78);
-}
-body{
-  font-family:'Outfit',sans-serif;
-  background:linear-gradient(180deg,var(--bg),var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-}
-a{color:inherit}
-.shell{max-width:1160px;margin:0 auto;padding:2rem 1rem 3rem}
-.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
-.nav a{
-  text-decoration:none;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.85rem;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.hero,.panel,.palace-sidebar{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1.2rem;
-}
-.hero h1{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.75rem,4vw,2.75rem);
-  margin-bottom:.5rem;
-}
-.hero p{color:var(--muted);line-height:1.7}
-.eq{
-  margin-top:.9rem;
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.9rem;
-  text-align:center;
-  overflow:auto;
-}
-.content-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.65fr) minmax(300px,.95fr);
-  gap:1rem;
-  align-items:start;
-  margin-top:1rem;
-}
-.main-stack{display:grid;gap:1rem}
-.section-title{
-  font-size:1rem;
-  font-weight:800;
-  color:var(--accent);
-  margin-bottom:.8rem;
-}
-.rooms{display:grid;gap:.85rem}
-.room{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.room h2{
-  font-size:1rem;
-  margin-bottom:.55rem;
-  color:var(--accent);
-}
-.room ul{padding-left:1.2rem}
-.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.plot-note{line-height:1.75;color:var(--muted)}
-.facts{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:.7rem;
-}
-.fact{
-  background:rgba(255,255,255,.02);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.75rem;
-}
-.fact .k{
-  font-size:.7rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:.25rem;
-}
-.fact .v{color:var(--muted);line-height:1.6}
-.mini{
-  margin-top:.75rem;
-  padding:.75rem .85rem;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-}
-.mini h3,.station h3,.transition h3{
-  font-size:.9rem;
-  color:var(--accent);
-  margin-bottom:.35rem;
-}
-.palace-sidebar{position:sticky;top:1rem}
-.path{display:grid;gap:.65rem}
-.station,.transition{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.transition{
-  border-style:dashed;
-  background:rgba(255,255,255,.02);
-}
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
-.tool-btn,.ghost-btn{
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.8rem;
-  font-family:inherit;
-  cursor:pointer;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
-.plot-wrap{
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:rgba(255,255,255,.02);
-  padding:1rem;
-}
-.plot-legend{
-  display:flex;
-  gap:.9rem;
-  flex-wrap:wrap;
-  margin-bottom:.75rem;
-}
-.legend-item{
-  display:flex;
-  align-items:center;
-  gap:.45rem;
-  color:var(--muted);
-  font-size:.82rem;
-}
-.legend-swatch{
-  width:16px;
-  height:3px;
-  border-radius:999px;
-}
-#kcl-plot{
-  width:100%;
-  height:auto;
-  display:block;
-  background:rgba(255,255,255,.02);
-  border:1px solid var(--line);
-  border-radius:12px;
-}
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  background:rgba(6,8,12,.74);
-  z-index:50;
-}
-.modal.open{display:flex}
-.modal-card{
-  width:min(760px,100%);
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1rem;
-  box-shadow:0 24px 80px rgba(0,0,0,.45);
-}
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:.75rem;
-}
-.modal-head h3{font-size:1rem;color:var(--accent)}
-.prompt-box{
-  width:100%;
-  min-height:360px;
-  resize:vertical;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--panel2);
-  color:var(--text);
-  padding:.9rem;
-  font:inherit;
-  line-height:1.65;
-}
-.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
-@media (max-width:760px){
-  .shell{padding:1rem .85rem 2rem}
-  .content-grid{grid-template-columns:1fr}
-  .palace-sidebar{position:static}
-}
-</style>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="linear-review.css" />
 </head>
-<body>
+<body data-page-key="rlc_ex727">
 <main class="shell">
-  <nav class="nav">
-    <a href="index.html">Pattern Palace</a>
+  <nav class="nav"><a href="index.html">Pattern Palace</a>
     <a href="hub.html">Hub</a>
-    <a href="rlc-ex726.html">Back: Exercise 7-26</a>
-  </nav>
+    <a href="rlc-ex726.html">Back: Exercise 7-26</a></nav>
 
   <section class="hero">
+    
     <h1>Exercise 7-27</h1>
-    <p>A parallel RLC circuit has $$R=1\ \text{k}\Omega,$$ $$C=1\ \mu\text{F},$$ $$L=100\ \text{mH},$$ $$I_0=100\ \text{mA},$$ and $$V_0=0.$$ Plot the zero-input responses of the inductor, resistor, and capacitor currents on one axis, then show that Kirchhoff's current law holds at every instant.</p>
-    <div class="eq">$$i_L(t)=e^{-500t}\left(100\cos 3122.5t+16.0\sin 3122.5t\right)\ \text{mA}$$
+    <p class="hero-sub">A parallel RLC circuit has $$R=1\ \text{k}\Omega,$$ $$C=1\ \mu\text{F},$$ $$L=100\ \text{mH},$$ $$I_0=100\ \text{mA},$$ and $$V_0=0.$$ Plot the zero-input responses of the inductor, resistor, and capacitor currents on one axis, then show that Kirchhoff's current law holds at every instant.</p>
+    <div class="formula-block">$$i_L(t)=e^{-500t}\left(100\cos 3122.5t+16.0\sin 3122.5t\right)\ \text{mA}$$
     $$i_R(t)=-32.0e^{-500t}\sin 3122.5t\ \text{mA},\qquad i_C(t)=e^{-500t}\left(-100\cos 3122.5t+16.0\sin 3122.5t\right)\ \text{mA}$$</div>
-    <div class="tool-row">
-      <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
-    </div>
+    <div class="tool-row"><a class="tool-btn" href="memory-palace-builder.html?pages=rlc-ex727.html" data-builder-link="true">Open in Memory Builder</a></div>
   </section>
 
-  <div class="content-grid">
+  <div class="study-grid">
     <div class="main-stack">
       <section class="panel">
         <div class="section-title">Quick Data</div>
-        <div class="facts">
-          <div class="fact"><div class="k">Resistance</div><div class="v">$$R=1\ \text{k}\Omega$$</div></div>
+        <div class="facts"><div class="fact"><div class="k">Resistance</div><div class="v">$$R=1\ \text{k}\Omega$$</div></div>
           <div class="fact"><div class="k">Capacitance</div><div class="v">$$C=1\times 10^{-6}\ \text{F}$$</div></div>
           <div class="fact"><div class="k">Inductance</div><div class="v">$$L=0.1\ \text{H}$$</div></div>
           <div class="fact"><div class="k">Initial State</div><div class="v">$$i_L(0)=100\ \text{mA},\quad v_C(0)=0$$</div></div>
           <div class="fact"><div class="k">Damping Data</div><div class="v">$$\alpha=500\ \text{s}^{-1},\quad \omega_d\approx 3122.5\ \text{rad/s}$$</div></div>
-          <div class="fact"><div class="k">Parallel Facts</div><div class="v">$$v=L\dfrac{di_L}{dt},\quad i_R=\dfrac{v}{R},\quad i_C=C\dfrac{dv}{dt}$$</div></div>
-        </div>
+          <div class="fact"><div class="k">Parallel Facts</div><div class="v">$$v=L\dfrac{di_L}{dt},\quad i_R=\dfrac{v}{R},\quad i_C=C\dfrac{dv}{dt}$$</div></div></div>
       </section>
 
       <section class="panel">
-        <div class="section-title">Answer Board</div>
-        <div class="facts">
-          <div class="fact"><div class="k">Inductor Current</div><div class="v">$$i_L(t)=e^{-500t}\left(100\cos 3122.5t+16.0\sin 3122.5t\right)\ \text{mA}$$</div></div>
-          <div class="fact"><div class="k">Resistor Current</div><div class="v">$$i_R(t)=-32.0e^{-500t}\sin 3122.5t\ \text{mA}$$</div></div>
-          <div class="fact"><div class="k">Capacitor Current</div><div class="v">$$i_C(t)=e^{-500t}\left(-100\cos 3122.5t+16.0\sin 3122.5t\right)\ \text{mA}$$</div></div>
-          <div class="fact"><div class="k">KCL</div><div class="v">$$i_L(t)+i_R(t)+i_C(t)=0$$ for all $$t$$</div></div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="section-title">Analytical Plot</div>
-        <div class="plot-wrap">
-          <div class="plot-legend">
-            <div class="legend-item"><span class="legend-swatch" style="background:#87b4ff"></span>Inductor current $$i_L(t)$$</div>
-            <div class="legend-item"><span class="legend-swatch" style="background:#d9d9d9"></span>Resistor current $$i_R(t)$$</div>
-            <div class="legend-item"><span class="legend-swatch" style="background:#c7a3ff"></span>Capacitor current $$i_C(t)$$</div>
-            <div class="legend-item"><span class="legend-swatch" style="background:#7ce8b0"></span>Sum $$i_L+i_R+i_C$$</div>
-          </div>
-          <svg id="kcl-plot" viewBox="0 0 720 420" role="img" aria-label="Plot of inductor, resistor, capacitor, and sum currents"></svg>
-          <p class="plot-note">This plot is generated from the analytic expressions above over the interval $$0\le t\le 10\ \text{ms}.$$ The green sum trace sits on the zero axis, confirming KCL at every instant.</p>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="section-title">Rooms</div>
-        <div class="rooms">
-          <article class="room">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms"><article class="room">
             <h2>Room 1: Write the Parallel Characteristic Equation</h2>
             <ul>
               <li>For a zero-input parallel RLC circuit, use</li>
@@ -295,7 +54,7 @@ a{color:inherit}
               <li>$$10^{-7}s^2+10^{-4}s+1=0.$$</li>
               <li>Normalized form:</li>
               <li>$$s^2+1000s+10^7=0.$$</li>
-            </ul>
+              <li><strong>Why:</strong> Because the characteristic equation is the starting model for the natural behavior, and every root, range, and waveform comes from it.</li></ul>
           </article>
 
           <article class="room">
@@ -305,7 +64,7 @@ a{color:inherit}
               <li>$$s_{1,2}=-500\pm j3122.5.$$</li>
               <li>So the zero-input inductor current is underdamped:</li>
               <li>$$i_L(t)=e^{-500t}\left(K_1\cos 3122.5t+K_2\sin 3122.5t\right).$$</li>
-            </ul>
+              <li><strong>Why:</strong> Because the root type decides the waveform template, so this step prevents guessing the wrong current form.</li></ul>
           </article>
 
           <article class="room">
@@ -314,7 +73,7 @@ a{color:inherit}
               <li>At $$t=0,$$ the cosine term is 1 and the sine term is 0.</li>
               <li>So</li>
               <li>$$i_L(0)=K_1=100\ \text{mA}.$$</li>
-            </ul>
+              <li><strong>Why:</strong> Because the initial inductor current is a stored-energy fact, so it immediately fixes one constant in the current template.</li></ul>
           </article>
 
           <article class="room">
@@ -326,7 +85,7 @@ a{color:inherit}
               <li>$$\left.\frac{di_L}{dt}\right|_0=0.$$</li>
               <li>This gives</li>
               <li>$$-500K_1+3122.5K_2=0.$$</li>
-            </ul>
+              <li><strong>Why:</strong> Because in parallel circuits the branch voltage controls current derivatives, so this is how the initial voltage becomes a solvable constraint.</li></ul>
           </article>
 
           <article class="room">
@@ -336,7 +95,7 @@ a{color:inherit}
               <li>$$K_2=\frac{500(100)}{3122.5}\approx 16.0.$$</li>
               <li>Therefore</li>
               <li>$$\boxed{i_L(t)=e^{-500t}\left(100\cos 3122.5t+16.0\sin 3122.5t\right)\ \text{mA}}.$$</li>
-            </ul>
+              <li><strong>Why:</strong> Because the second constant is the last missing degree of freedom, so solving it fully pins down the response.</li></ul>
           </article>
 
           <article class="room">
@@ -345,7 +104,7 @@ a{color:inherit}
               <li>Use $$v=L\,di_L/dt.$$</li>
               <li>The derivative condition cancels the cosine term at the start, leaving</li>
               <li>$$v_C(t)=v_L(t)=-32.0e^{-500t}\sin 3122.5t\ \text{V}. $$</li>
-            </ul>
+              <li><strong>Why:</strong> Because the branch voltage is the shared bridge to the other branch quantities, so it has to be extracted before the rest can follow.</li></ul>
           </article>
 
           <article class="room">
@@ -355,7 +114,7 @@ a{color:inherit}
               <li>$$i_R(t)=\frac{v_C(t)}{R}=\frac{-32.0e^{-500t}\sin 3122.5t}{1000}. $$</li>
               <li>So</li>
               <li>$$\boxed{i_R(t)=-32.0e^{-500t}\sin 3122.5t\ \text{mA}}.$$</li>
-            </ul>
+              <li><strong>Why:</strong> Because resistor current is not independent here; once the shared voltage is known, Ohm's law gives it immediately.</li></ul>
           </article>
 
           <article class="room">
@@ -364,7 +123,7 @@ a{color:inherit}
               <li>Use $$i_C=C\,dv_C/dt.$$</li>
               <li>After differentiation and simplification,</li>
               <li>$$\boxed{i_C(t)=e^{-500t}\left(-100\cos 3122.5t+16.0\sin 3122.5t\right)\ \text{mA}}.$$</li>
-            </ul>
+              <li><strong>Why:</strong> Because capacitor current comes from the voltage slope, so this step completes the branch-current picture from the same shared voltage.</li></ul>
           </article>
 
           <article class="room">
@@ -374,224 +133,14 @@ a{color:inherit}
               <li>$$i_L+i_R+i_C=e^{-500t}\left(100\cos+16\sin-32\sin-100\cos+16\sin\right).$$</li>
               <li>The cosine terms cancel and the sine terms also cancel, so</li>
               <li>$$\boxed{i_L(t)+i_R(t)+i_C(t)=0}$$ for every $$t.$$</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="mini">
-          <h3>Fast Memory Rule</h3>
-          <p>For a parallel zero-input problem, solve the current first, use the shared parallel voltage to get $$v(t),$$ then derive $$i_R$$ and $$i_C$$ from that same voltage. KCL becomes the final consistency check.</p>
-        </div>
+              <li><strong>Why:</strong> Because conservation of current is the final consistency check that proves all three branch expressions belong to the same solution.</li></ul>
+          </article></div>
+        <div class="mini"><h3>Fast Memory Rule</h3><p>For a parallel zero-input problem, solve the current first, use the shared parallel voltage to get $$v(t),$$ then derive $$i_R$$ and $$i_C$$ from that same voltage. KCL becomes the final consistency check.</p></div>
+        <div class="mini"><h3>Why The Order Matters</h3><p>This page works best when you read it as a chain instead of as isolated formulas. The early rooms set up the model, the middle rooms use that model to solve constants or component constraints, and the last room writes the requested answer. If a room feels sudden, go back one room and ask which number or rule it is using.</p></div>
+        <div class="mini"><h3>What To Watch</h3><p>Do not treat the branch quantities as independent. In the parallel pages, one shared voltage or one known branch current drives the rest of the solution.</p></div>
       </section>
     </div>
-
-    <aside class="palace-sidebar">
-      <div class="section-title">Memory Palace Path</div>
-      <p class="palace-intro">This route starts with the parallel characteristic equation and ends with the sum of the three branch currents collapsing to zero.</p>
-      <div class="path">
-        <div class="station">
-          <h3>Station 1: Parallel Gate</h3>
-          <p>Store $$LCs^2+\frac{L}{R}s+1=0.$$</p>
-        </div>
-        <div class="transition">
-          <h3>Transition 1 to 2</h3>
-          <p>The equation immediately creates the underdamped root pair.</p>
-        </div>
-        <div class="station">
-          <h3>Station 2: Root Chamber</h3>
-          <p>Keep $$-500\pm j3122.5$$ and the inductor-current template.</p>
-        </div>
-        <div class="transition">
-          <h3>Transition 2 to 3</h3>
-          <p>The first constant comes straight from the initial current.</p>
-        </div>
-        <div class="station">
-          <h3>Station 3: Current Lock</h3>
-          <p>Use $$i_L(0)=100\ \text{mA}$$ to set $$K_1=100.$$</p>
-        </div>
-        <div class="transition">
-          <h3>Transition 3 to 4</h3>
-          <p>The zero initial voltage becomes a derivative condition.</p>
-        </div>
-        <div class="station">
-          <h3>Station 4: Derivative Bridge</h3>
-          <p>Use $$v(0)=L\,di_L/dt|_0=0$$ to solve for $$K_2.$$</p>
-        </div>
-        <div class="transition">
-          <h3>Transition 4 to 5</h3>
-          <p>With the current fixed, the common branch voltage is forced next.</p>
-        </div>
-        <div class="station">
-          <h3>Station 5: Voltage Hall</h3>
-          <p>Differentiate once to get $$v_C(t)=v_L(t).$$</p>
-        </div>
-        <div class="transition">
-          <h3>Transition 5 to 6</h3>
-          <p>The resistor and capacitor currents both come from the same voltage waveform.</p>
-        </div>
-        <div class="station">
-          <h3>Station 6: Branch Desk</h3>
-          <p>Use $$i_R=v/R$$ and $$i_C=C\,dv/dt.$$</p>
-        </div>
-        <div class="transition">
-          <h3>Transition 6 to 7</h3>
-          <p>The final test is whether all branch currents satisfy KCL together.</p>
-        </div>
-        <div class="station">
-          <h3>Station 7: KCL Seal</h3>
-          <p>Store the final identity $$i_L+i_R+i_C=0.$$</p>
-        </div>
-      </div>
-    </aside>
   </div>
 </main>
-
-<div class="modal" id="prompt-modal" aria-hidden="true">
-  <div class="modal-card">
-    <div class="modal-head">
-      <h3>AI Memory Palace Prompt</h3>
-      <button class="ghost-btn" type="button" data-close-prompt>Close</button>
-    </div>
-    <p class="modal-copy">This prompt is prefilled with the full Exercise 7-27 flow. Use it to test alternate one-paragraph memory palaces in another AI.</p>
-    <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this parallel RLC zero-input plotting exercise. Keep the order exact, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
-
-Source material:
-1. The circuit is a parallel RLC with R = 1 kilo-ohm, C = 1 microfarad, L = 100 mH, I0 = 100 mA, and V0 = 0.
-2. Use the parallel characteristic equation LC s^2 + (L/R)s + 1 = 0.
-3. The normalized equation is s^2 + 1000s + 10^7 = 0 with roots -500 plus or minus j3122.5.
-4. Write the underdamped inductor-current form iL(t) = e^(-500t)(K1 cos 3122.5t + K2 sin 3122.5t).
-5. Apply iL(0) = 100 mA to get K1 = 100.
-6. Use the zero initial voltage with v = L diL/dt to get the derivative condition and solve K2 = 16.0.
-7. Therefore iL(t) = e^(-500t)(100 cos 3122.5t + 16.0 sin 3122.5t) mA.
-8. Differentiate once and multiply by L to get the common branch voltage vC(t) = vL(t) = -32.0 e^(-500t) sin 3122.5t volts.
-9. Use iR = v/R and iC = C dv/dt to get the resistor and capacitor currents.
-10. Add all three currents and the terms cancel exactly, so iL + iR + iC = 0 for every t.
-11. The final memory chain is: characteristic equation, roots, current template, current condition, derivative condition, voltage, resistor current, capacitor current, then KCL.</textarea>
-    <div class="modal-actions">
-      <button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button>
-      <button class="ghost-btn" type="button" data-close-prompt>Done</button>
-    </div>
-  </div>
-</div>
-
-<script>
-const ex727Modal = document.getElementById('prompt-modal');
-const ex727Textarea = document.getElementById('prompt-text');
-document.querySelector('[data-open-prompt]').addEventListener('click', () => {
-  ex727Modal.classList.add('open');
-  ex727Modal.setAttribute('aria-hidden', 'false');
-});
-document.querySelectorAll('[data-close-prompt]').forEach((button) => {
-  button.addEventListener('click', () => {
-    ex727Modal.classList.remove('open');
-    ex727Modal.setAttribute('aria-hidden', 'true');
-  });
-});
-ex727Modal.addEventListener('click', (event) => {
-  if (event.target === ex727Modal) {
-    ex727Modal.classList.remove('open');
-    ex727Modal.setAttribute('aria-hidden', 'true');
-  }
-});
-document.getElementById('copy-prompt').addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(ex727Textarea.value);
-  } catch (error) {
-    ex727Textarea.focus();
-    ex727Textarea.select();
-  }
-});
-
-(function drawKclPlot() {
-  const svg = document.getElementById('kcl-plot');
-  const ns = 'http://www.w3.org/2000/svg';
-  const width = 720;
-  const height = 420;
-  const left = 64;
-  const right = 20;
-  const top = 20;
-  const bottom = 44;
-  const plotWidth = width - left - right;
-  const plotHeight = height - top - bottom;
-  const tMax = 0.01;
-  const yMin = -100;
-  const yMax = 100;
-  const alpha = 500;
-  const wd = 3122.498999199199;
-  const k2 = 16.012815380508716;
-
-  function add(tag, attrs, parent) {
-    const node = document.createElementNS(ns, tag);
-    Object.keys(attrs).forEach((key) => node.setAttribute(key, attrs[key]));
-    (parent || svg).appendChild(node);
-    return node;
-  }
-
-  function xMap(t) {
-    return left + (t / tMax) * plotWidth;
-  }
-
-  function yMap(value) {
-    return top + ((yMax - value) / (yMax - yMin)) * plotHeight;
-  }
-
-  function iL(t) {
-    return Math.exp(-alpha * t) * (100 * Math.cos(wd * t) + k2 * Math.sin(wd * t));
-  }
-
-  function iR(t) {
-    return -32.025630761017425 * Math.exp(-alpha * t) * Math.sin(wd * t);
-  }
-
-  function iC(t) {
-    return -iL(t) - iR(t);
-  }
-
-  function iSum(t) {
-    return iL(t) + iR(t) + iC(t);
-  }
-
-  add('rect', { x: 0, y: 0, width, height, fill: 'rgba(255,255,255,0.01)' });
-
-  for (let i = 0; i <= 10; i += 1) {
-    const x = left + (i / 10) * plotWidth;
-    add('line', { x1: x, y1: top, x2: x, y2: top + plotHeight, stroke: 'rgba(255,255,255,0.08)', 'stroke-width': 1 });
-    const label = add('text', { x, y: height - 16, fill: 'rgba(247,241,232,0.72)', 'font-size': 11, 'text-anchor': 'middle' });
-    label.textContent = (i).toFixed(1) + 'm';
-  }
-
-  for (let j = -100; j <= 100; j += 20) {
-    const y = yMap(j);
-    add('line', { x1: left, y1: y, x2: left + plotWidth, y2: y, stroke: 'rgba(255,255,255,0.08)', 'stroke-width': 1 });
-    const label = add('text', { x: left - 10, y: y + 4, fill: 'rgba(247,241,232,0.72)', 'font-size': 11, 'text-anchor': 'end' });
-    label.textContent = j + 'm';
-  }
-
-  add('line', { x1: left, y1: yMap(0), x2: left + plotWidth, y2: yMap(0), stroke: 'rgba(255,208,138,0.35)', 'stroke-width': 1.5 });
-  add('line', { x1: left, y1: top, x2: left, y2: top + plotHeight, stroke: 'rgba(255,208,138,0.35)', 'stroke-width': 1.5 });
-
-  const title = add('text', { x: width / 2, y: 14, fill: 'rgba(247,241,232,0.9)', 'font-size': 13, 'text-anchor': 'middle' });
-  title.textContent = 'Transient Analysis';
-  const xAxis = add('text', { x: width / 2, y: height - 4, fill: 'rgba(247,241,232,0.72)', 'font-size': 12, 'text-anchor': 'middle' });
-  xAxis.textContent = 'Time (ms)';
-  const yAxis = add('text', { x: 16, y: height / 2, fill: 'rgba(247,241,232,0.72)', 'font-size': 12, transform: 'rotate(-90 16 ' + (height / 2) + ')', 'text-anchor': 'middle' });
-  yAxis.textContent = 'Current (mA)';
-
-  function buildPath(fn) {
-    const points = [];
-    const samples = 400;
-    for (let i = 0; i <= samples; i += 1) {
-      const t = (i / samples) * tMax;
-      points.push((i === 0 ? 'M' : 'L') + xMap(t).toFixed(2) + ' ' + yMap(fn(t)).toFixed(2));
-    }
-    return points.join(' ');
-  }
-
-  add('path', { d: buildPath(iL), fill: 'none', stroke: '#87b4ff', 'stroke-width': 2.4 });
-  add('path', { d: buildPath(iR), fill: 'none', stroke: '#d9d9d9', 'stroke-width': 2.1 });
-  add('path', { d: buildPath(iC), fill: 'none', stroke: '#c7a3ff', 'stroke-width': 2.1 });
-  add('path', { d: buildPath(iSum), fill: 'none', stroke: '#7ce8b0', 'stroke-width': 2.2, 'stroke-dasharray': '7 5' });
-})();
-</script>
 </body>
 </html>

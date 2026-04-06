@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-pole-zero-diagrams.html" />
+<title>Pole-Zero Diagrams | Chapter 9 Memory Palace</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_pole_zero_diagrams">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="guide.html">Guide</a>
+    <a href="ch9-exercise-9-3.html">Prev: Exercise 9-3</a>
+    <a href="ch9-example-9-9.html">Next: Example 9-9</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Pole-Zero Diagrams</div>
+    <h1>Urahara Builds The s-Plane Map</h1>
+    <p class="hero-sub">Kisuke Urahara walks through one underground training hall where every doorway is part of the s-plane: horizontal real axis, vertical imaginary axis, circles for zeros, and crossed spears for poles.</p>
+    <div class="formula-block">
+      $$F(s)=K\frac{(s-z_1)(s-z_2)\cdots}{(s-p_1)(s-p_2)\cdots}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Rooms</button>
+      <a class="tool-btn" href="ch9-exercise-9-3.html">Previous Section</a>
+      <a class="tool-btn" href="ch9-example-9-9.html">Continue Route</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Core Memory</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Circle</div><div class="v">A numerator factor becomes a circle gate, so it marks a zero.</div></div>
+          <div class="fact"><div class="k">Crossed spear</div><div class="v">A denominator factor becomes a crossed spear, so it marks a pole.</div></div>
+          <div class="fact"><div class="k">Square seal</div><div class="v">The scale factor $$K$$ is a square stamp, not a plotted point.</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Separate The Three Jobs In The Formula</h3>
+            <div class="review-room-prompt">
+              <p>When you look at</p>
+              <p>$$F(s)=K\frac{(s-z_1)(s-z_2)\cdots}{(s-p_1)(s-p_2)\cdots}$$</p>
+              <p>do not treat the whole expression as one blur. It has three different jobs.</p>
+              <p>The constant $$K$$ is only a scale factor.</p>
+              <p>The numerator factors decide the zeros.</p>
+              <p>The denominator factors decide the poles.</p>
+              <p>That is why the constant is not plotted as a point, while numerator and denominator roots are.</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Find Zeros By Killing The Numerator</h3>
+            <div class="review-room-prompt">
+              <p>Take a numerator factor like $$s-z_1.$$</p>
+              <p>To find its plotted location, ask when it becomes zero:</p>
+              <p>$$s-z_1=0$$</p>
+              <p>That gives</p>
+              <p>$$s=z_1$$</p>
+              <p>So the point $$z_1$$ is a zero.</p>
+              <p>If there are several numerator factors, repeat that same step for each one. Every root of the numerator becomes a zero on the pole-zero diagram.</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Find Poles By Killing The Denominator</h3>
+            <div class="review-room-prompt">
+              <p>Now take a denominator factor like $$s-p_1.$$</p>
+              <p>Ask when that factor becomes zero:</p>
+              <p>$$s-p_1=0$$</p>
+              <p>That gives</p>
+              <p>$$s=p_1$$</p>
+              <p>So the point $$p_1$$ is a pole.</p>
+              <p>Again, if there are several denominator factors, repeat the same process for every factor. Every denominator root becomes a pole.</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 4</div>
+            <h3 class="review-room-title">Handle Quadratic Factors Without Guessing</h3>
+            <div class="review-room-prompt">
+              <p>If a factor is quadratic, solve it explicitly instead of hoping the answer is obvious.</p>
+              <p>For example, if the denominator contains</p>
+              <p>$$s^2+\omega^2$$</p>
+              <p>set it equal to zero:</p>
+              <p>$$s^2+\omega^2=0$$</p>
+              <p>Move the constant term:</p>
+              <p>$$s^2=-\omega^2$$</p>
+              <p>Take the square root:</p>
+              <p>$$s=\pm j\omega$$</p>
+              <p>So one quadratic factor usually creates two symmetric plotted points, not one.</p>
+            </div>
+          </article>
+        </div>
+        <div class="mini"><h3>Concept Summary</h3><p>A pole-zero diagram is a root map. Numerator roots become zeros, denominator roots become poles, and quadratic factors must be solved into pairs before plotting.</p></div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: One Connected Scenario</div>
+        <div class="rooms">
+          <article class="room" data-tags="urahara,map,axes,foundation">
+            <h2>Room 1: Urahara Opens The Axis Hall</h2>
+            <p>Urahara slides open a long hallway. The floor line is the real axis and a glowing ladder rises through the center as the imaginary axis. He tells you the whole chapter happens on this one map.</p>
+            <ul>
+              <li>Horizontal hall = real part.</li>
+              <li>Vertical ladder = imaginary part.</li>
+              <li>Every future point must be placed relative to these two guides.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="urahara,zeros,circles,numerator">
+            <h2>Room 2: Circle Gates Mark The Zeros</h2>
+            <p>Urahara hangs bright circular gates over positions that make the numerator vanish. When the numerator becomes zero, the transfer function is zero there too.</p>
+            <ul>
+              <li>Numerator factor means circle shape.</li>
+              <li>If $$s=z_1$$ makes the numerator zero, plot a circle at $$z_1.$$</li>
+              <li>The circles are openings, not attacks.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="urahara,poles,spears,denominator">
+            <h2>Room 3: Crossed Spears Mark The Poles</h2>
+            <p>In the next chamber he drives black crossed spears into the floor. These mark values that make the denominator zero, so the response is pulled sharply there.</p>
+            <ul>
+              <li>Denominator factor means pole.</li>
+              <li>If $$s=p_1$$ makes the denominator zero, plot a crossed spear at $$p_1.$$</li>
+              <li>Pole locations dominate behavior, stability, and waveform style.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="urahara,quadratic,pairs,symmetry">
+            <h2>Room 4: Twin Arches Split Into Conjugate Pairs</h2>
+            <p>At the final chamber, a twin stone arch labeled $$s^2+\omega^2$$ cracks into two symmetric doors: one at $$+j\omega$$ and one at $$-j\omega.$$ Urahara says symmetry is the clue that prevents plotting only one point.</p>
+            <ul>
+              <li>Quadratic terms often hide two points.</li>
+              <li>Pure imaginary pairs sit directly on the imaginary axis.</li>
+              <li>This room leads directly to Ichigo's first full plotting mission.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Shape Hooks</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Square</div><div class="v">Scale factor</div></div>
+          <div class="fact"><div class="k">Circle</div><div class="v">Zero</div></div>
+          <div class="fact"><div class="k">Cross</div><div class="v">Pole</div></div>
+          <div class="fact"><div class="k">Twin arch</div><div class="v">Conjugate pair</div></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

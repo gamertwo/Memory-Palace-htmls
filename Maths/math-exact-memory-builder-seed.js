@@ -5,8 +5,12 @@
       palaces: [
         {
           id: 'palace-math-exact',
-          name: 'Math Exact Equations Palace',
-          importedPages: [],
+          name: 'Math Exercise 3.13 Odd Palace',
+          importedPages: [
+            'math-ex313-q1-solvable-p.html',
+            'math-ex313-q3-solvable-p.html',
+            'math-ex313-q5-clairaut.html'
+          ],
           importedRooms: [],
           blocks: [],
           edges: [],

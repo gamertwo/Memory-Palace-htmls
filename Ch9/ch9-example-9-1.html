@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-example-9-1.html" />
+<title>Example 9-1 | Unit Step Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_example_9_1">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="guide.html">Guide</a>
+    <a href="ch9-exercise-9-1.html">Next: Exercise 9-1</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Example 9-1</div>
+    <h1>The Flat Step Ground Becomes One White Pillar</h1>
+    <p class="hero-sub">This first Chapter 9 scene stays simple on purpose. You stand on the unit-step ground, sweep across time with the curved blade, and watch the exponential orb die at infinity until only a white pillar over the spiral vortex remains.</p>
+    <div class="formula-block">
+      $$f(t)=u(t), \qquad F(s)=\mathcal{L}\{u(t)\}=\frac{1}{s}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Room Route</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-example-9-1.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Result</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">$$f(t)=u(t)$$</div></div>
+          <div class="fact"><div class="k">Transform</div><div class="v">$$F(s)=\dfrac{1}{s}$$</div></div>
+          <div class="fact"><div class="k">Main image</div><div class="v">Flat white ground, then a white pillar standing over the dark $$s$$-vortex.</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Start From The Definition</h3>
+            <div class="review-room-prompt">
+              <p>Use the Laplace definition directly:</p>
+              <p>$$F(s)=\int_0^{\infty} f(t)e^{-st}\,dt$$</p>
+              <p>Now substitute $$f(t)=u(t).$$</p>
+              <p>Because $$u(t)=1$$ for $$t\ge 0,$$ the integral becomes</p>
+              <p>$$F(s)=\int_0^{\infty} e^{-st}\,dt$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Integrate The Exponential Carefully</h3>
+            <div class="review-room-prompt">
+              <p>The antiderivative is</p>
+              <p>$$\int e^{-st}\,dt=-\frac{e^{-st}}{s}$$</p>
+              <p>So</p>
+              <p>$$F(s)=\left[-\frac{e^{-st}}{s}\right]_0^{\infty}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Evaluate The Upper Limit First</h3>
+            <div class="review-room-prompt">
+              <p>At the upper limit, $$e^{-st}\to 0$$ as $$t\to\infty$$ provided $$\Re\{s\}>0.$$</p>
+              <p>That means the top contribution is</p>
+              <p>$$-\frac{0}{s}=0$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 4</div>
+            <h3 class="review-room-title">Use The Lower Limit At $$t=0$$</h3>
+            <div class="review-room-prompt">
+              <p>At $$t=0,$$ the exponential becomes</p>
+              <p>$$e^0=1$$</p>
+              <p>So the lower-limit term is</p>
+              <p>$$-\left(-\frac{1}{s}\right)=\frac{1}{s}$$</p>
+              <p>Therefore,</p>
+              <p>$$F(s)=\frac{1}{s}$$</p>
+            </div>
+          </article>
+        </div>
+        <div class="mini"><h3>Concept Summary</h3><p>The unit step is the first anchor transform of the chapter. Once $$u(t)$$ becomes 1 over the integration interval, the whole problem reduces to the exponential limit story that ends at $$1/s.$$</p></div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: Wall Maria Outer Gate</div>
+        <div class="rooms">
+          <article class="room" data-tags="step-ground,unit-step,time-road">
+            <h2>Room 1: The Flat Ground Turns The Signal On</h2>
+            <p>You stand on a completely flat white training ground. That ground is $$u(t),$$ because after the signal turns on, it stays unchanged across the whole road of time.</p>
+            <ul>
+              <li>Flat ground means constant value 1.</li>
+              <li>The road starts at $$t=0.$$</li>
+              <li>The same ground continues forward toward infinity.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="integral,blade,orb">
+            <h2>Room 2: The Curved Blade Sweeps Across The Road</h2>
+            <p>A glowing exponential orb appears over the time road while a dark spiral vortex pulls on it. Then the curved ODM blade cuts through the whole route. That slash is the integral and the moving orb is $$e^{-st}.$$</p>
+            <ul>
+              <li>Curved blade means integration.</li>
+              <li>Orb plus vortex means $$e^{-st}.$$</li>
+              <li>The cut turns the time process into one stacked fraction shape.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="infinity,decay,upper-limit">
+            <h2>Room 3: The Infinity Gate Kills The Orb</h2>
+            <p>You run to the outer gate at the horizon and the glowing orb fades to nothing there. That stores the upper-limit fact that the exponential contribution vanishes at infinity.</p>
+            <ul>
+              <li>Infinity gate means the upper limit.</li>
+              <li>The orb dies there, so the upper term becomes zero.</li>
+              <li>The condition is that the decay is strong enough: $$\Re\{s\}>0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="pillar,vortex,fraction">
+            <h2>Room 4: A White Pillar Freezes Above The Vortex</h2>
+            <p>Back at $$t=0,$$ the orb is fully intact and snaps into a bright white pillar equal to 1. The final frozen picture is that pillar standing over the spiral vortex, which is exactly $$1/s.$$</p>
+            <ul>
+              <li>At zero, the orb becomes 1.</li>
+              <li>The bottom object stays the $$s$$-vortex.</li>
+              <li>The whole page should collapse to the image $$1/s.$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Memory Hook</div>
+        <p class="copy">Flat step ground, integrate, infinity kills the orb, pillar remains over vortex.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

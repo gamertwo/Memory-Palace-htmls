@@ -9,86 +9,172 @@
 </head>
 <body data-page-key="ch8_index">
 <main class="shell">
-  <nav class="nav"><a href="../index.html">Repo Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-1.html">Exercise 8-1</a><a href="ch8-example-8-5.html">Example 8-5</a><a href="ch8-example-8-6.html">Example 8-6</a><a href="ch8-example-8-10.html">Example 8-10</a></nav>
+  <nav class="nav"><a href="../index.html">Repo Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-1.html">Exercise 8-1</a><a href="ch8-example-8-6.html">Example 8-6</a><a href="ch8-example-8-21.html">Example 8-21</a><a href="ch8-exercise-8-30.html">Exercise 8-30</a></nav>
 
   <section class="hero">
     <div class="tag">Electric Circuits Chapter 8</div>
     <h1>Sinusoids and Phasors Index</h1>
-    <p class="hero-sub">This Chapter 8 mini-site is built to make phasor work feel writable under pressure. The pages train one fixed flow: catch the source, identify whether you are going to phasor or back to a sinusoid, move between polar and rectangular without panic, then use addition or the derivative property only after the frequency check is clear.</p>
-    <div class="tool-row"><a class="tool-btn" href="guide.html">Open Phasor Guide</a><a class="tool-btn" href="ch8-exercise-8-1.html">Start Exercises</a><a class="tool-btn" href="ch8-example-8-6.html">Series RLC Movie</a><a class="tool-btn" href="#request-anchor">Save Notes</a></div>
+    <p class="hero-sub">This index is organized by solution pattern, not just by example number. The goal is to help you recognize what kind of move a problem wants: convert, add, differentiate, reduce an impedance, tune a circuit, use a transfer ratio, use source transformations, or collapse a network with Thevenin.</p>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Open Phasor Guide</a><a class="tool-btn" href="#patterns-anchor">Jump to Pattern Map</a><a class="tool-btn" href="#path-anchor">Quick Study Path</a><a class="tool-btn" href="#request-anchor">Save Notes</a></div>
   </section>
 
   <section class="panel">
-    <div class="section-title">How This Set Is Organized</div>
+    <div class="section-title">How To Use This Index</div>
     <div class="facts">
-      <div class="fact"><div class="k">Syntax Memory</div><div class="v">Lock the notation: polar form, rectangular form, cosine reference, phasor arrows, and the meaning of $$j\omega$$.</div></div>
-      <div class="fact"><div class="k">Logic Memory</div><div class="v">Train the decision flow: convert, split, add only same-frequency phasors, then return to the time domain.</div></div>
-      <div class="fact"><div class="k">Flow Memory</div><div class="v">Practice the order: identify the job, check frequency, choose form, compute cleanly, and box the final waveform or phasor.</div></div>
+      <div class="fact"><div class="k">If you are stuck</div><div class="v">Do not ask "which page number is similar?" Ask "which solution pattern is this?"</div></div>
+      <div class="fact"><div class="k">If you are reviewing</div><div class="v">Stay inside one pattern family until the moves feel automatic, then jump to the next family.</div></div>
+      <div class="fact"><div class="k">If you are cramming</div><div class="v">Use the Quick Study Path first, then return here and drill the specific pattern that feels shaky.</div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="patterns-anchor" style="margin-top:1rem">
+    <div class="section-title">Pattern Map</div>
+    <p class="copy">Each block below groups pages by the kind of reasoning they use. That way, Exercise 8-27 sits naturally next to Example 8-19 and Design Example 8-20, because all three are really "equivalent-source" problems.</p>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 1: Phasor Syntax and Conversion</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-1-sinusoids-and-phasors.html"><div class="topic-kicker">Pattern</div><h3>Sinusoids and Phasors</h3><p>Foundations: cosine reference, magnitude-angle meaning, and the time-domain to phasor bridge.</p></a>
+      <a class="topic-card" href="ch8-properties-of-phasors.html"><div class="topic-kicker">Pattern</div><h3>Properties of Phasors</h3><p>Reference page for the algebra rules that all later pages depend on.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-1.html"><div class="topic-kicker">Convert In</div><h3>Exercise 8-1</h3><p>Turn sinusoids into phasors in both polar and rectangular form.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-2.html"><div class="topic-kicker">Convert Out</div><h3>Exercise 8-2</h3><p>Return phasors to the time domain and recover the correct frequency.</p></a>
+      <a class="topic-card" href="ch8-example-8-4.html"><div class="topic-kicker">Mixed Finish</div><h3>Example 8-4</h3><p>Use phasors to add, then translate the result back into one clean sinusoid.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-6.html"><div class="topic-kicker">Cleanup</div><h3>Exercise 8-6</h3><p>Collapse a mixed cosine-sine waveform into one phasor without losing the phase logic.</p></a>
     </div>
   </section>
 
   <section class="panel" style="margin-top:1rem">
-    <div class="section-title">Study Path</div>
+    <div class="section-title">Pattern 2: Add Same-Frequency Phasors</div>
     <div class="topic-grid">
-      <a class="topic-card" href="guide.html"><div class="topic-kicker">Step 1</div><h3>Guideline Page</h3><p>Learn the fixed peg system for phasors, the symbol bank, and the do or do not rules for conversion and addition.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-1.html"><div class="topic-kicker">Step 2</div><h3>Exercise 8-1</h3><p>Convert sinusoids to phasors in polar and rectangular form.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-2.html"><div class="topic-kicker">Step 3</div><h3>Exercise 8-2</h3><p>Convert phasors back to sinusoids and recover the correct frequency from $$f$$ or $$\omega.$$</p></a>
-      <a class="topic-card" href="ch8-example-8-1.html"><div class="topic-kicker">Step 4</div><h3>Example 8-1</h3><p>Use the additive property of phasors after matching frequency.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-3.html"><div class="topic-kicker">Step 5</div><h3>Exercise 8-3</h3><p>Construct current phasors and add them to get one resulting sinusoid.</p></a>
-      <a class="topic-card" href="ch8-example-8-2.html"><div class="topic-kicker">Step 6</div><h3>Example 8-2</h3><p>See a balanced three-phasor sum collapse to zero in rectangular form.</p></a>
-      <a class="topic-card" href="ch8-example-8-3.html"><div class="topic-kicker">Step 7</div><h3>Example 8-3</h3><p>Use the derivative property to move from a waveform to the derivative phasor and back.</p></a>
-      <a class="topic-card" href="ch8-example-8-4.html"><div class="topic-kicker">Step 8</div><h3>Example 8-4</h3><p>Convert phasors to sinusoids and add the resulting waveform through phasor addition.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-4.html"><div class="topic-kicker">Step 9</div><h3>Exercise 8-4</h3><p>Check that a common rotation leaves the balanced sum unchanged.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-5.html"><div class="topic-kicker">Step 10</div><h3>Exercise 8-5</h3><p>Find the phasor of a time derivative directly from the derivative property.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-6.html"><div class="topic-kicker">Step 11</div><h3>Exercise 8-6</h3><p>Turn a mixed cosine-sine waveform into one clean phasor.</p></a>
-      <a class="topic-card" href="ch8-example-8-5.html"><div class="topic-kicker">Step 12</div><h3>Example 8-5</h3><p>Use impedance and KVL to find the steady-state voltage in a series RC circuit.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-7.html"><div class="topic-kicker">Step 13</div><h3>Exercise 8-7</h3><p>Match the magnitudes of resistor, inductor, and capacitor impedances and identify resonance.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-8.html"><div class="topic-kicker">Step 14</div><h3>Exercise 8-8</h3><p>Find an element impedance directly from the phasor ratio $$Z=V/I.$$ </p></a>
-      <a class="topic-card" href="ch8-exercise-8-9.html"><div class="topic-kicker">Step 15</div><h3>Exercise 8-9</h3><p>Compute inductor and capacitor impedances, element voltages, and lead-lag relationships.</p></a>
-      <a class="topic-card" href="ch8-example-8-6.html"><div class="topic-kicker">Step 16</div><h3>Example 8-6</h3><p>Solve a full series RLC circuit by phasors and recover the current and all element voltages.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-10.html"><div class="topic-kicker">Step 17</div><h3>Exercise 8-10</h3><p>Repeat the same series RLC flow with a shifted source and reactance cancellation.</p></a>
-      <a class="topic-card" href="ch8-design-example-8-7.html"><div class="topic-kicker">Step 18</div><h3>Design Example 8-7</h3><p>Use the voltage-divider relation to design impedances for a target output waveform.</p></a>
-      <a class="topic-card" href="ch8-design-exercise-8-11.html"><div class="topic-kicker">Step 19</div><h3>Design Exercise 8-11</h3><p>Choose a practical divider realization that produces a target output cosine.</p></a>
-      <a class="topic-card" href="ch8-design-exercise-8-12.html"><div class="topic-kicker">Step 20</div><h3>Design Exercise 8-12</h3><p>Design a load close to a target impedance using standard resistor and capacitor values.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-13.html"><div class="topic-kicker">Step 21</div><h3>Exercise 8-13</h3><p>Balance a Maxwell bridge by matching real and imaginary parts of the bridge equation.</p></a>
-      <a class="topic-card" href="ch8-example-8-9.html"><div class="topic-kicker">Step 22</div><h3>Example 8-9</h3><p>Switch from impedance to admittance to solve a parallel circuit and recover branch currents.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-14.html"><div class="topic-kicker">Step 23</div><h3>Exercise 8-14</h3><p>Reuse the parallel-admittance circuit with a shifted source and a cleaner common voltage.</p></a>
-      <a class="topic-card" href="ch8-example-8-10.html"><div class="topic-kicker">Step 24</div><h3>Example 8-10</h3><p>Reduce a mixed series-parallel circuit, solve the source current, then split it into branch currents.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-15.html"><div class="topic-kicker">Step 25</div><h3>Exercise 8-15</h3><p>Pull the inductor voltage directly from the solved current in Example 8-10.</p></a>
-      <a class="topic-card" href="ch8-application-example-8-11.html"><div class="topic-kicker">Step 26</div><h3>Application Example 8-11</h3><p>Derive the resonant-frequency formula for the RLC network in Figure 8-25.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-16.html"><div class="topic-kicker">Step 27</div><h3>Exercise 8-16</h3><p>Use the resonance formula numerically and compute the purely real input impedance.</p></a>
-      <a class="topic-card" href="ch8-example-8-12.html"><div class="topic-kicker">Step 28</div><h3>Example 8-12</h3><p>Choose a capacitor that makes the input impedance purely resistive at a fixed frequency.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-17.html"><div class="topic-kicker">Step 29</div><h3>Exercise 8-17</h3><p>Evaluate the Figure 8-25 equivalent impedance without tuning it to resonance.</p></a>
-      <a class="topic-card" href="ch8-example-8-13.html"><div class="topic-kicker">Step 30</div><h3>Example 8-13</h3><p>Cancel a load reactance by adding the right compensating element.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-18.html"><div class="topic-kicker">Step 31</div><h3>Exercise 8-18</h3><p>Reduce the input impedance and choose a series element that makes the reactance vanish.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-19.html"><div class="topic-kicker">Step 32</div><h3>Exercise 8-19</h3><p>Use voltage and current phasors to identify an unknown element from its impedance.</p></a>
-      <a class="topic-card" href="ch8-application-example-8-14.html"><div class="topic-kicker">Step 33</div><h3>Application Example 8-14</h3><p>Build the RC low-pass transfer ratio and interpret its cutoff behavior.</p></a>
-      <a class="topic-card" href="ch8-example-8-15.html"><div class="topic-kicker">Step 34</div><h3>Example 8-15</h3><p>Use the unit output method to solve Figure 8-30 and then scale to the real source.</p></a>
-      <a class="topic-card" href="ch8-design-exercise-8-20.html"><div class="topic-kicker">Step 35</div><h3>Design Exercise 8-20</h3><p>Pick practical R and C values for a target low-pass cutoff frequency.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-21.html"><div class="topic-kicker">Step 36</div><h3>Exercise 8-21</h3><p>Mirror the RC filter with an RL high-pass ratio and memorize its cutoff rule.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-22.html"><div class="topic-kicker">Step 37</div><h3>Exercise 8-22</h3><p>Reuse the unit output method when the desired output is a current instead of a voltage.</p></a>
-      <a class="topic-card" href="ch8-example-8-16.html"><div class="topic-kicker">Step 38</div><h3>Example 8-16</h3><p>Use superposition with same-frequency sources and add the phasor responses directly.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-23.html"><div class="topic-kicker">Step 39</div><h3>Exercise 8-23</h3><p>Apply the same-frequency superposition movie to a current output.</p></a>
-      <a class="topic-card" href="ch8-example-8-17.html"><div class="topic-kicker">Step 40</div><h3>Example 8-17</h3><p>Use superposition with different-frequency sources and finish in the time domain.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-24.html"><div class="topic-kicker">Step 41</div><h3>Exercise 8-24</h3><p>Write the output as a two-term waveform when each source contributes at a different frequency.</p></a>
-      <a class="topic-card" href="ch8-example-8-19.html"><div class="topic-kicker">Step 42</div><h3>Example 8-19</h3><p>Transform a Thevenin source into a Norton source by dividing the phasor voltage by the impedance.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-26.html"><div class="topic-kicker">Step 43</div><h3>Exercise 8-26</h3><p>Reverse the move and convert a Norton source into a Thevenin source.</p></a>
-      <a class="topic-card" href="ch8-design-example-8-20.html"><div class="topic-kicker">Step 44</div><h3>Design Example 8-20</h3><p>Reduce the network to Thevenin form and design a load that produces the required phasor output.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-27.html"><div class="topic-kicker">Step 45</div><h3>Exercise 8-27</h3><p>Transform the Thevenin design circuit into Norton form and keep the same load behavior.</p></a>
-      <a class="topic-card" href="ch8-example-8-21.html"><div class="topic-kicker">Step 46</div><h3>Example 8-21</h3><p>Use source transformations to solve a same-frequency superposition circuit in one parallel framework.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-28.html"><div class="topic-kicker">Step 47</div><h3>Exercise 8-28</h3><p>Repeat the source-transformation method at a new operating frequency.</p></a>
-      <a class="topic-card" href="ch8-example-8-22.html"><div class="topic-kicker">Step 48</div><h3>Example 8-22</h3><p>Use Thevenin theorem to collapse a bridge circuit and solve the branch current.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-29.html"><div class="topic-kicker">Step 49</div><h3>Exercise 8-29</h3><p>Find the Thevenin equivalent seen by an inductor and then compute its current.</p></a>
-      <a class="topic-card" href="ch8-exercise-8-30.html"><div class="topic-kicker">Step 50</div><h3>Exercise 8-30</h3><p>Determine the Thevenin equivalent seen by a capacitor by inspection.</p></a>
+      <a class="topic-card" href="ch8-additive-property.html"><div class="topic-kicker">Rule</div><h3>Additive Property</h3><p>The base rule: only same-frequency sinusoids can be combined into one phasor answer.</p></a>
+      <a class="topic-card" href="ch8-example-8-1.html"><div class="topic-kicker">Core</div><h3>Example 8-1</h3><p>Basic phasor addition after frequency matching.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-3.html"><div class="topic-kicker">Practice</div><h3>Exercise 8-3</h3><p>Build current phasors and add them to get one resulting sinusoid.</p></a>
+      <a class="topic-card" href="ch8-example-8-2.html"><div class="topic-kicker">Symmetry</div><h3>Example 8-2</h3><p>Balanced phasors cancel cleanly in rectangular form.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-4.html"><div class="topic-kicker">Rotation Check</div><h3>Exercise 8-4</h3><p>See why a common rotation does not disturb the balanced-sum cancellation.</p></a>
+      <a class="topic-card" href="ch8-example-8-16.html"><div class="topic-kicker">Circuit Version</div><h3>Example 8-16</h3><p>Use superposition when both sources live at the same frequency and their phasor responses can be added.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-23.html"><div class="topic-kicker">Current Output</div><h3>Exercise 8-23</h3><p>Same-frequency superposition again, but now the final target is a current.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 3: Differentiate in the Phasor Domain</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-derivative-property.html"><div class="topic-kicker">Rule</div><h3>Derivative Property</h3><p>The compact rule that turns time differentiation into multiplication by $$j\omega.$$</p></a>
+      <a class="topic-card" href="ch8-example-8-3.html"><div class="topic-kicker">Core</div><h3>Example 8-3</h3><p>Move from a waveform to the derivative phasor and back again.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-5.html"><div class="topic-kicker">Practice</div><h3>Exercise 8-5</h3><p>Apply the derivative rule directly and explain where the phase shift comes from.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 4: Build and Reduce Impedances</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-example-8-5.html"><div class="topic-kicker">Series RC</div><h3>Example 8-5</h3><p>Turn elements into impedances and solve a series circuit with KVL.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-7.html"><div class="topic-kicker">Reactance Match</div><h3>Exercise 8-7</h3><p>Compare resistor, inductor, and capacitor impedances and spot resonance conditions.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-8.html"><div class="topic-kicker">Unknown Z</div><h3>Exercise 8-8</h3><p>Identify an impedance directly from the ratio $$Z=V/I.$$</p></a>
+      <a class="topic-card" href="ch8-exercise-8-9.html"><div class="topic-kicker">Element Voltages</div><h3>Exercise 8-9</h3><p>Compute element impedances and track lead-lag relationships.</p></a>
+      <a class="topic-card" href="ch8-example-8-6.html"><div class="topic-kicker">Series RLC</div><h3>Example 8-6</h3><p>Full series RLC reduction with current and all element voltages.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-10.html"><div class="topic-kicker">Repeat Pattern</div><h3>Exercise 8-10</h3><p>Run the same series-reduction movie with a different source and reactance balance.</p></a>
+      <a class="topic-card" href="ch8-example-8-9.html"><div class="topic-kicker">Admittance Move</div><h3>Example 8-9</h3><p>Switch from impedance to admittance because the network is parallel.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-14.html"><div class="topic-kicker">Parallel Repeat</div><h3>Exercise 8-14</h3><p>Repeat the parallel-admittance pattern with new numerical values.</p></a>
+      <a class="topic-card" href="ch8-example-8-10.html"><div class="topic-kicker">Mixed Network</div><h3>Example 8-10</h3><p>Reduce a mixed series-parallel circuit, then split the current back into branches.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-15.html"><div class="topic-kicker">Branch Voltage</div><h3>Exercise 8-15</h3><p>Reuse the solved current to recover one specific branch voltage.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-19.html"><div class="topic-kicker">Element ID</div><h3>Exercise 8-19</h3><p>Use measured voltage and current phasors to identify an unknown element.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 5: Design, Resonance, and Compensation</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-design-example-8-7.html"><div class="topic-kicker">Divider Design</div><h3>Design Example 8-7</h3><p>Design impedances so a divider produces a target output phasor.</p></a>
+      <a class="topic-card" href="ch8-design-exercise-8-11.html"><div class="topic-kicker">Practical Design</div><h3>Design Exercise 8-11</h3><p>Choose a realizable divider that still meets the phasor target.</p></a>
+      <a class="topic-card" href="ch8-design-exercise-8-12.html"><div class="topic-kicker">Standard Values</div><h3>Design Exercise 8-12</h3><p>Approximate a desired impedance with standard components.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-13.html"><div class="topic-kicker">Bridge Balance</div><h3>Exercise 8-13</h3><p>Match real and imaginary parts to balance a Maxwell bridge.</p></a>
+      <a class="topic-card" href="ch8-application-example-8-11.html"><div class="topic-kicker">Resonance Formula</div><h3>App Example 8-11</h3><p>Derive the resonant-frequency condition for the given RLC network.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-16.html"><div class="topic-kicker">Numeric Resonance</div><h3>Exercise 8-16</h3><p>Use the resonance formula numerically and evaluate the resulting input impedance.</p></a>
+      <a class="topic-card" href="ch8-example-8-12.html"><div class="topic-kicker">Tune to Purely Real</div><h3>Example 8-12</h3><p>Choose a capacitor that forces the input impedance to become purely resistive.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-17.html"><div class="topic-kicker">Untuned Case</div><h3>Exercise 8-17</h3><p>Evaluate the same network without tuning it to resonance.</p></a>
+      <a class="topic-card" href="ch8-example-8-13.html"><div class="topic-kicker">Compensation</div><h3>Example 8-13</h3><p>Cancel a reactance by choosing the right compensating element.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-18.html"><div class="topic-kicker">Series Fix</div><h3>Exercise 8-18</h3><p>Reduce the input impedance, then choose the added element that removes the net reactance.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 6: Transfer Functions and Unit-Output Logic</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-application-example-8-14.html"><div class="topic-kicker">Low-Pass Ratio</div><h3>App Example 8-14</h3><p>Build the RC low-pass transfer ratio and interpret cutoff behavior.</p></a>
+      <a class="topic-card" href="ch8-example-8-15.html"><div class="topic-kicker">Backward Solve</div><h3>Example 8-15</h3><p>Use the unit-output method on Figure 8-30 and scale the whole solution afterward.</p></a>
+      <a class="topic-card" href="ch8-design-exercise-8-20.html"><div class="topic-kicker">Cutoff Design</div><h3>Design Exercise 8-20</h3><p>Pick practical $$R$$ and $$C$$ values for a target low-pass cutoff frequency.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-21.html"><div class="topic-kicker">RL Mirror</div><h3>Exercise 8-21</h3><p>Recognize the same transfer-ratio idea in an RL high-pass form.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-22.html"><div class="topic-kicker">Unit Current Output</div><h3>Exercise 8-22</h3><p>Use the unit-output method again when the desired output is a current instead of a voltage.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 7: Superposition with Frequency Awareness</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-example-8-16.html"><div class="topic-kicker">Same Frequency</div><h3>Example 8-16</h3><p>Superposition where the final phasor responses can be added directly.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-23.html"><div class="topic-kicker">Same Frequency</div><h3>Exercise 8-23</h3><p>The same same-frequency logic, but with a current target.</p></a>
+      <a class="topic-card" href="ch8-example-8-17.html"><div class="topic-kicker">Different Frequencies</div><h3>Example 8-17</h3><p>Keep source responses separate because the frequencies do not match.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-24.html"><div class="topic-kicker">Different Frequencies</div><h3>Exercise 8-24</h3><p>Write the output as a two-term waveform because no single final phasor exists.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 8: Equivalent Sources, Source Transformations, and Thevenin/Norton</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-example-8-19.html"><div class="topic-kicker">Thevenin to Norton</div><h3>Example 8-19</h3><p>Divide phasor voltage by impedance to change a Thevenin source into a Norton source.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-26.html"><div class="topic-kicker">Norton to Thevenin</div><h3>Exercise 8-26</h3><p>Reverse the move and explain the magnitude-angle multiplication carefully.</p></a>
+      <a class="topic-card" href="ch8-design-example-8-20.html"><div class="topic-kicker">Thevenin Design</div><h3>Design Example 8-20</h3><p>Reduce the source network first, then design a load from the Thevenin divider relation.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-27.html"><div class="topic-kicker">Equivalent Source</div><h3>Exercise 8-27</h3><p>Transform that design result into Norton form and explain why the same load still works.</p></a>
+      <a class="topic-card" href="ch8-example-8-21.html"><div class="topic-kicker">Source Transformations</div><h3>Example 8-21</h3><p>Turn two series sources into parallel current sources and solve one same-frequency network.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-28.html"><div class="topic-kicker">Frequency Update</div><h3>Exercise 8-28</h3><p>Use the same source-transformation movie again after recomputing every reactive impedance.</p></a>
+      <a class="topic-card" href="ch8-example-8-22.html"><div class="topic-kicker">Bridge Thevenin</div><h3>Example 8-22</h3><p>Remove the bridge branch, find $$V_T$$ and $$Z_T,$$ then restore the load and solve one reduced circuit.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-29.html"><div class="topic-kicker">Load-Seen Thevenin</div><h3>Exercise 8-29</h3><p>Find the Thevenin pair seen by an inductor and then compute the load current from the reduced model.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-30.html"><div class="topic-kicker">Inspection Thevenin</div><h3>Exercise 8-30</h3><p>Do a Thevenin reduction almost by sight once the symmetry of the circuit becomes obvious.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 9: Mesh and Node Methods</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-example-8-26.html"><div class="topic-kicker">Node Analysis</div><h3>Example 8-26</h3><p>Use node equations to solve a bridge circuit and then recover the branch current from the node-voltage difference.</p></a>
+      <a class="topic-card" href="ch8-example-8-33.html"><div class="topic-kicker">Mesh Analysis</div><h3>Example 8-33</h3><p>Use mesh currents with a dependent source to find the output voltage and input impedance.</p></a>
+      <a class="topic-card" href="ch8-evaluation-exercise-8-38.html"><div class="topic-kicker">Method Compare</div><h3>Evaluation Exercise 8-38</h3><p>Revisit Figure 8-58 using node-voltage analysis and decide why it is easier than the mesh route there.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-39.html"><div class="topic-kicker">Node Practice</div><h3>Exercise 8-39</h3><p>Use node-voltage analysis to find the output voltage and input impedance in Figure 8-60.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Pattern 10: Power and Maximum Power</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="ch8-example-8-35.html"><div class="topic-kicker">Average Power</div><h3>Example 8-35</h3><p>Reduce the load at the interface, find the current, and keep only the real part when computing average power.</p></a>
+      <a class="topic-card" href="ch8-example-8-36.html"><div class="topic-kicker">Interface Power</div><h3>Example 8-36</h3><p>Use a Thevenin equivalent to compare delivered power for a fixed load with the maximum power available at the interface.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-42.html"><div class="topic-kicker">Load Power</div><h3>Exercise 8-42</h3><p>Solve for the load-node voltage and current, then compute the average power delivered to the 25-ohm resistor.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-43.html"><div class="topic-kicker">Max Power</div><h3>Exercise 8-43</h3><p>Find the Thevenin equivalent at the interface and use conjugate matching to get the maximum average power.</p></a>
+    </div>
+  </section>
+
+  <section class="panel" id="path-anchor" style="margin-top:1rem">
+    <div class="section-title">Quick Study Path</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="guide.html"><div class="topic-kicker">Step 1</div><h3>Guide</h3><p>Learn the chapter's recurring symbols, peg system, and do-not-mix rules.</p></a>
+      <a class="topic-card" href="ch8-exercise-8-1.html"><div class="topic-kicker">Step 2</div><h3>Basic Conversion</h3><p>Start by moving comfortably between time domain and phasor domain.</p></a>
+      <a class="topic-card" href="ch8-example-8-1.html"><div class="topic-kicker">Step 3</div><h3>Addition</h3><p>Practice the same-frequency addition pattern before the circuits get heavier.</p></a>
+      <a class="topic-card" href="ch8-example-8-5.html"><div class="topic-kicker">Step 4</div><h3>Impedance Circuits</h3><p>Turn elements into impedances and solve a first complete phasor circuit.</p></a>
+      <a class="topic-card" href="ch8-example-8-10.html"><div class="topic-kicker">Step 5</div><h3>Mixed Reduction</h3><p>Work a larger series-parallel circuit before jumping to design and theorems.</p></a>
+      <a class="topic-card" href="ch8-example-8-15.html"><div class="topic-kicker">Step 6</div><h3>Transfer / Unit Output</h3><p>Learn the backward-solving pattern that Chapter 8 reuses in filter-style problems.</p></a>
+      <a class="topic-card" href="ch8-example-8-19.html"><div class="topic-kicker">Step 7</div><h3>Source Transformation</h3><p>Get comfortable moving between Thevenin and Norton before the theorem pages.</p></a>
+      <a class="topic-card" href="ch8-example-8-22.html"><div class="topic-kicker">Step 8</div><h3>Thevenin Theorem</h3><p>Finish with the reduce-restore pattern that makes bridge and load-interface problems manageable.</p></a>
     </div>
   </section>
 
   <section class="panel" id="request-anchor" style="margin-top:1rem">
     <div class="section-title">Save Chapter Notes</div>
-    <p class="copy">Type a change request or reminder, press Enter, and save it as a `.txt` file so you can mention that filename here later.</p>
+    <p class="copy">Type a change request or reminder, press Enter, and save it as a `.txt` file so you can mention that filename later.</p>
     <form class="request-form" data-txt-save>
       <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-index-request.txt" /></label>
-      <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Strengthen the movie flow on Exercise 8-10 and add one more admittance reminder."></textarea></label>
+      <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more mini-group for pages that use admittance instead of impedance."></textarea></label>
       <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
       <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
       <p class="memory-status" data-note-status>Nothing saved yet.</p>
@@ -98,12 +184,12 @@
   <section class="panel" style="margin-top:1rem">
     <div class="section-title">Fast Review Rule</div>
     <div class="flow-grid">
-      <div class="flow-step"><h3>1. Catch</h3><p>Catch the given signal or phasor and decide the job: to phasor, to sinusoid, add, or differentiate.</p></div>
-      <div class="flow-step"><h3>2. Match</h3><p>Check frequency before adding anything. Phasor addition needs one common $$\omega.$$</p></div>
-      <div class="flow-step"><h3>3. Convert</h3><p>Move between polar and rectangular in the simplest direction for the task.</p></div>
-      <div class="flow-step"><h3>4. Finish</h3><p>Return to the time domain only after the phasor result is clean and boxed.</p></div>
+      <div class="flow-step"><h3>1. Name the Pattern</h3><p>Decide whether the problem is a conversion, addition, impedance reduction, transfer-ratio, superposition, or equivalent-source problem.</p></div>
+      <div class="flow-step"><h3>2. Check Frequency</h3><p>Before adding or transforming reactive circuits, make sure the operating frequency is understood and current.</p></div>
+      <div class="flow-step"><h3>3. Choose the Best Form</h3><p>Use rectangular form for addition, polar form for multiplication and division, and admittance when the network is parallel.</p></div>
+      <div class="flow-step"><h3>4. Finish in the Right Domain</h3><p>Return to the time domain only when the final phasor is complete and the chapter actually wants a waveform.</p></div>
     </div>
-    <p class="source-note">Built from your Chapter 8 screenshots, focused on the conversion, addition, and derivative-property questions from the start of the phasors chapter.</p>
+    <p class="source-note">Built from your Chapter 8 pages, now grouped by how the solutions work rather than by whether the book called them examples, exercises, or design pages.</p>
   </section>
 </main>
 <script src="study.js"></script>

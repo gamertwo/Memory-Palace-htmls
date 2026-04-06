@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rc-ex719.html" />
 <title>RC Exercise 7-19 | Dominant Exponential + Graph</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
 <script>
@@ -12,226 +13,12 @@ MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="study-bridge.css" />
 <link rel="stylesheet" href="linear-review.css" />
 <script src="linear-review.js" defer></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d0f14;
-  --bg2:#1a1e27;
-  --panel:#131821;
-  --panel2:#191f2a;
-  --line:rgba(255,255,255,.08);
-  --accent:#ffd08a;
-  --cyan:#7ce8ff;
-  --green:#8fe6c4;
-  --red:#ff8b8b;
-  --text:#f7f1e8;
-  --muted:rgba(247,241,232,.78);
-}
-body{
-  font-family:'Outfit',sans-serif;
-  background:linear-gradient(180deg,var(--bg),var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-}
-a{color:inherit}
-.shell{max-width:1120px;margin:0 auto;padding:2rem 1rem 3rem}
-.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
-.nav a{
-  text-decoration:none;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.85rem;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.hero,.panel,.palace-sidebar{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1.2rem;
-}
-.hero h1{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  margin-bottom:.5rem;
-}
-.hero p{color:var(--muted);line-height:1.7}
-.eq{
-  margin-top:.9rem;
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.9rem;
-  text-align:center;
-  overflow:auto;
-}
-.content-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
-  gap:1rem;
-  align-items:start;
-  margin-top:1rem;
-}
-.main-stack{display:grid;gap:1rem}
-.section-title{
-  font-size:1rem;
-  font-weight:800;
-  color:var(--accent);
-  margin-bottom:.8rem;
-}
-.rooms{display:grid;gap:.85rem}
-.room{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.room h2{
-  font-size:1rem;
-  margin-bottom:.55rem;
-  color:var(--accent);
-}
-.room ul{padding-left:1.2rem}
-.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy,.plot-note{line-height:1.75;color:var(--muted)}
-.facts{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(155px,1fr));
-  gap:.75rem;
-}
-.fact{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.75rem;
-}
-.fact .k{
-  font-size:.7rem;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--accent);
-  margin-bottom:.25rem;
-}
-.fact .v{color:var(--muted);line-height:1.6}
-.mini{
-  margin-top:.75rem;
-  padding:.75rem .85rem;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-}
-.mini h3,.station h3,.transition h3{
-  font-size:.9rem;
-  color:var(--accent);
-  margin-bottom:.35rem;
-}
-.palace-sidebar{position:sticky;top:1rem}
-.path{display:grid;gap:.65rem}
-.station,.transition{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.transition{
-  border-style:dashed;
-  background:rgba(255,255,255,.02);
-}
-.plot-wrap{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:.8rem;
-}
-.legend{
-  display:flex;
-  gap:1rem;
-  flex-wrap:wrap;
-  margin-bottom:.7rem;
-}
-.legend-item{
-  display:flex;
-  align-items:center;
-  gap:.45rem;
-  font-size:.82rem;
-  color:var(--muted);
-}
-.swatch{
-  width:12px;
-  height:12px;
-  border-radius:999px;
-}
-.swatch.input{background:var(--cyan)}
-.swatch.cap{background:var(--green)}
-.swatch.max{background:var(--red)}
-.plot-frame{
-  width:100%;
-  border:1px solid rgba(255,255,255,.04);
-  border-radius:12px;
-  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
-}
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
-.tool-btn,.ghost-btn{
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.8rem;
-  font-family:inherit;
-  cursor:pointer;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  background:rgba(6,8,12,.74);
-  z-index:50;
-}
-.modal.open{display:flex}
-.modal-card{
-  width:min(760px,100%);
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1rem;
-  box-shadow:0 24px 80px rgba(0,0,0,.45);
-}
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:.75rem;
-}
-.modal-head h3{font-size:1rem;color:var(--accent)}
-.prompt-box{
-  width:100%;
-  min-height:360px;
-  resize:vertical;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--panel2);
-  color:var(--text);
-  padding:.9rem;
-  font:inherit;
-  line-height:1.65;
-}
-.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
-@media (max-width:760px){
-  .shell{padding:1rem .85rem 2rem}
-  .content-grid{grid-template-columns:1fr}
-  .palace-sidebar{position:static}
-}
-</style>
 </head>
-<body>
+<body data-page-key="rc_ex719">
 <main class="shell">
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
@@ -240,15 +27,16 @@ a{color:inherit}
   </nav>
 
   <section class="hero">
-    <h1>Exercise 7-19</h1>
-    <p>The circuit is driven by an exponential source, so the response contains two exponentials: the source exponential and the RC natural exponential. The main tasks are to identify the dominant one, plot the source and capacitor voltage together, and find the maximum capacitor voltage and when it occurs.</p>
+    <div class="tag">Exercise 7-19</div>
+<h1>Exercise 7-19</h1>
+    <p>This page is about reading behavior, not just producing a formula. Because the source and the circuit each contribute an exponential, the capacitor voltage contains two decay rates. From there, the real questions are conceptual: which exponential dominates later, why the waveform rises to a peak before decaying, and how to locate that peak mathematically.</p>
     <div class="eq">$$v_C(t)=20e^{-50t}-25e^{-100t}\,\text{V},\qquad V_{\max}=4\,\text{V at }t=\frac{\ln 2.5}{50}\approx 18.3\,\text{ms}$$</div>
     <div class="tool-row">
       <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="study-grid two-col">
     <div class="main-stack">
       <section class="panel">
         <div class="section-title">Quick Data</div>
@@ -289,6 +77,7 @@ a{color:inherit}
               <li>Since $$50&lt;100,$$ the slower term is</li>
               <li>$$\boxed{e^{-50t}}.$$</li>
               <li>So the source exponential is the dominant exponential.</li>
+              <li>This does not make the faster term unimportant; it shapes the early transient and helps create the peak.</li>
             </ul>
           </article>
 
@@ -330,6 +119,7 @@ a{color:inherit}
               <li>$$2500e^{-100t}=1000e^{-50t}.$$</li>
               <li>So</li>
               <li>$$e^{50t}=2.5 \qquad \Rightarrow \qquad t_{\max}=\frac{\ln 2.5}{50}\approx 0.0183\,\text{s}.$$</li>
+              <li>This is the exact moment when the early boost from the faster exponential stops overcoming the slower long-tail decay.</li>
             </ul>
           </article>
 
@@ -342,9 +132,11 @@ a{color:inherit}
               <li>$$V_{\max}=20(0.4)-25(0.16)=8-4=4\,\text{V}.$$</li>
               <li>Therefore</li>
               <li>$$\boxed{V_{\max}=4\,\text{V at }t\approx 18.3\,\text{ms}}.$$</li>
+              <li>The waveform peaks at a positive value even though it later decays back toward zero, which is exactly why this page is useful for graph intuition.</li>
             </ul>
           </article>
         </div>
+        <div class="mini"><h3>Concept Summary</h3><p>The response is a competition between two exponentials. The slower one decides the long-term tail, the faster one reshapes the early transient, and their interaction creates a finite-time peak that you can locate by setting the derivative to zero.</p></div>
       </section>
 
       <section class="panel">
@@ -440,7 +232,7 @@ a{color:inherit}
     <textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this RC derivation. Keep the steps in order, make each step trigger the next, and use vivid location-based imagery. Do not use bullet points.
 
 Source material:
-1. The circuit has R_T = 100 kΩ and C = 0.1 microfarad, so RC = 0.01 s and the natural exponential is e^(-100 t).
+1. The circuit has R_T = 100 kÎ© and C = 0.1 microfarad, so RC = 0.01 s and the natural exponential is e^(-100 t).
 2. The input is 10 e^(-50 t) V, so the forcing exponential is e^(-50 t).
 3. Compare the rates: 50 is smaller than 100, so e^(-50 t) decays more slowly and is the dominant exponential.
 4. Use the exponential-forcing RC response formula with V_0 = -5, V_A = 10, alpha = 50, and RC = 0.01.
@@ -449,7 +241,7 @@ Source material:
 7. Then V_0 - V_A / (1 - alpha RC) = -5 - 20 = -25.
 8. So the capacitor voltage is v_C(t) = 20 e^(-50 t) - 25 e^(-100 t).
 9. Differentiate: dv_C/dt = -1000 e^(-50 t) + 2500 e^(-100 t).
-10. Set dv_C/dt = 0 to find the peak: e^(50 t) = 2.5, so t_max = ln(2.5)/50 ≈ 18.3 ms.
+10. Set dv_C/dt = 0 to find the peak: e^(50 t) = 2.5, so t_max = ln(2.5)/50 â‰ˆ 18.3 ms.
 11. At that time, the capacitor voltage reaches 4 V.
 12. Plot the input and capacitor voltage on the same graph, and note that the capacitor curve eventually follows the slower source exponential.</textarea>
     <div class="modal-actions">
@@ -605,5 +397,8 @@ const yAxisText = make('text', {
 yAxisText.textContent = 'voltage';
 svg.appendChild(yAxisText);
 </script>
+<script src="study.js"></script>
 </body>
 </html>
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-36 | Power Delivered and Maximum Available Power</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_36">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-35.html">Prev: Example 8-35</a><a href="ch8-exercise-8-42.html">Next: Exercise 8-42</a></nav>
+  <section class="hero"><div class="tag">Example 8-36</div><h1>Calculate Delivered Power and the Maximum Average Power Available at an Interface</h1><p class="hero-sub">Part (a) asks what a specific 200-$$\Omega$$ load receives. Part (b) asks what the interface could deliver at best if the load were adjustable. Those are related questions, but not the same question.</p><div class="formula-block">$$V_T=\sqrt{5}\angle-63.4^\circ\text{ V},\quad Z_T=40-j80~\Omega,\quad P_{200\Omega}=7.81\text{ mW},\quad P_{MAX}=15.6\text{ mW}$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-36.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts"><div class="fact"><div class="k">Circuit Data</div><div class="v">$$v_s(t)=5\cos(10^6 t)\text{ V},\quad R=200\ \Omega,\quad C=0.01\,\mu\text{F},\quad R_L=200\ \Omega.$$</div></div><div class="fact"><div class="k">Part (a)</div><div class="v">Find the average power delivered to the 200-$$\Omega$$ load.</div></div><div class="fact"><div class="k">Part (b)</div><div class="v">Find the maximum average power available at the interface and the load that achieves it.</div></div></div></section>
+    <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+      <article class="room"><h2>Room 1: Convert the Capacitor to an Impedance</h2><ul><li>$$\omega=10^6\text{ rad/s}$$ and $$C=0.01\,\mu\text{F}=10^{-8}\text{ F}.$$ </li><li>So $$Z_C=\frac{1}{j\omega C}=\frac{1}{j(10^6)(10^{-8})}=-j100~\Omega. $$</li></ul></article>
+      <article class="room"><h2>Room 2: Find the Thevenin Voltage at the Interface</h2><ul><li>With the load removed, the interface voltage is the capacitor voltage of the divider:</li><li>$$V_T=\frac{Z_C}{R+Z_C}V_S=\frac{-j100}{200-j100}(5\angle0^\circ)=1-j2\text{ V}. $$</li><li>So $$V_T=\sqrt{5}\angle-63.4^\circ\text{ V}. $$</li></ul></article>
+      <article class="room"><h2>Room 3: Find the Thevenin Impedance</h2><ul><li>The short-circuit current is $$I_N=\frac{5\angle0^\circ}{200}=0.025+j0\text{ A}. $$</li><li>Then $$Z_T=\frac{V_T}{I_N}=\frac{1-j2}{0.025}=40-j80~\Omega. $$</li></ul></article>
+      <article class="room"><h2>Room 4: Part (a) Use the Specific Load $$R_L=200\ \Omega$$</h2><ul><li>The load current is $$I_L=\frac{V_T}{Z_T+R_L}=\frac{1-j2}{240-j80}=0.00625-j0.00625\text{ A}. $$</li><li>So $$|I_L|=8.84\text{ mA}$$ and $$P_{200\Omega}=\frac{1}{2}(200)(0.00884)^2=7.81\text{ mW}. $$</li></ul></article>
+      <article class="room"><h2>Room 5: Part (b) Use the Maximum-Power Condition</h2><ul><li>The conjugate-matched load is $$Z_{L,MAX}=Z_T^*=40+j80~\Omega. $$</li><li>The maximum average power is $$P_{MAX}=\frac{|V_T|^2}{8R_T}=\frac{5}{8(40)}=15.6\text{ mW}. $$</li></ul></article>
+      <article class="room"><h2>Room 6: Final Answer</h2><ul><li>$$V_T=\sqrt{5}\angle-63.4^\circ\text{ V},\qquad Z_T=40-j80~\Omega.$$</li><li>$$P_{200\Omega}=7.81\text{ mW},\qquad P_{MAX}=15.6\text{ mW},\qquad Z_{L,MAX}=40+j80~\Omega.$$</li></ul></article>
+    </div></section>
+    <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><div class="movie-flow"><div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the RC Thevenin Pair</h3><p>Fire reduces the interface to $$V_T$$ and $$Z_T.$$ </p></div><div class="movie-arrow">&rarr;</div><div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write the Given-Load Power</h3><p>Chalk computes the current for $$R_L=200\ \Omega.$$ </p></div><div class="movie-arrow">&rarr;</div><div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Maximum-Power Match</h3><p>The coat conjugate-matches the load and locks $$P_{MAX}.$$ </p></div></div></section>
+    <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-example-8-36-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note comparing the actual 200-ohm load power with the conjugate-matched maximum."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+  </div></div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

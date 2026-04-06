@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-example-9-10.html" />
+<title>Example 9-10 | Pole-Zero Plot With Cosine Pair</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_example_9_10">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="ch9-exercise-9-15.html">Prev: Exercise 9-15</a>
+    <a href="ch9-exercise-9-16.html">Next: Exercise 9-16</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Example 9-10</div>
+    <h1>Renji Follows The Origin Pole And The Imaginary Pair</h1>
+    <p class="hero-sub">Renji's scene is a forge walkway. One heavy spear is hammered into the origin while a twin-arch cosine gate throws two matching points up and down the imaginary axis.</p>
+    <div class="formula-block">
+      $$f(t)=(4-3\cos500t)u(t)$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Room Route</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-example-9-10.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Result</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Pole at origin</div><div class="v">A pole appears at $$s=0.$$ The constant term causes it.</div></div>
+          <div class="fact"><div class="k">Imaginary pair</div><div class="v">Two poles land at $$s=\pm j500.$$ The cosine term causes the symmetric pair.</div></div>
+          <div class="fact"><div class="k">Zero note</div><div class="v">The zeros are not practical to plot here from the simplified expression, so the memory focus is on the pole pattern.</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Transform The Constant And The Cosine Separately</h3>
+            <div class="review-room-prompt">
+              <p>Start from</p>
+              <p>$$f(t)=(4-3\cos500t)u(t)$$</p>
+              <p>Use linearity:</p>
+              <p>$$F(s)=4\mathcal{L}\{u(t)\}-3\mathcal{L}\{\cos500t\,u(t)\}$$</p>
+              <p>Now apply the basic table entries:</p>
+              <p>$$\mathcal{L}\{u(t)\}=\frac{1}{s},\qquad \mathcal{L}\{\cos500t\,u(t)\}=\frac{s}{s^2+500^2}$$</p>
+              <p>So the transform becomes</p>
+              <p>$$F(s)=\frac{4}{s}-\frac{3s}{s^2+500^2}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Combine Into One Rational Expression</h3>
+            <div class="review-room-prompt">
+              <p>The common denominator is $$s(s^2+500^2).$$</p>
+              <p>Rewrite each term over that denominator:</p>
+              <p>$$\frac{4}{s}=\frac{4(s^2+500^2)}{s(s^2+500^2)}$$</p>
+              <p>$$\frac{3s}{s^2+500^2}=\frac{3s^2}{s(s^2+500^2)}$$</p>
+              <p>Subtract the numerators:</p>
+              <p>$$F(s)=\frac{4(s^2+500^2)-3s^2}{s(s^2+500^2)}$$</p>
+              <p>Expand the top:</p>
+              <p>$$4(s^2+500^2)-3s^2=4s^2+1000000-3s^2=s^2+1000000$$</p>
+              <p>So</p>
+              <p>$$F(s)=\frac{s^2+1000000}{s(s^2+250000)}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Read The Denominator Poles Explicitly</h3>
+            <div class="review-room-prompt">
+              <p>The denominator is</p>
+              <p>$$s(s^2+250000)$$</p>
+              <p>Set it equal to zero factor by factor.</p>
+              <p>From $$s=0,$$ we get the origin pole.</p>
+              <p>From $$s^2+250000=0,$$ we get</p>
+              <p>$$s^2=-250000,\qquad s=\pm j500$$</p>
+              <p>So the pole set is</p>
+              <p>$$s=0,\quad s=+j500,\quad s=-j500$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 4</div>
+            <h3 class="review-room-title">Understand Why The Diagram Focuses On Three Pole Points</h3>
+            <div class="review-room-prompt">
+              <p>The denominator already gives the main pole geometry: one center pole and one symmetric imaginary-axis pair.</p>
+              <p>That is the picture the page is trying to lock in:</p>
+              <p>pole at $$0,$$ pole at $$+j500,$$ and pole at $$-j500.$$</p>
+              <p>If you keep tracking the numerator too, $$s^2+1000000=0$$ gives zeros at $$\pm j1000.$$ But the teaching focus of this example is the three-pole frame caused by the constant-plus-cosine denominator structure.</p>
+            </div>
+          </article>
+        </div>
+        <div class="mini"><h3>Concept Summary</h3><p>Example 9-10 is the clean “origin pole plus pure imaginary pair” example. The algebra leads to $$F(s)=\frac{s^2+1000000}{s(s^2+250000)},$$ so the pole pattern is read directly from $$s(s^2+250000).$$</p></div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: Renji's Forge Walk</div>
+        <div class="rooms">
+          <article class="room" data-tags="renji,constant,origin,pole">
+            <h2>Room 1: Renji Hammers A Spear Into The Origin</h2>
+            <p>Renji's first strike hits the center tile. The constant part of the signal creates a denominator factor that leaves a pole at $$s=0,$$ so the origin becomes the anchor of the whole page.</p>
+            <ul>
+              <li>Constant term leads to an origin-style pole pattern.</li>
+              <li>The center spear must be remembered before anything else.</li>
+              <li>This is the loudest object in the scene.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="renji,cosine,twin-arch,imaginary">
+            <h2>Room 2: The Cosine Opens A Twin Arch</h2>
+            <p>Further down the forge, a twin arch labeled $$s^2+(500)^2$$ splits open. Renji looks upward and downward, recognizing the pair at $$+j500$$ and $$-j500.$$</p>
+            <ul>
+              <li>Cosine gives a symmetric pair.</li>
+              <li>The pair sits on the imaginary axis.</li>
+              <li>Think top flame and bottom flame, same distance from the origin.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="renji,poles,diagram,placement">
+            <h2>Room 3: Renji Plants The Final Three Spears</h2>
+            <p>Renji plants one spear at the center, one high on the imaginary ladder, and one low on the ladder. This triangular spear picture is the whole example.</p>
+            <ul>
+              <li>Pole at $$0.$$</li>
+              <li>Pole at $$+j500.$$</li>
+              <li>Pole at $$-j500.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="renji,bridge,next-page,transition">
+            <h2>Room 4: Renji Hands The Route To Byakuya</h2>
+            <p>Before leaving, Renji points toward the next hall where a negative real pole joins an imaginary-axis pair. The palace now upgrades from three poles to a mixed layout.</p>
+            <ul>
+              <li>This page teaches origin plus imaginary pair.</li>
+              <li>Next page adds a left-side real pole.</li>
+              <li>The route stays connected room to room.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Picture To Keep</div>
+        <p class="copy">One spear at the origin, one spear above, one spear below. Renji's forge scene is just that three-point pole frame.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

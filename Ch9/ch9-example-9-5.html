@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-example-9-5.html" />
+<title>Example 9-5 to Exercise 9-6 | Sinusoid Transforms</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_example_9_5">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="guide.html">Guide</a>
+    <a href="ch9-example-9-6.html">Next: Example 9-6</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Example 9-5 through Exercise 9-6</div>
+    <h1>Sinusoid Corridor: Sine Base, Numeric Drill, And Cosine Twin</h1>
+    <p class="hero-sub">This range teaches the base sinusoid transforms. First build sine from Euler form, then substitute real numbers into the same structure, then mirror the whole logic for cosine.</p>
+    <div class="formula-block">$$\mathcal{L}\{A\sin(\beta t)u(t)\}=\frac{A\beta}{s^2+\beta^2},\qquad \mathcal{L}\{A\cos(\beta t)u(t)\}=\frac{As}{s^2+\beta^2}$$</div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Memory Rooms</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-example-9-5.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Results</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Example 9-5</div><div class="v">$$\mathcal{L}\{A\sin(\beta t)u(t)\}=\dfrac{A\beta}{s^2+\beta^2}$$</div></div>
+          <div class="fact"><div class="k">Exercise 9-5</div><div class="v">$$I(s)=\dfrac{20000}{s^2+40000}$$</div></div>
+          <div class="fact"><div class="k">Exercise 9-6</div><div class="v">$$F(s)=\dfrac{As}{s^2+\beta^2}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Example 9-5: Derive The Sine Transform From Euler Form</h3>
+            <div class="review-room-prompt">
+              <p>Start with the Euler identity for sine:</p>
+              <p>$$\sin(\beta t)=\frac{e^{j\beta t}-e^{-j\beta t}}{2j}$$</p>
+              <p>Multiply by $$A$$ and include the causal support:</p>
+              <p>$$f(t)=A\sin(\beta t)u(t)=A\frac{e^{j\beta t}-e^{-j\beta t}}{2j}u(t)$$</p>
+              <p>Apply linearity:</p>
+              <p>$$\mathcal{L}\{A\sin(\beta t)u(t)\}=\frac{A}{2j}\left[\mathcal{L}\{e^{j\beta t}u(t)\}-\mathcal{L}\{e^{-j\beta t}u(t)\}\right]$$</p>
+              <p>Transform each exponential:</p>
+              <p>$$\mathcal{L}\{e^{j\beta t}u(t)\}=\frac{1}{s-j\beta},\qquad \mathcal{L}\{e^{-j\beta t}u(t)\}=\frac{1}{s+j\beta}$$</p>
+              <p>So</p>
+              <p>$$F(s)=\frac{A}{2j}\left[\frac{1}{s-j\beta}-\frac{1}{s+j\beta}\right]$$</p>
+              <p>Use the common denominator:</p>
+              <p>$$\frac{1}{s-j\beta}-\frac{1}{s+j\beta}=\frac{(s+j\beta)-(s-j\beta)}{(s-j\beta)(s+j\beta)}=\frac{2j\beta}{s^2+\beta^2}$$</p>
+              <p>Now cancel $$2j$$:</p>
+              <p>$$F(s)=\frac{A}{2j}\cdot\frac{2j\beta}{s^2+\beta^2}=\frac{A\beta}{s^2+\beta^2}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Exercise 9-5: Substitute The Numbers Directly</h3>
+            <div class="review-room-prompt">
+              <p>The known pattern is</p>
+              <p>$$\mathcal{L}\{A\sin(\beta t)u(t)\}=\frac{A\beta}{s^2+\beta^2}$$</p>
+              <p>For $$i(t)=100\sin(200t)u(t),$$ identify</p>
+              <p>$$A=100,\qquad \beta=200$$</p>
+              <p>Substitute into the numerator:</p>
+              <p>$$A\beta=100\times200=20000$$</p>
+              <p>Substitute into the denominator:</p>
+              <p>$$\beta^2=200^2=40000$$</p>
+              <p>So</p>
+              <p>$$I(s)=\frac{20000}{s^2+40000}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Exercise 9-6: Derive The Cosine Transform Carefully</h3>
+            <div class="review-room-prompt">
+              <p>Use Euler form for cosine:</p>
+              <p>$$\cos(\beta t)=\frac{e^{j\beta t}+e^{-j\beta t}}{2}$$</p>
+              <p>Multiply by $$A$$ and transform:</p>
+              <p>$$\mathcal{L}\{A\cos(\beta t)u(t)\}=\frac{A}{2}\left[\mathcal{L}\{e^{j\beta t}u(t)\}+\mathcal{L}\{e^{-j\beta t}u(t)\}\right]$$</p>
+              <p>Replace each exponential transform:</p>
+              <p>$$F(s)=\frac{A}{2}\left[\frac{1}{s-j\beta}+\frac{1}{s+j\beta}\right]$$</p>
+              <p>Use the common denominator:</p>
+              <p>$$\frac{1}{s-j\beta}+\frac{1}{s+j\beta}=\frac{(s+j\beta)+(s-j\beta)}{(s-j\beta)(s+j\beta)}=\frac{2s}{s^2+\beta^2}$$</p>
+              <p>Now cancel the 2:</p>
+              <p>$$F(s)=\frac{A}{2}\cdot\frac{2s}{s^2+\beta^2}=\frac{As}{s^2+\beta^2}$$</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: Memory System First</div>
+        <div class="rooms">
+          <article class="room" data-tags="sine,euler,rotation,base">
+            <h2>Example 9-5: Sine Splits Into Opposite Rotations</h2>
+            <p>A glowing oscillation orb swings across the timeline road. It splits into two opposite rotation streams, one clockwise and one counterclockwise. When the two transformed streams recombine, the top becomes a pure beta-frequency core and the base locks into the twin rotation denominator.</p>
+            <ul>
+              <li>The sine machine always splits into opposite rotations.</li>
+              <li>The top remembers $$A\beta.$$</li>
+              <li>The base remembers $$s^2+\beta^2.$$</li>
+            </ul>
+          </article>
+          <article class="room" data-tags="numeric,substitution,20000,40000">
+            <h2>Exercise 9-5: The Same Sine Machine With Real Numbers</h2>
+            <p>The old sine machine returns, but now the oscillation ring is marked 200 and the outer shell is marked 100. They compress into a giant 20000 core above the locked 40000 oscillation base.</p>
+            <ul>
+              <li>Reuse the same sine structure.</li>
+              <li>Only the numbers change.</li>
+              <li>The final picture is $$20000$$ on top of $$s^2+40000.$$</li>
+            </ul>
+          </article>
+          <article class="room" data-tags="cosine,addition,vortex,mirror">
+            <h2>Exercise 9-6: Cosine Keeps The Same Base But Leaves s On Top</h2>
+            <p>The cosine orb starts at maximum displacement. It splits into the same opposite rotations, but this time the branches add instead of subtracting. The shared center pull survives as an $$s$$ vortex core, while the denominator base stays the same twin-rotation platform.</p>
+            <ul>
+              <li>Cosine uses the same denominator as sine.</li>
+              <li>Cosine leaves $$s$$ on top instead of $$\beta.$$</li>
+              <li>The final memory image is $$As/(s^2+\beta^2).$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Shape Hooks</div>
+        <div class="facts">
+          <div class="fact"><div class="k">$$e$$</div><div class="v">Glowing orb</div></div>
+          <div class="fact"><div class="k">$$j$$</div><div class="v">Blue rotation aura</div></div>
+          <div class="fact"><div class="k">$$\beta$$</div><div class="v">Oscillation ring</div></div>
+          <div class="fact"><div class="k">$$s^2+\beta^2$$</div><div class="v">Locked twin-rotation base</div></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

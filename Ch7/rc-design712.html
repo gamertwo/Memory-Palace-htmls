@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rc-design712.html" />
 <title>Design Example 7-12</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
 <script>
@@ -12,190 +13,12 @@ MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="study-bridge.css" />
 <link rel="stylesheet" href="linear-review.css" />
 <script src="linear-review.js" defer></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d0f14;
-  --bg2:#1a1e27;
-  --panel:#131821;
-  --panel2:#191f2a;
-  --line:rgba(255,255,255,.08);
-  --accent:#ffd08a;
-  --text:#f7f1e8;
-  --muted:rgba(247,241,232,.78);
-}
-body{
-  font-family:'Outfit',sans-serif;
-  background:linear-gradient(180deg,var(--bg),var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-}
-a{color:inherit}
-.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
-.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
-.nav a{
-  text-decoration:none;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.85rem;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.hero,.panel,.palace-sidebar{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1.2rem;
-}
-.hero h1{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  margin-bottom:.5rem;
-}
-.hero p{color:var(--muted);line-height:1.7}
-.eq{
-  margin-top:.9rem;
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.9rem;
-  text-align:center;
-  overflow:auto;
-}
-.content-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
-  gap:1rem;
-  align-items:start;
-  margin-top:1rem;
-}
-.main-stack{display:grid;gap:1rem}
-.section-title{
-  font-size:1rem;
-  font-weight:800;
-  color:var(--accent);
-  margin-bottom:.8rem;
-}
-.rooms{display:grid;gap:.85rem}
-.room{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.room h2{
-  font-size:1rem;
-  margin-bottom:.55rem;
-  color:var(--accent);
-}
-.room ul{padding-left:1.2rem}
-.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
-.facts{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:.75rem;
-}
-.fact{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.75rem;
-}
-.fact .k{
-  font-size:.7rem;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--accent);
-  margin-bottom:.25rem;
-}
-.fact .v{color:var(--muted);line-height:1.6}
-.mini{
-  margin-top:.75rem;
-  padding:.75rem .85rem;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-}
-.mini h3,.station h3,.transition h3{
-  font-size:.9rem;
-  color:var(--accent);
-  margin-bottom:.35rem;
-}
-.palace-sidebar{position:sticky;top:1rem}
-.path{display:grid;gap:.65rem}
-.station,.transition{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.transition{
-  border-style:dashed;
-  background:rgba(255,255,255,.02);
-}
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
-.tool-btn,.ghost-btn{
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.8rem;
-  font-family:inherit;
-  cursor:pointer;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  background:rgba(6,8,12,.74);
-  z-index:50;
-}
-.modal.open{display:flex}
-.modal-card{
-  width:min(760px,100%);
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1rem;
-  box-shadow:0 24px 80px rgba(0,0,0,.45);
-}
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:.75rem;
-}
-.modal-head h3{font-size:1rem;color:var(--accent)}
-.prompt-box{
-  width:100%;
-  min-height:360px;
-  resize:vertical;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--panel2);
-  color:var(--text);
-  padding:.9rem;
-  font:inherit;
-  line-height:1.65;
-}
-.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
-@media (max-width:760px){
-  .shell{padding:1rem .85rem 2rem}
-  .content-grid{grid-template-columns:1fr}
-  .palace-sidebar{position:static}
-}
-</style>
 </head>
-<body>
+<body data-page-key="rc_design712">
 <main class="shell">
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
@@ -204,7 +27,8 @@ a{color:inherit}
   </nav>
 
   <section class="hero">
-    <h1>Design Example 7-12</h1>
+    <div class="tag">Design Example 7-12</div>
+<h1>Design Example 7-12</h1>
     <p>This is a design problem: instead of solving for the response from a circuit, you reverse-engineer the circuit values from the desired capacitor voltage.</p>
     <div class="eq">$$v_C(t)=50-100e^{-2000t}\text{ V}$$</div>
     <div class="tool-row">
@@ -212,7 +36,7 @@ a{color:inherit}
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="study-grid two-col">
     <div class="main-stack">
       <section class="panel">
         <div class="section-title">Quick Data</div>
@@ -379,5 +203,9 @@ document.getElementById('copy-prompt').addEventListener('click', async () => {
   }
 });
 </script>
+<script src="study.js"></script>
 </body>
 </html>
+
+
+

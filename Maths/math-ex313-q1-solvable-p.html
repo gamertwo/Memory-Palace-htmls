@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.13 Question 1 | Homogeneous Reduction</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="math_ex313_q1">
+<main class="shell">
+  <nav class="nav"><a href="math-ex313-index.html">Ex 3.13 Index</a><a href="math-ex313-guide.html">Guide</a><a href="math-ex313-index.html">Prev: Ex 3.13 Index</a><a href="math-ex313-q3-solvable-p.html">Next: Ex 3.13 Q3</a></nav>
+  <section class="hero">
+    <div class="tag">Exercise 3.13 Odd Route</div>
+    <h1>Question 1</h1>
+    <p class="hero-sub">The equation is not a true Clairaut form. The useful recognition is that it becomes homogeneous after dividing by $x$, so we move into the substitution zone $y=vx$ and solve the reduced separable equation with every algebra step shown.</p>
+    <div class="formula-block">$$xp^2+x=2yp \qquad \text{where } p=\frac{dy}{dx}$$<br/><br/>$$2cy=c^2x^2+1$$</div>
+    <div class="tool-row"><a class="tool-btn" href="math-ex313-guide.html">Ex 3.13 Guide</a><button class="tool-btn" type="button" data-jump="linear-review-anchor">Linear Review</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="math-exact-memory-builder.html?pages=math-ex313-q1-solvable-p.html,math-ex313-q3-solvable-p.html,math-ex313-q5-clairaut.html">Open Odd Route in Memory Builder</a></div>
+  </section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel">
+      <div class="section-title">Quick Map</div>
+      <div class="facts">
+        <div class="fact"><div class="k">Problem</div><div class="v">$$xp^2+x=2yp$$</div></div>
+        <div class="fact"><div class="k">Type / Recognition</div><div class="v">Homogeneous after dividing by $$x$$, so use $$y=vx$$ and $$p=v+x\,dv/dx$$.</div></div>
+        <div class="fact"><div class="k">Main Idea</div><div class="v">Reduce everything to $$v$$, separate, integrate, then return to $$y$$.</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="linear-review-anchor">
+      <div class="section-title">Linear Review</div>
+      <p class="copy">This section follows your requested format: problem first, then recognition, then the complete algebra with all conversions explained. In review mode the memory room appears first and the actual explanation appears right under it.</p>
+      <div class="review-card">
+        <h3>Room 1 Actual Explanation: Read The Equation Correctly</h3>
+        <p><strong>Problem:</strong> Solve $$xp^2+x=2yp$$ where $$p=\dfrac{dy}{dx}.$$</p>
+        <p><strong>Type / Recognition:</strong> This is algebraic in $$p,$$ but the coefficients contain $$x$$ and $$y$$ in the same degree pattern. Divide by $$x$$ first so the equation can be written using $$y/x,$$ which signals the homogeneous substitution $$y=vx.$$</p>
+        <p>Starting equation:</p>
+        <div class="formula-block">$$xp^2+x=2yp$$</div>
+        <p>Since every term contains either an explicit factor of $$x$$ or a factor of $$y$$ multiplied by $$p,$$ divide both sides by $$x$$. This is valid as part of the ordinary differential equation manipulation on the nonzero branch where the solution is being built:</p>
+        <div class="formula-block">$$p^2+1=2\frac{y}{x}p$$</div>
+        <p>Now the ratio $$\dfrac{y}{x}$$ appears. That is the main signal for using $$y=vx,$$ because then $$\dfrac{y}{x}=v$$ becomes a single new variable.</p>
+      </div>
+      <div class="review-card">
+        <h3>Room 2 Actual Explanation: Substitute $$y=vx$$ Carefully</h3>
+        <p>Let</p>
+        <div class="formula-block">$$y=vx$$</div>
+        <p>Differentiate both sides with respect to $$x$$. Because $$v$$ depends on $$x$$, use the product rule:</p>
+        <div class="formula-block">$$\frac{dy}{dx}=v+x\frac{dv}{dx}$$</div>
+        <p>But $$p=\dfrac{dy}{dx},$$ so</p>
+        <div class="formula-block">$$p=v+x\frac{dv}{dx}$$</div>
+        <p>Substitute $$\dfrac{y}{x}=v$$ and $$p=v+x\dfrac{dv}{dx}$$ into $$p^2+1=2\dfrac{y}{x}p$$:</p>
+        <div class="formula-block">$$\left(v+x\frac{dv}{dx}\right)^2+1=2v\left(v+x\frac{dv}{dx}\right)$$</div>
+        <p>This substitution is chosen because it converts the mixed appearance of $$x$$ and $$y$$ into a single ratio variable $$v.$$</p>
+      </div>
+      <div class="review-card">
+        <h3>Room 3 Actual Explanation: Expand And Rearrange Without Skipping</h3>
+        <p>Expand the square on the left:</p>
+        <div class="formula-block">$$v^2+2vx\frac{dv}{dx}+x^2\left(\frac{dv}{dx}\right)^2+1=2v^2+2vx\frac{dv}{dx}$$</div>
+        <p>Subtract $$2vx\dfrac{dv}{dx}$$ from both sides. Those terms cancel:</p>
+        <div class="formula-block">$$v^2+x^2\left(\frac{dv}{dx}\right)^2+1=2v^2$$</div>
+        <p>Now subtract $$v^2+1$$ from both sides:</p>
+        <div class="formula-block">$$x^2\left(\frac{dv}{dx}\right)^2=v^2-1$$</div>
+        <p>Take square roots of both sides, which creates two branches:</p>
+        <div class="formula-block">$$x\frac{dv}{dx}=\pm\sqrt{v^2-1}$$</div>
+        <p>The plus-minus appears because both positive and negative square roots satisfy the squared equation.</p>
+      </div>
+      <div class="review-card">
+        <h3>Room 4 Actual Explanation: Separate And Integrate</h3>
+        <p>Move all $$v$$ terms to one side and all $$x$$ terms to the other:</p>
+        <div class="formula-block">$$\frac{dv}{\sqrt{v^2-1}}=\pm\frac{dx}{x}$$</div>
+        <p>This is separable because the left side now depends only on $$v$$ and the right side only on $$x.$$ Integrate both sides:</p>
+        <div class="formula-block">$$\int \frac{dv}{\sqrt{v^2-1}}=\pm\int \frac{dx}{x}$$</div>
+        <p>The standard antiderivative is</p>
+        <div class="formula-block">$$\int \frac{dv}{\sqrt{v^2-1}}=\ln\left|v+\sqrt{v^2-1}\right|$$</div>
+        <p>So we get</p>
+        <div class="formula-block">$$\ln\left|v+\sqrt{v^2-1}\right|=\pm\ln|x|+C$$</div>
+        <p>Exponentiating and absorbing sign choices into the constant gives the standard equivalent form</p>
+        <div class="formula-block">$$v=\frac12\left(cx+\frac1{cx}\right)$$</div>
+      </div>
+      <div class="review-card">
+        <h3>Room 5 Actual Explanation: Return To $$y$$ And Match The Book Answer</h3>
+        <p>Since $$y=vx,$$ multiply the expression for $$v$$ by $$x$$:</p>
+        <div class="formula-block">$$y=x\cdot \frac12\left(cx+\frac1{cx}\right)$$</div>
+        <p>Distribute $$x$$ across both terms:</p>
+        <div class="formula-block">$$y=\frac12\left(cx^2+\frac1c\right)$$</div>
+        <p>Multiply both sides by $$2$$:</p>
+        <div class="formula-block">$$2y=cx^2+\frac1c$$</div>
+        <p>Now rename the constant by multiplying through by $$c$$, which is a standard constant cleanup step. That gives the textbook form:</p>
+        <div class="formula-block">$$2cy=c^2x^2+1$$</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Memory Palace Rooms</div>
+      <div class="rooms">
+        <article class="room" id="room-math-ex313-q1-room-1" data-room-id="math-ex313-q1-room-1" data-room-title="Room 1: Ratio Gate In The Homogeneous Hall" data-source-page="math-ex313-q1-solvable-p.html" data-tags="problem,recognition,ratio">
+          <h2>Room 1: Ratio Gate In The Homogeneous Hall</h2>
+          <p>The corridor opens with a bronze equation wall: $$xp^2+x=2yp.$$ Ichigo notices every major block carries the same $$x$$-weight, so he cuts the whole wall by one vertical $$x$$-blade. The wall shrinks into $$p^2+1=2(y/x)p.$$ That exposed ratio $$y/x$$ glows like a doorway, signaling the substitution zone.</p>
+        </article>
+        <article class="room" id="room-math-ex313-q1-room-2" data-room-id="math-ex313-q1-room-2" data-room-title="Room 2: The Substitution Bridge" data-source-page="math-ex313-q1-solvable-p.html" data-tags="substitution,product-rule">
+          <h2>Room 2: The Substitution Bridge</h2>
+          <p>Inside the next room, the $$y$$ tower folds into a stacked object $$vx.$$ A derivative slash passes through it and splits it into two pieces: a plain $$v$$ core and a moving bridge piece $$x\,dv/dx.$$ Together they become the new slope symbol $$p=v+x\,dv/dx.$$ The whole bridge locks into the equation frame.</p>
+        </article>
+        <article class="room" id="room-math-ex313-q1-room-3" data-room-id="math-ex313-q1-room-3" data-room-title="Room 3: Expansion And Cancellation Forge" data-source-page="math-ex313-q1-solvable-p.html" data-tags="expand,cancel,root">
+          <h2>Room 3: Expansion And Cancellation Forge</h2>
+          <p>The squared bracket opens like a metal shell: $$\left(v+x\,dv/dx\right)^2.$$ Two identical middle gears appear on both sides and cancel each other exactly. What remains cools into one heavy block: $$x^2(dv/dx)^2=v^2-1.$$ Then the block is split by a root hammer into two exits: $$x\,dv/dx=+\sqrt{v^2-1}$$ and $$x\,dv/dx=-\sqrt{v^2-1}.$$</p>
+        </article>
+        <article class="room" id="room-math-ex313-q1-room-4" data-room-id="math-ex313-q1-room-4" data-room-title="Room 4: Separation Stairway" data-source-page="math-ex313-q1-solvable-p.html" data-tags="separate,integrate">
+          <h2>Room 4: Separation Stairway</h2>
+          <p>Ichigo pulls all $$v$$ parts to the left railing and all $$x$$ parts to the right railing, forming $$dv/\sqrt{v^2-1}=\pm dx/x.$$ He walks both rails at once. The left rail becomes a hyperbolic log gate, and the right rail becomes a logarithm pillar. Their meeting crystallizes into $$v=\frac12\left(cx+\frac1{cx}\right).$$</p>
+        </article>
+        <article class="room" id="room-math-ex313-q1-room-5" data-room-id="math-ex313-q1-room-5" data-room-title="Room 5: Final Frozen Image" data-source-page="math-ex313-q1-solvable-p.html" data-tags="final,answer">
+          <h2>Room 5: Final Frozen Image</h2>
+          <p>The $$v$$ mask is removed and the original $$y=vx$$ body returns. Multiplying by $$x$$ stretches the image into $$y=\frac12\left(cx^2+\frac1c\right).$$ Then a constant-cleanup seal stamps the final frozen answer across the chamber:</p>
+          <div class="formula-block">$$2cy=c^2x^2+1$$</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Shape System</div>
+      <div class="facts">
+        <div class="fact"><div class="k">$$x$$</div><div class="v">A straight corridor rail. It means the independent direction of travel.</div></div>
+        <div class="fact"><div class="k">$$y$$</div><div class="v">A vertical tower growing out of the corridor floor.</div></div>
+        <div class="fact"><div class="k">$$p=\dfrac{dy}{dx}$$</div><div class="v">A slope spear that always points in the instantaneous direction of change.</div></div>
+        <div class="fact"><div class="k">$$p^2$$</div><div class="v">A doubled slope-spear locked into a square frame.</div></div>
+        <div class="fact"><div class="k">Multiplication</div><div class="v">Two objects fused together in one stacked body, like $$xp$$ or $$vx$$.</div></div>
+        <div class="fact"><div class="k">Division</div><div class="v">A top object balanced over a lower base, making a clear fraction platform.</div></div>
+        <div class="fact"><div class="k">Substitution</div><div class="v">One object folding into another shape, like the $$y$$ tower folding into $$vx.$$</div></div>
+        <div class="fact"><div class="k">Differentiation</div><div class="v">A sharp slash that creates new motion pieces, such as $$v+x\,dv/dx.$$</div></div>
+        <div class="fact"><div class="k">Integration</div><div class="v">A long collecting arc that turns a path into a gate or accumulated height.</div></div>
+        <div class="fact"><div class="k">Brackets</div><div class="v">A metal chamber that keeps grouped algebra traveling together.</div></div>
+        <div class="fact"><div class="k">Roots</div><div class="v">A split hammer creating two branches, positive and negative.</div></div>
+        <div class="fact"><div class="k">Constants</div><div class="v">Colored seals that can be renamed without changing the family.</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="movie-anchor">
+      <div class="section-title">Recall Finish</div>
+      <p class="copy"><strong>Final answer:</strong> $$2cy=c^2x^2+1.$$</p>
+      <p class="copy"><strong>One-line recall:</strong> Cut by $$x,$$ spot $$y/x,$$ fold $$y$$ into $$vx,$$ separate the new variable, then rebuild $$y$$ and clean the constant.</p>
+      <p class="copy"><strong>Quick recall checks:</strong></p>
+      <ul>
+        <li>Why does dividing by $$x$$ reveal the correct substitution clue?</li>
+        <li>What does $$p$$ become after writing $$y=vx$$?</li>
+        <li>Why do we get a plus-minus sign after reducing to $$x^2(dv/dx)^2=v^2-1$$?</li>
+      </ul>
+    </section>
+
+    <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="math-ex313-q1-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add an extra note on how the logarithmic integration becomes the standard textbook constant form."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+  </div></div>
+</main>
+<script src="exact-study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

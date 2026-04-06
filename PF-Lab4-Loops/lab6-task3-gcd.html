@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 6 Task 3 | Recursive GCD</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab6-task3-gcd"><main class="shell"><nav class="nav"><a href="lab6-index.html">Lab 6 Index</a><a href="lab6-guide.html">Guide</a><a href="lab6-task4-print-reverse.html">Next: Task 4</a></nav><section class="hero"><div class="tag">Lab 6 Task 3</div><h1>Find GCD with a Recursive Function</h1><p class="hero-sub">This task uses the Euclidean method: replace the bigger pair with a smaller equivalent pair until the second value becomes zero.</p><div class="formula-block">$$gcd(a,b)=gcd(b,a\bmod b),\qquad gcd(a,0)=a$$</div><div class="tool-row"><a class="tool-btn" href="lab6-guide.html">Recursion Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab6-task3-gcd.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Function</div><div class="v"><span class="inline-code">int gcd(int a, int b)</span></div></div><div class="fact"><div class="k">Base case</div><div class="v"><span class="inline-code">b == 0</span></div></div><div class="fact"><div class="k">Recursive case</div><div class="v"><span class="inline-code">gcd(b, a % b)</span></div></div><div class="fact"><div class="k">Shrink step</div><div class="v">remainder is smaller than divisor</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int gcd(int a, int b)
+{
+    if (b == 0) {
+        return a;
+    }
+
+    return gcd(b, a % b);
+}
+
+int main(void)
+{
+    int x, y;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &amp;x, &amp;y);
+
+    printf("GCD = %d\n", gcd(x, y));
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Stop When the Second Number Is Zero</h2><ul><li>If the second input becomes 0, the first input is the GCD.</li><li>This is the Euclidean stopping condition.</li><li>So return <span class="inline-code">a</span> when <span class="inline-code">b == 0</span>.</li></ul></article><article class="room"><h2>Room 2: Replace the Pair Smartly</h2><ul><li>The next pair is not random.</li><li>It becomes <span class="inline-code">(b, a % b)</span>.</li><li>This keeps the same GCD while shrinking the problem.</li></ul></article><article class="room"><h2>Room 3: Remainder Drives Termination</h2><ul><li>The remainder is always smaller than the divisor.</li><li>That means the recursion moves toward zero.</li><li>So the calls cannot continue forever if written correctly.</li></ul></article><article class="room"><h2>Room 4: Trace Example</h2><ul><li><span class="inline-code">gcd(48, 18)</span> becomes <span class="inline-code">gcd(18, 12)</span>.</li><li>Then <span class="inline-code">gcd(12, 6)</span>, then <span class="inline-code">gcd(6, 0)</span>.</li><li>The final answer is 6.</li></ul></article><article class="room"><h2>Room 5: Memory Sentence</h2><ul><li>Move second to first.</li><li>Move remainder to second.</li><li>Stop when second is zero.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

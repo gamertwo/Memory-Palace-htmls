@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Example 8-26 | Node Analysis for Bridge Current</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_example_8_26">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="index.html">Prev: Index</a><a href="ch8-example-8-33.html">Next: Example 8-33</a></nav>
+  <section class="hero">
+    <div class="tag">Example 8-26</div>
+    <h1>Use Node Analysis to Find the Current $$I_x$$ in Figure 8-51</h1>
+    <p class="hero-sub">The source fixes the top node voltage immediately, so the only true unknowns are the two middle node voltages $$V_A$$ and $$V_B.$$ Once those are known, the inductor current follows directly from the voltage difference across $$j200\ \Omega.$$</p>
+    <div class="formula-block">$$V_A=70.4-j21.4\text{ V},\qquad V_B=38.6-j4.33\text{ V},\qquad I_x=0.180\angle-118^\circ\text{ A}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-26.html">Open in Memory Builder</a></div>
+  </section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts"><div class="fact"><div class="k">Given</div><div class="v">The source forces the top node to $$V_C=75\angle0^\circ\text{ V}.$$ The lower node is ground.</div></div><div class="fact"><div class="k">Unknowns</div><div class="v">The middle bridge-node voltages $$V_A$$ and $$V_B.$$</div></div><div class="fact"><div class="k">Goal</div><div class="v">Use those node voltages to find the inductor current $$I_x$$ through $$j200\ \Omega.$$</div></div></div></section>
+    <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+      <article class="room"><h2>Room 1: Notice Why Only Two Node Equations Are Needed</h2><ul><li>The source is connected directly between node $$C$$ and ground, so it forces $$V_C=75\angle0^\circ\text{ V}.$$</li><li>That means we do not need to write a node equation at $$C.$$ Its voltage is already known.</li><li>The only unknown node voltages are therefore $$V_A$$ and $$V_B.$$</li></ul><div class="mini"><h3>Why This Matters</h3><p>Node analysis gets easier whenever an independent voltage source fixes a node voltage directly.</p></div></article>
+      <article class="room"><h2>Room 2: Write the KCL Equation at Node $$A$$</h2><ul><li>Current to ground through the capacitor is $$\frac{V_A}{-j120}.$$</li><li>Current to node $$B$$ through the inductor is $$\frac{V_A-V_B}{j200}.$$</li><li>Current to node $$C$$ through the 50-$$\Omega$$ resistor is $$\frac{V_A-V_C}{50}.$$</li><li>KCL gives $$\frac{V_A}{-j120}+\frac{V_A-V_B}{j200}+\frac{V_A-V_C}{50}=0.$$</li></ul></article>
+      <article class="room"><h2>Room 3: Write the KCL Equation at Node $$B$$</h2><ul><li>Current to ground through the 60-$$\Omega$$ resistor is $$\frac{V_B}{60}.$$</li><li>Current to node $$A$$ through the inductor is $$\frac{V_B-V_A}{j200}.$$</li><li>Current to node $$C$$ through the 50-$$\Omega$$ resistor is $$\frac{V_B-V_C}{50}.$$</li><li>KCL gives $$\frac{V_B}{60}+\frac{V_B-V_A}{j200}+\frac{V_B-V_C}{50}=0.$$</li></ul></article>
+      <article class="room"><h2>Room 4: Solve for $$V_A$$ and $$V_B$$</h2><ul><li>Substituting $$V_C=75\angle0^\circ$$ and solving the two equations gives $$V_A=70.4-j21.4\text{ V},\qquad V_B=38.6-j4.33\text{ V}.$$</li><li>These are the actual rectangular node voltages at the two middle bridge nodes.</li></ul></article>
+      <article class="room"><h2>Room 5: Use the Voltage Difference Across $$j200\ \Omega$$ to Find $$I_x$$</h2><ul><li>By Ohm's law, $$I_x=\frac{V_A-V_B}{j200}.$$</li><li>Subtract the node voltages first: $$V_A-V_B=31.8-j17.1\text{ V}.$$</li><li>Then $$I_x=\frac{31.8-j17.1}{j200}=-0.0852-j0.1588\text{ A}=0.180\angle-118^\circ\text{ A}.$$</li></ul></article>
+      <article class="room"><h2>Room 6: Final Answer</h2><ul><li>Node voltages: $$V_A=70.4-j21.4\text{ V},\qquad V_B=38.6-j4.33\text{ V}.$$</li><li>Bridge current: $$I_x=0.180\angle-118^\circ\text{ A}.$$</li></ul></article>
+    </div></section>
+    <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><div class="movie-flow"><div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Known Source Node</h3><p>Fire fixes $$V_C=75\angle0^\circ$$ immediately.</p></div><div class="movie-arrow">&rarr;</div><div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write KCL at $$A$$ and $$B$$</h3><p>Chalk turns the bridge into two node equations.</p></div><div class="movie-arrow">&rarr;</div><div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Current $$I_x$$</h3><p>The coat uses $$I_x=(V_A-V_B)/j200.$$</p></div></div></section>
+    <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-example-8-26-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note explaining why node C does not need its own KCL equation."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+  </div></div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

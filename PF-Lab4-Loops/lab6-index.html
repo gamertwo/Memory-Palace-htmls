@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Lab 6 Recursion | Study Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+</head>
+<body>
+<main class="shell">
+  <section class="hero">
+    <div class="tag">Programming Fundamentals Lab 6</div>
+    <h1>Introduction to Recursive Functions</h1>
+    <p class="hero-sub">Lab 6 shifts from repeated loops to self-calling functions. The memory trick is simple: every recursive solution must know when to stop and how to shrink the problem before the next call.</p>
+    <div class="formula-block">$$\text{base case} + \text{smaller recursive case} \Rightarrow \text{correct recursion}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="index.html">All Labs</a><a class="tool-btn" href="lab6-guide.html">Recursion Guide</a><a class="tool-btn" href="memory-palace-builder.html">Memory Builder</a></div>
+  </section>
+
+  <section class="panel">
+    <div class="section-title">Lab 6 Route</div>
+    <div class="topic-grid">
+      <a class="topic-card" href="lab6-guide.html"><div class="topic-kicker">Guide</div><h3>Base Case and Recursive Case</h3><p>Lock in the stack story, stopping condition, and problem-size reduction before the tasks.</p></a>
+      <a class="topic-card" href="lab6-task1-power.html"><div class="topic-kicker">Task 1</div><h3>Recursive Power</h3><p>Compute <span class="inline-code">base^exp</span> by reducing the exponent one step at a time.</p></a>
+      <a class="topic-card" href="lab6-task2-sum-natural.html"><div class="topic-kicker">Task 2</div><h3>Sum of First n Natural Numbers</h3><p>Use recursion to add <span class="inline-code">n</span> to the sum of all smaller values.</p></a>
+      <a class="topic-card" href="lab6-task3-gcd.html"><div class="topic-kicker">Task 3</div><h3>Recursive GCD</h3><p>Apply the Euclidean idea until the remainder becomes zero.</p></a>
+      <a class="topic-card" href="lab6-task4-print-reverse.html"><div class="topic-kicker">Task 4</div><h3>Print Digits in Reverse</h3><p>Print the last digit first, then recurse on the shortened number.</p></a>
+      <a class="topic-card" href="lab6-debug1-sum-digits.html"><div class="topic-kicker">Debug 1</div><h3>Fix Recursive Sum of Digits</h3><p>Repair base-case logic, types, and missing semicolons in a broken recursive function.</p></a>
+      <a class="topic-card" href="lab6-debug2-count-digits.html"><div class="topic-kicker">Debug 2</div><h3>Fix Recursive Count Digits</h3><p>Correct the base case, reduction step, function call, and input handling.</p></a>
+    </div>
+  </section>
+</main>
+<script src="study.js"></script>
+</body>
+</html>

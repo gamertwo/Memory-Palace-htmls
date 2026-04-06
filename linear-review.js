@@ -159,6 +159,17 @@
     return hints.slice(0, 3);
   }
 
+  function cleanReviewExplanationHtml(html) {
+    var wrapper = document.createElement("div");
+    wrapper.innerHTML = html || "";
+
+    Array.prototype.slice.call(wrapper.querySelectorAll(".review-kicker")).forEach(function (node) {
+      node.remove();
+    });
+
+    return wrapper.innerHTML.trim();
+  }
+
   function ensureReviewThemeVariables() {
     var root = document.documentElement;
     var computed = window.getComputedStyle(root);
@@ -541,6 +552,7 @@
       ".pill"
     ]);
     var rooms = reviewSelector ? Array.prototype.slice.call(document.querySelectorAll(reviewSelector)) : [];
+    var actualReviewCards = Array.prototype.slice.call(document.querySelectorAll(".review-card"));
     var mainStack = firstSelector([".main-stack", ".inner", ".main-inner", ".stage", ".main"]);
     var aside = document.querySelector(".palace-sidebar");
     var hero = document.querySelector(".hero");
@@ -560,6 +572,7 @@
       return {
         title: title,
         html: clone.innerHTML.trim() || "<p>No saved content for this room.</p>",
+        actualHtml: actualReviewCards[index] ? cleanReviewExplanationHtml(actualReviewCards[index].innerHTML) : "",
         hints: hintsFromRoomHtml(clone.innerHTML.trim())
       };
     });
@@ -841,7 +854,19 @@
     }
 
     function renderAnswer(index) {
-      elements.answer.innerHTML = roomData[index].html;
+      var memoryHtml = roomData[index].html;
+      var actualHtml = roomData[index].actualHtml;
+      elements.answer.innerHTML =
+        '<div class="review-answer-section">' +
+          '<div class="review-answer-label">Memory System</div>' +
+          '<div class="review-answer-memory">' + memoryHtml + '</div>' +
+        '</div>' +
+        (actualHtml
+          ? '<div class="review-answer-section">' +
+              '<div class="review-answer-label">Actual Explanation</div>' +
+              '<div class="review-answer-actual">' + actualHtml + '</div>' +
+            '</div>'
+          : "");
       typesetNode(elements.answer);
     }
 

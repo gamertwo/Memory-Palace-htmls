@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rlc-ex720-example.html" />
 <title>RLC Example 7-20 | Parallel Zero-Input Responses</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="linear-review.css" />
@@ -196,7 +197,7 @@ a{color:inherit}
 }
 </style>
 </head>
-<body>
+<body data-page-key="rlc_ex720_example">
 <main class="shell">
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
@@ -205,7 +206,8 @@ a{color:inherit}
   </nav>
 
   <section class="hero">
-    <h1>Example 7-20</h1>
+    <div class="tag">Example 7-20</div>
+<h1>Example 7-20</h1>
     <p>For a parallel RLC circuit with $$R=500\ \Omega,$$ $$C=1\ \mu\text{F},$$ $$L=0.2\ \text{H},$$ $$I_0=50\ \text{mA},$$ and $$V_0=0\ \text{V},$$ find the zero-input responses of the inductor current, resistor current, and capacitor voltage.</p>
     <div class="eq">$$s^2+2000s+5\times 10^6=0,\qquad s_{1,2}=-1000\pm j2000$$
     $$i_L(t)=50e^{-1000t}\cos 2000t+25e^{-1000t}\sin 2000t\ \text{mA}$$</div>
@@ -482,5 +484,7 @@ document.getElementById('copy-prompt').addEventListener('click', async () => {
   }
 });
 </script>
+<script src="study.js"></script>
 </body>
 </html>
+

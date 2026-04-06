@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rc-ex718.html" />
 <title>RC Exercise 7-18 | Exponential Source Through Thevenin View</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
 <script>
@@ -12,190 +13,12 @@ MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="study-bridge.css" />
 <link rel="stylesheet" href="linear-review.css" />
 <script src="linear-review.js" defer></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d0f14;
-  --bg2:#1a1e27;
-  --panel:#131821;
-  --panel2:#191f2a;
-  --line:rgba(255,255,255,.08);
-  --accent:#ffd08a;
-  --text:#f7f1e8;
-  --muted:rgba(247,241,232,.78);
-}
-body{
-  font-family:'Outfit',sans-serif;
-  background:linear-gradient(180deg,var(--bg),var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-}
-a{color:inherit}
-.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
-.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
-.nav a{
-  text-decoration:none;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.85rem;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.hero,.panel,.palace-sidebar{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1.2rem;
-}
-.hero h1{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  margin-bottom:.5rem;
-}
-.hero p{color:var(--muted);line-height:1.7}
-.eq{
-  margin-top:.9rem;
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.9rem;
-  text-align:center;
-  overflow:auto;
-}
-.content-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
-  gap:1rem;
-  align-items:start;
-  margin-top:1rem;
-}
-.main-stack{display:grid;gap:1rem}
-.section-title{
-  font-size:1rem;
-  font-weight:800;
-  color:var(--accent);
-  margin-bottom:.8rem;
-}
-.rooms{display:grid;gap:.85rem}
-.room{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.room h2{
-  font-size:1rem;
-  margin-bottom:.55rem;
-  color:var(--accent);
-}
-.room ul{padding-left:1.2rem}
-.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
-.facts{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:.75rem;
-}
-.fact{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.75rem;
-}
-.fact .k{
-  font-size:.7rem;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--accent);
-  margin-bottom:.25rem;
-}
-.fact .v{color:var(--muted);line-height:1.6}
-.mini{
-  margin-top:.75rem;
-  padding:.75rem .85rem;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-}
-.mini h3,.station h3,.transition h3{
-  font-size:.9rem;
-  color:var(--accent);
-  margin-bottom:.35rem;
-}
-.palace-sidebar{position:sticky;top:1rem}
-.path{display:grid;gap:.65rem}
-.station,.transition{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.transition{
-  border-style:dashed;
-  background:rgba(255,255,255,.02);
-}
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
-.tool-btn,.ghost-btn{
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.8rem;
-  font-family:inherit;
-  cursor:pointer;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  background:rgba(6,8,12,.74);
-  z-index:50;
-}
-.modal.open{display:flex}
-.modal-card{
-  width:min(760px,100%);
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1rem;
-  box-shadow:0 24px 80px rgba(0,0,0,.45);
-}
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:.75rem;
-}
-.modal-head h3{font-size:1rem;color:var(--accent)}
-.prompt-box{
-  width:100%;
-  min-height:360px;
-  resize:vertical;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--panel2);
-  color:var(--text);
-  padding:.9rem;
-  font:inherit;
-  line-height:1.65;
-}
-.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
-@media (max-width:760px){
-  .shell{padding:1rem .85rem 2rem}
-  .content-grid{grid-template-columns:1fr}
-  .palace-sidebar{position:static}
-}
-</style>
 </head>
-<body>
+<body data-page-key="rc_ex718">
 <main class="shell">
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
@@ -204,15 +27,16 @@ a{color:inherit}
   </nav>
 
   <section class="hero">
-    <h1>Exercise 7-18</h1>
-    <p>The capacitor starts in the zero state. Reduce everything seen by the capacitor to its Thevenin equivalent, then treat the circuit as a first-order RC with an exponential forcing input. After finding $v_C(t)$, differentiate to get the capacitor current.</p>
+    <div class="tag">Exercise 7-18</div>
+<h1>Exercise 7-18</h1>
+    <p>This problem is really two linked tasks. First, collapse the surrounding network into the Thevenin source actually seen by the capacitor. Then treat the result as the same exponential-forcing RC problem from Example 7-15. The final derivative step matters because it forces you to connect waveform form to capacitor current, not just stop after the voltage expression.</p>
     <div class="eq">$$v_C(t)=45.5e^{-1000t}-45.5e^{-8333t}\,\text{V},\qquad i_C(t)=-45.5e^{-1000t}+379e^{-8333t}\,\mu\text{A},\qquad t\ge 0$$</div>
     <div class="tool-row">
       <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="study-grid two-col">
     <div class="main-stack">
       <section class="panel">
         <div class="section-title">Quick Data</div>
@@ -232,6 +56,7 @@ a{color:inherit}
             <h2>Room 1: Replace the Left Network by Its Thevenin Source</h2>
             <ul>
               <li>The capacitor sees the rest of the circuit through the top node.</li>
+              <li>That is why a Thevenin reduction is the natural first move: it preserves exactly what the capacitor terminal experiences.</li>
               <li>The Thevenin voltage is the divider output across the $$200\,\text{k}\Omega$$ resistor:</li>
               <li>$$V_{Th}(t)=100e^{-1000t}\left(\frac{200}{300+200}\right)=40e^{-1000t}\,\text{V}.$$</li>
             </ul>
@@ -274,6 +99,7 @@ a{color:inherit}
               <li>$$1-\alpha RC=1-(1000)(1.2\times10^{-4})=0.88.$$</li>
               <li>So the forcing coefficient is</li>
               <li>$$\frac{V_A}{1-\alpha RC}=\frac{40}{0.88}=45.5.$$</li>
+              <li>This is the payoff for doing Example 7-15 carefully: once the structure is recognized, the problem becomes substitution instead of a full re-derivation.</li>
             </ul>
           </article>
 
@@ -294,6 +120,7 @@ a{color:inherit}
               <li>$$i_C(t)=C\frac{dv_C}{dt}.$$</li>
               <li>Differentiate:</li>
               <li>$$\frac{dv_C}{dt}=-45.5(1000)e^{-1000t}+45.5(8333)e^{-8333t}.$$</li>
+              <li>The faster $$e^{-8333t}$$ term is large early but dies very quickly, while the slower $$e^{-1000t}$$ term controls the longer tail.</li>
               <li>Multiply by $$C=10^{-9}\,\text{F}:$$</li>
               <li>$$i_C(t)=-45.5e^{-1000t}+379e^{-8333t}\,\mu\text{A}.$$</li>
             </ul>
@@ -308,6 +135,7 @@ a{color:inherit}
             </ul>
           </article>
         </div>
+        <div class="mini"><h3>Concept Summary</h3><p>This exercise is a template-stacking problem: Thevenin reduction first, first-order exponential forcing second, capacitor current law third. Once those three layers are kept separate, the algebra becomes much less intimidating.</p></div>
       </section>
 
       <section class="panel">
@@ -393,7 +221,7 @@ Source material:
 1. The capacitor starts in the zero state, so v_C(0) = 0.
 2. Replace the source-and-resistor network seen by the capacitor with its Thevenin equivalent.
 3. The Thevenin voltage is the divider output: V_Th(t) = 100 e^(-1000 t) * [200 / (300 + 200)] = 40 e^(-1000 t) V.
-4. The Thevenin resistance is R_Th = 300 kΩ || 200 kΩ = 120 kΩ.
+4. The Thevenin resistance is R_Th = 300 kÎ© || 200 kÎ© = 120 kÎ©.
 5. The capacitor is 0.001 microfarad = 1 nanofarad, so tau = R_Th C = 1.2 x 10^-4 s and 1/tau = 8333 s^-1.
 6. The equivalent first-order equation is tau dv_C/dt + v_C = 40 e^(-1000 t), with v_C(0) = 0.
 7. Reuse the exponential-forcing RC result with V_0 = 0, V_A = 40, alpha = 1000, and RC = tau.
@@ -436,5 +264,8 @@ document.getElementById('copy-prompt').addEventListener('click', async () => {
   }
 });
 </script>
+<script src="study.js"></script>
 </body>
 </html>
+
+

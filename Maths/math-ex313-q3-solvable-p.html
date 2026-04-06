@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 3.13 Question 3 | Factor Branches In p</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="exact-study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="math_ex313_q3">
+<main class="shell">
+  <nav class="nav"><a href="math-ex313-index.html">Ex 3.13 Index</a><a href="math-ex313-guide.html">Guide</a><a href="math-ex313-q1-solvable-p.html">Prev: Ex 3.13 Q1</a><a href="math-ex313-q5-clairaut.html">Next: Ex 3.13 Q5</a></nav>
+  <section class="hero">
+    <div class="tag">Exercise 3.13 Odd Route</div>
+    <h1>Question 3</h1>
+    <p class="hero-sub">This page enters the branch-forge zone. The equation is quadratic in $$p$$ and factors cleanly, so the main idea is to split the problem into two first-order branches and solve each one completely.</p>
+    <div class="formula-block">$$x^2p^2+xyp-6y^2=0 \qquad \text{where } p=\frac{dy}{dx}$$<br/><br/>$$y=\frac{c}{x^3}, \qquad y=c_1x^2$$</div>
+    <div class="tool-row"><a class="tool-btn" href="math-ex313-guide.html">Ex 3.13 Guide</a><button class="tool-btn" type="button" data-jump="linear-review-anchor">Linear Review</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="math-exact-memory-builder.html?pages=math-ex313-q1-solvable-p.html,math-ex313-q3-solvable-p.html,math-ex313-q5-clairaut.html">Open Odd Route in Memory Builder</a></div>
+  </section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel">
+      <div class="section-title">Quick Map</div>
+      <div class="facts">
+        <div class="fact"><div class="k">Problem</div><div class="v">$$x^2p^2+xyp-6y^2=0$$</div></div>
+        <div class="fact"><div class="k">Type / Recognition</div><div class="v">Quadratic in $$p$$ that factors directly.</div></div>
+        <div class="fact"><div class="k">Main Idea</div><div class="v">Factor into two linear branch equations in $$p,$$ then solve each branch as a separable differential equation.</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="linear-review-anchor">
+      <div class="section-title">Linear Review</div>
+      <p class="copy">Here the key is not substitution first. The correct move is algebra first: factor the quadratic in $$p$$, split into branches, and solve each branch without skipping the logarithm steps.</p>
+      <div class="review-card">
+        <h3>Room 1 Actual Explanation: Recognize The Quadratic In $$p$$</h3>
+        <p><strong>Problem:</strong> Solve $$x^2p^2+xyp-6y^2=0$$ where $$p=\dfrac{dy}{dx}.$$</p>
+        <p><strong>Type / Recognition:</strong> The equation is quadratic in $$p.$$ The powers are $$p^2,$$ $$p,$$ and a constant term in the quadratic sense, so we try to factor it just as an algebraic quadratic.</p>
+        <p>Write it in factor form by looking for two expressions whose product gives $$x^2p^2-6y^2$$ and whose middle term adds to $$xyp.$$</p>
+        <div class="formula-block">$$x^2p^2+xyp-6y^2=(xp-2y)(xp+3y)$$</div>
+        <p>Check it explicitly:</p>
+        <div class="formula-block">$$xp\cdot xp=x^2p^2$$
+$$xp\cdot 3y=3xyp$$
+$$-2y\cdot xp=-2xyp$$
+$$-2y\cdot 3y=-6y^2$$</div>
+        <p>The middle terms combine to $$3xyp-2xyp=xyp,$$ so the factorization is correct.</p>
+      </div>
+      <div class="review-card">
+        <h3>Room 2 Actual Explanation: Split Into Two Branches</h3>
+        <p>Since the product is zero, at least one factor must be zero:</p>
+        <div class="formula-block">$$xp-2y=0 \qquad \text{or} \qquad xp+3y=0$$</div>
+        <p>Now replace $$p$$ by $$\dfrac{dy}{dx}$$ in each branch. That gives two separate first-order equations.</p>
+        <p>First branch:</p>
+        <div class="formula-block">$$x\frac{dy}{dx}-2y=0$$</div>
+        <p>Second branch:</p>
+        <div class="formula-block">$$x\frac{dy}{dx}+3y=0$$</div>
+      </div>
+      <div class="review-card">
+        <h3>Room 3 Actual Explanation: Solve Branch One Completely</h3>
+        <p>Start from</p>
+        <div class="formula-block">$$x\frac{dy}{dx}-2y=0$$</div>
+        <p>Move $$2y$$ to the other side:</p>
+        <div class="formula-block">$$x\frac{dy}{dx}=2y$$</div>
+        <p>Divide by $$x$$:</p>
+        <div class="formula-block">$$\frac{dy}{dx}=\frac{2y}{x}$$</div>
+        <p>To separate variables, divide by $$y$$ and multiply by $$dx$$:</p>
+        <div class="formula-block">$$\frac{dy}{y}=2\frac{dx}{x}$$</div>
+        <p>Integrate both sides:</p>
+        <div class="formula-block">$$\int\frac{dy}{y}=2\int\frac{dx}{x}$$</div>
+        <p>So</p>
+        <div class="formula-block">$$\ln|y|=2\ln|x|+C$$</div>
+        <p>Exponentiate:</p>
+        <div class="formula-block">$$|y|=e^C|x|^2$$</div>
+        <p>Absorb the sign and $$e^C$$ into one constant:</p>
+        <div class="formula-block">$$y=c_1x^2$$</div>
+      </div>
+      <div class="review-card">
+        <h3>Room 4 Actual Explanation: Solve Branch Two Completely</h3>
+        <p>Start from</p>
+        <div class="formula-block">$$x\frac{dy}{dx}+3y=0$$</div>
+        <p>Move $$3y$$ to the other side:</p>
+        <div class="formula-block">$$x\frac{dy}{dx}=-3y$$</div>
+        <p>Divide by $$x$$:</p>
+        <div class="formula-block">$$\frac{dy}{dx}=-\frac{3y}{x}$$</div>
+        <p>Separate variables:</p>
+        <div class="formula-block">$$\frac{dy}{y}=-3\frac{dx}{x}$$</div>
+        <p>Integrate:</p>
+        <div class="formula-block">$$\int\frac{dy}{y}=-3\int\frac{dx}{x}$$</div>
+        <p>So</p>
+        <div class="formula-block">$$\ln|y|=-3\ln|x|+C$$</div>
+        <p>Exponentiate and absorb the constant:</p>
+        <div class="formula-block">$$y=\frac{c_2}{x^3}$$</div>
+      </div>
+      <div class="review-card">
+        <h3>Room 5 Actual Explanation: Collect The Full Answer</h3>
+        <p>Because the original equation split into two valid branches, both families belong to the final answer set:</p>
+        <div class="formula-block">$$y=c_1x^2,\qquad y=\frac{c_2}{x^3}$$</div>
+        <p>The textbook answer may rename the constants differently, but the two families are exactly these two branches.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Memory Palace Rooms</div>
+      <div class="rooms">
+        <article class="room" id="room-math-ex313-q3-room-1" data-room-id="math-ex313-q3-room-1" data-room-title="Room 1: Enter The Branch Forge" data-source-page="math-ex313-q3-solvable-p.html" data-tags="factor,quadratic">
+          <h2>Room 1: Enter The Branch Forge</h2>
+          <p>The next connected zone is a forge where the equation wall $$x^2p^2+xyp-6y^2=0$$ is struck by a factoring hammer. The wall cracks into two doors: $$(xp-2y)$$ and $$(xp+3y).$$ Both doors glow because a zero-product law demands that at least one door must vanish.</p>
+        </article>
+        <article class="room" id="room-math-ex313-q3-room-2" data-room-id="math-ex313-q3-room-2" data-room-title="Room 2: First Branch Corridor" data-source-page="math-ex313-q3-solvable-p.html" data-tags="branch-one,separable">
+          <h2>Room 2: First Branch Corridor</h2>
+          <p>Ichigo enters the first door labeled $$xp-2y=0.$$ The slope spear $$p$$ turns into $$dy/dx,$$ so the corridor reads $$x\,dy/dx=2y.$$ He pulls $$y$$ to the left and $$x$$ to the right, making the separated rails $$dy/y=2\,dx/x.$$ The rails climb together and freeze into the growth banner $$y=c_1x^2.$$</p>
+        </article>
+        <article class="room" id="room-math-ex313-q3-room-3" data-room-id="math-ex313-q3-room-3" data-room-title="Room 3: Second Branch Corridor" data-source-page="math-ex313-q3-solvable-p.html" data-tags="branch-two,separable">
+          <h2>Room 3: Second Branch Corridor</h2>
+          <p>The second door reads $$xp+3y=0.$$ This time the slope spear is dragged downward into $$x\,dy/dx=-3y.$$ After separation, the right corridor slopes downward as $$dy/y=-3\,dx/x.$$ The final ice sculpture here is a decaying tower wrapped around the base rail:</p>
+          <div class="formula-block">$$y=\frac{c_2}{x^3}$$</div>
+        </article>
+        <article class="room" id="room-math-ex313-q3-room-4" data-room-id="math-ex313-q3-room-4" data-room-title="Room 4: Twin Final Images" data-source-page="math-ex313-q3-solvable-p.html" data-tags="final,branches">
+          <h2>Room 4: Twin Final Images</h2>
+          <p>At the end of the forge, both solved branches stand side by side as twin frozen images. One rises upward like $$c_1x^2$$ and one falls backward like $$c_2/x^3.$$ The room teaches that factoring a differential equation in $$p$$ can legitimately create multiple complete solution families.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Shape System</div>
+      <div class="facts">
+        <div class="fact"><div class="k">$$x$$</div><div class="v">A corridor rail used as the direction variable.</div></div>
+        <div class="fact"><div class="k">$$y$$</div><div class="v">A tower that can rise or shrink along the corridor.</div></div>
+        <div class="fact"><div class="k">$$p$$</div><div class="v">A slope spear. When replaced by $$dy/dx,$$ it becomes a moving derivative blade.</div></div>
+        <div class="fact"><div class="k">Quadratic in $$p$$</div><div class="v">A two-layer spear shell that can often be cracked into factors.</div></div>
+        <div class="fact"><div class="k">Factorization</div><div class="v">A forge hammer splitting one algebra wall into multiple doors.</div></div>
+        <div class="fact"><div class="k">Branches</div><div class="v">Separate corridors produced by a zero-product split.</div></div>
+        <div class="fact"><div class="k">Division by $$y$$</div><div class="v">Moving the tower to the denominator platform so variables separate.</div></div>
+        <div class="fact"><div class="k">Log integration</div><div class="v">A spiral pillar produced by $$\int dy/y$$ or $$\int dx/x.$$</div></div>
+        <div class="fact"><div class="k">Constants</div><div class="v">Colored seals that absorb exponentials and signs into one family marker.</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="movie-anchor">
+      <div class="section-title">Recall Finish</div>
+      <p class="copy"><strong>Final answer:</strong> $$y=c_1x^2,\qquad y=\dfrac{c_2}{x^3}.$$</p>
+      <p class="copy"><strong>One-line recall:</strong> Factor the quadratic wall in $$p$$, walk each branch corridor separately, and freeze both resulting families at the exit.</p>
+      <p class="copy"><strong>Quick recall checks:</strong></p>
+      <ul>
+        <li>Why is this problem solved by factoring first instead of using a substitution first?</li>
+        <li>How do you verify that $$(xp-2y)(xp+3y)$$ expands to the original equation?</li>
+        <li>Why do both branch solutions remain in the final answer?</li>
+      </ul>
+    </section>
+
+    <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><p class="copy">Type what you want changed on this page, press Enter, and save the note so you can mention the filename later.</p><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="math-ex313-q3-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note on why a zero product creates two differential-equation branches."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter if you want a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+  </div></div>
+</main>
+<script src="exact-study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

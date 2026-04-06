@@ -1,120 +1,426 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Example 8-21 | Same-Frequency Superposition by Source Transformations</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
-<link rel="stylesheet" href="study.css" />
-<link rel="stylesheet" href="../linear-review.css" />
-</head>
 <body data-page-key="ch8_example_8_21">
 <main class="shell">
-  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-exercise-8-27.html">Prev: Exercise 8-27</a><a href="ch8-exercise-8-28.html">Next: Exercise 8-28</a></nav>
+  <nav class="nav">
+    <a href="index.html">Ch8 Index</a>
+    <a href="guide.html">Guide</a>
+    <a href="ch8-exercise-8-27.html">Prev: Exercise 8-27</a>
+    <a href="ch8-exercise-8-28.html">Next: Exercise 8-28</a>
+  </nav>
 
   <section class="hero">
     <div class="tag">Example 8-21</div>
     <h1>Use Source Transformations When Both Sources Share One Frequency</h1>
-    <p class="hero-sub">This example solves the same same-frequency superposition idea in a different style. Instead of turning one source off at a time, you transform each series source into a Norton form, combine the parallel current sources, reduce the passive parallel network, and then recover the output voltage in one clean phasor step.</p>
-    <div class="formula-block">$$V_R=227\angle-47.9^\circ\text{ V},\qquad v_R(t)=227\cos(5000t-47.9^\circ)\text{ V}$$</div>
-    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-21.html">Open in Memory Builder</a></div>
+    <p class="hero-sub">
+      This example solves the same-frequency superposition idea in a different style. Instead of turning one source off at a time, you transform each series source into a Norton form, combine the parallel current sources, reduce the passive parallel network, and then recover the output voltage in one clean phasor step.
+    </p>
+    <div class="formula-block">
+      $$V_R=227\angle-47.9^\circ\text{ V},\qquad v_R(t)=227\cos(5000t-47.9^\circ)\text{ V}$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-example-8-21.html">Open in Memory Builder</a>
+    </div>
   </section>
 
   <div class="study-grid">
     <div class="main-stack">
+
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact">
+            <div class="k">Goal</div>
+            <div class="v">Find the resistor voltage $$V_R$$ by transforming the sources and reducing the same-frequency phasor network.</div>
+          </div>
+          <div class="fact">
+            <div class="k">Key Rule</div>
+            <div class="v">Because both sources operate at the same angular frequency, they can be reduced into one final phasor answer.</div>
+          </div>
+          <div class="fact">
+            <div class="k">Shortcut Idea</div>
+            <div class="v">Transform both series sources into Norton sources, combine them, reduce the parallel network, then use $$V=IZ.$$</div>
+          </div>
+        </div>
+      </section>
+
       <section class="panel">
         <div class="section-title">Quick Data</div>
         <div class="facts">
-          <div class="fact"><div class="k">Source Currents</div><div class="v">$$I_{eq1}=-j10\text{ A},\qquad I_{eq2}=2-j3.46\text{ A}$$</div></div>
-          <div class="fact"><div class="k">Combined Source</div><div class="v">$$I_{eq}=2-j13.46=13.6\angle-81.5^\circ\text{ A}$$</div></div>
-          <div class="fact"><div class="k">Equivalent Impedance</div><div class="v">$$Z_{eq}=16.6\angle33.7^\circ~\Omega$$</div></div>
+          <div class="fact">
+            <div class="k">Source Currents</div>
+            <div class="v">$$I_{eq1}=-j10\text{ A},\qquad I_{eq2}=2-j3.46\text{ A}$$</div>
+          </div>
+          <div class="fact">
+            <div class="k">Combined Source</div>
+            <div class="v">$$I_{eq}=I_{eq1}+I_{eq2}=2-j13.46=13.6\angle-81.5^\circ\text{ A}$$</div>
+          </div>
+          <div class="fact">
+            <div class="k">Equivalent Impedance</div>
+            <div class="v">$$Z_{eq}=16.6\angle33.7^\circ~\Omega$$</div>
+          </div>
         </div>
       </section>
 
       <section class="panel">
         <div class="section-title">Rooms: Full Solution</div>
         <div class="rooms">
+
           <article class="room">
-            <h2>Room 1: Transform Each Series Source into a Current Source</h2>
+            <h2>Room 1: Why Use Source Transformations Here?</h2>
             <ul>
-              <li>Convert the left source branch and the right source branch into Norton forms.</li>
-              <li>This gives $$I_{eq1}=-j10\text{ A}$$ and $$I_{eq2}=2-j3.46\text{ A}.$$</li>
-              <li>Now both sources live naturally in the same parallel picture.</li>
+              <li>The circuit has two sources, but both operate at the same frequency.</li>
+              <li>That means the whole network can remain in one phasor world.</li>
+              <li>Instead of turning one source off at a time, we choose a smarter reduction route.</li>
+              <li>Each series source is converted into a Norton source, so both sources become parallel current sources.</li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Source transformation is chosen here because the circuit becomes a parallel-current-source problem, and parallel current sources combine much more easily than mixed source forms.</p></div>
+
+            <div class="mini">
+              <h3>Why This Method Is Attractive</h3>
+              <p>
+                Parallel current sources add directly. So source transformation is not just a trick here; it reorganizes the circuit into an easier structure.
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Big Comparison</h3>
+              <p>
+                Different-frequency case:
+                <br>
+                solve separately and add in time domain.
+                <br><br>
+                Same-frequency case:
+                <br>
+                keep everything in phasors and reduce to one final answer.
+              </p>
+            </div>
           </article>
 
           <article class="room">
-            <h2>Room 2: Combine the Parallel Current Sources</h2>
+            <h2>Room 2: Transform the Left Series Source into Norton Form</h2>
             <ul>
-              <li>Add the source currents directly because they are now on the same branch framework.</li>
-              <li>$$I_{eq}=I_{eq1}+I_{eq2}=2-j13.46=13.6\angle-81.5^\circ\text{ A}.$$</li>
-              <li>The two physical sources have collapsed into one equivalent current source.</li>
+              <li>The left branch is converted from a voltage-source series form into a current-source parallel form.</li>
+              <li>The transformation rule is:
+                $$I_{eq1}=\frac{V_{s1}}{Z_{s1}}$$
+              </li>
+              <li>The book’s transformed result is:
+                $$I_{eq1}=-j10\text{ A}$$
+              </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Parallel current sources are one of the cleanest places to use phasor addition. The transformation was worthwhile because it created this easy combination step.</p></div>
+
+            <div class="mini">
+              <h3>What -j10 Means</h3>
+              <p>
+                $$-j10$$ is already in rectangular phasor form. Its magnitude is:
+                $$|-j10|=10$$
+                and its angle is:
+                $$\angle(-j10)=-90^\circ$$
+                So:
+                $$I_{eq1}=10\angle-90^\circ\text{ A}$$
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Why the Angle Is -90°</h3>
+              <p>
+                A pure negative imaginary phasor lies straight downward on the complex plane. That is why its phase is exactly $$-90^\circ.$$
+              </p>
+            </div>
           </article>
 
           <article class="room">
-            <h2>Room 3: Reduce the Four Passive Elements in Parallel</h2>
+            <h2>Room 3: Transform the Right Series Source into Norton Form</h2>
             <ul>
-              <li>The resistor, capacitor, and inductive branches are all connected in parallel.</li>
-              <li>Reducing them gives $$Z_{eq}=16.6\angle33.7^\circ~\Omega.$$</li>
-              <li>This equivalent impedance now sits across the combined current source.</li>
+              <li>The right branch is transformed the same way:
+                $$I_{eq2}=\frac{V_{s2}}{Z_{s2}}$$
+              </li>
+              <li>The book gives:
+                $$I_{eq2}=2-j3.46\text{ A}$$
+              </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Once everything is in one parallel frame, both the source and the passive network can be compressed. That is the whole structural advantage of the transformation route.</p></div>
+
+            <div class="mini">
+              <h3>Rectangular Meaning</h3>
+              <p>
+                The current has:
+                <br>
+                real part $$=2$$
+                <br>
+                imaginary part $$=-3.46$$
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Convert It to Polar Form</h3>
+              <p>
+                Magnitude:
+                $$|I_{eq2}|=\sqrt{2^2+(-3.46)^2}=\sqrt{4+11.97}\approx4$$
+                Angle:
+                $$\theta=\tan^{-1}\left(\frac{-3.46}{2}\right)\approx-60^\circ$$
+                So:
+                $$I_{eq2}\approx4\angle-60^\circ\text{ A}$$
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Why This Helps</h3>
+              <p>
+                Even if the current is first given in rectangular form, it still represents an ordinary phasor. Rectangular form is helpful for addition, while polar form is helpful for interpretation.
+              </p>
+            </div>
           </article>
 
           <article class="room">
-            <h2>Room 4: Recover the Output Voltage</h2>
+            <h2>Room 4: Combine the Parallel Current Sources</h2>
             <ul>
-              <li>The output voltage across the equivalent network equals the resistor voltage $$V_R.$$</li>
-              <li>Use the combined current source and equivalent impedance to get $$V_R=227\angle-47.9^\circ\text{ V}.$$</li>
-              <li>This matches the same-frequency superposition result found by the earlier method.</li>
+              <li>Now both sources are current sources in parallel, so they add directly.</li>
+              <li>Use:
+                $$I_{eq}=I_{eq1}+I_{eq2}$$
+              </li>
+              <li>Substitute the rectangular forms:
+                $$I_{eq}=(-j10)+(2-j3.46)$$
+              </li>
+              <li>So:
+                $$I_{eq}=2-j13.46\text{ A}$$
+              </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>This is the check that both methods are equivalent. Different reduction styles should still land on the same port voltage when the algebra is done correctly.</p></div>
+
+            <div class="mini">
+              <h3>Why Rectangular Form Is Used Here</h3>
+              <p>
+                In rectangular form, currents add component by component:
+                <br><br>
+                real parts add,
+                <br>
+                imaginary parts add.
+                <br><br>
+                That is why rectangular form is the easiest place to combine parallel phasor currents.
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Now Convert the Combined Current to Polar Form</h3>
+              <p>
+                Magnitude:
+                $$|I_{eq}|=\sqrt{2^2+(-13.46)^2}\approx13.6$$
+                Angle:
+                $$\theta=\tan^{-1}\left(\frac{-13.46}{2}\right)\approx-81.5^\circ$$
+                Therefore:
+                $$I_{eq}=13.6\angle-81.5^\circ\text{ A}$$
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Where Did 13.6∠-81.5° Come From?</h3>
+              <p>
+                It is just the polar form of:
+                $$2-j13.46$$
+                So:
+                <br>
+                $$13.6$$ came from Pythagorean magnitude,
+                <br>
+                and $$-81.5^\circ$$ came from the arctangent angle.
+              </p>
+            </div>
           </article>
 
           <article class="room">
-            <h2>Room 5: Write the Time-Domain Output</h2>
+            <h2>Room 5: Reduce the Four Passive Elements in Parallel</h2>
             <ul>
-              <li>Because both sources operate at $$\omega=5000\text{ rad/s},$$ one final phasor is enough.</li>
-              <li>So the output waveform is $$v_R(t)=227\cos(5000t-47.9^\circ)\text{ V}.$$</li>
-              <li>The same frequency is what permits the single clean cosine answer.</li>
+              <li>After transforming the sources, the passive branches are all in one parallel network.</li>
+              <li>That full parallel reduction gives:
+                $$Z_{eq}=16.6\angle33.7^\circ~\Omega$$
+              </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>This is the same big rule as Example 8-16: same-frequency responses can stay in the phasor world all the way to the end.</p></div>
+
+            <div class="mini">
+              <h3>What This Equivalent Means</h3>
+              <p>
+                Instead of carrying the resistor, capacitor, and inductive branches separately, we replace them with one equivalent impedance that behaves the same at the terminals.
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Why the Angle Is Positive</h3>
+              <p>
+                A positive impedance angle means the equivalent network behaves overall like an inductive-leaning impedance at this frequency.
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Structural Win</h3>
+              <p>
+                At this point the whole circuit has become:
+                <br><br>
+                one current source
+                <br>
+                in parallel with
+                <br>
+                one equivalent impedance.
+              </p>
+            </div>
           </article>
+
+          <article class="room">
+            <h2>Room 6: Recover the Output Voltage</h2>
+            <ul>
+              <li>The voltage across the equivalent impedance is the same as the resistor voltage $$V_R.$$</li>
+              <li>Use the phasor Ohm’s law relation:
+                $$V_R=I_{eq}Z_{eq}$$
+              </li>
+              <li>Substitute:
+                $$V_R=(13.6\angle-81.5^\circ)(16.6\angle33.7^\circ)$$
+              </li>
+            </ul>
+
+            <div class="mini">
+              <h3>Multiply Magnitudes</h3>
+              <p>
+                $$13.6\times16.6\approx225.8\approx227$$
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Add Angles</h3>
+              <p>
+                $$-81.5^\circ+33.7^\circ=-47.8^\circ\approx-47.9^\circ$$
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Final Phasor Voltage</h3>
+              <p>
+                $$V_R=227\angle-47.9^\circ\text{ V}$$
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Where Did 227∠-47.9° Come From?</h3>
+              <p>
+                It came directly from multiplying the combined source current phasor by the equivalent impedance phasor:
+                <br><br>
+                magnitude from multiplication,
+                <br>
+                angle from addition.
+              </p>
+            </div>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Convert the Final Phasor Back to Time Domain</h2>
+            <ul>
+              <li>The phasor output is:
+                $$V_R=227\angle-47.9^\circ\text{ V}$$
+              </li>
+              <li>The common source frequency is:
+                $$\omega=5000\text{ rad/s}$$
+              </li>
+              <li>So the time-domain waveform is:
+                $$v_R(t)=227\cos(5000t-47.9^\circ)\text{ V}$$
+              </li>
+            </ul>
+
+            <div class="mini">
+              <h3>Why One Final Cosine Is Allowed</h3>
+              <p>
+                Both sources share the same angular frequency. That means the whole circuit response also lives at that same one frequency. So one phasor answer is valid all the way to the end.
+              </p>
+            </div>
+
+            <div class="mini">
+              <h3>Big Rule</h3>
+              <p>
+                Same frequency ⇒ one final phasor.
+                <br><br>
+                Different frequencies ⇒ separate waveform terms.
+              </p>
+            </div>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: Compact Exam-Style Working</h2>
+            <ul>
+              <li>
+                $$I_{eq1}=-j10\text{ A}$$
+              </li>
+              <li>
+                $$I_{eq2}=2-j3.46\text{ A}$$
+              </li>
+              <li>
+                $$I_{eq}=I_{eq1}+I_{eq2}=2-j13.46=13.6\angle-81.5^\circ\text{ A}$$
+              </li>
+              <li>
+                $$Z_{eq}=16.6\angle33.7^\circ~\Omega$$
+              </li>
+              <li>
+                $$V_R=I_{eq}Z_{eq}=(13.6\angle-81.5^\circ)(16.6\angle33.7^\circ)=227\angle-47.9^\circ\text{ V}$$
+              </li>
+              <li>
+                $$v_R(t)=227\cos(5000t-47.9^\circ)\text{ V}$$
+              </li>
+            </ul>
+
+            <div class="mini">
+              <h3>Memory Target</h3>
+              <p>
+                Transform → combine current sources → reduce parallel network → use $$V=IZ$$ → write one final cosine.
+              </p>
+            </div>
+          </article>
+
         </div>
       </section>
 
       <section class="panel" id="movie-anchor">
         <div class="section-title">Solution Flow</div>
         <div class="movie-flow">
-          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Two Source Transformations</h3><p>The net grabs one Norton current from each side.</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">21 Net</div>
+            <h3>Catch the Two Source Transformations</h3>
+            <p>The net grabs one Norton current from each side.</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">31 Mat</div><h3>Flatten Them into One Current Source</h3><p>The mat combines the parallel sources.</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">31 Mat</div>
+            <h3>Flatten Them into One Current Source</h3>
+            <p>The mat combines the parallel current sources.</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Parallel Impedance</h3><p>Fire reveals the one equivalent impedance.</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">84 Fire</div>
+            <h3>Light the Parallel Impedance</h3>
+            <p>Fire reveals one equivalent passive network.</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Final Output Voltage</h3><p>The coat wraps the phasor back into $$v_R(t).$$</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">71 Coat</div>
+            <h3>Wear the Final Output Voltage</h3>
+            <p>The coat wraps the phasor back into $$v_R(t).$$</p>
+          </div>
         </div>
       </section>
 
       <section class="panel" id="request-anchor">
         <div class="section-title">Save Change Request</div>
         <form class="request-form" data-txt-save>
-          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-example-8-21-request.txt" /></label>
-          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more comparison with Example 8-16 to show why both methods agree."></textarea></label>
+          <label class="field-stack">
+            <span>File Name</span>
+            <input class="request-input" data-note-filename type="text" value="ch8-example-8-21-request.txt" />
+          </label>
+          <label class="field-stack">
+            <span>Text</span>
+            <textarea class="request-textarea" data-note-body placeholder="Example: Add one more comparison with Example 8-16 to show why both methods agree."></textarea>
+          </label>
           <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
           <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
           <p class="memory-status" data-note-status>Nothing saved yet.</p>
         </form>
       </section>
+
     </div>
   </div>
 </main>
 <script src="study.js"></script>
 <script src="../linear-review.js" defer></script>
 </body>
-</html>

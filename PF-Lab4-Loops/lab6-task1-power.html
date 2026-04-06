@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 6 Task 1 | Recursive Power Function</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab6-task1-power"><main class="shell"><nav class="nav"><a href="lab6-index.html">Lab 6 Index</a><a href="lab6-guide.html">Guide</a><a href="lab6-task2-sum-natural.html">Next: Task 2</a></nav><section class="hero"><div class="tag">Lab 6 Task 1</div><h1>Recursive Power Function</h1><p class="hero-sub">Power is one of the cleanest recursion problems because the exponent shrinks by exactly one each call.</p><div class="formula-block">$$base^{exp}=base \times base^{exp-1},\qquad base^0 = 1$$</div><div class="tool-row"><a class="tool-btn" href="lab6-guide.html">Recursion Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab6-task1-power.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Function</div><div class="v"><span class="inline-code">int power(int base, int exp)</span></div></div><div class="fact"><div class="k">Base case</div><div class="v"><span class="inline-code">exp == 0</span></div></div><div class="fact"><div class="k">Recursive case</div><div class="v"><span class="inline-code">base * power(base, exp - 1)</span></div></div><div class="fact"><div class="k">Shrink step</div><div class="v">reduce exponent</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int power(int base, int exp)
+{
+    if (exp == 0) {
+        return 1;
+    }
+
+    return base * power(base, exp - 1);
+}
+
+int main(void)
+{
+    int base, exp;
+
+    printf("Enter base and exponent: ");
+    scanf("%d %d", &amp;base, &amp;exp);
+
+    printf("Result = %d\n", power(base, exp));
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Find the Stop First</h2><ul><li>Any number to the power 0 equals 1.</li><li>That gives the base case immediately.</li><li>If <span class="inline-code">exp == 0</span>, return 1.</li></ul></article><article class="room"><h2>Room 2: Shrink Only the Exponent</h2><ul><li>The base stays the same in every call.</li><li>The exponent moves from <span class="inline-code">exp</span> to <span class="inline-code">exp - 1</span>.</li><li>This drives the problem toward zero.</li></ul></article><article class="room"><h2>Room 3: Multiply on the Way Back</h2><ul><li>Each waiting call contributes one extra factor of <span class="inline-code">base</span>.</li><li>So the return expression is <span class="inline-code">base * power(base, exp - 1)</span>.</li><li>The multiplication happens as calls return.</li></ul></article><article class="room"><h2>Room 4: main Only Supplies Input</h2><ul><li><span class="inline-code">main</span> reads base and exponent.</li><li>It sends both values into the function.</li><li>The recursive work stays hidden inside <span class="inline-code">power</span>.</li></ul></article><article class="room"><h2>Room 5: Call Stack Story</h2><ul><li><span class="inline-code">power(2, 3)</span> waits for <span class="inline-code">power(2, 2)</span>.</li><li>Then that waits for <span class="inline-code">power(2, 1)</span>, then <span class="inline-code">power(2, 0)</span>.</li><li>The base case returns 1, and the stack rebuilds 2, 4, 8.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

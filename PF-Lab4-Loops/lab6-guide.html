@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Lab 6 Recursion | Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+</head>
+<body>
+<main class="shell">
+  <nav class="nav"><a href="index.html">All Labs</a><a href="lab6-index.html">Lab 6 Index</a><a href="memory-palace-builder.html">Memory Builder</a><a href="lab6-task1-power.html">Task 1</a></nav>
+
+  <section class="hero">
+    <div class="tag">Recursive Thinking + Call Stack</div>
+    <h1>How to Build a Recursive Function</h1>
+    <p class="hero-sub">Every recursive solution should answer two questions immediately: when do I stop, and how does the next call make the problem smaller?</p>
+    <div class="formula-block">$$\text{if stop condition} \Rightarrow \text{return base value},\qquad \text{else} \Rightarrow \text{solve smaller version}$$</div>
+  </section>
+
+  <div class="study-grid two-col">
+    <section class="panel">
+      <div class="section-title">Recursion Selection Table</div>
+      <table class="guide-table">
+        <thead><tr><th>Need</th><th>Base Case</th><th>Smaller Step</th><th>Lab Use</th></tr></thead>
+        <tbody>
+          <tr><td>Repeated multiplication</td><td><span class="inline-code">exp == 0</span></td><td><span class="inline-code">base * power(base, exp - 1)</span></td><td>Task 1</td></tr>
+          <tr><td>Running sum</td><td><span class="inline-code">n == 0</span></td><td><span class="inline-code">n + sum(n - 1)</span></td><td>Task 2</td></tr>
+          <tr><td>Remainder-based reduction</td><td><span class="inline-code">b == 0</span></td><td><span class="inline-code">gcd(b, a % b)</span></td><td>Task 3</td></tr>
+          <tr><td>Digit-by-digit processing</td><td>single digit left</td><td>remove one digit with division</td><td>Task 4, Debugs</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Core Syntax Memory</div>
+      <div class="facts">
+        <div class="fact"><div class="k">base case</div><div class="v">the exact condition that stops further calls</div></div>
+        <div class="fact"><div class="k">recursive case</div><div class="v">the part that calls the same function on a smaller problem</div></div>
+        <div class="fact"><div class="k">stack frame</div><div class="v">one active call waiting for the smaller call to finish</div></div>
+        <div class="fact"><div class="k">shrink step</div><div class="v">use <span class="inline-code">n - 1</span>, <span class="inline-code">n / 10</span>, or a remainder rule</div></div>
+        <div class="fact"><div class="k">danger</div><div class="v">wrong base case causes infinite recursion</div></div>
+        <div class="fact"><div class="k">trace</div><div class="v">follow one call downward and then back upward</div></div>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="study.js"></script>
+</body>
+</html>

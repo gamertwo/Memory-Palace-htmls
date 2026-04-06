@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-example-9-9.html" />
+<title>Example 9-9 | Find Poles and Zeros</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_example_9_9">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="ch9-pole-zero-diagrams.html">Prev: Pole-Zero</a>
+    <a href="ch9-exercise-9-15.html">Next: Exercise 9-15</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Example 9-9</div>
+    <h1>Ichigo Hunts The Points In A Mist Corridor</h1>
+    <p class="hero-sub">Ichigo runs one straight corridor while the transform breaks into shapes. The square seal goes first, the circle gate lands at the zero, and the crossed spears land at the poles.</p>
+    <div class="formula-block">
+      $$f(t)=e^{-2t}+e^{-2t}\cos2t-\sin2t\,u(t)$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Room Route</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-example-9-9.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Result</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Zeros</div><div class="v">One real zero at $$s=0$$ and one at $$s=-\infty$$ in the book's interpretation.</div></div>
+          <div class="fact"><div class="k">Poles</div><div class="v">Three poles: two at $$s=-2\pm j2$$ and one at $$s=-2.$$</div></div>
+          <div class="fact"><div class="k">Main image</div><div class="v">A real-axis circle at the origin and a pole cluster centered around the shifted line $$\Re\{s\}=-2.$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Convert Each Time-Domain Term Explicitly</h3>
+            <div class="review-room-prompt">
+              <p>Start from</p>
+              <p>$$f(t)=e^{-2t}+e^{-2t}\cos2t-\sin2t\,u(t)$$</p>
+              <p>Use the basic shifted forms one term at a time.</p>
+              <p>For the pure exponential:</p>
+              <p>$$\mathcal{L}\{e^{-2t}u(t)\}=\frac{1}{s+2}$$</p>
+              <p>For the shifted cosine:</p>
+              <p>$$\mathcal{L}\{e^{-2t}\cos2t\,u(t)\}=\frac{s+2}{(s+2)^2+2^2}=\frac{s+2}{(s+2)^2+4}$$</p>
+              <p>For the sine term:</p>
+              <p>$$\mathcal{L}\{\sin2t\,u(t)\}=\frac{2}{s^2+4}$$</p>
+              <p>So the unsimplified transform is</p>
+              <p>$$F(s)=\frac{1}{s+2}+\frac{s+2}{(s+2)^2+4}-\frac{2}{s^2+4}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Combine, Simplify, And Watch For Cancellation</h3>
+            <div class="review-room-prompt">
+              <p>The temporary common denominator is built from all three denominator pieces:</p>
+              <p>$$ (s+2)\big((s+2)^2+4\big)(s^2+4) $$</p>
+              <p>When the algebra is simplified fully, the textbook reduces the result to</p>
+              <p>$$F(s)=\frac{2s^2}{(s+2)(s^2+4s+8)}$$</p>
+              <p>This is the important lesson: a factor that appears temporarily during combination does not automatically survive into the final pole-zero diagram. You always plot from the final simplified form, not from the first common denominator you wrote down.</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Read The Zero From The Final Numerator</h3>
+            <div class="review-room-prompt">
+              <p>The final numerator is $$2s^2.$$</p>
+              <p>The constant 2 is only a scale factor, so ignore it for plotting.</p>
+              <p>Set the remaining numerator equal to zero:</p>
+              <p>$$s^2=0$$</p>
+              <p>That gives</p>
+              <p>$$s=0$$</p>
+              <p>So the visible zero is at the origin. Because the power is 2, the origin is a repeated zero in the algebra, but the page picture remembers it as the main real-axis zero point.</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 4</div>
+            <h3 class="review-room-title">Read The Poles From The Final Denominator</h3>
+            <div class="review-room-prompt">
+              <p>The denominator is</p>
+              <p>$$ (s+2)(s^2+4s+8) $$</p>
+              <p>From the first factor,</p>
+              <p>$$s+2=0\quad\Rightarrow\quad s=-2$$</p>
+              <p>From the quadratic factor, use the quadratic formula:</p>
+              <p>$$s=\frac{-4\pm\sqrt{4^2-4(1)(8)}}{2}=\frac{-4\pm\sqrt{16-32}}{2}=\frac{-4\pm\sqrt{-16}}{2}$$</p>
+              <p>$$s=\frac{-4\pm4j}{2}=-2\pm j2$$</p>
+              <p>So the final poles are</p>
+              <p>$$s=-2,\qquad s=-2+j2,\qquad s=-2-j2$$</p>
+            </div>
+          </article>
+        </div>
+        <div class="mini"><h3>Concept Summary</h3><p>This example teaches two habits at once: convert each time-domain term honestly, then simplify all the way before plotting. The final reduced form is what decides the true poles and zeros.</p></div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: Ichigo's Connected Run</div>
+        <div class="rooms">
+          <article class="room" data-tags="ichigo,transform,split,linearity">
+            <h2>Room 1: Ichigo Splits The Waveform</h2>
+            <p>Ichigo enters a foggy corridor and cuts the waveform into standard Laplace pieces. Each slash exposes a familiar transform so the whole expression can be rebuilt in the s-domain.</p>
+            <ul>
+              <li>Use linearity first.</li>
+              <li>Do not plot anything before the transform is organized.</li>
+              <li>The corridor only becomes clear after the algebra is simplified.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="ichigo,shape,square,zero">
+            <h2>Room 2: The Numerator Becomes A Circle Gate</h2>
+            <p>After rationalizing, Ichigo reaches a circular door labeled by the numerator. He asks one question only: what value of $$s$$ makes that numerator zero?</p>
+            <ul>
+              <li>Numerator means zero hunt.</li>
+              <li>A zero is a circle gate, not a spear.</li>
+              <li>The visible real-axis circle lands at $$s=0.$$</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="ichigo,poles,shifted,pair">
+            <h2>Room 3: Crossed Spears Appear At The Denominator Roots</h2>
+            <p>Ichigo turns left and finds the denominator factors arranged as spear racks. One rack gives a single real pole at $$s=-2$$ and the twin-arch factor gives a pair at $$s=-2\pm j2.$$</p>
+            <ul>
+              <li>Linear denominator factor gives one pole.</li>
+              <li>Quadratic denominator factor gives a pair.</li>
+              <li>The whole pole pattern is shifted left by 2 units.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="ichigo,plot,final,map">
+            <h2>Room 4: Ichigo Pins The Final Diagram To The Wall</h2>
+            <p>At the last room, Ichigo pins one circle at the origin and three crossed spears on the shifted locations. The mist clears and the plotting rule feels mechanical instead of mysterious.</p>
+            <ul>
+              <li>Circle at $$0.$$</li>
+              <li>Crossed spears at $$-2$$ and $$-2\pm j2.$$</li>
+              <li>The next page repeats the exact idea with a cleaner numerator.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Formula Shapes</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Square seal</div><div class="v">Overall multiplier</div></div>
+          <div class="fact"><div class="k">Circle gate</div><div class="v">$$N(s)=0$$</div></div>
+          <div class="fact"><div class="k">Crossed spear</div><div class="v">$$D(s)=0$$</div></div>
+          <div class="fact"><div class="k">Twin arch</div><div class="v">$$-2\pm j2$$ pair</div></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

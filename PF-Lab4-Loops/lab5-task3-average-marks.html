@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 5 Task 3 | Average Marks with Two Functions</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab5-task3-average-marks"><main class="shell"><nav class="nav"><a href="lab5-index.html">Lab 5 Index</a><a href="lab5-guide.html">Guide</a><a href="lab5-task4-calculator.html">Next: Task 4</a></nav><section class="hero"><div class="tag">Lab 5 Task 3</div><h1>Input Marks and Find Average Using Two Functions</h1><p class="hero-sub">This task trains modular division of work: one function gathers marks and another computes the average.</p><div class="formula-block">$$\text{average}=\frac{\text{sum of marks}}{\text{number of students}}$$</div><div class="tool-row"><a class="tool-btn" href="lab5-guide.html">Functions Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab5-task3-average-marks.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Function 1</div><div class="v"><span class="inline-code">inputMarks</span> fills the array</div></div><div class="fact"><div class="k">Function 2</div><div class="v"><span class="inline-code">averageMarks</span> computes result</div></div><div class="fact"><div class="k">Shared data</div><div class="v">marks array and student count</div></div><div class="fact"><div class="k">Design idea</div><div class="v">split collection from calculation</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+void inputMarks(int marks[], int n)
+{
+    int i;
+
+    for (i = 0; i &lt; n; i++) {
+        printf("Enter marks of student %d: ", i + 1);
+        scanf("%d", &amp;marks[i]);
+    }
+}
+
+float averageMarks(int marks[], int n)
+{
+    int i;
+    int sum = 0;
+
+    for (i = 0; i &lt; n; i++) {
+        sum += marks[i];
+    }
+
+    return (float) sum / n;
+}
+
+int main(void)
+{
+    int n;
+    int marks[100];
+
+    printf("Enter number of students: ");
+    scanf("%d", &amp;n);
+
+    inputMarks(marks, n);
+    printf("Average marks = %.2f\n", averageMarks(marks, n));
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Two Jobs, Two Functions</h2><ul><li>Reading marks is one job.</li><li>Calculating the average is another job.</li><li>So the lab explicitly asks for two separate functions.</li></ul></article><article class="room"><h2>Room 2: inputMarks Fills the Array</h2><ul><li>This function takes the array and number of students.</li><li>It loops through each index and stores input.</li><li>It does not need to return a value, so <span class="inline-code">void</span> is enough.</li></ul></article><article class="room"><h2>Room 3: averageMarks Returns a Float</h2><ul><li>The average may contain decimals.</li><li>So this function should return <span class="inline-code">float</span>.</li><li>It sums the array and divides by <span class="inline-code">n</span>.</li></ul></article><article class="room"><h2>Room 4: main Coordinates the Workflow</h2><ul><li><span class="inline-code">main</span> asks for the student count first.</li><li>Then it calls <span class="inline-code">inputMarks</span>.</li><li>Finally it calls <span class="inline-code">averageMarks</span> and prints the result.</li></ul></article><article class="room"><h2>Room 5: Data Passing Memory</h2><ul><li>The same marks array is passed to both functions.</li><li>One function fills it and the other reads it.</li><li>This is a strong modular-programming pattern to remember.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

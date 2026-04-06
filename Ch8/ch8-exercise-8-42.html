@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exercise 8-42 | Average Power Delivered to the 25-Ohm Load</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+</head>
+<body data-page-key="ch8_exercise_8_42">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-36.html">Prev: Example 8-36</a><a href="ch8-exercise-8-43.html">Next: Exercise 8-43</a></nav>
+  <section class="hero"><div class="tag">Exercise 8-42</div><h1>Find the Average Power Delivered to the 25-Ohm Load</h1><p class="hero-sub">The key move is to solve for the load-node voltage first. After that, the load current and average power are direct.</p><div class="formula-block">$$V_O=97.5-j46.9\text{ V},\qquad I_L=3.90-j1.87\text{ A},\qquad P=234\text{ W}$$</div><div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-42.html">Open in Memory Builder</a></div></section>
+  <div class="study-grid"><div class="main-stack">
+    <section class="panel"><div class="section-title">What You Are Asked To Find</div><div class="facts"><div class="fact"><div class="k">Left Source</div><div class="v">$$150\angle0^\circ\text{ V}$$ connected to the load node through $$j2\ \Omega.$$</div></div><div class="fact"><div class="k">Right Source</div><div class="v">$$125\angle-90^\circ\text{ V}$$ connected to the load node through $$j4\ \Omega.$$</div></div><div class="fact"><div class="k">Load</div><div class="v">A 25-$$\Omega$$ resistor from the load node to ground.</div></div></div></section>
+    <section class="panel"><div class="section-title">Rooms: Full Solution</div><div class="rooms">
+      <article class="room"><h2>Room 1: Let the Load-Node Voltage Be $$V_O$$</h2><ul><li>Call the top node voltage $$V_O.$$ It is also the voltage across the 25-$$\Omega$$ load resistor.</li></ul></article>
+      <article class="room"><h2>Room 2: Write KCL at the Load Node</h2><ul><li>Current to the left source: $$\frac{V_O-150\angle0^\circ}{j2}$$</li><li>Current to the right source: $$\frac{V_O-125\angle-90^\circ}{j4}$$</li><li>Current to ground through the resistor: $$\frac{V_O}{25}$$</li><li>KCL gives $$\frac{V_O-150\angle0^\circ}{j2}+\frac{V_O-125\angle-90^\circ}{j4}+\frac{V_O}{25}=0.$$</li></ul></article>
+      <article class="room"><h2>Room 3: Solve the Node Equation</h2><ul><li>Using $$125\angle-90^\circ=-j125,$$ the solution is $$V_O=97.5-j46.9\text{ V}. $$</li></ul></article>
+      <article class="room"><h2>Room 4: Find the Load Current</h2><ul><li>$$I_L=\frac{V_O}{25}=\frac{97.5-j46.9}{25}=3.90-j1.87\text{ A}. $$</li><li>So $$|I_L|=4.33\text{ A}. $$</li></ul></article>
+      <article class="room"><h2>Room 5: Compute the Average Power</h2><ul><li>Using peak phasors, $$P=\frac{1}{2}R|I|^2.$$</li><li>So $$P=\frac{1}{2}(25)(4.33)^2=234\text{ W}. $$</li></ul><div class="mini"><h3>Why Only the Resistor Gets Average Power</h3><p>The reactive feed branches shape the current, but the resistor is the element that dissipates net energy.</p></div></article>
+      <article class="room"><h2>Room 6: Final Answer</h2><ul><li>$$V_O=97.5-j46.9\text{ V},\qquad I_L=3.90-j1.87\text{ A},\qquad P=234\text{ W}. $$</li></ul></article>
+    </div></section>
+    <section class="panel" id="movie-anchor"><div class="section-title">Solution Flow</div><div class="movie-flow"><div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Load Node</h3><p>The net treats the center node voltage as the one key unknown.</p></div><div class="movie-arrow">&rarr;</div><div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write One KCL Equation</h3><p>Chalk combines the two reactive feed currents and the resistor current.</p></div><div class="movie-arrow">&rarr;</div><div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Load Power</h3><p>The coat turns the solved node voltage into current and average power.</p></div></div></section>
+    <section class="panel" id="request-anchor"><div class="section-title">Save Change Request</div><form class="request-form" data-txt-save><label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-42-request.txt" /></label><label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note showing the load-node KCL equation in admittance form."></textarea></label><div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div><p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p><p class="memory-status" data-note-status>Nothing saved yet.</p></form></section>
+  </div></div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

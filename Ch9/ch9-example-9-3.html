@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-example-9-3.html" />
+<title>Example 9-3 | Transform Of delta(t)</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_example_9_3">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="ch9-exercise-9-2.html">Prev: Exercise 9-2</a>
+    <a href="ch9-exercise-9-3.html">Next: Exercise 9-3</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Example 9-3</div>
+    <h1>The Zero Checkpoint Leaves Only One Bright Token</h1>
+    <p class="hero-sub">The chapter now zooms all the way into the instant around zero. The impulse does not care about the long road to infinity. It acts only at the checkpoint between $$0^-$$ and $$0^+$$ and samples the exponential at exactly zero.</p>
+    <div class="formula-block">
+      $$f(t)=\delta(t), \qquad F(s)=\mathcal{L}\{\delta(t)\}=1$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Room Route</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-example-9-3.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Result</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">$$f(t)=\delta(t)$$</div></div>
+          <div class="fact"><div class="k">Transform</div><div class="v">$$F(s)=1$$</div></div>
+          <div class="fact"><div class="k">Main image</div><div class="v">A razor-thin zero-point spike leaves one bright token behind.</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Start With The Impulse Definition Setup</h3>
+            <div class="review-room-prompt">
+              <p>Write the transform as</p>
+              <p>$$F(s)=\int_{0^-}^{\infty}\delta(t)e^{-st}\,dt$$</p>
+              <p>The lower limit is written as $$0^-$$ because the impulse acts at exactly zero.</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Reduce The Interval To The Instant Around Zero</h3>
+            <div class="review-room-prompt">
+              <p>Since $$\delta(t)=0$$ everywhere except at $$t=0,$$ nothing away from zero contributes.</p>
+              <p>So the integral reduces to</p>
+              <p>$$F(s)=\int_{0^-}^{0^+}\delta(t)e^{-st}\,dt$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Sample The Exponential At Zero</h3>
+            <div class="review-room-prompt">
+              <p>At the impulse location, $$t=0,$$ so</p>
+              <p>$$e^{-st}=e^0=1$$</p>
+              <p>That makes the integral</p>
+              <p>$$F(s)=\int_{0^-}^{0^+}\delta(t)\,dt$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 4</div>
+            <h3 class="review-room-title">Use The Unit-Area Property</h3>
+            <div class="review-room-prompt">
+              <p>The impulse has unit area over that tiny interval, so</p>
+              <p>$$\int_{0^-}^{0^+}\delta(t)\,dt=1$$</p>
+              <p>Therefore,</p>
+              <p>$$F(s)=1$$</p>
+            </div>
+          </article>
+        </div>
+        <div class="mini"><h3>Concept Summary</h3><p>The impulse transform is a sampling story, not an infinity story. The spike only cares about the exact instant at zero, where the exponential equals 1.</p></div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: The Zero Checkpoint</div>
+        <div class="rooms">
+          <article class="room" data-tags="zero-checkpoint,left-gate,right-gate">
+            <h2>Room 1: Only The Gates Around Zero Matter</h2>
+            <p>The long time road disappears and only one checkpoint remains. A gate marked $$0^-$$ stands just before zero, and a gate marked $$0^+$$ stands just after it.</p>
+            <ul>
+              <li>This scene zooms into the instant around zero.</li>
+              <li>The rest of the timeline does not matter.</li>
+              <li>The integration interval shrinks around the checkpoint.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="impulse,spike,spear">
+            <h2>Room 2: A Razor-Thin Spear Spike Appears At The Marker</h2>
+            <p>Exactly at the zero marker, a needle-thin spear spike appears. That spike is $$\delta(t),$$ meaning all the action happens at one instant and nowhere else.</p>
+            <ul>
+              <li>The spike is not wide.</li>
+              <li>All action is concentrated at one point.</li>
+              <li>Everything off the point contributes zero.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="sampling,orb,zero">
+            <h2>Room 3: The Orb Gets Sampled Before It Can Decay</h2>
+            <p>A glowing exponential orb tries to move along the road, but the impulse hits at exactly zero before any motion happens. Since the hit happens instantly, the orb is sampled at $$t=0,$$ where it equals 1.</p>
+            <ul>
+              <li>No time passes before sampling.</li>
+              <li>That is why the exponential becomes 1.</li>
+              <li>The far road and infinity are irrelevant here.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="token,unit,final">
+            <h2>Room 4: One Bright Token Is Left Behind</h2>
+            <p>After the zero-point strike, only one bright token remains. There is no denominator structure here, just the pure unit result $$1.$$</p>
+            <ul>
+              <li>The impulse leaves unit area.</li>
+              <li>The sampled value is 1.</li>
+              <li>The final answer is simply $$1.$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Memory Hook</div>
+        <p class="copy">Impulse only acts at zero, so it samples the exponential at zero and leaves 1.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

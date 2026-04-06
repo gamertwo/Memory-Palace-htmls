@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-example-9-7.html" />
+<title>Example 9-7 to Exercise 9-10 | Differentiation Corridor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_example_9_7">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="ch9-example-9-6.html">Prev: Example 9-6</a>
+    <a href="ch9-example-9-8.html">Next: Example 9-8</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Example 9-7 through Exercise 9-10</div>
+    <h1>Differentiation Corridor</h1>
+    <p class="hero-sub">This range teaches the derivative property as a removal move. Differentiation injects an $$s$$ into the numerator and subtracts the pre-zero checkpoint value.</p>
+    <div class="formula-block">$$\mathcal{L}\left\{\frac{df(t)}{dt}\right\}=sF(s)-f(0^-)$$</div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Memory Rooms</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-example-9-7.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Results</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Example 9-7</div><div class="v">$$\mathcal{L}\{\cos\beta t\,u(t)\}=\dfrac{s}{s^2+\beta^2}$$</div></div>
+          <div class="fact"><div class="k">Exercise 9-9</div><div class="v">$$\mathcal{L}\{v_2(t)\}=\dfrac{V_A}{s}=sV_1(s)-v_1(0^-)$$</div></div>
+          <div class="fact"><div class="k">Exercise 9-10</div><div class="v">$$V(s)=\dfrac{3s}{s+1200}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Example 9-7: Get Cosine By Differentiating Sine</h3>
+            <div class="review-room-prompt">
+              <p>Start from the identity</p>
+              <p>$$\cos\beta t=\frac{1}{\beta}\frac{d}{dt}\sin\beta t$$</p>
+              <p>You already know</p>
+              <p>$$\mathcal{L}\{\sin\beta t\,u(t)\}=\frac{\beta}{s^2+\beta^2}$$</p>
+              <p>Apply the differentiation property:</p>
+              <p>$$\mathcal{L}\left\{\frac{d}{dt}\sin\beta t\right\}=s\frac{\beta}{s^2+\beta^2}-\sin(0^-)$$</p>
+              <p>The pre-zero value is zero:</p>
+              <p>$$\sin(0^-)=0$$</p>
+              <p>Now include the factor $$1/\beta$$:</p>
+              <p>$$\mathcal{L}\{\cos\beta t\,u(t)\}=\frac{1}{\beta}\left[s\frac{\beta}{s^2+\beta^2}-0\right]=\frac{s}{s^2+\beta^2}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Exercise 9-9: Differentiate The Ramp Back Into A Step</h3>
+            <div class="review-room-prompt">
+              <p>Because $$r(t)=tu(t),$$ the first signal is</p>
+              <p>$$v_1(t)=V_Ar(t)=V_Atu(t)$$</p>
+              <p>Its Laplace transform is</p>
+              <p>$$V_1(s)=\frac{V_A}{s^2}$$</p>
+              <p>Now differentiate in time:</p>
+              <p>$$v_2(t)=\frac{d}{dt}[V_Atu(t)]=V_Au(t)$$</p>
+              <p>So directly,</p>
+              <p>$$\mathcal{L}\{v_2(t)\}=\mathcal{L}\{V_Au(t)\}=\frac{V_A}{s}$$</p>
+              <p>Check with the derivative property:</p>
+              <p>$$sV_1(s)-v_1(0^-)=s\frac{V_A}{s^2}-0=\frac{V_A}{s}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Exercise 9-10: Differentiate The Exponential Then Apply The Scale</h3>
+            <div class="review-room-prompt">
+              <p>Given</p>
+              <p>$$i(t)=30e^{-1200t}u(t),\qquad v(t)=0.1\frac{di(t)}{dt}$$</p>
+              <p>First transform the current:</p>
+              <p>$$I(s)=\frac{30}{s+1200}$$</p>
+              <p>Apply the differentiation property:</p>
+              <p>$$\mathcal{L}\left\{\frac{di(t)}{dt}\right\}=sI(s)-i(0^-)$$</p>
+              <p>Because the signal is causal, the pre-zero value is</p>
+              <p>$$i(0^-)=0$$</p>
+              <p>So</p>
+              <p>$$\mathcal{L}\left\{\frac{di(t)}{dt}\right\}=s\frac{30}{s+1200}$$</p>
+              <p>Now multiply by 0.1:</p>
+              <p>$$V(s)=0.1\cdot s\frac{30}{s+1200}=\frac{3s}{s+1200}$$</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: Memory System First</div>
+        <div class="rooms">
+          <article class="room" data-tags="derivative,cosine,sine,checkpoint">
+            <h2>Example 9-7: The Derivative Slash Turns Sine Into Cosine</h2>
+            <p>Begin with the old sine machine that gave a beta core over the locked oscillation base. Strike it with the derivative slash. An $$s$$ vortex rises into the top structure. At the zero checkpoint nothing survives from the subtraction term because the sine machine reads zero there.</p>
+            <ul>
+              <li>Differentiation injects $$s$$ on top.</li>
+              <li>The initial checkpoint must always be checked.</li>
+              <li>The final image is $$s/(s^2+\beta^2).$$</li>
+            </ul>
+          </article>
+          <article class="room" data-tags="ramp,derivative,step,remove-layer">
+            <h2>Exercise 9-9: The Ramp Road Gets Flattened Back Into Step Ground</h2>
+            <p>Start with the rising ramp road glowing with VA energy. In transform form it is a VA pillar over a double-vortex base. Strike it with the derivative slash. The sloped road flattens back into the old step ground and one vortex layer disappears.</p>
+            <ul>
+              <li>Derivative removes one accumulation layer.</li>
+              <li>The zero checkpoint contributes nothing here.</li>
+              <li>The final image is a VA pillar over a single vortex.</li>
+            </ul>
+          </article>
+          <article class="room" data-tags="exponential,derivative,1200,scale">
+            <h2>Exercise 9-10: Differentiate The Exponential And Shrink The Result</h2>
+            <p>Begin with a 30-strength exponential orb on a 1200-collared vortex base. Hit it with the derivative slash so an $$s$$ vortex rises into the top. The zero checkpoint shows nothing. Then a 0.1 scaling band shrinks the top from 30 to 3 while the denominator stays the same.</p>
+            <ul>
+              <li>Differentiate the old exponential structure.</li>
+              <li>Keep the same denominator.</li>
+              <li>The final image is $$3s/(s+1200).$$</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Shape Hooks</div>
+        <div class="facts">
+          <div class="fact"><div class="k">$$d/dt$$</div><div class="v">Derivative slash</div></div>
+          <div class="fact"><div class="k">Rule</div><div class="v">Inject $$s$$, then check $$0^-$$</div></div>
+          <div class="fact"><div class="k">Ramp</div><div class="v">Derivative removes one layer</div></div>
+          <div class="fact"><div class="k">Cosine</div><div class="v">Same base as sine, different top</div></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 5 Task 2 | Iterative Factorial Function</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab5-task2-factorial-iteration"><main class="shell"><nav class="nav"><a href="lab5-index.html">Lab 5 Index</a><a href="lab5-guide.html">Guide</a><a href="lab5-task3-average-marks.html">Next: Task 3</a></nav><section class="hero"><div class="tag">Lab 5 Task 2</div><h1>Factorial Function Using Iteration</h1><p class="hero-sub">This function still returns one value, but the work inside the function is iterative instead of formula-based.</p><div class="formula-block">$$n! = 1 \times 2 \times 3 \times \dots \times n$$</div><div class="tool-row"><a class="tool-btn" href="lab5-guide.html">Functions Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab5-task2-factorial-iteration.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Function type</div><div class="v"><span class="inline-code">int factorial(int n)</span></div></div><div class="fact"><div class="k">Method</div><div class="v">loop inside function</div></div><div class="fact"><div class="k">Running value</div><div class="v">product starts at 1</div></div><div class="fact"><div class="k">Caller</div><div class="v"><span class="inline-code">main</span> gets number and prints result</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int factorial(int n)
+{
+    int i;
+    int result = 1;
+
+    for (i = 1; i &lt;= n; i++) {
+        result *= i;
+    }
+
+    return result;
+}
+
+int main(void)
+{
+    int num;
+
+    printf("Enter a positive integer: ");
+    scanf("%d", &amp;num);
+
+    printf("Factorial = %d\n", factorial(num));
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Function Header Says Job Clearly</h2><ul><li>The input is an integer <span class="inline-code">n</span>.</li><li>The output is also an integer for normal small lab values.</li><li>That creates the header <span class="inline-code">int factorial(int n)</span>.</li></ul></article><article class="room"><h2>Room 2: Product Starts at 1</h2><ul><li>Factorial is multiplication, not addition.</li><li>So the running result must start from 1.</li><li>Starting from 0 would destroy every product.</li></ul></article><article class="room"><h2>Room 3: Loop Lives Inside the Function</h2><ul><li>The loop multiplies all integers from 1 to <span class="inline-code">n</span>.</li><li>Each iteration updates the running product.</li><li>Only the final product is returned.</li></ul></article><article class="room"><h2>Room 4: main Only Handles Input and Output</h2><ul><li><span class="inline-code">main</span> should not contain the factorial logic itself.</li><li>It reads the number, calls the function, and prints the answer.</li><li>This keeps the design modular.</li></ul></article><article class="room"><h2>Room 5: Reuse Memory</h2><ul><li>Any time another problem needs factorial, call this same function.</li><li>The algorithm is stored once in one place.</li><li>That is the whole point of modular programming.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

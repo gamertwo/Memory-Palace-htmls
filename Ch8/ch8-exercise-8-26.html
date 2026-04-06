@@ -5,102 +5,364 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Exercise 8-26 | Norton to Thevenin Conversion</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 <link rel="stylesheet" href="study.css" />
 <link rel="stylesheet" href="../linear-review.css" />
 </head>
 <body data-page-key="ch8_exercise_8_26">
 <main class="shell">
-  <nav class="nav"><a href="index.html">Ch8 Index</a><a href="guide.html">Guide</a><a href="ch8-example-8-19.html">Prev: Example 8-19</a><a href="ch8-design-example-8-20.html">Next: Design Example 8-20</a></nav>
+  <nav class="nav">
+    <a href="index.html">Ch8 Index</a>
+    <a href="guide.html">Guide</a>
+    <a href="ch8-example-8-19.html">Prev: Example 8-19</a>
+    <a href="ch8-design-example-8-20.html">Next: Design Example 8-20</a>
+  </nav>
 
   <section class="hero">
     <div class="tag">Exercise 8-26</div>
     <h1>Convert a Norton Circuit into an Equivalent Thevenin Circuit</h1>
-    <p class="hero-sub">This page is the mirror of Example 8-19. The current source and parallel impedance are given, and you reverse the move by multiplying the Norton current by the Norton impedance. The impedance itself stays unchanged.</p>
-    <div class="formula-block">$$V_T=70.71\angle-8.13^\circ\text{ V},\qquad Z_T=141.4\angle45^\circ~\Omega$$</div>
-    <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-26.html">Open in Memory Builder</a></div>
+    <p class="hero-sub">
+      This page is the mirror of Example 8-19. The current source and parallel impedance are given, and you reverse the move by multiplying the Norton current by the Norton impedance. The impedance itself stays unchanged. The real work is understanding how the rectangular forms become polar forms and how that multiplication produces the final magnitude and angle.
+    </p>
+    <div class="formula-block">
+      $$V_T=70.71\angle-8.13^\circ\text{ V},\qquad Z_T=141.4\angle45^\circ~\Omega$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Major Guide</a>
+      <button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button>
+      <button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-26.html">Open in Memory Builder</a>
+    </div>
   </section>
 
   <div class="study-grid">
     <div class="main-stack">
+
       <section class="panel">
         <div class="section-title">What You Are Asked To Find</div>
         <div class="facts">
-          <div class="fact"><div class="k">Given</div><div class="v">A Norton circuit with $$I_N=300-j400\text{ mA}$$ and $$Z_N=100+j100~\Omega.$$</div></div>
-          <div class="fact"><div class="k">Find</div><div class="v">Find the equivalent Thevenin circuit.</div></div>
-          <div class="fact"><div class="k">Key Rule</div><div class="v">Use $$V_T=I_N Z_N$$ and keep the same impedance.</div></div>
+          <div class="fact">
+            <div class="k">Given</div>
+            <div class="v">A Norton circuit with $$I_N=300-j400\text{ mA}$$ and $$Z_N=100+j100~\Omega.$$</div>
+          </div>
+          <div class="fact">
+            <div class="k">Find</div>
+            <div class="v">Find the equivalent Thevenin circuit.</div>
+          </div>
+          <div class="fact">
+            <div class="k">Key Rule</div>
+            <div class="v">Use $$V_T=I_N Z_N$$ and keep the same impedance.</div>
+          </div>
         </div>
       </section>
 
       <section class="panel">
         <div class="section-title">Rooms: Full Solution</div>
         <div class="rooms">
+
           <article class="room">
             <h2>Room 1: Reverse the Source-Transformation Rule</h2>
             <ul>
-              <li>A Norton source becomes a Thevenin source through multiplication.</li>
-              <li>The new voltage is $$V_T=I_N Z_N.$$</li>
-              <li>The impedance stays the same during the conversion.</li>
+              <li>A Norton source becomes a Thevenin source by multiplication.</li>
+              <li>The source-conversion rule is:
+                $$V_T=I_NZ_N$$
+              </li>
+              <li>The impedance does not change during the conversion.</li>
+              <li>So once $$V_T$$ is found, the job is almost done.</li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>This keeps the two source-transformation directions paired in memory: divide to go Thevenin to Norton, multiply to go Norton to Thevenin.</p></div>
+            <div class="mini">
+              <h3>What This Rule Means</h3>
+              <p>
+                This page is the exact reverse of Thevenin-to-Norton conversion. There, you divided voltage by impedance to get current. Here, you multiply current by impedance to get voltage.
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Memory Pair</h3>
+              <p>
+                $$\text{Thevenin}\to\text{Norton}: \quad I_N=\frac{V_T}{Z_T}$$
+                $$\text{Norton}\to\text{Thevenin}: \quad V_T=I_NZ_N$$
+              </p>
+            </div>
           </article>
 
           <article class="room">
-            <h2>Room 2: Put the Given Quantities into Convenient Form</h2>
+            <h2>Room 2: Read the Given Quantities Carefully</h2>
             <ul>
-              <li>The impedance $$100+j100$$ becomes $$141.4\angle45^\circ~\Omega.$$</li>
-              <li>The current $$300-j400\text{ mA}$$ has magnitude-angle form $$0.5\angle-53.1^\circ\text{ A}.$$</li>
-              <li>Now the multiplication becomes clean.</li>
+              <li>The given Norton current is in rectangular form:
+                $$I_N=300-j400\text{ mA}$$
+              </li>
+              <li>The given impedance is also in rectangular form:
+                $$Z_N=100+j100~\Omega$$
+              </li>
+              <li>Because multiplication is easiest in polar form, convert both quantities before multiplying.</li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Complex multiplication is fastest in polar form. This is the exact companion move to the polar division used on the previous page.</p></div>
+            <div class="mini">
+              <h3>Why Polar Form Is Better Here</h3>
+              <p>
+                In polar form, multiplication becomes:
+                <br><br>
+                multiply the magnitudes,
+                <br>
+                add the angles.
+                <br><br>
+                That is much cleaner than multiplying rectangular forms directly.
+              </p>
+            </div>
           </article>
 
           <article class="room">
-            <h2>Room 3: Multiply to Get the Thevenin Voltage</h2>
+            <h2>Room 3: Convert the Norton Current into Polar Form</h2>
             <ul>
-              <li>$$V_T=(0.5\angle-53.1^\circ)(141.4\angle45^\circ).$$</li>
-              <li>This gives $$V_T=70.71\angle-8.13^\circ\text{ V}.$$</li>
-              <li>That is the equivalent source voltage.</li>
+              <li>Start from:
+                $$I_N=300-j400\text{ mA}$$
+              </li>
+              <li>Convert mA to A if you want standard units:
+                $$300-j400\text{ mA}=0.3-j0.4\text{ A}$$
+              </li>
+              <li>Now find the magnitude:
+                $$|I_N|=\sqrt{0.3^2+(-0.4)^2}=\sqrt{0.09+0.16}=\sqrt{0.25}=0.5\text{ A}$$
+              </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Once current and impedance are in polar form, the source voltage falls out directly from magnitude multiplication and angle addition.</p></div>
+            <div class="mini">
+              <h3>Where Does the Angle -53.1° Come From?</h3>
+              <p>
+                Use:
+                $$\theta=\tan^{-1}\left(\frac{b}{a}\right)$$
+                with
+                $$a=0.3,\qquad b=-0.4$$
+                so:
+                $$\theta=\tan^{-1}\left(\frac{-0.4}{0.3}\right)=\tan^{-1}(-1.333)\approx-53.1^\circ$$
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Why the Angle Is Negative</h3>
+              <p>
+                The current has positive real part and negative imaginary part, so it lies below the real axis. That puts it in the fourth quadrant, which is why the angle is negative.
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Final Polar Form of the Current</h3>
+              <p>
+                Therefore:
+                $$I_N=0.5\angle-53.1^\circ\text{ A}$$
+              </p>
+            </div>
           </article>
 
           <article class="room">
-            <h2>Room 4: Keep the Same Impedance</h2>
+            <h2>Room 4: Convert the Norton Impedance into Polar Form</h2>
             <ul>
-              <li>The equivalent Thevenin impedance equals the Norton impedance.</li>
-              <li>So $$Z_T=Z_N=100+j100=141.4\angle45^\circ~\Omega.$$</li>
-              <li>The final Thevenin circuit is a voltage source in series with this impedance.</li>
+              <li>Start from:
+                $$Z_N=100+j100~\Omega$$
+              </li>
+              <li>Find the magnitude:
+                $$|Z_N|=\sqrt{100^2+100^2}=\sqrt{20000}=141.4~\Omega$$
+              </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>The source representation changes, but the port seen by the load must not change. That is why the impedance is preserved.</p></div>
+            <div class="mini">
+              <h3>Where Does 141.4 Come From?</h3>
+              <p>
+                It comes directly from the Pythagorean magnitude formula:
+                $$|a+jb|=\sqrt{a^2+b^2}$$
+                so for
+                $$100+j100,$$
+                the magnitude is
+                $$\sqrt{100^2+100^2}=141.4.$$
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Where Does the Angle 45° Come From?</h3>
+              <p>
+                Use:
+                $$\theta=\tan^{-1}\left(\frac{b}{a}\right)$$
+                with
+                $$a=100,\qquad b=100$$
+                so:
+                $$\theta=\tan^{-1}\left(\frac{100}{100}\right)=\tan^{-1}(1)=45^\circ$$
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Why the Angle Is Positive</h3>
+              <p>
+                Both the real and imaginary parts are positive, so the impedance lies in the first quadrant. That is why the angle is positive.
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Final Polar Form of the Impedance</h3>
+              <p>
+                Therefore:
+                $$Z_N=141.4\angle45^\circ~\Omega$$
+              </p>
+            </div>
           </article>
+
+          <article class="room">
+            <h2>Room 5: Multiply to Get the Thevenin Voltage</h2>
+            <ul>
+              <li>Now apply the conversion rule:
+                $$V_T=I_NZ_N$$
+              </li>
+              <li>Substitute the polar forms:
+                $$V_T=(0.5\angle-53.1^\circ)(141.4\angle45^\circ)$$
+              </li>
+            </ul>
+            <div class="mini">
+              <h3>What Happens During Polar Multiplication?</h3>
+              <p>
+                When multiplying in polar form:
+                $$\left(A\angle\alpha\right)\left(B\angle\beta\right)=AB\angle(\alpha+\beta)$$
+                So there are two separate jobs:
+              </p>
+              <p>
+                <strong>Magnitude job:</strong>
+                $$0.5\times141.4=70.7$$
+              </p>
+              <p>
+                <strong>Angle job:</strong>
+                $$-53.1^\circ+45^\circ=-8.1^\circ$$
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Where Does 70.71 Come From?</h3>
+              <p>
+                It comes only from multiplying the magnitudes:
+                $$0.5\times141.4=70.7\approx70.71$$
+                So the final voltage magnitude is the product of the current magnitude and the impedance magnitude.
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Where Does -8.13° Come From?</h3>
+              <p>
+                It comes only from adding the angles:
+                $$-53.1^\circ+45^\circ=-8.1^\circ\approx-8.13^\circ$$
+                So the final voltage angle is just the current angle plus the impedance angle.
+              </p>
+            </div>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Write the Thevenin Voltage Clearly</h2>
+            <ul>
+              <li>After multiplying magnitudes and adding angles:
+                $$V_T=70.71\angle-8.13^\circ\text{ V}$$
+              </li>
+              <li>This is the equivalent Thevenin source voltage.</li>
+            </ul>
+            <div class="mini">
+              <h3>What This Answer Is Saying</h3>
+              <p>
+                The Thevenin equivalent has a voltage source whose magnitude is
+                $$70.71\text{ V}$$
+                and whose phase is
+                $$-8.13^\circ.$$
+                Nothing mysterious happened. The number came from magnitude multiplication, and the angle came from angle addition.
+              </p>
+            </div>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: Keep the Same Impedance</h2>
+            <ul>
+              <li>The Thevenin impedance equals the Norton impedance.</li>
+              <li>So:
+                $$Z_T=Z_N=100+j100~\Omega$$
+              </li>
+              <li>Or in polar form:
+                $$Z_T=141.4\angle45^\circ~\Omega$$
+              </li>
+            </ul>
+            <div class="mini">
+              <h3>Why the Impedance Stays the Same</h3>
+              <p>
+                Source transformation changes only the source representation. It does not change the impedance seen from the load terminals. That is why the impedance is preserved exactly.
+              </p>
+            </div>
+          </article>
+
+          <article class="room">
+            <h2>Room 8: State the Final Thevenin Circuit</h2>
+            <ul>
+              <li>The equivalent Thevenin source voltage is:
+                $$V_T=70.71\angle-8.13^\circ\text{ V}$$
+              </li>
+              <li>The equivalent Thevenin impedance is:
+                $$Z_T=100+j100=141.4\angle45^\circ~\Omega$$
+              </li>
+              <li>So the final Thevenin circuit is a voltage source in series with this same impedance.</li>
+            </ul>
+            <div class="mini">
+              <h3>Final Answer</h3>
+              <p>
+                $$V_T=70.71\angle-8.13^\circ\text{ V},\qquad Z_T=141.4\angle45^\circ~\Omega$$
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Compact Exam-Style Working</h3>
+              <p>
+                $$I_N=300-j400\text{ mA}=0.3-j0.4\text{ A}=0.5\angle-53.1^\circ\text{ A}$$
+                $$Z_N=100+j100=141.4\angle45^\circ~\Omega$$
+                $$V_T=I_NZ_N=(0.5\angle-53.1^\circ)(141.4\angle45^\circ)$$
+                $$V_T=70.71\angle-8.13^\circ\text{ V}$$
+                $$Z_T=Z_N=141.4\angle45^\circ~\Omega$$
+              </p>
+            </div>
+          </article>
+
         </div>
       </section>
 
       <section class="panel" id="movie-anchor">
         <div class="section-title">Solution Flow</div>
         <div class="movie-flow">
-          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch $$I_N$$ and $$Z_N$$</h3><p>The net grabs the Norton pair.</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">21 Net</div>
+            <h3>Catch $$I_N$$ and $$Z_N$$</h3>
+            <p>The net grabs the Norton pair.</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Polar Forms</h3><p>Fire converts the current and impedance into magnitude-angle form.</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">84 Fire</div>
+            <h3>Light the Polar Forms</h3>
+            <p>Fire converts the current and impedance into magnitude-angle form.</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$V_T=I_NZ_N$$</h3><p>Chalk computes the Thevenin voltage.</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">67 Chalk</div>
+            <h3>Write $$V_T=I_NZ_N$$</h3>
+            <p>Chalk multiplies magnitudes and adds angles.</p>
+          </div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Final Thevenin Pair</h3><p>The coat leaves the voltage source in series with the same impedance.</p></div>
+          <div class="movie-step">
+            <div class="movie-peg">71 Coat</div>
+            <h3>Wear the Final Thevenin Pair</h3>
+            <p>The coat leaves the voltage source in series with the same impedance.</p>
+          </div>
         </div>
       </section>
 
       <section class="panel" id="request-anchor">
         <div class="section-title">Save Change Request</div>
         <form class="request-form" data-txt-save>
-          <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-26-request.txt" /></label>
-          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more line comparing this multiplication move with Example 8-19's division move."></textarea></label>
+          <label class="field-stack">
+            <span>File Name</span>
+            <input class="request-input" data-note-filename type="text" value="ch8-exercise-8-26-request.txt" />
+          </label>
+          <label class="field-stack">
+            <span>Text</span>
+            <textarea class="request-textarea" data-note-body placeholder="Example: Add one more line comparing this multiplication move with Example 8-19's division move."></textarea>
+          </label>
           <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
           <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
           <p class="memory-status" data-note-status>Nothing saved yet.</p>
         </form>
       </section>
+
     </div>
   </div>
 </main>

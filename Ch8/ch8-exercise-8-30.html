@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Exercise 8-30 | Determine Thevenin by Inspection</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 <link rel="stylesheet" href="study.css" />
 <link rel="stylesheet" href="../linear-review.css" />
@@ -17,56 +22,113 @@
   <section class="hero">
     <div class="tag">Exercise 8-30</div>
     <h1>Determine the Thevenin Equivalent by Inspection</h1>
-    <p class="hero-sub">This last page is a fast-pattern exercise. Instead of doing a long derivation, you are meant to recognize the terminal open-circuit voltage and the look-back impedance almost immediately from the circuit structure of Fig. 8-30.</p>
+    <p class="hero-sub">The textbook labels this one an inspection problem, but inspection only feels easy after the hidden logic becomes visible. This page spells out exactly what the shortcut is seeing in Figure 8-30: remove the capacitor, read the open-circuit divider voltage, turn off the source, and spot two identical series branches in parallel.</p>
     <div class="formula-block">$$V_T=5\angle0^\circ\text{ V},\qquad Z_T=25+j50~\Omega$$</div>
     <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-30.html">Open in Memory Builder</a></div>
   </section>
 
   <div class="study-grid">
     <div class="main-stack">
+
       <section class="panel">
-        <div class="section-title">Rooms: Inspection Route</div>
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Given</div><div class="v">Use Figure 8-30 with $$V_S=10\angle0^\circ\text{ V}.$$ The capacitor branch is the load branch whose Thevenin equivalent is required.</div></div>
+          <div class="fact"><div class="k">Known Topology</div><div class="v">From Example 8-15, the node where the capacitor connects sits between a left branch $$50+j100\ \Omega$$ and a right branch $$j100+50\ \Omega.$$ </div></div>
+          <div class="fact"><div class="k">Goal</div><div class="v">Find the Thevenin voltage and Thevenin impedance seen by the capacitor.</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
         <div class="rooms">
+
           <article class="room">
-            <h2>Room 1: Remove the Capacitor and Read the Terminal Voltage</h2>
+            <h2>Room 1: Remove the Capacitor Because It Is the Load</h2>
             <ul>
-              <li>The capacitor is the load whose Thevenin source is required.</li>
-              <li>With it removed, the terminal open-circuit voltage is read as $$V_T=5\angle0^\circ\text{ V}.$$</li>
-              <li>This is the Thevenin source voltage.</li>
+              <li>The capacitor is the element connected at the interface of interest, so remove it first.</li>
+              <li>With the capacitor branch open, the left source and the remaining passive elements form one series path:
+                $$(50+j100)\ \Omega\quad\text{followed by}\quad(j100+50)\ \Omega.$$ </li>
+              <li>The terminal where the capacitor used to connect is the midpoint between those two series halves.</li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Thevenin voltage always comes from the open-circuit condition at the load terminals, even when the circuit is simple enough to read quickly by inspection.</p></div>
+            <div class="mini"><h3>Why This Is the Correct Port</h3><p>Thevenin is always built from the load's point of view. If we want the equivalent seen by the capacitor, then the capacitor must be removed and the rest of the circuit must be viewed from those exact terminals.</p></div>
           </article>
 
           <article class="room">
-            <h2>Room 2: Turn Off the Source and Read the Look-Back Impedance</h2>
+            <h2>Room 2: Find the Open-Circuit Thevenin Voltage $$V_T$$</h2>
             <ul>
-              <li>Deactivate the independent source and inspect the impedance seen from the capacitor terminals.</li>
-              <li>The resulting Thevenin impedance is $$Z_T=25+j50~\Omega.$$</li>
-              <li>This is the fixed impedance of the rest of the network as seen by the capacitor.</li>
+              <li>With the capacitor removed, the two remaining series sections are
+                $$Z_{left}=50+j100,\qquad Z_{right}=50+j100.$$ </li>
+              <li>Because they are equal, the source voltage divides equally between them.</li>
+              <li>The open-circuit voltage at the capacitor terminals is the voltage across the right-hand half, so
+                $$V_T=V_S\frac{Z_{right}}{Z_{left}+Z_{right}}=10\angle0^\circ\frac{50+j100}{(50+j100)+(50+j100)}.$$ </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>The inspection shortcut still follows the same logic as every other Thevenin page. It is just faster because the circuit reduction is visually obvious.</p></div>
+            <div class="mini"><h3>Why the Fraction Is Exactly One-Half</h3><p>Since $$Z_{left}=Z_{right},$$ the numerator and one of the two equal denominator terms are the same. That makes the divider ratio
+              $$\frac{Z_{right}}{Z_{left}+Z_{right}}=\frac{1}{2}. $$
+              So the midpoint voltage is exactly half the source voltage.</p></div>
+            <div class="mini"><h3>Final Thevenin Voltage</h3><p>
+              $$V_T=10\angle0^\circ\left(\frac{1}{2}\right)=5\angle0^\circ\text{ V}. $$
+              The magnitude $$5$$ comes from halving the 10-V source, and the angle stays $$0^\circ$$ because the divider ratio is a positive real number with zero phase shift.
+            </p></div>
           </article>
 
           <article class="room">
-            <h2>Room 3: Lock the Final Pair</h2>
+            <h2>Room 3: Turn Off the Source Before Finding $$Z_T$$</h2>
             <ul>
-              <li>The Thevenin equivalent seen by the capacitor is therefore</li>
-              <li>$$V_T=5\angle0^\circ\text{ V},\qquad Z_T=25+j50~\Omega.$$</li>
-              <li>This is the final pattern the exercise wants you to recognize quickly.</li>
+              <li>To find Thevenin impedance, turn off the independent voltage source. A turned-off voltage source becomes a short circuit.</li>
+              <li>After that short is placed, the capacitor terminals see two branches to ground.</li>
+              <li>The left branch is the original left-side series impedance:
+                $$50+j100~\Omega.$$</li>
+              <li>The right branch is the original right-side series impedance:
+                $$j100+50=50+j100~\Omega.$$</li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>This page exists to build speed. Once the Thevenin route becomes familiar, some circuits should feel almost immediate instead of algebra-heavy.</p></div>
+            <div class="mini"><h3>Inspection Shortcut</h3><p>At this point the port is looking into two identical branches in parallel. Once you notice that symmetry, the rest is immediate.</p></div>
           </article>
+
+          <article class="room">
+            <h2>Room 4: Combine the Two Identical Branches in Parallel</h2>
+            <ul>
+              <li>The Thevenin impedance is
+                $$Z_T=(50+j100)\parallel(50+j100).$$
+              </li>
+              <li>When two equal impedances are in parallel, the result is half of either one:</li>
+              <li>
+                $$Z_T=\frac{50+j100}{2}=25+j50~\Omega.$$ 
+              </li>
+            </ul>
+            <div class="mini"><h3>Where the Real Part $$25$$ Comes From</h3><p>Each branch contributes $$50\ \Omega$$ of resistance. Two equal 50-ohm resistive parts in parallel reduce to $$25\ \Omega.$$</p></div>
+            <div class="mini"><h3>Where the Imaginary Part $$+50$$ Comes From</h3><p>Each branch contributes $$+j100\ \Omega$$ of inductive reactance. Two equal inductive reactances in parallel halve in the same way, so $$j100\parallel j100=j50.$$</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 5: State the Final Thevenin Equivalent and Explain Why Inspection Works</h2>
+            <ul>
+              <li>The Thevenin voltage seen by the capacitor is
+                $$V_T=5\angle0^\circ\text{ V}. $$</li>
+              <li>The Thevenin impedance seen by the capacitor is
+                $$Z_T=25+j50~\Omega. $$</li>
+              <li>The whole reason this can be done by inspection is that the circuit has obvious symmetry once the capacitor is removed and the source is turned off.</li>
+            </ul>
+            <div class="mini"><h3>Compact Exam-Style Working</h3><p>
+              $$V_T=10\angle0^\circ\frac{50+j100}{(50+j100)+(50+j100)}=5\angle0^\circ\text{ V}$$
+              $$Z_T=(50+j100)\parallel(50+j100)=\frac{50+j100}{2}=25+j50~\Omega$$
+            </p></div>
+            <div class="mini"><h3>What the Shortcut Is Really Doing</h3><p>Inspection is not magic. It is just recognizing, without a long algebra run, that the open-circuit case is a 50-50 divider and the look-back case is two equal series branches in parallel.</p></div>
+          </article>
+
         </div>
       </section>
 
       <section class="panel" id="movie-anchor">
         <div class="section-title">Solution Flow</div>
         <div class="movie-flow">
-          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Capacitor Terminals</h3><p>The net removes the capacitor and locks the correct port.</p></div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Capacitor Port</h3><p>The net removes the capacitor and locks the correct interface.</p></div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Open-Circuit Voltage</h3><p>Fire reveals $$V_T=5\angle0^\circ\text{ V}.$$ </p></div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light the Equal Divider Halves</h3><p>Fire shows that the open-circuit voltage is exactly half the source.</p></div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write the Look-Back Impedance</h3><p>Chalk writes $$Z_T=25+j50~\Omega.$$ </p></div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write the Parallel of Two Equal Branches</h3><p>Chalk halves $$50+j100$$ to get the look-back impedance.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Final Thevenin Pair</h3><p>The coat leaves $$V_T=5\angle0^\circ\text{ V}$$ and $$Z_T=25+j50~\Omega.$$</p></div>
         </div>
       </section>
 
@@ -74,7 +136,7 @@
         <div class="section-title">Save Change Request</div>
         <form class="request-form" data-txt-save>
           <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-30-request.txt" /></label>
-          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more inspection note showing which impedances combine into 25 + j50 ohms."></textarea></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note contrasting the quick inspection route with the longer formal Thevenin route."></textarea></label>
           <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
           <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
           <p class="memory-status" data-note-status>Nothing saved yet.</p>

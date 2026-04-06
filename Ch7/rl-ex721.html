@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rl-ex721.html" />
 <title>RL Exercise 7-21 | Forced Component at Three Frequencies</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
 <script>
@@ -426,7 +427,7 @@ a{color:inherit}
 }
 </style>
 </head>
-<body>
+<body data-page-key="rl_ex721">
 <main class="shell">
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
@@ -435,7 +436,8 @@ a{color:inherit}
   </nav>
 
   <section class="hero">
-    <h1>Exercise 7-21</h1>
+    <div class="tag">Exercise 7-21</div>
+<h1>Exercise 7-21</h1>
     <p>Find the forced component solution of $$10^{-3}\frac{dv(t)}{dt}+v(t)=10\cos(\omega t)\ \text{V}$$ for $$\omega=500,\ 1000,\ 2000\ \text{rad/s}.$$ Use a cosine-plus-sine trial, match coefficients, then convert each result to amplitude-phase form.</p>
     <div class="eq">$$v_F(t)=\frac{10}{1+\left(10^{-3}\omega\right)^2}\cos(\omega t)+\frac{10\left(10^{-3}\omega\right)}{1+\left(10^{-3}\omega\right)^2}\sin(\omega t)\ \text{V}$$
     $$=\frac{10}{\sqrt{1+\left(10^{-3}\omega\right)^2}}\cos\!\left(\omega t-\tan^{-1}(10^{-3}\omega)\right)\ \text{V}$$</div>
@@ -445,7 +447,7 @@ a{color:inherit}
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="study-grid two-col">
     <div class="main-stack">
       <section class="panel">
         <div class="section-title">Quick Data</div>
@@ -1130,5 +1132,7 @@ reviewElements.rateButtons.forEach((button) => {
 syncConfidenceDisplay();
 renderReview();
 </script>
+<script src="study.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PF Lab 5 Functions | Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+</head>
+<body>
+<main class="shell">
+  <nav class="nav"><a href="index.html">All Labs</a><a href="lab5-index.html">Lab 5 Index</a><a href="memory-palace-builder.html">Memory Builder</a><a href="lab5-task1-area-circle.html">Task 1</a></nav>
+
+  <section class="hero">
+    <div class="tag">Function Choice + Value Flow</div>
+    <h1>How to Read and Write Functions</h1>
+    <p class="hero-sub">A function is easiest to memorize when you track the data path: input enters through parameters, work happens in the body, and a result returns to the caller.</p>
+    <div class="formula-block">$$\text{caller} \rightarrow \text{arguments} \rightarrow \text{function body} \rightarrow \text{return value or action}$$</div>
+  </section>
+
+  <div class="study-grid two-col">
+    <section class="panel">
+      <div class="section-title">Function Selection Table</div>
+      <table class="guide-table">
+        <thead><tr><th>Need</th><th>Best Shape</th><th>Why</th><th>Lab Use</th></tr></thead>
+        <tbody>
+          <tr><td>Compute and send back one value</td><td><span class="inline-code">type func(...)</span></td><td>Return value is used in <span class="inline-code">main</span> or another function.</td><td>Tasks 1, 2, 4</td></tr>
+          <tr><td>Break a job into separate steps</td><td>multiple functions</td><td>Each function owns one smaller responsibility.</td><td>Task 3</td></tr>
+          <tr><td>Choose one operation from many</td><td>menu + operation functions</td><td>Selection stays in main, logic stays modular.</td><td>Task 4</td></tr>
+          <tr><td>Repair broken function code</td><td>debugging checklist</td><td>Check type, parameter list, call syntax, variables, and semicolons.</td><td>Debug 1, Debug 2</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">Core Syntax Memory</div>
+      <div class="facts">
+        <div class="fact"><div class="k">prototype</div><div class="v"><span class="inline-code">float areaCircle(float r);</span></div></div>
+        <div class="fact"><div class="k">definition</div><div class="v"><span class="inline-code">float areaCircle(float r) { ... }</span></div></div>
+        <div class="fact"><div class="k">call</div><div class="v"><span class="inline-code">area = areaCircle(radius);</span></div></div>
+        <div class="fact"><div class="k">void</div><div class="v">use when the function performs an action but returns nothing</div></div>
+        <div class="fact"><div class="k">return</div><div class="v">send a value back to the caller</div></div>
+        <div class="fact"><div class="k">parameter</div><div class="v">local input accepted by the function</div></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel" style="margin-top:1rem">
+    <div class="section-title">Function Writing Checklist</div>
+    <div class="flow-grid">
+      <div class="flow-step"><h3>1. Name the task</h3><p>Choose a function name that says exactly what the code should do.</p></div>
+      <div class="flow-step"><h3>2. Choose return type</h3><p>Return a value if the caller needs a result. Use <span class="inline-code">void</span> if it only performs work.</p></div>
+      <div class="flow-step"><h3>3. Define parameters</h3><p>Pass in only the data the function truly needs.</p></div>
+      <div class="flow-step"><h3>4. Keep one job</h3><p>One function should solve one clear subproblem.</p></div>
+      <div class="flow-step"><h3>5. Verify the call</h3><p>Check argument types, order, commas, and assignment of the returned value.</p></div>
+    </div>
+  </section>
+</main>
+<script src="study.js"></script>
+</body>
+</html>

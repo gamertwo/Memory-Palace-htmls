@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Exercise 8-29 | Thevenin Seen by an Inductor</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 <link rel="stylesheet" href="study.css" />
 <link rel="stylesheet" href="../linear-review.css" />
@@ -17,66 +22,180 @@
   <section class="hero">
     <div class="tag">Exercise 8-29</div>
     <h1>Find the Thevenin Circuit Seen by the Inductor and Then Find $$I_x$$</h1>
-    <p class="hero-sub">This exercise repeats the Thevenin movie on a different topology. You remove the inductor, find the terminal Thevenin pair seen by that branch, and then restore the inductor as the load to get the current through it.</p>
+    <p class="hero-sub">This is a complete remove-reduce-restore Thevenin problem. The inductor is treated as the load, the rest of the circuit is compressed into $$V_T$$ and $$Z_T,$$ and then the inductor is reattached so its current can be found from one final phasor division.</p>
     <div class="formula-block">$$V_T=0.08925+j1.3839\text{ V},\quad Z_T=230.8-j153.8~\Omega,\quad I_x=5.852\angle99.44^\circ\text{ mA}$$</div>
     <div class="tool-row"><a class="tool-btn" href="guide.html">Major Guide</a><button class="tool-btn" type="button" data-jump="movie-anchor">Solution Flow</button><button class="tool-btn" type="button" data-jump="request-anchor">Save Notes</button><a class="tool-btn" href="memory-palace-builder.html?pages=ch8-exercise-8-29.html">Open in Memory Builder</a></div>
   </section>
 
   <div class="study-grid">
     <div class="main-stack">
+
+      <section class="panel">
+        <div class="section-title">What You Are Asked To Find</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Circuit Data</div><div class="v">The source is $$V_s=5\angle120^\circ\text{ V}.$$ The fixed network connected to the inductor terminals consists of a $$1\text{ k}\Omega$$ resistor feeding a node with a $$500\ \Omega$$ resistor and a $$-j500\ \Omega$$ capacitor branch.</div></div>
+          <div class="fact"><div class="k">Find</div><div class="v">Find the Thevenin equivalent seen by the inductor $$j100\ \Omega,$$ then use it to compute the inductor current $$I_x.$$</div></div>
+          <div class="fact"><div class="k">Pattern</div><div class="v">Remove the load, find $$V_T,$$ turn off the source and find $$Z_T,$$ then put the load back and solve one reduced circuit.</div></div>
+        </div>
+      </section>
+
       <section class="panel">
         <div class="section-title">Rooms: Full Solution</div>
         <div class="rooms">
+
           <article class="room">
-            <h2>Room 1: Remove the Inductor and Look into Its Terminals</h2>
+            <h2>Room 1: Remove the Inductor and Define the Thevenin Port</h2>
             <ul>
-              <li>The branch of interest is the inductor branch.</li>
-              <li>To find the Thevenin equivalent seen by it, remove the inductor first.</li>
-              <li>This exposes the terminal voltage and look-back impedance of the rest of the circuit.</li>
+              <li>The inductor is the load of interest, so it must be removed first.</li>
+              <li>Once the inductor is open-circuited, the remaining network seen from its two terminals is what we must replace by a Thevenin equivalent.</li>
+              <li>With the inductor removed, the only branches remaining from the port node to ground are the $$500\ \Omega$$ resistor and the $$-j500\ \Omega$$ capacitor.</li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Thevenin is always taken from the load's point of view. If the inductor stays connected, it contaminates the very network you are trying to reduce.</p></div>
+            <div class="mini"><h3>Why Removal Matters</h3><p>Thevenin voltage is an open-circuit voltage. If the inductor stayed connected, its current would change the terminal voltage and we would no longer be measuring the source network by itself.</p></div>
           </article>
 
           <article class="room">
-            <h2>Room 2: State the Thevenin Pair</h2>
+            <h2>Room 2: Combine the Two Shunt Branches to Prepare for $$V_T$$</h2>
             <ul>
-              <li>The terminal Thevenin voltage is $$V_T=0.08925+j1.3839\text{ V}.$$</li>
-              <li>The look-back impedance is $$Z_T=230.8-j153.8~\Omega.$$</li>
-              <li>These two quantities replace the entire rest of the circuit.</li>
+              <li>The open-circuit port node sees $$500\ \Omega$$ in parallel with $$-j500\ \Omega.$$ Call that equivalent impedance $$Z_p.$$</li>
+              <li>Use the parallel formula:
+                $$Z_p=\frac{(500)(-j500)}{500-j500}. $$
+              </li>
+              <li>Simplifying gives
+                $$Z_p=250-j250~\Omega.$$</li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>This is the compression step. Once the fixed network is replaced by a Thevenin pair, the remaining current calculation is short and direct.</p></div>
+            <div class="mini"><h3>Where $$250-j250$$ Comes From</h3><p>Because the two branch magnitudes are equal, their parallel combination lands halfway in both the real and imaginary directions. You can also verify it by admittance:
+              $$\frac{1}{Z_p}=\frac{1}{500}+\frac{1}{-j500}=0.002+j0.002,$$
+              so inverting gives $$Z_p=250-j250~\Omega.$$</p></div>
           </article>
 
           <article class="room">
-            <h2>Room 3: Put the Inductor Back as the Load</h2>
+            <h2>Room 3: Use Voltage Division to Find the Open-Circuit Thevenin Voltage</h2>
             <ul>
-              <li>Restore the inductor branch to the Thevenin terminals.</li>
-              <li>The current $$I_x$$ is now the load current of a reduced one-source circuit.</li>
-              <li>Use the Thevenin source and impedance together with the inductor impedance.</li>
+              <li>With the inductor removed, the source sees a series path made of the $$1\text{ k}\Omega$$ resistor and the equivalent shunt impedance $$Z_p=250-j250\ \Omega.$$</li>
+              <li>The open-circuit terminal voltage is the voltage across $$Z_p,$$ so
+                $$V_T=V_s\frac{Z_p}{1000+Z_p}.$$
+              </li>
+              <li>Substitute the known values:
+                $$V_T=5\angle120^\circ\frac{250-j250}{1250-j250}. $$
+              </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Thevenin does not solve the load current by itself; it makes the load current easy to solve after the network has been reduced.</p></div>
+            <div class="mini"><h3>Work the Divider Ratio First</h3><p>
+              $$\frac{250-j250}{1250-j250}=0.23077-j0.15385.$$
+              This ratio has magnitude
+              $$\sqrt{0.23077^2+(-0.15385)^2}=0.27735$$
+              and angle
+              $$\tan^{-1}\left(\frac{-0.15385}{0.23077}\right)=-33.69^\circ.$$
+            </p></div>
+            <div class="mini"><h3>Now Apply the Source Magnitude and Phase</h3><p>
+              The source magnitude is $$5$$ and the divider magnitude is $$0.27735,$$ so
+              $$|V_T|=5(0.27735)=1.38675\text{ V}. $$
+              The source angle is $$120^\circ$$ and the divider angle is $$-33.69^\circ,$$ so
+              $$\angle V_T=120^\circ-33.69^\circ=86.31^\circ.$$
+              Therefore,
+              $$V_T=1.38675\angle86.31^\circ\text{ V}. $$
+            </p></div>
+            <div class="mini"><h3>Rectangular Form of $$V_T$$</h3><p>
+              $$V_T=1.38675(\cos86.31^\circ+j\sin86.31^\circ)=0.08925+j1.3839\text{ V}. $$
+              That is exactly the answer reported in the text.
+            </p></div>
           </article>
 
           <article class="room">
-            <h2>Room 4: State the Final Inductor Current</h2>
+            <h2>Room 4: Turn Off the Source and Find the Look-Back Impedance $$Z_T$$</h2>
             <ul>
-              <li>The resulting current is $$I_x=5.852\angle99.44^\circ\text{ mA}.$$</li>
-              <li>This is the current through the reconnected inductor branch.</li>
-              <li>The whole route was: remove, reduce, restore, solve.</li>
+              <li>To find Thevenin impedance, deactivate the independent voltage source. A voltage source turned off becomes a short circuit.</li>
+              <li>That means the port node now sees three branches to ground in parallel:
+                $$1000~\Omega,\quad 500~\Omega,\quad -j500~\Omega.$$</li>
+              <li>So
+                $$\frac{1}{Z_T}=\frac{1}{1000}+\frac{1}{500}+\frac{1}{-j500}=0.001+0.002+j0.002=0.003+j0.002.$$
+              </li>
             </ul>
-            <div class="mini"><h3>Why This Step</h3><p>This final step is small only because the circuit was compressed first. Without Thevenin, the original branch network would be much less transparent.</p></div>
+            <div class="mini"><h3>Invert the Admittance</h3><p>
+              $$Z_T=\frac{1}{0.003+j0.002}.$$
+              Multiply numerator and denominator by the complex conjugate:
+              $$Z_T=\frac{0.003-j0.002}{(0.003)^2+(0.002)^2}=\frac{0.003-j0.002}{0.000013}.$$
+              Therefore,
+              $$Z_T=230.8-j153.8~\Omega.$$</p></div>
+            <div class="mini"><h3>Meaning of the Signs</h3><p>The real part $$230.8\ \Omega$$ is the equivalent resistance of the fixed network seen by the inductor. The negative imaginary part $$-153.8\ \Omega$$ means the fixed network looks net capacitive at the port.</p></div>
           </article>
+
+          <article class="room">
+            <h2>Room 5: Reattach the Inductor as the Load</h2>
+            <ul>
+              <li>The load is the original inductor, so
+                $$Z_L=j100~\Omega.$$ </li>
+              <li>After Thevenin reduction, the inductor current is simply the load current of one source driving one series impedance path:</li>
+              <li>
+                $$I_x=\frac{V_T}{Z_T+Z_L}. $$
+              </li>
+              <li>First add the series impedances:
+                $$Z_T+Z_L=(230.8-j153.8)+j100=230.8-j53.8~\Omega.$$</li>
+            </ul>
+            <div class="mini"><h3>Why the Imaginary Part Changes from $$-153.8$$ to $$-53.8$$</h3><p>The inductor contributes $$+j100\ \Omega.$$ It partially cancels the capacitive part of the Thevenin impedance, so the total reactance becomes less negative.</p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 6: Divide to Get the Inductor Current</h2>
+            <ul>
+              <li>Use the rectangular values directly:
+                $$I_x=\frac{0.08925+j1.3839}{230.8-j53.8}. $$
+              </li>
+              <li>It is easier to see the final magnitude and angle if we first convert the denominator to polar form.</li>
+            </ul>
+            <div class="mini"><h3>Magnitude and Phase of the Denominator</h3><p>
+              $$|230.8-j53.8|=\sqrt{230.8^2+(-53.8)^2}=236.99\ \Omega$$
+              $$\angle(230.8-j53.8)=\tan^{-1}\left(\frac{-53.8}{230.8}\right)=-13.12^\circ$$
+              So,
+              $$Z_T+Z_L=236.99\angle-13.12^\circ~\Omega. $$
+            </p></div>
+            <div class="mini"><h3>Magnitude and Phase of the Numerator</h3><p>
+              $$|V_T|=\sqrt{0.08925^2+1.3839^2}=1.38675\text{ V}$$
+              $$\angle V_T=\tan^{-1}\left(\frac{1.3839}{0.08925}\right)=86.31^\circ$$
+              so
+              $$V_T=1.38675\angle86.31^\circ\text{ V}. $$
+            </p></div>
+            <div class="mini"><h3>Final Current Magnitude and Phase</h3><p>
+              $$|I_x|=\frac{1.38675}{236.99}=0.005852\text{ A}=5.852\text{ mA}$$
+              $$\angle I_x=86.31^\circ-(-13.12^\circ)=99.43^\circ$$
+              Therefore,
+              $$I_x=5.852\angle99.44^\circ\text{ mA}. $$
+            </p></div>
+          </article>
+
+          <article class="room">
+            <h2>Room 7: State the Final Thevenin Pair and the Final Current</h2>
+            <ul>
+              <li>The open-circuit Thevenin voltage is
+                $$V_T=0.08925+j1.3839\text{ V}. $$
+              </li>
+              <li>The look-back Thevenin impedance is
+                $$Z_T=230.8-j153.8~\Omega. $$
+              </li>
+              <li>After reconnecting the inductor $$j100\ \Omega,$$ the load current is
+                $$I_x=5.852\angle99.44^\circ\text{ mA}. $$
+              </li>
+            </ul>
+            <div class="mini"><h3>Compact Exam-Style Working</h3><p>
+              $$500\parallel(-j500)=250-j250$$
+              $$V_T=5\angle120^\circ\frac{250-j250}{1000+250-j250}=0.08925+j1.3839\text{ V}$$
+              $$Z_T=\left(\frac{1}{1000}+\frac{1}{500}+\frac{1}{-j500}\right)^{-1}=230.8-j153.8~\Omega$$
+              $$I_x=\frac{V_T}{Z_T+j100}=\frac{0.08925+j1.3839}{230.8-j53.8}=5.852\angle99.44^\circ\text{ mA}$$
+            </p></div>
+          </article>
+
         </div>
       </section>
 
       <section class="panel" id="movie-anchor">
         <div class="section-title">Solution Flow</div>
         <div class="movie-flow">
-          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Load Terminals</h3><p>The net removes the inductor and catches the correct port.</p></div>
+          <div class="movie-step"><div class="movie-peg">21 Net</div><h3>Catch the Inductor Terminals</h3><p>The net removes the inductor and defines the correct Thevenin port.</p></div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light $$V_T$$ and $$Z_T$$</h3><p>Fire reveals the Thevenin pair seen by the inductor.</p></div>
+          <div class="movie-step"><div class="movie-peg">84 Fire</div><h3>Light $$V_T$$ and $$Z_T$$</h3><p>Fire reveals the open-circuit voltage and the look-back impedance of the fixed network.</p></div>
           <div class="movie-arrow">&rarr;</div>
-          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Final Inductor Current</h3><p>The coat restores the inductor and leaves $$I_x.$$</p></div>
+          <div class="movie-step"><div class="movie-peg">67 Chalk</div><h3>Write $$I_x=V_T/(Z_T+j100)$$</h3><p>Chalk restores the inductor and turns the whole problem into one final division.</p></div>
+          <div class="movie-arrow">&rarr;</div>
+          <div class="movie-step"><div class="movie-peg">71 Coat</div><h3>Wear the Final Load Current</h3><p>The coat leaves the inductor current in phasor form.</p></div>
         </div>
       </section>
 
@@ -84,7 +203,7 @@
         <div class="section-title">Save Change Request</div>
         <form class="request-form" data-txt-save>
           <label class="field-stack"><span>File Name</span><input class="request-input" data-note-filename type="text" value="ch8-exercise-8-29-request.txt" /></label>
-          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add the explicit inductor-load division step after the Thevenin reduction."></textarea></label>
+          <label class="field-stack"><span>Text</span><textarea class="request-textarea" data-note-body placeholder="Example: Add one more note explaining why the source becomes a short when we find Z_T."></textarea></label>
           <div class="tool-row"><button class="tool-btn" type="submit">Save .txt</button></div>
           <p class="request-note">Press Enter to save. Use Shift+Enter for a new line.</p>
           <p class="memory-status" data-note-status>Nothing saved yet.</p>

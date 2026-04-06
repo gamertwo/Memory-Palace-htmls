@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 6 Debug 1 | Fix Recursive Sum of Digits</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab6-debug1-sum-digits"><main class="shell"><nav class="nav"><a href="lab6-index.html">Lab 6 Index</a><a href="lab6-guide.html">Guide</a><a href="lab6-debug2-count-digits.html">Next: Debug 2</a></nav><section class="hero"><div class="tag">Lab 6 Debugging Task 1</div><h1>Fix the Broken Recursive Sum of Digits</h1><p class="hero-sub">This debugging task is mostly about base-case correctness. One wrong symbol in recursion can destroy the entire logic.</p><div class="formula-block">$$\text{if } n==0 \text{ return } 0,\qquad \text{else return } n\bmod 10 + sumDigits(n/10)$$</div><div class="tool-row"><a class="tool-btn" href="lab6-guide.html">Recursion Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab6-debug1-sum-digits.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Broken Code Shape</div><div class="formula-block"><pre><code>int sumDigits(n)
+{
+    if (n = 0)
+        return 0;
+    else
+        return n % 10 + sumDigits(n / 10)
+}</code></pre></div></section><section class="panel"><div class="section-title">Corrected Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+int sumDigits(int n)
+{
+    if (n == 0) {
+        return 0;
+    }
+
+    return n % 10 + sumDigits(n / 10);
+}
+
+int main(void)
+{
+    int num;
+
+    printf("Enter number: ");
+    scanf("%d", &amp;num);
+    printf("Sum of digits = %d\n", sumDigits(num));
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Parameter Needs a Type</h2><ul><li>The function header must declare <span class="inline-code">int n</span>.</li><li>Untyped parameters are not valid for this lab style.</li><li>The corrected header is <span class="inline-code">int sumDigits(int n)</span>.</li></ul></article><article class="room"><h2>Room 2: Base Case Uses Comparison, Not Assignment</h2><ul><li><span class="inline-code">n = 0</span> assigns zero.</li><li>The test must be <span class="inline-code">n == 0</span>.</li><li>This is the key logical repair.</li></ul></article><article class="room"><h2>Room 3: Recursive Formula Uses Last Digit Plus Smaller Problem</h2><ul><li><span class="inline-code">n % 10</span> extracts the last digit.</li><li><span class="inline-code">n / 10</span> removes that last digit.</li><li>The function keeps summing until zero remains.</li></ul></article><article class="room"><h2>Room 4: Missing Semicolon Still Matters</h2><ul><li>The return statement must end with <span class="inline-code">;</span>.</li><li>Recursive logic can be right and still fail to compile.</li><li>Always check punctuation after fixing logic.</li></ul></article><article class="room"><h2>Room 5: Trace Example</h2><ul><li><span class="inline-code">sumDigits(123)</span> becomes <span class="inline-code">3 + sumDigits(12)</span>.</li><li>Then <span class="inline-code">2 + sumDigits(1)</span>, then <span class="inline-code">1 + sumDigits(0)</span>.</li><li>The base case returns 0, so the total becomes 6.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

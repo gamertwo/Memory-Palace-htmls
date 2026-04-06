@@ -33,60 +33,173 @@
         </div>
       </section>
 
-      <section class="panel">
-        <div class="section-title">Rooms: Full Solution</div>
-        <div class="rooms">
-          <article class="room">
-            <h2>Room 1: Open the Load and Find the Thevenin Voltage</h2>
-            <ul>
-              <li>With the load removed, the output node is set by a simple divider across the fixed network.</li>
-              <li>Using the open-circuit divider gives $$V_T=35.35\angle-45^\circ\text{ V}.$$</li>
-              <li>This becomes the source for the Thevenin model.</li>
-            </ul>
-            <div class="mini"><h3>Why This Step</h3><p>The load must not distort the Thevenin source while we are finding it. That is why we remove the load before computing the open-circuit voltage.</p></div>
-          </article>
+    <section class="panel">
+  <div class="section-title">Rooms: Full Solution</div>
+  <div class="rooms">
 
-          <article class="room">
-            <h2>Room 2: Turn Off the Source and Look Back for $$Z_T$$</h2>
-            <ul>
-              <li>Deactivate the independent source and compute the impedance seen from the load terminals.</li>
-              <li>The look-back reduction gives $$Z_T=500-j500~\Omega.$$</li>
-              <li>Now the whole left side of the circuit has been compressed into one Thevenin pair.</li>
-            </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Thevenin works because everything fixed in the network can be replaced by one source and one impedance as seen by the load.</p></div>
-          </article>
+    <article class="room">
+      <h2>Room 1: Remove Load and Find Thevenin Voltage</h2>
+      <ul>
+        <li>Remove $$Z_L$$ (open circuit)</li>
+        <li>Now no current flows into load</li>
+        <li>So output is just divider of fixed network</li>
+      </ul>
 
-          <article class="room">
-            <h2>Room 3: Write the Unknown Load as $$R_L+jX_L$$</h2>
-            <ul>
-              <li>Let $$Z_L=R_L+jX_L.$$</li>
-              <li>Use the voltage-divider relation $$V_L=\dfrac{Z_L}{Z_L+Z_T}V_T.$$</li>
-              <li>Substitute the target $$V_L=10\angle-90^\circ\text{ V}$$ and the known $$V_T$$ and $$Z_T.$$</li>
-            </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Once the network has been reduced to Thevenin form, the design problem becomes a one-load divider problem instead of a messy full-circuit problem.</p></div>
-          </article>
+      <div class="mini">
+        <h3>What is happening?</h3>
+        <p>
+          Open circuit means:
+          $$I=0$$  
+          So voltage is directly set by network.
+        </p>
+      </div>
 
-          <article class="room">
-            <h2>Room 4: Separate Real and Imaginary Parts</h2>
-            <ul>
-              <li>Cross-multiply the divider equation and expand in rectangular form.</li>
-              <li>Then match the real and imaginary parts as two simultaneous equations in $$R_L$$ and $$X_L.$$</li>
-              <li>Solving gives $$R_L=235.3~\Omega$$ and $$X_L=-58.8~\Omega.$$</li>
-            </ul>
-            <div class="mini"><h3>Why This Step</h3><p>Designing a complex load means solving for two unknowns, so the rectangular form is the cleanest place to separate the problem into two real equations.</p></div>
-          </article>
+      <div class="mini">
+        <h3>Result</h3>
+        <p>
+          $$V_T=35.35\angle-45^\circ$$
+        </p>
+      </div>
 
-          <article class="room">
-            <h2>Room 5: State the Final Load Clearly</h2>
-            <ul>
-              <li>The required load is $$Z_L=235.3-j58.8~\Omega.$$</li>
-              <li>This load makes the divider produce the demanded $$10\angle-90^\circ\text{ V}.$$</li>
-              <li>The whole design move depended on compressing the source network first.</li>
-            </ul>
-            <div class="mini"><h3>Why This Step</h3><p>This is the real memory target of the page: Thevenin is not only for analysis, it is a design shortcut for choosing a load that creates a required output.</p></div>
-          </article>
-        </div>
-      </section>
+      <div class="mini">
+        <h3>Where did 35.35 come from?</h3>
+        <p>
+          From voltage division magnitude.
+          <br><br>
+          And:
+          $$35.35 = \frac{50}{\sqrt{2}}$$
+          shows a 45° relationship.
+        </p>
+      </div>
+    </article>
+
+    <article class="room">
+      <h2>Room 2: Find Thevenin Impedance</h2>
+      <ul>
+        <li>Turn OFF source</li>
+        <li>Voltage source → short</li>
+        <li>Look back into circuit</li>
+      </ul>
+
+      <div class="mini">
+        <h3>Result</h3>
+        <p>
+          $$Z_T=500-j500$$
+        </p>
+      </div>
+
+      <div class="mini">
+        <h3>Convert to Polar</h3>
+        <p>
+          $$|Z_T|=\sqrt{500^2+500^2}=707$$
+          <br>
+          $$\angle Z_T=\tan^{-1}\left(\frac{-500}{500}\right)=-45^\circ$$
+        </p>
+      </div>
+
+      <div class="mini">
+        <h3>Meaning</h3>
+        <p>
+          Circuit behaves like:
+          <br>
+          $$707\angle-45^\circ$$
+        </p>
+      </div>
+    </article>
+
+    <article class="room">
+      <h2>Room 3: Set Up Design Equation</h2>
+      <ul>
+        <li>Let:
+          $$Z_L=R_L+jX_L$$
+        </li>
+        <li>Use divider:
+          $$V_L=\frac{Z_L}{Z_L+Z_T}V_T$$
+        </li>
+      </ul>
+
+      <div class="mini">
+        <h3>Substitute known values</h3>
+        <p>
+          $$10\angle-90^\circ = \frac{Z_L}{Z_L+(500-j500)}(35.35\angle-45^\circ)$$
+        </p>
+      </div>
+
+      <div class="mini">
+        <h3>Key idea</h3>
+        <p>
+          You are forcing the circuit to produce a desired output.
+        </p>
+      </div>
+    </article>
+
+    <article class="room">
+      <h2>Room 4: Solve for Load</h2>
+      <ul>
+        <li>Multiply both sides</li>
+        <li>Convert to rectangular form</li>
+        <li>Separate real and imaginary parts</li>
+      </ul>
+
+      <div class="mini">
+        <h3>Why rectangular?</h3>
+        <p>
+          Because:
+          <br>
+          Real part → gives equation 1  
+          Imag part → gives equation 2
+        </p>
+      </div>
+
+      <div class="mini">
+        <h3>Result</h3>
+        <p>
+          $$R_L=235.3$$  
+          $$X_L=-58.8$$
+        </p>
+      </div>
+
+      <div class="mini">
+        <h3>Meaning of X_L</h3>
+        <p>
+          Negative → capacitive load
+        </p>
+      </div>
+    </article>
+
+    <article class="room">
+      <h2>Room 5: Final Load</h2>
+      <ul>
+        <li>Combine results:</li>
+      </ul>
+
+      <div class="mini">
+        <h3>Final Answer</h3>
+        <p>
+          $$Z_L=235.3 - j58.8$$
+        </p>
+      </div>
+
+      <div class="mini">
+        <h3>Big Idea</h3>
+        <p>
+          Thevenin converts a complex circuit into:
+          <br><br>
+          ONE source + ONE impedance  
+          → then design becomes easy
+        </p>
+      </div>
+
+      <div class="mini">
+        <h3>Core Pattern</h3>
+        <p>
+          Reduce → Replace → Design
+        </p>
+      </div>
+    </article>
+
+  </div>
+</section>
 
       <section class="panel" id="movie-anchor">
         <div class="section-title">Solution Flow</div>

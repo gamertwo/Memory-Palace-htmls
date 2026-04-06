@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rc-ex715-example.html" />
 <title>RC Example 7-15 | Exponential Forcing Response</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
 <script>
@@ -12,171 +13,12 @@ MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="study-bridge.css" />
 <link rel="stylesheet" href="linear-review.css" />
 <script src="linear-review.js" defer></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d0f14;
-  --bg2:#1a1e27;
-  --panel:#131821;
-  --panel2:#191f2a;
-  --line:rgba(255,255,255,.08);
-  --accent:#ffd08a;
-  --text:#f7f1e8;
-  --muted:rgba(247,241,232,.78);
-}
-body{
-  font-family:'Outfit',sans-serif;
-  background:linear-gradient(180deg,var(--bg),var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-}
-a{color:inherit}
-.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}
-.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
-.nav a{
-  text-decoration:none;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.85rem;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.hero,.panel,.palace-sidebar{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1.2rem;
-}
-.hero h1{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  margin-bottom:.5rem;
-}
-.hero p{color:var(--muted);line-height:1.7}
-.eq{
-  margin-top:.9rem;
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:.9rem;
-  text-align:center;
-  overflow:auto;
-}
-.content-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);
-  gap:1rem;
-  align-items:start;
-  margin-top:1rem;
-}
-.main-stack{display:grid;gap:1rem}
-.section-title{
-  font-size:1rem;
-  font-weight:800;
-  color:var(--accent);
-  margin-bottom:.8rem;
-}
-.rooms{display:grid;gap:.85rem}
-.room{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.room h2{
-  font-size:1rem;
-  margin-bottom:.55rem;
-  color:var(--accent);
-}
-.room ul{padding-left:1.2rem}
-.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}
-.mini{
-  margin-top:.75rem;
-  padding:.75rem .85rem;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-}
-.mini h3,.station h3,.transition h3{
-  font-size:.9rem;
-  color:var(--accent);
-  margin-bottom:.35rem;
-}
-.palace-sidebar{position:sticky;top:1rem}
-.path{display:grid;gap:.65rem}
-.station,.transition{
-  background:var(--panel2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1rem;
-}
-.transition{
-  border-style:dashed;
-  background:rgba(255,255,255,.02);
-}
-.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}
-.tool-btn,.ghost-btn{
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.55rem .9rem;
-  font-size:.8rem;
-  font-family:inherit;
-  cursor:pointer;
-  color:var(--accent);
-  background:rgba(255,255,255,.03);
-}
-.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  background:rgba(6,8,12,.74);
-  z-index:50;
-}
-.modal.open{display:flex}
-.modal-card{
-  width:min(760px,100%);
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:1rem;
-  box-shadow:0 24px 80px rgba(0,0,0,.45);
-}
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:.75rem;
-}
-.modal-head h3{font-size:1rem;color:var(--accent)}
-.prompt-box{
-  width:100%;
-  min-height:340px;
-  resize:vertical;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--panel2);
-  color:var(--text);
-  padding:.9rem;
-  font:inherit;
-  line-height:1.65;
-}
-.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}
-@media (max-width:760px){
-  .shell{padding:1rem .85rem 2rem}
-  .content-grid{grid-template-columns:1fr}
-  .palace-sidebar{position:static}
-}
-</style>
 </head>
-<body>
+<body data-page-key="rc_ex715_example">
 <main class="shell">
   <nav class="nav">
     <a href="index.html">Pattern Palace</a>
@@ -185,24 +27,36 @@ a{color:inherit}
   </nav>
 
   <section class="hero">
-    <h1>Example 7-15</h1>
-    <p>This example finds the response of an RC circuit to an exponential forcing function. The total response is the sum of a natural exponential and a forced exponential, and the initial capacitor voltage is given as $v(0)=V_0$.</p>
+    <div class="tag">Example 7-15</div>
+<h1>Example 7-15</h1>
+    <p>This example is the first place where the RC response is not just one exponential going to a constant. The source itself is exponential, so the forced response must also be exponential, while the circuit still keeps its own natural exponential. The big idea is that the final answer contains two exponentials for two different reasons: one comes from the circuit, and one comes from the source.</p>
     <div class="eq">$$v(t)=\left[V_0-\frac{V_A}{1-\alpha RC}\right]e^{-t/RC}+\frac{V_A}{1-\alpha RC}e^{-\alpha t},\qquad t\ge 0$$</div>
     <div class="tool-row">
       <button class="tool-btn" type="button" data-open-prompt>AI Prompt</button>
     </div>
   </section>
 
-  <div class="content-grid">
+  <div class="study-grid two-col">
     <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Result</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Natural part</div><div class="v">$$Ke^{-t/RC}$$ is still present because the capacitor keeps its own first-order memory.</div></div>
+          <div class="fact"><div class="k">Forced part</div><div class="v">Because the source is $$V_Ae^{-\alpha t},$$ the forced response is guessed with the same exponential shape.</div></div>
+          <div class="fact"><div class="k">Key coefficient</div><div class="v">$$\dfrac{V_A}{1-\alpha RC}$$ shows how the source decay interacts with the RC decay.</div></div>
+        </div>
+      </section>
+
       <section class="panel">
         <div class="section-title">Rooms</div>
         <div class="rooms">
           <article class="room">
             <h2>Room 1: Start with the Natural Response</h2>
             <ul>
+              <li>Before worrying about the source, remember what the capacitor would do by itself.</li>
               <li>As before, the natural response of an RC circuit is</li>
               <li>$$v_N(t)=Ke^{-t/RC},\qquad t\ge 0.$$</li>
+              <li>This part is the circuit's own first-order mode, not something created by the source.</li>
             </ul>
           </article>
 
@@ -217,7 +71,8 @@ a{color:inherit}
           <article class="room">
             <h2>Room 3: Guess the Forced Response Shape</h2>
             <ul>
-              <li>Because the input is exponential, choose a forced response of the same form:</li>
+              <li>The forcing term is exponential, so the smartest trial form is another exponential with the same decay rate.</li>
+              <li>This is the same logic used when sinusoidal inputs lead to sinusoidal forced-response guesses.</li>
               <li>$$v_F(t)=K_F e^{-\alpha t}.$$</li>
             </ul>
           </article>
@@ -241,7 +96,7 @@ a{color:inherit}
             <li>$$K_F(1-\alpha RC)=V_A$$</li>
             <li>and therefore</li>
             <li>$$K_F=\frac{V_A}{1-\alpha RC}.$$</li>
-            <li>This step assumes $$1-\alpha RC\neq 0.$$</li>
+            <li>This step assumes $$1-\alpha RC\neq 0.$$ If $$\alpha RC=1,$$ the source decay exactly matches the circuit's own decay rate and the trial form has to be changed.</li>
           </ul>
         </article>
 
@@ -268,11 +123,12 @@ a{color:inherit}
             <ul>
               <li>Substitute $K$ back into the total response:</li>
               <li>$$\boxed{v(t)=\left[V_0-\frac{V_A}{1-\alpha RC}\right]e^{-t/RC}+\frac{V_A}{1-\alpha RC}e^{-\alpha t}},\qquad t\ge 0.$$</li>
-              <li>The waveform is the sum of two decaying exponentials.</li>
-              <li>The one with the larger time constant decays more slowly and becomes the dominant exponential.</li>
+              <li>The waveform is the sum of two decaying exponentials, so the graph is shaped by a competition between source decay and circuit decay.</li>
+              <li>The one with the larger time constant decays more slowly and becomes the dominant exponential later.</li>
             </ul>
           </article>
         </div>
+        <div class="mini"><h3>Concept Summary</h3><p>This page upgrades first-order RC thinking from natural plus constant to natural plus matched forcing shape. Once the source is exponential, the response naturally carries two exponentials and you have to keep straight which one belongs to the circuit and which one belongs to the source.</p></div>
       </section>
 
       <section class="panel">
@@ -408,5 +264,8 @@ document.getElementById('copy-prompt').addEventListener('click', async () => {
   }
 });
 </script>
+<script src="study.js"></script>
 </body>
 </html>
+
+

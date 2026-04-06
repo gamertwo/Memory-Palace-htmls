@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rlc-design732.html" />
 <title>RLC Design Exercise 7-32 | Choose R for Critical Damping in Figure 7-47</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="linear-review.css" />
 <script>
 MathJax = {
   tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
@@ -13,47 +13,46 @@ MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
-<script src="linear-review.js" defer></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0d0f14;--bg2:#1a1e27;--panel:#131821;--panel2:#191f2a;--line:rgba(255,255,255,.08);--accent:#ffd08a;--text:#f7f1e8;--muted:rgba(247,241,232,.78)}
-body{font-family:'Outfit',sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);min-height:100vh}
-a{color:inherit}.shell{max-width:1100px;margin:0 auto;padding:2rem 1rem 3rem}.nav{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}.nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.85rem;color:var(--accent);background:rgba(255,255,255,.03)}.hero,.panel,.palace-sidebar{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem}.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.75rem,4vw,2.75rem);margin-bottom:.5rem}.hero p{color:var(--muted);line-height:1.7}.eq{margin-top:.9rem;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center;overflow:auto}.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.95fr);gap:1rem;align-items:start;margin-top:1rem}.main-stack{display:grid;gap:1rem}.section-title{font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}.rooms{display:grid;gap:.85rem}.room{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.room h2{font-size:1rem;margin-bottom:.55rem;color:var(--accent)}.room ul{padding-left:1.2rem}.room li,.room p,.mini p,.station p,.transition p,.palace-intro,.modal-copy{line-height:1.75;color:var(--muted)}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}.fact{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:.75rem}.fact .k{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem}.fact .v{color:var(--muted);line-height:1.6}.mini{margin-top:.75rem;padding:.75rem .85rem;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}.mini h3,.station h3,.transition h3{font-size:.9rem;color:var(--accent);margin-bottom:.35rem}.palace-sidebar{position:sticky;top:1rem}.path{display:grid;gap:.65rem}.station,.transition{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:1rem}.transition{border-style:dashed;background:rgba(255,255,255,.02)}.tool-row{display:flex;justify-content:flex-end;margin-top:.85rem}.tool-btn,.ghost-btn{border:1px solid var(--line);border-radius:999px;padding:.55rem .9rem;font-size:.8rem;font-family:inherit;cursor:pointer;color:var(--accent);background:rgba(255,255,255,.03)}.tool-btn:hover,.ghost-btn:hover{background:rgba(255,255,255,.06)}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(6,8,12,.74);z-index:50}.modal.open{display:flex}.modal-card{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem;box-shadow:0 24px 80px rgba(0,0,0,.45)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}.modal-head h3{font-size:1rem;color:var(--accent)}.prompt-box{width:100%;min-height:340px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);padding:.9rem;font:inherit;line-height:1.65}.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:.8rem;flex-wrap:wrap}@media (max-width:760px){.shell{padding:1rem .85rem 2rem}.content-grid{grid-template-columns:1fr}.palace-sidebar{position:static}}
-</style>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="linear-review.css" />
 </head>
-<body>
-<main class="shell"><nav class="nav"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a><a href="rlc-ex731.html">Back: Exercise 7-31</a></nav>
-<section class="hero"><h1>Design Exercise 7-32</h1><p>Select the resistor value in Figure 7-47 that makes the response critically damped, then find the maximum value of $$v_o(t)$$ and the time when it occurs. Finally determine the maximum power delivered by the 60 V source.</p><div class="eq">$$R_{\text{crit}}=\frac{1}{2}\sqrt{\frac{L}{C}}=250\ \Omega$$
-$$v_o(t)=480000te^{-4000t}\ \text{V},\qquad v_{o,\max}=44.15\ \text{V at }t=250\ \mu s$$
-$$P_{s,\max}=60\times 0.24=14.4\ \text{W}$$</div><div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div></section>
-<div class="content-grid"><div class="main-stack">
-<section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Source</div><div class="v">$$v_s(t)=60u(t)\ \text{V}$$</div></div><div class="fact"><div class="k">Fixed Elements</div><div class="v">$$L=125\ \text{mH},\quad C=0.5\ \mu\text{F}$$</div></div><div class="fact"><div class="k">Design Variable</div><div class="v">Choose $$R$$ for critical damping</div></div><div class="fact"><div class="k">Normalized Denominator</div><div class="v">$$s^2+\frac{1}{RC}s+\frac{1}{LC}$$</div></div><div class="fact"><div class="k">Critical Root</div><div class="v">At the design point, $$s=-4000$$ is repeated.</div></div><div class="fact"><div class="k">Power Relation</div><div class="v">$$p_s(t)=v_s(t)i_s(t)$$</div></div></div></section>
-<section class="panel"><div class="section-title">Answer Board</div><div class="facts"><div class="fact"><div class="k">Part (a)</div><div class="v">$$\boxed{R=250\ \Omega}$$</div></div><div class="fact"><div class="k">Part (b)</div><div class="v">$$v_{o,\max}=44.15\ \text{V}$$ at $$t=250\ \mu s$$</div></div><div class="fact"><div class="k">Source Current</div><div class="v">$$i_s(t)=0.24-1920te^{-4000t}\ \text{A}$$</div></div><div class="fact"><div class="k">Part (c)</div><div class="v">$$\boxed{P_{s,\max}=14.4\ \text{W}}$$</div></div></div></section>
-<section class="panel"><div class="section-title">Rooms</div><div class="rooms">
-<article class="room"><h2>Room 1: Start from the Figure 7-47 Denominator</h2><ul><li>From Exercise 7-31, the output denominator for this network is</li><li>$$RLCs^2+Ls+R.$$</li><li>Divide by $$RLC$$ to get the standard form</li><li>$$s^2+\frac{1}{RC}s+\frac{1}{LC}. $$</li></ul></article>
-<article class="room"><h2>Room 2: Match the Standard Second-Order Pattern</h2><ul><li>Compare with</li><li>$$s^2+2\alpha s+\omega_0^2.$$</li><li>So</li><li>$$2\alpha=\frac{1}{RC},\qquad \omega_0=\frac{1}{\sqrt{LC}}.$$</li></ul></article>
-<article class="room"><h2>Room 3: Impose Critical Damping</h2><ul><li>Critical damping means $$\alpha=\omega_0.$$</li><li>Therefore</li><li>$$\frac{1}{2RC}=\frac{1}{\sqrt{LC}}.$$</li><li>Solve for the design resistor:</li><li>$$R_{\text{crit}}=\frac{1}{2}\sqrt{\frac{L}{C}}. $$</li></ul></article>
-<article class="room"><h2>Room 4: Evaluate the Resistor Value</h2><ul><li>With $$L=0.125\ \text{H}$$ and $$C=0.5\times10^{-6}\ \text{F},$$</li><li>$$R_{\text{crit}}=\frac{1}{2}\sqrt{\frac{0.125}{0.5\times10^{-6}}}=250\ \Omega. $$</li></ul></article>
-<article class="room"><h2>Room 5: Write the Critical Output Response</h2><ul><li>At $$R=250\ \Omega,$$ the denominator becomes</li><li>$$s^2+8000s+1.6\times10^7=(s+4000)^2. $$</li><li>The step output is</li><li>$$V_o(s)=\frac{480000}{(s+4000)^2}.$$</li><li>So</li><li>$$v_o(t)=480000te^{-4000t}\ \text{V}. $$</li></ul></article>
-<article class="room"><h2>Room 6: Find the Peak Voltage</h2><ul><li>Differentiate:</li><li>$$\frac{dv_o}{dt}=480000e^{-4000t}(1-4000t). $$</li><li>Set the derivative to zero:</li><li>$$1-4000t=0\Rightarrow t=\frac{1}{4000}=250\ \mu s. $$</li><li>Then</li><li>$$v_{o,\max}=480000\left(\frac{1}{4000}\right)e^{-1}=\frac{120}{e}=44.15\ \text{V}. $$</li></ul></article>
-<article class="room"><h2>Room 7: Find the Source Current</h2><ul><li>Use Ohm's law on the series resistor:</li><li>$$i_s(t)=\frac{v_s-v_o}{R}. $$</li><li>With $$v_s=60$$ and $$R=250,$$</li><li>$$i_s(t)=0.24-1920te^{-4000t}\ \text{A}. $$</li><li>This is largest at $$t=0$$ and again as $$t\to\infty,$$ where it equals 0.24 A.</li></ul></article>
-<article class="room"><h2>Room 8: Compute the Maximum Source Power</h2><ul><li>The source voltage is a constant 60 V step.</li><li>So the maximum delivered power is</li><li>$$P_{s,\max}=v_s i_{s,\max}=60(0.24)=14.4\ \text{W}. $$</li></ul></article>
-</div><div class="mini"><h3>Fast Memory Rule</h3><p>This design problem is a three-step chain: force the repeated root to get $$R,$$ use the critical-response form to get the peak output time and value, then combine the source voltage with the peak source current to get the maximum power.</p></div></section>
-</div><aside class="palace-sidebar"><div class="section-title">Memory Palace Path</div><p class="palace-intro">This path turns the design target into a fixed repeated root, then squeezes the peak output and peak power from the critical response.</p><div class="path"><div class="station"><h3>Station 1: Critical Marker</h3><p>Set $$\alpha=\omega_0$$ and solve for the resistor.</p></div><div class="transition"><h3>Transition 1 to 2</h3><p>The critical resistor locks the repeated root at $$-4000.$$ </p></div><div class="station"><h3>Station 2: Repeated-Root Gate</h3><p>Write $$V_o(s)=480000/(s+4000)^2.$$ </p></div><div class="transition"><h3>Transition 2 to 3</h3><p>The time response becomes one pulse shape.</p></div><div class="station"><h3>Station 3: Peak Clock</h3><p>Differentiate $$480000te^{-4000t}$$ and stop the clock at 250 microseconds.</p></div><div class="transition"><h3>Transition 3 to 4</h3><p>After the peak output, look back through the resistor for the source current.</p></div><div class="station"><h3>Station 4: Power Exit</h3><p>The source current peaks at 0.24 A, so the source power peaks at 14.4 W.</p></div></div></aside></div></main>
-<div class="modal" id="prompt-modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div><p class="modal-copy">This prompt is prefilled with the Design Exercise 7-32 workflow.</p><textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this design exercise on Figure 7-47. Keep the order exact, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+<body data-page-key="rlc_design732">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a><a href="rlc-ex731.html">Back: Exercise 7-31</a></nav>
 
-Source material:
-1. The circuit has L=125 mH, C=0.5 microfarads, and source vS(t)=60u(t) V, with R chosen for critical damping.
-2. The normalized denominator is s^2 + 1/(RC)s + 1/(LC).
-3. Compare with s^2 + 2alpha s + omega0^2 and impose alpha = omega0.
-4. Solve R = 0.5 sqrt(L/C) = 250 ohms.
-5. With that R, the denominator becomes (s+4000)^2.
-6. The step output is Vo(s)=480000/(s+4000)^2, so vo(t)=480000te^(-4000t) V.
-7. Differentiate to find the peak at t=250 microseconds, with vo,max = 44.15 V.
-8. The source current is iS(t)=0.24-1920te^(-4000t) A, so its maximum is 0.24 A at t=0 and as t goes to infinity.
-9. Therefore the maximum source power is 60 times 0.24 = 14.4 W.</textarea><div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div></div></div>
-<script>
-const ex732Modal = document.getElementById('prompt-modal'); const ex732Textarea = document.getElementById('prompt-text'); document.querySelector('[data-open-prompt]').addEventListener('click', () => { ex732Modal.classList.add('open'); ex732Modal.setAttribute('aria-hidden', 'false'); }); document.querySelectorAll('[data-close-prompt]').forEach((button) => { button.addEventListener('click', () => { ex732Modal.classList.remove('open'); ex732Modal.setAttribute('aria-hidden', 'true'); }); }); ex732Modal.addEventListener('click', (event) => { if (event.target === ex732Modal) { ex732Modal.classList.remove('open'); ex732Modal.setAttribute('aria-hidden', 'true'); } }); document.getElementById('copy-prompt').addEventListener('click', async () => { try { await navigator.clipboard.writeText(ex732Textarea.value); } catch (error) { ex732Textarea.focus(); ex732Textarea.select(); } });
-</script>
+  <section class="hero">
+    
+    <h1>Design Exercise 7-32</h1>
+    <p class="hero-sub">Select the resistor value in Figure 7-47 that makes the response critically damped, then find the maximum value of $$v_o(t)$$ and the time when it occurs. Finally determine the maximum power delivered by the 60 V source.</p>
+    <div class="formula-block">$$R_{\text{crit}}=\frac{1}{2}\sqrt{\frac{L}{C}}=250\ \Omega$$
+$$v_o(t)=480000te^{-4000t}\ \text{V},\qquad v_{o,\max}=44.15\ \text{V at }t=250\ \mu s$$
+$$P_{s,\max}=60\times 0.24=14.4\ \text{W}$$</div>
+    <div class="tool-row"><a class="tool-btn" href="memory-palace-builder.html?pages=rlc-design732.html" data-builder-link="true">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts"><div class="fact"><div class="k">Source</div><div class="v">$$v_s(t)=60u(t)\ \text{V}$$</div></div><div class="fact"><div class="k">Fixed Elements</div><div class="v">$$L=125\ \text{mH},\quad C=0.5\ \mu\text{F}$$</div></div><div class="fact"><div class="k">Design Variable</div><div class="v">Choose $$R$$ for critical damping</div></div><div class="fact"><div class="k">Normalized Denominator</div><div class="v">$$s^2+\frac{1}{RC}s+\frac{1}{LC}$$</div></div><div class="fact"><div class="k">Critical Root</div><div class="v">At the design point, $$s=-4000$$ is repeated.</div></div><div class="fact"><div class="k">Power Relation</div><div class="v">$$p_s(t)=v_s(t)i_s(t)$$</div></div></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms"><article class="room"><h2>Room 1: Start from the Figure 7-47 Denominator</h2><ul><li>From Exercise 7-31, the output denominator for this network is</li><li>$$RLCs^2+Ls+R.$$</li><li>Divide by $$RLC$$ to get the standard form</li><li>$$s^2+\frac{1}{RC}s+\frac{1}{LC}. $$</li>  <li><strong>Why:</strong> Because the denominator contains the natural dynamics, and critical-damping design always starts by shaping that denominator.</li></ul></article>
+<article class="room"><h2>Room 2: Match the Standard Second-Order Pattern</h2><ul><li>Compare with</li><li>$$s^2+2\alpha s+\omega_0^2.$$</li><li>So</li><li>$$2\alpha=\frac{1}{RC},\qquad \omega_0=\frac{1}{\sqrt{LC}}.$$</li>  <li><strong>Why:</strong> Because the second-order pattern translates the circuit denominator into the alpha and omega0 quantities that define critical damping.</li></ul></article>
+<article class="room"><h2>Room 3: Impose Critical Damping</h2><ul><li>Critical damping means $$\alpha=\omega_0.$$</li><li>Therefore</li><li>$$\frac{1}{2RC}=\frac{1}{\sqrt{LC}}.$$</li><li>Solve for the design resistor:</li><li>$$R_{\text{crit}}=\frac{1}{2}\sqrt{\frac{L}{C}}. $$</li>  <li><strong>Why:</strong> Because a repeated root is the defining condition for critical damping, so this is the design constraint that matters most.</li></ul></article>
+<article class="room"><h2>Room 4: Evaluate the Resistor Value</h2><ul><li>With $$L=0.125\ \text{H}$$ and $$C=0.5\times10^{-6}\ \text{F},$$</li><li>$$R_{\text{crit}}=\frac{1}{2}\sqrt{\frac{0.125}{0.5\times10^{-6}}}=250\ \Omega. $$</li>  <li><strong>Why:</strong> Because the symbolic critical-damping condition only becomes useful after it is converted into an actual component value.</li></ul></article>
+<article class="room"><h2>Room 5: Write the Critical Output Response</h2><ul><li>At $$R=250\ \Omega,$$ the denominator becomes</li><li>$$s^2+8000s+1.6\times10^7=(s+4000)^2. $$</li><li>The step output is</li><li>$$V_o(s)=\frac{480000}{(s+4000)^2}.$$</li><li>So</li><li>$$v_o(t)=480000te^{-4000t}\ \text{V}. $$</li>  <li><strong>Why:</strong> Because once the repeated-root design is fixed, the response expression shows the exact pulse shape you will optimize.</li></ul></article>
+<article class="room"><h2>Room 6: Find the Peak Voltage</h2><ul><li>Differentiate:</li><li>$$\frac{dv_o}{dt}=480000e^{-4000t}(1-4000t). $$</li><li>Set the derivative to zero:</li><li>$$1-4000t=0\Rightarrow t=\frac{1}{4000}=250\ \mu s. $$</li><li>Then</li><li>$$v_{o,\max}=480000\left(\frac{1}{4000}\right)e^{-1}=\frac{120}{e}=44.15\ \text{V}. $$</li>  <li><strong>Why:</strong> Because peak output is a performance target, so the waveform must be differentiated or inspected to locate its maximum.</li></ul></article>
+<article class="room"><h2>Room 7: Find the Source Current</h2><ul><li>Use Ohm's law on the series resistor:</li><li>$$i_s(t)=\frac{v_s-v_o}{R}. $$</li><li>With $$v_s=60$$ and $$R=250,$$</li><li>$$i_s(t)=0.24-1920te^{-4000t}\ \text{A}. $$</li><li>This is largest at $$t=0$$ and again as $$t\to\infty,$$ where it equals 0.24 A.</li>  <li><strong>Why:</strong> Because source power depends on source current, so this quantity must be recovered before the power calculation can happen.</li></ul></article>
+<article class="room"><h2>Room 8: Compute the Maximum Source Power</h2><ul><li>The source voltage is a constant 60 V step.</li><li>So the maximum delivered power is</li><li>$$P_{s,\max}=v_s i_{s,\max}=60(0.24)=14.4\ \text{W}. $$</li>  <li><strong>Why:</strong> Because the design question is not complete until the electrical stress or power demand is also quantified.</li></ul></article></div>
+        <div class="mini"><h3>Fast Memory Rule</h3><p>This design problem is a three-step chain: force the repeated root to get $$R,$$ use the critical-response form to get the peak output time and value, then combine the source voltage with the peak source current to get the maximum power.</p></div>
+        <div class="mini"><h3>Why The Order Matters</h3><p>This page works best when you read it as a chain instead of as isolated formulas. The early rooms set up the model, the middle rooms use that model to solve constants or component constraints, and the last room writes the requested answer. If a room feels sudden, go back one room and ask which number or rule it is using.</p></div>
+        <div class="mini"><h3>What To Watch</h3><p>Do not jump to the last formula too early. Read each room as the reason the next room is allowed to exist.</p></div>
+      </section>
+    </div>
+  </div>
+</main>
 </body>
 </html>

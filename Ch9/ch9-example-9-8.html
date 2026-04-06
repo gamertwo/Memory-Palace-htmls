@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-example-9-8.html" />
+<title>Example 9-8 to Exercise 9-12 | Mixed-Signal Synthesis</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_example_9_8">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="ch9-example-9-7.html">Prev: Example 9-7</a>
+    <a href="ch9-pole-zero-diagrams.html">Next: Pole-Zero</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Example 9-8 through Exercise 9-12</div>
+    <h1>Mixed-Signal Synthesis Workshop</h1>
+    <p class="hero-sub">This range teaches what to do when several known transform structures appear together. Build each one correctly, then fuse them into a common denominator platform.</p>
+    <div class="formula-block">$$\mathcal{L}\{f_1+f_2+\cdots\}=F_1(s)+F_2(s)+\cdots$$</div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Memory Rooms</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-example-9-8.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Results</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Example 9-8</div><div class="v">$$F(s)=\dfrac{16(s^2+1)}{s(s+2)(s^2+4)}$$</div></div>
+          <div class="fact"><div class="k">Exercise 9-11</div><div class="v">$$(a)\ \dfrac{2(s+4)}{s^2(s+2)},\qquad (b)\ \dfrac{4(s+2)}{s(s^2+4)}$$</div></div>
+          <div class="fact"><div class="k">Exercise 9-12</div><div class="v">$$(a)\ \dfrac{s^3+36s+80}{s(s+4)(s^2+16)},\qquad (b)\ \dfrac{10s+200}{(s+40)^2}$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Example 9-8: Transform Each Known Signal Separately Before Combining</h3>
+            <div class="review-room-prompt">
+              <p>Start from</p>
+              <p>$$f(t)=2u(t)-5e^{-2t}u(t)+3\cos2t\,u(t)+3\sin2t\,u(t)$$</p>
+              <p>Apply linearity:</p>
+              <p>$$F(s)=2\mathcal{L}\{u(t)\}-5\mathcal{L}\{e^{-2t}u(t)\}+3\mathcal{L}\{\cos2t\,u(t)\}+3\mathcal{L}\{\sin2t\,u(t)\}$$</p>
+              <p>Transform each term:</p>
+              <p>$$F(s)=\frac{2}{s}-\frac{5}{s+2}+\frac{3s}{s^2+4}+\frac{6}{s^2+4}$$</p>
+              <p>Combine the last two first:</p>
+              <p>$$F(s)=\frac{2}{s}-\frac{5}{s+2}+\frac{3s+6}{s^2+4}$$</p>
+              <p>After rationalization, the final single-fraction form is</p>
+              <p>$$F(s)=\frac{16(s^2+1)}{s(s+2)(s^2+4)}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Exercise 9-11: Practice Mixed Addition On Two Smaller Cases</h3>
+            <div class="review-room-prompt">
+              <p>Part (a):</p>
+              <p>$$f(t)=e^{-2t}u(t)+4tu(t)-u(t)$$</p>
+              <p>Transform term by term:</p>
+              <p>$$F(s)=\frac{1}{s+2}+\frac{4}{s^2}-\frac{1}{s}$$</p>
+              <p>Combine the first and third terms:</p>
+              <p>$$\frac{1}{s+2}-\frac{1}{s}=\frac{s-(s+2)}{s(s+2)}=-\frac{2}{s(s+2)}$$</p>
+              <p>Then</p>
+              <p>$$F(s)=\frac{4}{s^2}-\frac{2}{s(s+2)}=\frac{4(s+2)-2s}{s^2(s+2)}=\frac{2(s+4)}{s^2(s+2)}$$</p>
+              <p>Part (b):</p>
+              <p>$$f(t)=[2+2\sin2t-2\cos2t]u(t)$$</p>
+              <p>So</p>
+              <p>$$F(s)=\frac{2}{s}+\frac{4}{s^2+4}-\frac{2s}{s^2+4}=\frac{2}{s}+\frac{4-2s}{s^2+4}$$</p>
+              <p>Use a common denominator:</p>
+              <p>$$F(s)=\frac{2(s^2+4)+s(4-2s)}{s(s^2+4)}=\frac{4s+8}{s(s^2+4)}=\frac{4(s+2)}{s(s^2+4)}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Exercise 9-12: Combine Integration And Differentiation With Known Bases</h3>
+            <div class="review-room-prompt">
+              <p>Part (a):</p>
+              <p>$$f(t)=e^{-4t}u(t)+5\int_0^t\sin4x\,dx$$</p>
+              <p>Transform the decay term:</p>
+              <p>$$\mathcal{L}\{e^{-4t}u(t)\}=\frac{1}{s+4}$$</p>
+              <p>For the integral term, first use $$\mathcal{L}\{\sin4t\}=\frac{4}{s^2+16}$$ and then divide by $$s$$:</p>
+              <p>$$5\mathcal{L}\left\{\int_0^t\sin4x\,dx\right\}=5\cdot\frac{1}{s}\cdot\frac{4}{s^2+16}=\frac{20}{s(s^2+16)}$$</p>
+              <p>So</p>
+              <p>$$F(s)=\frac{1}{s+4}+\frac{20}{s(s^2+16)}=\frac{s^3+36s+80}{s(s+4)(s^2+16)}$$</p>
+              <p>Part (b):</p>
+              <p>$$f(t)=5e^{-40t}u(t)+\frac{d}{dt}[5te^{-40t}u(t)]$$</p>
+              <p>The first term gives</p>
+              <p>$$\frac{5}{s+40}$$</p>
+              <p>The damped ramp has transform</p>
+              <p>$$\mathcal{L}\{5te^{-40t}u(t)\}=\frac{5}{(s+40)^2}$$</p>
+              <p>Differentiating injects $$s$$ and the checkpoint contributes zero:</p>
+              <p>$$\mathcal{L}\left\{\frac{d}{dt}[5te^{-40t}u(t)]\right\}=s\frac{5}{(s+40)^2}$$</p>
+              <p>So</p>
+              <p>$$F(s)=\frac{5}{s+40}+\frac{5s}{(s+40)^2}=\frac{5(s+40)+5s}{(s+40)^2}=\frac{10s+200}{(s+40)^2}$$</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: Memory System First</div>
+        <div class="rooms">
+          <article class="room" data-tags="multi-signal,fusion,common-denominator,example">
+            <h2>Example 9-8: Four Transform Warriors Fuse Into One Triple Base</h2>
+            <p>A step tower, a decay tower, a cosine tower, and a sine tower appear separately. The sine and cosine towers already share the same oscillation base. Then all four structures move inward and fuse into one common denominator platform made of $$s,$$ $$s+2,$$ and $$s^2+4.$$ The top compresses into a bright $$16(s^2+1)$$ core.</p>
+            <ul>
+              <li>Transform each known signal first.</li>
+              <li>Only after that do you fuse the structures.</li>
+              <li>The final image is $$16(s^2+1)$$ over a triple base.</li>
+            </ul>
+          </article>
+          <article class="room" data-tags="exercise,mixed,practice,11">
+            <h2>Exercise 9-11: Small Mixed Workshops</h2>
+            <p>In the first workshop, decay plus ramp minus step compresses into a base made of $$s^2$$ and $$s+2,$$ leaving $$2(s+4)$$ on top. In the second workshop, a step tower fuses with sine and negative cosine on the oscillation base and leaves $$4(s+2)$$ above $$s(s^2+4).$$</p>
+            <ul>
+              <li>Part (a) is a decay-ramp-step workshop.</li>
+              <li>Part (b) is a step-sine-cosine workshop.</li>
+              <li>Both are practice in common-denominator fusion.</li>
+            </ul>
+          </article>
+          <article class="room" data-tags="integration,differentiation,mixed,12">
+            <h2>Exercise 9-12: Integration And Differentiation Towers Merge With Known Bases</h2>
+            <p>One chamber combines a decay tower with an integrated sine tower, producing a triple denominator platform. The next chamber combines a decay tower with a differentiated damped-ramp tower, both sharing the squared collared base $$(s+40)^2.$$</p>
+            <ul>
+              <li>Integrated sine means add one $$s$$ layer under the oscillation base.</li>
+              <li>Differentiated damped ramp means inject $$s$$ on top but keep the squared decay base.</li>
+              <li>The final memory images are the compressed numerators over the shared platforms.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Shape Hooks</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Sum</div><div class="v">Parallel structures first</div></div>
+          <div class="fact"><div class="k">Common denominator</div><div class="v">One locked platform</div></div>
+          <div class="fact"><div class="k">Integration</div><div class="v">Add one base layer</div></div>
+          <div class="fact"><div class="k">Differentiation</div><div class="v">Inject $$s$$ on top</div></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>

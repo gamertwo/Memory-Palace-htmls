@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Lab 5 Task 4 | Menu-Driven Calculator</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" /><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script><link rel="stylesheet" href="study.css" /></head>
+<body data-page-key="pf-lab5-task4-calculator"><main class="shell"><nav class="nav"><a href="lab5-index.html">Lab 5 Index</a><a href="lab5-guide.html">Guide</a><a href="lab5-debug1-sum-function.html">Next: Debug 1</a></nav><section class="hero"><div class="tag">Lab 5 Task 4</div><h1>Menu-Driven Calculator with Functions</h1><p class="hero-sub">The menu chooses the operation, but each operation still lives in its own function so the program stays organized.</p><div class="formula-block">$$\text{menu choice} \Rightarrow \text{call matching operation function}$$</div><div class="tool-row"><a class="tool-btn" href="lab5-guide.html">Functions Guide</a><button class="tool-btn" type="button" data-jump="rooms-anchor">Core Rooms</button><a class="tool-btn" href="memory-palace-builder.html?pages=lab5-task4-calculator.html">Open in Memory Builder</a></div></section><div class="study-grid"><div class="main-stack"><section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Operations</div><div class="v">add, subtract, multiply, divide</div></div><div class="fact"><div class="k">Selection</div><div class="v">menu choice in <span class="inline-code">main</span></div></div><div class="fact"><div class="k">Function style</div><div class="v">one function per operation</div></div><div class="fact"><div class="k">Care point</div><div class="v">division by zero</div></div></div></section><section class="panel"><div class="section-title">Actual Code</div><div class="formula-block"><pre><code>#include &lt;stdio.h&gt;
+
+float add(float a, float b) { return a + b; }
+float subtract(float a, float b) { return a - b; }
+float multiply(float a, float b) { return a * b; }
+float divide(float a, float b) { return a / b; }
+
+int main(void)
+{
+    int choice;
+    float x, y;
+
+    printf("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n");
+    printf("Enter your choice: ");
+    scanf("%d", &amp;choice);
+
+    printf("Enter two numbers: ");
+    scanf("%f %f", &amp;x, &amp;y);
+
+    switch (choice) {
+        case 1:
+            printf("Result = %.2f\n", add(x, y));
+            break;
+        case 2:
+            printf("Result = %.2f\n", subtract(x, y));
+            break;
+        case 3:
+            printf("Result = %.2f\n", multiply(x, y));
+            break;
+        case 4:
+            if (y == 0) {
+                printf("Division by zero is not allowed.\n");
+            } else {
+                printf("Result = %.2f\n", divide(x, y));
+            }
+            break;
+        default:
+            printf("Invalid choice.\n");
+    }
+
+    return 0;
+}</code></pre></div></section><section class="panel" id="rooms-anchor"><div class="section-title">Core Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Menu Stays in main</h2><ul><li>The user chooses the operation in <span class="inline-code">main</span>.</li><li>That makes <span class="inline-code">main</span> the control center.</li><li>It decides which function should run.</li></ul></article><article class="room"><h2>Room 2: One Function Per Operation</h2><ul><li>Addition, subtraction, multiplication, and division each get separate functions.</li><li>This keeps every operation small and readable.</li><li>It also makes debugging easier.</li></ul></article><article class="room"><h2>Room 3: switch Matches Choice to Function</h2><ul><li>After reading the menu choice, use <span class="inline-code">switch</span>.</li><li>Each case calls the matching function.</li><li>The result is printed immediately.</li></ul></article><article class="room"><h2>Room 4: Division Needs a Guard</h2><ul><li>Division by zero must be blocked before calling the function.</li><li>This check belongs in the division case.</li><li>It prevents invalid arithmetic.</li></ul></article><article class="room"><h2>Room 5: Modular Calculator Memory</h2><ul><li>Menu chooses.</li><li>Function computes.</li><li><span class="inline-code">printf</span> reports the answer.</li></ul></article></div></section></div></div></main><script src="study.js"></script></body></html>

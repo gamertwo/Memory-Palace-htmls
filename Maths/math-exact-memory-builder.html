@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Math Exact Equations Memory Palace Builder</title>
+<title>Math Memory Palace Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -53,6 +53,7 @@
   --sidebar-w: 340px;
   --editor-w:  356px;
   --header-h:  52px;
+  --bottom-dock-h: 72px;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -108,6 +109,7 @@ a:hover{text-decoration:underline;}
 .btn-export .icon{font-size:14px;}
 .btn-ic{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--r-md);color:var(--t3);background:var(--card);border:1px solid var(--b1);transition:all .14s;}
 .btn-ic:hover{color:var(--t1);border-color:var(--b2);background:var(--card-2);}
+.btn-ic.is-active{color:var(--blue);border-color:var(--blue-3);background:var(--blue-2);}
 
 #sidebar-left{width:var(--sidebar-w);flex-shrink:0;background:var(--panel);border-right:1px solid var(--b1);display:flex;flex-direction:column;overflow:hidden;z-index:40;}
 .sb-block{border-bottom:1px solid var(--b1);}
@@ -166,11 +168,21 @@ a:hover{text-decoration:underline;}
 .sb-btn.danger{border-color:var(--red-2);background:var(--red-2);color:var(--red);}
 .sb-btn.danger:hover{background:var(--red-3);}
 
-#canvas-viewport{flex:1;overflow:auto;position:relative;background-color:var(--bg);background-image:radial-gradient(circle,rgba(148,163,200,.038) 1px,transparent 1px);background-size:24px 24px;}
+#canvas-viewport{flex:1;overflow:auto;position:relative;background-color:var(--bg);background-image:radial-gradient(circle,rgba(148,163,200,.038) 1px,transparent 1px);background-size:24px 24px;padding-bottom:84px;}
 .canvas-stage{width:3200px;height:2200px;transform-origin:top left;position:relative;}
 #edge-layer{position:absolute;inset:0;width:100%;height:100%;}
 #sketch-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+#canvas-image-layer{position:absolute;inset:0;pointer-events:none;}
 #canvas-block-layer{position:absolute;inset:0;pointer-events:none;}
+
+.canvas-image{position:absolute;pointer-events:auto;user-select:none;cursor:move;border-radius:var(--r-xl);overflow:hidden;background:rgba(16,21,36,.9);border:1px solid var(--b2);box-shadow:0 8px 28px rgba(0,0,0,.45),0 1px 2px rgba(0,0,0,.3);transition:border-color .16s,box-shadow .16s,transform .16s;}
+.canvas-image:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(0,0,0,.52),0 1px 2px rgba(0,0,0,.3);}
+.canvas-image.is-selected{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-glow),0 14px 36px rgba(91,156,246,.2);}
+.canvas-image img{display:block;width:100%;height:100%;object-fit:contain;background:rgba(0,0,0,.16);}
+.ci-delete{position:absolute;top:8px;right:8px;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:rgba(11,14,25,.84);border:1px solid var(--b2);color:var(--t2);opacity:0;transition:opacity .14s,color .14s,background .14s;}
+.canvas-image:hover .ci-delete,.canvas-image.is-selected .ci-delete{opacity:1;}
+.ci-delete:hover{background:var(--red-2);border-color:var(--red-3);color:var(--red);}
+.ci-badge{position:absolute;left:8px;bottom:8px;padding:3px 7px;border-radius:var(--r-full);background:rgba(11,14,25,.82);border:1px solid var(--b2);font-size:10px;font-family:var(--f-mono);color:var(--t2);}
 
 .canvas-block{position:absolute;pointer-events:auto;user-select:none;cursor:move;border-radius:var(--r-2xl);background:var(--card);border:1px solid var(--b2);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.4),0 1px 2px rgba(0,0,0,.3);transition:box-shadow .18s,border-color .18s;min-width:255px;}
 .canvas-block:hover{box-shadow:0 6px 28px rgba(0,0,0,.55),0 2px 4px rgba(0,0,0,.3);}
@@ -217,16 +229,11 @@ a:hover{text-decoration:underline;}
 }
 
 /* Zoom bar */
-#zoom-bar{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--b2);border-radius:var(--r-full);padding:7px 14px;z-index:10;box-shadow:0 4px 20px rgba(0,0,0,.45);}
-.zoom-btn{display:flex;align-items:center;color:var(--t3);transition:color .13s;}
-.zoom-btn:hover{color:var(--blue);}
-.zoom-sep{width:1px;height:13px;background:var(--b2);}
-#zoom-val{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--t1);min-width:34px;text-align:center;}
 
 /* ─── Pen Toolbar ─────────────────────────────── */
 #pen-toolbar {
-  position: absolute;
-  bottom: 72px;
+  position: fixed;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -238,13 +245,18 @@ a:hover{text-decoration:underline;}
   border: 1px solid rgba(148, 163, 200, 0.16);
   border-radius: var(--r-full);
   padding: 6px 12px;
-  z-index: 20;
+  z-index: 70;
   box-shadow:
     0 8px 32px rgba(0,0,0,.55),
     0 1px 0 rgba(255,255,255,.04) inset,
     0 0 0 1px rgba(91,156,246,0) ;
   transition: box-shadow .3s;
   user-select: none;
+}
+.pt-group{
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 #pen-toolbar:has(.pt-tool.active[data-tool="pen"]),
 #pen-toolbar:has(.pt-tool.active[data-tool="eraser"]) {
@@ -378,6 +390,71 @@ a:hover{text-decoration:underline;}
   white-space: nowrap;
   padding: 0 4px;
 }
+.pt-select-modes{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:2px;
+  border-radius:var(--r-full);
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--b1);
+}
+.pt-select-mode{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:5px 9px;
+  border-radius:var(--r-full);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--t3);
+  transition:all .14s;
+}
+.pt-select-mode:hover{
+  color:var(--t1);
+  background:var(--card-2);
+}
+.pt-select-mode.active{
+  background:var(--blue-2);
+  color:var(--blue);
+  border:1px solid var(--blue-3);
+}
+.pt-select-mode .icon{font-size:14px;}
+.pt-zoom{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.pt-zoom-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  color:var(--t3);
+  border:1px solid transparent;
+  transition:all .14s;
+}
+.pt-zoom-btn:hover{
+  color:var(--blue);
+  background:var(--card-2);
+  border-color:var(--b2);
+}
+.pt-zoom-slider{
+  width:130px;
+  accent-color:var(--blue);
+  cursor:pointer;
+}
+.pt-zoom-val{
+  font-family:var(--f-mono);
+  font-size:11px;
+  color:var(--t1);
+  min-width:44px;
+  text-align:center;
+}
 
 /* Eraser cursor when active */
 body.eraser-active #canvas-viewport {
@@ -386,6 +463,14 @@ body.eraser-active #canvas-viewport {
 body.pen-active #canvas-viewport {
   cursor: crosshair;
 }
+body.draw-active #canvas-viewport,
+body.draw-active #canvas-viewport *{
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+body.left-sidebar-hidden #sidebar-left{display:none;}
+body.right-sidebar-hidden #sidebar-right{display:none;}
 
 /* Right sidebar */
 #sidebar-right{width:var(--editor-w);flex-shrink:0;background:var(--panel);border-left:1px solid var(--b1);display:flex;flex-direction:column;z-index:40;overflow:hidden;}
@@ -513,7 +598,7 @@ body.pen-active #canvas-viewport {
   <header id="header">
     <div class="h-brand">
       <div class="h-brand-icon"><span class="icon icon-fill">domain</span></div>
-      <h1>Chapter 28 Memory Palace</h1>
+      <h1>Memory Palace</h1>
     </div>
 
     <div class="h-search">
@@ -531,10 +616,16 @@ body.pen-active #canvas-viewport {
     </div>
 
     <div class="h-right">
+      <button id="toggle-left-sidebar" type="button" class="btn-ic is-active" title="Hide room library" aria-pressed="true">
+        <span class="icon">left_panel_open</span>
+      </button>
+      <button id="toggle-right-sidebar" type="button" class="btn-ic is-active" title="Hide editor" aria-pressed="true">
+        <span class="icon">right_panel_open</span>
+      </button>
       <button id="export-palace-button" type="button" class="btn-export">
         <span class="icon icon-sm">ios_share</span> Export
       </button>
-      <a href="../index.html" class="btn-ic" title="Home"><span class="icon">home</span></a>
+      <a href="index.html" class="btn-ic" title="Home"><span class="icon">home</span></a>
     </div>
   </header>
 
@@ -545,14 +636,14 @@ body.pen-active #canvas-viewport {
     <aside id="sidebar-left">
       <div class="sb-block sb-block-pad">
         <div class="palace-head">
-          <span id="palace-name">Chapter 28 Palace</span>
+          <span id="palace-name">Chapter 8 Palace</span>
           <button id="rename-palace-button" type="button" class="btn-ic" title="Rename">
             <span class="icon icon-sm">drive_file_rename_outline</span>
           </button>
         </div>
         <div class="palace-row">
           <select id="palace-select" class="sel"></select>
-          <button id="load-preset-button" type="button" class="btn-ic" title="Load blank palace">
+          <button id="load-preset-button" type="button" class="btn-ic" title="Load Ch8 preset">
             <span class="icon">auto_awesome</span>
           </button>
           <button id="new-palace-button" type="button" class="btn-ic" title="New palace">
@@ -629,6 +720,7 @@ body.pen-active #canvas-viewport {
           </defs>
         </svg>
         <svg id="sketch-layer" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"></svg>
+        <div id="canvas-image-layer" style="position:absolute;inset:0;"></div>
         <div id="canvas-block-layer" style="position:absolute;inset:0;"></div>
 
         <!-- Review panel (canvas overlay) -->
@@ -652,7 +744,7 @@ body.pen-active #canvas-viewport {
                   <span id="review-room-source"></span>
                   <h3 id="review-room-title"></h3>
                 </div>
-                <a id="review-room-link" href="#">Open Source ↗</a>
+                <a id="review-room-link" href="#">Open Source -></a>
               </div>
               <div id="review-room-summary"></div>
               <article id="review-room-content"></article>
@@ -661,24 +753,13 @@ body.pen-active #canvas-viewport {
         </section>
       </div>
 
-      <!-- Zoom bar -->
-      <div id="zoom-bar">
-        <button id="zoom-out" type="button" class="zoom-btn"><span class="icon">remove</span></button>
-        <div class="zoom-sep"></div>
-        <span id="zoom-val">100%</span>
-        <div class="zoom-sep"></div>
-        <button id="zoom-in" type="button" class="zoom-btn"><span class="icon">add</span></button>
-        <div class="zoom-sep"></div>
-        <button id="zoom-reset" type="button" class="zoom-btn"><span class="icon">center_focus_strong</span></button>
-      </div>
-
       <!-- ─── Pen Toolbar ─── -->
       <div id="pen-toolbar">
         <!-- Tools -->
-        <button class="pt-tool active" data-tool="pen" title="Pen — P">
+        <button class="pt-tool active" data-tool="pen" title="Pen - P">
           <span class="icon">edit</span>
         </button>
-        <button class="pt-tool" data-tool="eraser" title="Eraser — E">
+        <button class="pt-tool" data-tool="eraser" title="Eraser - E">
           <span class="icon">ink_eraser</span>
         </button>
 
@@ -712,7 +793,40 @@ body.pen-active #canvas-viewport {
 
         <div class="pt-sep"></div>
 
-        <span class="pt-hint">Ctrl+Z undo · X redo · P pen · E erase</span>
+        <div class="pt-select-modes">
+          <button type="button" class="pt-select-mode active" data-selection-mode="all" title="Select anything">
+            <span class="icon">select_all</span> All
+          </button>
+          <button type="button" class="pt-select-mode" data-selection-mode="blocks" title="Select blocks only">
+            <span class="icon">dashboard</span> Blocks
+          </button>
+          <button type="button" class="pt-select-mode" data-selection-mode="images" title="Select pasted images only">
+            <span class="icon">image</span> Images
+          </button>
+          <button type="button" class="pt-select-mode" data-selection-mode="edges" title="Select links only">
+            <span class="icon">timeline</span> Links
+          </button>
+        </div>
+
+        <div class="pt-sep"></div>
+
+        <div class="pt-zoom">
+          <button id="zoom-out" type="button" class="pt-zoom-btn" title="Zoom out">
+            <span class="icon">remove</span>
+          </button>
+          <input id="zoom-slider" class="pt-zoom-slider" type="range" min="40" max="200" step="5" value="100" aria-label="Zoom level"/>
+          <span id="zoom-val" class="pt-zoom-val">100%</span>
+          <button id="zoom-in" type="button" class="pt-zoom-btn" title="Zoom in">
+            <span class="icon">add</span>
+          </button>
+          <button id="zoom-reset" type="button" class="pt-zoom-btn" title="Reset zoom">
+            <span class="icon">center_focus_strong</span>
+          </button>
+        </div>
+
+        <div class="pt-sep"></div>
+
+        <span class="pt-hint">Ctrl+scroll zoom | Ctrl+V image | Ctrl+Z undo | X redo</span>
       </div>
 
     </main>

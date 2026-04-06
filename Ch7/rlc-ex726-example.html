@@ -3,34 +3,48 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="rlc-ex726-example.html" />
 <title>RLC Example 7-26 | Source-Resistance Range for an Underdamped Parallel RLC Response</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="rlc-study-page.css" />
-<link rel="stylesheet" href="linear-review.css" />
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
-<script src="linear-review.js" defer></script>
-<style>:root{--accent:#8cdde2}</style>
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="linear-review.css" />
 </head>
-<body>
-<main class="shell"><nav class="nav"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a><a href="rlc-ex733.html">Back: Exercise 7-33</a></nav>
-<section class="hero"><h1>Example 7-26</h1><p>What range of source resistance produces an underdamped natural response in a parallel RLC circuit with $$L=200\ \text{mH}$$ and $$C=0.032\ \mu\text{F}?$$ Normalize the parallel characteristic equation, match it to the standard second-order form, and impose $$\zeta&lt;1.$$</p><div class="eq">$$LCs^2+\frac{L}{R_N}s+1=0$$
-$$s^2+\frac{1}{R_NC}s+\frac{1}{LC}=0,\qquad R_N&gt;1250\ \Omega$$</div><div class="tool-row"><button class="tool-btn" type="button" data-open-prompt>AI Prompt</button></div></section>
-<div class="content-grid"><div class="main-stack">
-<section class="panel"><div class="section-title">Quick Data</div><div class="facts"><div class="fact"><div class="k">Inductance</div><div class="v">$$L=200\ \text{mH}$$</div></div><div class="fact"><div class="k">Capacitance</div><div class="v">$$C=0.032\ \mu\text{F}$$</div></div><div class="fact"><div class="k">Parallel Form</div><div class="v">$$s^2+\frac{1}{R_NC}s+\frac{1}{LC}=0$$</div></div><div class="fact"><div class="k">Natural Frequency</div><div class="v">$$\omega_0=12.5\times10^3\ \text{rad/s}$$</div></div><div class="fact"><div class="k">Critical Boundary</div><div class="v">$$R_N=1250\ \Omega$$</div></div><div class="fact"><div class="k">Underdamped Range</div><div class="v">$$R_N&gt;1250\ \Omega$$</div></div></div></section>
-<section class="panel"><div class="section-title">Answer Board</div><div class="facts"><div class="fact"><div class="k">Standard Match</div><div class="v">$$2\zeta\omega_0=\frac{1}{R_NC}$$</div></div><div class="fact"><div class="k">Threshold</div><div class="v">$$R_N=\frac{1}{2\omega_0C}=1250\ \Omega$$</div></div><div class="fact"><div class="k">Final Answer</div><div class="v">$$\boxed{R_N&gt;1250\ \Omega}$$</div></div></div></section>
-<section class="panel"><div class="section-title">Rooms</div><div class="rooms"><article class="room"><h2>Room 1: Write the Parallel Equation</h2><ul><li>Use the natural-response form $$LCs^2+\frac{L}{R_N}s+1=0.$$</li><li>Divide by $$LC$$ to get $$s^2+\frac{1}{R_NC}s+\frac{1}{LC}=0.$$</li></ul></article><article class="room"><h2>Room 2: Match the Standard Form</h2><ul><li>Compare with $$s^2+2\zeta\omega_0s+\omega_0^2=0.$$</li><li>So $$2\zeta\omega_0=1/(R_NC)$$ and $$\omega_0^2=1/(LC).$$</li></ul></article><article class="room"><h2>Room 3: Compute the Natural Frequency</h2><ul><li>$$\omega_0=1/\sqrt{LC}=1/\sqrt{(0.2)(32\times10^{-9})}=12.5\times10^3\ \text{rad/s}.$$</li></ul></article><article class="room"><h2>Room 4: Use the Critical Boundary</h2><ul><li>Underdamped means $$\zeta&lt;1.$$</li><li>The boundary occurs at $$\zeta=1,$$ so $$R_N=1/(2\omega_0C).$$</li></ul></article><article class="room"><h2>Room 5: Solve the Resistance Range</h2><ul><li>$$R_N=1/(2(12.5\times10^3)(32\times10^{-9}))=1250\ \Omega.$$</li><li>For a parallel RLC circuit, underdamping lies on the larger-resistance side, so $$\boxed{R_N&gt;1250\ \Omega}.$$</li></ul></article></div><div class="mini"><h3>Fast Memory Rule</h3><p>In a parallel RLC circuit, more resistance means less damping. Normalize first, find the critical threshold, then move upward in resistance for underdamping.</p></div></section>
-</div><aside class="palace-sidebar"><div class="section-title">Memory Palace Path</div><p class="palace-intro">This path turns the parallel characteristic equation into one clean resistance inequality.</p><div class="path"><div class="station"><h3>Station 1: Normalization Gate</h3><p>Divide by $$LC$$ and expose the coefficient of $$s.$$</p></div><div class="transition"><h3>Transition 1 to 2</h3><p>The normalized form maps directly to $$2\zeta\omega_0.$$</p></div><div class="station"><h3>Station 2: Frequency Marker</h3><p>Compute $$\omega_0$$ from $$1/\sqrt{LC}.$$</p></div><div class="transition"><h3>Transition 2 to 3</h3><p>Use the critical threshold before choosing the underdamped side.</p></div><div class="station"><h3>Station 3: Resistance Exit</h3><p>For parallel RLC, underdamping lives above the threshold.</p></div></div></aside></div></main>
-<div class="modal" id="prompt-modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h3>AI Memory Palace Prompt</h3><button class="ghost-btn" type="button" data-close-prompt>Close</button></div><p class="modal-copy">This prompt is prefilled with the full Example 7-26 flow.</p><textarea class="prompt-box" id="prompt-text" readonly>Create a memory palace in exactly one connected paragraph for this parallel RLC damping-range example. Keep the order exact, make each step force the next, and use vivid location-based imagery. Do not use bullet points.
+<body data-page-key="rlc_ex726_example">
+<main class="shell">
+  <nav class="nav"><a href="index.html">Pattern Palace</a><a href="hub.html">Hub</a><a href="rlc-ex733.html">Back: Exercise 7-33</a></nav>
 
-Source material:
-1. The circuit is parallel RLC with L=200 mH and C=0.032 microfarads.
-2. The characteristic equation is LCs^2+(L/RN)s+1=0, or normalized as s^2+1/(RNC)s+1/(LC)=0.
-3. Compare with s^2+2zeta omega0 s+omega0^2.
-4. Compute omega0=1/sqrt(LC)=12.5x10^3 rad/s.
-5. Underdamped response requires zeta<1.
-6. The threshold is RN=1/(2 omega0 C)=1250 ohms.
-7. Therefore the underdamped range is RN>1250 ohms.</textarea><div class="modal-actions"><button class="ghost-btn" type="button" id="copy-prompt">Copy Prompt</button><button class="ghost-btn" type="button" data-close-prompt>Done</button></div></div></div>
-<script>const modal=document.getElementById('prompt-modal');const textarea=document.getElementById('prompt-text');document.querySelector('[data-open-prompt]').addEventListener('click',()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');});document.querySelectorAll('[data-close-prompt]').forEach((button)=>{button.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');});});modal.addEventListener('click',(event)=>{if(event.target===modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');}});document.getElementById('copy-prompt').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(textarea.value);}catch(error){textarea.focus();textarea.select();}});</script>
+  <section class="hero">
+    
+    <h1>Example 7-26</h1>
+    <p class="hero-sub">What range of source resistance produces an underdamped natural response in a parallel RLC circuit with $$L=200\ \text{mH}$$ and $$C=0.032\ \mu\text{F}?$$ Normalize the parallel characteristic equation, match it to the standard second-order form, and impose $$\zeta<1.$$</p>
+    <div class="formula-block">$$LCs^2+\frac{L}{R_N}s+1=0$$
+$$s^2+\frac{1}{R_NC}s+\frac{1}{LC}=0,\qquad R_N&gt;1250\ \Omega$$</div>
+    <div class="tool-row"><a class="tool-btn" href="memory-palace-builder.html?pages=rlc-ex726-example.html" data-builder-link="true">Open in Memory Builder</a></div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Data</div>
+        <div class="facts"><div class="fact"><div class="k">Inductance</div><div class="v">$$L=200\ \text{mH}$$</div></div><div class="fact"><div class="k">Capacitance</div><div class="v">$$C=0.032\ \mu\text{F}$$</div></div><div class="fact"><div class="k">Parallel Form</div><div class="v">$$s^2+\frac{1}{R_NC}s+\frac{1}{LC}=0$$</div></div><div class="fact"><div class="k">Natural Frequency</div><div class="v">$$\omega_0=12.5\times10^3\ \text{rad/s}$$</div></div><div class="fact"><div class="k">Critical Boundary</div><div class="v">$$R_N=1250\ \Omega$$</div></div><div class="fact"><div class="k">Underdamped Range</div><div class="v">$$R_N&gt;1250\ \Omega$$</div></div></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">Rooms: Full Solution</div>
+        <div class="rooms"><article class="room"><h2>Room 1: Write the Parallel Equation</h2><ul><li>Use the natural-response form $$LCs^2+\frac{L}{R_N}s+1=0.$$</li><li>Divide by $$LC$$ to get $$s^2+\frac{1}{R_NC}s+\frac{1}{LC}=0.$$</li>  <li><strong>Why:</strong> Because the parallel form puts the circuit into a standard model that you can classify and solve systematically.</li></ul></article><article class="room"><h2>Room 2: Match the Standard Form</h2><ul><li>Compare with $$s^2+2\zeta\omega_0s+\omega_0^2=0.$$</li><li>So $$2\zeta\omega_0=1/(R_NC)$$ and $$\omega_0^2=1/(LC).$$</li>  <li><strong>Why:</strong> Because matching to the standard second-order form converts raw coefficients into meaningful parameters like damping and natural frequency.</li></ul></article><article class="room"><h2>Room 3: Compute the Natural Frequency</h2><ul><li>$$\omega_0=1/\sqrt{LC}=1/\sqrt{(0.2)(32\times10^{-9})}=12.5\times10^3\ \text{rad/s}.$$</li>  <li><strong>Why:</strong> Because the natural frequency sets the circuit time scale, so you need it before judging damping or resistance thresholds.</li></ul></article><article class="room"><h2>Room 4: Use the Critical Boundary</h2><ul><li>Underdamped means $$\zeta&lt;1.$$</li><li>The boundary occurs at $$\zeta=1,$$ so $$R_N=1/(2\omega_0C).$$</li>  <li><strong>Why:</strong> Because the critical boundary is the dividing line between underdamped and overdamped behavior, so the inequality must be built around it.</li></ul></article><article class="room"><h2>Room 5: Solve the Resistance Range</h2><ul><li>$$R_N=1/(2(12.5\times10^3)(32\times10^{-9}))=1250\ \Omega.$$</li><li>For a parallel RLC circuit, underdamping lies on the larger-resistance side, so $$\boxed{R_N&gt;1250\ \Omega}.$$</li>  <li><strong>Why:</strong> Because once the boundary is known, the actual design question is which side of that boundary keeps the requested response type.</li></ul></article></div>
+        <div class="mini"><h3>Fast Memory Rule</h3><p>In a parallel RLC circuit, more resistance means less damping. Normalize first, find the critical threshold, then move upward in resistance for underdamping.</p></div>
+        <div class="mini"><h3>Why The Order Matters</h3><p>This page works best when you read it as a chain instead of as isolated formulas. The early rooms set up the model, the middle rooms use that model to solve constants or component constraints, and the last room writes the requested answer. If a room feels sudden, go back one room and ask which number or rule it is using.</p></div>
+        <div class="mini"><h3>What To Watch</h3><p>Do not treat the branch quantities as independent. In the parallel pages, one shared voltage or one known branch current drives the rest of the solution.</p></div>
+      </section>
+    </div>
+  </div>
+</main>
 </body>
 </html>

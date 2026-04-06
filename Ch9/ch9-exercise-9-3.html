@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="memory-source-page" content="ch9-exercise-9-3.html" />
+<title>Exercise 9-3 | Transform Of 0.5delta(t)</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="study.css" />
+<link rel="stylesheet" href="../linear-review.css" />
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body data-page-key="ch9_exercise_9_3">
+<main class="shell">
+  <nav class="nav">
+    <a href="index.html">Ch9 Index</a>
+    <a href="ch9-example-9-3.html">Prev: Example 9-3</a>
+    <a href="ch9-pole-zero-diagrams.html">Next: Pole-Zero</a>
+  </nav>
+
+  <section class="hero">
+    <div class="tag">Exercise 9-3</div>
+    <h1>A Half-Strength Spike Leaves A Half Coin</h1>
+    <p class="hero-sub">This last page in the opening sequence keeps the exact same zero-checkpoint impulse scene, but scales the result down by one half. There is still no denominator structure to build, only a smaller token left behind by the spike.</p>
+    <div class="formula-block">
+      $$i(t)=0.5\delta(t), \qquad I(s)=\mathcal{L}\{0.5\delta(t)\}=0.5$$
+    </div>
+    <div class="tool-row">
+      <a class="tool-btn" href="guide.html">Shape Guide</a>
+      <button class="tool-btn" type="button" data-jump="rooms-anchor">Room Route</button>
+      <a class="tool-btn" href="memory-palace-builder.html?pages=ch9-exercise-9-3.html">Open In Builder</a>
+    </div>
+  </section>
+
+  <div class="study-grid">
+    <div class="main-stack">
+      <section class="panel">
+        <div class="section-title">Quick Result</div>
+        <div class="facts">
+          <div class="fact"><div class="k">Base fact</div><div class="v">$$\mathcal{L}\{\delta(t)\}=1$$</div></div>
+          <div class="fact"><div class="k">Linearity</div><div class="v">$$\mathcal{L}\{K\delta(t)\}=K$$</div></div>
+          <div class="fact"><div class="k">Answer</div><div class="v">$$I(s)=0.5$$</div></div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:1rem">
+        <div class="section-title">Linear Review: Actual Concept First</div>
+        <div class="rooms">
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 1</div>
+            <h3 class="review-room-title">Start From The Basic Impulse Transform</h3>
+            <div class="review-room-prompt">
+              <p>From Example 9-3, we already know</p>
+              <p>$$\mathcal{L}\{\delta(t)\}=1$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 2</div>
+            <h3 class="review-room-title">Use The Constant-Multiple Rule</h3>
+            <div class="review-room-prompt">
+              <p>The actual signal is $$0.5\delta(t).$$</p>
+              <p>So apply linearity:</p>
+              <p>$$I(s)=\mathcal{L}\{0.5\delta(t)\}=0.5\mathcal{L}\{\delta(t)\}$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 3</div>
+            <h3 class="review-room-title">Substitute The Known Result</h3>
+            <div class="review-room-prompt">
+              <p>Now insert the base transform:</p>
+              <p>$$I(s)=0.5(1)$$</p>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-kicker">Linear Room 4</div>
+            <h3 class="review-room-title">Freeze The Final Number</h3>
+            <div class="review-room-prompt">
+              <p>Therefore,</p>
+              <p>$$I(s)=0.5$$</p>
+              <p>There is no denominator because the impulse transform itself is already just a constant.</p>
+            </div>
+          </article>
+        </div>
+        <div class="mini"><h3>Concept Summary</h3><p>Once the impulse transform is known, the scaled impulse is immediate. A half-strength impulse leaves a half-sized result.</p></div>
+      </section>
+
+      <section class="panel" id="rooms-anchor">
+        <div class="section-title">Rooms: The Half-Coin Checkpoint</div>
+        <div class="rooms">
+          <article class="room" data-tags="checkpoint,repeat,impulse">
+            <h2>Room 1: Return To The Same Zero Checkpoint</h2>
+            <p>The left and right zero gates are still standing around the checkpoint. This problem reuses the exact impulse scene from Example 9-3.</p>
+            <ul>
+              <li>Same narrow interval around zero.</li>
+              <li>Same spike structure.</li>
+              <li>No long time-road story is needed.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="half-strength,spike,scale">
+            <h2>Room 2: The Spear Strike Is Only Half Strength</h2>
+            <p>The razor-thin spike still appears at zero, but the strike now feels lighter and smaller. That reduced intensity stores the factor 0.5.</p>
+            <ul>
+              <li>Same impulse type.</li>
+              <li>Reduced magnitude means scaled result.</li>
+              <li>The structure stays constant-only.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="half-coin,token,result">
+            <h2>Room 3: The Full Token Shrinks Into A Half Coin</h2>
+            <p>Instead of leaving a full bright token behind, the spike leaves a half-sized glowing coin. That half coin is the whole answer image.</p>
+            <ul>
+              <li>Half coin means 0.5.</li>
+              <li>No denominator object appears.</li>
+              <li>The result is purely a scaled constant.</li>
+            </ul>
+          </article>
+
+          <article class="room" data-tags="transition,opening-route,finish">
+            <h2>Room 4: The Opening Route Ends With One Small Coin</h2>
+            <p>The step-ground, collared corridor, and zero checkpoint now connect as one clean opening route for Section 9-1. The last frozen image is just the half coin floating at the zero marker: $$0.5.$$</p>
+            <ul>
+              <li>Step ground taught $$1/s.$$</li>
+              <li>Collared vortex taught $$1/(s+\alpha).$$</li>
+              <li>Zero checkpoint ends with the constant impulse results.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="side-stack">
+      <section class="panel">
+        <div class="section-title">Memory Hook</div>
+        <p class="copy">A half-strength impulse leaves a half token, so the transform is 0.5.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+<script src="study.js"></script>
+<script src="../linear-review.js" defer></script>
+</body>
+</html>
